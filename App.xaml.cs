@@ -1,8 +1,10 @@
 ﻿using IcyLauncher.Models;
 using IcyLauncher.Services;
 using IcyLauncher.Services.Interfaces;
+using IcyLauncher.ViewModels;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
+using Microsoft.UI.Xaml.Controls;
 using Serilog;
 
 namespace IcyLauncher;
@@ -26,9 +28,16 @@ public partial class App : Application
             })
             .ConfigureServices((context, services) =>
             {
+                NavigationView navigationView = INavigation.CreateNew();
+
+                services.AddScoped<INavigation>(provider => new Navigation(navigationView, (Frame)navigationView.Content));
                 services.AddScoped<IConverter, JsonConverter>();
 
                 services.Configure<Configuration>(context.Configuration);
+
+                services.AddSingleton<ShellViewModel>();
+
+                services.AddSingleton<ShellView>(provider => new() { Content = navigationView });
             })
             .Build();
 
