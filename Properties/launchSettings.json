@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "IcyLauncher (Package)": {
+      "commandName": "MsixPackage"
+    },
+    "IcyLauncher (Unpackaged)": {
+      "commandName": "Project"
+    }
+  }
+}
