@@ -60,12 +60,12 @@ public class Navigation : INavigation
         {
             navigationView.SelectedItem = item;
 
-            logger.Log("The current NavigationView item was set successfully");
+            logger.Log("Set current NavigationView item successfully");
             return true;
         }
         catch
         {
-            logger.Log("The current NavigationView item failed to set");
+            logger.Log("Failed to set current NavigationView item");
             return false;
         }
     }
@@ -76,12 +76,12 @@ public class Navigation : INavigation
         {
             frame.Navigate(type, parameter);
 
-            logger.Log("The current NavigationView page was set successfully");
+            logger.Log("Set current NavigationView page successfully");
             return true;
         }
         catch
         {
-            logger.Log("The current NavigationView page item failed to set");
+            logger.Log("Failed to set current NavigationView page item");
             return false;
         }
     }
@@ -115,12 +115,12 @@ public class Navigation : INavigation
             frame.BackStack.RemoveAt(frame.BackStackDepth - 1);
             frame.BackStack.RemoveAt(frame.BackStackDepth - 1);
 
-            logger.Log("The current NavigationView page went back successfully");
+            logger.Log("Current NavigationView page went back successfully");
             return true;
         }
         catch
         {
-            logger.Log("The current NavigationView page item failed to go back");
+            logger.Log("Current NavigationView page failed to go back");
             return false;
         }
     }

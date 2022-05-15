@@ -12,7 +12,7 @@ public class Configuration
 
     public string Export()
     {
-        logger.Log($"Exported app configuration");
+        logger.Log($"Exporting app configuration");
 
         return converter.ToString(this);
     }
@@ -30,7 +30,7 @@ public class Configuration
 
     public string ExportTheme()
     {
-        logger.Log($"Exported theme configuration");
+        logger.Log($"Exporting theme configuration");
 
         return converter.ToString(Apperance);
     }

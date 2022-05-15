@@ -13,9 +13,18 @@ public partial class ShellViewModel : ObservableObject
         this.navigation = navigation;
     }
 
-    public void WindowActivated() =>
+    public void WindowActivated()
+    {
         navigation.Navigate("Home");
 
-    public void WindowClosed() =>
+        logger.Log("Window Activated");
+    }
+
+
+    public void WindowClosed()
+    {
         configuration.Export();
+
+        logger.Log("Window Closed");
+    }
 }

@@ -10,6 +10,8 @@ public class JsonConverter : IConverter
     public JsonConverter(ILogger<JsonConverter> logger)
     {
         this.logger = logger;
+
+        this.logger.Log("Registered JsonConverter");
     }
 
 
