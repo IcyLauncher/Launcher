@@ -1,9 +1,8 @@
-﻿using Microsoft.Extensions.Logging;
-using System.Runtime.CompilerServices;
+﻿using System.Runtime.CompilerServices;
 
 namespace IcyLauncher.Extentions;
 
-public static class LoggerExtentions
+static class LoggerExtentions
 {
     public static void Log(this ILogger logger, object? message, Exception? exception = null, LogLevel logLevel = LogLevel.Information,
         [CallerFilePath] string filePath = "",

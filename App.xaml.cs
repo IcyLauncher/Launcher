@@ -1,4 +1,7 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using IcyLauncher.Models;
+using IcyLauncher.Services;
+using IcyLauncher.Services.Interfaces;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Serilog;
 
@@ -23,11 +26,19 @@ public partial class App : Application
             })
             .ConfigureServices((context, services) =>
             {
+                services.AddScoped<IConverter, JsonConverter>();
 
+                services.Configure<Configuration>(context.Configuration);
             })
             .Build();
 
         Provider = host.Services;
+
+        AppDomain.CurrentDomain.FirstChanceException += (sender, args) =>
+        {
+            var logger = Provider.GetRequiredService<ILogger<App>>();
+            logger.Log("Global FirstChanceException", args.Exception);
+        };
     }
 
     protected override async void OnLaunched(LaunchActivatedEventArgs args)

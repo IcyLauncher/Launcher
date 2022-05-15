@@ -51,8 +51,12 @@
 
 	<ItemGroup>
 		<Using Include="System" />
+		
 		<Using Include="Microsoft.UI.Xaml" />
 		<Using Include="Microsoft.Extensions.DependencyInjection" />
+		<Using Include="Microsoft.Extensions.Logging" />
+
+		<Using Include="IcyLauncher.Extentions" />
 	</ItemGroup>
 
 	<ItemGroup Condition="'$(DisableMsixProjectCapabilityAddedByProject)'!='true' and '$(EnablePreviewMsixTooling)'=='true'">
@@ -60,9 +64,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<Folder Include="Models\" />
-		<Folder Include="Helpers\" />
-		<Folder Include="Services\Interfaces\" />
 		<Folder Include="ViewModels\" />
 	</ItemGroup>
 
