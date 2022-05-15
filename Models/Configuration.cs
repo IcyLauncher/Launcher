@@ -1,6 +1,4 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
-using IcyLauncher.Helpers;
-using IcyLauncher.Services.Interfaces;
+﻿using IcyLauncher.Helpers;
 using IcyLauncher.Types;
 using Windows.UI;
 
@@ -55,7 +53,7 @@ class Configuration
     public ConfigurationDeveloper Developer { get; set; } = new();
 }
 
-class ConfigurationLauncher : ObservableObject
+partial class ConfigurationLauncher : ObservableObject
 {
     [ObservableProperty]
     bool isDiscordEnabled = true;
@@ -73,7 +71,7 @@ class ConfigurationLauncher : ObservableObject
     string versionsDirectory = $"{Computer.CurrentDirectory}\\Versions";
 }
 
-class ConfigurationApperance : ObservableObject
+partial class ConfigurationApperance : ObservableObject
 {
     [ObservableProperty]
     BannerType playBannerType = BannerType.TimeDependent;
@@ -93,7 +91,7 @@ class ConfigurationApperanceColors
 
     public ConfigurationApperanceColorsControl Control { get; set; } = new();
 }
-class ConfigurationApperanceColorsAccent : ObservableObject
+partial class ConfigurationApperanceColorsAccent : ObservableObject
 {
     [ObservableProperty]
     Color primary = Color.FromArgb(255, 0, 138, 255);
@@ -104,7 +102,7 @@ class ConfigurationApperanceColorsAccent : ObservableObject
     [ObservableProperty]
     Color dark = Color.FromArgb(255, 0, 73, 135);
 }
-class ConfigurationApperanceColorsBackground : ObservableObject
+partial class ConfigurationApperanceColorsBackground : ObservableObject
 {
     [ObservableProperty]
     Color primary = Color.FromArgb(255, 32, 32, 32);
@@ -115,7 +113,7 @@ class ConfigurationApperanceColorsBackground : ObservableObject
     [ObservableProperty]
     Color dark = Color.FromArgb(255, 23, 23, 23);
 }
-class ConfigurationApperanceColorsText : ObservableObject
+partial class ConfigurationApperanceColorsText : ObservableObject
 {
     [ObservableProperty]
     Color primary = Color.FromArgb(255, 255, 255, 255);
@@ -129,7 +127,7 @@ class ConfigurationApperanceColorsText : ObservableObject
     [ObservableProperty]
     Color disabled = Color.FromArgb(92, 255, 255, 255);
 }
-class ConfigurationApperanceColorsControl : ObservableObject
+partial class ConfigurationApperanceColorsControl : ObservableObject
 {
     [ObservableProperty]
     Color primary = Color.FromArgb(13, 255, 255, 255);
@@ -145,7 +143,7 @@ class ConfigurationApperanceColorsControl : ObservableObject
 
     public ConfigurationApperanceColorsControlSolid Solid { get; set; } = new();
 }
-class ConfigurationApperanceColorsControlSolid : ObservableObject
+partial class ConfigurationApperanceColorsControlSolid : ObservableObject
 {
     [ObservableProperty]
     Color primary = Color.FromArgb(255, 46, 46, 46);
@@ -160,7 +158,7 @@ class ConfigurationApperanceColorsControlSolid : ObservableObject
     Color outlineDisabled = Color.FromArgb(255, 79, 79, 79);
 }
 
-class ConfigurationWeather : ObservableObject
+partial class ConfigurationWeather : ObservableObject
 {
     [ObservableProperty]
     bool isEnabled = true;
@@ -172,7 +170,7 @@ class ConfigurationWeather : ObservableObject
     WeatherUnit unit = WeatherUnit.Celsius;
 }
 
-class ConfigurationDateTime : ObservableObject
+partial class ConfigurationDateTime : ObservableObject
 {
     [ObservableProperty]
     string dateFormat  = "dd.MM.yyyy";
@@ -181,7 +179,7 @@ class ConfigurationDateTime : ObservableObject
     string timeFormat  = "HH:mm:ss";
 }
 
-class ConfigurationDeveloper : ObservableObject
+partial class ConfigurationDeveloper : ObservableObject
 {
     [ObservableProperty]
     bool isSaveLoginEnabled = false;
