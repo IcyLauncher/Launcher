@@ -35,6 +35,7 @@
 	  <None Remove="Assets\Icon.png" />
 	  <None Remove="Assets\LICENSE" />
 	  <None Remove="Assets\NoImage.png" />
+	  <None Remove="Views\HomeView.xaml" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -58,6 +59,7 @@
 		
 		<Using Include="System" />
 		<Using Include="CommunityToolkit.Mvvm.ComponentModel" />
+		<Using Include="CommunityToolkit.Mvvm.Input" />
 
 		<Using Include="IcyLauncher.Models" />
 		<Using Include="IcyLauncher.Extentions" />
@@ -89,5 +91,8 @@
 			<Pack>True</Pack>
 			<PackagePath>\</PackagePath>
 		</None>
+		<Page Update="Views\HomeView.xaml">
+		  <Generator>MSBuild:Compile</Generator>
+		</Page>
 	</ItemGroup>
 </Project>

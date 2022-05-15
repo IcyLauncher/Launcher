@@ -1,6 +1,6 @@
 ﻿namespace IcyLauncher.Types;
 
-enum WeatherUnit
+public enum WeatherUnit
 {
     Celsius,
     Farenheit

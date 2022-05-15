@@ -1,6 +1,6 @@
 ﻿namespace IcyLauncher.ViewModels;
 
-partial class ShellViewModel : ObservableObject
+public partial class ShellViewModel : ObservableObject
 {
     readonly ILogger logger;
     readonly Configuration configuration;

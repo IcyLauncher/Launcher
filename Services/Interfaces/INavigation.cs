@@ -3,7 +3,7 @@ using Microsoft.UI.Xaml.Data;
 
 namespace IcyLauncher.Services.Interfaces;
 
-interface INavigation
+public interface INavigation
 {
     static NavigationView CreateNew()
     {
@@ -17,8 +17,7 @@ interface INavigation
 
         navigationView.SetBinding(NavigationView.IsBackEnabledProperty, new Binding() { Source = frame, Path = new PropertyPath("CanGoBack"), Mode = BindingMode.TwoWay });
 
-        navigationView.MenuItems.Add(new NavigationViewItem() { Content = "Home", Icon = new SymbolIcon(Symbol.Home), Tag = "MVVMTest.Views.HomeView" });
-        navigationView.MenuItems.Add(new NavigationViewItem() { Content = "Second", Icon = new SymbolIcon(Symbol.TwoBars), Tag = "MVVMTest.Views.SecondView" });
+        navigationView.MenuItems.Add(new NavigationViewItem() { Content = "Home", Icon = new SymbolIcon(Symbol.Home), Tag = "IcyLauncher.Views.HomeView" });
 
         return navigationView;
     }

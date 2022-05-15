@@ -1,9 +1,8 @@
-﻿using IcyLauncher.Services.Interfaces;
-using Microsoft.UI.Xaml.Controls;
+﻿using Microsoft.UI.Xaml.Controls;
 
 namespace IcyLauncher.Services;
 
-class Navigation : INavigation
+public class Navigation : INavigation
 {
     readonly NavigationView navigationView;
     readonly Frame frame;

@@ -1,6 +1,6 @@
 ﻿namespace IcyLauncher.Helpers;
 
-class Computer
+public class Computer
 {
     public static string AppDataDirectory { get; } = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
     public static string LocalAppDataDirectory { get; } = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);

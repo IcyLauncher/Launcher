@@ -1,6 +1,6 @@
 ﻿using IcyLauncher.ViewModels;
 
-namespace IcyLauncher;
+namespace IcyLauncher.Views;
 
 public sealed partial class ShellView : Window
 {

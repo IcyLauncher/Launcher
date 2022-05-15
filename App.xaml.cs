@@ -2,6 +2,7 @@
 using IcyLauncher.Services;
 using IcyLauncher.Services.Interfaces;
 using IcyLauncher.ViewModels;
+using IcyLauncher.Views;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.UI.Xaml.Controls;
@@ -32,10 +33,12 @@ public partial class App : Application
 
                 services.AddScoped<INavigation>(provider => new Navigation(navigationView, (Frame)navigationView.Content));
                 services.AddScoped<IConverter, JsonConverter>();
+                services.AddScoped<WindowHandler>();
 
                 services.Configure<Configuration>(context.Configuration);
 
                 services.AddSingleton<ShellViewModel>();
+                services.AddSingleton<HomeViewModel>();
 
                 services.AddSingleton<ShellView>(provider => new() { Content = navigationView });
             })

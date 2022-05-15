@@ -1,6 +1,6 @@
 ﻿namespace IcyLauncher.Types;
 
-enum MinecraftLaunchBehaviour
+public enum MinecraftLaunchBehaviour
 {
     Close,
     Minimize,

@@ -1,10 +1,9 @@
-﻿using IcyLauncher.Services.Interfaces;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using IcyLauncher.Helpers;
 
 namespace IcyLauncher.Services;
 
-class JsonConverter : IConverter
+public class JsonConverter : IConverter
 {
     readonly ILogger logger;
 

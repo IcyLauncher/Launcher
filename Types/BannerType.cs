@@ -1,6 +1,6 @@
 ﻿namespace IcyLauncher.Types;
 
-enum BannerType
+public enum BannerType
 {
     TimeDependent,
     Gallery,

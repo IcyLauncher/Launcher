@@ -1,6 +1,6 @@
 ﻿namespace IcyLauncher.Services.Interfaces;
 
-interface IConverter
+public interface IConverter
 {
     string ToString(object input);
 

@@ -1,6 +1,6 @@
 ﻿namespace IcyLauncher.Types;
 
-enum BlurEffect
+public enum BlurEffect
 {
     Mica,
     Acrylic,

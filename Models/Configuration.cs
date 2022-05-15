@@ -4,7 +4,7 @@ using Windows.UI;
 
 namespace IcyLauncher.Models;
 
-class Configuration
+public class Configuration
 {
     readonly static ILogger logger = App.Provider.GetRequiredService<ILogger<Configuration>>();
     readonly static IConverter converter = App.Provider.GetRequiredService<IConverter>();
@@ -53,7 +53,7 @@ class Configuration
     public ConfigurationDeveloper Developer { get; set; } = new();
 }
 
-partial class ConfigurationLauncher : ObservableObject
+public partial class ConfigurationLauncher : ObservableObject
 {
     [ObservableProperty]
     bool isDiscordEnabled = true;
@@ -71,7 +71,7 @@ partial class ConfigurationLauncher : ObservableObject
     string versionsDirectory = $"{Computer.CurrentDirectory}\\Versions";
 }
 
-partial class ConfigurationApperance : ObservableObject
+public partial class ConfigurationApperance : ObservableObject
 {
     [ObservableProperty]
     BannerType playBannerType = BannerType.TimeDependent;
@@ -81,7 +81,7 @@ partial class ConfigurationApperance : ObservableObject
     [ObservableProperty]
     BlurEffect blur = BlurEffect.Simple;
 }
-class ConfigurationApperanceColors
+public class ConfigurationApperanceColors
 {
     public ConfigurationApperanceColorsAccent Accent { get; set; } = new();
 
@@ -91,7 +91,7 @@ class ConfigurationApperanceColors
 
     public ConfigurationApperanceColorsControl Control { get; set; } = new();
 }
-partial class ConfigurationApperanceColorsAccent : ObservableObject
+public partial class ConfigurationApperanceColorsAccent : ObservableObject
 {
     [ObservableProperty]
     Color primary = Color.FromArgb(255, 0, 138, 255);
@@ -102,7 +102,7 @@ partial class ConfigurationApperanceColorsAccent : ObservableObject
     [ObservableProperty]
     Color dark = Color.FromArgb(255, 0, 73, 135);
 }
-partial class ConfigurationApperanceColorsBackground : ObservableObject
+public partial class ConfigurationApperanceColorsBackground : ObservableObject
 {
     [ObservableProperty]
     Color primary = Color.FromArgb(255, 32, 32, 32);
@@ -113,7 +113,7 @@ partial class ConfigurationApperanceColorsBackground : ObservableObject
     [ObservableProperty]
     Color dark = Color.FromArgb(255, 23, 23, 23);
 }
-partial class ConfigurationApperanceColorsText : ObservableObject
+public partial class ConfigurationApperanceColorsText : ObservableObject
 {
     [ObservableProperty]
     Color primary = Color.FromArgb(255, 255, 255, 255);
@@ -127,7 +127,7 @@ partial class ConfigurationApperanceColorsText : ObservableObject
     [ObservableProperty]
     Color disabled = Color.FromArgb(92, 255, 255, 255);
 }
-partial class ConfigurationApperanceColorsControl : ObservableObject
+public partial class ConfigurationApperanceColorsControl : ObservableObject
 {
     [ObservableProperty]
     Color primary = Color.FromArgb(13, 255, 255, 255);
@@ -143,7 +143,7 @@ partial class ConfigurationApperanceColorsControl : ObservableObject
 
     public ConfigurationApperanceColorsControlSolid Solid { get; set; } = new();
 }
-partial class ConfigurationApperanceColorsControlSolid : ObservableObject
+public partial class ConfigurationApperanceColorsControlSolid : ObservableObject
 {
     [ObservableProperty]
     Color primary = Color.FromArgb(255, 46, 46, 46);
@@ -158,7 +158,7 @@ partial class ConfigurationApperanceColorsControlSolid : ObservableObject
     Color outlineDisabled = Color.FromArgb(255, 79, 79, 79);
 }
 
-partial class ConfigurationWeather : ObservableObject
+public partial class ConfigurationWeather : ObservableObject
 {
     [ObservableProperty]
     bool isEnabled = true;
@@ -170,7 +170,7 @@ partial class ConfigurationWeather : ObservableObject
     WeatherUnit unit = WeatherUnit.Celsius;
 }
 
-partial class ConfigurationDateTime : ObservableObject
+public partial class ConfigurationDateTime : ObservableObject
 {
     [ObservableProperty]
     string dateFormat  = "dd.MM.yyyy";
@@ -179,7 +179,7 @@ partial class ConfigurationDateTime : ObservableObject
     string timeFormat  = "HH:mm:ss";
 }
 
-partial class ConfigurationDeveloper : ObservableObject
+public partial class ConfigurationDeveloper : ObservableObject
 {
     [ObservableProperty]
     bool isSaveLoginEnabled = false;
