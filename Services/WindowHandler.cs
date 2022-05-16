@@ -2,8 +2,8 @@
 using IcyLauncher.Views;
 using Microsoft.UI;
 using Microsoft.UI.Windowing;
-using System.Runtime.InteropServices;
 using Windows.Graphics;
+using Windows.UI;
 using WinRT.Interop;
 
 namespace IcyLauncher.Services;
@@ -13,10 +13,10 @@ public class WindowHandler
     readonly ILogger logger;
     readonly ShellView shellView;
 
-    public WindowHandler(ILogger<Window> logger)
+    public WindowHandler(ILogger<Window> logger, ShellView shellView)
     {
         this.logger = logger;
-        shellView = App.Provider.GetRequiredService<ShellView>();
+        this.shellView = shellView;
 
         this.logger.Log("Registered WindowHandler");
     }
@@ -27,21 +27,10 @@ public class WindowHandler
 
     public IntPtr HWnd => WindowNative.GetWindowHandle(shellView);
 
+    public bool HasTilteBar { get; private set; } = true;
     public SizeInt32 Size => Window.Size;
     public PointInt32 Position => Window.Position;
-    public SizeInt32 ScreenSize
-    {
-        get
-        {
-            IntPtr monitor = Win32.MonitorFromWindow(HWnd, 0);
-
-            var info = new Win32.MONITORINFOEX();
-            Win32.GetMonitorInfo(monitor, info);
-
-            logger.Log("Requested screen size");
-            return new(info.rcMonitor.right, info.rcMonitor.bottom);
-        }
-    }
+    public RectInt32 ScreenSize => DisplayArea.GetFromWindowId(Win32Interop.GetWindowIdFromWindow(HWnd), DisplayAreaFallback.Nearest).WorkArea;
 
 
     public void SetIcon(string path)
@@ -77,10 +66,64 @@ public class WindowHandler
 
         logger.Log($"Set window position to \"{x}, {y}\"");
     }
+    public void SetPositionToCenter() =>
+        SetPosition((ScreenSize.Width - Window.Size.Width) / 2, (ScreenSize.Height - Window.Size.Height) / 2);
 
-    public void SetToCenter()
+    public bool SetTilteBar(bool isEnabled = false, UIElement? titleBar = null)
     {
-        var screen = ScreenSize;
-        SetPosition(screen.Width / 2 - Size.Width / 2, screen.Height / 2 - Size.Height / 2);
+        //1 isEnabled = false && IsSupported = false: Error
+        //2 isEnabled = false && IsSupported = true: Hide TitleBar
+
+        //3 isEnabled = true && IsSupported = false && titleBar = null: Error
+        //4 isEnabled = true && IsSupported = true && titleBar = null: Standard
+        //5 isEnabled = true && IsSupported = true && titleBar != null: Set to new
+
+
+        if (!AppWindowTitleBar.IsCustomizationSupported()) // 1 + 3
+        {
+            logger.Log("Tried to set TitleBar: Not supported");
+            return false;
+        }
+
+        if (!isEnabled) // 2
+        {
+            if (titleBar is not null)
+                titleBar.Visibility = Visibility.Collapsed;
+            HasTilteBar = false;
+
+            Presenter.SetBorderAndTitleBar(true, false);
+
+            logger.Log("Set TitleBar to nothing");
+            return true;
+        }
+
+        if (titleBar is null) // 4
+        {
+            HasTilteBar = false;
+
+            Presenter.SetBorderAndTitleBar(true, true);
+
+            Window.TitleBar.ExtendsContentIntoTitleBar = false;
+
+            logger.Log("Set TitleBar to default");
+            return true;
+        }
+
+
+        titleBar.Visibility = Visibility.Visible;
+        HasTilteBar = true;
+
+        Presenter.SetBorderAndTitleBar(true, true);
+
+        Window.TitleBar.ExtendsContentIntoTitleBar = true;
+        Window.TitleBar.ButtonBackgroundColor = Colors.Transparent;
+        Window.TitleBar.ButtonInactiveBackgroundColor = Colors.Transparent;
+        Window.TitleBar.ButtonHoverBackgroundColor = Color.FromArgb(50, 255, 255, 255);
+        Window.TitleBar.ButtonPressedBackgroundColor = Color.FromArgb(90, 255, 255, 255);
+
+        shellView.SetTitleBar(titleBar);
+
+        logger.Log("Set TitleBar to UIElement");
+        return true;
     }
 }

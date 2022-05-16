@@ -1,7 +1,4 @@
-﻿using IcyLauncher.Models;
-using IcyLauncher.Services;
-using IcyLauncher.Services.Interfaces;
-using IcyLauncher.ViewModels;
+﻿using IcyLauncher.ViewModels;
 using IcyLauncher.Views;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
@@ -14,6 +11,8 @@ public partial class App : Application
 {
     readonly IHost host;
     public static IServiceProvider Provider { get; private set; } = default!;
+
+    readonly Grid titleBar = Helpers.UiElementProvider.TitleBar();
 
     public App()
     {
@@ -29,7 +28,8 @@ public partial class App : Application
             })
             .ConfigureServices((context, services) =>
             {
-                NavigationView navigationView = INavigation.CreateNew();
+                NavigationView navigationView = Helpers.UiElementProvider.NavigationView();
+                Grid mainGrid = Helpers.UiElementProvider.MainGrid(new GridLength[] { new(), new(1, GridUnitType.Star) }, titleBar, navigationView);
 
                 services.AddScoped<INavigation>(provider => new Navigation(navigationView, (Frame)navigationView.Content));
                 services.AddScoped<IConverter, JsonConverter>();
@@ -40,24 +40,30 @@ public partial class App : Application
                 services.AddSingleton<ShellViewModel>();
                 services.AddSingleton<HomeViewModel>();
 
-                services.AddSingleton<ShellView>(provider => new() { Content = navigationView });
+                services.AddSingleton<ShellView>(provider => new() { Content = mainGrid });
             })
             .Build();
 
         Provider = host.Services;
 
+
+        var logger = Provider.GetRequiredService<ILogger<App>>();
+
         AppDomain.CurrentDomain.FirstChanceException += (sender, args) =>
-        {
-            var logger = Provider.GetRequiredService<ILogger<App>>();
             logger.Log("Global FirstChanceException", args.Exception);
-        };
     }
 
     protected override async void OnLaunched(LaunchActivatedEventArgs args)
     {
         await host.StartAsync();
 
-        var shell = Provider.GetRequiredService<ShellView>();
-        shell.Activate();
+        var windowHandler = Provider.GetRequiredService<WindowHandler>();
+        windowHandler.SetTilteBar(false, titleBar);
+
+        var shellView = Provider.GetRequiredService<ShellView>();
+        shellView.Activate();
+
+        var navigation = Provider.GetRequiredService<INavigation>();
+        navigation.Navigate("Home");
     }
 }

@@ -60,7 +60,7 @@ public class Navigation : INavigation
         {
             navigationView.SelectedItem = item;
 
-            logger.Log("Set current NavigationView item successfully");
+            logger.Log("Set current NavigationView item");
             return true;
         }
         catch
@@ -76,7 +76,7 @@ public class Navigation : INavigation
         {
             frame.Navigate(type, parameter);
 
-            logger.Log("Set current NavigationView page successfully");
+            logger.Log("Set current NavigationView page");
             return true;
         }
         catch
@@ -115,7 +115,7 @@ public class Navigation : INavigation
             frame.BackStack.RemoveAt(frame.BackStackDepth - 1);
             frame.BackStack.RemoveAt(frame.BackStackDepth - 1);
 
-            logger.Log("Current NavigationView page went back successfully");
+            logger.Log("Current NavigationView page went back");
             return true;
         }
         catch

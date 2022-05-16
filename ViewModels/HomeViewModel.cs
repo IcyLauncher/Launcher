@@ -1,6 +1,4 @@
-﻿using Windows.Graphics.Display;
-
-namespace IcyLauncher.ViewModels;
+﻿namespace IcyLauncher.ViewModels;
 
 public partial class HomeViewModel : ObservableObject
 {
@@ -18,7 +16,7 @@ public partial class HomeViewModel : ObservableObject
     [ICommand]
     void Ass()
     {
-        windowHandler.SetToCenter();
+        windowHandler.SetPositionToCenter();
         logger.Log("your mom");
     }
 }

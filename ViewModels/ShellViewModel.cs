@@ -4,20 +4,13 @@ public partial class ShellViewModel : ObservableObject
 {
     readonly ILogger logger;
     readonly Configuration configuration;
-    readonly INavigation navigation;
 
-    public ShellViewModel(ILogger<ShellViewModel> logger, IOptions<Configuration> configuration, INavigation navigation)
+    public ShellViewModel(ILogger<ShellViewModel> logger, IOptions<Configuration> configuration)
     {
         this.logger = logger;
         this.configuration = configuration.Value;
-        this.navigation = navigation;
-    }
 
-    public void WindowActivated()
-    {
-        navigation.Navigate("Home");
-
-        logger.Log("Window Activated");
+        this.logger.Log("Window Started");
     }
 
 
