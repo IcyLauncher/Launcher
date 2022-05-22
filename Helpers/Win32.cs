@@ -8,9 +8,6 @@ namespace IcyLauncher.Helpers;
 
 public class Win32
 {
-    readonly WindowHandler windowHandler = App.Provider.GetRequiredService<WindowHandler>();
-
-
     public delegate IntPtr WinProc(IntPtr hWnd, int msg, IntPtr wParam, IntPtr lParam);
 
     public static WinProc? NewWndProc { get; set; } = null;

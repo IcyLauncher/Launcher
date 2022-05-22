@@ -1,4 +1,7 @@
-﻿namespace IcyLauncher.ViewModels;
+﻿using IcyLauncher.Helpers;
+using Microsoft.UI.Xaml.Media.Imaging;
+
+namespace IcyLauncher.ViewModels;
 
 public partial class HomeViewModel : ObservableObject
 {

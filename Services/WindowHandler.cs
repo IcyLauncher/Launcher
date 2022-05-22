@@ -71,21 +71,13 @@ public class WindowHandler
 
     public bool SetTilteBar(bool isEnabled = false, UIElement? titleBar = null)
     {
-        //1 isEnabled = false && IsSupported = false: Error
-        //2 isEnabled = false && IsSupported = true: Hide TitleBar
-
-        //3 isEnabled = true && IsSupported = false && titleBar = null: Error
-        //4 isEnabled = true && IsSupported = true && titleBar = null: Standard
-        //5 isEnabled = true && IsSupported = true && titleBar != null: Set to new
-
-
-        if (!AppWindowTitleBar.IsCustomizationSupported()) // 1 + 3
+        if (!AppWindowTitleBar.IsCustomizationSupported()) 
         {
             logger.Log("Tried to set TitleBar: Not supported");
             return false;
         }
 
-        if (!isEnabled) // 2
+        if (!isEnabled)
         {
             if (titleBar is not null)
                 titleBar.Visibility = Visibility.Collapsed;
@@ -97,7 +89,7 @@ public class WindowHandler
             return true;
         }
 
-        if (titleBar is null) // 4
+        if (titleBar is null)
         {
             HasTilteBar = false;
 
@@ -116,10 +108,13 @@ public class WindowHandler
         Presenter.SetBorderAndTitleBar(true, true);
 
         Window.TitleBar.ExtendsContentIntoTitleBar = true;
+        Window.TitleBar.SetDragRectangles(new RectInt32[] { new(40, 0, ScreenSize.Width, 32) } );
+
         Window.TitleBar.ButtonBackgroundColor = Colors.Transparent;
-        Window.TitleBar.ButtonInactiveBackgroundColor = Colors.Transparent;
-        Window.TitleBar.ButtonHoverBackgroundColor = Color.FromArgb(50, 255, 255, 255);
         Window.TitleBar.ButtonPressedBackgroundColor = Color.FromArgb(90, 255, 255, 255);
+        Window.TitleBar.ButtonHoverBackgroundColor = Color.FromArgb(50, 255, 255, 255);
+        Window.TitleBar.ButtonInactiveBackgroundColor = Colors.Transparent;
+        Window.TitleBar.ButtonInactiveForegroundColor = Colors.LightGray;
 
         shellView.SetTitleBar(titleBar);
 

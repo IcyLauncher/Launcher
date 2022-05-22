@@ -12,7 +12,7 @@ public partial class App : Application
     readonly IHost host;
     public static IServiceProvider Provider { get; private set; } = default!;
 
-    readonly Grid titleBar = Helpers.UiElementProvider.TitleBar();
+    StackPanel titleBar = default!;
 
     public App()
     {
@@ -28,8 +28,9 @@ public partial class App : Application
             })
             .ConfigureServices((context, services) =>
             {
-                NavigationView navigationView = Helpers.UiElementProvider.NavigationView();
-                Grid mainGrid = Helpers.UiElementProvider.MainGrid(new GridLength[] { new(), new(1, GridUnitType.Star) }, titleBar, navigationView);
+                NavigationView navigationView = Helpers.UIElementProvider.NavigationView();
+                titleBar = Helpers.UIElementProvider.TitleBar(context.Configuration.Get<Configuration>().Apperance.Colors.Accent.Primary);
+                Grid mainGrid = Helpers.UIElementProvider.MainGrid(new GridLength[] { new(), new(1, GridUnitType.Star) }, titleBar, navigationView);
 
                 services.AddScoped<INavigation>(provider => new Navigation(navigationView, (Frame)navigationView.Content));
                 services.AddScoped<IConverter, JsonConverter>();
@@ -58,7 +59,7 @@ public partial class App : Application
         await host.StartAsync();
 
         var windowHandler = Provider.GetRequiredService<WindowHandler>();
-        windowHandler.SetTilteBar(false, titleBar);
+        windowHandler.SetTilteBar(true, titleBar);
 
         var shellView = Provider.GetRequiredService<ShellView>();
         shellView.Activate();
