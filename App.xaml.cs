@@ -67,7 +67,7 @@ public partial class App : Application
                 services.AddSingleton<HomeViewModel>();
                 services.AddSingleton<ProfilesViewModel>();
 
-                services.AddSingleton<ShellView>(provider => new() { Content = mainGrid });
+                services.AddSingleton<ShellView>(provider => new() { Content = mainGrid, Title = "IcyLauncher" });
             })
             .Build();
 
@@ -81,6 +81,7 @@ public partial class App : Application
 
         var windowHandler = Provider.GetRequiredService<WindowHandler>();
         windowHandler.SetTilteBar(true, titleBar);
+        windowHandler.SetIcon("Assets/Icon.ico");
         windowHandler.SetMinSize(700, 400);
         windowHandler.SetSize(1031, 550);
         windowHandler.SetPositionToCenter();
