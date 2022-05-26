@@ -36,6 +36,7 @@
 	  <None Remove="Assets\LICENSE" />
 	  <None Remove="Assets\NoImage.png" />
 	  <None Remove="Views\HomeView.xaml" />
+	  <None Remove="Views\ProfilesView.xaml" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -94,6 +95,10 @@
 			<Pack>True</Pack>
 			<PackagePath>\</PackagePath>
 		</None>
+		<Page Update="Views\ProfilesView.xaml">
+		  <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+		  <SubType>Designer</SubType>
+		</Page>
 		<Page Update="Views\HomeView.xaml">
 		  <Generator>MSBuild:Compile</Generator>
 		</Page>
