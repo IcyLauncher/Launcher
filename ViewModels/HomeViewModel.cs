@@ -1,7 +1,4 @@
-﻿using IcyLauncher.Helpers;
-using Microsoft.UI.Xaml.Media.Imaging;
-
-namespace IcyLauncher.ViewModels;
+﻿namespace IcyLauncher.ViewModels;
 
 public partial class HomeViewModel : ObservableObject
 {
@@ -14,12 +11,5 @@ public partial class HomeViewModel : ObservableObject
         this.logger = logger;
         Configuration = configuration.Value;
         this.windowHandler = windowHandler;
-    }
-
-    [ICommand]
-    void Ass()
-    {
-        App.CanGoBack = !App.CanGoBack;
-        logger.Log("your mom");
     }
 }

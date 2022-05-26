@@ -2,7 +2,6 @@
 #pragma warning disable CA2211
 
 using System.Runtime.InteropServices;
-using Windows.Graphics;
 
 namespace IcyLauncher.Helpers;
 
