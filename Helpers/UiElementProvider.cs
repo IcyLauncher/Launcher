@@ -1,53 +1,77 @@
 ﻿using Microsoft.UI;
 using Microsoft.UI.Xaml.Controls;
+using Microsoft.UI.Xaml.Controls.AnimatedVisuals;
 using Microsoft.UI.Xaml.Data;
 using Microsoft.UI.Xaml.Media;
-using Microsoft.UI.Xaml.Media.Imaging;
-using System.Diagnostics;
+using Microsoft.UI.Xaml.Media.Animation;
 using Windows.UI;
 
 namespace IcyLauncher.Helpers;
 
 public class UIElementProvider
 {
+    public static Storyboard Animate(DependencyObject element, string property, int startValue, int endValue, double lenght)
+    {
+        var keyFrameStart = new EasingDoubleKeyFrame() { KeyTime = KeyTime.FromTimeSpan(TimeSpan.FromMilliseconds(0)), Value = startValue, EasingFunction = new ExponentialEase() { EasingMode = EasingMode.EaseInOut } };
+        var keyFrameEnd = new EasingDoubleKeyFrame() { KeyTime = KeyTime.FromTimeSpan(TimeSpan.FromMilliseconds(lenght)), Value = endValue, EasingFunction = new ExponentialEase() { EasingMode = EasingMode.EaseInOut } };
+
+        var anim = new DoubleAnimationUsingKeyFrames() { EnableDependentAnimation = true };
+        anim.KeyFrames.Add(keyFrameStart);
+        anim.KeyFrames.Add(keyFrameEnd);
+
+        Storyboard.SetTarget(anim, element);
+        Storyboard.SetTargetProperty(anim, property);
+
+        var board = new Storyboard();
+        board.Children.Add(anim);
+
+        return board;
+    }
+
+
     public static Grid MainGrid(GridLength[] rowHeight, params UIElement[] children)
     {
-        Grid grid = new();
+        Grid containerGrid = new();
 
         for (int i = 0; i < rowHeight.Length; i++)
         {
-            grid.RowDefinitions.Add(new() { Height = rowHeight[i] });
+            containerGrid.RowDefinitions.Add(new() { Height = rowHeight[i] });
 
             children[i].SetValue(Grid.RowProperty, i);
-            grid.Children.Add(children[i]);
+            containerGrid.Children.Add(children[i]);
         }
 
-        return grid;
+        return containerGrid;
     }
 
-    public static StackPanel TitleBar(Color primaryColor)
+    public static StackPanel TitleBar(Color primaryColor, out Button backButton)
     {
-        Button button = new()
+        var backIcon = new AnimatedIcon() {Source = new AnimatedBackVisualSource(), FallbackIconSource = new SymbolIconSource() { Symbol = Symbol.Back }, Foreground = new SolidColorBrush(Colors.White) };
+
+        backButton = new()
         {
+            Visibility = Visibility.Collapsed,
             Margin = new(4, 4, 0, 4),
             Width = 32,
             Height = 32,
             Padding = new(0),
             Background = new SolidColorBrush(Colors.Transparent),
             BorderBrush = new SolidColorBrush(Colors.Transparent),
-            Content = new Viewbox() { Child = new SymbolIcon(Symbol.Back) { Foreground = new SolidColorBrush(Colors.LightGray) }, Width = 11, Height = 11},
+            Content = new Viewbox() { Child = backIcon, Width = 16, Height = 16},
         };
+        backButton.PointerEntered += (s, e) => AnimatedIcon.SetState(backIcon, "PointerOver");
+        backButton.PointerExited += (s, e) => AnimatedIcon.SetState(backIcon, "Normal");
 
-        Image image = new()
+        Image iconImage = new()
         {
             HorizontalAlignment = HorizontalAlignment.Left,
+            Margin = new(10, 0, 10, 0),
             Width = 18,
             Height = 18,
-            Margin = new(16, 0, 16, 0),
             Source = "Icon.png".AsImage()
         };
 
-        TextBlock textBlock = new()
+        TextBlock titleTextBlock = new()
         {
             VerticalAlignment = VerticalAlignment.Center,
             FontSize = 12,
@@ -55,22 +79,22 @@ public class UIElementProvider
             Text = "IcyLauncher",
         };
 
-        StackPanel stackPanel = new()
+        StackPanel containerStackPanel = new()
         {
             Orientation = Orientation.Horizontal,
             Height = 48,
             Visibility = Visibility.Collapsed
         };
-        stackPanel.Children.Add(button);
-        stackPanel.Children.Add(image);
-        stackPanel.Children.Add(textBlock);
+        containerStackPanel.Children.Add(backButton);
+        containerStackPanel.Children.Add(iconImage);
+        containerStackPanel.Children.Add(titleTextBlock);
 
-        return stackPanel;
+        return containerStackPanel;
     }
 
     public static Image Icon()
     {
-        Image image = new()
+        Image iconImage = new()
         {
             Width = 16,
             Height = 16,
@@ -78,28 +102,29 @@ public class UIElementProvider
             Source = "Icon.png".AsImage()
         };
 
-        return image;
+        return iconImage;
     }
 
-    public static NavigationView NavigationView()
+    public static NavigationView NavigationView(out Frame contentFrame)
     {
-        Frame frame = new();
-        NavigationView navigationView = new()
+        contentFrame = new();
+        NavigationView containerNavigationView = new()
         {
-            Content = frame,
+            Content = contentFrame,
             OpenPaneLength = 200,
-            IsSettingsVisible = false
+            IsSettingsVisible = false,
+            IsBackButtonVisible = NavigationViewBackButtonVisible.Collapsed
         };
 
-        navigationView.SetBinding(Microsoft.UI.Xaml.Controls.NavigationView.IsBackEnabledProperty, new Binding() { 
-            Source = frame, 
+        containerNavigationView.SetBinding(Microsoft.UI.Xaml.Controls.NavigationView.IsBackEnabledProperty, new Binding() { 
+            Source = contentFrame, 
             Path = new PropertyPath("CanGoBack"), 
             Mode = BindingMode.TwoWay });
 
-        navigationView.MenuItems.Add(
+        containerNavigationView.MenuItems.Add(
             new NavigationViewItem() { Content = "Home", Icon = new SymbolIcon(Symbol.Home), Tag = "IcyLauncher.Views.HomeView" 
             });
 
-        return navigationView;
+        return containerNavigationView;
     }
 }

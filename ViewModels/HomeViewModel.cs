@@ -19,7 +19,7 @@ public partial class HomeViewModel : ObservableObject
     [ICommand]
     void Ass()
     {
-        windowHandler.SetPositionToCenter();
+        App.CanGoBack = !App.CanGoBack;
         logger.Log("your mom");
     }
 }
