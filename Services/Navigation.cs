@@ -16,8 +16,10 @@ public class Navigation : INavigation
 
         this.navigationView.SelectionChanged += (s, args) =>
         {
-            if (args.SelectedItemContainer is NavigationViewItem item && Type.GetType(item.Tag.ToString()!) is Type type)
+            if (args.SelectedItemContainer is NavigationViewItem item && Type.GetType($"IcyLauncher.Views.{item.Tag}View") is Type type)
                 SetCurrentPage(type);
+            else
+                logger.Log("Failed to set current NavigationView page: Unregistered Type");
         };
         this.navigationView.BackRequested += (s, args) => GoBack();
 
@@ -48,7 +50,7 @@ public class Navigation : INavigation
 
             var items = GetNavigationViewItems();
 
-            return items.Find(item => searchFor.Equals(searchForTag ? item.Tag.ToString() : item.Content.ToString(), comparision));
+            return items.Find(item => searchFor.Equals(searchForTag ? $"IcyLauncher.Views.{item.Tag}View" : item.Tag.ToString(), comparision));
         }
         catch { return null; }
     }
@@ -75,13 +77,14 @@ public class Navigation : INavigation
         try
         {
             frame.Navigate(type, parameter);
+            App.CanGoBack = frame.CanGoBack;
 
             logger.Log("Set current NavigationView page");
             return true;
         }
         catch
         {
-            logger.Log("Failed to set current NavigationView page item");
+            logger.Log("Failed to set current NavigationView page");
             return false;
         }
     }
@@ -91,7 +94,7 @@ public class Navigation : INavigation
         if (item is null || string.IsNullOrWhiteSpace(item.Tag.ToString()))
             return false;
 
-        if (Type.GetType(item.Tag.ToString()!) is not null)
+        if (Type.GetType($"IcyLauncher.Views.{item.Tag}View") is not null)
             return SetCurrentNavigationViewItem(item);
         else
             return false;
@@ -114,6 +117,7 @@ public class Navigation : INavigation
 
             frame.BackStack.RemoveAt(frame.BackStackDepth - 1);
             frame.BackStack.RemoveAt(frame.BackStackDepth - 1);
+            App.CanGoBack = frame.CanGoBack;
 
             logger.Log("Current NavigationView page went back");
             return true;

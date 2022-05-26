@@ -108,7 +108,7 @@ public class WindowHandler
         Presenter.SetBorderAndTitleBar(true, true);
 
         Window.TitleBar.ExtendsContentIntoTitleBar = true;
-        Window.TitleBar.SetDragRectangles(new RectInt32[] { new(40, 0, ScreenSize.Width, 32) } );
+        Window.TitleBar.SetDragRectangles(new RectInt32[] { new(40, 0, ScreenSize.Width, 48) } );
 
         Window.TitleBar.ButtonBackgroundColor = Colors.Transparent;
         Window.TitleBar.ButtonPressedBackgroundColor = Color.FromArgb(90, 255, 255, 255);

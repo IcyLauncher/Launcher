@@ -14,12 +14,12 @@ public partial class App : Application
     public static IServiceProvider Provider { get; private set; } = default!;
     public static bool CanGoBack 
     {
-        get
-        {
-            return backButton.Visibility != Visibility.Collapsed;
-        }
+        get => backButton.Visibility != Visibility.Collapsed;
         set
         {
+            if (CanGoBack == value)
+                return;
+
             if (value)
             {
                 backButton.Visibility = Visibility.Visible;
@@ -53,8 +53,8 @@ public partial class App : Application
             })
             .ConfigureServices((context, services) =>
             {
-                titleBar = UIElementProvider.TitleBar(context.Configuration.Get<Configuration>().Apperance.Colors.Accent.Primary, out backButton);
                 NavigationView navigationView = UIElementProvider.NavigationView(out Frame contentFrame);
+                titleBar = UIElementProvider.TitleBar(context.Configuration.Get<Configuration>().Apperance.Colors.Accent.Primary, out backButton);
                 Grid mainGrid = UIElementProvider.MainGrid(new GridLength[] { new(), new(1, GridUnitType.Star) }, titleBar, navigationView);
 
                 services.AddScoped<INavigation>(provider => new Navigation(navigationView, contentFrame));
@@ -65,31 +65,35 @@ public partial class App : Application
 
                 services.AddSingleton<ShellViewModel>();
                 services.AddSingleton<HomeViewModel>();
+                services.AddSingleton<ProfilesViewModel>();
 
                 services.AddSingleton<ShellView>(provider => new() { Content = mainGrid });
             })
             .Build();
 
         Provider = host.Services;
-
-
-        var logger = Provider.GetRequiredService<ILogger<App>>();
-
-        AppDomain.CurrentDomain.FirstChanceException += (sender, args) =>
-            logger.Log("Global FirstChanceException", args.Exception);
     }
 
     protected override async void OnLaunched(LaunchActivatedEventArgs args)
     {
         await host.StartAsync();
 
+
         var windowHandler = Provider.GetRequiredService<WindowHandler>();
         windowHandler.SetTilteBar(true, titleBar);
+        windowHandler.SetMinSize(700, 400);
+        windowHandler.SetSize(1031, 550);
+        windowHandler.SetPositionToCenter();
 
         var shellView = Provider.GetRequiredService<ShellView>();
         shellView.Activate();
 
         var navigation = Provider.GetRequiredService<INavigation>();
         navigation.Navigate("Home");
+        backButton.Click += (s, e) => navigation.GoBack();
+
+        var logger = Provider.GetRequiredService<ILogger<App>>();
+        AppDomain.CurrentDomain.FirstChanceException += (sender, args) =>
+            logger.Log("Global FirstChanceException", args.Exception);
     }
 }
