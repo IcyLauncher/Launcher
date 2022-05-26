@@ -13,6 +13,7 @@
             FontSize="20"
             Foreground="Red"
             Text="{x:Bind viewModel.Configuration.Launcher.TexturepackDirectory}" />
-        <Button Command="{x:Bind viewModel.AssCommand}" Content="Fuck yoiu" />
+
+
     </Grid>
 </Page>
