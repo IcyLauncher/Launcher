@@ -1,0 +1,113 @@
+<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<OutputType>WinExe</OutputType>
+		<TargetFramework>net6.0-windows10.0.19041.0</TargetFramework>
+		<TargetPlatformMinVersion>10.0.17763.0</TargetPlatformMinVersion>
+		<RootNamespace>IcyLauncher</RootNamespace>
+		<Platforms>x86;x64</Platforms>
+		<RuntimeIdentifiers>win10-x86;win10-x64</RuntimeIdentifiers>
+		<PublishProfile>win10-$(Platform).pubxml</PublishProfile>
+		<UseWinUI>true</UseWinUI>
+		<EnablePreviewMsixTooling>true</EnablePreviewMsixTooling>
+		<WindowsPackageType>None</WindowsPackageType>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+		
+		<Version>0.0.0.1</Version>
+		<Authors>IcySnex</Authors>
+		<Description>A modern &amp; feature rich MC:BE versionswitcher and launcher</Description>
+		<Copyright>Copyright © 2022 IcySnex - Lao Lao</Copyright>
+		<NeutralLanguage>en</NeutralLanguage>
+		
+		<RepositoryUrl>https://github.com/IcyLauncher/Launcher</RepositoryUrl>
+		<RepositoryType>github</RepositoryType>
+
+		<PackageProjectUrl>https://github.com/IcyLauncher</PackageProjectUrl>
+		<PackageTags>minecraft bedrock, versionswitcher, launcher, cosmetics &amp; texturepacks</PackageTags>
+		<PackageLicenseFile>Assets\LICENSE</PackageLicenseFile>
+		<PackageReadmeFile>Assets\README.md</PackageReadmeFile>
+		<PackageIcon>Assets\Icon.png</PackageIcon>
+		<ApplicationManifest>app.manifest</ApplicationManifest>
+		<ApplicationIcon>Assets\Icon.ico</ApplicationIcon>
+	</PropertyGroup>
+
+	<ItemGroup>
+	  <None Remove="Assets\Icon.png" />
+	  <None Remove="Assets\LICENSE" />
+	  <None Remove="Assets\NoImage.png" />
+	  <None Remove="Views\HomeView.xaml" />
+	  <None Remove="Views\ProfilesView.xaml" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="CommunityToolkit.Mvvm" Version="7.1.2" />
+		<PackageReference Include="Microsoft.Extensions.Hosting" Version="6.0.1" />
+		<PackageReference Include="Microsoft.WindowsAppSDK" Version="1.1.0-preview3" />
+		<PackageReference Include="Microsoft.Windows.SDK.BuildTools" Version="10.0.22000.197" />
+		<PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+		<PackageReference Include="Serilog" Version="2.11.0" />
+		<PackageReference Include="Serilog.Extensions.Hosting" Version="4.2.0" />
+		<PackageReference Include="Serilog.Sinks.Debug" Version="2.0.0" />
+		<PackageReference Include="Serilog.Sinks.File" Version="5.0.0" />
+		<Manifest Include="$(ApplicationManifest)" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\IcyLauncher.Core\IcyLauncher.Core.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<Using Include="Microsoft.UI.Xaml" />
+		<Using Include="Microsoft.Extensions.DependencyInjection" />
+		<Using Include="Microsoft.Extensions.Logging" />
+		<Using Include="Microsoft.Extensions.Options" />
+		
+		<Using Include="System" />
+		<Using Include="CommunityToolkit.Mvvm.ComponentModel" />
+		<Using Include="CommunityToolkit.Mvvm.Input" />
+
+		<Using Include="IcyLauncher.Models" />
+
+		<Using Include="IcyLauncher.Core.Extentions" />
+		<Using Include="IcyLauncher.Core.Helpers" />
+		<Using Include="IcyLauncher.Core.Interfaces" />
+		<Using Include="IcyLauncher.Core.Services" />
+		<Using Include="IcyLauncher.Core.Types" />
+	</ItemGroup>
+
+	<ItemGroup Condition="'$(DisableMsixProjectCapabilityAddedByProject)'!='true' and '$(EnablePreviewMsixTooling)'=='true'">
+		<ProjectCapability Include="Msix" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Content Update="Assets\Icon.ico">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </Content>
+	  <Content Update="Assets\Icon.png">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </Content>
+	  <Content Update="Assets\LICENSE">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Content>
+	  <Content Update="Assets\NoImage.png">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </Content>
+	  <Content Update="Assets\README.md">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Content>
+	</ItemGroup>
+
+	<ItemGroup>
+		<None Update="Assets\README.md">
+			<Pack>True</Pack>
+			<PackagePath>\</PackagePath>
+		</None>
+		<Page Update="Views\ProfilesView.xaml">
+		  <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+		  <SubType>Designer</SubType>
+		</Page>
+		<Page Update="Views\HomeView.xaml">
+		  <Generator>MSBuild:Compile</Generator>
+		</Page>
+	</ItemGroup>
+</Project>

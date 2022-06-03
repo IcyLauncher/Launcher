@@ -1,0 +1,11 @@
+D:\Personal\Coding\IcyLauncher\Launcher\IcyLauncher\bin\Publish\IcyLauncher.pdb
+D:\Personal\Coding\IcyLauncher\Launcher\IcyLauncher\bin\Publish\Assets\LICENSE
+D:\Personal\Coding\IcyLauncher\Launcher\IcyLauncher\bin\Publish\Assets\README.md
+D:\Personal\Coding\IcyLauncher\Launcher\IcyLauncher\bin\Publish\Assets\Icon.ico
+D:\Personal\Coding\IcyLauncher\Launcher\IcyLauncher\bin\Publish\Assets\Icon.png
+D:\Personal\Coding\IcyLauncher\Launcher\IcyLauncher\bin\Publish\Assets\NoImage.png
+D:\Personal\Coding\IcyLauncher\Launcher\IcyLauncher\bin\Publish\Microsoft.WindowsAppRuntime.Bootstrap.dll
+D:\Personal\Coding\IcyLauncher\Launcher\IcyLauncher\bin\Publish\IcyLauncher.Core.pdb
+D:\Personal\Coding\IcyLauncher\Launcher\IcyLauncher\bin\Publish\IcyLauncher.Core.pri
+D:\Personal\Coding\IcyLauncher\Launcher\IcyLauncher\bin\Publish\resources.pri
+D:\Personal\Coding\IcyLauncher\Launcher\IcyLauncher\bin\Publish\IcyLauncher.exe

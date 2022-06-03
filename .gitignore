@@ -1,6 +1,6 @@
 .vs/
-bin/
-obj/
+IcyLauncher.bin/
+IcyLauncher.obj/
 *.suo
 *.user
 _ReSharper.*
