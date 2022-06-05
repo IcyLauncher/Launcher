@@ -4,6 +4,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.UI;
 using Microsoft.UI.Xaml.Controls;
+using Microsoft.UI.Xaml.Media;
 using Serilog;
 
 namespace IcyLauncher;
@@ -14,7 +15,6 @@ public partial class App : Application
     public static IServiceProvider Provider { get; private set; } = default!;
 
     static Button backButton = default!;
-    StackPanel titleBar = default!;
 
     readonly Action<bool> CanGoBack = new(CanGoBack =>
     {
@@ -52,25 +52,18 @@ public partial class App : Application
             {
                 var configuration = context.Configuration.Get<Configuration>();
 
-                titleBar = UIElementProvider.TitleBar(configuration.Apperance.Colors.Accent.Primary, out backButton);
+                var titleBar = UIElementProvider.TitleBar(configuration.Apperance.Colors.Accent.Primary, out backButton);
                 var navigationView = UIElementProvider.NavigationView(out Frame contentFrame);
                 var mainGrid = UIElementProvider.MainGrid(new GridLength[] { new(), new(1, GridUnitType.Star) },
                     configuration.Apperance.Blur == BlurEffect.None ? configuration.Apperance.Colors.Background.Primary : Colors.Transparent, 
                     titleBar, navigationView);
 
                 services.AddScoped<Core.Services.ConfigurationManager>();
-                services.AddScoped<INavigation>(provider => new Navigation(provider.GetRequiredService<ILogger<Navigation>>(), navigationView, contentFrame, CanGoBack));
-                services.AddScoped<IConverter, JsonConverter>();
+                services.AddScoped<ThemeManager>();
                 services.AddScoped<WindowHandler>();
-                //switch (configuration.Apperance.Blur)
-                //{
-                //    case BlurEffect.Mica:
-                //        services.AddScoped<IBackdropHandler, MicaBackdropHandler>();
-                //        break;
-                //    case BlurEffect.Acrylic:
-                //        services.AddScoped<IBackdropHandler, AcrylicBackdropHandler>();
-                //        break;
-                //}
+                services.AddScoped<IConverter, JsonConverter>();
+                services.AddScoped<INavigation>(provider => new Navigation(provider.GetRequiredService<ILogger<Navigation>>(), navigationView, contentFrame, CanGoBack));
+                services.AddScoped<AppStartupHandler>();
 
                 services.Configure<Configuration>(context.Configuration);
 
@@ -88,29 +81,8 @@ public partial class App : Application
     protected override async void OnLaunched(LaunchActivatedEventArgs args)
     {
         await host.StartAsync();
-
-
-        var windowHandler = Provider.GetRequiredService<WindowHandler>();
-        windowHandler.SetTilteBar(true, titleBar);
-        windowHandler.SetIcon("Assets/Icon.ico");
-        windowHandler.SetMinSize(700, 400);
-        windowHandler.SetSize(1031, 550);
-        windowHandler.SetPositionToCenter();
-        windowHandler.MakeTransparent();
-
-        var shellView = Provider.GetRequiredService<Window>();
-        shellView.Activate();
-
-        //var backdropHandler = Provider.GetService<IBackdropHandler>();
-        //if (backdropHandler is not null) 
-        //    backdropHandler.SetBackdrop();
-
-        var navigation = Provider.GetRequiredService<INavigation>();
-        navigation.Navigate("Home");
-        backButton.Click += (s, e) => navigation.GoBack();
-
-        var logger = Provider.GetRequiredService<ILogger<App>>();
-        AppDomain.CurrentDomain.FirstChanceException += (sender, args) =>
-            logger.Log("Global FirstChanceException", args.Exception);
+        Provider.GetRequiredService<AppStartupHandler>();
     }
+
+    public static SolidColorBrush MyPublicColor = new(Colors.Red);
 }

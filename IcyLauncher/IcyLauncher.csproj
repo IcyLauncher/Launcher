@@ -32,6 +32,8 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+		<None Remove="Assets\FluentSystemIcons-Filled.ttf" />
+		<None Remove="Assets\FluentSystemIcons-Regular.ttf" />
 		<None Remove="Assets\Icon.png" />
 		<None Remove="Assets\LICENSE" />
 		<None Remove="Assets\NoImage.png" />
@@ -79,6 +81,12 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<Content Update="Assets\FluentSystemIcons-Filled.ttf">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
+		<Content Update="Assets\FluentSystemIcons-Regular.ttf">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
 		<Content Update="Assets\Icon.ico">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</Content>

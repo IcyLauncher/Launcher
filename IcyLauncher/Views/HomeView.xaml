@@ -10,7 +10,7 @@
     <Grid>
         <TextBlock
             FontSize="20"
-            Foreground="{StaticResource AccentPrimary}"
+            Foreground="{x:Bind viewModel.Configuration.Apperance.Colors.Accent.Primary, Mode=OneWay, Converter={StaticResource BrushConverter}}"
             Text="{x:Bind viewModel.Configuration.Launcher.TexturepackDirectory}" />
 
         <StackPanel Margin="50">
@@ -20,6 +20,7 @@
             <Button Command="{x:Bind viewModel.AcrylicCommand}">Acrylic</Button>
             <Button Command="{x:Bind viewModel.SimpleCommand}">Simple</Button>
             <Button Command="{x:Bind viewModel.NoneCommand}">None</Button>
+            <Button Command="{x:Bind viewModel.ReColorCommand}">ReColor</Button>
         </StackPanel>
     </Grid>
 </Page>

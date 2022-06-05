@@ -1,4 +1,6 @@
-﻿namespace IcyLauncher.ViewModels;
+﻿using Microsoft.UI;
+
+namespace IcyLauncher.ViewModels;
 
 public partial class HomeViewModel : ObservableObject
 {
@@ -41,5 +43,11 @@ public partial class HomeViewModel : ObservableObject
     {
         windowHandler.SetBlur(BlurEffect.None, Enable, DarkMOde);
         logger.Log("\n\n\n");
+    }
+
+    [ICommand]
+    void ReColor()
+    {
+        Configuration.Apperance.Colors.Accent.Primary = Colors.Red;
     }
 }
