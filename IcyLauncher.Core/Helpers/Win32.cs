@@ -25,6 +25,9 @@ public class Win32
     [DllImport("user32.dll")]
     public static extern IntPtr CallWindowProc(IntPtr lpPrevWndFunc, IntPtr hWnd, int msg, IntPtr wParam, IntPtr lParam);
 
+    [DllImport("CoreMessaging.dll")]
+    public static extern IntPtr CreateDispatcherQueueController([In] DISPATCHERQUEUEOPTIONS options, [In, Out, MarshalAs(UnmanagedType.IUnknown)] ref object? dispatcherQueueController);
+
 
     [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode)]
     public struct POINT
@@ -34,13 +37,21 @@ public class Win32
     }
 
     [StructLayout(LayoutKind.Sequential)]
-    struct MINMAXINFO
+    public struct MINMAXINFO
     {
         public POINT ptReserved;
         public POINT ptMaxSize;
         public POINT ptMaxPosition;
         public POINT ptMinTrackSize;
         public POINT ptMaxTrackSize;
+    }
+
+    [StructLayout(LayoutKind.Sequential)]
+    public struct DISPATCHERQUEUEOPTIONS
+    {
+        public int dwSize;
+        public int threadType;
+        public int apartmentType;
     }
 
 

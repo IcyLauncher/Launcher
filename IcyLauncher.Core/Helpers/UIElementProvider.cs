@@ -29,9 +29,9 @@ public class UIElementProvider
     }
 
 
-    public static Grid MainGrid(GridLength[] rowHeight, params UIElement[] children)
+    public static Grid MainGrid(GridLength[] rowHeight, Color backgroundColor, params UIElement[] children)
     {
-        Grid containerGrid = new();
+        Grid containerGrid = new() { Background = new SolidColorBrush(backgroundColor) };
 
         for (int i = 0; i < rowHeight.Length; i++)
         {

@@ -2,6 +2,7 @@
 using IcyLauncher.Views;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
+using Microsoft.UI;
 using Microsoft.UI.Xaml.Controls;
 using Serilog;
 
@@ -49,13 +50,27 @@ public partial class App : Application
             })
             .ConfigureServices((context, services) =>
             {
-                NavigationView navigationView = UIElementProvider.NavigationView(out Frame contentFrame);
-                titleBar = UIElementProvider.TitleBar(context.Configuration.Get<Configuration>().Apperance.Colors.Accent.Primary, out backButton);
-                Grid mainGrid = UIElementProvider.MainGrid(new GridLength[] { new(), new(1, GridUnitType.Star) }, titleBar, navigationView);
+                var configuration = context.Configuration.Get<Configuration>();
 
+                titleBar = UIElementProvider.TitleBar(configuration.Apperance.Colors.Accent.Primary, out backButton);
+                var navigationView = UIElementProvider.NavigationView(out Frame contentFrame);
+                var mainGrid = UIElementProvider.MainGrid(new GridLength[] { new(), new(1, GridUnitType.Star) },
+                    configuration.Apperance.Blur == BlurEffect.None ? configuration.Apperance.Colors.Background.Primary : Colors.Transparent, 
+                    titleBar, navigationView);
+
+                services.AddScoped<Core.Services.ConfigurationManager>();
                 services.AddScoped<INavigation>(provider => new Navigation(provider.GetRequiredService<ILogger<Navigation>>(), navigationView, contentFrame, CanGoBack));
                 services.AddScoped<IConverter, JsonConverter>();
                 services.AddScoped<WindowHandler>();
+                switch (configuration.Apperance.Blur)
+                {
+                    case BlurEffect.Mica:
+                        services.AddScoped<IBackdropHandler, MicaBackdropHandler>();
+                        break;
+                    case BlurEffect.Acrylic:
+                        services.AddScoped<IBackdropHandler, AcrylicBackdropHandler>();
+                        break;
+                }
 
                 services.Configure<Configuration>(context.Configuration);
 
@@ -84,6 +99,10 @@ public partial class App : Application
 
         var shellView = Provider.GetRequiredService<Window>();
         shellView.Activate();
+
+        var backdropHandler = Provider.GetService<IBackdropHandler>();
+        if (backdropHandler is not null) 
+            backdropHandler.SetBackdrop();
 
         var navigation = Provider.GetRequiredService<INavigation>();
         navigation.Navigate("Home");

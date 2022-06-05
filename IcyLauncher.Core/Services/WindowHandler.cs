@@ -106,7 +106,7 @@ public class WindowHandler
         Presenter.SetBorderAndTitleBar(true, true);
 
         Window.TitleBar.ExtendsContentIntoTitleBar = true;
-        Window.TitleBar.SetDragRectangles(new RectInt32[] { new(40, 0, ScreenSize.Width, 48) } );
+        Window.TitleBar.SetDragRectangles(new RectInt32[] { new(40, 0, ScreenSize.Width, 48) });
 
         Window.TitleBar.ButtonBackgroundColor = Colors.Transparent;
         Window.TitleBar.ButtonPressedBackgroundColor = Color.FromArgb(90, 255, 255, 255);
@@ -114,6 +114,7 @@ public class WindowHandler
         Window.TitleBar.ButtonInactiveBackgroundColor = Colors.Transparent;
         Window.TitleBar.ButtonInactiveForegroundColor = Colors.LightGray;
 
+        //shell.ExtendsContentIntoTitleBar = true;
         shell.SetTitleBar(titleBar);
 
         logger.Log("Set TitleBar to UIElement");

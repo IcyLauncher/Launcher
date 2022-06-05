@@ -1,45 +1,10 @@
-﻿using Windows.UI;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+using Windows.UI;
 
-namespace IcyLauncher.Models;
+namespace IcyLauncher.Core.Models;
 
 public class Configuration
 {
-    readonly static ILogger logger = App.Provider.GetRequiredService<ILogger<Configuration>>();
-    readonly static IConverter converter = App.Provider.GetRequiredService<IConverter>();
-
-
-    public string Export()
-    {
-        logger.Log($"Exporting app configuration");
-
-        return converter.ToString(this);
-    }
-    public void Load(Configuration input, bool IgnoreTheme = false)
-    {
-        Launcher = input.Launcher;
-        if (!IgnoreTheme)
-            Apperance = input.Apperance;
-        Weather = input.Weather;
-        DateTime = input.DateTime;
-        Developer = input.Developer;
-        
-        logger.Log($"Loaded app configuration from string");
-    }
-
-    public string ExportTheme()
-    {
-        logger.Log($"Exporting theme configuration");
-
-        return converter.ToString(Apperance);
-    }
-    public void LoadTheme(ConfigurationApperance input)
-    {
-        Apperance = input;
-
-        logger.Log($"Loaded theme configuration from string");
-    }
-
-
     public ConfigurationLauncher Launcher { get; set; } = new();
 
     public ConfigurationApperance Apperance { get; set; } = new();

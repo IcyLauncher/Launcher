@@ -2,6 +2,7 @@
 global using global::IcyLauncher.Core.Extentions;
 global using global::IcyLauncher.Core.Helpers;
 global using global::IcyLauncher.Core.Interfaces;
+global using global::IcyLauncher.Core.Models;
 global using global::IcyLauncher.Core.Services;
 global using global::IcyLauncher.Core.Types;
 global using global::Microsoft.Extensions.Logging;

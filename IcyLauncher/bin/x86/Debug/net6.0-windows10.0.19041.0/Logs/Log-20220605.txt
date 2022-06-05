@@ -1,0 +1,345 @@
+2022-06-05 10:39:06.035 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2022-06-05 10:39:06.092 +03:00 [INF] Hosting environment: Production
+2022-06-05 10:39:06.095 +03:00 [INF] Content root path: D:\Personal\Coding\IcyLauncher\Launcher\IcyLauncher\bin\x86\Debug\net6.0-windows10.0.19041.0
+2022-06-05 10:39:06.115 +03:00 [INF] [ShellViewModel.cs-.ctor] Window Started
+2022-06-05 10:39:06.288 +03:00 [INF] [WindowHandler.cs-.ctor] Registered WindowHandler
+2022-06-05 10:39:06.560 +03:00 [INF] [WindowHandler.cs-SetTilteBar] Set TitleBar to UIElement
+2022-06-05 10:39:06.577 +03:00 [INF] [WindowHandler.cs-SetIcon] Set app icon to "Assets/Icon.ico"
+2022-06-05 10:39:06.580 +03:00 [INF] [WindowHandler.cs-SetMinSize] Set window minimum size to "700x400"
+2022-06-05 10:39:06.587 +03:00 [INF] [WindowHandler.cs-SetSize] Set window size to "1031x550"
+2022-06-05 10:39:06.593 +03:00 [INF] [WindowHandler.cs-SetPosition] Set window position to "444, 241"
+2022-06-05 10:39:06.672 +03:00 [INF] [Navigation.cs-.ctor] Registered NavigationView
+2022-06-05 10:39:06.847 +03:00 [INF] [Navigation.cs-SetCurrentPage] Set current NavigationView page
+2022-06-05 10:39:06.854 +03:00 [INF] [Navigation.cs-SetCurrentNavigationViewItem] Set current NavigationView item
+2022-06-05 10:39:17.119 +03:00 [INF] [Navigation.cs-.ctor] Failed to set current NavigationView page: Unregistered Type
+2022-06-05 10:39:18.384 +03:00 [INF] [Navigation.cs-SetCurrentPage] Set current NavigationView page
+2022-06-05 10:39:19.614 +03:00 [INF] [Navigation.cs-SetCurrentPage] Set current NavigationView page
+2022-06-05 10:39:23.742 +03:00 [INF] [Navigation.cs-SetCurrentPage] Set current NavigationView page
+2022-06-05 10:39:25.003 +03:00 [INF] [Navigation.cs-SetCurrentPage] Set current NavigationView page
+2022-06-05 10:39:25.973 +03:00 [INF] [Navigation.cs-SetCurrentPage] Set current NavigationView page
+2022-06-05 10:39:26.745 +03:00 [INF] [Navigation.cs-SetCurrentPage] Set current NavigationView page
+2022-06-05 10:39:27.240 +03:00 [INF] [Navigation.cs-SetCurrentPage] Set current NavigationView page
+2022-06-05 10:39:27.242 +03:00 [INF] [Navigation.cs-SetCurrentNavigationViewItem] Set current NavigationView item
+2022-06-05 10:39:27.245 +03:00 [INF] [Navigation.cs-GoBack] Current NavigationView page went back
+2022-06-05 10:39:27.827 +03:00 [INF] [Navigation.cs-SetCurrentPage] Set current NavigationView page
+2022-06-05 10:39:27.829 +03:00 [INF] [Navigation.cs-SetCurrentNavigationViewItem] Set current NavigationView item
+2022-06-05 10:39:27.831 +03:00 [INF] [Navigation.cs-GoBack] Current NavigationView page went back
+2022-06-05 10:39:28.430 +03:00 [INF] [Navigation.cs-SetCurrentPage] Set current NavigationView page
+2022-06-05 10:39:28.432 +03:00 [INF] [Navigation.cs-SetCurrentNavigationViewItem] Set current NavigationView item
+2022-06-05 10:39:28.434 +03:00 [INF] [Navigation.cs-GoBack] Current NavigationView page went back
+2022-06-05 10:39:29.066 +03:00 [INF] [Navigation.cs-SetCurrentPage] Set current NavigationView page
+2022-06-05 10:39:29.068 +03:00 [INF] [Navigation.cs-SetCurrentNavigationViewItem] Set current NavigationView item
+2022-06-05 10:39:29.070 +03:00 [INF] [Navigation.cs-GoBack] Current NavigationView page went back
+2022-06-05 10:39:41.242 +03:00 [INF] [Navigation.cs-SetCurrentPage] Set current NavigationView page
+2022-06-05 10:39:41.244 +03:00 [INF] [Navigation.cs-SetCurrentNavigationViewItem] Set current NavigationView item
+2022-06-05 10:39:41.246 +03:00 [INF] [Navigation.cs-GoBack] Current NavigationView page went back
+2022-06-05 10:39:41.778 +03:00 [INF] [Navigation.cs-SetCurrentPage] Set current NavigationView page
+2022-06-05 10:39:41.780 +03:00 [INF] [Navigation.cs-SetCurrentNavigationViewItem] Set current NavigationView item
+2022-06-05 10:39:41.784 +03:00 [INF] [Navigation.cs-GoBack] Current NavigationView page went back
+2022-06-05 10:39:45.731 +03:00 [INF] [JsonConverter.cs-.ctor] Registered JsonConverter
+2022-06-05 10:39:45.733 +03:00 [INF] [Configuration.cs-Export] Exporting app configuration
+2022-06-05 10:39:45.820 +03:00 [INF] [JsonConverter.cs-ToString] Serializing object to string
+2022-06-05 10:39:46.127 +03:00 [INF] [ShellViewModel.cs-WindowClosed] Window Closed
+2022-06-05 10:46:18.600 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2022-06-05 10:46:18.685 +03:00 [INF] Hosting environment: Production
+2022-06-05 10:46:18.687 +03:00 [INF] Content root path: D:\Personal\Coding\IcyLauncher\Launcher\IcyLauncher\bin\x86\Debug\net6.0-windows10.0.19041.0
+2022-06-05 10:46:18.698 +03:00 [INF] [ShellViewModel.cs-.ctor] Window Started
+2022-06-05 10:46:18.988 +03:00 [INF] [WindowHandler.cs-.ctor] Registered WindowHandler
+2022-06-05 10:46:19.280 +03:00 [INF] [WindowHandler.cs-SetTilteBar] Set TitleBar to UIElement
+2022-06-05 10:46:19.293 +03:00 [INF] [WindowHandler.cs-SetIcon] Set app icon to "Assets/Icon.ico"
+2022-06-05 10:46:19.296 +03:00 [INF] [WindowHandler.cs-SetMinSize] Set window minimum size to "700x400"
+2022-06-05 10:46:19.321 +03:00 [INF] [WindowHandler.cs-SetSize] Set window size to "1031x550"
+2022-06-05 10:46:19.327 +03:00 [INF] [WindowHandler.cs-SetPosition] Set window position to "444, 241"
+2022-06-05 10:46:19.477 +03:00 [INF] [Navigation.cs-.ctor] Registered NavigationView
+2022-06-05 10:46:19.744 +03:00 [INF] [Navigation.cs-SetCurrentPage] Set current NavigationView page
+2022-06-05 10:46:19.753 +03:00 [INF] [Navigation.cs-SetCurrentNavigationViewItem] Set current NavigationView item
+2022-06-05 10:46:30.947 +03:00 [INF] [Navigation.cs-SetCurrentPage] Set current NavigationView page
+2022-06-05 10:46:33.370 +03:00 [INF] [JsonConverter.cs-.ctor] Registered JsonConverter
+2022-06-05 10:46:33.372 +03:00 [INF] [Configuration.cs-Export] Exporting app configuration
+2022-06-05 10:46:33.386 +03:00 [INF] [JsonConverter.cs-ToString] Serializing object to string
+2022-06-05 10:46:33.730 +03:00 [INF] [ShellViewModel.cs-WindowClosed] Window Closed
+2022-06-05 10:47:38.036 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2022-06-05 10:47:38.133 +03:00 [INF] Hosting environment: Production
+2022-06-05 10:47:38.136 +03:00 [INF] Content root path: D:\Personal\Coding\IcyLauncher\Launcher\IcyLauncher\bin\x86\Debug\net6.0-windows10.0.19041.0
+2022-06-05 10:47:38.148 +03:00 [INF] [ShellViewModel.cs-.ctor] Window Started
+2022-06-05 10:47:38.435 +03:00 [INF] [WindowHandler.cs-.ctor] Registered WindowHandler
+2022-06-05 10:47:38.696 +03:00 [INF] [WindowHandler.cs-SetTilteBar] Set TitleBar to UIElement
+2022-06-05 10:47:38.719 +03:00 [INF] [WindowHandler.cs-SetIcon] Set app icon to "Assets/Icon.ico"
+2022-06-05 10:47:38.722 +03:00 [INF] [WindowHandler.cs-SetMinSize] Set window minimum size to "700x400"
+2022-06-05 10:47:38.742 +03:00 [INF] [WindowHandler.cs-SetSize] Set window size to "1031x550"
+2022-06-05 10:47:38.749 +03:00 [INF] [WindowHandler.cs-SetPosition] Set window position to "444, 241"
+2022-06-05 10:47:38.890 +03:00 [INF] [Navigation.cs-.ctor] Registered NavigationView
+2022-06-05 10:47:39.116 +03:00 [INF] [Navigation.cs-SetCurrentPage] Set current NavigationView page
+2022-06-05 10:47:39.126 +03:00 [INF] [Navigation.cs-SetCurrentNavigationViewItem] Set current NavigationView item
+2022-06-05 10:47:45.158 +03:00 [INF] [Navigation.cs-SetCurrentPage] Set current NavigationView page
+2022-06-05 10:47:45.710 +03:00 [INF] [Navigation.cs-.ctor] Failed to set current NavigationView page: Unregistered Type
+2022-06-05 10:47:46.400 +03:00 [INF] [Navigation.cs-SetCurrentPage] Set current NavigationView page
+2022-06-05 10:47:56.739 +03:00 [INF] [Navigation.cs-SetCurrentPage] Set current NavigationView page
+2022-06-05 10:47:58.357 +03:00 [INF] [Navigation.cs-SetCurrentPage] Set current NavigationView page
+2022-06-05 10:48:02.105 +03:00 [INF] [Navigation.cs-SetCurrentPage] Set current NavigationView page
+2022-06-05 10:48:02.107 +03:00 [INF] [Navigation.cs-SetCurrentNavigationViewItem] Set current NavigationView item
+2022-06-05 10:48:02.114 +03:00 [INF] [Navigation.cs-GoBack] Current NavigationView page went back
+2022-06-05 10:48:02.550 +03:00 [INF] [Navigation.cs-SetCurrentPage] Set current NavigationView page
+2022-06-05 10:48:02.551 +03:00 [INF] [Navigation.cs-SetCurrentNavigationViewItem] Set current NavigationView item
+2022-06-05 10:48:02.553 +03:00 [INF] [Navigation.cs-GoBack] Current NavigationView page went back
+2022-06-05 10:48:03.095 +03:00 [INF] [Navigation.cs-SetCurrentPage] Set current NavigationView page
+2022-06-05 10:48:03.097 +03:00 [INF] [Navigation.cs-SetCurrentNavigationViewItem] Set current NavigationView item
+2022-06-05 10:48:03.098 +03:00 [INF] [Navigation.cs-GoBack] Current NavigationView page went back
+2022-06-05 10:48:04.457 +03:00 [INF] [Navigation.cs-SetCurrentPage] Set current NavigationView page
+2022-06-05 10:48:04.458 +03:00 [INF] [Navigation.cs-SetCurrentNavigationViewItem] Set current NavigationView item
+2022-06-05 10:48:04.463 +03:00 [INF] [Navigation.cs-GoBack] Current NavigationView page went back
+2022-06-05 10:48:05.532 +03:00 [INF] [JsonConverter.cs-.ctor] Registered JsonConverter
+2022-06-05 10:48:05.534 +03:00 [INF] [Configuration.cs-Export] Exporting app configuration
+2022-06-05 10:48:05.547 +03:00 [INF] [JsonConverter.cs-ToString] Serializing object to string
+2022-06-05 10:48:05.897 +03:00 [INF] [ShellViewModel.cs-WindowClosed] Window Closed
+2022-06-05 10:51:56.090 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2022-06-05 10:51:56.159 +03:00 [INF] Hosting environment: Production
+2022-06-05 10:51:56.162 +03:00 [INF] Content root path: D:\Personal\Coding\IcyLauncher\Launcher\IcyLauncher\bin\x86\Debug\net6.0-windows10.0.19041.0
+2022-06-05 10:51:56.174 +03:00 [INF] [ShellViewModel.cs-.ctor] Window Started
+2022-06-05 10:51:56.338 +03:00 [INF] [WindowHandler.cs-.ctor] Registered WindowHandler
+2022-06-05 10:51:56.576 +03:00 [INF] [WindowHandler.cs-SetTilteBar] Set TitleBar to UIElement
+2022-06-05 10:51:56.592 +03:00 [INF] [WindowHandler.cs-SetIcon] Set app icon to "Assets/Icon.ico"
+2022-06-05 10:51:56.596 +03:00 [INF] [WindowHandler.cs-SetMinSize] Set window minimum size to "700x400"
+2022-06-05 10:51:56.606 +03:00 [INF] [WindowHandler.cs-SetSize] Set window size to "1031x550"
+2022-06-05 10:51:56.613 +03:00 [INF] [WindowHandler.cs-SetPosition] Set window position to "444, 241"
+2022-06-05 10:51:56.909 +03:00 [INF] [Navigation.cs-.ctor] Registered NavigationView
+2022-06-05 10:51:57.063 +03:00 [INF] [Navigation.cs-SetCurrentPage] Set current NavigationView page
+2022-06-05 10:51:57.069 +03:00 [INF] [Navigation.cs-SetCurrentNavigationViewItem] Set current NavigationView item
+2022-06-05 10:51:59.565 +03:00 [INF] [JsonConverter.cs-.ctor] Registered JsonConverter
+2022-06-05 10:51:59.567 +03:00 [INF] [Configuration.cs-Export] Exporting app configuration
+2022-06-05 10:51:59.631 +03:00 [INF] [JsonConverter.cs-ToString] Serializing object to string
+2022-06-05 10:51:59.993 +03:00 [INF] [ShellViewModel.cs-WindowClosed] Window Closed
+2022-06-05 10:52:03.504 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2022-06-05 10:52:03.549 +03:00 [INF] Hosting environment: Production
+2022-06-05 10:52:03.551 +03:00 [INF] Content root path: D:\Personal\Coding\IcyLauncher\Launcher\IcyLauncher\bin\x86\Debug\net6.0-windows10.0.19041.0
+2022-06-05 10:52:03.561 +03:00 [INF] [ShellViewModel.cs-.ctor] Window Started
+2022-06-05 10:52:03.600 +03:00 [INF] [WindowHandler.cs-.ctor] Registered WindowHandler
+2022-06-05 10:52:03.695 +03:00 [INF] [WindowHandler.cs-SetTilteBar] Set TitleBar to UIElement
+2022-06-05 10:52:03.702 +03:00 [INF] [WindowHandler.cs-SetIcon] Set app icon to "Assets/Icon.ico"
+2022-06-05 10:52:03.705 +03:00 [INF] [WindowHandler.cs-SetMinSize] Set window minimum size to "700x400"
+2022-06-05 10:52:03.711 +03:00 [INF] [WindowHandler.cs-SetSize] Set window size to "1031x550"
+2022-06-05 10:52:03.718 +03:00 [INF] [WindowHandler.cs-SetPosition] Set window position to "444, 241"
+2022-06-05 10:52:03.788 +03:00 [INF] [Navigation.cs-.ctor] Registered NavigationView
+2022-06-05 10:52:03.835 +03:00 [INF] [Navigation.cs-SetCurrentPage] Set current NavigationView page
+2022-06-05 10:52:03.838 +03:00 [INF] [Navigation.cs-SetCurrentNavigationViewItem] Set current NavigationView item
+2022-06-05 10:52:10.550 +03:00 [INF] [Navigation.cs-SetCurrentPage] Set current NavigationView page
+2022-06-05 10:52:11.188 +03:00 [INF] [Navigation.cs-.ctor] Failed to set current NavigationView page: Unregistered Type
+2022-06-05 10:52:11.875 +03:00 [INF] [Navigation.cs-SetCurrentPage] Set current NavigationView page
+2022-06-05 10:52:16.679 +03:00 [INF] [JsonConverter.cs-.ctor] Registered JsonConverter
+2022-06-05 10:52:16.681 +03:00 [INF] [Configuration.cs-Export] Exporting app configuration
+2022-06-05 10:52:16.695 +03:00 [INF] [JsonConverter.cs-ToString] Serializing object to string
+2022-06-05 10:52:16.996 +03:00 [INF] [ShellViewModel.cs-WindowClosed] Window Closed
+2022-06-05 11:08:43.977 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2022-06-05 11:08:44.044 +03:00 [INF] Hosting environment: Production
+2022-06-05 11:08:44.046 +03:00 [INF] Content root path: D:\Personal\Coding\IcyLauncher\Launcher\IcyLauncher\bin\x86\Debug\net6.0-windows10.0.19041.0
+2022-06-05 11:08:44.057 +03:00 [INF] [JsonConverter.cs-.ctor] Registered JsonConverter
+2022-06-05 11:08:44.060 +03:00 [INF] [ShellViewModel.cs-.ctor] Window Started
+2022-06-05 11:08:44.299 +03:00 [INF] [WindowHandler.cs-.ctor] Registered WindowHandler
+2022-06-05 11:08:44.522 +03:00 [INF] [WindowHandler.cs-SetTilteBar] Set TitleBar to UIElement
+2022-06-05 11:08:44.537 +03:00 [INF] [WindowHandler.cs-SetIcon] Set app icon to "Assets/Icon.ico"
+2022-06-05 11:08:44.540 +03:00 [INF] [WindowHandler.cs-SetMinSize] Set window minimum size to "700x400"
+2022-06-05 11:08:44.563 +03:00 [INF] [WindowHandler.cs-SetSize] Set window size to "1031x550"
+2022-06-05 11:08:44.569 +03:00 [INF] [WindowHandler.cs-SetPosition] Set window position to "444, 241"
+2022-06-05 11:08:44.821 +03:00 [INF] [Navigation.cs-.ctor] Registered NavigationView
+2022-06-05 11:08:44.940 +03:00 [INF] [Navigation.cs-SetCurrentPage] Set current NavigationView page
+2022-06-05 11:08:44.946 +03:00 [INF] [Navigation.cs-SetCurrentNavigationViewItem] Set current NavigationView item
+2022-06-05 11:08:47.502 +03:00 [INF] [Navigation.cs-SetCurrentPage] Set current NavigationView page
+2022-06-05 11:08:48.348 +03:00 [INF] [Navigation.cs-SetCurrentPage] Set current NavigationView page
+2022-06-05 11:08:49.490 +03:00 [INF] [Navigation.cs-SetCurrentPage] Set current NavigationView page
+2022-06-05 11:08:49.492 +03:00 [INF] [Navigation.cs-SetCurrentNavigationViewItem] Set current NavigationView item
+2022-06-05 11:08:49.497 +03:00 [INF] [Navigation.cs-GoBack] Current NavigationView page went back
+2022-06-05 11:08:49.842 +03:00 [INF] [Navigation.cs-SetCurrentPage] Set current NavigationView page
+2022-06-05 11:08:49.844 +03:00 [INF] [Navigation.cs-SetCurrentNavigationViewItem] Set current NavigationView item
+2022-06-05 11:08:49.849 +03:00 [INF] [Navigation.cs-GoBack] Current NavigationView page went back
+2022-06-05 11:08:50.893 +03:00 [INF] [ConfigurationManager.cs-Export] Exporting app configuration
+2022-06-05 11:08:50.908 +03:00 [INF] [JsonConverter.cs-ToString] Serializing object to string
+2022-06-05 11:08:51.259 +03:00 [INF] [ShellViewModel.cs-WindowClosed] Window Closed
+2022-06-05 11:09:05.516 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2022-06-05 11:09:05.570 +03:00 [INF] Hosting environment: Production
+2022-06-05 11:09:05.573 +03:00 [INF] Content root path: D:\Personal\Coding\IcyLauncher\Launcher\IcyLauncher\bin\x86\Debug\net6.0-windows10.0.19041.0
+2022-06-05 11:09:05.584 +03:00 [INF] [JsonConverter.cs-.ctor] Registered JsonConverter
+2022-06-05 11:09:05.587 +03:00 [INF] [ShellViewModel.cs-.ctor] Window Started
+2022-06-05 11:09:05.632 +03:00 [INF] [WindowHandler.cs-.ctor] Registered WindowHandler
+2022-06-05 11:09:05.736 +03:00 [INF] [WindowHandler.cs-SetTilteBar] Set TitleBar to UIElement
+2022-06-05 11:09:05.741 +03:00 [INF] [WindowHandler.cs-SetIcon] Set app icon to "Assets/Icon.ico"
+2022-06-05 11:09:05.744 +03:00 [INF] [WindowHandler.cs-SetMinSize] Set window minimum size to "700x400"
+2022-06-05 11:09:05.752 +03:00 [INF] [WindowHandler.cs-SetSize] Set window size to "1031x550"
+2022-06-05 11:09:05.757 +03:00 [INF] [WindowHandler.cs-SetPosition] Set window position to "444, 241"
+2022-06-05 11:09:05.861 +03:00 [INF] [Navigation.cs-.ctor] Registered NavigationView
+2022-06-05 11:09:05.907 +03:00 [INF] [Navigation.cs-SetCurrentPage] Set current NavigationView page
+2022-06-05 11:09:05.911 +03:00 [INF] [Navigation.cs-SetCurrentNavigationViewItem] Set current NavigationView item
+2022-06-05 11:09:07.819 +03:00 [INF] [Navigation.cs-SetCurrentPage] Set current NavigationView page
+2022-06-05 11:09:09.470 +03:00 [INF] [Navigation.cs-SetCurrentPage] Set current NavigationView page
+2022-06-05 11:09:10.909 +03:00 [INF] [Navigation.cs-SetCurrentPage] Set current NavigationView page
+2022-06-05 11:09:10.911 +03:00 [INF] [Navigation.cs-SetCurrentNavigationViewItem] Set current NavigationView item
+2022-06-05 11:09:10.913 +03:00 [INF] [Navigation.cs-GoBack] Current NavigationView page went back
+2022-06-05 11:09:11.442 +03:00 [INF] [Navigation.cs-SetCurrentPage] Set current NavigationView page
+2022-06-05 11:09:11.444 +03:00 [INF] [Navigation.cs-SetCurrentNavigationViewItem] Set current NavigationView item
+2022-06-05 11:09:11.448 +03:00 [INF] [Navigation.cs-GoBack] Current NavigationView page went back
+2022-06-05 11:09:28.814 +03:00 [INF] [ConfigurationManager.cs-Export] Exporting app configuration
+2022-06-05 11:09:28.822 +03:00 [INF] [JsonConverter.cs-ToString] Serializing object to string
+2022-06-05 11:09:28.993 +03:00 [INF] [ShellViewModel.cs-WindowClosed] Window Closed
+2022-06-05 11:09:35.745 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2022-06-05 11:09:35.791 +03:00 [INF] Hosting environment: Production
+2022-06-05 11:09:35.793 +03:00 [INF] Content root path: D:\Personal\Coding\IcyLauncher\Launcher\IcyLauncher\bin\x86\Debug\net6.0-windows10.0.19041.0
+2022-06-05 11:09:35.804 +03:00 [INF] [JsonConverter.cs-.ctor] Registered JsonConverter
+2022-06-05 11:09:35.807 +03:00 [INF] [ShellViewModel.cs-.ctor] Window Started
+2022-06-05 11:09:35.852 +03:00 [INF] [WindowHandler.cs-.ctor] Registered WindowHandler
+2022-06-05 11:09:35.958 +03:00 [INF] [WindowHandler.cs-SetTilteBar] Set TitleBar to UIElement
+2022-06-05 11:09:35.963 +03:00 [INF] [WindowHandler.cs-SetIcon] Set app icon to "Assets/Icon.ico"
+2022-06-05 11:09:35.967 +03:00 [INF] [WindowHandler.cs-SetMinSize] Set window minimum size to "700x400"
+2022-06-05 11:09:35.973 +03:00 [INF] [WindowHandler.cs-SetSize] Set window size to "1031x550"
+2022-06-05 11:09:35.979 +03:00 [INF] [WindowHandler.cs-SetPosition] Set window position to "444, 241"
+2022-06-05 11:10:04.835 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2022-06-05 11:10:04.884 +03:00 [INF] Hosting environment: Production
+2022-06-05 11:10:04.887 +03:00 [INF] Content root path: D:\Personal\Coding\IcyLauncher\Launcher\IcyLauncher\bin\x86\Debug\net6.0-windows10.0.19041.0
+2022-06-05 11:10:04.897 +03:00 [INF] [JsonConverter.cs-.ctor] Registered JsonConverter
+2022-06-05 11:10:04.899 +03:00 [INF] [ShellViewModel.cs-.ctor] Window Started
+2022-06-05 11:10:04.957 +03:00 [INF] [WindowHandler.cs-.ctor] Registered WindowHandler
+2022-06-05 11:10:05.068 +03:00 [INF] [WindowHandler.cs-SetTilteBar] Set TitleBar to UIElement
+2022-06-05 11:10:05.073 +03:00 [INF] [WindowHandler.cs-SetIcon] Set app icon to "Assets/Icon.ico"
+2022-06-05 11:10:05.076 +03:00 [INF] [WindowHandler.cs-SetMinSize] Set window minimum size to "700x400"
+2022-06-05 11:10:05.082 +03:00 [INF] [WindowHandler.cs-SetSize] Set window size to "1031x550"
+2022-06-05 11:10:05.088 +03:00 [INF] [WindowHandler.cs-SetPosition] Set window position to "444, 241"
+2022-06-05 11:10:31.320 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2022-06-05 11:10:31.364 +03:00 [INF] Hosting environment: Production
+2022-06-05 11:10:31.367 +03:00 [INF] Content root path: D:\Personal\Coding\IcyLauncher\Launcher\IcyLauncher\bin\x86\Debug\net6.0-windows10.0.19041.0
+2022-06-05 11:10:31.378 +03:00 [INF] [JsonConverter.cs-.ctor] Registered JsonConverter
+2022-06-05 11:10:31.380 +03:00 [INF] [ShellViewModel.cs-.ctor] Window Started
+2022-06-05 11:10:31.421 +03:00 [INF] [WindowHandler.cs-.ctor] Registered WindowHandler
+2022-06-05 11:10:31.509 +03:00 [INF] [WindowHandler.cs-SetTilteBar] Set TitleBar to UIElement
+2022-06-05 11:10:31.515 +03:00 [INF] [WindowHandler.cs-SetIcon] Set app icon to "Assets/Icon.ico"
+2022-06-05 11:10:31.518 +03:00 [INF] [WindowHandler.cs-SetMinSize] Set window minimum size to "700x400"
+2022-06-05 11:10:31.524 +03:00 [INF] [WindowHandler.cs-SetSize] Set window size to "1031x550"
+2022-06-05 11:10:31.530 +03:00 [INF] [WindowHandler.cs-SetPosition] Set window position to "444, 241"
+2022-06-05 11:10:31.569 +03:00 [INF] [Navigation.cs-.ctor] Registered NavigationView
+2022-06-05 11:10:31.773 +03:00 [INF] [Navigation.cs-SetCurrentPage] Failed to set current NavigationView page
+2022-06-05 11:10:31.777 +03:00 [INF] [Navigation.cs-SetCurrentNavigationViewItem] Set current NavigationView item
+2022-06-05 11:10:34.768 +03:00 [INF] [Navigation.cs-SetCurrentPage] Set current NavigationView page
+2022-06-05 11:10:35.588 +03:00 [INF] [App.xaml.cs-OnLaunched] Global FirstChanceException
+System.InvalidOperationException: Unable to resolve service for type 'IcyLauncher.Core.Interfaces.IBackdropHandler' while attempting to activate 'IcyLauncher.ViewModels.HomeViewModel'.
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.CreateArgumentCallSites(Type implementationType, CallSiteChain callSiteChain, ParameterInfo[] parameters, Boolean throwIfCallSiteNotFound)
+2022-06-05 11:10:35.766 +03:00 [INF] [App.xaml.cs-OnLaunched] Global FirstChanceException
+System.InvalidOperationException: Unable to resolve service for type 'IcyLauncher.Core.Interfaces.IBackdropHandler' while attempting to activate 'IcyLauncher.ViewModels.HomeViewModel'.
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.CreateArgumentCallSites(Type implementationType, CallSiteChain callSiteChain, ParameterInfo[] parameters, Boolean throwIfCallSiteNotFound)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.CreateConstructorCallSite(ResultCache lifetime, Type serviceType, Type implementationType, CallSiteChain callSiteChain)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.TryCreateExact(ServiceDescriptor descriptor, Type serviceType, CallSiteChain callSiteChain, Int32 slot)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.TryCreateExact(Type serviceType, CallSiteChain callSiteChain)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.CreateCallSite(Type serviceType, CallSiteChain callSiteChain)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.GetCallSite(Type serviceType, CallSiteChain callSiteChain)
+   at Microsoft.Extensions.DependencyInjection.ServiceProvider.CreateServiceAccessor(Type serviceType)
+   at System.Collections.Concurrent.ConcurrentDictionary`2.GetOrAdd(TKey key, Func`2 valueFactory)
+   at Microsoft.Extensions.DependencyInjection.ServiceProvider.GetService(Type serviceType, ServiceProviderEngineScope serviceProviderEngineScope)
+   at Microsoft.Extensions.DependencyInjection.ServiceProvider.GetService(Type serviceType)
+   at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService(IServiceProvider provider, Type serviceType)
+   at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService[T](IServiceProvider provider)
+   at IcyLauncher.Views.HomeView..ctor() in D:\Personal\Coding\IcyLauncher\Launcher\IcyLauncher\Views\HomeView.xaml.cs:line 8
+   at IcyLauncher.IcyLauncher_XamlTypeInfo.XamlTypeInfoProvider.Activate_37_HomeView() in D:\Personal\Coding\IcyLauncher\Launcher\IcyLauncher\obj\x86\Debug\net6.0-windows10.0.19041.0\XamlTypeInfo.g.cs:line 358
+   at IcyLauncher.IcyLauncher_XamlTypeInfo.XamlUserType.ActivateInstance() in D:\Personal\Coding\IcyLauncher\Launcher\IcyLauncher\obj\x86\Debug\net6.0-windows10.0.19041.0\XamlTypeInfo.g.cs:line 1738
+   at ABI.Microsoft.UI.Xaml.Markup.IXamlType.Do_Abi_ActivateInstance_13(IntPtr thisPtr, IntPtr* result)
+--- End of stack trace from previous location ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+2022-06-05 11:10:35.810 +03:00 [INF] [Navigation.cs-SetCurrentPage] Failed to set current NavigationView page
+2022-06-05 11:10:36.875 +03:00 [INF] [ConfigurationManager.cs-Export] Exporting app configuration
+2022-06-05 11:10:36.884 +03:00 [INF] [JsonConverter.cs-ToString] Serializing object to string
+2022-06-05 11:10:37.067 +03:00 [INF] [ShellViewModel.cs-WindowClosed] Window Closed
+2022-06-05 11:11:21.144 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2022-06-05 11:11:21.226 +03:00 [INF] Hosting environment: Production
+2022-06-05 11:11:21.229 +03:00 [INF] Content root path: D:\Personal\Coding\IcyLauncher\Launcher\IcyLauncher\bin\x86\Debug\net6.0-windows10.0.19041.0
+2022-06-05 11:11:21.241 +03:00 [INF] [JsonConverter.cs-.ctor] Registered JsonConverter
+2022-06-05 11:11:21.244 +03:00 [INF] [ShellViewModel.cs-.ctor] Window Started
+2022-06-05 11:11:21.497 +03:00 [INF] [WindowHandler.cs-.ctor] Registered WindowHandler
+2022-06-05 11:11:21.629 +03:00 [INF] [WindowHandler.cs-SetTilteBar] Set TitleBar to UIElement
+2022-06-05 11:11:21.649 +03:00 [INF] [WindowHandler.cs-SetIcon] Set app icon to "Assets/Icon.ico"
+2022-06-05 11:11:21.655 +03:00 [INF] [WindowHandler.cs-SetMinSize] Set window minimum size to "700x400"
+2022-06-05 11:11:21.711 +03:00 [INF] [WindowHandler.cs-SetSize] Set window size to "1031x550"
+2022-06-05 11:11:21.728 +03:00 [INF] [WindowHandler.cs-SetPosition] Set window position to "444, 241"
+2022-06-05 11:11:21.853 +03:00 [INF] [Navigation.cs-.ctor] Registered NavigationView
+2022-06-05 11:11:22.175 +03:00 [INF] [Navigation.cs-SetCurrentPage] Failed to set current NavigationView page
+2022-06-05 11:11:22.185 +03:00 [INF] [Navigation.cs-SetCurrentNavigationViewItem] Set current NavigationView item
+2022-06-05 11:11:27.078 +03:00 [INF] [Navigation.cs-SetCurrentPage] Set current NavigationView page
+2022-06-05 11:11:28.172 +03:00 [INF] [App.xaml.cs-OnLaunched] Global FirstChanceException
+System.InvalidOperationException: Unable to resolve service for type 'IcyLauncher.Core.Interfaces.IBackdropHandler' while attempting to activate 'IcyLauncher.ViewModels.HomeViewModel'.
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.CreateArgumentCallSites(Type implementationType, CallSiteChain callSiteChain, ParameterInfo[] parameters, Boolean throwIfCallSiteNotFound)
+2022-06-05 11:11:28.313 +03:00 [INF] [App.xaml.cs-OnLaunched] Global FirstChanceException
+System.InvalidOperationException: Unable to resolve service for type 'IcyLauncher.Core.Interfaces.IBackdropHandler' while attempting to activate 'IcyLauncher.ViewModels.HomeViewModel'.
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.CreateArgumentCallSites(Type implementationType, CallSiteChain callSiteChain, ParameterInfo[] parameters, Boolean throwIfCallSiteNotFound)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.CreateConstructorCallSite(ResultCache lifetime, Type serviceType, Type implementationType, CallSiteChain callSiteChain)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.TryCreateExact(ServiceDescriptor descriptor, Type serviceType, CallSiteChain callSiteChain, Int32 slot)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.TryCreateExact(Type serviceType, CallSiteChain callSiteChain)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.CreateCallSite(Type serviceType, CallSiteChain callSiteChain)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.GetCallSite(Type serviceType, CallSiteChain callSiteChain)
+   at Microsoft.Extensions.DependencyInjection.ServiceProvider.CreateServiceAccessor(Type serviceType)
+   at System.Collections.Concurrent.ConcurrentDictionary`2.GetOrAdd(TKey key, Func`2 valueFactory)
+   at Microsoft.Extensions.DependencyInjection.ServiceProvider.GetService(Type serviceType, ServiceProviderEngineScope serviceProviderEngineScope)
+   at Microsoft.Extensions.DependencyInjection.ServiceProvider.GetService(Type serviceType)
+   at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService(IServiceProvider provider, Type serviceType)
+   at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService[T](IServiceProvider provider)
+   at IcyLauncher.Views.HomeView..ctor() in D:\Personal\Coding\IcyLauncher\Launcher\IcyLauncher\Views\HomeView.xaml.cs:line 8
+   at IcyLauncher.IcyLauncher_XamlTypeInfo.XamlTypeInfoProvider.Activate_37_HomeView() in D:\Personal\Coding\IcyLauncher\Launcher\IcyLauncher\obj\x86\Debug\net6.0-windows10.0.19041.0\XamlTypeInfo.g.cs:line 358
+   at IcyLauncher.IcyLauncher_XamlTypeInfo.XamlUserType.ActivateInstance() in D:\Personal\Coding\IcyLauncher\Launcher\IcyLauncher\obj\x86\Debug\net6.0-windows10.0.19041.0\XamlTypeInfo.g.cs:line 1738
+   at ABI.Microsoft.UI.Xaml.Markup.IXamlType.Do_Abi_ActivateInstance_13(IntPtr thisPtr, IntPtr* result)
+--- End of stack trace from previous location ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+2022-06-05 11:11:28.344 +03:00 [INF] [Navigation.cs-SetCurrentPage] Failed to set current NavigationView page
+2022-06-05 11:12:31.655 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2022-06-05 11:12:31.743 +03:00 [INF] Hosting environment: Production
+2022-06-05 11:12:31.745 +03:00 [INF] Content root path: D:\Personal\Coding\IcyLauncher\Launcher\IcyLauncher\bin\x86\Debug\net6.0-windows10.0.19041.0
+2022-06-05 11:12:31.756 +03:00 [INF] [JsonConverter.cs-.ctor] Registered JsonConverter
+2022-06-05 11:12:31.759 +03:00 [INF] [ShellViewModel.cs-.ctor] Window Started
+2022-06-05 11:12:32.054 +03:00 [INF] [WindowHandler.cs-.ctor] Registered WindowHandler
+2022-06-05 11:12:32.174 +03:00 [INF] [WindowHandler.cs-SetTilteBar] Set TitleBar to UIElement
+2022-06-05 11:12:32.195 +03:00 [INF] [WindowHandler.cs-SetIcon] Set app icon to "Assets/Icon.ico"
+2022-06-05 11:12:32.198 +03:00 [INF] [WindowHandler.cs-SetMinSize] Set window minimum size to "700x400"
+2022-06-05 11:12:32.255 +03:00 [INF] [WindowHandler.cs-SetSize] Set window size to "1031x550"
+2022-06-05 11:12:32.259 +03:00 [INF] [WindowHandler.cs-SetPosition] Set window position to "444, 241"
+2022-06-05 11:12:32.358 +03:00 [INF] [Navigation.cs-.ctor] Registered NavigationView
+2022-06-05 11:12:32.629 +03:00 [INF] [Navigation.cs-SetCurrentPage] Failed to set current NavigationView page
+2022-06-05 11:12:32.661 +03:00 [INF] [Navigation.cs-SetCurrentNavigationViewItem] Set current NavigationView item
+2022-06-05 11:12:39.682 +03:00 [INF] [Navigation.cs-SetCurrentPage] Set current NavigationView page
+2022-06-05 11:12:40.568 +03:00 [INF] [App.xaml.cs-OnLaunched] Global FirstChanceException
+System.InvalidOperationException: Unable to resolve service for type 'IcyLauncher.Core.Interfaces.IBackdropHandler' while attempting to activate 'IcyLauncher.ViewModels.HomeViewModel'.
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.CreateArgumentCallSites(Type implementationType, CallSiteChain callSiteChain, ParameterInfo[] parameters, Boolean throwIfCallSiteNotFound)
+2022-06-05 11:12:40.681 +03:00 [INF] [App.xaml.cs-OnLaunched] Global FirstChanceException
+System.InvalidOperationException: Unable to resolve service for type 'IcyLauncher.Core.Interfaces.IBackdropHandler' while attempting to activate 'IcyLauncher.ViewModels.HomeViewModel'.
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.CreateArgumentCallSites(Type implementationType, CallSiteChain callSiteChain, ParameterInfo[] parameters, Boolean throwIfCallSiteNotFound)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.CreateConstructorCallSite(ResultCache lifetime, Type serviceType, Type implementationType, CallSiteChain callSiteChain)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.TryCreateExact(ServiceDescriptor descriptor, Type serviceType, CallSiteChain callSiteChain, Int32 slot)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.TryCreateExact(Type serviceType, CallSiteChain callSiteChain)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.CreateCallSite(Type serviceType, CallSiteChain callSiteChain)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.GetCallSite(Type serviceType, CallSiteChain callSiteChain)
+   at Microsoft.Extensions.DependencyInjection.ServiceProvider.CreateServiceAccessor(Type serviceType)
+   at System.Collections.Concurrent.ConcurrentDictionary`2.GetOrAdd(TKey key, Func`2 valueFactory)
+   at Microsoft.Extensions.DependencyInjection.ServiceProvider.GetService(Type serviceType, ServiceProviderEngineScope serviceProviderEngineScope)
+   at Microsoft.Extensions.DependencyInjection.ServiceProvider.GetService(Type serviceType)
+   at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService(IServiceProvider provider, Type serviceType)
+   at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService[T](IServiceProvider provider)
+   at IcyLauncher.Views.HomeView..ctor() in D:\Personal\Coding\IcyLauncher\Launcher\IcyLauncher\Views\HomeView.xaml.cs:line 8
+   at IcyLauncher.IcyLauncher_XamlTypeInfo.XamlTypeInfoProvider.Activate_37_HomeView() in D:\Personal\Coding\IcyLauncher\Launcher\IcyLauncher\obj\x86\Debug\net6.0-windows10.0.19041.0\XamlTypeInfo.g.cs:line 358
+   at IcyLauncher.IcyLauncher_XamlTypeInfo.XamlUserType.ActivateInstance() in D:\Personal\Coding\IcyLauncher\Launcher\IcyLauncher\obj\x86\Debug\net6.0-windows10.0.19041.0\XamlTypeInfo.g.cs:line 1738
+   at ABI.Microsoft.UI.Xaml.Markup.IXamlType.Do_Abi_ActivateInstance_13(IntPtr thisPtr, IntPtr* result)
+--- End of stack trace from previous location ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+2022-06-05 11:12:40.721 +03:00 [INF] [Navigation.cs-SetCurrentPage] Failed to set current NavigationView page
+2022-06-05 11:12:56.870 +03:00 [INF] [ConfigurationManager.cs-Export] Exporting app configuration
+2022-06-05 11:12:56.980 +03:00 [INF] [JsonConverter.cs-ToString] Serializing object to string
+2022-06-05 11:12:57.302 +03:00 [INF] [ShellViewModel.cs-WindowClosed] Window Closed
+2022-06-05 11:13:10.442 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2022-06-05 11:13:10.529 +03:00 [INF] Hosting environment: Production
+2022-06-05 11:13:10.531 +03:00 [INF] Content root path: D:\Personal\Coding\IcyLauncher\Launcher\IcyLauncher\bin\x86\Debug\net6.0-windows10.0.19041.0
+2022-06-05 11:13:10.543 +03:00 [INF] [JsonConverter.cs-.ctor] Registered JsonConverter
+2022-06-05 11:13:10.545 +03:00 [INF] [ShellViewModel.cs-.ctor] Window Started
+2022-06-05 11:13:10.866 +03:00 [INF] [WindowHandler.cs-.ctor] Registered WindowHandler
+2022-06-05 11:13:11.157 +03:00 [INF] [WindowHandler.cs-SetTilteBar] Set TitleBar to UIElement
+2022-06-05 11:13:11.182 +03:00 [INF] [WindowHandler.cs-SetIcon] Set app icon to "Assets/Icon.ico"
+2022-06-05 11:13:11.185 +03:00 [INF] [WindowHandler.cs-SetMinSize] Set window minimum size to "700x400"
+2022-06-05 11:13:11.242 +03:00 [INF] [WindowHandler.cs-SetSize] Set window size to "1031x550"
+2022-06-05 11:13:11.248 +03:00 [INF] [WindowHandler.cs-SetPosition] Set window position to "444, 241"
+2022-06-05 11:13:11.570 +03:00 [INF] [Navigation.cs-.ctor] Registered NavigationView
+2022-06-05 11:13:11.796 +03:00 [INF] [Navigation.cs-SetCurrentPage] Set current NavigationView page
+2022-06-05 11:13:11.803 +03:00 [INF] [Navigation.cs-SetCurrentNavigationViewItem] Set current NavigationView item
+2022-06-05 11:13:16.193 +03:00 [INF] [Navigation.cs-SetCurrentPage] Set current NavigationView page
+2022-06-05 11:13:19.148 +03:00 [INF] [Navigation.cs-SetCurrentPage] Set current NavigationView page
+2022-06-05 11:21:16.114 +03:00 [INF] [ConfigurationManager.cs-Export] Exporting app configuration
+2022-06-05 11:21:16.496 +03:00 [INF] [JsonConverter.cs-ToString] Serializing object to string
+2022-06-05 11:21:16.860 +03:00 [INF] [ShellViewModel.cs-WindowClosed] Window Closed

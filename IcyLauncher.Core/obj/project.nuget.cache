@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "w21N8mEW0nM3aLdvY5vWPV4GSKC7hiwgAeR6ON7We+5QH3K7UVbu8ddCbaJ4iKdyXMaQRQfHCjjQDlSsFG1w1w==",
+  "dgSpecHash": "ej+uavX8juPZZXE1UlURfwL4M5+tJ/TIyGyyEUY4VSkpxDCvQ6wTW2Kiq5c6ElLbw0EV782/ysiOetlqnIiRzg==",
   "success": true,
   "projectFilePath": "D:\\Personal\\Coding\\IcyLauncher\\Launcher\\IcyLauncher.Core\\IcyLauncher.Core.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\User69\\.nuget\\packages\\communitytoolkit.mvvm\\7.1.2\\communitytoolkit.mvvm.7.1.2.nupkg.sha512",
     "C:\\Users\\User69\\.nuget\\packages\\microsoft.extensions.configuration\\6.0.0\\microsoft.extensions.configuration.6.0.0.nupkg.sha512",
     "C:\\Users\\User69\\.nuget\\packages\\microsoft.extensions.configuration.abstractions\\6.0.0\\microsoft.extensions.configuration.abstractions.6.0.0.nupkg.sha512",
     "C:\\Users\\User69\\.nuget\\packages\\microsoft.extensions.configuration.binder\\6.0.0\\microsoft.extensions.configuration.binder.6.0.0.nupkg.sha512",
@@ -29,22 +30,21 @@
     "C:\\Users\\User69\\.nuget\\packages\\microsoft.extensions.options\\6.0.0\\microsoft.extensions.options.6.0.0.nupkg.sha512",
     "C:\\Users\\User69\\.nuget\\packages\\microsoft.extensions.options.configurationextensions\\6.0.0\\microsoft.extensions.options.configurationextensions.6.0.0.nupkg.sha512",
     "C:\\Users\\User69\\.nuget\\packages\\microsoft.extensions.primitives\\6.0.0\\microsoft.extensions.primitives.6.0.0.nupkg.sha512",
-    "D:\\Programs\\Microsoft Visual Studio\\Shared\\NuGetPackages\\microsoft.windows.sdk.buildtools\\10.0.22000.194\\microsoft.windows.sdk.buildtools.10.0.22000.194.nupkg.sha512",
-    "C:\\Users\\User69\\.nuget\\packages\\microsoft.windowsappsdk\\1.0.0\\microsoft.windowsappsdk.1.0.0.nupkg.sha512",
+    "C:\\Users\\User69\\.nuget\\packages\\microsoft.windows.sdk.buildtools\\10.0.22000.197\\microsoft.windows.sdk.buildtools.10.0.22000.197.nupkg.sha512",
+    "C:\\Users\\User69\\.nuget\\packages\\microsoft.windowsappsdk\\1.1.0-preview3\\microsoft.windowsappsdk.1.1.0-preview3.nupkg.sha512",
     "C:\\Users\\User69\\.nuget\\packages\\newtonsoft.json\\13.0.1\\newtonsoft.json.13.0.1.nupkg.sha512",
     "C:\\Users\\User69\\.nuget\\packages\\system.diagnostics.diagnosticsource\\6.0.0\\system.diagnostics.diagnosticsource.6.0.0.nupkg.sha512",
     "C:\\Users\\User69\\.nuget\\packages\\system.diagnostics.eventlog\\6.0.0\\system.diagnostics.eventlog.6.0.0.nupkg.sha512",
     "C:\\Users\\User69\\.nuget\\packages\\system.runtime.compilerservices.unsafe\\6.0.0\\system.runtime.compilerservices.unsafe.6.0.0.nupkg.sha512",
     "C:\\Users\\User69\\.nuget\\packages\\system.text.encodings.web\\6.0.0\\system.text.encodings.web.6.0.0.nupkg.sha512",
     "C:\\Users\\User69\\.nuget\\packages\\system.text.json\\6.0.0\\system.text.json.6.0.0.nupkg.sha512",
-    "C:\\Users\\User69\\.nuget\\packages\\microsoft.netcore.app.runtime.win-x86\\6.0.4\\microsoft.netcore.app.runtime.win-x86.6.0.4.nupkg.sha512",
     "C:\\Users\\User69\\.nuget\\packages\\microsoft.netcore.app.runtime.win-x64\\6.0.4\\microsoft.netcore.app.runtime.win-x64.6.0.4.nupkg.sha512",
-    "C:\\Users\\User69\\.nuget\\packages\\microsoft.windowsdesktop.app.runtime.win-x86\\6.0.4\\microsoft.windowsdesktop.app.runtime.win-x86.6.0.4.nupkg.sha512",
-    "C:\\Users\\User69\\.nuget\\packages\\microsoft.windowsdesktop.app.runtime.win-x64\\6.0.4\\microsoft.windowsdesktop.app.runtime.win-x64.6.0.4.nupkg.sha512",
-    "C:\\Users\\User69\\.nuget\\packages\\microsoft.aspnetcore.app.runtime.win-x86\\6.0.4\\microsoft.aspnetcore.app.runtime.win-x86.6.0.4.nupkg.sha512",
     "C:\\Users\\User69\\.nuget\\packages\\microsoft.aspnetcore.app.runtime.win-x64\\6.0.4\\microsoft.aspnetcore.app.runtime.win-x64.6.0.4.nupkg.sha512",
-    "C:\\Users\\User69\\.nuget\\packages\\microsoft.netcore.app.crossgen2.win-x64\\6.0.4\\microsoft.netcore.app.crossgen2.win-x64.6.0.4.nupkg.sha512",
-    "C:\\Users\\User69\\.nuget\\packages\\microsoft.windows.sdk.net.ref\\10.0.19041.24\\microsoft.windows.sdk.net.ref.10.0.19041.24.nupkg.sha512"
+    "C:\\Users\\User69\\.nuget\\packages\\microsoft.windowsdesktop.app.runtime.win-x64\\6.0.4\\microsoft.windowsdesktop.app.runtime.win-x64.6.0.4.nupkg.sha512",
+    "C:\\Users\\User69\\.nuget\\packages\\microsoft.windows.sdk.net.ref\\10.0.19041.24\\microsoft.windows.sdk.net.ref.10.0.19041.24.nupkg.sha512",
+    "C:\\Users\\User69\\.nuget\\packages\\microsoft.netcore.app.runtime.win-x86\\6.0.4\\microsoft.netcore.app.runtime.win-x86.6.0.4.nupkg.sha512",
+    "C:\\Users\\User69\\.nuget\\packages\\microsoft.aspnetcore.app.runtime.win-x86\\6.0.4\\microsoft.aspnetcore.app.runtime.win-x86.6.0.4.nupkg.sha512",
+    "C:\\Users\\User69\\.nuget\\packages\\microsoft.windowsdesktop.app.runtime.win-x86\\6.0.4\\microsoft.windowsdesktop.app.runtime.win-x86.6.0.4.nupkg.sha512"
   ],
   "logs": []
 }

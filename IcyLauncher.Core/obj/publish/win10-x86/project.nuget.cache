@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "1fZ04fVXedoGRa29oabbzPBFUuinVzWIbJUaDeGV9w6+YtFQ6esSia1/n7ljlwqpH4zr4QeLTwbG30wYb3wpig==",
+  "dgSpecHash": "JDZX7kTiVrntg7zbp/Zd6cr7CA5fWrCLqGRrZUYgj7L/J4vHJg0iwKob/eEJNyfuAh0zJiJEE76kKRLoOMxQaw==",
   "success": true,
   "projectFilePath": "D:\\Personal\\Coding\\IcyLauncher\\Launcher\\IcyLauncher.Core\\IcyLauncher.Core.csproj",
   "expectedPackageFiles": [
@@ -29,8 +29,8 @@
     "C:\\Users\\User69\\.nuget\\packages\\microsoft.extensions.options\\6.0.0\\microsoft.extensions.options.6.0.0.nupkg.sha512",
     "C:\\Users\\User69\\.nuget\\packages\\microsoft.extensions.options.configurationextensions\\6.0.0\\microsoft.extensions.options.configurationextensions.6.0.0.nupkg.sha512",
     "C:\\Users\\User69\\.nuget\\packages\\microsoft.extensions.primitives\\6.0.0\\microsoft.extensions.primitives.6.0.0.nupkg.sha512",
-    "D:\\Programs\\Microsoft Visual Studio\\Shared\\NuGetPackages\\microsoft.windows.sdk.buildtools\\10.0.22000.194\\microsoft.windows.sdk.buildtools.10.0.22000.194.nupkg.sha512",
-    "C:\\Users\\User69\\.nuget\\packages\\microsoft.windowsappsdk\\1.0.0\\microsoft.windowsappsdk.1.0.0.nupkg.sha512",
+    "C:\\Users\\User69\\.nuget\\packages\\microsoft.windows.sdk.buildtools\\10.0.22000.197\\microsoft.windows.sdk.buildtools.10.0.22000.197.nupkg.sha512",
+    "C:\\Users\\User69\\.nuget\\packages\\microsoft.windowsappsdk\\1.1.0-preview3\\microsoft.windowsappsdk.1.1.0-preview3.nupkg.sha512",
     "C:\\Users\\User69\\.nuget\\packages\\newtonsoft.json\\13.0.1\\newtonsoft.json.13.0.1.nupkg.sha512",
     "C:\\Users\\User69\\.nuget\\packages\\system.diagnostics.diagnosticsource\\6.0.0\\system.diagnostics.diagnosticsource.6.0.0.nupkg.sha512",
     "C:\\Users\\User69\\.nuget\\packages\\system.diagnostics.eventlog\\6.0.0\\system.diagnostics.eventlog.6.0.0.nupkg.sha512",

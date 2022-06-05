@@ -11,9 +11,10 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+		<PackageReference Include="CommunityToolkit.Mvvm" Version="7.1.2" />
 		<PackageReference Include="Microsoft.Extensions.Hosting" Version="6.0.1" />
-		<PackageReference Include="Microsoft.WindowsAppSDK" Version="1.0.0" />
-		<PackageReference Include="Microsoft.Windows.SDK.BuildTools" Version="10.0.22000.194" />
+		<PackageReference Include="Microsoft.Windows.SDK.BuildTools" Version="10.0.22000.197" />
+		<PackageReference Include="Microsoft.WindowsAppSDK" Version="1.1.0-preview3" />
 		<PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
 	</ItemGroup>
 
@@ -28,6 +29,7 @@
 		<Using Include="IcyLauncher.Core.Extentions" />
 		<Using Include="IcyLauncher.Core.Helpers" />
 		<Using Include="IcyLauncher.Core.Interfaces" />
+		<Using Include="IcyLauncher.Core.Models" />
 		<Using Include="IcyLauncher.Core.Services" />
 		<Using Include="IcyLauncher.Core.Types" />
 	</ItemGroup>

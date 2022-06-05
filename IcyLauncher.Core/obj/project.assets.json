@@ -2,6 +2,15 @@
   "version": 3,
   "targets": {
     "net6.0-windows10.0.19041": {
+      "CommunityToolkit.Mvvm/7.1.2": {
+        "type": "package",
+        "compile": {
+          "lib/net5.0/CommunityToolkit.Mvvm.dll": {}
+        },
+        "runtime": {
+          "lib/net5.0/CommunityToolkit.Mvvm.dll": {}
+        }
+      },
       "Microsoft.Extensions.Configuration/6.0.0": {
         "type": "package",
         "dependencies": {
@@ -399,14 +408,14 @@
           "buildTransitive/netcoreapp3.1/_._": {}
         }
       },
-      "Microsoft.Windows.SDK.BuildTools/10.0.22000.194": {
+      "Microsoft.Windows.SDK.BuildTools/10.0.22000.197": {
         "type": "package",
         "build": {
           "build/Microsoft.Windows.SDK.BuildTools.props": {},
           "build/Microsoft.Windows.SDK.BuildTools.targets": {}
         }
       },
-      "Microsoft.WindowsAppSDK/1.0.0": {
+      "Microsoft.WindowsAppSDK/1.1.0-preview3": {
         "type": "package",
         "dependencies": {
           "Microsoft.Windows.SDK.BuildTools": "10.0.22000.194"
@@ -415,25 +424,31 @@
           "lib/net5.0-windows10.0.18362.0/Microsoft.InteractiveExperiences.Projection.dll": {},
           "lib/net5.0-windows10.0.18362.0/Microsoft.WinUI.dll": {},
           "lib/net5.0-windows10.0.18362.0/Microsoft.Windows.AppLifecycle.Projection.dll": {},
+          "lib/net5.0-windows10.0.18362.0/Microsoft.Windows.AppNotifications.Projection.dll": {},
           "lib/net5.0-windows10.0.18362.0/Microsoft.Windows.ApplicationModel.DynamicDependency.Projection.dll": {},
           "lib/net5.0-windows10.0.18362.0/Microsoft.Windows.ApplicationModel.Resources.Projection.dll": {},
           "lib/net5.0-windows10.0.18362.0/Microsoft.Windows.ApplicationModel.WindowsAppRuntime.Projection.dll": {},
+          "lib/net5.0-windows10.0.18362.0/Microsoft.Windows.PushNotifications.Projection.dll": {},
           "lib/net5.0-windows10.0.18362.0/Microsoft.Windows.System.Power.Projection.dll": {},
+          "lib/net5.0-windows10.0.18362.0/Microsoft.Windows.System.Projection.dll": {},
           "lib/net5.0-windows10.0.18362.0/Microsoft.WindowsAppRuntime.Bootstrap.Net.dll": {}
         },
         "runtime": {
           "lib/net5.0-windows10.0.18362.0/Microsoft.InteractiveExperiences.Projection.dll": {},
           "lib/net5.0-windows10.0.18362.0/Microsoft.WinUI.dll": {},
           "lib/net5.0-windows10.0.18362.0/Microsoft.Windows.AppLifecycle.Projection.dll": {},
+          "lib/net5.0-windows10.0.18362.0/Microsoft.Windows.AppNotifications.Projection.dll": {},
           "lib/net5.0-windows10.0.18362.0/Microsoft.Windows.ApplicationModel.DynamicDependency.Projection.dll": {},
           "lib/net5.0-windows10.0.18362.0/Microsoft.Windows.ApplicationModel.Resources.Projection.dll": {},
           "lib/net5.0-windows10.0.18362.0/Microsoft.Windows.ApplicationModel.WindowsAppRuntime.Projection.dll": {},
+          "lib/net5.0-windows10.0.18362.0/Microsoft.Windows.PushNotifications.Projection.dll": {},
           "lib/net5.0-windows10.0.18362.0/Microsoft.Windows.System.Power.Projection.dll": {},
+          "lib/net5.0-windows10.0.18362.0/Microsoft.Windows.System.Projection.dll": {},
           "lib/net5.0-windows10.0.18362.0/Microsoft.WindowsAppRuntime.Bootstrap.Net.dll": {}
         },
         "build": {
-          "build/Microsoft.WindowsAppSDK.props": {},
-          "build/Microsoft.WindowsAppSDK.targets": {}
+          "buildTransitive/Microsoft.WindowsAppSDK.props": {},
+          "buildTransitive/Microsoft.WindowsAppSDK.targets": {}
         },
         "runtimeTargets": {
           "runtimes/win10-arm64/native/Microsoft.WindowsAppRuntime.Bootstrap.dll": {
@@ -547,6 +562,15 @@
       }
     },
     "net6.0-windows10.0.19041/win10-x64": {
+      "CommunityToolkit.Mvvm/7.1.2": {
+        "type": "package",
+        "compile": {
+          "lib/net5.0/CommunityToolkit.Mvvm.dll": {}
+        },
+        "runtime": {
+          "lib/net5.0/CommunityToolkit.Mvvm.dll": {}
+        }
+      },
       "Microsoft.Extensions.Configuration/6.0.0": {
         "type": "package",
         "dependencies": {
@@ -944,14 +968,14 @@
           "buildTransitive/netcoreapp3.1/_._": {}
         }
       },
-      "Microsoft.Windows.SDK.BuildTools/10.0.22000.194": {
+      "Microsoft.Windows.SDK.BuildTools/10.0.22000.197": {
         "type": "package",
         "build": {
           "build/Microsoft.Windows.SDK.BuildTools.props": {},
           "build/Microsoft.Windows.SDK.BuildTools.targets": {}
         }
       },
-      "Microsoft.WindowsAppSDK/1.0.0": {
+      "Microsoft.WindowsAppSDK/1.1.0-preview3": {
         "type": "package",
         "dependencies": {
           "Microsoft.Windows.SDK.BuildTools": "10.0.22000.194"
@@ -960,28 +984,34 @@
           "lib/net5.0-windows10.0.18362.0/Microsoft.InteractiveExperiences.Projection.dll": {},
           "lib/net5.0-windows10.0.18362.0/Microsoft.WinUI.dll": {},
           "lib/net5.0-windows10.0.18362.0/Microsoft.Windows.AppLifecycle.Projection.dll": {},
+          "lib/net5.0-windows10.0.18362.0/Microsoft.Windows.AppNotifications.Projection.dll": {},
           "lib/net5.0-windows10.0.18362.0/Microsoft.Windows.ApplicationModel.DynamicDependency.Projection.dll": {},
           "lib/net5.0-windows10.0.18362.0/Microsoft.Windows.ApplicationModel.Resources.Projection.dll": {},
           "lib/net5.0-windows10.0.18362.0/Microsoft.Windows.ApplicationModel.WindowsAppRuntime.Projection.dll": {},
+          "lib/net5.0-windows10.0.18362.0/Microsoft.Windows.PushNotifications.Projection.dll": {},
           "lib/net5.0-windows10.0.18362.0/Microsoft.Windows.System.Power.Projection.dll": {},
+          "lib/net5.0-windows10.0.18362.0/Microsoft.Windows.System.Projection.dll": {},
           "lib/net5.0-windows10.0.18362.0/Microsoft.WindowsAppRuntime.Bootstrap.Net.dll": {}
         },
         "runtime": {
           "lib/net5.0-windows10.0.18362.0/Microsoft.InteractiveExperiences.Projection.dll": {},
           "lib/net5.0-windows10.0.18362.0/Microsoft.WinUI.dll": {},
           "lib/net5.0-windows10.0.18362.0/Microsoft.Windows.AppLifecycle.Projection.dll": {},
+          "lib/net5.0-windows10.0.18362.0/Microsoft.Windows.AppNotifications.Projection.dll": {},
           "lib/net5.0-windows10.0.18362.0/Microsoft.Windows.ApplicationModel.DynamicDependency.Projection.dll": {},
           "lib/net5.0-windows10.0.18362.0/Microsoft.Windows.ApplicationModel.Resources.Projection.dll": {},
           "lib/net5.0-windows10.0.18362.0/Microsoft.Windows.ApplicationModel.WindowsAppRuntime.Projection.dll": {},
+          "lib/net5.0-windows10.0.18362.0/Microsoft.Windows.PushNotifications.Projection.dll": {},
           "lib/net5.0-windows10.0.18362.0/Microsoft.Windows.System.Power.Projection.dll": {},
+          "lib/net5.0-windows10.0.18362.0/Microsoft.Windows.System.Projection.dll": {},
           "lib/net5.0-windows10.0.18362.0/Microsoft.WindowsAppRuntime.Bootstrap.Net.dll": {}
         },
         "native": {
           "runtimes/win10-x64/native/Microsoft.WindowsAppRuntime.Bootstrap.dll": {}
         },
         "build": {
-          "build/Microsoft.WindowsAppSDK.props": {},
-          "build/Microsoft.WindowsAppSDK.targets": {}
+          "buildTransitive/Microsoft.WindowsAppSDK.props": {},
+          "buildTransitive/Microsoft.WindowsAppSDK.targets": {}
         }
       },
       "Newtonsoft.Json/13.0.1": {
@@ -1066,6 +1096,15 @@
       }
     },
     "net6.0-windows10.0.19041/win10-x86": {
+      "CommunityToolkit.Mvvm/7.1.2": {
+        "type": "package",
+        "compile": {
+          "lib/net5.0/CommunityToolkit.Mvvm.dll": {}
+        },
+        "runtime": {
+          "lib/net5.0/CommunityToolkit.Mvvm.dll": {}
+        }
+      },
       "Microsoft.Extensions.Configuration/6.0.0": {
         "type": "package",
         "dependencies": {
@@ -1463,14 +1502,14 @@
           "buildTransitive/netcoreapp3.1/_._": {}
         }
       },
-      "Microsoft.Windows.SDK.BuildTools/10.0.22000.194": {
+      "Microsoft.Windows.SDK.BuildTools/10.0.22000.197": {
         "type": "package",
         "build": {
           "build/Microsoft.Windows.SDK.BuildTools.props": {},
           "build/Microsoft.Windows.SDK.BuildTools.targets": {}
         }
       },
-      "Microsoft.WindowsAppSDK/1.0.0": {
+      "Microsoft.WindowsAppSDK/1.1.0-preview3": {
         "type": "package",
         "dependencies": {
           "Microsoft.Windows.SDK.BuildTools": "10.0.22000.194"
@@ -1479,28 +1518,34 @@
           "lib/net5.0-windows10.0.18362.0/Microsoft.InteractiveExperiences.Projection.dll": {},
           "lib/net5.0-windows10.0.18362.0/Microsoft.WinUI.dll": {},
           "lib/net5.0-windows10.0.18362.0/Microsoft.Windows.AppLifecycle.Projection.dll": {},
+          "lib/net5.0-windows10.0.18362.0/Microsoft.Windows.AppNotifications.Projection.dll": {},
           "lib/net5.0-windows10.0.18362.0/Microsoft.Windows.ApplicationModel.DynamicDependency.Projection.dll": {},
           "lib/net5.0-windows10.0.18362.0/Microsoft.Windows.ApplicationModel.Resources.Projection.dll": {},
           "lib/net5.0-windows10.0.18362.0/Microsoft.Windows.ApplicationModel.WindowsAppRuntime.Projection.dll": {},
+          "lib/net5.0-windows10.0.18362.0/Microsoft.Windows.PushNotifications.Projection.dll": {},
           "lib/net5.0-windows10.0.18362.0/Microsoft.Windows.System.Power.Projection.dll": {},
+          "lib/net5.0-windows10.0.18362.0/Microsoft.Windows.System.Projection.dll": {},
           "lib/net5.0-windows10.0.18362.0/Microsoft.WindowsAppRuntime.Bootstrap.Net.dll": {}
         },
         "runtime": {
           "lib/net5.0-windows10.0.18362.0/Microsoft.InteractiveExperiences.Projection.dll": {},
           "lib/net5.0-windows10.0.18362.0/Microsoft.WinUI.dll": {},
           "lib/net5.0-windows10.0.18362.0/Microsoft.Windows.AppLifecycle.Projection.dll": {},
+          "lib/net5.0-windows10.0.18362.0/Microsoft.Windows.AppNotifications.Projection.dll": {},
           "lib/net5.0-windows10.0.18362.0/Microsoft.Windows.ApplicationModel.DynamicDependency.Projection.dll": {},
           "lib/net5.0-windows10.0.18362.0/Microsoft.Windows.ApplicationModel.Resources.Projection.dll": {},
           "lib/net5.0-windows10.0.18362.0/Microsoft.Windows.ApplicationModel.WindowsAppRuntime.Projection.dll": {},
+          "lib/net5.0-windows10.0.18362.0/Microsoft.Windows.PushNotifications.Projection.dll": {},
           "lib/net5.0-windows10.0.18362.0/Microsoft.Windows.System.Power.Projection.dll": {},
+          "lib/net5.0-windows10.0.18362.0/Microsoft.Windows.System.Projection.dll": {},
           "lib/net5.0-windows10.0.18362.0/Microsoft.WindowsAppRuntime.Bootstrap.Net.dll": {}
         },
         "native": {
           "runtimes/win10-x86/native/Microsoft.WindowsAppRuntime.Bootstrap.dll": {}
         },
         "build": {
-          "build/Microsoft.WindowsAppSDK.props": {},
-          "build/Microsoft.WindowsAppSDK.targets": {}
+          "buildTransitive/Microsoft.WindowsAppSDK.props": {},
+          "buildTransitive/Microsoft.WindowsAppSDK.targets": {}
         }
       },
       "Newtonsoft.Json/13.0.1": {
@@ -1586,6 +1631,32 @@
     }
   },
   "libraries": {
+    "CommunityToolkit.Mvvm/7.1.2": {
+      "sha512": "/zEpNH3FIBFY2iZRBi+S3Sia3q2yJgy1IQHnWRW7MdhQIe3IGcA1TGqJdbtjiJBmNy4v7kkPdNzgYlvvNDjXZg==",
+      "type": "package",
+      "path": "communitytoolkit.mvvm/7.1.2",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "Icon.png",
+        "License.md",
+        "ThirdPartyNotices.txt",
+        "analyzers/dotnet/cs/CommunityToolkit.Mvvm.SourceGenerators.dll",
+        "analyzers/dotnet/cs/CommunityToolkit.Mvvm.SourceGenerators.pdb",
+        "analyzers/dotnet/cs/CommunityToolkit.Mvvm.SourceGenerators.xml",
+        "communitytoolkit.mvvm.7.1.2.nupkg.sha512",
+        "communitytoolkit.mvvm.nuspec",
+        "lib/net5.0/CommunityToolkit.Mvvm.dll",
+        "lib/net5.0/CommunityToolkit.Mvvm.pdb",
+        "lib/net5.0/CommunityToolkit.Mvvm.xml",
+        "lib/netstandard2.0/CommunityToolkit.Mvvm.dll",
+        "lib/netstandard2.0/CommunityToolkit.Mvvm.pdb",
+        "lib/netstandard2.0/CommunityToolkit.Mvvm.xml",
+        "lib/netstandard2.1/CommunityToolkit.Mvvm.dll",
+        "lib/netstandard2.1/CommunityToolkit.Mvvm.pdb",
+        "lib/netstandard2.1/CommunityToolkit.Mvvm.xml"
+      ]
+    },
     "Microsoft.Extensions.Configuration/6.0.0": {
       "sha512": "tq2wXyh3fL17EMF2bXgRhU7JrbO3on93MRKYxzz4JzzvuGSA1l0W3GI9/tl8EO89TH+KWEymP7bcFway6z9fXg==",
       "type": "package",
@@ -2152,10 +2223,10 @@
         "useSharedDesignerContext.txt"
       ]
     },
-    "Microsoft.Windows.SDK.BuildTools/10.0.22000.194": {
-      "sha512": "4L0P3zqut466SIqT3VBeLTNUQTxCBDOrTRymRuROCRJKazcK7ibLz9yAO1nKWRt50ttCj39oAa2Iuz9ZTDmLlg==",
+    "Microsoft.Windows.SDK.BuildTools/10.0.22000.197": {
+      "sha512": "Yzovh74wAbTrVSAtaMuPXoJ2WTLG6LlFtDoqc9LF25G8XYU/pFTw5td4InYg1r62hgB664arPoYn47ecbud7VQ==",
       "type": "package",
-      "path": "microsoft.windows.sdk.buildtools/10.0.22000.194",
+      "path": "microsoft.windows.sdk.buildtools/10.0.22000.197",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -2178,6 +2249,7 @@
         "bin/10.0.22000.0/x64/Microsoft.Windows.Build.Signing.mssign32.dll.manifest",
         "bin/10.0.22000.0/x64/Microsoft.Windows.Build.Signing.wintrust.dll.manifest",
         "bin/10.0.22000.0/x64/PackageEditor.exe",
+        "bin/10.0.22000.0/x64/ServicingCommon.dll",
         "bin/10.0.22000.0/x64/SirepClient.assembly.manifest",
         "bin/10.0.22000.0/x64/SirepClient.dll",
         "bin/10.0.22000.0/x64/SirepInterop.dll",
@@ -2211,6 +2283,7 @@
         "bin/10.0.22000.0/x64/signtool.exe",
         "bin/10.0.22000.0/x64/signtool.exe.manifest",
         "bin/10.0.22000.0/x64/tracewpp.exe",
+        "bin/10.0.22000.0/x64/uuidgen.exe",
         "bin/10.0.22000.0/x64/winmdidl.exe",
         "bin/10.0.22000.0/x64/wintrust.dll",
         "bin/10.0.22000.0/x64/wintrust.dll.ini",
@@ -2229,6 +2302,7 @@
         "bin/10.0.22000.0/x86/Microsoft.Windows.Build.Signing.mssign32.dll.manifest",
         "bin/10.0.22000.0/x86/Microsoft.Windows.Build.Signing.wintrust.dll.manifest",
         "bin/10.0.22000.0/x86/PackageEditor.exe",
+        "bin/10.0.22000.0/x86/ServicingCommon.dll",
         "bin/10.0.22000.0/x86/SirepClient.assembly.manifest",
         "bin/10.0.22000.0/x86/SirepClient.dll",
         "bin/10.0.22000.0/x86/SirepInterop.dll",
@@ -2262,12 +2336,13 @@
         "bin/10.0.22000.0/x86/signtool.exe",
         "bin/10.0.22000.0/x86/signtool.exe.manifest",
         "bin/10.0.22000.0/x86/tracewpp.exe",
+        "bin/10.0.22000.0/x86/uuidgen.exe",
         "bin/10.0.22000.0/x86/winmdidl.exe",
         "bin/10.0.22000.0/x86/wintrust.dll",
         "bin/10.0.22000.0/x86/wintrust.dll.ini",
         "build/Microsoft.Windows.SDK.BuildTools.props",
         "build/Microsoft.Windows.SDK.BuildTools.targets",
-        "microsoft.windows.sdk.buildtools.10.0.22000.194.nupkg.sha512",
+        "microsoft.windows.sdk.buildtools.10.0.22000.197.nupkg.sha512",
         "microsoft.windows.sdk.buildtools.nuspec",
         "schemas/10.0.22000.0/winrt/AppxManifestSchema.xsd",
         "schemas/10.0.22000.0/winrt/AppxManifestSchema2010_v2.xsd",
@@ -2288,10 +2363,10 @@
         "schemas/10.0.22000.0/winrt/UapManifestSchema_v8.xsd"
       ]
     },
-    "Microsoft.WindowsAppSDK/1.0.0": {
-      "sha512": "nQRK4KuaRDWk9YX78k4Vn1D9w2Z07ki1mTmuT+4oCIEJNM01c40A7DUC6GiBdTjmHJbBq4hm7EyFQUb+kBSW8A==",
+    "Microsoft.WindowsAppSDK/1.1.0-preview3": {
+      "sha512": "CvXncf87ZjP7ortAmuW6Ww3csduC8kIsvmzCLbz6kaHseg23taAlVhlUWCOHfyw5q8zi+oH3/S0kVa1mUiT49Q==",
       "type": "package",
-      "path": "microsoft.windowsappsdk/1.0.0",
+      "path": "microsoft.windowsappsdk/1.1.0-preview3",
       "hasTools": true,
       "files": [
         ".nupkg.metadata",
@@ -2317,6 +2392,12 @@
         "build/AppDevPackageScripts/Add-AppDevPackage.resources/zh-TW/Add-AppDevPackage.psd1",
         "build/AppDevPackageScripts/Install.ps1",
         "build/AppDevPackageScripts/LogSideloadingTelemetry.ps1",
+        "build/Landing/extras/br.png",
+        "build/Landing/extras/br_snippet.png",
+        "build/Landing/image.png",
+        "build/Landing/index.template.html",
+        "build/Landing/logo.png",
+        "build/Landing/style.css",
         "build/Microsoft.Build.Msix.Common.props",
         "build/Microsoft.Build.Msix.Cpp.props",
         "build/Microsoft.Build.Msix.Cpp.targets",
@@ -2331,9 +2412,6 @@
         "build/Microsoft.InteractiveExperiences.Common.targets",
         "build/Microsoft.InteractiveExperiences.props",
         "build/Microsoft.InteractiveExperiences.targets",
-        "build/Microsoft.ProjectReunion.WinUI.Build.props",
-        "build/Microsoft.ProjectReunion.WinUI.props",
-        "build/Microsoft.ProjectReunion.WinUI.targets",
         "build/Microsoft.UI.Xaml.Markup.Compiler.interop.targets",
         "build/Microsoft.UI.Xaml.Markup.Compiler.props",
         "build/Microsoft.UI.Xaml.Markup.Compiler.targets",
@@ -2345,7 +2423,7 @@
         "build/Microsoft.WinUI.targets",
         "build/Microsoft.WindowsAppSDK.AppXReference.props",
         "build/Microsoft.WindowsAppSDK.Bootstrap.CS.targets",
-        "build/Microsoft.WindowsAppSDK.Bootstrap.targets",
+        "build/Microsoft.WindowsAppSDK.BootstrapCommon.targets",
         "build/Microsoft.WindowsAppSDK.Common.props",
         "build/Microsoft.WindowsAppSDK.DWrite.ProjectCapabilities.props",
         "build/Microsoft.WindowsAppSDK.DWrite.props",
@@ -2354,10 +2432,9 @@
         "build/Microsoft.WindowsAppSDK.Foundation.targets",
         "build/Microsoft.WindowsAppSDK.InteractiveExperiences.props",
         "build/Microsoft.WindowsAppSDK.InteractiveExperiences.targets",
-        "build/Microsoft.WindowsAppSDK.MddCommon.targets",
         "build/Microsoft.WindowsAppSDK.Metapackage.props",
-        "build/Microsoft.WindowsAppSDK.SelfContained.props",
         "build/Microsoft.WindowsAppSDK.SelfContained.targets",
+        "build/Microsoft.WindowsAppSDK.WinUI.Build.props",
         "build/Microsoft.WindowsAppSDK.WinUI.props",
         "build/Microsoft.WindowsAppSDK.WinUI.targets",
         "build/Microsoft.WindowsAppSDK.props",
@@ -2366,8 +2443,8 @@
         "build/MicrosoftWindowsAppSDKFoundationAppXVersion.props",
         "build/MrtCore.PriGen.targets",
         "build/MrtCore.References.targets",
-        "build/MrtCore.props",
         "build/MrtCore.targets",
+        "build/ProjectItemsSchema.xaml",
         "build/README.md",
         "build/Rules/MsixPackageDebugPropertyPage.xaml",
         "build/Rules/af-ZA/MsixPackageDebugPropertyPage.xaml",
@@ -2425,12 +2502,10 @@
         "build/Rules/vi-VN/MsixPackageDebugPropertyPage.xaml",
         "build/Rules/zh-CN/MsixPackageDebugPropertyPage.xaml",
         "build/Rules/zh-TW/MsixPackageDebugPropertyPage.xaml",
+        "build/Templates/Package.appinstaller",
         "build/native/LiftedWinRTClassRegistrations.xml",
-        "build/native/Microsoft.FrameworkUdk.targets",
         "build/native/Microsoft.InteractiveExperiences.props",
         "build/native/Microsoft.InteractiveExperiences.targets",
-        "build/native/Microsoft.ProjectReunion.WinUI.props",
-        "build/native/Microsoft.ProjectReunion.WinUI.targets",
         "build/native/Microsoft.WinUI.References.targets",
         "build/native/Microsoft.WinUI.props",
         "build/native/Microsoft.WinUI.targets",
@@ -2448,6 +2523,78 @@
         "build/native/WindowsAppSDK-Nuget-Native.Bootstrap.targets",
         "build/native/WindowsAppSDK-Nuget-Native.C.props",
         "build/native/WindowsAppSDK-Nuget-Native.WinRt.props",
+        "buildTransitive/AppDevPackageScripts/Add-AppDevPackage.ps1",
+        "buildTransitive/AppDevPackageScripts/Add-AppDevPackage.resources/Add-AppDevPackage.psd1",
+        "buildTransitive/AppDevPackageScripts/Add-AppDevPackage.resources/cs-CZ/Add-AppDevPackage.psd1",
+        "buildTransitive/AppDevPackageScripts/Add-AppDevPackage.resources/de-DE/Add-AppDevPackage.psd1",
+        "buildTransitive/AppDevPackageScripts/Add-AppDevPackage.resources/en-US/Add-AppDevPackage.psd1",
+        "buildTransitive/AppDevPackageScripts/Add-AppDevPackage.resources/es-ES/Add-AppDevPackage.psd1",
+        "buildTransitive/AppDevPackageScripts/Add-AppDevPackage.resources/fr-FR/Add-AppDevPackage.psd1",
+        "buildTransitive/AppDevPackageScripts/Add-AppDevPackage.resources/it-IT/Add-AppDevPackage.psd1",
+        "buildTransitive/AppDevPackageScripts/Add-AppDevPackage.resources/ja-JP/Add-AppDevPackage.psd1",
+        "buildTransitive/AppDevPackageScripts/Add-AppDevPackage.resources/ko-KR/Add-AppDevPackage.psd1",
+        "buildTransitive/AppDevPackageScripts/Add-AppDevPackage.resources/pl-PL/Add-AppDevPackage.psd1",
+        "buildTransitive/AppDevPackageScripts/Add-AppDevPackage.resources/pt-BR/Add-AppDevPackage.psd1",
+        "buildTransitive/AppDevPackageScripts/Add-AppDevPackage.resources/ru-RU/Add-AppDevPackage.psd1",
+        "buildTransitive/AppDevPackageScripts/Add-AppDevPackage.resources/tr-TR/Add-AppDevPackage.psd1",
+        "buildTransitive/AppDevPackageScripts/Add-AppDevPackage.resources/zh-CN/Add-AppDevPackage.psd1",
+        "buildTransitive/AppDevPackageScripts/Add-AppDevPackage.resources/zh-TW/Add-AppDevPackage.psd1",
+        "buildTransitive/AppDevPackageScripts/Install.ps1",
+        "buildTransitive/AppDevPackageScripts/LogSideloadingTelemetry.ps1",
+        "buildTransitive/Landing/extras/br.png",
+        "buildTransitive/Landing/extras/br_snippet.png",
+        "buildTransitive/Landing/image.png",
+        "buildTransitive/Landing/index.template.html",
+        "buildTransitive/Landing/logo.png",
+        "buildTransitive/Landing/style.css",
+        "buildTransitive/Microsoft.Build.Msix.Common.props",
+        "buildTransitive/Microsoft.Build.Msix.Cpp.props",
+        "buildTransitive/Microsoft.Build.Msix.Cpp.targets",
+        "buildTransitive/Microsoft.Build.Msix.DesignTime.targets",
+        "buildTransitive/Microsoft.Build.Msix.Packaging.targets",
+        "buildTransitive/Microsoft.Build.Msix.Pri.targets",
+        "buildTransitive/Microsoft.Build.Msix.props",
+        "buildTransitive/Microsoft.Build.Msix.targets",
+        "buildTransitive/Microsoft.InteractiveExperiences.Capabilities.props",
+        "buildTransitive/Microsoft.InteractiveExperiences.Capabilities.targets",
+        "buildTransitive/Microsoft.InteractiveExperiences.Common.props",
+        "buildTransitive/Microsoft.InteractiveExperiences.Common.targets",
+        "buildTransitive/Microsoft.InteractiveExperiences.props",
+        "buildTransitive/Microsoft.InteractiveExperiences.targets",
+        "buildTransitive/Microsoft.UI.Xaml.Markup.Compiler.interop.targets",
+        "buildTransitive/Microsoft.UI.Xaml.Markup.Compiler.props",
+        "buildTransitive/Microsoft.UI.Xaml.Markup.Compiler.targets",
+        "buildTransitive/Microsoft.WinUI.AppX.targets",
+        "buildTransitive/Microsoft.WinUI.NET.Markup.Compiler.targets",
+        "buildTransitive/Microsoft.WinUI.ProjectCapabilities.props",
+        "buildTransitive/Microsoft.WinUI.References.targets",
+        "buildTransitive/Microsoft.WinUI.props",
+        "buildTransitive/Microsoft.WinUI.targets",
+        "buildTransitive/Microsoft.WindowsAppSDK.AppXReference.props",
+        "buildTransitive/Microsoft.WindowsAppSDK.Bootstrap.CS.targets",
+        "buildTransitive/Microsoft.WindowsAppSDK.BootstrapCommon.targets",
+        "buildTransitive/Microsoft.WindowsAppSDK.Common.props",
+        "buildTransitive/Microsoft.WindowsAppSDK.DWrite.ProjectCapabilities.props",
+        "buildTransitive/Microsoft.WindowsAppSDK.DWrite.props",
+        "buildTransitive/Microsoft.WindowsAppSDK.DWrite.targets",
+        "buildTransitive/Microsoft.WindowsAppSDK.Foundation.props",
+        "buildTransitive/Microsoft.WindowsAppSDK.Foundation.targets",
+        "buildTransitive/Microsoft.WindowsAppSDK.InteractiveExperiences.props",
+        "buildTransitive/Microsoft.WindowsAppSDK.InteractiveExperiences.targets",
+        "buildTransitive/Microsoft.WindowsAppSDK.Metapackage.props",
+        "buildTransitive/Microsoft.WindowsAppSDK.SelfContained.targets",
+        "buildTransitive/Microsoft.WindowsAppSDK.WinUI.Build.props",
+        "buildTransitive/Microsoft.WindowsAppSDK.WinUI.props",
+        "buildTransitive/Microsoft.WindowsAppSDK.WinUI.targets",
+        "buildTransitive/Microsoft.WindowsAppSDK.props",
+        "buildTransitive/Microsoft.WindowsAppSDK.targets",
+        "buildTransitive/Microsoft.Xaml.Tooling.targets",
+        "buildTransitive/MicrosoftWindowsAppSDKFoundationAppXVersion.props",
+        "buildTransitive/MrtCore.PriGen.targets",
+        "buildTransitive/MrtCore.References.targets",
+        "buildTransitive/MrtCore.targets",
+        "buildTransitive/ProjectItemsSchema.xaml",
+        "buildTransitive/README.md",
         "buildTransitive/Rules/MsixPackageDebugPropertyPage.xaml",
         "buildTransitive/Rules/af-ZA/MsixPackageDebugPropertyPage.xaml",
         "buildTransitive/Rules/ar-SA/MsixPackageDebugPropertyPage.xaml",
@@ -2504,16 +2651,37 @@
         "buildTransitive/Rules/vi-VN/MsixPackageDebugPropertyPage.xaml",
         "buildTransitive/Rules/zh-CN/MsixPackageDebugPropertyPage.xaml",
         "buildTransitive/Rules/zh-TW/MsixPackageDebugPropertyPage.xaml",
+        "buildTransitive/Templates/Package.appinstaller",
+        "buildTransitive/native/LiftedWinRTClassRegistrations.xml",
+        "buildTransitive/native/Microsoft.InteractiveExperiences.props",
+        "buildTransitive/native/Microsoft.InteractiveExperiences.targets",
+        "buildTransitive/native/Microsoft.WinUI.References.targets",
+        "buildTransitive/native/Microsoft.WinUI.props",
+        "buildTransitive/native/Microsoft.WinUI.targets",
+        "buildTransitive/native/Microsoft.WindowsAppSDK.Foundation.props",
+        "buildTransitive/native/Microsoft.WindowsAppSDK.Foundation.targets",
+        "buildTransitive/native/Microsoft.WindowsAppSDK.InteractiveExperiences.props",
+        "buildTransitive/native/Microsoft.WindowsAppSDK.InteractiveExperiences.targets",
+        "buildTransitive/native/Microsoft.WindowsAppSDK.WinUI.props",
+        "buildTransitive/native/Microsoft.WindowsAppSDK.WinUI.targets",
+        "buildTransitive/native/Microsoft.WindowsAppSDK.props",
+        "buildTransitive/native/Microsoft.WindowsAppSDK.targets",
+        "buildTransitive/native/MrtCore.C.props",
+        "buildTransitive/native/MrtCore.props",
+        "buildTransitive/native/MrtCore.targets",
+        "buildTransitive/native/WindowsAppSDK-Nuget-Native.Bootstrap.targets",
+        "buildTransitive/native/WindowsAppSDK-Nuget-Native.C.props",
+        "buildTransitive/native/WindowsAppSDK-Nuget-Native.WinRt.props",
         "include/MRM.h",
         "include/MddBootstrap.h",
         "include/MddBootstrapAutoInitializer.cpp",
         "include/MddBootstrapAutoInitializer.cs",
         "include/Microsoft.UI.Composition.Interop.h",
         "include/Microsoft.UI.Interop.h",
+        "include/Microsoft.Windows.ApplicationModel.Resources.idl",
         "include/MsixDynamicDependency.h",
         "include/WebView2.h",
         "include/WebView2.idl",
-        "include/WindowsAppRuntime-Licensing.h",
         "include/WindowsAppRuntimeInsights.h",
         "include/WindowsAppSDK-VersionInfo.cs",
         "include/WindowsAppSDK-VersionInfo.h",
@@ -2544,14 +2712,17 @@
         "lib/net5.0-windows10.0.17763.0/Microsoft.WinUI/Themes/generic.xaml",
         "lib/net5.0-windows10.0.17763.0/Microsoft.Windows.AppLifecycle.Projection.dll",
         "lib/net5.0-windows10.0.17763.0/Microsoft.Windows.AppLifecycle.Projection.xml",
+        "lib/net5.0-windows10.0.17763.0/Microsoft.Windows.AppNotifications.Projection.dll",
         "lib/net5.0-windows10.0.17763.0/Microsoft.Windows.ApplicationModel.DynamicDependency.Projection.dll",
         "lib/net5.0-windows10.0.17763.0/Microsoft.Windows.ApplicationModel.DynamicDependency.Projection.xml",
         "lib/net5.0-windows10.0.17763.0/Microsoft.Windows.ApplicationModel.Resources.Projection.dll",
         "lib/net5.0-windows10.0.17763.0/Microsoft.Windows.ApplicationModel.Resources.Projection.xml",
         "lib/net5.0-windows10.0.17763.0/Microsoft.Windows.ApplicationModel.WindowsAppRuntime.Projection.dll",
         "lib/net5.0-windows10.0.17763.0/Microsoft.Windows.ApplicationModel.WindowsAppSDK.Projection.xml",
+        "lib/net5.0-windows10.0.17763.0/Microsoft.Windows.PushNotifications.Projection.dll",
         "lib/net5.0-windows10.0.17763.0/Microsoft.Windows.System.Power.Projection.dll",
         "lib/net5.0-windows10.0.17763.0/Microsoft.Windows.System.Power.Projection.xml",
+        "lib/net5.0-windows10.0.17763.0/Microsoft.Windows.System.Projection.dll",
         "lib/net5.0-windows10.0.17763.0/Microsoft.WindowsAppRuntime.Bootstrap.Net.dll",
         "lib/net5.0-windows10.0.18362.0/Microsoft.InteractiveExperiences.Projection.dll",
         "lib/net5.0-windows10.0.18362.0/Microsoft.InteractiveExperiences.Projection.xml",
@@ -2560,23 +2731,32 @@
         "lib/net5.0-windows10.0.18362.0/Microsoft.WinUI/Themes/generic.xaml",
         "lib/net5.0-windows10.0.18362.0/Microsoft.Windows.AppLifecycle.Projection.dll",
         "lib/net5.0-windows10.0.18362.0/Microsoft.Windows.AppLifecycle.Projection.xml",
+        "lib/net5.0-windows10.0.18362.0/Microsoft.Windows.AppNotifications.Projection.dll",
         "lib/net5.0-windows10.0.18362.0/Microsoft.Windows.ApplicationModel.DynamicDependency.Projection.dll",
         "lib/net5.0-windows10.0.18362.0/Microsoft.Windows.ApplicationModel.DynamicDependency.Projection.xml",
         "lib/net5.0-windows10.0.18362.0/Microsoft.Windows.ApplicationModel.Resources.Projection.dll",
         "lib/net5.0-windows10.0.18362.0/Microsoft.Windows.ApplicationModel.Resources.Projection.xml",
         "lib/net5.0-windows10.0.18362.0/Microsoft.Windows.ApplicationModel.WindowsAppRuntime.Projection.dll",
         "lib/net5.0-windows10.0.18362.0/Microsoft.Windows.ApplicationModel.WindowsAppSDK.Projection.xml",
+        "lib/net5.0-windows10.0.18362.0/Microsoft.Windows.PushNotifications.Projection.dll",
         "lib/net5.0-windows10.0.18362.0/Microsoft.Windows.System.Power.Projection.dll",
         "lib/net5.0-windows10.0.18362.0/Microsoft.Windows.System.Power.Projection.xml",
+        "lib/net5.0-windows10.0.18362.0/Microsoft.Windows.System.Projection.dll",
         "lib/net5.0-windows10.0.18362.0/Microsoft.WindowsAppRuntime.Bootstrap.Net.dll",
         "lib/uap10.0.17763/Microsoft.Foundation.winmd",
+        "lib/uap10.0.17763/Microsoft.Foundation.xml",
         "lib/uap10.0.17763/Microsoft.Graphics.winmd",
+        "lib/uap10.0.17763/Microsoft.Graphics.xml",
         "lib/uap10.0.17763/Microsoft.UI.winmd",
         "lib/uap10.0.17763/Microsoft.UI.xml",
         "lib/uap10.0.18362/Microsoft.Foundation.winmd",
+        "lib/uap10.0.18362/Microsoft.Foundation.xml",
         "lib/uap10.0.18362/Microsoft.Graphics.winmd",
+        "lib/uap10.0.18362/Microsoft.Graphics.xml",
         "lib/uap10.0.18362/Microsoft.UI.winmd",
         "lib/uap10.0.18362/Microsoft.UI.xml",
+        "lib/uap10.0/Microsoft.Foundation.xml",
+        "lib/uap10.0/Microsoft.Graphics.xml",
         "lib/uap10.0/Microsoft.UI.Text.winmd",
         "lib/uap10.0/Microsoft.UI.Text.xml",
         "lib/uap10.0/Microsoft.UI.Xaml.winmd",
@@ -2585,15 +2765,19 @@
         "lib/uap10.0/Microsoft.Web.WebView2.Core.winmd",
         "lib/uap10.0/Microsoft.Windows.AppLifecycle.winmd",
         "lib/uap10.0/Microsoft.Windows.AppLifecycle.xml",
+        "lib/uap10.0/Microsoft.Windows.AppNotifications.winmd",
         "lib/uap10.0/Microsoft.Windows.ApplicationModel.DynamicDependency.winmd",
         "lib/uap10.0/Microsoft.Windows.ApplicationModel.DynamicDependency.xml",
         "lib/uap10.0/Microsoft.Windows.ApplicationModel.Resources.winmd",
         "lib/uap10.0/Microsoft.Windows.ApplicationModel.Resources.xml",
         "lib/uap10.0/Microsoft.Windows.ApplicationModel.WindowsAppRuntime.winmd",
+        "lib/uap10.0/Microsoft.Windows.ApplicationModel.WindowsAppRuntime.xml",
         "lib/uap10.0/Microsoft.Windows.ApplicationModel.WindowsAppSDK.xml",
+        "lib/uap10.0/Microsoft.Windows.PushNotifications.winmd",
         "lib/uap10.0/Microsoft.Windows.PushNotifications.xml",
         "lib/uap10.0/Microsoft.Windows.System.Power.winmd",
         "lib/uap10.0/Microsoft.Windows.System.Power.xml",
+        "lib/uap10.0/Microsoft.Windows.System.winmd",
         "lib/uap10.0/Microsoft.Windows.System.xml",
         "lib/win10-arm64/DWriteCore.lib",
         "lib/win10-arm64/MRM.lib",
@@ -2610,39 +2794,176 @@
         "license.txt",
         "manifests/Microsoft.InteractiveExperiences.manifest",
         "manifests/Microsoft.WindowsAppSdk.Foundation.manifest",
-        "manifests/Microsoft.WindowsAppSdk.WinUI.manifest",
-        "microsoft.windowsappsdk.1.0.0.nupkg.sha512",
+        "manifests/manifests/Microsoft.WindowsAppSdk.WinUI.manifest",
+        "microsoft.windowsappsdk.1.1.0-preview3.nupkg.sha512",
         "microsoft.windowsappsdk.nuspec",
         "runtimes/win10-arm64/native/Microsoft.WindowsAppRuntime.Bootstrap.dll",
         "runtimes/win10-x64/native/Microsoft.WindowsAppRuntime.Bootstrap.dll",
         "runtimes/win10-x86/native/Microsoft.WindowsAppRuntime.Bootstrap.dll",
         "tools/MSIX/win10-arm64/MSIX.inventory",
-        "tools/MSIX/win10-arm64/Microsoft.WindowsAppRuntime.1.0.msix",
-        "tools/MSIX/win10-arm64/Microsoft.WindowsAppRuntime.DDLM.1.0.msix",
-        "tools/MSIX/win10-arm64/Microsoft.WindowsAppRuntime.Main.1.0.msix",
-        "tools/MSIX/win10-arm64/Microsoft.WindowsAppRuntime.Singleton.1.0.msix",
+        "tools/MSIX/win10-arm64/Microsoft.WindowsAppRuntime.1.1-preview3.msix",
+        "tools/MSIX/win10-arm64/Microsoft.WindowsAppRuntime.DDLM.1.1-preview3.msix",
+        "tools/MSIX/win10-arm64/Microsoft.WindowsAppRuntime.Main.1.1-preview3.msix",
+        "tools/MSIX/win10-arm64/Microsoft.WindowsAppRuntime.Singleton.1.1-preview3.msix",
         "tools/MSIX/win10-x64/MSIX.inventory",
-        "tools/MSIX/win10-x64/Microsoft.WindowsAppRuntime.1.0.msix",
-        "tools/MSIX/win10-x64/Microsoft.WindowsAppRuntime.DDLM.1.0.msix",
-        "tools/MSIX/win10-x64/Microsoft.WindowsAppRuntime.Main.1.0.msix",
-        "tools/MSIX/win10-x64/Microsoft.WindowsAppRuntime.Singleton.1.0.msix",
+        "tools/MSIX/win10-x64/Microsoft.WindowsAppRuntime.1.1-preview3.msix",
+        "tools/MSIX/win10-x64/Microsoft.WindowsAppRuntime.DDLM.1.1-preview3.msix",
+        "tools/MSIX/win10-x64/Microsoft.WindowsAppRuntime.Main.1.1-preview3.msix",
+        "tools/MSIX/win10-x64/Microsoft.WindowsAppRuntime.Singleton.1.1-preview3.msix",
         "tools/MSIX/win10-x86/MSIX.inventory",
-        "tools/MSIX/win10-x86/Microsoft.WindowsAppRuntime.1.0.msix",
-        "tools/MSIX/win10-x86/Microsoft.WindowsAppRuntime.DDLM.1.0.msix",
-        "tools/MSIX/win10-x86/Microsoft.WindowsAppRuntime.Main.1.0.msix",
-        "tools/MSIX/win10-x86/Microsoft.WindowsAppRuntime.Singleton.1.0.msix",
-        "tools/Microsoft.Build.Framework.dll",
-        "tools/Microsoft.Build.Msix.dll",
-        "tools/Microsoft.Build.Utilities.Core.dll",
-        "tools/Microsoft.Diagnostics.Tracing.EventSource.dll",
-        "tools/Microsoft.UI.Xaml.Markup.Compiler.MSBuildInterop.dll",
-        "tools/Microsoft.UI.Xaml.Markup.Compiler.dll",
-        "tools/Microsoft.VisualStudio.RemoteControl.dll",
-        "tools/Microsoft.VisualStudio.Setup.Configuration.Interop.dll",
-        "tools/Microsoft.VisualStudio.Telemetry.dll",
-        "tools/Microsoft.VisualStudio.Utilities.Internal.dll",
-        "tools/Newtonsoft.Json.dll",
+        "tools/MSIX/win10-x86/Microsoft.WindowsAppRuntime.1.1-preview3.msix",
+        "tools/MSIX/win10-x86/Microsoft.WindowsAppRuntime.DDLM.1.1-preview3.msix",
+        "tools/MSIX/win10-x86/Microsoft.WindowsAppRuntime.Main.1.1-preview3.msix",
+        "tools/MSIX/win10-x86/Microsoft.WindowsAppRuntime.Singleton.1.1-preview3.msix",
+        "tools/NOTICE.txt",
         "tools/arm64/GenXbf.dll",
+        "tools/net472/Microsoft.Bcl.AsyncInterfaces.dll",
+        "tools/net472/Microsoft.Build.Framework.dll",
+        "tools/net472/Microsoft.Build.Msix.dll",
+        "tools/net472/Microsoft.Build.Utilities.Core.dll",
+        "tools/net472/Microsoft.Build.dll",
+        "tools/net472/Microsoft.Cci.dll",
+        "tools/net472/Microsoft.Diagnostics.Tracing.EventSource.dll",
+        "tools/net472/Microsoft.UI.Xaml.Markup.Compiler.IO.dll",
+        "tools/net472/Microsoft.UI.Xaml.Markup.Compiler.MSBuildInterop.dll",
+        "tools/net472/Microsoft.UI.Xaml.Markup.Compiler.dll",
+        "tools/net472/Microsoft.VisualStudio.RemoteControl.dll",
+        "tools/net472/Microsoft.VisualStudio.Setup.Configuration.Interop.dll",
+        "tools/net472/Microsoft.VisualStudio.Telemetry.dll",
+        "tools/net472/Microsoft.VisualStudio.Utilities.Internal.dll",
+        "tools/net472/System.Buffers.dll",
+        "tools/net472/System.Collections.Immutable.dll",
+        "tools/net472/System.Memory.dll",
+        "tools/net472/System.Numerics.Vectors.dll",
+        "tools/net472/System.Runtime.CompilerServices.Unsafe.dll",
+        "tools/net472/System.Text.Encodings.Web.dll",
+        "tools/net472/System.Text.Json.dll",
+        "tools/net472/System.Threading.Tasks.Dataflow.dll",
+        "tools/net472/System.Threading.Tasks.Extensions.dll",
+        "tools/net472/XamlCompiler.exe",
+        "tools/net472/XamlCompiler.exe.config",
+        "tools/net472/af-ZA/Microsoft.Build.Msix.resources.dll",
+        "tools/net472/ar-SA/Microsoft.Build.Msix.resources.dll",
+        "tools/net472/az-Latn-AZ/Microsoft.Build.Msix.resources.dll",
+        "tools/net472/bg-BG/Microsoft.Build.Msix.resources.dll",
+        "tools/net472/bs-Latn-BA/Microsoft.Build.Msix.resources.dll",
+        "tools/net472/ca-ES/Microsoft.Build.Msix.resources.dll",
+        "tools/net472/cs-CZ/Microsoft.Build.Msix.resources.dll",
+        "tools/net472/cy-GB/Microsoft.Build.Msix.resources.dll",
+        "tools/net472/da-DK/Microsoft.Build.Msix.resources.dll",
+        "tools/net472/de-DE/Microsoft.Build.Msix.resources.dll",
+        "tools/net472/el-GR/Microsoft.Build.Msix.resources.dll",
+        "tools/net472/en-GB/Microsoft.Build.Msix.resources.dll",
+        "tools/net472/es-ES/Microsoft.Build.Msix.resources.dll",
+        "tools/net472/es-MX/Microsoft.Build.Msix.resources.dll",
+        "tools/net472/et-EE/Microsoft.Build.Msix.resources.dll",
+        "tools/net472/eu-ES/Microsoft.Build.Msix.resources.dll",
+        "tools/net472/fa-IR/Microsoft.Build.Msix.resources.dll",
+        "tools/net472/fi-FI/Microsoft.Build.Msix.resources.dll",
+        "tools/net472/fr-CA/Microsoft.Build.Msix.resources.dll",
+        "tools/net472/fr-FR/Microsoft.Build.Msix.resources.dll",
+        "tools/net472/gl-ES/Microsoft.Build.Msix.resources.dll",
+        "tools/net472/he-IL/Microsoft.Build.Msix.resources.dll",
+        "tools/net472/hi-IN/Microsoft.Build.Msix.resources.dll",
+        "tools/net472/hr-HR/Microsoft.Build.Msix.resources.dll",
+        "tools/net472/hu-HU/Microsoft.Build.Msix.resources.dll",
+        "tools/net472/id-ID/Microsoft.Build.Msix.resources.dll",
+        "tools/net472/is-IS/Microsoft.Build.Msix.resources.dll",
+        "tools/net472/it-IT/Microsoft.Build.Msix.resources.dll",
+        "tools/net472/ja-JP/Microsoft.Build.Msix.resources.dll",
+        "tools/net472/ka-GE/Microsoft.Build.Msix.resources.dll",
+        "tools/net472/kk-KZ/Microsoft.Build.Msix.resources.dll",
+        "tools/net472/ko-KR/Microsoft.Build.Msix.resources.dll",
+        "tools/net472/lt-LT/Microsoft.Build.Msix.resources.dll",
+        "tools/net472/lv-LV/Microsoft.Build.Msix.resources.dll",
+        "tools/net472/ms-MY/Microsoft.Build.Msix.resources.dll",
+        "tools/net472/nb-NO/Microsoft.Build.Msix.resources.dll",
+        "tools/net472/nl-NL/Microsoft.Build.Msix.resources.dll",
+        "tools/net472/nn-NO/Microsoft.Build.Msix.resources.dll",
+        "tools/net472/pl-PL/Microsoft.Build.Msix.resources.dll",
+        "tools/net472/pt-BR/Microsoft.Build.Msix.resources.dll",
+        "tools/net472/pt-PT/Microsoft.Build.Msix.resources.dll",
+        "tools/net472/ro-RO/Microsoft.Build.Msix.resources.dll",
+        "tools/net472/ru-RU/Microsoft.Build.Msix.resources.dll",
+        "tools/net472/sk-SK/Microsoft.Build.Msix.resources.dll",
+        "tools/net472/sl-SI/Microsoft.Build.Msix.resources.dll",
+        "tools/net472/sq-AL/Microsoft.Build.Msix.resources.dll",
+        "tools/net472/sr-Cyrl-RS/Microsoft.Build.Msix.resources.dll",
+        "tools/net472/sr-Latn-RS/Microsoft.Build.Msix.resources.dll",
+        "tools/net472/sv-SE/Microsoft.Build.Msix.resources.dll",
+        "tools/net472/th-TH/Microsoft.Build.Msix.resources.dll",
+        "tools/net472/tr-TR/Microsoft.Build.Msix.resources.dll",
+        "tools/net472/uk-UA/Microsoft.Build.Msix.resources.dll",
+        "tools/net472/vi-VN/Microsoft.Build.Msix.resources.dll",
+        "tools/net472/zh-CN/Microsoft.Build.Msix.resources.dll",
+        "tools/net472/zh-TW/Microsoft.Build.Msix.resources.dll",
+        "tools/net5.0/Microsoft.Bcl.AsyncInterfaces.dll",
+        "tools/net5.0/Microsoft.Build.Msix.dll",
+        "tools/net5.0/Microsoft.Cci.dll",
+        "tools/net5.0/Microsoft.UI.Xaml.Markup.Compiler.IO.dll",
+        "tools/net5.0/Microsoft.UI.Xaml.Markup.Compiler.MSBuildInterop.dll",
+        "tools/net5.0/Microsoft.UI.Xaml.Markup.Compiler.dll",
+        "tools/net5.0/Microsoft.VisualStudio.RemoteControl.dll",
+        "tools/net5.0/Microsoft.VisualStudio.Telemetry.dll",
+        "tools/net5.0/Microsoft.VisualStudio.Utilities.Internal.dll",
+        "tools/net5.0/System.Runtime.CompilerServices.Unsafe.dll",
+        "tools/net5.0/System.Text.Encodings.Web.dll",
+        "tools/net5.0/System.Text.Json.dll",
+        "tools/net5.0/af-ZA/Microsoft.Build.Msix.resources.dll",
+        "tools/net5.0/ar-SA/Microsoft.Build.Msix.resources.dll",
+        "tools/net5.0/az-Latn-AZ/Microsoft.Build.Msix.resources.dll",
+        "tools/net5.0/bg-BG/Microsoft.Build.Msix.resources.dll",
+        "tools/net5.0/bs-Latn-BA/Microsoft.Build.Msix.resources.dll",
+        "tools/net5.0/ca-ES/Microsoft.Build.Msix.resources.dll",
+        "tools/net5.0/cs-CZ/Microsoft.Build.Msix.resources.dll",
+        "tools/net5.0/cy-GB/Microsoft.Build.Msix.resources.dll",
+        "tools/net5.0/da-DK/Microsoft.Build.Msix.resources.dll",
+        "tools/net5.0/de-DE/Microsoft.Build.Msix.resources.dll",
+        "tools/net5.0/el-GR/Microsoft.Build.Msix.resources.dll",
+        "tools/net5.0/en-GB/Microsoft.Build.Msix.resources.dll",
+        "tools/net5.0/es-ES/Microsoft.Build.Msix.resources.dll",
+        "tools/net5.0/es-MX/Microsoft.Build.Msix.resources.dll",
+        "tools/net5.0/et-EE/Microsoft.Build.Msix.resources.dll",
+        "tools/net5.0/eu-ES/Microsoft.Build.Msix.resources.dll",
+        "tools/net5.0/fa-IR/Microsoft.Build.Msix.resources.dll",
+        "tools/net5.0/fi-FI/Microsoft.Build.Msix.resources.dll",
+        "tools/net5.0/fr-CA/Microsoft.Build.Msix.resources.dll",
+        "tools/net5.0/fr-FR/Microsoft.Build.Msix.resources.dll",
+        "tools/net5.0/gl-ES/Microsoft.Build.Msix.resources.dll",
+        "tools/net5.0/he-IL/Microsoft.Build.Msix.resources.dll",
+        "tools/net5.0/hi-IN/Microsoft.Build.Msix.resources.dll",
+        "tools/net5.0/hr-HR/Microsoft.Build.Msix.resources.dll",
+        "tools/net5.0/hu-HU/Microsoft.Build.Msix.resources.dll",
+        "tools/net5.0/id-ID/Microsoft.Build.Msix.resources.dll",
+        "tools/net5.0/is-IS/Microsoft.Build.Msix.resources.dll",
+        "tools/net5.0/it-IT/Microsoft.Build.Msix.resources.dll",
+        "tools/net5.0/ja-JP/Microsoft.Build.Msix.resources.dll",
+        "tools/net5.0/ka-GE/Microsoft.Build.Msix.resources.dll",
+        "tools/net5.0/kk-KZ/Microsoft.Build.Msix.resources.dll",
+        "tools/net5.0/ko-KR/Microsoft.Build.Msix.resources.dll",
+        "tools/net5.0/lt-LT/Microsoft.Build.Msix.resources.dll",
+        "tools/net5.0/lv-LV/Microsoft.Build.Msix.resources.dll",
+        "tools/net5.0/ms-MY/Microsoft.Build.Msix.resources.dll",
+        "tools/net5.0/nb-NO/Microsoft.Build.Msix.resources.dll",
+        "tools/net5.0/nl-NL/Microsoft.Build.Msix.resources.dll",
+        "tools/net5.0/nn-NO/Microsoft.Build.Msix.resources.dll",
+        "tools/net5.0/pl-PL/Microsoft.Build.Msix.resources.dll",
+        "tools/net5.0/pt-BR/Microsoft.Build.Msix.resources.dll",
+        "tools/net5.0/pt-PT/Microsoft.Build.Msix.resources.dll",
+        "tools/net5.0/ro-RO/Microsoft.Build.Msix.resources.dll",
+        "tools/net5.0/ru-RU/Microsoft.Build.Msix.resources.dll",
+        "tools/net5.0/sk-SK/Microsoft.Build.Msix.resources.dll",
+        "tools/net5.0/sl-SI/Microsoft.Build.Msix.resources.dll",
+        "tools/net5.0/sq-AL/Microsoft.Build.Msix.resources.dll",
+        "tools/net5.0/sr-Cyrl-RS/Microsoft.Build.Msix.resources.dll",
+        "tools/net5.0/sr-Latn-RS/Microsoft.Build.Msix.resources.dll",
+        "tools/net5.0/sv-SE/Microsoft.Build.Msix.resources.dll",
+        "tools/net5.0/th-TH/Microsoft.Build.Msix.resources.dll",
+        "tools/net5.0/tr-TR/Microsoft.Build.Msix.resources.dll",
+        "tools/net5.0/uk-UA/Microsoft.Build.Msix.resources.dll",
+        "tools/net5.0/vi-VN/Microsoft.Build.Msix.resources.dll",
+        "tools/net5.0/zh-CN/Microsoft.Build.Msix.resources.dll",
+        "tools/net5.0/zh-TW/Microsoft.Build.Msix.resources.dll",
         "tools/x64/GenXbf.dll",
         "tools/x86/GenXbf.dll"
       ]
@@ -2839,9 +3160,10 @@
   },
   "projectFileDependencyGroups": {
     "net6.0-windows10.0.19041": [
+      "CommunityToolkit.Mvvm >= 7.1.2",
       "Microsoft.Extensions.Hosting >= 6.0.1",
-      "Microsoft.Windows.SDK.BuildTools >= 10.0.22000.194",
-      "Microsoft.WindowsAppSDK >= 1.0.0",
+      "Microsoft.Windows.SDK.BuildTools >= 10.0.22000.197",
+      "Microsoft.WindowsAppSDK >= 1.1.0-preview3",
       "Newtonsoft.Json >= 13.0.1"
     ]
   },
@@ -2867,7 +3189,7 @@
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
-        "net6.0-windows10.0.19041.0"
+        "net6.0-windows10.0.19041"
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
@@ -2889,17 +3211,21 @@
       "net6.0-windows10.0.19041": {
         "targetAlias": "net6.0-windows10.0.19041.0",
         "dependencies": {
+          "CommunityToolkit.Mvvm": {
+            "target": "Package",
+            "version": "[7.1.2, )"
+          },
           "Microsoft.Extensions.Hosting": {
             "target": "Package",
             "version": "[6.0.1, )"
           },
           "Microsoft.Windows.SDK.BuildTools": {
             "target": "Package",
-            "version": "[10.0.22000.194, )"
+            "version": "[10.0.22000.197, )"
           },
           "Microsoft.WindowsAppSDK": {
             "target": "Package",
-            "version": "[1.0.0, )"
+            "version": "[1.1.0-preview3, )"
           },
           "Newtonsoft.Json": {
             "target": "Package",
@@ -2923,10 +3249,6 @@
           },
           {
             "name": "Microsoft.AspNetCore.App.Runtime.win-x86",
-            "version": "[6.0.4, 6.0.4]"
-          },
-          {
-            "name": "Microsoft.NETCore.App.Crossgen2.win-x64",
             "version": "[6.0.4, 6.0.4]"
           },
           {

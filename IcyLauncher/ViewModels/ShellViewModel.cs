@@ -3,12 +3,12 @@
 public partial class ShellViewModel : ObservableObject
 {
     readonly ILogger logger;
-    readonly Configuration configuration;
+    readonly ConfigurationManager configurationManagaer;
 
-    public ShellViewModel(ILogger<ShellViewModel> logger, IOptions<Configuration> configuration)
+    public ShellViewModel(ILogger<ShellViewModel> logger, ConfigurationManager configurationManagaer)
     {
         this.logger = logger;
-        this.configuration = configuration.Value;
+        this.configurationManagaer = configurationManagaer;
 
         this.logger.Log("Window Started");
     }
@@ -16,7 +16,7 @@ public partial class ShellViewModel : ObservableObject
 
     public void WindowClosed()
     {
-        configuration.Export();
+        configurationManagaer.Export();
 
         logger.Log("Window Closed");
     }

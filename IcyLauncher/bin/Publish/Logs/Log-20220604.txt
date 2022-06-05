@@ -1,123 +1,17 @@
-2022-06-04 00:00:35.622 +03:00 [INF] Application started. Press Ctrl+C to shut down.
-2022-06-04 00:00:35.639 +03:00 [INF] Hosting environment: Production
-2022-06-04 00:00:35.639 +03:00 [INF] Content root path: D:\Personal\Coding\IcyLauncher\Launcher\IcyLauncher\bin\Publish
-2022-06-04 00:00:35.640 +03:00 [INF] [ShellViewModel.cs-.ctor] Window Started
-2022-06-04 00:00:35.661 +03:00 [INF] [WindowHandler.cs-.ctor] Registered WindowHandler
-2022-06-04 00:00:35.722 +03:00 [INF] [WindowHandler.cs-SetTilteBar] Set TitleBar to UIElement
-2022-06-04 00:00:35.725 +03:00 [INF] [WindowHandler.cs-SetIcon] Set app icon to "Assets/Icon.ico"
-2022-06-04 00:00:35.726 +03:00 [INF] [WindowHandler.cs-SetMinSize] Set window minimum size to "700x400"
-2022-06-04 00:00:35.730 +03:00 [INF] [WindowHandler.cs-SetSize] Set window size to "1031x550"
-2022-06-04 00:00:35.733 +03:00 [INF] [WindowHandler.cs-SetPosition] Set window position to "444, 241"
-2022-06-04 00:00:35.768 +03:00 [INF] [Navigation.cs-.ctor] Registered NavigationView
-2022-06-04 00:00:45.210 +03:00 [INF] Application started. Press Ctrl+C to shut down.
-2022-06-04 00:00:45.226 +03:00 [INF] Hosting environment: Production
-2022-06-04 00:00:45.226 +03:00 [INF] Content root path: D:\Personal\Coding\IcyLauncher\Launcher\IcyLauncher\bin\Publish
-2022-06-04 00:00:45.227 +03:00 [INF] [ShellViewModel.cs-.ctor] Window Started
-2022-06-04 00:00:45.248 +03:00 [INF] [WindowHandler.cs-.ctor] Registered WindowHandler
-2022-06-04 00:00:45.311 +03:00 [INF] [WindowHandler.cs-SetTilteBar] Set TitleBar to UIElement
-2022-06-04 00:00:45.314 +03:00 [INF] [WindowHandler.cs-SetIcon] Set app icon to "Assets/Icon.ico"
-2022-06-04 00:00:45.315 +03:00 [INF] [WindowHandler.cs-SetMinSize] Set window minimum size to "700x400"
-2022-06-04 00:00:45.319 +03:00 [INF] [WindowHandler.cs-SetSize] Set window size to "1031x550"
-2022-06-04 00:00:45.322 +03:00 [INF] [WindowHandler.cs-SetPosition] Set window position to "444, 241"
-2022-06-04 00:00:45.356 +03:00 [INF] [Navigation.cs-.ctor] Registered NavigationView
-2022-06-04 00:00:45.372 +03:00 [INF] [Navigation.cs-SetCurrentPage] Set current NavigationView page
-2022-06-04 00:00:45.374 +03:00 [INF] [Navigation.cs-SetCurrentNavigationViewItem] Set current NavigationView item
-2022-06-04 00:00:46.491 +03:00 [INF] [Navigation.cs-SetCurrentPage] Set current NavigationView page
-2022-06-04 00:00:47.237 +03:00 [INF] [Navigation.cs-SetCurrentPage] Set current NavigationView page
-2022-06-04 00:00:48.167 +03:00 [INF] [JsonConverter.cs-.ctor] Registered JsonConverter
-2022-06-04 00:00:48.167 +03:00 [INF] [Configuration.cs-Export] Exporting app configuration
-2022-06-04 00:00:48.167 +03:00 [INF] [JsonConverter.cs-ToString] Serializing object to string
-2022-06-04 00:00:48.227 +03:00 [INF] [ShellViewModel.cs-WindowClosed] Window Closed
-2022-06-04 00:00:51.156 +03:00 [INF] Application started. Press Ctrl+C to shut down.
-2022-06-04 00:00:51.172 +03:00 [INF] Hosting environment: Production
-2022-06-04 00:00:51.172 +03:00 [INF] Content root path: D:\Personal\Coding\IcyLauncher\Launcher\IcyLauncher\bin\Publish
-2022-06-04 00:00:51.173 +03:00 [INF] [ShellViewModel.cs-.ctor] Window Started
-2022-06-04 00:00:51.194 +03:00 [INF] [WindowHandler.cs-.ctor] Registered WindowHandler
-2022-06-04 00:00:51.254 +03:00 [INF] [WindowHandler.cs-SetTilteBar] Set TitleBar to UIElement
-2022-06-04 00:00:51.257 +03:00 [INF] [WindowHandler.cs-SetIcon] Set app icon to "Assets/Icon.ico"
-2022-06-04 00:00:51.258 +03:00 [INF] [WindowHandler.cs-SetMinSize] Set window minimum size to "700x400"
-2022-06-04 00:00:51.261 +03:00 [INF] [WindowHandler.cs-SetSize] Set window size to "1031x550"
-2022-06-04 00:00:51.264 +03:00 [INF] [WindowHandler.cs-SetPosition] Set window position to "444, 241"
-2022-06-04 00:00:51.298 +03:00 [INF] [Navigation.cs-.ctor] Registered NavigationView
-2022-06-04 00:00:51.313 +03:00 [INF] [Navigation.cs-SetCurrentPage] Set current NavigationView page
-2022-06-04 00:00:51.315 +03:00 [INF] [Navigation.cs-SetCurrentNavigationViewItem] Set current NavigationView item
-2022-06-04 00:00:52.252 +03:00 [INF] [JsonConverter.cs-.ctor] Registered JsonConverter
-2022-06-04 00:00:52.252 +03:00 [INF] [Configuration.cs-Export] Exporting app configuration
-2022-06-04 00:00:52.252 +03:00 [INF] [JsonConverter.cs-ToString] Serializing object to string
-2022-06-04 00:00:52.311 +03:00 [INF] [ShellViewModel.cs-WindowClosed] Window Closed
-2022-06-04 00:00:54.615 +03:00 [INF] Application started. Press Ctrl+C to shut down.
-2022-06-04 00:00:54.631 +03:00 [INF] Hosting environment: Production
-2022-06-04 00:00:54.632 +03:00 [INF] Content root path: D:\Personal\Coding\IcyLauncher\Launcher\IcyLauncher\bin\Publish
-2022-06-04 00:00:54.633 +03:00 [INF] [ShellViewModel.cs-.ctor] Window Started
-2022-06-04 00:00:54.653 +03:00 [INF] [WindowHandler.cs-.ctor] Registered WindowHandler
-2022-06-04 00:00:54.712 +03:00 [INF] [WindowHandler.cs-SetTilteBar] Set TitleBar to UIElement
-2022-06-04 00:00:54.716 +03:00 [INF] [WindowHandler.cs-SetIcon] Set app icon to "Assets/Icon.ico"
-2022-06-04 00:00:54.717 +03:00 [INF] [WindowHandler.cs-SetMinSize] Set window minimum size to "700x400"
-2022-06-04 00:00:54.721 +03:00 [INF] [WindowHandler.cs-SetSize] Set window size to "1031x550"
-2022-06-04 00:00:54.724 +03:00 [INF] [WindowHandler.cs-SetPosition] Set window position to "444, 241"
-2022-06-04 00:00:54.761 +03:00 [INF] [Navigation.cs-.ctor] Registered NavigationView
-2022-06-04 00:00:54.777 +03:00 [INF] [Navigation.cs-SetCurrentPage] Set current NavigationView page
-2022-06-04 00:00:54.778 +03:00 [INF] [Navigation.cs-SetCurrentNavigationViewItem] Set current NavigationView item
-2022-06-04 00:00:55.887 +03:00 [INF] [JsonConverter.cs-.ctor] Registered JsonConverter
-2022-06-04 00:00:55.887 +03:00 [INF] [Configuration.cs-Export] Exporting app configuration
-2022-06-04 00:00:55.887 +03:00 [INF] [JsonConverter.cs-ToString] Serializing object to string
-2022-06-04 00:00:55.960 +03:00 [INF] [ShellViewModel.cs-WindowClosed] Window Closed
-2022-06-04 00:00:58.153 +03:00 [INF] Application started. Press Ctrl+C to shut down.
-2022-06-04 00:00:58.170 +03:00 [INF] Hosting environment: Production
-2022-06-04 00:00:58.170 +03:00 [INF] Content root path: D:\Personal\Coding\IcyLauncher\Launcher\IcyLauncher\bin\Publish
-2022-06-04 00:00:58.171 +03:00 [INF] [ShellViewModel.cs-.ctor] Window Started
-2022-06-04 00:00:58.203 +03:00 [INF] [WindowHandler.cs-.ctor] Registered WindowHandler
-2022-06-04 00:00:58.282 +03:00 [INF] [WindowHandler.cs-SetTilteBar] Set TitleBar to UIElement
-2022-06-04 00:00:58.286 +03:00 [INF] [WindowHandler.cs-SetIcon] Set app icon to "Assets/Icon.ico"
-2022-06-04 00:00:58.287 +03:00 [INF] [WindowHandler.cs-SetMinSize] Set window minimum size to "700x400"
-2022-06-04 00:00:58.292 +03:00 [INF] [WindowHandler.cs-SetSize] Set window size to "1031x550"
-2022-06-04 00:00:58.296 +03:00 [INF] [WindowHandler.cs-SetPosition] Set window position to "444, 241"
-2022-06-04 00:00:58.338 +03:00 [INF] [Navigation.cs-.ctor] Registered NavigationView
-2022-06-04 00:00:58.353 +03:00 [INF] [Navigation.cs-SetCurrentPage] Set current NavigationView page
-2022-06-04 00:00:58.355 +03:00 [INF] [Navigation.cs-SetCurrentNavigationViewItem] Set current NavigationView item
-2022-06-04 00:00:59.121 +03:00 [INF] [JsonConverter.cs-.ctor] Registered JsonConverter
-2022-06-04 00:00:59.121 +03:00 [INF] [Configuration.cs-Export] Exporting app configuration
-2022-06-04 00:00:59.121 +03:00 [INF] [JsonConverter.cs-ToString] Serializing object to string
-2022-06-04 00:00:59.182 +03:00 [INF] [ShellViewModel.cs-WindowClosed] Window Closed
-2022-06-04 00:01:01.183 +03:00 [INF] Application started. Press Ctrl+C to shut down.
-2022-06-04 00:01:01.199 +03:00 [INF] Hosting environment: Production
-2022-06-04 00:01:01.199 +03:00 [INF] Content root path: D:\Personal\Coding\IcyLauncher\Launcher\IcyLauncher\bin\Publish
-2022-06-04 00:01:01.201 +03:00 [INF] [ShellViewModel.cs-.ctor] Window Started
-2022-06-04 00:01:03.997 +03:00 [INF] Application started. Press Ctrl+C to shut down.
-2022-06-04 00:01:04.013 +03:00 [INF] Hosting environment: Production
-2022-06-04 00:01:04.013 +03:00 [INF] Content root path: D:\Personal\Coding\IcyLauncher\Launcher\IcyLauncher\bin\Publish
-2022-06-04 00:01:04.014 +03:00 [INF] [ShellViewModel.cs-.ctor] Window Started
-2022-06-04 00:01:13.302 +03:00 [INF] Application started. Press Ctrl+C to shut down.
-2022-06-04 00:01:13.318 +03:00 [INF] Hosting environment: Production
-2022-06-04 00:01:13.318 +03:00 [INF] Content root path: D:\Personal\Coding\IcyLauncher\Launcher\IcyLauncher\bin\Publish
-2022-06-04 00:01:13.320 +03:00 [INF] [ShellViewModel.cs-.ctor] Window Started
-2022-06-04 00:01:13.340 +03:00 [INF] [WindowHandler.cs-.ctor] Registered WindowHandler
-2022-06-04 00:01:13.398 +03:00 [INF] [WindowHandler.cs-SetTilteBar] Set TitleBar to UIElement
-2022-06-04 00:01:13.401 +03:00 [INF] [WindowHandler.cs-SetIcon] Set app icon to "Assets/Icon.ico"
-2022-06-04 00:01:13.402 +03:00 [INF] [WindowHandler.cs-SetMinSize] Set window minimum size to "700x400"
-2022-06-04 00:01:13.406 +03:00 [INF] [WindowHandler.cs-SetSize] Set window size to "1031x550"
-2022-06-04 00:01:13.409 +03:00 [INF] [WindowHandler.cs-SetPosition] Set window position to "444, 241"
-2022-06-04 00:01:13.444 +03:00 [INF] [Navigation.cs-.ctor] Registered NavigationView
-2022-06-04 00:01:13.460 +03:00 [INF] [Navigation.cs-SetCurrentPage] Set current NavigationView page
-2022-06-04 00:01:13.461 +03:00 [INF] [Navigation.cs-SetCurrentNavigationViewItem] Set current NavigationView item
-2022-06-04 00:01:14.716 +03:00 [INF] [JsonConverter.cs-.ctor] Registered JsonConverter
-2022-06-04 00:01:14.717 +03:00 [INF] [Configuration.cs-Export] Exporting app configuration
-2022-06-04 00:01:14.717 +03:00 [INF] [JsonConverter.cs-ToString] Serializing object to string
-2022-06-04 00:01:14.777 +03:00 [INF] [ShellViewModel.cs-WindowClosed] Window Closed
-2022-06-04 00:01:17.318 +03:00 [INF] Application started. Press Ctrl+C to shut down.
-2022-06-04 00:01:17.334 +03:00 [INF] Hosting environment: Production
-2022-06-04 00:01:17.334 +03:00 [INF] Content root path: D:\Personal\Coding\IcyLauncher\Launcher\IcyLauncher\bin\Publish
-2022-06-04 00:01:17.335 +03:00 [INF] [ShellViewModel.cs-.ctor] Window Started
-2022-06-04 00:01:17.356 +03:00 [INF] [WindowHandler.cs-.ctor] Registered WindowHandler
-2022-06-04 00:01:17.415 +03:00 [INF] [WindowHandler.cs-SetTilteBar] Set TitleBar to UIElement
-2022-06-04 00:01:17.417 +03:00 [INF] [WindowHandler.cs-SetIcon] Set app icon to "Assets/Icon.ico"
-2022-06-04 00:01:17.418 +03:00 [INF] [WindowHandler.cs-SetMinSize] Set window minimum size to "700x400"
-2022-06-04 00:01:17.422 +03:00 [INF] [WindowHandler.cs-SetSize] Set window size to "1031x550"
-2022-06-04 00:01:17.425 +03:00 [INF] [WindowHandler.cs-SetPosition] Set window position to "444, 241"
-2022-06-04 00:01:17.458 +03:00 [INF] [Navigation.cs-.ctor] Registered NavigationView
-2022-06-04 00:01:17.473 +03:00 [INF] [Navigation.cs-SetCurrentPage] Set current NavigationView page
-2022-06-04 00:01:17.475 +03:00 [INF] [Navigation.cs-SetCurrentNavigationViewItem] Set current NavigationView item
-2022-06-04 00:01:19.197 +03:00 [INF] [JsonConverter.cs-.ctor] Registered JsonConverter
-2022-06-04 00:01:19.197 +03:00 [INF] [Configuration.cs-Export] Exporting app configuration
-2022-06-04 00:01:19.197 +03:00 [INF] [JsonConverter.cs-ToString] Serializing object to string
-2022-06-04 00:01:19.257 +03:00 [INF] [ShellViewModel.cs-WindowClosed] Window Closed
+2022-06-04 11:24:01.981 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2022-06-04 11:24:02.031 +03:00 [INF] Hosting environment: Production
+2022-06-04 11:24:02.031 +03:00 [INF] Content root path: D:\Personal\Coding\IcyLauncher\Launcher\IcyLauncher\bin\Publish
+2022-06-04 11:24:02.034 +03:00 [INF] [ShellViewModel.cs-.ctor] Window Started
+2022-06-04 11:24:02.307 +03:00 [INF] [WindowHandler.cs-.ctor] Registered WindowHandler
+2022-06-04 11:24:02.585 +03:00 [INF] [WindowHandler.cs-SetTilteBar] Set TitleBar to UIElement
+2022-06-04 11:24:02.593 +03:00 [INF] [WindowHandler.cs-SetIcon] Set app icon to "Assets/Icon.ico"
+2022-06-04 11:24:02.594 +03:00 [INF] [WindowHandler.cs-SetMinSize] Set window minimum size to "700x400"
+2022-06-04 11:24:02.610 +03:00 [INF] [WindowHandler.cs-SetSize] Set window size to "1031x550"
+2022-06-04 11:24:02.615 +03:00 [INF] [WindowHandler.cs-SetPosition] Set window position to "444, 241"
+2022-06-04 11:24:02.761 +03:00 [INF] [Navigation.cs-.ctor] Registered NavigationView
+2022-06-04 11:24:02.843 +03:00 [INF] [Navigation.cs-SetCurrentPage] Set current NavigationView page
+2022-06-04 11:24:02.849 +03:00 [INF] [Navigation.cs-SetCurrentNavigationViewItem] Set current NavigationView item
+2022-06-04 11:24:07.076 +03:00 [INF] [JsonConverter.cs-.ctor] Registered JsonConverter
+2022-06-04 11:24:07.076 +03:00 [INF] [Configuration.cs-Export] Exporting app configuration
+2022-06-04 11:24:07.076 +03:00 [INF] [JsonConverter.cs-ToString] Serializing object to string
+2022-06-04 11:24:07.341 +03:00 [INF] [ShellViewModel.cs-WindowClosed] Window Closed

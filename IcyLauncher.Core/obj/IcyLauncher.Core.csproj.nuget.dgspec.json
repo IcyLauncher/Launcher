@@ -22,7 +22,7 @@
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
-          "net6.0-windows10.0.19041.0"
+          "net6.0-windows10.0.19041"
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
@@ -44,17 +44,21 @@
         "net6.0-windows10.0.19041": {
           "targetAlias": "net6.0-windows10.0.19041.0",
           "dependencies": {
+            "CommunityToolkit.Mvvm": {
+              "target": "Package",
+              "version": "[7.1.2, )"
+            },
             "Microsoft.Extensions.Hosting": {
               "target": "Package",
               "version": "[6.0.1, )"
             },
             "Microsoft.Windows.SDK.BuildTools": {
               "target": "Package",
-              "version": "[10.0.22000.194, )"
+              "version": "[10.0.22000.197, )"
             },
             "Microsoft.WindowsAppSDK": {
               "target": "Package",
-              "version": "[1.0.0, )"
+              "version": "[1.1.0-preview3, )"
             },
             "Newtonsoft.Json": {
               "target": "Package",
@@ -78,10 +82,6 @@
             },
             {
               "name": "Microsoft.AspNetCore.App.Runtime.win-x86",
-              "version": "[6.0.4, 6.0.4]"
-            },
-            {
-              "name": "Microsoft.NETCore.App.Crossgen2.win-x64",
               "version": "[6.0.4, 6.0.4]"
             },
             {

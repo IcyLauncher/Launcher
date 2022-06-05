@@ -627,8 +627,8 @@
         "framework": ".NETCoreApp,Version=v6.0",
         "dependencies": {
           "Microsoft.Extensions.Hosting": "6.0.1",
-          "Microsoft.Windows.SDK.BuildTools": "10.0.22000.194",
-          "Microsoft.WindowsAppSDK": "1.0.0",
+          "Microsoft.Windows.SDK.BuildTools": "10.0.22000.197",
+          "Microsoft.WindowsAppSDK": "1.1.0-preview3",
           "Newtonsoft.Json": "13.0.1"
         },
         "compile": {
@@ -1239,8 +1239,8 @@
         "framework": ".NETCoreApp,Version=v6.0",
         "dependencies": {
           "Microsoft.Extensions.Hosting": "6.0.1",
-          "Microsoft.Windows.SDK.BuildTools": "10.0.22000.194",
-          "Microsoft.WindowsAppSDK": "1.0.0",
+          "Microsoft.Windows.SDK.BuildTools": "10.0.22000.197",
+          "Microsoft.WindowsAppSDK": "1.1.0-preview3",
           "Newtonsoft.Json": "13.0.1"
         },
         "compile": {
@@ -1851,8 +1851,8 @@
         "framework": ".NETCoreApp,Version=v6.0",
         "dependencies": {
           "Microsoft.Extensions.Hosting": "6.0.1",
-          "Microsoft.Windows.SDK.BuildTools": "10.0.22000.194",
-          "Microsoft.WindowsAppSDK": "1.0.0",
+          "Microsoft.Windows.SDK.BuildTools": "10.0.22000.197",
+          "Microsoft.WindowsAppSDK": "1.1.0-preview3",
           "Newtonsoft.Json": "13.0.1"
         },
         "compile": {

@@ -12,13 +12,13 @@
 		<WindowsPackageType>None</WindowsPackageType>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>enable</Nullable>
-		
+
 		<Version>0.0.0.1</Version>
 		<Authors>IcySnex</Authors>
 		<Description>A modern &amp; feature rich MC:BE versionswitcher and launcher</Description>
 		<Copyright>Copyright © 2022 IcySnex - Lao Lao</Copyright>
 		<NeutralLanguage>en</NeutralLanguage>
-		
+
 		<RepositoryUrl>https://github.com/IcyLauncher/Launcher</RepositoryUrl>
 		<RepositoryType>github</RepositoryType>
 
@@ -32,11 +32,11 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-	  <None Remove="Assets\Icon.png" />
-	  <None Remove="Assets\LICENSE" />
-	  <None Remove="Assets\NoImage.png" />
-	  <None Remove="Views\HomeView.xaml" />
-	  <None Remove="Views\ProfilesView.xaml" />
+		<None Remove="Assets\Icon.png" />
+		<None Remove="Assets\LICENSE" />
+		<None Remove="Assets\NoImage.png" />
+		<None Remove="Views\HomeView.xaml" />
+		<None Remove="Views\ProfilesView.xaml" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -53,7 +53,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <ProjectReference Include="..\IcyLauncher.Core\IcyLauncher.Core.csproj" />
+		<ProjectReference Include="..\IcyLauncher.Core\IcyLauncher.Core.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -61,16 +61,15 @@
 		<Using Include="Microsoft.Extensions.DependencyInjection" />
 		<Using Include="Microsoft.Extensions.Logging" />
 		<Using Include="Microsoft.Extensions.Options" />
-		
+
 		<Using Include="System" />
 		<Using Include="CommunityToolkit.Mvvm.ComponentModel" />
 		<Using Include="CommunityToolkit.Mvvm.Input" />
 
-		<Using Include="IcyLauncher.Models" />
-
 		<Using Include="IcyLauncher.Core.Extentions" />
 		<Using Include="IcyLauncher.Core.Helpers" />
 		<Using Include="IcyLauncher.Core.Interfaces" />
+		<Using Include="IcyLauncher.Core.Models" />
 		<Using Include="IcyLauncher.Core.Services" />
 		<Using Include="IcyLauncher.Core.Types" />
 	</ItemGroup>
@@ -80,21 +79,21 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Content Update="Assets\Icon.ico">
-	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-	  </Content>
-	  <Content Update="Assets\Icon.png">
-	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-	  </Content>
-	  <Content Update="Assets\LICENSE">
-	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-	  </Content>
-	  <Content Update="Assets\NoImage.png">
-	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-	  </Content>
-	  <Content Update="Assets\README.md">
-	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-	  </Content>
+		<Content Update="Assets\Icon.ico">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
+		<Content Update="Assets\Icon.png">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
+		<Content Update="Assets\LICENSE">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Update="Assets\NoImage.png">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
+		<Content Update="Assets\README.md">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
 	</ItemGroup>
 
 	<ItemGroup>
@@ -103,11 +102,11 @@
 			<PackagePath>\</PackagePath>
 		</None>
 		<Page Update="Views\ProfilesView.xaml">
-		  <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
-		  <SubType>Designer</SubType>
+			<XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+			<SubType>Designer</SubType>
 		</Page>
 		<Page Update="Views\HomeView.xaml">
-		  <Generator>MSBuild:Compile</Generator>
+			<Generator>MSBuild:Compile</Generator>
 		</Page>
 	</ItemGroup>
 </Project>

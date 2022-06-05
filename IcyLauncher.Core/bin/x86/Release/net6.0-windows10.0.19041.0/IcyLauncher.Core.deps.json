@@ -9,8 +9,8 @@
       "IcyLauncher.Core/1.0.0": {
         "dependencies": {
           "Microsoft.Extensions.Hosting": "6.0.1",
-          "Microsoft.Windows.SDK.BuildTools": "10.0.22000.194",
-          "Microsoft.WindowsAppSDK": "1.0.0",
+          "Microsoft.Windows.SDK.BuildTools": "10.0.22000.197",
+          "Microsoft.WindowsAppSDK": "1.1.0-preview3",
           "Newtonsoft.Json": "13.0.1",
           "runtimepack.Microsoft.Windows.SDK.NET.Ref": "10.0.19041.24"
         },
@@ -368,43 +368,55 @@
           }
         }
       },
-      "Microsoft.Windows.SDK.BuildTools/10.0.22000.194": {},
-      "Microsoft.WindowsAppSDK/1.0.0": {
+      "Microsoft.Windows.SDK.BuildTools/10.0.22000.197": {},
+      "Microsoft.WindowsAppSDK/1.1.0-preview3": {
         "dependencies": {
-          "Microsoft.Windows.SDK.BuildTools": "10.0.22000.194"
+          "Microsoft.Windows.SDK.BuildTools": "10.0.22000.197"
         },
         "runtime": {
           "lib/net5.0-windows10.0.18362.0/Microsoft.InteractiveExperiences.Projection.dll": {
             "assemblyVersion": "10.0.0.0",
-            "fileVersion": "10.0.22467.1012"
+            "fileVersion": "10.0.25087.1003"
           },
           "lib/net5.0-windows10.0.18362.0/Microsoft.WinUI.dll": {
             "assemblyVersion": "3.0.0.0",
-            "fileVersion": "3.0.0.2111"
+            "fileVersion": "3.0.0.2204"
           },
           "lib/net5.0-windows10.0.18362.0/Microsoft.Windows.AppLifecycle.Projection.dll": {
-            "assemblyVersion": "1.0.0.0",
-            "fileVersion": "1.0.0.0"
+            "assemblyVersion": "1.1.0.0",
+            "fileVersion": "1.1.0.0"
+          },
+          "lib/net5.0-windows10.0.18362.0/Microsoft.Windows.AppNotifications.Projection.dll": {
+            "assemblyVersion": "1.1.0.0",
+            "fileVersion": "1.1.0.0"
           },
           "lib/net5.0-windows10.0.18362.0/Microsoft.Windows.ApplicationModel.DynamicDependency.Projection.dll": {
-            "assemblyVersion": "1.0.0.0",
-            "fileVersion": "1.0.0.0"
+            "assemblyVersion": "1.1.0.0",
+            "fileVersion": "1.1.0.0"
           },
           "lib/net5.0-windows10.0.18362.0/Microsoft.Windows.ApplicationModel.Resources.Projection.dll": {
-            "assemblyVersion": "1.0.0.0",
-            "fileVersion": "1.0.0.0"
+            "assemblyVersion": "1.1.0.0",
+            "fileVersion": "1.1.0.0"
           },
           "lib/net5.0-windows10.0.18362.0/Microsoft.Windows.ApplicationModel.WindowsAppRuntime.Projection.dll": {
-            "assemblyVersion": "1.0.0.0",
-            "fileVersion": "1.0.0.0"
+            "assemblyVersion": "1.1.0.0",
+            "fileVersion": "1.1.0.0"
+          },
+          "lib/net5.0-windows10.0.18362.0/Microsoft.Windows.PushNotifications.Projection.dll": {
+            "assemblyVersion": "1.1.0.0",
+            "fileVersion": "1.1.0.0"
           },
           "lib/net5.0-windows10.0.18362.0/Microsoft.Windows.System.Power.Projection.dll": {
-            "assemblyVersion": "1.0.0.0",
-            "fileVersion": "1.0.0.0"
+            "assemblyVersion": "1.1.0.0",
+            "fileVersion": "1.1.0.0"
+          },
+          "lib/net5.0-windows10.0.18362.0/Microsoft.Windows.System.Projection.dll": {
+            "assemblyVersion": "1.1.0.0",
+            "fileVersion": "1.1.0.0"
           },
           "lib/net5.0-windows10.0.18362.0/Microsoft.WindowsAppRuntime.Bootstrap.Net.dll": {
-            "assemblyVersion": "1.0.0.0",
-            "fileVersion": "1.0.0.0"
+            "assemblyVersion": "1.1.0.0",
+            "fileVersion": "1.1.0.0"
           }
         },
         "runtimeTargets": {
@@ -660,19 +672,19 @@
       "path": "microsoft.extensions.primitives/6.0.0",
       "hashPath": "microsoft.extensions.primitives.6.0.0.nupkg.sha512"
     },
-    "Microsoft.Windows.SDK.BuildTools/10.0.22000.194": {
+    "Microsoft.Windows.SDK.BuildTools/10.0.22000.197": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-4L0P3zqut466SIqT3VBeLTNUQTxCBDOrTRymRuROCRJKazcK7ibLz9yAO1nKWRt50ttCj39oAa2Iuz9ZTDmLlg==",
-      "path": "microsoft.windows.sdk.buildtools/10.0.22000.194",
-      "hashPath": "microsoft.windows.sdk.buildtools.10.0.22000.194.nupkg.sha512"
+      "sha512": "sha512-Yzovh74wAbTrVSAtaMuPXoJ2WTLG6LlFtDoqc9LF25G8XYU/pFTw5td4InYg1r62hgB664arPoYn47ecbud7VQ==",
+      "path": "microsoft.windows.sdk.buildtools/10.0.22000.197",
+      "hashPath": "microsoft.windows.sdk.buildtools.10.0.22000.197.nupkg.sha512"
     },
-    "Microsoft.WindowsAppSDK/1.0.0": {
+    "Microsoft.WindowsAppSDK/1.1.0-preview3": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-nQRK4KuaRDWk9YX78k4Vn1D9w2Z07ki1mTmuT+4oCIEJNM01c40A7DUC6GiBdTjmHJbBq4hm7EyFQUb+kBSW8A==",
-      "path": "microsoft.windowsappsdk/1.0.0",
-      "hashPath": "microsoft.windowsappsdk.1.0.0.nupkg.sha512"
+      "sha512": "sha512-CvXncf87ZjP7ortAmuW6Ww3csduC8kIsvmzCLbz6kaHseg23taAlVhlUWCOHfyw5q8zi+oH3/S0kVa1mUiT49Q==",
+      "path": "microsoft.windowsappsdk/1.1.0-preview3",
+      "hashPath": "microsoft.windowsappsdk.1.1.0-preview3.nupkg.sha512"
     },
     "Newtonsoft.Json/13.0.1": {
       "type": "package",
