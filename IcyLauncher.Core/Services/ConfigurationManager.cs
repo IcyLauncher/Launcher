@@ -14,7 +14,7 @@ public class ConfigurationManager
         this.configuration = configuration.Value;
         this.converter = converter;
 
-        this.logger.Log("Registered ConfigurationManager");
+        this.logger.Log("Registered Configuration Manager");
     }
 
     public string Export()
@@ -33,18 +33,5 @@ public class ConfigurationManager
         configuration.Developer = input.Developer;
 
         logger.Log($"Loaded app configuration from string");
-    }
-
-    public string ExportTheme()
-    {
-        logger.Log($"Exporting theme configuration");
-
-        return converter.ToString(configuration.Apperance);
-    }
-    public void LoadTheme(ConfigurationApperance input)
-    {
-        configuration.Apperance = input;
-
-        logger.Log($"Loaded theme configuration from string");
     }
 }

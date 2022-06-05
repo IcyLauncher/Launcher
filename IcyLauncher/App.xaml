@@ -4,17 +4,18 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:animatedvisuals="using:Microsoft.UI.Xaml.Controls.AnimatedVisuals"
     xmlns:controls="using:Microsoft.UI.Xaml.Controls"
-    xmlns:helper="using:IcyLauncher.Core.Helpers"
     xmlns:local="using:IcyLauncher"
     xmlns:media="using:Microsoft.UI.Xaml.Media"
-    xmlns:primitives="using:Microsoft.UI.Xaml.Controls.Primitives">
+    xmlns:primitives="using:Microsoft.UI.Xaml.Controls.Primitives"
+    xmlns:xaml="using:IcyLauncher.Core.Xaml">
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <XamlControlsResources xmlns="using:Microsoft.UI.Xaml.Controls" />
             </ResourceDictionary.MergedDictionaries>
 
-            <helper:ArrayConverter x:Key="ArrayConverter" />
+            <xaml:ArrayConverter x:Key="ArrayConverter" />
+            <xaml:BrushConverter x:Key="BrushConverter" />
 
             <Color x:Key="AccentPrimary">#FF008AFF</Color>
             <Color x:Key="AccentLight">#FF7DC3FF</Color>
@@ -69,7 +70,7 @@
                                             x:Name="SelectionIndicator"
                                             Width="4"
                                             Height="24"
-                                            Fill="{StaticResource AccentPrimary}"
+                                            Fill="{x:Bind local:App.MyPublicColor}"
                                             Opacity="0.0"
                                             RadiusX="1"
                                             RadiusY="1" />
@@ -90,12 +91,12 @@
                                             <Grid>
                                                 <FontIcon
                                                     x:Name="Icon"
-                                                    FontFamily="FluentSystemIcons-Regular"
+                                                    FontFamily="Assets/FluentSystemIcons-Regular.ttf#FluentSystemIcons-Regular"
                                                     Foreground="{StaticResource TextSecondary}"
                                                     Glyph="{Binding Content, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource ArrayConverter}, ConverterParameter=0}" />
                                                 <FontIcon
                                                     x:Name="IconFilled"
-                                                    FontFamily="FluentSystemIcons-Filled"
+                                                    FontFamily="Assets/FluentSystemIcons-Filled.ttf#FluentSystemIcons-Filled"
                                                     Foreground="{StaticResource AccentPrimary}"
                                                     Glyph="{Binding Content, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource ArrayConverter}, ConverterParameter=1}"
                                                     Opacity="0" />
@@ -108,7 +109,7 @@
                                             HorizontalAlignment="Center">
                                             <TextBlock
                                                 x:Name="Title"
-                                                helper:AncestorSource.AncestorType="NavigationViewItem"
+                                                xaml:AncestorSource.AncestorType="NavigationViewItem"
                                                 AutomationProperties.AccessibilityView="Raw"
                                                 FontSize="11"
                                                 Foreground="{StaticResource TextSecondary}"

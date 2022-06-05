@@ -42,7 +42,7 @@ public partial class ConfigurationApperance : ObservableObject
     public ConfigurationApperanceColors Colors { get; set; } = new();
 
     [ObservableProperty]
-    BlurEffect blur = BlurEffect.Simple;
+    BlurEffect blur = BlurEffect.Mica;
 }
 public class ConfigurationApperanceColors
 {
