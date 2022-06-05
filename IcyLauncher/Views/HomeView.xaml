@@ -10,9 +10,16 @@
     <Grid>
         <TextBlock
             FontSize="20"
-            Foreground="Red"
+            Foreground="{StaticResource AccentPrimary}"
             Text="{x:Bind viewModel.Configuration.Launcher.TexturepackDirectory}" />
 
-        <Button Command="{x:Bind viewModel.AssCommand}">Clicky</Button>
+        <StackPanel Margin="50">
+            <ToggleSwitch Header="enable" IsOn="{x:Bind viewModel.Enable, Mode=TwoWay}" />
+            <ToggleSwitch Header="Darky" IsOn="{x:Bind viewModel.DarkMOde, Mode=TwoWay}" />
+            <Button Command="{x:Bind viewModel.MicaCommand}">Mica</Button>
+            <Button Command="{x:Bind viewModel.AcrylicCommand}">Acrylic</Button>
+            <Button Command="{x:Bind viewModel.SimpleCommand}">Simple</Button>
+            <Button Command="{x:Bind viewModel.NoneCommand}">None</Button>
+        </StackPanel>
     </Grid>
 </Page>

@@ -62,15 +62,15 @@ public partial class App : Application
                 services.AddScoped<INavigation>(provider => new Navigation(provider.GetRequiredService<ILogger<Navigation>>(), navigationView, contentFrame, CanGoBack));
                 services.AddScoped<IConverter, JsonConverter>();
                 services.AddScoped<WindowHandler>();
-                switch (configuration.Apperance.Blur)
-                {
-                    case BlurEffect.Mica:
-                        services.AddScoped<IBackdropHandler, MicaBackdropHandler>();
-                        break;
-                    case BlurEffect.Acrylic:
-                        services.AddScoped<IBackdropHandler, AcrylicBackdropHandler>();
-                        break;
-                }
+                //switch (configuration.Apperance.Blur)
+                //{
+                //    case BlurEffect.Mica:
+                //        services.AddScoped<IBackdropHandler, MicaBackdropHandler>();
+                //        break;
+                //    case BlurEffect.Acrylic:
+                //        services.AddScoped<IBackdropHandler, AcrylicBackdropHandler>();
+                //        break;
+                //}
 
                 services.Configure<Configuration>(context.Configuration);
 
@@ -96,13 +96,14 @@ public partial class App : Application
         windowHandler.SetMinSize(700, 400);
         windowHandler.SetSize(1031, 550);
         windowHandler.SetPositionToCenter();
+        windowHandler.MakeTransparent();
 
         var shellView = Provider.GetRequiredService<Window>();
         shellView.Activate();
 
-        var backdropHandler = Provider.GetService<IBackdropHandler>();
-        if (backdropHandler is not null) 
-            backdropHandler.SetBackdrop();
+        //var backdropHandler = Provider.GetService<IBackdropHandler>();
+        //if (backdropHandler is not null) 
+        //    backdropHandler.SetBackdrop();
 
         var navigation = Provider.GetRequiredService<INavigation>();
         navigation.Navigate("Home");

@@ -10,10 +10,17 @@
     <Grid>
         <TextBlock x:ConnectionId='2'
             FontSize="20"
-            Foreground="Red"
+            Foreground="{StaticResource AccentPrimary}"
                                                                                   />
 
-        <Button x:ConnectionId='3'                                        >Clicky</Button>
+        <StackPanel Margin="50">
+            <ToggleSwitch x:ConnectionId='3' Header="enable"                                               />
+            <ToggleSwitch x:ConnectionId='4' Header="Darky"                                                 />
+            <Button x:ConnectionId='5'                                         >Mica</Button>
+            <Button x:ConnectionId='6'                                            >Acrylic</Button>
+            <Button x:ConnectionId='7'                                           >Simple</Button>
+            <Button x:ConnectionId='8'                                         >None</Button>
+        </StackPanel>
     </Grid>
 </Page>
 

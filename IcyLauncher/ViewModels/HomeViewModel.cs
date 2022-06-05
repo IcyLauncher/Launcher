@@ -5,19 +5,41 @@ public partial class HomeViewModel : ObservableObject
     readonly ILogger logger;
     readonly public Configuration Configuration;
     readonly WindowHandler windowHandler;
-    IBackdropHandler handy;
 
-    public HomeViewModel(ILogger<ShellViewModel> logger, IOptions<Configuration> configuration, WindowHandler windowHandler, IBackdropHandler handy)
+    public HomeViewModel(ILogger<ShellViewModel> logger, IOptions<Configuration> configuration, WindowHandler windowHandler)
     {
         this.logger = logger;
         Configuration = configuration.Value;
         this.windowHandler = windowHandler;
-        this.handy = handy;
     }
 
+    [ObservableProperty]
+    bool enable = true;
+    [ObservableProperty]
+    bool darkMOde = true;
+
     [ICommand]
-    void Ass()
+    void Mica()
     {
-        handy.SetBackdrop();
+        windowHandler.SetBlur(BlurEffect.Mica, Enable, DarkMOde);
+        logger.Log("\n\n\n");
+    }
+    [ICommand]
+    void Acrylic()
+    {
+        windowHandler.SetBlur(BlurEffect.Acrylic, Enable, DarkMOde);
+        logger.Log("\n\n\n");
+    }
+    [ICommand]
+    void Simple()
+    {
+        windowHandler.SetBlur(BlurEffect.Simple, Enable, DarkMOde);
+        logger.Log("\n\n\n");
+    }
+    [ICommand]
+    void None()
+    {
+        windowHandler.SetBlur(BlurEffect.None, Enable, DarkMOde);
+        logger.Log("\n\n\n");
     }
 }
