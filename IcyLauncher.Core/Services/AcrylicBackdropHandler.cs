@@ -1,7 +1,5 @@
-﻿using Microsoft.Extensions.Options;
-using Microsoft.UI.Composition;
+﻿using Microsoft.UI.Composition;
 using Microsoft.UI.Composition.SystemBackdrops;
-using Windows.UI;
 using WinRT;
 
 namespace IcyLauncher.Core.Services;
@@ -9,17 +7,15 @@ namespace IcyLauncher.Core.Services;
 public class AcrylicBackdropHandler : IBackdropHandler
 {
     readonly ILogger logger;
-    readonly Configuration configuration;
 
     public Window Shell { get; private set; }
     public object Controller { get; private set; } = new DesktopAcrylicController();
     public SystemBackdropConfiguration BackdropConfiguration { get; private set; } = new();
     public WindowsSystemDispatcherQueueHelper DispatcherQueueHelper { get; set; } = new();
 
-    public AcrylicBackdropHandler(ILogger<AcrylicBackdropHandler> logger, IOptions<Configuration> configuration, Window shell)
+    public AcrylicBackdropHandler(ILogger<AcrylicBackdropHandler> logger, Window shell)
     {
         this.logger = logger;
-        this.configuration = configuration.Value;
 
         Shell = shell;
 
@@ -27,7 +23,7 @@ public class AcrylicBackdropHandler : IBackdropHandler
     }
 
 
-    public bool SetBackdrop()
+    public bool SetBackdrop(bool useDarkMode)
     {
         if (!DesktopAcrylicController.IsSupported())
             return false;
@@ -40,7 +36,7 @@ public class AcrylicBackdropHandler : IBackdropHandler
         logger.Log("Hooked Activated/Closed handlers");
 
         BackdropConfiguration.IsInputActive = true;
-        BackdropConfiguration.Theme = configuration.Apperance.Colors.Background.Primary != Color.FromArgb(255, 32, 32, 32) ? SystemBackdropTheme.Light : SystemBackdropTheme.Dark;
+        BackdropConfiguration.Theme = useDarkMode ? SystemBackdropTheme.Light : SystemBackdropTheme.Dark;
         logger.Log("Configured Backdrop Configuration");
 
         ((DesktopAcrylicController)Controller).AddSystemBackdropTarget(Shell.As<ICompositionSupportsSystemBackdrop>());

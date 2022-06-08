@@ -116,6 +116,7 @@ public class WindowHandler
 
         Presenter.SetBorderAndTitleBar(true, true);
 
+        //shell.ExtendsContentIntoTitleBar = true;
         Window.TitleBar.ExtendsContentIntoTitleBar = true;
         Window.TitleBar.SetDragRectangles(new RectInt32[] { new(40, 0, ScreenSize.Width, 48) });
 
@@ -125,7 +126,6 @@ public class WindowHandler
         Window.TitleBar.ButtonInactiveBackgroundColor = Colors.Transparent;
         Window.TitleBar.ButtonInactiveForegroundColor = Colors.LightGray;
 
-        //shell.ExtendsContentIntoTitleBar = true;
         shell.SetTitleBar(titleBar);
 
         logger.Log("Set TitleBar to UIElement");
@@ -158,28 +158,40 @@ public class WindowHandler
         return false;
     }
 
+    private bool SetMainBackground(Color backgroundColor)
+    {
+        try
+        {
+            var mainGrid = (Grid)shell.Content;
+            mainGrid.Background = new SolidColorBrush(backgroundColor);
+            logger.Log($"Set background color on MainGrid ({backgroundColor})");
+
+            return true;
+        }
+        catch (Exception ex)
+        {
+            logger.Log($"Failed setting background color on MainGrid ({backgroundColor})", ex);
+            return false;
+        }
+    }
+
     public bool SetBlur(BlurEffect blurEffect, bool enable, bool useDarkMode = true)
     {
         RemoveAllBlur();
 
-        switch (blurEffect)
+        return blurEffect switch
         {
-            case BlurEffect.Mica:
-                return SetBlurMica(enable, useDarkMode);
-
-            case BlurEffect.Acrylic:
-                return SetBlurAcrylic(enable, useDarkMode);
-
-            case BlurEffect.Simple:
-                return SetBlurSimple(enable, useDarkMode);
-
-            default:
-                return SetBlurNone(enable);
-        }
+            BlurEffect.Mica => SetBlurMica(enable, useDarkMode),
+            BlurEffect.Acrylic => SetBlurAcrylic(enable, useDarkMode),
+            BlurEffect.Simple => SetBlurSimple(enable, useDarkMode),
+            _ => SetBlurNone(enable),
+        };
     }
 
     private void RemoveAllBlur()
     {
+        SetMainBackground(Colors.Transparent);
+
         if (IsBlurMicaEnabled)
             SetBlurMica(false, false);
 
@@ -188,9 +200,6 @@ public class WindowHandler
 
         if (IsBlurSimpleEnabled)
             SetBlurSimple(false, false);
-
-        if (IsBlurNoneEnabled)
-            SetBlurNone(false);
     }
 
     private bool SetBlurMica(bool enable, bool useDarkMode)
@@ -217,19 +226,21 @@ public class WindowHandler
     private bool SetBlurAcrylic(bool enable, bool useDarkMode)
     {
         var setComposition = SetComposition(Win32.AccentState.ACCENT_ENABLE_ACRYLICBLURBEHIND, enable, useDarkMode);
+        var setMainBackground = SetMainBackground(enable ? configuration.Apperance.Colors.Background.Transparent : Colors.Transparent);
 
-        if (setComposition)
+        if (setComposition && setMainBackground)
             IsBlurAcrylicEnabled = enable;
-        return setComposition;
+        return setComposition && setMainBackground;
     }
 
     private bool SetBlurSimple(bool enable, bool useDarkMode)
     {
         var setComposition = SetComposition(Win32.AccentState.ACCENT_ENABLE_BLURBEHIND, enable, useDarkMode);
+        var setMainBackground = SetMainBackground(enable ? configuration.Apperance.Colors.Background.Transparent : Colors.Transparent);
 
-        if (setComposition)
+        if (setComposition && setMainBackground)
             IsBlurSimpleEnabled = enable;
-        return setComposition;
+        return setComposition && setMainBackground;
     }
 
     private bool SetComposition(Win32.AccentState state, bool enable, bool useDarkMode)
@@ -276,19 +287,10 @@ public class WindowHandler
 
     private bool SetBlurNone(bool enable)
     {
-        try
-        {
-            var mainGrid = (Grid)shell.Content;
-            mainGrid.Background = new SolidColorBrush(enable ? configuration.Apperance.Colors.Background.Primary : Colors.Transparent);
-            logger.Log($"Set background color on MainGrid ({enable})");
+        var setMainBackground = SetMainBackground(enable ? configuration.Apperance.Colors.Background.Solid : Colors.Transparent);
 
+        if (setMainBackground)
             IsBlurNoneEnabled = enable;
-            return true;
-        }
-        catch (Exception ex)
-        {
-            logger.Log($"Failed setting background color on MainGrid ({enable})", ex);
-            return false;
-        }
+        return setMainBackground;
     }
 }

@@ -6,7 +6,7 @@ public partial class ProfilesViewModel : ObservableObject
     readonly public Configuration Configuration;
     readonly WindowHandler windowHandler;
 
-    public ProfilesViewModel(ILogger<ShellViewModel> logger, IOptions<Configuration> configuration, WindowHandler windowHandler)
+    public ProfilesViewModel(ILogger<HomeViewModel> logger, IOptions<Configuration> configuration, WindowHandler windowHandler)
     {
         this.logger = logger;
         Configuration = configuration.Value;

@@ -9,7 +9,7 @@ public interface IBackdropHandler
     SystemBackdropConfiguration BackdropConfiguration { get; }
     WindowsSystemDispatcherQueueHelper DispatcherQueueHelper { get; }
 
-    bool SetBackdrop();
+    bool SetBackdrop(bool useDarkMode);
 }
 
 

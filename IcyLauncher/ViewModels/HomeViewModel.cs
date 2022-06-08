@@ -5,14 +5,14 @@ namespace IcyLauncher.ViewModels;
 public partial class HomeViewModel : ObservableObject
 {
     readonly ILogger logger;
-    readonly public Configuration Configuration;
     readonly WindowHandler windowHandler;
+    readonly public ThemeManager ThemeManager;
 
-    public HomeViewModel(ILogger<ShellViewModel> logger, IOptions<Configuration> configuration, WindowHandler windowHandler)
+    public HomeViewModel(ILogger<HomeViewModel> logger, WindowHandler windowHandler, ThemeManager themeManager)
     {
         this.logger = logger;
-        Configuration = configuration.Value;
         this.windowHandler = windowHandler;
+        ThemeManager = themeManager;
     }
 
     [ObservableProperty]
@@ -48,6 +48,8 @@ public partial class HomeViewModel : ObservableObject
     [ICommand]
     void ReColor()
     {
-        Configuration.Apperance.Colors.Accent.Primary = Colors.Red;
+        ThemeManager.Colors.Accent.Primary = Colors.Red;
+        ThemeManager.Colors.Accent.Light = Colors.Green;
+        ThemeManager.Colors.Accent.Dark = Colors.Blue;
     }
 }

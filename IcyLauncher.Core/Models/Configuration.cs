@@ -44,15 +44,19 @@ public partial class ConfigurationApperance : ObservableObject
     [ObservableProperty]
     BlurEffect blur = BlurEffect.Mica;
 }
-public class ConfigurationApperanceColors
+public partial class ConfigurationApperanceColors : ObservableObject
 {
-    public ConfigurationApperanceColorsAccent Accent { get; set; } = new();
+    [ObservableProperty]
+    ConfigurationApperanceColorsAccent accent = new();
 
-    public ConfigurationApperanceColorsBackground Background { get; set; } = new();
+    [ObservableProperty]
+    ConfigurationApperanceColorsBackground background = new();
 
-    public ConfigurationApperanceColorsText Text { get; set; } = new();
+    [ObservableProperty]
+    ConfigurationApperanceColorsText text = new();
 
-    public ConfigurationApperanceColorsControl Control { get; set; } = new();
+    [ObservableProperty]
+    ConfigurationApperanceColorsControl control = new();
 }
 public partial class ConfigurationApperanceColorsAccent : ObservableObject
 {
@@ -60,21 +64,18 @@ public partial class ConfigurationApperanceColorsAccent : ObservableObject
     Color primary = Color.FromArgb(255, 0, 138, 255);
 
     [ObservableProperty]
-    Color light = Color.FromArgb(255, 125, 195, 255);
+    Color light = Color.FromArgb(255, 96, 184, 255);
 
     [ObservableProperty]
-    Color dark = Color.FromArgb(255, 0, 73, 135);
+    Color dark = Color.FromArgb(255, 24, 83, 196);
 }
 public partial class ConfigurationApperanceColorsBackground : ObservableObject
 {
     [ObservableProperty]
-    Color primary = Color.FromArgb(255, 32, 32, 32);
+    Color solid = Color.FromArgb(255, 32, 32, 32);
 
     [ObservableProperty]
-    Color light = Color.FromArgb(255, 58, 58, 58);
-
-    [ObservableProperty]
-    Color dark = Color.FromArgb(255, 23, 23, 23);
+    Color transparent = Color.FromArgb(160, 32, 32, 32);
 }
 public partial class ConfigurationApperanceColorsText : ObservableObject
 {
@@ -104,7 +105,8 @@ public partial class ConfigurationApperanceColorsControl : ObservableObject
     [ObservableProperty]
     Color outlineDisabled = Color.FromArgb(51, 255, 255, 255);
 
-    public ConfigurationApperanceColorsControlSolid Solid { get; set; } = new();
+    [ObservableProperty]
+    ConfigurationApperanceColorsControlSolid solid = new();
 }
 public partial class ConfigurationApperanceColorsControlSolid : ObservableObject
 {

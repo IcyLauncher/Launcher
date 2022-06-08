@@ -1,5 +1,6 @@
 ﻿#pragma warning disable CA1401
 #pragma warning disable CA2211
+#pragma warning disable IDE0060
 
 using System.Runtime.InteropServices;
 

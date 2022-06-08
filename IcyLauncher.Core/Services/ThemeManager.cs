@@ -1,9 +1,4 @@
 ﻿using Microsoft.Extensions.Options;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace IcyLauncher.Core.Services;
 
@@ -12,6 +7,8 @@ public class ThemeManager
     readonly ILogger logger;
     readonly Configuration configuration;
     readonly IConverter converter;
+
+    public ConfigurationApperanceColors Colors => configuration.Apperance.Colors;
 
     public ThemeManager(IOptions<Configuration> configuration, ILogger<ConfigurationManager> logger, IConverter converter)
     {
@@ -39,6 +36,14 @@ public class ThemeManager
 
     public void SetResourceColors()
     {
+        if (Application.Current.Resources["Colors"] is ConfigurationApperanceColors resourceColors)
+        {
+            resourceColors.Accent = configuration.Apperance.Colors.Accent;
+            resourceColors.Background = configuration.Apperance.Colors.Background;
+            resourceColors.Text = configuration.Apperance.Colors.Text;
+            resourceColors.Control = configuration.Apperance.Colors.Control;
+        }
 
+        logger.Log($"Set Resource Colors to Configuration");
     }
 }

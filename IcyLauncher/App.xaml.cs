@@ -2,9 +2,7 @@
 using IcyLauncher.Views;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
-using Microsoft.UI;
 using Microsoft.UI.Xaml.Controls;
-using Microsoft.UI.Xaml.Media;
 using Serilog;
 
 namespace IcyLauncher;
@@ -50,12 +48,12 @@ public partial class App : Application
             })
             .ConfigureServices((context, services) =>
             {
+                services.Configure<Configuration>(context.Configuration);
                 var configuration = context.Configuration.Get<Configuration>();
 
-                var titleBar = UIElementProvider.TitleBar(configuration.Apperance.Colors.Accent.Primary, out backButton);
+                var titleBar = UIElementProvider.TitleBar(configuration.Apperance.Colors.Accent.Light, configuration.Apperance.Colors.Accent.Dark, out backButton);
                 var navigationView = UIElementProvider.NavigationView(out Frame contentFrame);
-                var mainGrid = UIElementProvider.MainGrid(new GridLength[] { new(), new(1, GridUnitType.Star) },
-                    configuration.Apperance.Blur == BlurEffect.None ? configuration.Apperance.Colors.Background.Primary : Colors.Transparent, 
+                var mainGrid = UIElementProvider.MainGrid(new GridLength[] { new(), new(1, GridUnitType.Star) }, 
                     titleBar, navigationView);
 
                 services.AddScoped<Core.Services.ConfigurationManager>();
@@ -65,9 +63,6 @@ public partial class App : Application
                 services.AddScoped<INavigation>(provider => new Navigation(provider.GetRequiredService<ILogger<Navigation>>(), navigationView, contentFrame, CanGoBack));
                 services.AddScoped<AppStartupHandler>();
 
-                services.Configure<Configuration>(context.Configuration);
-
-                services.AddSingleton<ShellViewModel>();
                 services.AddSingleton<HomeViewModel>();
                 services.AddSingleton<ProfilesViewModel>();
 
@@ -83,6 +78,4 @@ public partial class App : Application
         await host.StartAsync();
         Provider.GetRequiredService<AppStartupHandler>();
     }
-
-    public static SolidColorBrush MyPublicColor = new(Colors.Red);
 }
