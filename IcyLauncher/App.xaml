@@ -15,10 +15,35 @@
                 <XamlControlsResources xmlns="using:Microsoft.UI.Xaml.Controls" />
             </ResourceDictionary.MergedDictionaries>
 
+
             <models:ConfigurationApperanceColors x:Key="Colors" />
+
+            <SolidColorBrush x:Key="AccentPrimary" Color="{Binding Accent.Primary, Source={ThemeResource Colors}, Mode=OneWay}" />
+            <SolidColorBrush x:Key="AccentLight" Color="{Binding Accent.Light, Source={ThemeResource Colors}, Mode=OneWay}" />
+            <SolidColorBrush x:Key="AccentDark" Color="{Binding Accent.Dark, Source={ThemeResource Colors}, Mode=OneWay}" />
+
+            <SolidColorBrush x:Key="BackgroundSolid" Color="{Binding Background.Solid, Source={ThemeResource Colors}, Mode=OneWay}" />
+            <SolidColorBrush x:Key="BackgroundTransparent" Color="{Binding Background.Transparent, Source={ThemeResource Colors}, Mode=OneWay}" />
+
+            <SolidColorBrush x:Key="TextPrimary" Color="{Binding Text.Primary, Source={ThemeResource Colors}, Mode=OneWay}" />
+            <SolidColorBrush x:Key="TextSecondary" Color="{Binding Text.Secondary, Source={ThemeResource Colors}, Mode=OneWay}" />
+            <SolidColorBrush x:Key="TextTertiary" Color="{Binding Text.Tertiary, Source={ThemeResource Colors}, Mode=OneWay}" />
+            <SolidColorBrush x:Key="TextDisabled" Color="{Binding Text.Disabled, Source={ThemeResource Colors}, Mode=OneWay}" />
+
+            <SolidColorBrush x:Key="ControlPrimary" Color="{Binding Control.Primary, Source={ThemeResource Colors}, Mode=OneWay}" />
+            <SolidColorBrush x:Key="ControlOutline" Color="{Binding Control.Outline, Source={ThemeResource Colors}, Mode=OneWay}" />
+            <SolidColorBrush x:Key="ControlPrimaryDisabled" Color="{Binding Control.PrimaryDisabled, Source={ThemeResource Colors}, Mode=OneWay}" />
+            <SolidColorBrush x:Key="ControlOutlineDisabled" Color="{Binding Control.OutlineDisabled, Source={ThemeResource Colors}, Mode=OneWay}" />
+
+            <SolidColorBrush x:Key="ControlSolidPrimary" Color="{Binding Control.Solid.Primary, Source={ThemeResource Colors}, Mode=OneWay}" />
+            <SolidColorBrush x:Key="ControlSolidOutline" Color="{Binding Control.Solid.Outline, Source={ThemeResource Colors}, Mode=OneWay}" />
+            <SolidColorBrush x:Key="ControlSolidPrimaryDisabled" Color="{Binding Control.Solid.PrimaryDisabled, Source={ThemeResource Colors}, Mode=OneWay}" />
+            <SolidColorBrush x:Key="ControlSolidOutlineDisabled" Color="{Binding Control.Solid.OutlineDisabled, Source={ThemeResource Colors}, Mode=OneWay}" />
+
 
             <xaml:ArrayConverter x:Key="ArrayConverter" />
             <xaml:BrushConverter x:Key="BrushConverter" />
+
 
             <Style TargetType="NavigationView">
                 <Setter Property="IsSettingsVisible" Value="False" />
@@ -49,7 +74,7 @@
                                             x:Name="SelectionIndicator"
                                             Width="4"
                                             Height="24"
-                                            Fill="{Binding Accent.Primary, Source={StaticResource Colors}, Mode=OneWay, Converter={StaticResource BrushConverter}}"
+                                            Fill="{ThemeResource AccentPrimary}"
                                             Opacity="0.0"
                                             RadiusX="1"
                                             RadiusY="1" />
@@ -71,12 +96,12 @@
                                                 <FontIcon
                                                     x:Name="Icon"
                                                     FontFamily="Assets/FluentSystemIcons-Regular.ttf#FluentSystemIcons-Regular"
-                                                    Foreground="{Binding Text.Secondary, Source={StaticResource Colors}, Mode=OneWay, Converter={StaticResource BrushConverter}}"
+                                                    Foreground="{ThemeResource TextSecondary}"
                                                     Glyph="{Binding Content, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource ArrayConverter}, ConverterParameter=0}" />
                                                 <FontIcon
                                                     x:Name="IconFilled"
                                                     FontFamily="Assets/FluentSystemIcons-Filled.ttf#FluentSystemIcons-Filled"
-                                                    Foreground="{Binding Accent.Primary, Source={StaticResource Colors}, Mode=OneWay, Converter={StaticResource BrushConverter}}"
+                                                    Foreground="{ThemeResource AccentPrimary}"
                                                     Glyph="{Binding Content, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource ArrayConverter}, ConverterParameter=1}"
                                                     Opacity="0" />
                                             </Grid>
@@ -91,7 +116,7 @@
                                                 xaml:AncestorSource.AncestorType="NavigationViewItem"
                                                 AutomationProperties.AccessibilityView="Raw"
                                                 FontSize="11"
-                                                Foreground="{Binding Text.Secondary, Source={StaticResource Colors}, Mode=OneWay, Converter={StaticResource BrushConverter}}"
+                                                Foreground="{ThemeResource TextSecondary}"
                                                 Text="{Binding Tag}" />
                                         </Grid>
                                     </Grid>
@@ -110,7 +135,7 @@
                                                     <ColorAnimation
                                                         Storyboard.TargetName="Icon"
                                                         Storyboard.TargetProperty="(UIElement.Foreground).(SolidColorBrush.Color)"
-                                                        To="{Binding Text.Secondary, Source={StaticResource Colors}, Mode=OneWay}"
+                                                        To="{Binding Color, Source={ThemeResource TextSecondary}}"
                                                         Duration="0:0:0.2" />
                                                     <DoubleAnimation
                                                         EnableDependentAnimation="true"
@@ -127,7 +152,7 @@
                                                     <ColorAnimation
                                                         Storyboard.TargetName="Title"
                                                         Storyboard.TargetProperty="(UIElement.Foreground).(SolidColorBrush.Color)"
-                                                        To="{Binding Text.Secondary, Source={StaticResource Colors}, Mode=OneWay}"
+                                                        To="{Binding Color, Source={ThemeResource TextSecondary}}"
                                                         Duration="0:0:0.2" />
                                                     <DoubleAnimation
                                                         EnableDependentAnimation="true"
@@ -148,12 +173,12 @@
                                                     <ColorAnimation
                                                         Storyboard.TargetName="LayoutRoot"
                                                         Storyboard.TargetProperty="(UIElement.Background).(SolidColorBrush.Color)"
-                                                        To="{Binding Control.Primary, Source={StaticResource Colors}, Mode=OneWay}"
+                                                        To="{Binding Color, Source={ThemeResource ControlPrimary}}"
                                                         Duration="0:0:0.2" />
                                                     <ColorAnimation
                                                         Storyboard.TargetName="Icon"
                                                         Storyboard.TargetProperty="(UIElement.Foreground).(SolidColorBrush.Color)"
-                                                        To="{Binding Text.Primary, Source={StaticResource Colors}, Mode=OneWay}"
+                                                        To="{Binding Color, Source={ThemeResource TextPrimary}}"
                                                         Duration="0:0:0.2" />
                                                     <DoubleAnimation
                                                         EnableDependentAnimation="true"
@@ -170,7 +195,7 @@
                                                     <ColorAnimation
                                                         Storyboard.TargetName="Title"
                                                         Storyboard.TargetProperty="(UIElement.Foreground).(SolidColorBrush.Color)"
-                                                        To="{Binding Text.Primary, Source={StaticResource Colors}, Mode=OneWay}"
+                                                        To="{Binding Color, Source={ThemeResource TextPrimary}}"
                                                         Duration="0:0:0.2" />
                                                 </Storyboard>
                                             </VisualState.Storyboard>
@@ -185,12 +210,12 @@
                                                     <ColorAnimation
                                                         Storyboard.TargetName="LayoutRoot"
                                                         Storyboard.TargetProperty="(UIElement.Background).(SolidColorBrush.Color)"
-                                                        To="{Binding Control.Outline, Source={StaticResource Colors}, Mode=OneWay}"
+                                                        To="{Binding Color, Source={ThemeResource ControlOutline}}"
                                                         Duration="0:0:0.1" />
                                                     <ColorAnimation
                                                         Storyboard.TargetName="Icon"
                                                         Storyboard.TargetProperty="(UIElement.Foreground).(SolidColorBrush.Color)"
-                                                        To="{Binding Text.Tertiary, Source={StaticResource Colors}, Mode=OneWay}"
+                                                        To="{Binding Color, Source={ThemeResource TextTertiary}}"
                                                         Duration="0:0:0.1" />
                                                     <DoubleAnimation
                                                         EnableDependentAnimation="true"
@@ -207,7 +232,7 @@
                                                     <ColorAnimation
                                                         Storyboard.TargetName="Title"
                                                         Storyboard.TargetProperty="(UIElement.Foreground).(SolidColorBrush.Color)"
-                                                        To="{Binding Text.Tertiary, Source={StaticResource Colors}, Mode=OneWay}"
+                                                        To="{Binding Color, Source={ThemeResource TextTertiary}}"
                                                         Duration="0:0:0.1" />
                                                 </Storyboard>
                                             </VisualState.Storyboard>
@@ -222,12 +247,12 @@
                                                     <ColorAnimation
                                                         Storyboard.TargetName="LayoutRoot"
                                                         Storyboard.TargetProperty="(UIElement.Background).(SolidColorBrush.Color)"
-                                                        To="{Binding Control.Primary, Source={StaticResource Colors}, Mode=OneWay}"
+                                                        To="{Binding Color, Source={ThemeResource ControlPrimary}}"
                                                         Duration="0:0:0.2" />
                                                     <ColorAnimation
                                                         Storyboard.TargetName="Title"
                                                         Storyboard.TargetProperty="(UIElement.Foreground).(SolidColorBrush.Color)"
-                                                        To="{Binding Accent.Primary, Source={StaticResource Colors}, Mode=OneWay}"
+                                                        To="{Binding Color, Source={ThemeResource AccentPrimary}}"
                                                         Duration="0:0:0.2" />
                                                     <DoubleAnimation
                                                         EnableDependentAnimation="true"
@@ -257,12 +282,12 @@
                                                     <ColorAnimation
                                                         Storyboard.TargetName="LayoutRoot"
                                                         Storyboard.TargetProperty="(UIElement.Background).(SolidColorBrush.Color)"
-                                                        To="{Binding Control.Primary, Source={StaticResource Colors}, Mode=OneWay}"
+                                                        To="{Binding Color, Source={ThemeResource ControlPrimary}}"
                                                         Duration="0:0:0.2" />
                                                     <ColorAnimation
                                                         Storyboard.TargetName="Title"
                                                         Storyboard.TargetProperty="(UIElement.Foreground).(SolidColorBrush.Color)"
-                                                        To="{Binding Accent.Primary, Source={StaticResource Colors}, Mode=OneWay}"
+                                                        To="{Binding Color, Source={ThemeResource AccentPrimary}}"
                                                         Duration="0:0:0.2" />
                                                     <DoubleAnimation
                                                         EnableDependentAnimation="true"
@@ -293,20 +318,22 @@
                 </Setter>
             </Style>
 
-            <SolidColorBrush x:Key="ButtonBackground" Color="{Binding Control.Primary, Source={StaticResource Colors}, Mode=OneWay}"/>
-            <SolidColorBrush x:Key="ButtonBackgroundPointerOver" Color="{Binding Control.Outline, Source={StaticResource Colors}, Mode=OneWay}"/>
-            <SolidColorBrush x:Key="ButtonBackgroundPressed" Color="{Binding Control.PrimaryDisabled, Source={StaticResource Colors}, Mode=OneWay}"/>
-            <SolidColorBrush x:Key="ButtonBackgroundDisabled" Color="{Binding Control.PrimaryDisabled, Source={StaticResource Colors}, Mode=OneWay}"/>
-            
-            <SolidColorBrush x:Key="ButtonForeground" Color="{Binding Text.Secondary, Source={StaticResource Colors}, Mode=OneWay}"/>
-            <SolidColorBrush x:Key="ButtonForegroundPointerOver" Color="{Binding Text.Primary, Source={StaticResource Colors}, Mode=OneWay}"/>
-            <SolidColorBrush x:Key="ButtonForegroundPressed" Color="{Binding Text.Tertiary, Source={StaticResource Colors}, Mode=OneWay}"/>
-            <SolidColorBrush x:Key="ButtonForegroundDisabled" Color="{Binding Text.Disabled, Source={StaticResource Colors}, Mode=OneWay}"/>
 
-            <SolidColorBrush x:Key="ButtonBorderBrush" Color="{Binding Control.Outline, Source={StaticResource Colors}, Mode=OneWay}"/>
-            <SolidColorBrush x:Key="ButtonBorderBrushPointerOver" Color="{Binding Control.Outline, Source={StaticResource Colors}, Mode=OneWay}"/>
-            <SolidColorBrush x:Key="ButtonBorderBrushPressed" Color="{Binding Control.OutlineDisabled, Source={StaticResource Colors}, Mode=OneWay}"/>
-            <SolidColorBrush x:Key="ButtonBorderBrushDisabled" Color="{Binding Control.OutlineDisabled, Source={StaticResource Colors}, Mode=OneWay}"/>
+
+            <SolidColorBrush x:Key="ButtonBackground" Color="{Binding Color, Source={ThemeResource ControlPrimary}}" />
+            <SolidColorBrush x:Key="ButtonBackgroundPointerOver" Color="{Binding Color, Source={ThemeResource ControlOutline}}" />
+            <SolidColorBrush x:Key="ButtonBackgroundPressed" Color="{Binding Color, Source={ThemeResource ControlPrimaryDisabled}}" />
+            <SolidColorBrush x:Key="ButtonBackgroundDisabled" Color="{Binding Color, Source={ThemeResource ControlPrimaryDisabled}}" />
+
+            <SolidColorBrush x:Key="ButtonForeground" Color="{Binding Color, Source={ThemeResource TextSecondary}}" />
+            <SolidColorBrush x:Key="ButtonForegroundPointerOver" Color="{Binding Color, Source={ThemeResource TextPrimary}}" />
+            <SolidColorBrush x:Key="ButtonForegroundPressed" Color="{Binding Color, Source={ThemeResource TextTertiary}}" />
+            <SolidColorBrush x:Key="ButtonForegroundDisabled" Color="{Binding Color, Source={ThemeResource TextDisabled}}" />
+
+            <SolidColorBrush x:Key="ButtonBorderBrush" Color="{Binding Color, Source={ThemeResource ControlOutline}}" />
+            <SolidColorBrush x:Key="ButtonBorderBrushPointerOver" Color="{Binding Color, Source={ThemeResource ControlOutline}}" />
+            <SolidColorBrush x:Key="ButtonBorderBrushPressed" Color="{Binding Color, Source={ThemeResource ControlOutlineDisabled}}" />
+            <SolidColorBrush x:Key="ButtonBorderBrushDisabled" Color="{Binding Color, Source={ThemeResource ControlOutlineDisabled}}" />
 
         </ResourceDictionary>
     </Application.Resources>

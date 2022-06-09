@@ -36,17 +36,17 @@ public class AppStartupHandler
         var iconColorStops = ((LinearGradientBrush)((Path)((Viewbox)titleBar.Children[1]).Child).Fill).GradientStops;
         configuration.Value.Apperance.Colors.Accent.PropertyChanged += (s, e) =>
         {
-            if (e.PropertyName == "Light")
+            switch (e.PropertyName)
             {
-                iconColorStops[0].Color = configuration.Value.Apperance.Colors.Accent.Light;
-            }
-            if (e.PropertyName == "Dark")
-            {
-                iconColorStops[1].Color = configuration.Value.Apperance.Colors.Accent.Dark;
+                case "Light":
+                    iconColorStops[0].Color = configuration.Value.Apperance.Colors.Accent.Light;
+                    break;
+                case "Dark":
+                    iconColorStops[1].Color = configuration.Value.Apperance.Colors.Accent.Dark;
+                    break;
             }
         };
-        Application.Current.Resources["SystemAccentColorLight2"] = configuration.Value.Apperance.Colors.Accent.Light;
-        Application.Current.Resources["SystemAccentColorDark1"] = configuration.Value.Apperance.Colors.Accent.Light;
+        
 
         windowHandler.SetTilteBar(true, titleBar);
         windowHandler.SetIcon("Assets/Icon.ico");

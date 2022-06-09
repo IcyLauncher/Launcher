@@ -1,4 +1,6 @@
 ﻿using Microsoft.Extensions.Options;
+using Windows.UI;
+using Windows.UI.ViewManagement;
 
 namespace IcyLauncher.Core.Services;
 
@@ -7,6 +9,7 @@ public class ThemeManager
     readonly ILogger logger;
     readonly Configuration configuration;
     readonly IConverter converter;
+    readonly UISettings uiSettings = new();
 
     public ConfigurationApperanceColors Colors => configuration.Apperance.Colors;
 
@@ -15,6 +18,8 @@ public class ThemeManager
         this.logger = logger;
         this.configuration = configuration.Value;
         this.converter = converter;
+
+        uiSettings.ColorValuesChanged += ColorValuesChanged;
 
         this.logger.Log("Registered Theme Manager");
     }
@@ -44,6 +49,15 @@ public class ThemeManager
             resourceColors.Control = configuration.Apperance.Colors.Control;
         }
 
+
         logger.Log($"Set Resource Colors to Configuration");
+    }
+
+
+    private void ColorValuesChanged(UISettings sender, object args)
+    {
+        var accentColor = sender.GetColorValue(UIColorType.Accent);
+
+        var backgroundColor = sender.GetColorValue(UIColorType.Background);
     }
 }

@@ -18,7 +18,7 @@ public partial class HomeViewModel : ObservableObject
     [ObservableProperty]
     bool enable = true;
     [ObservableProperty]
-    bool darkMOde = true;
+    bool darkMOde = false;
 
     [ICommand]
     void Mica()
@@ -48,8 +48,14 @@ public partial class HomeViewModel : ObservableObject
     [ICommand]
     void ReColor()
     {
-        ThemeManager.Colors.Accent.Primary = Colors.Red;
-        ThemeManager.Colors.Accent.Light = Colors.Green;
-        ThemeManager.Colors.Accent.Dark = Colors.Blue;
+        ThemeManager.Colors.Control.Primary = Colors.Red;
+        ThemeManager.Colors.Control.Outline = Colors.Green;
+        ThemeManager.Colors.Control.PrimaryDisabled = Colors.Blue;
+        ThemeManager.Colors.Control.OutlineDisabled = Colors.Yellow;
+
+        ThemeManager.Colors.Text.Primary = Colors.Violet;
+        ThemeManager.Colors.Text.Secondary = Colors.Magenta;
+        ThemeManager.Colors.Text.Tertiary = Colors.AliceBlue;
+        ThemeManager.Colors.Text.Disabled = Colors.Orange;
     }
 }

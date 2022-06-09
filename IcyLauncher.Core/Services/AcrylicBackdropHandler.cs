@@ -36,7 +36,7 @@ public class AcrylicBackdropHandler : IBackdropHandler
         logger.Log("Hooked Activated/Closed handlers");
 
         BackdropConfiguration.IsInputActive = true;
-        BackdropConfiguration.Theme = useDarkMode ? SystemBackdropTheme.Light : SystemBackdropTheme.Dark;
+        BackdropConfiguration.Theme = useDarkMode ? SystemBackdropTheme.Dark : SystemBackdropTheme.Light;
         logger.Log("Configured Backdrop Configuration");
 
         ((DesktopAcrylicController)Controller).AddSystemBackdropTarget(Shell.As<ICompositionSupportsSystemBackdrop>());

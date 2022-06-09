@@ -10,12 +10,20 @@
     <Grid>
         <TextBlock
             FontSize="20"
-            Foreground="{x:Bind viewModel.ThemeManager.Colors.Accent.Primary, Mode=OneWay, Converter={StaticResource BrushConverter}}"
+            Foreground="{StaticResource AccentPrimary}"
             Text="some goofy ahh text" />
 
         <StackPanel Margin="50" Spacing="10">
             <ToggleSwitch Header="enable" IsOn="{x:Bind viewModel.Enable, Mode=TwoWay}" />
-            <ToggleSwitch Header="Darky" IsOn="{x:Bind viewModel.DarkMOde, Mode=TwoWay}" />
+            <ToggleSwitch Header="ssssss" IsOn="False" />
+            <ToggleSwitch
+                Header="foirtni"
+                IsEnabled="False"
+                IsOn="True" />
+            <ToggleSwitch
+                Header="Darky"
+                IsEnabled="False"
+                IsOn="{x:Bind viewModel.DarkMOde, Mode=TwoWay}" />
             <Button Command="{x:Bind viewModel.MicaCommand}" IsEnabled="False">Mica</Button>
             <Button Command="{x:Bind viewModel.AcrylicCommand}">Acrylic</Button>
             <Button Command="{x:Bind viewModel.SimpleCommand}">Simple</Button>
@@ -31,8 +39,8 @@
                 <Path.Fill>
                     <LinearGradientBrush StartPoint="0,0" EndPoint="0.625,1">
                         <GradientStopCollection>
-                            <GradientStop Offset="0.1" Color="{x:Bind viewModel.ThemeManager.Colors.Accent.Light, Mode=OneWay}" />
-                            <GradientStop Offset="1" Color="{x:Bind viewModel.ThemeManager.Colors.Accent.Dark, Mode=OneWay}" />
+                            <GradientStop Offset="0.1" Color="{Binding Color, Source={StaticResource AccentLight}}" />
+                            <GradientStop Offset="1" Color="{Binding Color, Source={StaticResource AccentDark}}" />
                         </GradientStopCollection>
                     </LinearGradientBrush>
                 </Path.Fill>
