@@ -24,7 +24,7 @@
                 Header="Darky"
                 IsEnabled="False"
                 IsOn="{x:Bind viewModel.DarkMOde, Mode=TwoWay}" />
-            <Button Command="{x:Bind viewModel.MicaCommand}" IsEnabled="False">Mica</Button>
+            <Button Command="{x:Bind viewModel.MicaCommand}">Mica</Button>
             <Button Command="{x:Bind viewModel.AcrylicCommand}">Acrylic</Button>
             <Button Command="{x:Bind viewModel.SimpleCommand}">Simple</Button>
             <Button Command="{x:Bind viewModel.NoneCommand}">None</Button>

@@ -1,11 +1,4 @@
-﻿using IcyLauncher.Core.Xaml;
-using Microsoft.Extensions.Options;
-using Microsoft.UI.Xaml.Controls;
-using Microsoft.UI.Xaml.Data;
-using Microsoft.UI.Xaml.Media ;
-using Microsoft.UI.Xaml.Shapes;
-
-namespace IcyLauncher.Core.Services;
+﻿namespace IcyLauncher.Core.Services;
 
 public class AppStartupHandler
 {
@@ -15,43 +8,17 @@ public class AppStartupHandler
         ConfigurationManager configurationManagaer,
         ThemeManager themeManager,
         WindowHandler windowHandler,
+        ControlReciever controlReciever,
         Window shell,
         INavigation navigation)
     {
         AppDomain.CurrentDomain.FirstChanceException += (sender, args) =>
-            logger.Log("Global FirstChanceException", args.Exception);
-
-        var titleBar = (StackPanel)((Grid)shell.Content).Children[0];
-        var backButton = (Button)titleBar.Children[0];
-        var titleTextBlock = (TextBlock)titleBar.Children[2];
-
-        titleTextBlock.SetBinding(TextBlock.ForegroundProperty, new Binding()
-        {
-            Source = configuration.Value,
-            Converter = new BrushConverter(),
-            Path = new PropertyPath("Apperance.Colors.Accent.Primary"),
-            Mode = BindingMode.OneWay
-        });
-
-        var iconColorStops = ((LinearGradientBrush)((Path)((Viewbox)titleBar.Children[1]).Child).Fill).GradientStops;
-        configuration.Value.Apperance.Colors.Accent.PropertyChanged += (s, e) =>
-        {
-            switch (e.PropertyName)
-            {
-                case "Light":
-                    iconColorStops[0].Color = configuration.Value.Apperance.Colors.Accent.Light;
-                    break;
-                case "Dark":
-                    iconColorStops[1].Color = configuration.Value.Apperance.Colors.Accent.Dark;
-                    break;
-            }
-        };
-        
-
-        windowHandler.SetTilteBar(true, titleBar);
+            logger.Log("Global Exception thrown", args.Exception);
+             
+        windowHandler.SetTilteBar(true, controlReciever.TitleBar);
         windowHandler.SetIcon("Assets/Icon.ico");
         windowHandler.SetMinSize(700, 400);
-        windowHandler.SetSize(1031, 550);
+        windowHandler.SetSize(1031, 700);//550);
         windowHandler.SetPositionToCenter();
         windowHandler.MakeTransparent();
         windowHandler.SetBlur(configuration.Value.Apperance.Blur, true);
@@ -60,8 +27,9 @@ public class AppStartupHandler
         shell.Activate();
 
         themeManager.SetResourceColors();
+        themeManager.SetUnbindableBindings();
 
-        backButton.Click += (s, e) => navigation.GoBack();
+        controlReciever.BackButton.Click += (s, e) => navigation.GoBack();
         navigation.Navigate("Home");
 
         logger.Log("App fully startup");

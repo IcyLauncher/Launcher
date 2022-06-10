@@ -75,7 +75,7 @@ public partial class ConfigurationApperanceColorsBackground : ObservableObject
     Color solid = Color.FromArgb(255, 32, 32, 32);
 
     [ObservableProperty]
-    Color transparent = Color.FromArgb(160, 32, 32, 32);
+    Color transparent = Microsoft.UI.Colors.Red;//.FromArgb(160, 32, 32, 32)
 }
 public partial class ConfigurationApperanceColorsText : ObservableObject
 {

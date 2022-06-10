@@ -13,7 +13,6 @@ public partial class App : Application
     public static IServiceProvider Provider { get; private set; } = default!;
 
     static Button backButton = default!;
-
     readonly Action<bool> CanGoBack = new(CanGoBack =>
     {
         if (CanGoBack == (backButton.Visibility != Visibility.Collapsed))
@@ -61,6 +60,7 @@ public partial class App : Application
                 services.AddScoped<WindowHandler>();
                 services.AddScoped<IConverter, JsonConverter>();
                 services.AddScoped<INavigation>(provider => new Navigation(provider.GetRequiredService<ILogger<Navigation>>(), navigationView, contentFrame, CanGoBack));
+                services.AddScoped<ControlReciever>();
                 services.AddScoped<AppStartupHandler>();
 
                 services.AddSingleton<HomeViewModel>();

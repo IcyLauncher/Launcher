@@ -1,7 +1,9 @@
-﻿using Microsoft.Extensions.Options;
+﻿using IcyLauncher.Core.Xaml;
+using Microsoft.Extensions.Options;
 using Microsoft.UI;
 using Microsoft.UI.Windowing;
 using Microsoft.UI.Xaml.Controls;
+using Microsoft.UI.Xaml.Data;
 using Microsoft.UI.Xaml.Media;
 using System.Runtime.InteropServices;
 using Windows.Graphics;
@@ -80,7 +82,7 @@ public class WindowHandler
 
     public bool SetTilteBar(bool isEnabled = false, UIElement? titleBar = null)
     {
-        if (!AppWindowTitleBar.IsCustomizationSupported()) 
+        if (!AppWindowTitleBar.IsCustomizationSupported())
         {
             logger.Log("Tried to set TitleBar: Not supported");
             return false;
@@ -134,7 +136,7 @@ public class WindowHandler
 
     public bool MakeTransparent()
     {
-        try 
+        try
         {
             Win32.SubClassDelegate = new(Win32.WindowSubClass);
             var setWindowSubClass = Win32.SetWindowSubclass(HWnd, Win32.SubClassDelegate, 0, 0);
@@ -158,12 +160,21 @@ public class WindowHandler
         return false;
     }
 
-    private bool SetMainBackground(Color backgroundColor)
+    private bool SetMainBackground(string backgroundColor)
     {
         try
         {
             var mainGrid = (Grid)shell.Content;
-            mainGrid.Background = new SolidColorBrush(backgroundColor);
+            if (backgroundColor == "Transparent")
+                mainGrid.Background = new SolidColorBrush(Colors.Transparent);
+            else
+                mainGrid.SetBinding(Panel.BackgroundProperty, new Binding()
+                {
+                    Source = configuration,
+                    Converter = new BrushConverter(),
+                    Path = new PropertyPath(backgroundColor),
+                    Mode = BindingMode.OneWay
+                });
             logger.Log($"Set background color on MainGrid ({backgroundColor})");
 
             return true;
@@ -190,7 +201,7 @@ public class WindowHandler
 
     private void RemoveAllBlur()
     {
-        SetMainBackground(Colors.Transparent);
+        SetMainBackground("Transparent");
 
         if (IsBlurMicaEnabled)
             SetBlurMica(false, false);
@@ -226,7 +237,7 @@ public class WindowHandler
     private bool SetBlurAcrylic(bool enable, bool useDarkMode)
     {
         var setComposition = SetComposition(Win32.AccentState.ACCENT_ENABLE_ACRYLICBLURBEHIND, enable, useDarkMode);
-        var setMainBackground = SetMainBackground(enable ? configuration.Apperance.Colors.Background.Transparent : Colors.Transparent);
+        var setMainBackground = SetMainBackground(enable ? "Apperance.Colors.Background.Transparent" : "Transparent");
 
         if (setComposition && setMainBackground)
             IsBlurAcrylicEnabled = enable;
@@ -236,7 +247,7 @@ public class WindowHandler
     private bool SetBlurSimple(bool enable, bool useDarkMode)
     {
         var setComposition = SetComposition(Win32.AccentState.ACCENT_ENABLE_BLURBEHIND, enable, useDarkMode);
-        var setMainBackground = SetMainBackground(enable ? configuration.Apperance.Colors.Background.Transparent : Colors.Transparent);
+        var setMainBackground = SetMainBackground(enable ? "Apperance.Colors.Background.Transparent" : "Transparent");
 
         if (setComposition && setMainBackground)
             IsBlurSimpleEnabled = enable;
@@ -287,7 +298,7 @@ public class WindowHandler
 
     private bool SetBlurNone(bool enable)
     {
-        var setMainBackground = SetMainBackground(enable ? configuration.Apperance.Colors.Background.Solid : Colors.Transparent);
+        var setMainBackground = SetMainBackground(enable ? "Apperance.Colors.Background.Solid" : "Transparent");
 
         if (setMainBackground)
             IsBlurNoneEnabled = enable;

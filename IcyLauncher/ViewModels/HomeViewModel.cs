@@ -24,30 +24,33 @@ public partial class HomeViewModel : ObservableObject
     void Mica()
     {
         windowHandler.SetBlur(BlurEffect.Mica, Enable, DarkMOde);
-        logger.Log("\n\n\n");
     }
     [ICommand]
     void Acrylic()
     {
         windowHandler.SetBlur(BlurEffect.Acrylic, Enable, DarkMOde);
-        logger.Log("\n\n\n");
     }
     [ICommand]
     void Simple()
     {
         windowHandler.SetBlur(BlurEffect.Simple, Enable, DarkMOde);
-        logger.Log("\n\n\n");
     }
     [ICommand]
     void None()
     {
         windowHandler.SetBlur(BlurEffect.None, Enable, DarkMOde);
-        logger.Log("\n\n\n");
     }
 
     [ICommand]
     void ReColor()
     {
+        ThemeManager.Colors.Accent.Primary = Colors.Wheat;
+        ThemeManager.Colors.Accent.Light = Colors.White;
+        ThemeManager.Colors.Accent.Dark = Colors.Black;
+
+        ThemeManager.Colors.Background.Solid = Colors.YellowGreen;
+        ThemeManager.Colors.Background.Transparent = Colors.Bisque;
+
         ThemeManager.Colors.Control.Primary = Colors.Red;
         ThemeManager.Colors.Control.Outline = Colors.Green;
         ThemeManager.Colors.Control.PrimaryDisabled = Colors.Blue;
@@ -55,7 +58,9 @@ public partial class HomeViewModel : ObservableObject
 
         ThemeManager.Colors.Text.Primary = Colors.Violet;
         ThemeManager.Colors.Text.Secondary = Colors.Magenta;
-        ThemeManager.Colors.Text.Tertiary = Colors.AliceBlue;
+        ThemeManager.Colors.Text.Tertiary = Colors.Turquoise;
         ThemeManager.Colors.Text.Disabled = Colors.Orange;
+
+        logger.Log("Updated entire fucking theme!!!!");
     }
 }
