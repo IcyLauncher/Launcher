@@ -310,7 +310,6 @@
             </Style>
 
 
-
             <SolidColorBrush x:Key="ButtonBackground" Color="{Binding Color, Source={ThemeResource ControlPrimary}}" />
             <SolidColorBrush x:Key="ButtonBackgroundPointerOver" Color="{Binding Color, Source={ThemeResource ControlOutline}}" />
             <SolidColorBrush x:Key="ButtonBackgroundPressed" Color="{Binding Color, Source={ThemeResource ControlPrimaryDisabled}}" />

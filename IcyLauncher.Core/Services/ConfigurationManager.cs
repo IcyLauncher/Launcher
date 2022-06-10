@@ -1,6 +1,4 @@
-﻿using Microsoft.Extensions.Options;
-
-namespace IcyLauncher.Core.Services;
+﻿namespace IcyLauncher.Core.Services;
 
 public class ConfigurationManager
 {

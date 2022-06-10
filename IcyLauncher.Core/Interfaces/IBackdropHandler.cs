@@ -13,7 +13,7 @@ public interface IBackdropHandler
 }
 
 
-// => Disabled correct way to implement Mica/Acrylic because of limitations
+// => Disabled correct way to implement Mica/Acrylic because of limitations => Need to activate on WndowsAppSDK v1.1.0-stable
 // => Placed in servises registration
 //switch (configuration.Apperance.Blur)
 //{

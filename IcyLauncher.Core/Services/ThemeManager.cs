@@ -22,11 +22,11 @@ public class ThemeManager
         this.converter = converter;
         this.controlReciever = controlReciever;
 
-        this.configuration.Apperance.Colors.Accent.PropertyChanged += ColorsValuesChanged;
-        //this.configuration.Apperance.Colors.Background.PropertyChanged += ColorsValuesChanged;
-        //this.configuration.Apperance.Colors.Text.PropertyChanged += ColorsValuesChanged;
-        this.configuration.Apperance.Colors.Control.PropertyChanged += ColorsValuesChanged;
-        //this.configuration.Apperance.Colors.Control.Solid.PropertyChanged += ColorsValuesChanged;
+        this.configuration.Apperance.Colors.Accent.PropertyChanged += AccentColorsValuesChanged;
+        //this.configuration.Apperance.Colors.Background.PropertyChanged += BackgroundColorsValuesChanged;
+        //this.configuration.Apperance.Colors.Text.PropertyChanged += TextColorsValuesChanged;
+        this.configuration.Apperance.Colors.Control.PropertyChanged += ControlColorsValuesChanged;
+        //this.configuration.Apperance.Colors.Control.Solid.PropertyChanged += ControlSolidColorsValuesChanged;
         new UISettings().ColorValuesChanged += SystemColorsValuesChanged;
 
         this.logger.Log("Registered Theme Manager and hooked all ColorValue changes");
@@ -84,18 +84,30 @@ public class ThemeManager
     }
 
 
-    private void ColorsValuesChanged(object? sender, System.ComponentModel.PropertyChangedEventArgs e)
+    private void AccentColorsValuesChanged(object? sender, System.ComponentModel.PropertyChangedEventArgs e)
     {
         switch (e.PropertyName)
         {
             case "Light":
                 controlReciever.TitleBarIconGradientStops[0].Color = configuration.Apperance.Colors.Accent.Light;
+
+                logger.Log($"Updated TitleBar icon gradient stop (0)");
                 break;
             case "Dark":
                 controlReciever.TitleBarIconGradientStops[1].Color = configuration.Apperance.Colors.Accent.Dark;
+
+                logger.Log($"Updated TitleBar icon gradient stop (1)");
                 break;
+        }
+    }
+    private void ControlColorsValuesChanged(object? sender, System.ComponentModel.PropertyChangedEventArgs e)
+    {
+        switch (e.PropertyName)
+        {
             case "Primary":
                 controlReciever.CurrentNavigationViewItemLayoutRoot.Background = new SolidColorBrush(configuration.Apperance.Colors.Control.Primary);
+
+                logger.Log($"Updated current NavigationViewItem LayoutRoot");
                 break;
         }
     }

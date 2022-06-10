@@ -30,6 +30,6 @@ public class ControlReciever
         TitleBarIconGradientStops = ((LinearGradientBrush)((Path)((Viewbox)TitleBar.Children[1]).Child).Fill).GradientStops;
         TitleBarTitle = (TextBlock)TitleBar.Children[2];
 
-        this.logger.Log("Registered Control Reciever and casted all UIElements");
+        this.logger.Log("Registered Control Reciever and casted all controls");
     }
 }

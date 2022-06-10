@@ -9,7 +9,7 @@ public interface INavigation
 
     List<NavigationViewItem> GetNavigationViewItems();
 
-    NavigationViewItem? GetNavigationViewItem(string? searchFor, bool searchForTag, StringComparison comparision);
+    NavigationViewItem? GetNavigationViewItem(string? searchFor, bool searchForTag = false, StringComparison comparision = StringComparison.InvariantCultureIgnoreCase);
 
 
     bool SetCurrentNavigationViewItem(NavigationViewItem item);

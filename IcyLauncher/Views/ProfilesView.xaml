@@ -6,6 +6,7 @@
     xmlns:local="using:IcyLauncher.Views"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     Background="Transparent"
+    NavigationCacheMode="Enabled"
     mc:Ignorable="d">
 
     <Grid>

@@ -19,14 +19,14 @@ public class Navigation : INavigation
 
         this.navigationView.SelectionChanged += (s, args) =>
         {
-            if (args.SelectedItemContainer is NavigationViewItem item && $"IcyLauncher.Views.{item.Tag}View".AsType() is Type type)
+            if (args.SelectedItemContainer is NavigationViewItem item && $"Views.{item.Tag}View".AsType() is Type type)
                 SetCurrentPage(type);
             else
-                logger.Log("Failed to set current NavigationView page: Unregistered Type");
+                this.logger.Log("Failed to set current NavigationView page: Unregistered Type");
         };
         this.navigationView.BackRequested += (s, args) => GoBack();
 
-        logger.Log("Registered NavigationView");
+        this.logger.Log("Registered NavigationView");
     }
 
 
@@ -97,7 +97,7 @@ public class Navigation : INavigation
         if (item is null || string.IsNullOrWhiteSpace(item.Tag.ToString()))
             return false;
 
-        if ($"IcyLauncher.Views.{item.Tag}View".AsType() is not null)
+        if ($"Views.{item.Tag}View".AsType() is not null)
             return SetCurrentNavigationViewItem(item);
         else
             return false;

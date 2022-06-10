@@ -16,12 +16,14 @@ public class WindowHandler
 {
     readonly ILogger logger;
     readonly Configuration configuration;
+    readonly ControlReciever controlReciever;
     readonly Window shell;
 
-    public WindowHandler(ILogger<Window> logger, IOptions<Configuration> configuration, Window shell)
+    public WindowHandler(ILogger<Window> logger, IOptions<Configuration> configuration, ControlReciever controlReciever, Window shell)
     {
         this.logger = logger;
         this.configuration = configuration.Value;
+        this.controlReciever = controlReciever;
         this.shell = shell;
 
         this.logger.Log("Registered WindowHandler");
@@ -80,6 +82,7 @@ public class WindowHandler
     public void SetPositionToCenter() =>
         SetPosition((ScreenSize.Width - Window.Size.Width) / 2, (ScreenSize.Height - Window.Size.Height) / 2);
 
+
     public bool SetTilteBar(bool isEnabled = false, UIElement? titleBar = null)
     {
         if (!AppWindowTitleBar.IsCustomizationSupported())
@@ -118,7 +121,6 @@ public class WindowHandler
 
         Presenter.SetBorderAndTitleBar(true, true);
 
-        //shell.ExtendsContentIntoTitleBar = true;
         Window.TitleBar.ExtendsContentIntoTitleBar = true;
         Window.TitleBar.SetDragRectangles(new RectInt32[] { new(40, 0, ScreenSize.Width, 48) });
 
@@ -133,6 +135,7 @@ public class WindowHandler
         logger.Log("Set TitleBar to UIElement");
         return true;
     }
+
 
     public bool MakeTransparent()
     {
@@ -164,19 +167,23 @@ public class WindowHandler
     {
         try
         {
-            var mainGrid = (Grid)shell.Content;
-            if (backgroundColor == "Transparent")
-                mainGrid.Background = new SolidColorBrush(Colors.Transparent);
-            else
-                mainGrid.SetBinding(Panel.BackgroundProperty, new Binding()
-                {
-                    Source = configuration,
-                    Converter = new BrushConverter(),
-                    Path = new PropertyPath(backgroundColor),
-                    Mode = BindingMode.OneWay
-                });
-            logger.Log($"Set background color on MainGrid ({backgroundColor})");
+            switch (backgroundColor)
+            {
+                case "Transparent":
+                    controlReciever.MainGrid.Background = new SolidColorBrush(Colors.Transparent);
+                    break;
+                default:
+                    controlReciever.MainGrid.SetBinding(Panel.BackgroundProperty, new Binding()
+                    {
+                        Source = configuration,
+                        Converter = new BrushConverter(),
+                        Path = new PropertyPath(backgroundColor),
+                        Mode = BindingMode.OneWay
+                    });
+                    break;
+            }
 
+            logger.Log($"Set background color on MainGrid ({backgroundColor})");
             return true;
         }
         catch (Exception ex)
@@ -185,6 +192,7 @@ public class WindowHandler
             return false;
         }
     }
+
 
     public bool SetBlur(BlurEffect blurEffect, bool enable, bool useDarkMode = true)
     {
@@ -212,6 +220,7 @@ public class WindowHandler
         if (IsBlurSimpleEnabled)
             SetBlurSimple(false, false);
     }
+
 
     private bool SetBlurMica(bool enable, bool useDarkMode)
     {

@@ -1,66 +1,64 @@
 ﻿using Microsoft.UI;
+using Windows.UI;
 
 namespace IcyLauncher.ViewModels;
 
 public partial class HomeViewModel : ObservableObject
 {
     readonly ILogger logger;
+    readonly ThemeManager themeManager;
     readonly WindowHandler windowHandler;
-    readonly public ThemeManager ThemeManager;
 
-    public HomeViewModel(ILogger<HomeViewModel> logger, WindowHandler windowHandler, ThemeManager themeManager)
+    public HomeViewModel(ILogger<HomeViewModel> logger, ThemeManager themeManager, WindowHandler windowHandler)
     {
         this.logger = logger;
+        this.themeManager = themeManager;
         this.windowHandler = windowHandler;
-        ThemeManager = themeManager;
-    }
-
-    [ObservableProperty]
-    bool enable = true;
-    [ObservableProperty]
-    bool darkMOde = false;
-
-    [ICommand]
-    void Mica()
-    {
-        windowHandler.SetBlur(BlurEffect.Mica, Enable, DarkMOde);
-    }
-    [ICommand]
-    void Acrylic()
-    {
-        windowHandler.SetBlur(BlurEffect.Acrylic, Enable, DarkMOde);
-    }
-    [ICommand]
-    void Simple()
-    {
-        windowHandler.SetBlur(BlurEffect.Simple, Enable, DarkMOde);
-    }
-    [ICommand]
-    void None()
-    {
-        windowHandler.SetBlur(BlurEffect.None, Enable, DarkMOde);
     }
 
     [ICommand]
     void ReColor()
     {
-        ThemeManager.Colors.Accent.Primary = Colors.Wheat;
-        ThemeManager.Colors.Accent.Light = Colors.White;
-        ThemeManager.Colors.Accent.Dark = Colors.Black;
+        themeManager.Colors.Accent.Primary = GetRandomColor();
+        themeManager.Colors.Accent.Light = GetRandomColor();
+        themeManager.Colors.Accent.Dark = GetRandomColor();
 
-        ThemeManager.Colors.Background.Solid = Colors.YellowGreen;
-        ThemeManager.Colors.Background.Transparent = Colors.Bisque;
+        themeManager.Colors.Background.Solid = GetRandomColor();
+        themeManager.Colors.Background.Transparent = GetRandomColor(150);
 
-        ThemeManager.Colors.Control.Primary = Colors.Red;
-        ThemeManager.Colors.Control.Outline = Colors.Green;
-        ThemeManager.Colors.Control.PrimaryDisabled = Colors.Blue;
-        ThemeManager.Colors.Control.OutlineDisabled = Colors.Yellow;
+        themeManager.Colors.Control.Primary = GetRandomColor(150);
+        themeManager.Colors.Control.Outline = GetRandomColor(150);
+        themeManager.Colors.Control.PrimaryDisabled = GetRandomColor(150);
+        themeManager.Colors.Control.OutlineDisabled = GetRandomColor(150);
 
-        ThemeManager.Colors.Text.Primary = Colors.Violet;
-        ThemeManager.Colors.Text.Secondary = Colors.Magenta;
-        ThemeManager.Colors.Text.Tertiary = Colors.Turquoise;
-        ThemeManager.Colors.Text.Disabled = Colors.Orange;
+        themeManager.Colors.Control.Solid.Primary = GetRandomColor();
+        themeManager.Colors.Control.Solid.Outline = GetRandomColor();
+        themeManager.Colors.Control.Solid.PrimaryDisabled = GetRandomColor();
+        themeManager.Colors.Control.Solid.OutlineDisabled = GetRandomColor();
+
+        themeManager.Colors.Text.Primary = GetRandomColor();
+        themeManager.Colors.Text.Secondary = GetRandomColor();
+        themeManager.Colors.Text.Tertiary = GetRandomColor();
+        themeManager.Colors.Text.Disabled = GetRandomColor();
 
         logger.Log("Updated entire fucking theme!!!!");
     }
+
+    static Color GetRandomColor(byte transparency = 255)
+    {
+        var random = new Random();
+        return Color.FromArgb(transparency, Convert.ToByte(random.Next(0, 255)), Convert.ToByte(random.Next(0, 255)), Convert.ToByte(random.Next(0, 255)));
+    }
+
+
+    [ObservableProperty]
+    BlurEffect selectedBlurEffect = BlurEffect.Mica;
+
+    partial void OnSelectedBlurEffectChanged(BlurEffect value)
+    {
+        windowHandler.SetBlur(value, true, true);
+    }
+
+    [ObservableProperty]
+    IEnumerable<BlurEffect> blurEffects = Enum.GetValues(typeof(BlurEffect)).Cast<BlurEffect>();
 }
