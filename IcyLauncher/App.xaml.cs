@@ -12,27 +12,6 @@ public partial class App : Application
     readonly IHost host;
     public static IServiceProvider Provider { get; private set; } = default!;
 
-    static Button backButton = default!;
-    readonly Action<bool> CanGoBack = new(CanGoBack =>
-    {
-        if (CanGoBack == (backButton.Visibility != Visibility.Collapsed))
-            return;
-
-        if (CanGoBack)
-        {
-            backButton.Visibility = Visibility.Visible;
-            UIElementProvider.Animate(backButton, "Opacity", 0, 1, 200).Begin();
-            UIElementProvider.Animate(backButton, "Width", 0, 32, 110).Begin();
-        }
-        else
-        {
-            UIElementProvider.Animate(backButton, "Opacity", 1, 0, 200).Begin();
-            var board = UIElementProvider.Animate(backButton, "Width", 32, 0, 110);
-            board.Completed += (s, e) => backButton.Visibility = Visibility.Collapsed;
-            board.Begin();
-        }
-    });
-
     public App()
     {
         host = Host.CreateDefaultBuilder()
@@ -50,7 +29,7 @@ public partial class App : Application
                 services.Configure<Configuration>(context.Configuration);
                 var configuration = context.Configuration.Get<Configuration>();
 
-                var titleBar = UIElementProvider.TitleBar(configuration.Apperance.Colors.Accent.Light, configuration.Apperance.Colors.Accent.Dark, out backButton);
+                var titleBar = UIElementProvider.TitleBar(configuration.Apperance.Colors.Accent.Light, configuration.Apperance.Colors.Accent.Dark, out Button backButton);
                 var navigationView = UIElementProvider.NavigationView(out Frame contentFrame);
                 var mainGrid = UIElementProvider.MainGrid(new GridLength[] { new(), new(1, GridUnitType.Star) }, 
                     titleBar, navigationView);
@@ -59,7 +38,7 @@ public partial class App : Application
                 services.AddScoped<ThemeManager>();
                 services.AddScoped<WindowHandler>();
                 services.AddScoped<IConverter, JsonConverter>();
-                services.AddScoped<INavigation>(provider => new Navigation(provider.GetRequiredService<ILogger<Navigation>>(), navigationView, contentFrame, CanGoBack));
+                services.AddScoped<INavigation>(provider => new Navigation(provider.GetRequiredService<ILogger<Navigation>>(), navigationView, contentFrame, backButton));
                 services.AddScoped<ControlReciever>();
                 services.AddScoped<AppStartupHandler>();
 

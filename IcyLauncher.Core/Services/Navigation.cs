@@ -7,15 +7,14 @@ public class Navigation : INavigation
     readonly ILogger logger;
     readonly NavigationView navigationView;
     readonly Frame frame;
-    readonly Action<bool> CanGoBackChanged;
+    readonly Button backButton;
 
-    public Navigation(ILogger<Navigation> logger, NavigationView navigationView, Frame frame, Action<bool> CanGoBackChanged)
+    public Navigation(ILogger<Navigation> logger, NavigationView navigationView, Frame frame, Button backButton)
     {
         this.logger = logger;
         this.navigationView = navigationView;
         this.frame = frame;
-
-        this.CanGoBackChanged = CanGoBackChanged;
+        this.backButton = backButton;
 
         this.navigationView.SelectionChanged += (s, args) =>
         {
@@ -129,6 +128,26 @@ public class Navigation : INavigation
         {
             logger.Log("Current NavigationView page failed to go back");
             return false;
+        }
+    }
+
+    private void CanGoBackChanged(bool canGoBack)
+    {
+        if (canGoBack == (backButton.Visibility != Visibility.Collapsed))
+            return;
+
+        if (canGoBack)
+        {
+            backButton.Visibility = Visibility.Visible;
+            UIElementProvider.Animate(backButton, "Opacity", 0, 1, 200).Begin();
+            UIElementProvider.Animate(backButton, "Width", 0, 32, 110).Begin();
+        }
+        else
+        {
+            UIElementProvider.Animate(backButton, "Opacity", 1, 0, 200).Begin();
+            var board = UIElementProvider.Animate(backButton, "Width", 32, 0, 110);
+            board.Completed += (s, e) => backButton.Visibility = Visibility.Collapsed;
+            board.Begin();
         }
     }
 }
