@@ -14,22 +14,30 @@
             Text="some goofy ahh text" />
 
         <StackPanel Margin="50" Spacing="10">
-            <CheckBox
-                Content="Checked-Enabled"
-                IsChecked="True"
-                IsEnabled="True" />
-            <CheckBox
-                Content="Checked-Disabled"
-                IsChecked="True"
-                IsEnabled="False" />
-            <CheckBox
-                Content="Unchecked-Enabled"
-                IsChecked="False"
-                IsEnabled="True" />
-            <CheckBox
-                Content="Unchecked-Disabled"
-                IsChecked="False"
-                IsEnabled="False" />
+            <StackPanel Orientation="Horizontal" Spacing="50">
+                <ToggleSwitch Header="On-Enabled" IsOn="true" />
+                <ToggleSwitch Header="Off-Enabled" IsOn="False"  x:Name="Ssss"/>
+                <ToggleSwitch
+                Header="On-Disabled"
+                IsEnabled="False"
+                IsOn="True"/>
+                <ToggleSwitch
+                Header="Off-Disabled"
+                IsEnabled="{x:Bind Ssss.IsOn, Mode=TwoWay}"
+                IsOn="false" />
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Spacing="50">
+                <CheckBox Content="On-Enabled" IsChecked="true" />
+                <CheckBox Content="Off-Enabled" IsChecked="False" />
+                <CheckBox
+                Content="On-Disabled"
+                IsEnabled="False"
+                IsChecked="True" />
+                <CheckBox
+                Content="Off-Disabled"
+                IsEnabled="False"
+                IsChecked="false" />
+            </StackPanel>
 
             <StackPanel
                 Margin="0,10,0,0"
