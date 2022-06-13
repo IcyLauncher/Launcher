@@ -39,88 +39,13 @@ public partial class ConfigurationApperance : ObservableObject
     [ObservableProperty]
     BannerType playBannerType = BannerType.TimeDependent;
 
-    public ConfigurationApperanceColors Colors { get; set; } = new();
+    public Theme Colors { get; set; } = Theme.Dark;
 
     [ObservableProperty]
     BlurEffect blur = BlurEffect.Mica;
-}
-public partial class ConfigurationApperanceColors : ObservableObject
-{
-    [ObservableProperty]
-    ConfigurationApperanceColorsAccent accent = new();
 
     [ObservableProperty]
-    ConfigurationApperanceColorsBackground background = new();
-
-    [ObservableProperty]
-    ConfigurationApperanceColorsText text = new();
-
-    [ObservableProperty]
-    ConfigurationApperanceColorsControl control = new();
-}
-public partial class ConfigurationApperanceColorsAccent : ObservableObject
-{
-    [ObservableProperty]
-    Color primary = Color.FromArgb(255, 0, 138, 255);
-
-    [ObservableProperty]
-    Color light = Color.FromArgb(255, 96, 184, 255);
-
-    [ObservableProperty]
-    Color dark = Color.FromArgb(255, 24, 83, 196);
-}
-public partial class ConfigurationApperanceColorsBackground : ObservableObject
-{
-    [ObservableProperty]
-    Color solid = Color.FromArgb(255, 32, 32, 32);
-
-    [ObservableProperty]
-    Color transparent = Color.FromArgb(150, 32, 32, 32);
-}
-public partial class ConfigurationApperanceColorsText : ObservableObject
-{
-    [ObservableProperty]
-    Color primary = Color.FromArgb(255, 255, 255, 255);
-
-    [ObservableProperty]
-    Color secondary = Color.FromArgb(196, 255, 255, 255);
-
-    [ObservableProperty]
-    Color tertiary = Color.FromArgb(133, 255, 255, 255);
-
-    [ObservableProperty]
-    Color disabled = Color.FromArgb(92, 255, 255, 255);
-}
-public partial class ConfigurationApperanceColorsControl : ObservableObject
-{
-    [ObservableProperty]
-    Color primary = Color.FromArgb(13, 255, 255, 255);
-
-    [ObservableProperty]
-    Color outline = Color.FromArgb(26, 255, 255, 255);
-
-    [ObservableProperty]
-    Color primaryDisabled = Color.FromArgb(38, 255, 255, 255);
-
-    [ObservableProperty]
-    Color outlineDisabled = Color.FromArgb(51, 255, 255, 255);
-
-    [ObservableProperty]
-    ConfigurationApperanceColorsControlSolid solid = new();
-}
-public partial class ConfigurationApperanceColorsControlSolid : ObservableObject
-{
-    [ObservableProperty]
-    Color primary = Color.FromArgb(255, 46, 46, 46);
-
-    [ObservableProperty]
-    Color outline = Color.FromArgb(255, 56, 56, 56);
-
-    [ObservableProperty]
-    Color primaryDisabled = Color.FromArgb(255, 67, 67, 67);
-
-    [ObservableProperty]
-    Color outlineDisabled = Color.FromArgb(255, 79, 79, 79);
+    bool useDarkModeBlur = true;
 }
 
 public partial class ConfigurationWeather : ObservableObject

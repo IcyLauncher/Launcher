@@ -16,7 +16,7 @@
             </ResourceDictionary.MergedDictionaries>
 
 
-            <models:ConfigurationApperanceColors x:Key="Colors" />
+            <models:Theme x:Key="Colors" />
 
             <SolidColorBrush x:Key="AccentPrimary" Color="{Binding Accent.Primary, Source={ThemeResource Colors}, Mode=OneWay}" />
             <SolidColorBrush x:Key="AccentLight" Color="{Binding Accent.Light, Source={ThemeResource Colors}, Mode=OneWay}" />
@@ -308,6 +308,10 @@
                     </Setter.Value>
                 </Setter>
             </Style>
+
+
+            <SolidColorBrush x:Key="NavigationViewContentBackground" Color="{Binding Color, Source={ThemeResource ControlPrimary}}" />
+            <SolidColorBrush x:Key="NavigationViewContentGridBorderBrush" Color="{Binding Color, Source={ThemeResource ControlOutline}}" />
 
 
             <SolidColorBrush x:Key="ButtonBackground" Color="{Binding Color, Source={ThemeResource ControlPrimary}}" />
@@ -933,11 +937,6 @@
                     </Setter.Value>
                 </Setter>
             </Style>
-
-
-
-
-
 
         </ResourceDictionary>
     </Application.Resources>

@@ -21,7 +21,7 @@ public class AppStartupHandler
         windowHandler.SetSize(1031, 550);
         windowHandler.SetPositionToCenter();
         windowHandler.MakeTransparent();
-        windowHandler.SetBlur(configuration.Value.Apperance.Blur, true);
+        windowHandler.SetBlur(configuration.Value.Apperance.Blur, true, configuration.Value.Apperance.UseDarkModeBlur);
 
         shell.Closed += (s, e) => logger.Log(configurationManagaer.Export());
         shell.Activate();

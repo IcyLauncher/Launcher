@@ -19,28 +19,7 @@ public partial class HomeViewModel : ObservableObject
     [ICommand]
     void ReColor()
     {
-        themeManager.Colors.Accent.Primary = GetRandomColor();
-        themeManager.Colors.Accent.Light = GetRandomColor();
-        themeManager.Colors.Accent.Dark = GetRandomColor();
-
-        themeManager.Colors.Background.Solid = GetRandomColor();
-        themeManager.Colors.Background.Transparent = GetRandomColor(150);
-
-        themeManager.Colors.Control.Primary = GetRandomColor(150);
-        themeManager.Colors.Control.Outline = GetRandomColor(150);
-        themeManager.Colors.Control.PrimaryDisabled = GetRandomColor(150);
-        themeManager.Colors.Control.OutlineDisabled = GetRandomColor(150);
-
-        themeManager.Colors.Control.Solid.Primary = GetRandomColor();
-        themeManager.Colors.Control.Solid.Outline = GetRandomColor();
-        themeManager.Colors.Control.Solid.PrimaryDisabled = GetRandomColor();
-        themeManager.Colors.Control.Solid.OutlineDisabled = GetRandomColor();
-
-        themeManager.Colors.Text.Primary = GetRandomColor();
-        themeManager.Colors.Text.Secondary = GetRandomColor();
-        themeManager.Colors.Text.Tertiary = GetRandomColor();
-        themeManager.Colors.Text.Disabled = GetRandomColor();
-
+        themeManager.LoadTheme(Theme.Light);
         logger.Log("Updated entire fucking theme!!!!");
     }
 
@@ -56,9 +35,12 @@ public partial class HomeViewModel : ObservableObject
 
     partial void OnSelectedBlurEffectChanged(BlurEffect value)
     {
-        windowHandler.SetBlur(value, true, true);
+        windowHandler.SetBlur(value, true, UseDarkModeBlur);
     }
 
     [ObservableProperty]
     IEnumerable<BlurEffect> blurEffects = Enum.GetValues(typeof(BlurEffect)).Cast<BlurEffect>();
+
+    [ObservableProperty]
+    bool useDarkModeBlur = true;
 }

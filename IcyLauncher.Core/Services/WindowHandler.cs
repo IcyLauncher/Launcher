@@ -15,14 +15,14 @@ namespace IcyLauncher.Core.Services;
 public class WindowHandler
 {
     readonly ILogger logger;
-    readonly Configuration configuration;
+    readonly ThemeManager themeManager;
     readonly ControlReciever controlReciever;
     readonly Window shell;
 
-    public WindowHandler(ILogger<Window> logger, IOptions<Configuration> configuration, ControlReciever controlReciever, Window shell)
+    public WindowHandler(ILogger<Window> logger, ThemeManager themeManager, ControlReciever controlReciever, Window shell)
     {
         this.logger = logger;
-        this.configuration = configuration.Value;
+        this.themeManager = themeManager;
         this.controlReciever = controlReciever;
         this.shell = shell;
 
@@ -115,25 +115,78 @@ public class WindowHandler
             return true;
         }
 
+        try
+        {
+            titleBar.Visibility = Visibility.Visible;
+            HasTilteBar = true;
 
-        titleBar.Visibility = Visibility.Visible;
-        HasTilteBar = true;
+            Presenter.SetBorderAndTitleBar(true, true);
 
-        Presenter.SetBorderAndTitleBar(true, true);
+            Window.TitleBar.ExtendsContentIntoTitleBar = true;
+            Window.TitleBar.SetDragRectangles(new RectInt32[] { new(40, 0, ScreenSize.Width, 48) });
 
-        Window.TitleBar.ExtendsContentIntoTitleBar = true;
-        Window.TitleBar.SetDragRectangles(new RectInt32[] { new(40, 0, ScreenSize.Width, 48) });
 
-        Window.TitleBar.ButtonBackgroundColor = Colors.Transparent;
-        Window.TitleBar.ButtonPressedBackgroundColor = Color.FromArgb(90, 255, 255, 255);
-        Window.TitleBar.ButtonHoverBackgroundColor = Color.FromArgb(50, 255, 255, 255);
-        Window.TitleBar.ButtonInactiveBackgroundColor = Colors.Transparent;
-        Window.TitleBar.ButtonInactiveForegroundColor = Colors.LightGray;
+            shell.SetTitleBar(titleBar);
 
-        shell.SetTitleBar(titleBar);
+            themeManager.Colors.Control.PropertyChanged += TextControlColorsValueChanged;
+            themeManager.Colors.Text.PropertyChanged += TextControlColorsValueChanged;
+            TextControlColorsValueChanged(null, new("Primary"));
 
-        logger.Log("Set TitleBar to UIElement");
-        return true;
+            logger.Log("Set TitleBar to UIElement");
+            return true;
+        }
+        catch (Exception ex)
+        {
+            logger.Log("Failed to set TitleBar to UIElement", ex);
+            return false;
+        }
+    }
+
+    public bool SetTitleBarButtonColors(ButtonColors backgroundColors, ButtonColors foregroundColors)
+    {
+        if (!AppWindowTitleBar.IsCustomizationSupported())
+        {
+            logger.Log("Tried to set TitleBar Button Colors: Not supported");
+            return false;
+        }
+
+        try
+        {
+            Window.TitleBar.ButtonBackgroundColor = backgroundColors.Normal;
+            Window.TitleBar.ButtonHoverBackgroundColor = backgroundColors.Hover;
+            Window.TitleBar.ButtonPressedBackgroundColor = backgroundColors.Pressed;
+            Window.TitleBar.ButtonInactiveBackgroundColor = backgroundColors.Inactive;
+
+            Window.TitleBar.ButtonForegroundColor = foregroundColors.Normal;
+            Window.TitleBar.ButtonHoverForegroundColor = foregroundColors.Hover;
+            Window.TitleBar.ButtonPressedForegroundColor = foregroundColors.Pressed;
+            Window.TitleBar.ButtonInactiveForegroundColor = foregroundColors.Inactive;
+
+            return true;
+        }
+        catch (Exception ex)
+        {
+            logger.Log("Failed to set TitleBar Button Colors", ex);
+            return false;
+        }
+    }
+    private void TextControlColorsValueChanged(object? sender, System.ComponentModel.PropertyChangedEventArgs e)
+    {
+        if (e.PropertyName == "Outline" ||
+            e.PropertyName == "Primary" ||
+            e.PropertyName == "Secondary" ||
+            e.PropertyName == "Tertiary" ||
+            e.PropertyName == "Disabled")
+            SetTitleBarButtonColors(new(
+                    Colors.Transparent,
+                    themeManager.Colors.Control.Outline,
+                    themeManager.Colors.Control.Primary,
+                    Colors.Transparent),
+                new(
+                    themeManager.Colors.Text.Secondary,
+                    themeManager.Colors.Text.Primary,
+                    themeManager.Colors.Text.Tertiary,
+                    themeManager.Colors.Text.Disabled));
     }
 
 
@@ -175,7 +228,7 @@ public class WindowHandler
                 default:
                     controlReciever.MainGrid.SetBinding(Panel.BackgroundProperty, new Binding()
                     {
-                        Source = configuration,
+                        Source = themeManager.Colors,
                         Converter = new BrushConverter(),
                         Path = new PropertyPath(backgroundColor),
                         Mode = BindingMode.OneWay
@@ -246,7 +299,7 @@ public class WindowHandler
     private bool SetBlurAcrylic(bool enable, bool useDarkMode)
     {
         var setComposition = SetComposition(Win32.AccentState.ACCENT_ENABLE_ACRYLICBLURBEHIND, enable, useDarkMode);
-        var setMainBackground = SetMainBackground(enable ? "Apperance.Colors.Background.Transparent" : "Transparent");
+        var setMainBackground = SetMainBackground(enable ? "Background.Transparent" : "Transparent");
 
         if (setComposition && setMainBackground)
             IsBlurAcrylicEnabled = enable;
@@ -256,7 +309,7 @@ public class WindowHandler
     private bool SetBlurSimple(bool enable, bool useDarkMode)
     {
         var setComposition = SetComposition(Win32.AccentState.ACCENT_ENABLE_BLURBEHIND, enable, useDarkMode);
-        var setMainBackground = SetMainBackground(enable ? "Apperance.Colors.Background.Transparent" : "Transparent");
+        var setMainBackground = SetMainBackground(enable ? "Background.Transparent" : "Transparent");
 
         if (setComposition && setMainBackground)
             IsBlurSimpleEnabled = enable;
@@ -307,7 +360,7 @@ public class WindowHandler
 
     private bool SetBlurNone(bool enable)
     {
-        var setMainBackground = SetMainBackground(enable ? "Apperance.Colors.Background.Solid" : "Transparent");
+        var setMainBackground = SetMainBackground(enable ? "Background.Solid" : "Transparent");
 
         if (setMainBackground)
             IsBlurNoneEnabled = enable;

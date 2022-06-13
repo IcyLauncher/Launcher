@@ -2,6 +2,7 @@
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Data;
 using Microsoft.UI.Xaml.Media;
+using Windows.UI;
 using Windows.UI.ViewManagement;
 
 namespace IcyLauncher.Core.Services;
@@ -13,7 +14,7 @@ public class ThemeManager
     readonly IConverter converter;
     readonly ControlReciever controlReciever;
 
-    public ConfigurationApperanceColors Colors => configuration.Apperance.Colors;
+    public Theme Colors => configuration.Apperance.Colors;
 
     public ThemeManager(ILogger<ConfigurationManager> logger, IOptions<Configuration> configuration, IConverter converter, ControlReciever controlReciever)
     {
@@ -38,24 +39,44 @@ public class ThemeManager
 
         return converter.ToString(configuration.Apperance);
     }
-    public void LoadTheme(ConfigurationApperance input)
+    public void LoadTheme(Theme input)
     {
-        configuration.Apperance = input;
+        CopyTheme(configuration.Apperance.Colors, input);
         SetResourceColors();
 
-        logger.Log($"Loaded theme configuration from string");
+        logger.Log($"Loaded theme configuration from input");
+    }
+
+    static void CopyTheme(Theme copyTo, Theme copyFrom)
+    {
+        copyTo.Accent.Primary = copyFrom.Accent.Primary;
+        copyTo.Accent.Light = copyFrom.Accent.Light;
+        copyTo.Accent.Dark = copyFrom.Accent.Dark;
+
+        copyTo.Background.Solid = copyFrom.Background.Solid;
+        copyTo.Background.Transparent = copyFrom.Background.Transparent;
+
+        copyTo.Text.Primary = copyFrom.Text.Primary;
+        copyTo.Text.Secondary = copyFrom.Text.Secondary;
+        copyTo.Text.Tertiary = copyFrom.Text.Tertiary;
+        copyTo.Text.Disabled = copyFrom.Text.Disabled;
+
+        copyTo.Control.Primary = copyFrom.Control.Primary;
+        copyTo.Control.Outline = copyFrom.Control.Outline;
+        copyTo.Control.PrimaryDisabled = copyFrom.Control.Outline;
+        copyTo.Control.OutlineDisabled = copyFrom.Control.Outline;
+
+        copyTo.Control.Solid.Primary = copyFrom.Control.Solid.Primary;
+        copyTo.Control.Solid.Outline = copyFrom.Control.Solid.Outline;
+        copyTo.Control.Solid.PrimaryDisabled = copyFrom.Control.Solid.Outline;
+        copyTo.Control.Solid.OutlineDisabled = copyFrom.Control.Solid.Outline;
     }
 
 
     public void SetResourceColors()
     {
-        if (Application.Current.Resources["Colors"] is ConfigurationApperanceColors resourceColors)
-        {
-            resourceColors.Accent = configuration.Apperance.Colors.Accent;
-            resourceColors.Background = configuration.Apperance.Colors.Background;
-            resourceColors.Text = configuration.Apperance.Colors.Text;
-            resourceColors.Control = configuration.Apperance.Colors.Control;
-        }
+        if (Application.Current.Resources["Colors"] is Theme resourceColors)
+            CopyTheme(resourceColors, configuration.Apperance.Colors);
 
         logger.Log($"Set resource colors to configuration");
     }
@@ -100,6 +121,7 @@ public class ThemeManager
                 break;
         }
     }
+
     private void ControlColorsValuesChanged(object? sender, System.ComponentModel.PropertyChangedEventArgs e)
     {
         switch (e.PropertyName)
