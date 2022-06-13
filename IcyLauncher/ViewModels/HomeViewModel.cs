@@ -16,13 +16,6 @@ public partial class HomeViewModel : ObservableObject
         this.windowHandler = windowHandler;
     }
 
-    [ICommand]
-    void ReColor()
-    {
-        themeManager.LoadTheme(Theme.Light);
-        logger.Log("Updated entire fucking theme!!!!");
-    }
-
     static Color GetRandomColor(byte transparency = 255)
     {
         var random = new Random();
@@ -43,4 +36,31 @@ public partial class HomeViewModel : ObservableObject
 
     [ObservableProperty]
     bool useDarkModeBlur = true;
+
+
+    [ObservableProperty]
+    Color accentPrimary = GetRandomColor(255);
+
+    [ObservableProperty]
+    Color accentLight = GetRandomColor(255);
+
+    [ObservableProperty]
+    Color accentDark = GetRandomColor(255);
+
+    [ICommand]
+    void UpdateAccent()
+    {
+        themeManager.Colors.Accent.Primary = accentPrimary;
+        themeManager.Colors.Accent.Light = accentLight;
+        themeManager.Colors.Accent.Dark = accentDark;
+    }
+
+    [ObservableProperty]
+    bool darkMode = true;
+
+    partial void OnDarkModeChanged(bool value)
+    {
+        logger.Log(themeManager.Colors.Control.Primary);
+        themeManager.LoadTheme(value ? Theme.Dark : Theme.Light, true); // =>>>>>>>>>>>>>>>>>>>>>>>>>>> WHY IS THIS ONLY WORKING ONCE 
+    }
 }

@@ -39,19 +39,20 @@ public class ThemeManager
 
         return converter.ToString(configuration.Apperance);
     }
-    public void LoadTheme(Theme input)
+    public void LoadTheme(Theme input, bool ignoreAccent = false)
     {
-        CopyTheme(configuration.Apperance.Colors, input);
-        SetResourceColors();
-
+        CopyTheme(Colors, input, ignoreAccent);
         logger.Log($"Loaded theme configuration from input");
     }
 
-    static void CopyTheme(Theme copyTo, Theme copyFrom)
+    public static void CopyTheme(Theme copyTo, Theme copyFrom, bool ignoreAccent = false)
     {
-        copyTo.Accent.Primary = copyFrom.Accent.Primary;
-        copyTo.Accent.Light = copyFrom.Accent.Light;
-        copyTo.Accent.Dark = copyFrom.Accent.Dark;
+        if (!ignoreAccent)
+        {
+            copyTo.Accent.Primary = copyFrom.Accent.Primary;
+            copyTo.Accent.Light = copyFrom.Accent.Light;
+            copyTo.Accent.Dark = copyFrom.Accent.Dark;
+        }
 
         copyTo.Background.Solid = copyFrom.Background.Solid;
         copyTo.Background.Transparent = copyFrom.Background.Transparent;
@@ -76,7 +77,12 @@ public class ThemeManager
     public void SetResourceColors()
     {
         if (Application.Current.Resources["Colors"] is Theme resourceColors)
-            CopyTheme(resourceColors, configuration.Apperance.Colors);
+        {
+            resourceColors.Accent = Colors.Accent;
+            resourceColors.Background = Colors.Background;
+            resourceColors.Text = Colors.Text;
+            resourceColors.Control = Colors.Control;
+        }
 
         logger.Log($"Set resource colors to configuration");
     }

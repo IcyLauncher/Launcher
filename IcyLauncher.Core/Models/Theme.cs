@@ -77,13 +77,13 @@ public partial class Theme : ObservableObject
         }
     };
 
-    public ThemeAccent Accent { get; private set; } = new();
+    public ThemeAccent Accent { get; set; } = new();
 
-    public ThemeBackground Background { get; private set; } = new();
+    public ThemeBackground Background { get; set; } = new();
 
-    public ThemeText Text { get; private set; } = new();
+    public ThemeText Text { get; set; } = new();
 
-    public ThemeControl Control { get; private set; } = new();
+    public ThemeControl Control { get; set; } = new();
 }
 
 public partial class ThemeAccent : ObservableObject

@@ -50,21 +50,19 @@
                 Margin="0,10,0,0"
                 Orientation="Horizontal"
                 Spacing="50">
+                <ColorPicker Color="{x:Bind viewModel.AccentPrimary, Mode=TwoWay}" />
+                <ColorPicker Color="{x:Bind viewModel.AccentLight, Mode=TwoWay}" />
+                <ColorPicker Color="{x:Bind viewModel.AccentDark, Mode=TwoWay}" />
                 <Button
-                    Margin="0,10,0,0"
-                    Command="{x:Bind viewModel.ReColorCommand}"
-                    Content="ReColor" />
+                    Command="{x:Bind viewModel.UpdateAccentCommand}"
+                    Content="Update Accent" />
+                <ToggleSwitch Header="DarkMode" IsOn="{x:Bind viewModel.DarkMode, Mode=TwoWay}" />
                 <ComboBox
                     Header="BlurEffect"
                     ItemsSource="{x:Bind viewModel.BlurEffects}"
                     SelectedItem="{x:Bind viewModel.SelectedBlurEffect, Mode=TwoWay}" />
-                <ToggleSwitch IsOn="{x:Bind viewModel.UseDarkModeBlur, Mode=TwoWay}"/>
+                <ToggleSwitch Header="BlurDarkMode" IsOn="{x:Bind viewModel.UseDarkModeBlur, Mode=TwoWay}" />
             </StackPanel>
         </StackPanel>
-        <SplitView Margin="300,300,0,0" >
-            <Grid Background="Transparent">
-                <TextBlock Text="Sex" />
-            </Grid>
-        </SplitView>
     </Grid>
 </Page>
