@@ -28,14 +28,11 @@ public partial class HomeViewModel : ObservableObject
 
     partial void OnSelectedBlurEffectChanged(BlurEffect value)
     {
-        windowHandler.SetBlur(value, true, UseDarkModeBlur);
+        windowHandler.SetBlur(value, true, darkMode);
     }
 
     [ObservableProperty]
     IEnumerable<BlurEffect> blurEffects = Enum.GetValues(typeof(BlurEffect)).Cast<BlurEffect>();
-
-    [ObservableProperty]
-    bool useDarkModeBlur = true;
 
 
     [ObservableProperty]
@@ -60,7 +57,7 @@ public partial class HomeViewModel : ObservableObject
 
     partial void OnDarkModeChanged(bool value)
     {
-        logger.Log(themeManager.Colors.Control.Primary);
-        themeManager.LoadTheme(value ? Theme.Dark : Theme.Light, true); // =>>>>>>>>>>>>>>>>>>>>>>>>>>> WHY IS THIS ONLY WORKING ONCE 
+        themeManager.LoadTheme(value ? Theme.Dark : Theme.Light, true);
+        windowHandler.SetBlur(selectedBlurEffect, true, darkMode);
     }
 }

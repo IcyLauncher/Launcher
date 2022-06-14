@@ -39,7 +39,7 @@ public partial class ConfigurationApperance : ObservableObject
     [ObservableProperty]
     BannerType playBannerType = BannerType.TimeDependent;
 
-    public Theme Colors { get; set; } = Theme.Dark;
+    public Theme Colors { get; set; } = new();
 
     [ObservableProperty]
     BlurEffect blur = BlurEffect.Mica;

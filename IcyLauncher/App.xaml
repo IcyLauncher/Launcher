@@ -45,6 +45,107 @@
             <xaml:BrushConverter x:Key="BrushConverter" />
 
 
+
+            <SolidColorBrush x:Key="ButtonBackground" Color="{Binding Color, Source={ThemeResource ControlPrimary}}" />
+            <SolidColorBrush x:Key="ButtonBackgroundPointerOver" Color="{Binding Color, Source={ThemeResource ControlOutline}}" />
+            <SolidColorBrush x:Key="ButtonBackgroundPressed" Color="{Binding Color, Source={ThemeResource ControlPrimaryDisabled}}" />
+            <SolidColorBrush x:Key="ButtonBackgroundDisabled" Color="{Binding Color, Source={ThemeResource ControlPrimaryDisabled}}" />
+
+            <SolidColorBrush x:Key="ButtonBorderBrush" Color="{Binding Color, Source={ThemeResource ControlOutline}}" />
+            <SolidColorBrush x:Key="ButtonBorderBrushPointerOver" Color="{Binding Color, Source={ThemeResource ControlOutline}}" />
+            <SolidColorBrush x:Key="ButtonBorderBrushPressed" Color="{Binding Color, Source={ThemeResource ControlOutlineDisabled}}" />
+            <SolidColorBrush x:Key="ButtonBorderBrushDisabled" Color="{Binding Color, Source={ThemeResource ControlOutlineDisabled}}" />
+
+            <SolidColorBrush x:Key="ButtonForeground" Color="{Binding Color, Source={ThemeResource TextSecondary}}" />
+            <SolidColorBrush x:Key="ButtonForegroundPointerOver" Color="{Binding Color, Source={ThemeResource TextPrimary}}" />
+            <SolidColorBrush x:Key="ButtonForegroundPressed" Color="{Binding Color, Source={ThemeResource TextTertiary}}" />
+            <SolidColorBrush x:Key="ButtonForegroundDisabled" Color="{Binding Color, Source={ThemeResource TextDisabled}}" />
+
+
+            <SolidColorBrush x:Key="CheckBoxCheckBackgroundFillUnchecked" Color="{Binding Color, Source={ThemeResource ControlPrimary}}" />
+            <SolidColorBrush x:Key="CheckBoxCheckBackgroundFillUncheckedPointerOver" Color="{Binding Color, Source={ThemeResource ControlOutline}}" />
+            <SolidColorBrush x:Key="CheckBoxCheckBackgroundFillUncheckedPressed" Color="{Binding Color, Source={ThemeResource ControlPrimaryDisabled}}" />
+            <SolidColorBrush x:Key="CheckBoxCheckBackgroundFillUncheckedDisabled" Color="{Binding Color, Source={ThemeResource ControlPrimaryDisabled}}" />
+
+            <SolidColorBrush x:Key="CheckBoxCheckBackgroundStrokeUnchecked" Color="{Binding Color, Source={ThemeResource ControlOutline}}" />
+            <SolidColorBrush x:Key="CheckBoxCheckBackgroundStrokeUncheckedPointerOver" Color="{Binding Color, Source={ThemeResource ControlOutline}}" />
+            <SolidColorBrush x:Key="CheckBoxCheckBackgroundStrokeUncheckedPressed" Color="{Binding Color, Source={ThemeResource ControlOutlineDisabled}}" />
+            <SolidColorBrush x:Key="CheckBoxCheckBackgroundStrokeUncheckedDisabled" Color="{Binding Color, Source={ThemeResource ControlOutlineDisabled}}" />
+
+            <SolidColorBrush x:Key="CheckBoxCheckBackgroundFillChecked" Color="{Binding Color, Source={ThemeResource AccentPrimary}}" />
+            <SolidColorBrush x:Key="CheckBoxCheckBackgroundFillCheckedPointerOver" Color="{Binding Color, Source={ThemeResource AccentLight}}" />
+            <SolidColorBrush x:Key="CheckBoxCheckBackgroundFillCheckedPressed" Color="{Binding Color, Source={ThemeResource AccentDark}}" />
+            <SolidColorBrush x:Key="CheckBoxCheckBackgroundFillCheckedDisabled" Color="{Binding Color, Source={ThemeResource ControlPrimaryDisabled}}" />
+
+            <SolidColorBrush x:Key="CheckBoxCheckBackgroundStrokeChecked" Color="{Binding Color, Source={ThemeResource AccentPrimary}}" />
+            <SolidColorBrush x:Key="CheckBoxCheckBackgroundStrokeCheckedPointerOver" Color="{Binding Color, Source={ThemeResource AccentLight}}" />
+            <SolidColorBrush x:Key="CheckBoxCheckBackgroundStrokeCheckedPressed" Color="{Binding Color, Source={ThemeResource AccentDark}}" />
+            <SolidColorBrush x:Key="CheckBoxCheckBackgroundStrokeCheckedDisabled" Color="{Binding Color, Source={ThemeResource ControlPrimaryDisabled}}" />
+
+            <SolidColorBrush x:Key="CheckBoxCheckGlyphForegroundChecked" Color="{Binding Color, Source={ThemeResource ControlSolidPrimary}}" />
+            <SolidColorBrush x:Key="CheckBoxCheckGlyphForegroundCheckedPointerOver" Color="{Binding Color, Source={ThemeResource ControlSolidOutline}}" />
+            <SolidColorBrush x:Key="CheckBoxCheckGlyphForegroundCheckedPressed" Color="{Binding Color, Source={ThemeResource ControlSolidPrimaryDisabled}}" />
+            <SolidColorBrush x:Key="CheckBoxCheckGlyphForegroundCheckedDisabled" Color="{Binding Color, Source={ThemeResource ControlOutlineDisabled}}" />
+
+
+            <SolidColorBrush x:Key="ComboBoxItemForeground" Color="{Binding Color, Source={ThemeResource TextSecondary}}" />
+            <SolidColorBrush x:Key="ComboBoxItemForegroundPointerOver" Color="{Binding Color, Source={ThemeResource TextPrimary}}" />
+            <SolidColorBrush x:Key="ComboBoxItemForegroundPressed" Color="{Binding Color, Source={ThemeResource TextTertiary}}" />
+            <SolidColorBrush x:Key="ComboBoxItemForegroundDisabled" Color="{Binding Color, Source={ThemeResource TextDisabled}}" />
+
+            <SolidColorBrush x:Key="ComboBoxItemForegroundSelected" Color="{Binding Color, Source={ThemeResource TextPrimary}}" />
+            <SolidColorBrush x:Key="ComboBoxItemForegroundSelectedPointerOver" Color="{Binding Color, Source={ThemeResource TextSecondary}}" />
+            <SolidColorBrush x:Key="ComboBoxItemForegroundSelectedPressed" Color="{Binding Color, Source={ThemeResource TextTertiary}}" />
+            <SolidColorBrush x:Key="ComboBoxItemForegroundSelectedDisabled" Color="{Binding Color, Source={ThemeResource TextDisabled}}" />
+
+            <SolidColorBrush x:Key="ComboBoxItemBackgroundPointerOver" Color="{Binding Color, Source={ThemeResource ControlPrimary}}" />
+            <SolidColorBrush x:Key="ComboBoxItemBackgroundPressed" Color="{Binding Color, Source={ThemeResource ControlOutline}}" />
+
+            <SolidColorBrush x:Key="ComboBoxItemBorderBrushPointerOver" Color="{Binding Color, Source={ThemeResource ControlPrimary}}" />
+            <SolidColorBrush x:Key="ComboBoxItemBorderBrushPressed" Color="{Binding Color, Source={ThemeResource ControlOutlineDisabled}}" />
+
+            <SolidColorBrush x:Key="ComboBoxItemBackgroundSelected" Color="{Binding Color, Source={ThemeResource ControlOutline}}" />
+            <SolidColorBrush x:Key="ComboBoxItemBackgroundSelectedPointerOver" Color="{Binding Color, Source={ThemeResource ControlPrimary}}" />
+            <SolidColorBrush x:Key="ComboBoxItemBackgroundSelectedPressed" Color="{Binding Color, Source={ThemeResource ControlPrimaryDisabled}}" />
+            <SolidColorBrush x:Key="ComboBoxItemBackgroundSelectedDisabled" Color="{Binding Color, Source={ThemeResource ControlPrimaryDisabled}}" />
+
+            <SolidColorBrush x:Key="ComboBoxItemBorderBrushSelected" Color="{Binding Color, Source={ThemeResource ControlOutline}}" />
+            <SolidColorBrush x:Key="ComboBoxItemBorderBrushSelectedPointerOver" Color="{Binding Color, Source={ThemeResource ControlOutline}}" />
+            <SolidColorBrush x:Key="ComboBoxItemBorderBrushSelectedPressed" Color="{Binding Color, Source={ThemeResource ControlOutlineDisabled}}" />
+            <SolidColorBrush x:Key="ComboBoxItemBorderBrushSelectedDisabled" Color="{Binding Color, Source={ThemeResource ControlOutlineDisabled}}" />
+
+            <SolidColorBrush x:Key="ComboBoxDropDownBackground" Color="{Binding Color, Source={ThemeResource ControlSolidPrimary}}" />
+            <SolidColorBrush x:Key="ComboBoxDropDownBorderBrush" Color="{Binding Color, Source={ThemeResource ControlSolidOutline}}" />
+
+
+            <SolidColorBrush x:Key="ComboBoxBackground" Color="{Binding Color, Source={ThemeResource ControlPrimary}}" />
+            <SolidColorBrush x:Key="ComboBoxBackgroundUnfocused" Color="{Binding Color, Source={ThemeResource ControlPrimary}}" />
+            <SolidColorBrush x:Key="ComboBoxBackgroundPointerOver" Color="{Binding Color, Source={ThemeResource ControlOutline}}" />
+            <SolidColorBrush x:Key="ComboBoxBackgroundPressed" Color="{Binding Color, Source={ThemeResource ControlPrimaryDisabled}}" />
+            <SolidColorBrush x:Key="ComboBoxBackgroundDisabled" Color="{Binding Color, Source={ThemeResource ControlPrimaryDisabled}}" />
+
+            <SolidColorBrush x:Key="ComboBoxBorderBrush" Color="{Binding Color, Source={ThemeResource ControlOutline}}" />
+            <SolidColorBrush x:Key="ComboBoxBorderBrushPointerOver" Color="{Binding Color, Source={ThemeResource ControlOutline}}" />
+            <SolidColorBrush x:Key="ComboBoxBorderBrushPressed" Color="{Binding Color, Source={ThemeResource ControlOutlineDisabled}}" />
+            <SolidColorBrush x:Key="ComboBoxBorderBrushDisabled" Color="{Binding Color, Source={ThemeResource ControlOutlineDisabled}}" />
+
+            <SolidColorBrush x:Key="ComboBoxForeground" Color="{Binding Color, Source={ThemeResource TextSecondary}}" />
+            <SolidColorBrush x:Key="ComboBoxForegroundPointerOver" Color="{Binding Color, Source={ThemeResource TextPrimary}}" />
+            <SolidColorBrush x:Key="ComboBoxForegroundPressed" Color="{Binding Color, Source={ThemeResource TextTertiary}}" />
+            <SolidColorBrush x:Key="ComboBoxForegroundDisabled" Color="{Binding Color, Source={ThemeResource TextDisabled}}" />
+
+            <SolidColorBrush x:Key="ComboBoxPlaceHolderForeground" Color="{Binding Color, Source={ThemeResource TextTertiary}}" />
+            <SolidColorBrush x:Key="ComboBoxPlaceHolderForegroundDisabled" Color="{Binding Color, Source={ThemeResource TextDisabled}}" />
+
+            <SolidColorBrush x:Key="ComboBoxDropDownGlyphForeground" Color="{Binding Color, Source={ThemeResource TextSecondary}}" />
+            <SolidColorBrush x:Key="ComboBoxDropDownGlyphForegroundPointerOver" Color="{Binding Color, Source={ThemeResource TextPrimary}}" />
+            <SolidColorBrush x:Key="ComboBoxDropDownGlyphForegroundPressed" Color="{Binding Color, Source={ThemeResource TextTertiary}}" />
+            <SolidColorBrush x:Key="ComboBoxDropDownGlyphForegroundDisabled" Color="{Binding Color, Source={ThemeResource TextDisabled}}" />
+
+
+            <SolidColorBrush x:Key="NavigationViewContentBackground" Color="{Binding Color, Source={ThemeResource ControlPrimary}}" />
+            <SolidColorBrush x:Key="NavigationViewContentGridBorderBrush" Color="{Binding Color, Source={ThemeResource ControlOutline}}" />
+
             <Style TargetType="NavigationView">
                 <Setter Property="IsSettingsVisible" Value="False" />
                 <Setter Property="IsPaneOpen" Value="True" />
@@ -308,52 +409,6 @@
                     </Setter.Value>
                 </Setter>
             </Style>
-
-
-            <SolidColorBrush x:Key="NavigationViewContentBackground" Color="{Binding Color, Source={ThemeResource ControlPrimary}}" />
-            <SolidColorBrush x:Key="NavigationViewContentGridBorderBrush" Color="{Binding Color, Source={ThemeResource ControlOutline}}" />
-
-
-            <SolidColorBrush x:Key="ButtonBackground" Color="{Binding Color, Source={ThemeResource ControlPrimary}}" />
-            <SolidColorBrush x:Key="ButtonBackgroundPointerOver" Color="{Binding Color, Source={ThemeResource ControlOutline}}" />
-            <SolidColorBrush x:Key="ButtonBackgroundPressed" Color="{Binding Color, Source={ThemeResource ControlPrimaryDisabled}}" />
-            <SolidColorBrush x:Key="ButtonBackgroundDisabled" Color="{Binding Color, Source={ThemeResource ControlPrimaryDisabled}}" />
-
-            <SolidColorBrush x:Key="ButtonBorderBrush" Color="{Binding Color, Source={ThemeResource ControlOutline}}" />
-            <SolidColorBrush x:Key="ButtonBorderBrushPointerOver" Color="{Binding Color, Source={ThemeResource ControlOutline}}" />
-            <SolidColorBrush x:Key="ButtonBorderBrushPressed" Color="{Binding Color, Source={ThemeResource ControlOutlineDisabled}}" />
-            <SolidColorBrush x:Key="ButtonBorderBrushDisabled" Color="{Binding Color, Source={ThemeResource ControlOutlineDisabled}}" />
-
-            <SolidColorBrush x:Key="ButtonForeground" Color="{Binding Color, Source={ThemeResource TextSecondary}}" />
-            <SolidColorBrush x:Key="ButtonForegroundPointerOver" Color="{Binding Color, Source={ThemeResource TextPrimary}}" />
-            <SolidColorBrush x:Key="ButtonForegroundPressed" Color="{Binding Color, Source={ThemeResource TextTertiary}}" />
-            <SolidColorBrush x:Key="ButtonForegroundDisabled" Color="{Binding Color, Source={ThemeResource TextDisabled}}" />
-
-
-            <SolidColorBrush x:Key="CheckBoxCheckBackgroundFillUnchecked" Color="{Binding Color, Source={ThemeResource ControlPrimary}}" />
-            <SolidColorBrush x:Key="CheckBoxCheckBackgroundFillUncheckedPointerOver" Color="{Binding Color, Source={ThemeResource ControlOutline}}" />
-            <SolidColorBrush x:Key="CheckBoxCheckBackgroundFillUncheckedPressed" Color="{Binding Color, Source={ThemeResource ControlPrimaryDisabled}}" />
-            <SolidColorBrush x:Key="CheckBoxCheckBackgroundFillUncheckedDisabled" Color="{Binding Color, Source={ThemeResource ControlPrimaryDisabled}}" />
-
-            <SolidColorBrush x:Key="CheckBoxCheckBackgroundStrokeUnchecked" Color="{Binding Color, Source={ThemeResource ControlOutline}}" />
-            <SolidColorBrush x:Key="CheckBoxCheckBackgroundStrokeUncheckedPointerOver" Color="{Binding Color, Source={ThemeResource ControlOutline}}" />
-            <SolidColorBrush x:Key="CheckBoxCheckBackgroundStrokeUncheckedPressed" Color="{Binding Color, Source={ThemeResource ControlOutlineDisabled}}" />
-            <SolidColorBrush x:Key="CheckBoxCheckBackgroundStrokeUncheckedDisabled" Color="{Binding Color, Source={ThemeResource ControlOutlineDisabled}}" />
-
-            <SolidColorBrush x:Key="CheckBoxCheckBackgroundFillChecked" Color="{Binding Color, Source={ThemeResource AccentPrimary}}" />
-            <SolidColorBrush x:Key="CheckBoxCheckBackgroundFillCheckedPointerOver" Color="{Binding Color, Source={ThemeResource AccentLight}}" />
-            <SolidColorBrush x:Key="CheckBoxCheckBackgroundFillCheckedPressed" Color="{Binding Color, Source={ThemeResource AccentDark}}" />
-            <SolidColorBrush x:Key="CheckBoxCheckBackgroundFillCheckedDisabled" Color="{Binding Color, Source={ThemeResource ControlPrimaryDisabled}}" />
-
-            <SolidColorBrush x:Key="CheckBoxCheckBackgroundStrokeChecked" Color="{Binding Color, Source={ThemeResource AccentPrimary}}" />
-            <SolidColorBrush x:Key="CheckBoxCheckBackgroundStrokeCheckedPointerOver" Color="{Binding Color, Source={ThemeResource AccentLight}}" />
-            <SolidColorBrush x:Key="CheckBoxCheckBackgroundStrokeCheckedPressed" Color="{Binding Color, Source={ThemeResource AccentDark}}" />
-            <SolidColorBrush x:Key="CheckBoxCheckBackgroundStrokeCheckedDisabled" Color="{Binding Color, Source={ThemeResource ControlPrimaryDisabled}}" />
-
-            <SolidColorBrush x:Key="CheckBoxCheckGlyphForegroundChecked" Color="{Binding Color, Source={ThemeResource ControlSolidPrimary}}" />
-            <SolidColorBrush x:Key="CheckBoxCheckGlyphForegroundCheckedPointerOver" Color="{Binding Color, Source={ThemeResource ControlSolidOutline}}" />
-            <SolidColorBrush x:Key="CheckBoxCheckGlyphForegroundCheckedPressed" Color="{Binding Color, Source={ThemeResource ControlSolidPrimaryDisabled}}" />
-            <SolidColorBrush x:Key="CheckBoxCheckGlyphForegroundCheckedDisabled" Color="{Binding Color, Source={ThemeResource ControlOutlineDisabled}}" />
 
 
             <Style TargetType="ToggleSwitch">

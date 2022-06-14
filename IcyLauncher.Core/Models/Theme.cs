@@ -5,42 +5,8 @@ namespace IcyLauncher.Core.Models;
 
 public partial class Theme : ObservableObject
 {
-    public static Theme Dark { get; } = new()
-    {
-        Accent = new()
-        {
-            Primary = Color.FromArgb(255, 0, 138, 255),
-            Light = Color.FromArgb(255, 96, 184, 255),
-            Dark = Color.FromArgb(255, 24, 83, 196)
-        },
-        Background = new()
-        {
-            Solid = Color.FromArgb(255, 32, 32, 32),
-            Transparent = Color.FromArgb(150, 32, 32, 32)
-        },
-        
-        Text = new()
-        {
-            Primary = Color.FromArgb(255, 255, 255, 255),
-            Secondary = Color.FromArgb(196, 255, 255, 255),
-            Tertiary = Color.FromArgb(133, 255, 255, 255),
-            Disabled = Color.FromArgb(92, 255, 255, 255),
-        },
-        Control = new()
-        {
-            Primary = Color.FromArgb(13, 255, 255, 255),
-            Outline = Color.FromArgb(26, 255, 255, 255),
-            PrimaryDisabled = Color.FromArgb(38, 255, 255, 255),
-            OutlineDisabled = Color.FromArgb(51, 255, 255, 255),
-            Solid = new()
-            {
-                Primary = Color.FromArgb(255, 46, 46, 46),
-                Outline = Color.FromArgb(255, 56, 56, 56),
-                PrimaryDisabled = Color.FromArgb(255, 67, 67, 67),
-                OutlineDisabled = Color.FromArgb(255, 79, 79, 79)
-            }
-        }
-    };
+    public static Theme Dark { get; } = new();
+
     public static Theme Light { get; } = new()
     {
         Accent = new()
@@ -89,66 +55,66 @@ public partial class Theme : ObservableObject
 public partial class ThemeAccent : ObservableObject
 {
     [ObservableProperty]
-    Color primary;
+    Color primary = Color.FromArgb(255, 0, 138, 255);
 
     [ObservableProperty]
-    Color light;
+    Color light = Color.FromArgb(255, 96, 184, 255);
 
     [ObservableProperty]
-    Color dark;
+    Color dark = Color.FromArgb(255, 24, 83, 196);
 }
 
 public partial class ThemeBackground : ObservableObject
 {
     [ObservableProperty]
-    Color solid;
+    Color solid = Color.FromArgb(255, 32, 32, 32);
 
     [ObservableProperty]
-    Color transparent;
+    Color transparent = Color.FromArgb(150, 32, 32, 32);
 }
 
 public partial class ThemeText : ObservableObject
 {
     [ObservableProperty]
-    Color primary;
+    Color primary = Color.FromArgb(255, 255, 255, 255);
 
     [ObservableProperty]
-    Color secondary;
+    Color secondary = Color.FromArgb(196, 255, 255, 255);
 
     [ObservableProperty]
-    Color tertiary;
+    Color tertiary = Color.FromArgb(133, 255, 255, 255);
 
     [ObservableProperty]
-    Color disabled;
+    Color disabled = Color.FromArgb(92, 255, 255, 255);
 }
 
 public partial class ThemeControl : ObservableObject
 {
     [ObservableProperty]
-    Color primary;
+    Color primary = Color.FromArgb(13, 255, 255, 255);
 
     [ObservableProperty]
-    Color outline;
+    Color outline = Color.FromArgb(26, 255, 255, 255);
 
     [ObservableProperty]
-    Color primaryDisabled;
+    Color primaryDisabled = Color.FromArgb(38, 255, 255, 255);
 
     [ObservableProperty]
-    Color outlineDisabled;
+    Color outlineDisabled = Color.FromArgb(51, 255, 255, 255);
 
     public ThemeControlSolid Solid { get; set; } = new();
 }
 public partial class ThemeControlSolid : ObservableObject
 {
     [ObservableProperty]
-    Color primary;
+    Color primary = Color.FromArgb(255, 46, 46, 46);
 
     [ObservableProperty]
-    Color outline;
+    Color outline = Color.FromArgb(255, 56, 56, 56);
 
     [ObservableProperty]
-    Color primaryDisabled;
+    Color primaryDisabled = Color.FromArgb(255, 67, 67, 67);
 
     [ObservableProperty]
-    Color outlineDisabled;
+    Color outlineDisabled = Color.FromArgb(255, 79, 79, 79);
 }
