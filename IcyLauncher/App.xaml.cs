@@ -2,9 +2,7 @@
 using IcyLauncher.Views;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
-using Microsoft.UI;
 using Microsoft.UI.Xaml.Controls;
-using Microsoft.UI.Xaml.Media;
 using Serilog;
 
 namespace IcyLauncher;
@@ -13,6 +11,7 @@ public partial class App : Application
 {
     readonly IHost host;
     public static IServiceProvider Provider { get; private set; } = default!;
+    public static Theme Colors { get; private set; } = default!;
 
     public App()
     {
@@ -58,19 +57,6 @@ public partial class App : Application
     {
         await host.StartAsync();
         Provider.GetRequiredService<AppStartupHandler>();
-    }
-}
-
-public class CustomTextBox : TextBox
-{
-    public CustomTextBox()
-    {
-        SetBinding(ForegroundProperty, new Microsoft.UI.Xaml.Data.Binding()
-        {
-            Source = App.Provider.GetRequiredService<ThemeManager>().Colors,
-            Converter = new Core.Xaml.BrushConverter(),
-            Path = new PropertyPath(IsEnabled ? "Text.Secondary" : "Text.Disabled"), // <<<<<<<<< not working. Fix it plz. Also Hover effect broken ;(
-            Mode = Microsoft.UI.Xaml.Data.BindingMode.OneWay
-        });
+        Colors = Provider.GetRequiredService<ThemeManager>().Colors;
     }
 }

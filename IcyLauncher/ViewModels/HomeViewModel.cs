@@ -46,7 +46,7 @@ public partial class HomeViewModel : ObservableObject
     Color accentDark = GetRandomColor(255);
 
     [ICommand]
-    void UpdateAccent()
+    async void UpdateAccent()
     {
         themeManager.Colors.Accent.Primary = accentPrimary;
         themeManager.Colors.Accent.Light = accentLight;
