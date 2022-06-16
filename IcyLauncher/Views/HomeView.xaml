@@ -15,7 +15,7 @@
             Text="some goofy ahh text" />
 
         <ScrollViewer>
-            <StackPanel Margin="50" Spacing="10">
+            <StackPanel Margin="50" Spacing="20">
                 <StackPanel Orientation="Horizontal" Spacing="50">
                     <ToggleSwitch Header="On-Enabled" IsOn="true" />
                     <ToggleSwitch
@@ -82,6 +82,15 @@
                         IsEnabled="False"
                         PlaceholderText="PlaceHolder" />
                 </StackPanel>
+                <StackPanel Orientation="Horizontal" Spacing="50">
+                    <TextBlock Style="{ThemeResource Header}" Text="Header" />
+                    <TextBlock Style="{ThemeResource Title}" Text="Title" />
+                    <TextBlock Style="{ThemeResource TitleSecondary}" Text="TitleSecondary" />
+                    <TextBlock Style="{ThemeResource Content}" Text="Content" />
+                    <TextBlock Style="{ThemeResource ContentSecondary}" Text="ContentSecondary" />
+                    <TextBlock Style="{ThemeResource Subpoint}" Text="Subpoint" />
+                    <TextBlock Style="{ThemeResource SubpointSecondary}" Text="SubpointSecondary" />
+                </StackPanel>
 
                 <StackPanel
                     Margin="0,100,0,0"
@@ -94,8 +103,14 @@
                             <ColorPicker Color="{x:Bind viewModel.AccentDark, Mode=TwoWay}" />
                         </StackPanel>
                     </Viewbox>
-                    <Button Command="{x:Bind viewModel.UpdateAccentCommand}" Content="Update Accent" />
-                    <ToggleSwitch Header="DarkMode" IsOn="{x:Bind viewModel.DarkMode, Mode=TwoWay}" />
+                    <Button
+                        VerticalAlignment="Top"
+                        Command="{x:Bind viewModel.UpdateAccentCommand}"
+                        Content="Update Accent" />
+                    <ToggleSwitch
+                        VerticalAlignment="Top"
+                        Header="DarkMode"
+                        IsOn="{x:Bind viewModel.DarkMode, Mode=TwoWay}" />
                     <ComboBox
                         Header="BlurEffect"
                         ItemsSource="{x:Bind viewModel.BlurEffects}"

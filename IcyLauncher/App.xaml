@@ -151,6 +151,57 @@
             <SolidColorBrush x:Key="ComboBoxItemPillFillBrush" Color="{Binding Color, Source={ThemeResource AccentPrimary}}" />
 
 
+            <Style x:Key="Header" TargetType="TextBlock">
+                <Setter Property="FontFamily" Value="Segoe UI" />
+                <Setter Property="FontSize" Value="24" />
+                <Setter Property="FontWeight" Value="Normal" />
+                <Setter Property="Foreground" Value="{ThemeResource TextTertiary}" />
+            </Style>
+
+            <Style x:Key="Title" TargetType="TextBlock">
+                <Setter Property="FontFamily" Value="Segoe UI" />
+                <Setter Property="FontSize" Value="20" />
+                <Setter Property="FontWeight" Value="SemiBold" />
+                <Setter Property="Foreground" Value="{ThemeResource TextPrimary}" />
+                <Setter Property="Typography.Capitals" Value="AllSmallCaps" />
+            </Style>
+
+            <Style x:Key="TitleSecondary" TargetType="TextBlock">
+                <Setter Property="FontFamily" Value="Segoe UI" />
+                <Setter Property="FontSize" Value="18" />
+                <Setter Property="FontWeight" Value="Normal" />
+                <Setter Property="Foreground" Value="{ThemeResource TextPrimary}" />
+            </Style>
+
+            <Style x:Key="Content" TargetType="TextBlock">
+                <Setter Property="FontFamily" Value="Segoe UI" />
+                <Setter Property="FontSize" Value="18" />
+                <Setter Property="FontWeight" Value="Normal" />
+                <Setter Property="Foreground" Value="{ThemeResource TextSecondary}" />
+            </Style>
+
+            <Style x:Key="ContentSecondary" TargetType="TextBlock">
+                <Setter Property="FontFamily" Value="Segoe UI" />
+                <Setter Property="FontSize" Value="18" />
+                <Setter Property="FontWeight" Value="Normal" />
+                <Setter Property="Foreground" Value="{ThemeResource TextTertiary}" />
+            </Style>
+
+            <Style x:Key="Subpoint" TargetType="TextBlock">
+                <Setter Property="FontFamily" Value="Segoe UI" />
+                <Setter Property="FontSize" Value="14" />
+                <Setter Property="FontWeight" Value="Normal" />
+                <Setter Property="Foreground" Value="{ThemeResource TextSecondary}" />
+            </Style>
+
+            <Style x:Key="SubpointSecondary" TargetType="TextBlock">
+                <Setter Property="FontFamily" Value="Segoe UI" />
+                <Setter Property="FontSize" Value="14" />
+                <Setter Property="FontWeight" Value="Normal" />
+                <Setter Property="Foreground" Value="{ThemeResource TextTertiary}" />
+            </Style>
+
+
             <Style TargetType="ui:TextBox">
                 <Setter Property="Background" Value="{ThemeResource ControlPrimary}" />
                 <Setter Property="BorderBrush" Value="{ThemeResource ControlOutline}" />
