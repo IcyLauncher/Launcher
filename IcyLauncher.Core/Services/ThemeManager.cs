@@ -56,6 +56,7 @@ public class ThemeManager
 
         copyTo.Background.Solid = copyFrom.Background.Solid;
         copyTo.Background.Transparent = copyFrom.Background.Transparent;
+        copyTo.Background.Gradient = copyFrom.Background.Gradient;
 
         copyTo.Text.Primary = copyFrom.Text.Primary;
         copyTo.Text.Secondary = copyFrom.Text.Secondary;

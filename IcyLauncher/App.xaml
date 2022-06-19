@@ -29,6 +29,7 @@
 
             <SolidColorBrush x:Key="BackgroundSolid" Color="{Binding Background.Solid, Source={ThemeResource Colors}, Mode=OneWay}" />
             <SolidColorBrush x:Key="BackgroundTransparent" Color="{Binding Background.Transparent, Source={ThemeResource Colors}, Mode=OneWay}" />
+            <SolidColorBrush x:Key="BackgroundGradient" Color="{Binding Background.Gradient, Source={ThemeResource Colors}, Mode=OneWay}" />
 
             <SolidColorBrush x:Key="TextPrimary" Color="{Binding Text.Primary, Source={ThemeResource Colors}, Mode=OneWay}" />
             <SolidColorBrush x:Key="TextSecondary" Color="{Binding Text.Secondary, Source={ThemeResource Colors}, Mode=OneWay}" />

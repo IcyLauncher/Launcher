@@ -37,12 +37,15 @@
 		<None Remove="Assets\Icon.png" />
 		<None Remove="Assets\LICENSE" />
 		<None Remove="Assets\NoImage.png" />
+		<None Remove="Assets\Redstone-Block.png" />
 		<None Remove="Views\HomeView.xaml" />
 		<None Remove="Views\ProfilesView.xaml" />
 	</ItemGroup>
 
 	<ItemGroup>
 		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.0.0-preview3" />
+		<PackageReference Include="CommunityToolkit.WinUI.UI" Version="7.1.2" />
+		<PackageReference Include="CommunityToolkit.WinUI.UI.Media" Version="7.1.2" />
 		<PackageReference Include="Microsoft.Extensions.Hosting" Version="6.0.1" />
 		<PackageReference Include="Microsoft.WindowsAppSDK" Version="1.1.0-preview3" />
 		<PackageReference Include="Microsoft.Windows.SDK.BuildTools" Version="10.0.22000.197" />
@@ -101,6 +104,9 @@
 		</Content>
 		<Content Update="Assets\README.md">
 			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Update="Assets\Redstone-Block.png">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</Content>
 	</ItemGroup>
 

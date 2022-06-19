@@ -1,5 +1,12 @@
-﻿using Microsoft.UI;
+﻿using IcyLauncher.Core.Xaml;
+using Microsoft.UI;
+using Microsoft.UI.Xaml.Controls;
+using Microsoft.UI.Xaml.Hosting;
 using Microsoft.UI.Xaml.Media;
+using Microsoft.UI.Xaml.Shapes;
+using System.Collections.ObjectModel;
+using System.Numerics;
+using System.Text;
 using Windows.UI;
 
 namespace IcyLauncher.ViewModels;
@@ -46,11 +53,19 @@ public partial class HomeViewModel : ObservableObject
     Color accentDark = GetRandomColor(255);
 
     [ICommand]
-    async void UpdateAccent()
+    void UpdateAccent()
     {
-        themeManager.Colors.Accent.Primary = accentPrimary;
-        themeManager.Colors.Accent.Light = accentLight;
-        themeManager.Colors.Accent.Dark = accentDark;
+        //themeManager.Colors.Accent.Primary = accentPrimary;
+        //themeManager.Colors.Accent.Light = accentLight;
+        //themeManager.Colors.Accent.Dark = accentDark;
+        Profiles.Add(new() 
+        {
+            Title = "Default",
+            Color = Colors.Red,
+            Icon = "Redstone-Block.png".AsImage(),
+            Version = "1.18",
+            Client = "Vanilla"
+        });
     }
 
     [ObservableProperty]
@@ -61,4 +76,8 @@ public partial class HomeViewModel : ObservableObject
         themeManager.LoadTheme(value ? Theme.Dark : Theme.Light, true);
         windowHandler.SetBlur(selectedBlurEffect, true, darkMode);
     }
+
+
+    [ObservableProperty]
+    ObservableCollection<Profile> profiles = new();
 }
