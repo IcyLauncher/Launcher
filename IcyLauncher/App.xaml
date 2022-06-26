@@ -2,12 +2,6 @@
     x:Class="IcyLauncher.App"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:animatedvisuals="using:Microsoft.UI.Xaml.Controls.AnimatedVisuals"
-    xmlns:controls="using:Microsoft.UI.Xaml.Controls"
-    xmlns:ex="using:CommunityToolkit.WinUI.UI"
-    xmlns:local="using:IcyLauncher"
-    xmlns:md="using:CommunityToolkit.WinUI.UI.Media"
-    xmlns:media="using:Microsoft.UI.Xaml.Media"
     xmlns:models="using:IcyLauncher.Core.Models"
     xmlns:primitives="using:Microsoft.UI.Xaml.Controls.Primitives"
     xmlns:ui="using:IcyLauncher.UI"
@@ -17,6 +11,7 @@
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <XamlControlsResources xmlns="using:Microsoft.UI.Xaml.Controls" />
+
                 <ui:ProfileDataTemplate />
             </ResourceDictionary.MergedDictionaries>
 
@@ -49,6 +44,7 @@
             <SolidColorBrush x:Key="ControlSolidOutline" Color="{Binding Control.Solid.Outline, Source={ThemeResource Colors}, Mode=OneWay}" />
             <SolidColorBrush x:Key="ControlSolidPrimaryDisabled" Color="{Binding Control.Solid.PrimaryDisabled, Source={ThemeResource Colors}, Mode=OneWay}" />
             <SolidColorBrush x:Key="ControlSolidOutlineDisabled" Color="{Binding Control.Solid.OutlineDisabled, Source={ThemeResource Colors}, Mode=OneWay}" />
+
 
 
             <SolidColorBrush x:Key="ButtonBackground" Color="{Binding Color, Source={ThemeResource ControlPrimary}}" />
@@ -228,7 +224,6 @@
             </Style>
 
 
-
             <Style TargetType="ui:TextBox">
                 <Setter Property="Background" Value="{ThemeResource ControlPrimary}" />
                 <Setter Property="BorderBrush" Value="{ThemeResource ControlOutline}" />
@@ -343,7 +338,14 @@
 
                                 <VisualStateManager.VisualStateGroups>
                                     <VisualStateGroup x:Name="CommonStates">
-                                        <VisualState x:Name="Normal" />
+
+                                        <VisualState x:Name="Normal">
+                                            <Storyboard>
+                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentElement" Storyboard.TargetProperty="Foreground">
+                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource TextPrimary}" />
+                                                </ObjectAnimationUsingKeyFrames>
+                                            </Storyboard>
+                                        </VisualState>
 
                                         <VisualState x:Name="Disabled">
                                             <Storyboard>
@@ -2670,6 +2672,7 @@
                                     VerticalScrollBarVisibility="Hidden">
                                     <GridView
                                         x:Name="ItemsContainter"
+                                        Margin="0,0,0,-23"
                                         ItemContainerStyle="{TemplateBinding ItemContainerStyle}"
                                         ItemTemplate="{TemplateBinding ItemTemplate}"
                                         ItemsSource="{TemplateBinding ItemsSource}">
@@ -2685,7 +2688,7 @@
                                     Name="BackButton"
                                     Width="20"
                                     Height="39"
-                                    Margin="5,0,0,0"
+                                    Margin="5,0,0,-11"
                                     Padding="-2"
                                     VerticalAlignment="Center">
                                     <FontIcon FontFamily="Assets/FluentSystemIcons-Filled.ttf#FluentSystemIcons-Filled" Glyph="&#xF2AB;" />
@@ -2694,7 +2697,7 @@
                                     Name="ForwardButton"
                                     Width="20"
                                     Height="39"
-                                    Margin="0,0,5,0"
+                                    Margin="0,0,5,-11"
                                     Padding="-2"
                                     HorizontalAlignment="Right"
                                     VerticalAlignment="Center">

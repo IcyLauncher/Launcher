@@ -1,5 +1,4 @@
 ﻿using IcyLauncher.ViewModels;
-using IcyLauncher.Views;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.UI.Xaml.Controls;
@@ -10,8 +9,8 @@ namespace IcyLauncher;
 public partial class App : Application
 {
     readonly IHost host;
+
     public static IServiceProvider Provider { get; private set; } = default!;
-    public static Theme Colors { get; private set; } = default!;
 
     public App()
     {
@@ -30,9 +29,14 @@ public partial class App : Application
                 services.Configure<Configuration>(context.Configuration);
                 var configuration = context.Configuration.Get<Configuration>();
 
-                var titleBar = UIElementProvider.TitleBar(configuration.Apperance.Colors.Accent.Light, configuration.Apperance.Colors.Accent.Dark, out Button backButton);
-                var navigationView = UIElementProvider.NavigationView(out Frame contentFrame);
-                var mainGrid = UIElementProvider.MainGrid(new GridLength[] { new(), new(1, GridUnitType.Star) }, 
+                var titleBar = UIElementProvider.TitleBar(
+                    configuration.Apperance.Colors.Accent.Light,
+                    configuration.Apperance.Colors.Accent.Dark,
+                    out Button backButton);
+                var navigationView = UIElementProvider.NavigationView(
+                    out Frame contentFrame);
+                var mainGrid = UIElementProvider.MainGrid(
+                    new GridLength[] { new(), new(1, GridUnitType.Star) }, 
                     titleBar, navigationView);
 
                 services.AddScoped<Core.Services.ConfigurationManager>();
@@ -46,9 +50,8 @@ public partial class App : Application
                 services.AddSingleton<HomeViewModel>();
                 services.AddSingleton<ProfilesViewModel>();
 
-                services.AddSingleton<Window>(provider => new ShellView() { Content = mainGrid, Title = "IcyLauncher" });
-            })
-            .Build();
+                services.AddSingleton<Window>(provider => new() { Content = mainGrid, Title = "IcyLauncher" });
+            }).Build();
 
         Provider = host.Services;
     }
@@ -56,7 +59,7 @@ public partial class App : Application
     protected override async void OnLaunched(LaunchActivatedEventArgs args)
     {
         await host.StartAsync();
+
         Provider.GetRequiredService<AppStartupHandler>();
-        Colors = Provider.GetRequiredService<ThemeManager>().Colors;
     }
 }

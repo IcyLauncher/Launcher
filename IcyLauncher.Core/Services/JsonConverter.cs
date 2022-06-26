@@ -17,18 +17,21 @@ public class JsonConverter : IConverter
     public string ToString(object input)
     {
         logger.Log("Serializing object to string");
+
         return JsonConvert.SerializeObject(input);
     }
 
     public void SaveToPath(object input, string path)
     {
         logger.Log($"Serializing object to path ({path})");
+
         throw new NotImplementedException();
     }
 
     public T ToObject<T>(string input, object? settings = null)
     {
         logger.Log("Deserializing string to object");
+
         return (JsonConvert.DeserializeObject<T>(input, settings is not JsonSerializerSettings ? new() : (JsonSerializerSettings)settings) is T result) ?
             result : throw Exceptions.InvalidDeserializedResult;
     }
@@ -44,7 +47,7 @@ public class JsonConverter : IConverter
                 MissingMemberHandling = MissingMemberHandling.Error
             });
 
-        logger.Log($"Tried to deserialize string to object (Status: {success})");
+        logger.Log($"Tried to deserialize string to object (Result: {success})");
         return success;
     }
 }

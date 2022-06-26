@@ -8,7 +8,7 @@ public class ScrollLane : GridView
         "CanContentRenderOutsideBounds",
         typeof(bool),
         typeof(ScrollLane),
-        new PropertyMetadata(true));
+        new(true));
 
     public bool CanContentRenderOutsideBounds
     {
@@ -20,7 +20,7 @@ public class ScrollLane : GridView
         "VerticalScrollBarVisibility",
         typeof(ScrollBarVisibility),
         typeof(ScrollLane),
-        new PropertyMetadata(ScrollBarVisibility.Hidden));
+        new(ScrollBarVisibility.Hidden));
 
     public ScrollBarVisibility VerticalScrollBarVisibility
     {
@@ -46,12 +46,14 @@ public class ScrollLane : GridView
         forwardButton = (Button)GetTemplateChild("ForwardButton");
 
         scrollContainer.Loaded += OnScrollContainerLoaded;
+        itemsContainter.SelectionChanged += ItemSelectionChanged;
+
         itemsContainter.Items.VectorChanged += async (s, e) =>
         {
             await Task.Delay(100);
             UpdateButtonVisibilities(scrollContainer.HorizontalOffset);
         };
-        itemsContainter.SelectionChanged += ItemSelectionChanged;
+
         backButton.Click += (s, e) =>
         {
             var newScroll = scrollContainer.HorizontalOffset - scrollContainer.ActualWidth + 50;
@@ -73,6 +75,7 @@ public class ScrollLane : GridView
     private void OnScrollContainerLoaded(object sender, RoutedEventArgs e)
     {
         scrollContainer.SizeChanged += (s, e) => UpdateButtonVisibilities(scrollContainer.HorizontalOffset);
+
         scrollContainer.Loaded -= OnScrollContainerLoaded;
     }
 

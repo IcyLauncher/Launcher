@@ -6,10 +6,8 @@ namespace IcyLauncher.UI;
 
 public partial class ProfileDataTemplate : ResourceDictionary
 {
-    public ProfileDataTemplate()
-    {
+    public ProfileDataTemplate() =>
         InitializeComponent();
-    }
 
     private void OnRootLayoutLoaded(object sender, RoutedEventArgs e)
     {
@@ -36,6 +34,7 @@ public partial class ProfileDataTemplate : ResourceDictionary
                 icon.Translation = new Vector3(0, 0, 0);
             }
         };
+
         rootLayout.Loaded -= OnRootLayoutLoaded;
     }
 }

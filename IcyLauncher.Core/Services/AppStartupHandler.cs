@@ -1,6 +1,4 @@
-﻿using CommunityToolkit.WinUI.UI;
-
-namespace IcyLauncher.Core.Services;
+﻿namespace IcyLauncher.Core.Services;
 
 public class AppStartupHandler
 {
@@ -15,7 +13,7 @@ public class AppStartupHandler
         INavigation navigation)
     {
         AppDomain.CurrentDomain.FirstChanceException += (sender, args) =>
-            logger.Log("Global Exception thrown", args.Exception);
+            logger.Log("Global Exception thrown", args.Exception, LogLevel.Error, "global", "?");
              
         windowHandler.SetTilteBar(true, uiElementReciever.TitleBar);
         windowHandler.SetIcon("Assets/Icon.ico");

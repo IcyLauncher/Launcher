@@ -1,25 +1,17 @@
-﻿using IcyLauncher.Core.Xaml;
-using Microsoft.UI;
+﻿using Microsoft.UI;
 using Microsoft.UI.Xaml.Controls;
-using Microsoft.UI.Xaml.Hosting;
-using Microsoft.UI.Xaml.Media;
-using Microsoft.UI.Xaml.Shapes;
 using System.Collections.ObjectModel;
-using System.Numerics;
-using System.Text;
 using Windows.UI;
 
 namespace IcyLauncher.ViewModels;
 
 public partial class HomeViewModel : ObservableObject
 {
-    readonly ILogger logger;
     readonly ThemeManager themeManager;
     readonly WindowHandler windowHandler;
 
-    public HomeViewModel(ILogger<HomeViewModel> logger, ThemeManager themeManager, WindowHandler windowHandler)
+    public HomeViewModel(ThemeManager themeManager, WindowHandler windowHandler)
     {
-        this.logger = logger;
         this.themeManager = themeManager;
         this.windowHandler = windowHandler;
     }
@@ -58,15 +50,11 @@ public partial class HomeViewModel : ObservableObject
         //themeManager.Colors.Accent.Primary = accentPrimary;
         //themeManager.Colors.Accent.Light = accentLight;
         //themeManager.Colors.Accent.Dark = accentDark;
-        Profiles.Add(new() 
+        Profiles.Add(new()
         {
-            Title = "Default",
-            Color = Colors.Red,
-            Icon = "Redstone-Block.png".AsImage(),
-            Version = "1.18",
-            Client = "Vanilla"
+            Width = 150, Height = 150,
+            Fill = new Microsoft.UI.Xaml.Media.SolidColorBrush(GetRandomColor())
         });
-        Profiles.Add(new() );
     }
 
     [ObservableProperty]
@@ -80,7 +68,7 @@ public partial class HomeViewModel : ObservableObject
 
 
     [ObservableProperty]
-    ObservableCollection<Profile> profiles = new();
+    ObservableCollection<Microsoft.UI.Xaml.Shapes.Rectangle> profiles = new();
 
     public void OnItemSelectionChanged(object sender, SelectionChangedEventArgs e)
     {

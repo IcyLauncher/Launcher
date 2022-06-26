@@ -5,10 +5,8 @@ namespace IcyLauncher.Views;
 
 public sealed partial class ProfilesView : Page
 {
-    readonly ProfilesViewModel viewModel = App.Provider.GetRequiredService<ProfilesViewModel>();
+    public readonly ProfilesViewModel viewModel = App.Provider.GetRequiredService<ProfilesViewModel>();
 
-    public ProfilesView()
-    {
+    public ProfilesView() =>
         InitializeComponent();
-    }
 }

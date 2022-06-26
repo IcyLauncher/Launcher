@@ -8,6 +8,7 @@ public class ArrayConverter : IValueConverter
     {
         var array = value.ToString()!.Split(",");
         var requested = System.Convert.ToInt32(parameter);
+
         return array[requested <= array.Length - 1 ? requested : array.Length - 1 ];
     }
 

@@ -33,15 +33,13 @@ public class ThemeManager
         this.logger.Log("Registered Theme Manager and hooked all ColorValue changes");
     }
 
-    public string ExportTheme()
-    {
-        logger.Log($"Exporting theme configuration");
+    public string ExportTheme() =>
+        converter.ToString(configuration.Apperance);
 
-        return converter.ToString(configuration.Apperance);
-    }
     public void LoadTheme(Theme input, bool ignoreAccent = false)
     {
         CopyTheme(Colors, input, ignoreAccent);
+
         logger.Log($"Loaded theme configuration from input");
     }
 
@@ -91,12 +89,10 @@ public class ThemeManager
 
     public void SetUnbindableBindings()
     {
-        var brushConverter = new BrushConverter();
-
         uiElementReciever.BackButton.SetBinding(IconElement.ForegroundProperty, new Binding()
         {
             Source = configuration,
-            Converter = brushConverter,
+            Converter = UIElementProvider.BrushConverter,
             Path = new PropertyPath("Apperance.Colors.Text.Primary"),
             Mode = BindingMode.OneWay
         });
@@ -104,7 +100,7 @@ public class ThemeManager
         uiElementReciever.TitleBarTitle.SetBinding(TextBlock.ForegroundProperty, new Binding()
         {
             Source = configuration,
-            Converter = brushConverter,
+            Converter = UIElementProvider.BrushConverter,
             Path = new PropertyPath("Apperance.Colors.Accent.Primary"),
             Mode = BindingMode.OneWay
         });

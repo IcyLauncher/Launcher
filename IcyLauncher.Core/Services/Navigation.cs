@@ -1,6 +1,5 @@
 ﻿using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Media.Animation;
-using System.Numerics;
 
 namespace IcyLauncher.Core.Services;
 
@@ -18,14 +17,14 @@ public class Navigation : INavigation
         this.frame = frame;
         this.backButton = backButton;
 
-        this.navigationView.SelectionChanged += (s, args) =>
+        this.navigationView.SelectionChanged += (s, e) =>
         {
-            if (args.SelectedItemContainer is NavigationViewItem item && $"Views.{item.Tag}View".AsType() is Type type)
+            if (e.SelectedItemContainer is NavigationViewItem item && $"Views.{item.Tag}View".AsType() is Type type)
                 SetCurrentPage(type);
             else
                 this.logger.Log("Failed to set current NavigationView page: Unregistered Type");
         };
-        this.navigationView.BackRequested += (s, args) => GoBack();
+        this.navigationView.BackRequested += (s, e) => GoBack();
 
         this.logger.Log("Registered NavigationView");
     }
@@ -135,12 +134,11 @@ public class Navigation : INavigation
 
     private void CanGoBackChanged(bool canGoBack)
     {
-        if (canGoBack == (backButton.Visibility != Visibility.Collapsed))
+        if (canGoBack == (backButton.Opacity != 0))
             return;
 
         if (canGoBack)
         {
-            backButton.Visibility = Visibility.Visible;
             backButton.Opacity = 1;
             var board = new Storyboard();
             board.Children.Add(UIElementProvider.Animate(backButton, "Width", 0, 32, 200));
@@ -151,7 +149,6 @@ public class Navigation : INavigation
             backButton.Opacity = 0;
             var board = new Storyboard();
             board.Children.Add(UIElementProvider.Animate(backButton, "Width", 32, 0, 200));
-            board.Completed += (s, e) => backButton.Visibility = Visibility.Collapsed;
             board.Begin();
         }
     }

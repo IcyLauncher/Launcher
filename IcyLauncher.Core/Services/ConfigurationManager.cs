@@ -15,12 +15,9 @@ public class ConfigurationManager
         this.logger.Log("Registered Configuration Manager");
     }
 
-    public string Export()
-    {
-        logger.Log($"Exporting app configuration");
+    public string Export() =>
+        converter.ToString(configuration);
 
-        return converter.ToString(configuration);
-    }
     public void Load(Configuration input, bool IgnoreTheme = false)
     {
         configuration.Launcher = input.Launcher;

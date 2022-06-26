@@ -8,18 +8,17 @@ public class MicaBackdropHandler : IBackdropHandler
 {
     readonly ILogger logger;
 
-    public Window Shell { get; private set; }
-    public object Controller { get; private set; } = new MicaController();
-    public SystemBackdropConfiguration BackdropConfiguration { get; private set; } = new();
-    public WindowsSystemDispatcherQueueHelper DispatcherQueueHelper { get; set; } = new();
+    readonly Window shell;
+    readonly WindowsSystemDispatcherQueueHelper dispatcherQueueHelper = new();
+    MicaController controller = new();
+    SystemBackdropConfiguration backdropConfiguration = new();
 
     public MicaBackdropHandler(ILogger<MicaBackdropHandler> logger, Window shell)
     {
         this.logger = logger;
+        this.shell = shell;
 
-        Shell = shell;
-
-        this.logger.Log("Registered BackdropHandler: Mica");
+        this.logger.Log("Registered BackdropHandler");
     }
 
 
@@ -28,33 +27,42 @@ public class MicaBackdropHandler : IBackdropHandler
         if (!MicaController.IsSupported())
             return false;
 
-        DispatcherQueueHelper.EnsureWindowsSystemDispatcherQueueController();
-        logger.Log("Ensured WindowsSystemDispatcherQueueController");
+        try
+        {
+            dispatcherQueueHelper.EnsureWindowsSystemDispatcherQueueController();
+            logger.Log("Ensured WindowsSystemDispatcherQueueController");
 
-        Shell.Activated += ShellActivated;
-        Shell.Closed += ShellClosed;
-        logger.Log("Hooked Activated/Closed handlers");
+            shell.Activated += ShellActivated;
+            shell.Closed += ShellClosed;
+            logger.Log("Hooked Activated/Closed handlers");
 
-        BackdropConfiguration.IsInputActive = true;
-        BackdropConfiguration.Theme = useDarkMode ? SystemBackdropTheme.Dark : SystemBackdropTheme.Light;
-        logger.Log("Configured Backdrop Configuration");
+            backdropConfiguration.IsInputActive = true;
+            backdropConfiguration.Theme = useDarkMode ? SystemBackdropTheme.Dark : SystemBackdropTheme.Light;
+            logger.Log("Configured Backdrop Configuration");
 
-        ((MicaController)Controller).AddSystemBackdropTarget(Shell.As<ICompositionSupportsSystemBackdrop>());
-        ((MicaController)Controller).SetSystemBackdropConfiguration(BackdropConfiguration);
-        logger.Log("Set System Backdrop");
-        return true;
+            controller.AddSystemBackdropTarget(shell.As<ICompositionSupportsSystemBackdrop>());
+            controller.SetSystemBackdropConfiguration(backdropConfiguration);
+            logger.Log("Set System Backdrop");
+            return true;
+        }
+        catch (Exception ex)
+        {
+            logger.Log("Failed to set System Backdrop", ex);
+            return true;
+        }
     }
 
 
     void ShellActivated(object sender, WindowActivatedEventArgs args) =>
-        BackdropConfiguration.IsInputActive = args.WindowActivationState is not WindowActivationState.Deactivated;
+        backdropConfiguration.IsInputActive = args.WindowActivationState is not WindowActivationState.Deactivated;
 
     void ShellClosed(object sender, WindowEventArgs args)
     {
-        ((MicaController)Controller).Dispose();
-        Controller = null!;
-        Shell.Activated -= ShellActivated;
-        BackdropConfiguration = null!;
+        shell.Activated -= ShellActivated;
+
+        controller.Dispose();
+        controller = default!;
+        backdropConfiguration = default!;
         logger.Log("Unhooked Backdrophandler: Mica");
     }
 }

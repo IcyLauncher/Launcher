@@ -1,9 +1,12 @@
 ﻿using IcyLauncher.Core.Xaml;
+using Microsoft.UI.Xaml.Data;
 
 namespace IcyLauncher.UI;
 
 public class TextBox : Microsoft.UI.Xaml.Controls.TextBox
 {
+    Theme colors = default!;
+
     public TextBox()
     {
         Loaded += OnLoaded;
@@ -12,16 +15,18 @@ public class TextBox : Microsoft.UI.Xaml.Controls.TextBox
 
     private void OnLoaded(object sender, RoutedEventArgs e)
     {
-        Loaded -= OnLoaded;
+        colors = App.Provider.GetRequiredService<ThemeManager>().Colors;
         UpdateBinding(sender, null);
+
+        Loaded -= OnLoaded;
     }
 
     private void UpdateBinding(object sender, object? args) =>
-        SetBinding(ForegroundProperty, new Microsoft.UI.Xaml.Data.Binding()
+        SetBinding(ForegroundProperty, new Binding()
         {
-            Source = App.Colors,
-            Converter = new ValidateNo255(),
+            Source = colors,
+            Converter = UIElementProvider.ValidateNo255,
             Path = new PropertyPath(IsEnabled ? "Text.Secondary" : "Text.Disabled"),
-            Mode = Microsoft.UI.Xaml.Data.BindingMode.OneWay
+            Mode = BindingMode.OneWay
         });
 }

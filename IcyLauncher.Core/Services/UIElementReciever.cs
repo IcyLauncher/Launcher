@@ -15,8 +15,7 @@ public class UIElementReciever
     public AnimatedIcon BackButtonIcon;
     public GradientStopCollection TitleBarIconGradientStops;
     public TextBlock TitleBarTitle;
-    public Grid CurrentNavigationViewItemLayoutRoot => 
-        (Grid)VisualTreeHelper.GetChild(VisualTreeHelper.GetChild(VisualTreeHelper.GetChild(navigation.GetCurrentNavigationViewItem(), 0), 0), 0);
+    public Grid CurrentNavigationViewItemLayoutRoot => (Grid)VisualTreeHelper.GetChild(VisualTreeHelper.GetChild(VisualTreeHelper.GetChild(navigation.GetCurrentNavigationViewItem(), 0), 0), 0);
 
     public UIElementReciever(ILogger<UIElementReciever> logger, INavigation navigation, Window shell)
     {
@@ -30,6 +29,6 @@ public class UIElementReciever
         TitleBarIconGradientStops = ((LinearGradientBrush)((Path)((Viewbox)TitleBar.Children[1]).Child).Fill).GradientStops;
         TitleBarTitle = (TextBlock)TitleBar.Children[2];
 
-        this.logger.Log("Registered Control Reciever and casted all controls");
+        this.logger.Log("Registered UIElement Reciever and casted all UIElements");
     }
 }

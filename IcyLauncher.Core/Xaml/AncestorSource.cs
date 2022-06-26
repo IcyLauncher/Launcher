@@ -9,8 +9,7 @@ public class AncestorSource
             "AncestorType",
             typeof(Type),
             typeof(AncestorSource),
-            new PropertyMetadata(default(Type), OnAncestorTypeChanged)
-    );
+            new(default(Type), OnAncestorTypeChanged));
 
     public static void SetAncestorType(FrameworkElement element, Type value) =>
         element.SetValue(AncestorTypeProperty, value);
@@ -21,6 +20,7 @@ public class AncestorSource
     private static void OnAncestorTypeChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
     {
         FrameworkElement target = (FrameworkElement)d;
+
         if (target.IsLoaded)
             SetDataContext(target);
         else
@@ -30,24 +30,24 @@ public class AncestorSource
     private static void OnTargetLoaded(object sender, RoutedEventArgs e)
     {
         FrameworkElement target = (FrameworkElement)sender;
-        target.Loaded -= OnTargetLoaded;
         SetDataContext(target);
+
+        target.Loaded -= OnTargetLoaded;
     }
 
     private static void SetDataContext(FrameworkElement target)
     {
         Type ancestorType = GetAncestorType(target);
-        if (ancestorType != null)
+
+        if (ancestorType is not null)
             target.DataContext = FindParent(target, ancestorType);
     }
 
     private static object? FindParent(DependencyObject dependencyObject, Type ancestorType)
     {
         DependencyObject parent = VisualTreeHelper.GetParent(dependencyObject);
-        if (parent is null)
-            return null;
 
-        if (ancestorType.IsAssignableFrom(parent.GetType()))
+        if (parent is null || ancestorType.IsAssignableFrom(parent.GetType()))
             return parent;
 
         return FindParent(parent, ancestorType);

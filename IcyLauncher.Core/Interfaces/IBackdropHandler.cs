@@ -1,17 +1,9 @@
-﻿using Microsoft.UI.Composition.SystemBackdrops;
-
-namespace IcyLauncher.Core.Interfaces;
+﻿namespace IcyLauncher.Core.Interfaces;
 
 public interface IBackdropHandler
 {
-    Window Shell { get; }
-    object Controller { get; }
-    SystemBackdropConfiguration BackdropConfiguration { get; }
-    WindowsSystemDispatcherQueueHelper DispatcherQueueHelper { get; }
-
     bool SetBackdrop(bool useDarkMode);
 }
-
 
 // => Disabled correct way to implement Mica/Acrylic because of limitations => Need to activate on WndowsAppSDK v1.1.0-stable
 // => Placed in servises registration

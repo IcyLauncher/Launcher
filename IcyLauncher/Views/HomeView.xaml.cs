@@ -5,10 +5,8 @@ namespace IcyLauncher.Views;
 
 public sealed partial class HomeView : Page
 {
-    readonly HomeViewModel viewModel = App.Provider.GetRequiredService<HomeViewModel>();
+    public readonly HomeViewModel viewModel = App.Provider.GetRequiredService<HomeViewModel>();
 
-    public HomeView()
-    {
+    public HomeView() =>
         InitializeComponent();
-    }
 }

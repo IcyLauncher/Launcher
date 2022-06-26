@@ -1,4 +1,5 @@
-﻿using Microsoft.UI;
+﻿using IcyLauncher.Core.Xaml;
+using Microsoft.UI;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Controls.AnimatedVisuals;
 using Microsoft.UI.Xaml.Data;
@@ -11,6 +12,9 @@ namespace IcyLauncher.Core.Helpers;
 
 public class UIElementProvider
 {
+    public static readonly BrushConverter BrushConverter = new();
+    public static readonly ValidateNo255 ValidateNo255 = new();
+
     public static Timeline Animate(DependencyObject element, string property, double? startValue, double endValue, double lenght)
     {
         var anim = new DoubleAnimation()
@@ -47,7 +51,6 @@ public class UIElementProvider
         var backIcon = new AnimatedIcon() { Source = new AnimatedBackVisualSource(), FallbackIconSource = new SymbolIconSource() { Symbol = Symbol.Back } };
         backButton = new()
         {
-            Visibility = Visibility.Collapsed,
             Margin = new(4, 4, 0, 4),
             Width = 0,
             Height = 32,

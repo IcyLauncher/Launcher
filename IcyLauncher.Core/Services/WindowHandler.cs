@@ -1,13 +1,10 @@
-﻿using IcyLauncher.Core.Xaml;
-using Microsoft.Extensions.Options;
-using Microsoft.UI;
+﻿using Microsoft.UI;
 using Microsoft.UI.Windowing;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Data;
 using Microsoft.UI.Xaml.Media;
 using System.Runtime.InteropServices;
 using Windows.Graphics;
-using Windows.UI;
 using WinRT.Interop;
 
 namespace IcyLauncher.Core.Services;
@@ -87,7 +84,7 @@ public class WindowHandler
     {
         if (!AppWindowTitleBar.IsCustomizationSupported())
         {
-            logger.Log("Tried to set TitleBar: Not supported");
+            logger.Log("Tried to set TitleBar: Not supported", logLevel: LogLevel.Error);
             return false;
         }
 
@@ -146,7 +143,7 @@ public class WindowHandler
     {
         if (!AppWindowTitleBar.IsCustomizationSupported())
         {
-            logger.Log("Tried to set TitleBar Button Colors: Not supported");
+            logger.Log("Tried to set TitleBar Button Colors: Not supported", logLevel: LogLevel.Error);
             return false;
         }
 
@@ -177,7 +174,8 @@ public class WindowHandler
             e.PropertyName == "Secondary" ||
             e.PropertyName == "Tertiary" ||
             e.PropertyName == "Disabled")
-            SetTitleBarButtonColors(new(
+            SetTitleBarButtonColors(
+                new(
                     Colors.Transparent,
                     themeManager.Colors.Control.Outline,
                     themeManager.Colors.Control.Primary,
@@ -229,7 +227,7 @@ public class WindowHandler
                     uiElementReciever.MainGrid.SetBinding(Panel.BackgroundProperty, new Binding()
                     {
                         Source = themeManager.Colors,
-                        Converter = new BrushConverter(),
+                        Converter = UIElementProvider.BrushConverter,
                         Path = new PropertyPath(backgroundColor),
                         Mode = BindingMode.OneWay
                     });
