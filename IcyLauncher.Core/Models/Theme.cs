@@ -19,7 +19,8 @@ public partial class Theme : ObservableObject
         {
             Solid = Color.FromArgb(255, 223, 223, 223),
             Transparent = Color.FromArgb(180, 255, 255, 255),
-            Gradient = Color.FromArgb(255, 255, 255, 255)
+            Gradient = Color.FromArgb(255, 255, 255, 255),
+            GradientTransparent = Color.FromArgb(0, 255, 255, 255)
         },
         Text = new()
         {
@@ -75,6 +76,9 @@ public partial class ThemeBackground : ObservableObject
 
     [ObservableProperty]
     Color gradient = Color.FromArgb(255, 0, 0, 0);
+
+    [ObservableProperty]
+    Color gradientTransparent = Color.FromArgb(0, 0, 0, 0);
 }
 
 public partial class ThemeText : ObservableObject

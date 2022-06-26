@@ -38,6 +38,7 @@
 		<None Remove="Assets\LICENSE" />
 		<None Remove="Assets\NoImage.png" />
 		<None Remove="Assets\Redstone-Block.png" />
+		<None Remove="UI\ProfileDataTemplate.xaml" />
 		<None Remove="Views\HomeView.xaml" />
 		<None Remove="Views\ProfilesView.xaml" />
 	</ItemGroup>
@@ -115,6 +116,9 @@
 			<Pack>True</Pack>
 			<PackagePath>\</PackagePath>
 		</None>
+		<Page Update="UIElements\ProfileDataTemplate.xaml">
+		  <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+		</Page>
 		<Page Update="Views\ProfilesView.xaml">
 			<XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
 			<SubType>Designer</SubType>

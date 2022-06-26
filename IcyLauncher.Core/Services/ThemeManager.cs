@@ -12,16 +12,16 @@ public class ThemeManager
     readonly ILogger logger;
     readonly Configuration configuration;
     readonly IConverter converter;
-    readonly ControlReciever controlReciever;
+    readonly UIElementReciever uiElementReciever;
 
     public Theme Colors => configuration.Apperance.Colors;
 
-    public ThemeManager(ILogger<ConfigurationManager> logger, IOptions<Configuration> configuration, IConverter converter, ControlReciever controlReciever)
+    public ThemeManager(ILogger<ConfigurationManager> logger, IOptions<Configuration> configuration, IConverter converter, UIElementReciever uiElementReciever)
     {
         this.logger = logger;
         this.configuration = configuration.Value;
         this.converter = converter;
-        this.controlReciever = controlReciever;
+        this.uiElementReciever = uiElementReciever;
 
         this.configuration.Apperance.Colors.Accent.PropertyChanged += AccentColorsValuesChanged;
         //this.configuration.Apperance.Colors.Background.PropertyChanged += BackgroundColorsValuesChanged;
@@ -57,6 +57,7 @@ public class ThemeManager
         copyTo.Background.Solid = copyFrom.Background.Solid;
         copyTo.Background.Transparent = copyFrom.Background.Transparent;
         copyTo.Background.Gradient = copyFrom.Background.Gradient;
+        copyTo.Background.GradientTransparent = copyFrom.Background.GradientTransparent;
 
         copyTo.Text.Primary = copyFrom.Text.Primary;
         copyTo.Text.Secondary = copyFrom.Text.Secondary;
@@ -92,7 +93,7 @@ public class ThemeManager
     {
         var brushConverter = new BrushConverter();
 
-        controlReciever.BackButton.SetBinding(IconElement.ForegroundProperty, new Binding()
+        uiElementReciever.BackButton.SetBinding(IconElement.ForegroundProperty, new Binding()
         {
             Source = configuration,
             Converter = brushConverter,
@@ -100,7 +101,7 @@ public class ThemeManager
             Mode = BindingMode.OneWay
         });
 
-        controlReciever.TitleBarTitle.SetBinding(TextBlock.ForegroundProperty, new Binding()
+        uiElementReciever.TitleBarTitle.SetBinding(TextBlock.ForegroundProperty, new Binding()
         {
             Source = configuration,
             Converter = brushConverter,
@@ -117,12 +118,12 @@ public class ThemeManager
         switch (e.PropertyName)
         {
             case "Light":
-                controlReciever.TitleBarIconGradientStops[0].Color = configuration.Apperance.Colors.Accent.Light;
+                uiElementReciever.TitleBarIconGradientStops[0].Color = configuration.Apperance.Colors.Accent.Light;
 
                 logger.Log($"Updated TitleBar icon gradient stop (0)");
                 break;
             case "Dark":
-                controlReciever.TitleBarIconGradientStops[1].Color = configuration.Apperance.Colors.Accent.Dark;
+                uiElementReciever.TitleBarIconGradientStops[1].Color = configuration.Apperance.Colors.Accent.Dark;
 
                 logger.Log($"Updated TitleBar icon gradient stop (1)");
                 break;
@@ -134,7 +135,7 @@ public class ThemeManager
         switch (e.PropertyName)
         {
             case "Primary":
-                controlReciever.CurrentNavigationViewItemLayoutRoot.Background = new SolidColorBrush(configuration.Apperance.Colors.Control.Primary);
+                uiElementReciever.CurrentNavigationViewItemLayoutRoot.Background = new SolidColorBrush(configuration.Apperance.Colors.Control.Primary);
 
                 logger.Log($"Updated current NavigationViewItem LayoutRoot");
                 break;

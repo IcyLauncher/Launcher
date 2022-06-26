@@ -66,6 +66,7 @@ public partial class HomeViewModel : ObservableObject
             Version = "1.18",
             Client = "Vanilla"
         });
+        Profiles.Add(new() );
     }
 
     [ObservableProperty]
@@ -80,4 +81,18 @@ public partial class HomeViewModel : ObservableObject
 
     [ObservableProperty]
     ObservableCollection<Profile> profiles = new();
+
+    public void OnItemSelectionChanged(object sender, SelectionChangedEventArgs e)
+    {
+        if (e.RemovedItems.Count == 0)
+            return;
+
+        var rootLayout = (Grid)((GridViewItem)((GridView)sender).ContainerFromItem(e.RemovedItems[0])).ContentTemplateRoot;
+        var details = rootLayout.Children[3];
+        var icon = rootLayout.Children[2];
+
+        details.Opacity = 0;
+        details.Translation = new Vector3(-10, 0, 0);
+        icon.Translation = new Vector3(0, 0, 0);
+    }
 }

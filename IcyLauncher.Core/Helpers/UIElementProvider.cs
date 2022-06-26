@@ -11,10 +11,26 @@ namespace IcyLauncher.Core.Helpers;
 
 public class UIElementProvider
 {
-    public static Storyboard Animate(DependencyObject element, string property, int startValue, int endValue, double lenght)
+    public static Storyboard Animate(DependencyObject element, string property, double startValue, double endValue, double lenght)
     {
-        var keyFrameStart = new EasingDoubleKeyFrame() { KeyTime = KeyTime.FromTimeSpan(TimeSpan.FromMilliseconds(0)), Value = startValue, EasingFunction = new ExponentialEase() { EasingMode = EasingMode.EaseInOut } };
-        var keyFrameEnd = new EasingDoubleKeyFrame() { KeyTime = KeyTime.FromTimeSpan(TimeSpan.FromMilliseconds(lenght)), Value = endValue, EasingFunction = new ExponentialEase() { EasingMode = EasingMode.EaseInOut } };
+        var keyFrameStart = new EasingDoubleKeyFrame() 
+        {
+            KeyTime = KeyTime.FromTimeSpan(TimeSpan.FromMilliseconds(0)),
+            Value = startValue,
+            EasingFunction = new ExponentialEase()
+            {
+                EasingMode = EasingMode.EaseInOut
+            }
+        };
+        var keyFrameEnd = new EasingDoubleKeyFrame() 
+        {
+            KeyTime = KeyTime.FromTimeSpan(TimeSpan.FromMilliseconds(lenght)),
+            Value = endValue,
+            EasingFunction = new ExponentialEase()
+            {
+                EasingMode = EasingMode.EaseInOut
+            }
+        };
 
         var anim = new DoubleAnimationUsingKeyFrames() { EnableDependentAnimation = true };
         anim.KeyFrames.Add(keyFrameStart);
@@ -28,21 +44,33 @@ public class UIElementProvider
 
         return board;
     }
+    public static DoubleAnimation Animate(DependencyObject element, string property, double endValue, double lenght)
+    {
+        var anim = new DoubleAnimation()
+        {
+            Duration = TimeSpan.FromMilliseconds(lenght),
+            To = endValue
+        };
 
+        Storyboard.SetTarget(anim, element);
+        Storyboard.SetTargetProperty(anim, property);
+
+        return anim;
+    }
 
     public static Grid MainGrid(GridLength[] rowHeight, params UIElement[] children)
     {
-        Grid containerGrid = new();
+        Grid mainGrid = new();
 
         for (int i = 0; i < rowHeight.Length; i++)
         {
-            containerGrid.RowDefinitions.Add(new() { Height = rowHeight[i] });
+            mainGrid.RowDefinitions.Add(new() { Height = rowHeight[i] });
 
             children[i].SetValue(Grid.RowProperty, i);
-            containerGrid.Children.Add(children[i]);
+            mainGrid.Children.Add(children[i]);
         }
 
-        return containerGrid;
+        return mainGrid;
     }
 
     public static StackPanel TitleBar(Color lightIconColor, Color darkIconColor, out Button backButton)

@@ -4,25 +4,14 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:ex="using:CommunityToolkit.WinUI.UI"
-    xmlns:md="using:CommunityToolkit.WinUI.UI.Media"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:md="using:CommunityToolkit.WinUI.UI.Media"
     xmlns:models="using:IcyLauncher.Core.Models"
-    xmlns:ui="using:IcyLauncher.UIElements"
+    xmlns:ui="using:IcyLauncher.UI"
     NavigationCacheMode="Enabled"
     mc:Ignorable="d">
-    <Page.Resources>
-        <ex:AttachedDropShadow
-            x:Key="CommonShadow"
-            BlurRadius="20"
-            CastTo="{Binding ElementName=ShadowCast}"
-            Opacity="0.5"
-            Offset="0,3"
-            Color="Black" />
-    </Page.Resources>
 
     <Grid>
-        <Grid Name="ShadowCast" />
-
         <TextBlock
             FontSize="20"
             Foreground="{StaticResource AccentPrimary}"
@@ -105,94 +94,12 @@
                     <TextBlock Style="{ThemeResource Subpoint}" Text="Subpoint" />
                     <TextBlock Style="{ThemeResource SubpointSecondary}" Text="SubpointSecondary" />
                 </StackPanel>
-                <Grid Margin="-20,0,-20,0">
-                    <ScrollViewer
-                        Name="Scrollll"
-                        CanContentRenderOutsideBounds="True"
-                        HorizontalScrollBarVisibility="Hidden"
-                        HorizontalScrollMode="Disabled"
-                        VerticalScrollBarVisibility="Disabled">
-                        <GridView ItemsSource="{x:Bind viewModel.Profiles}">
-                            <GridView.ItemsPanel>
-                                <ItemsPanelTemplate>
-                                    <ItemsWrapGrid Orientation="Horizontal" />
-                                </ItemsPanelTemplate>
-                            </GridView.ItemsPanel>
-                            <GridView.ItemTemplate>
-                                <DataTemplate x:DataType="models:Profile">
-                                    <Grid
-                                        Width="173"
-                                        Height="94"
-                                        CornerRadius="8">
-
-                                        <Rectangle
-                                            ex:Effects.Shadow="{StaticResource CommonShadow}"
-                                            Fill="{x:Bind Color, Converter={StaticResource BrushConverter}}"
-                                            Opacity="0.15" />
-
-                                        <Image
-                                            Name="imhg"
-                                            Width="68"
-                                            Height="68"
-                                            ex:Effects.Shadow="{StaticResource CommonShadow}"
-                                            Source="{x:Bind Icon}" />
-
-                                        <Grid HorizontalAlignment="Left" Width="173">
-                                            <Rectangle>
-                                                <Rectangle.Fill>
-                                                    <md:BackdropBlurBrush Amount="5"/>
-                                                </Rectangle.Fill>
-                                            </Rectangle>
-                                            <Rectangle>
-                                                <Rectangle.Fill>
-                                                    <LinearGradientBrush StartPoint="0,1" EndPoint="1,1">
-                                                        <GradientStopCollection>
-                                                            <GradientStop Offset="0" Color="{Binding Color, Source={ThemeResource BackgroundGradient}}" />
-                                                            <GradientStop Offset="1" Color="#00000000" />
-                                                        </GradientStopCollection>
-                                                    </LinearGradientBrush>
-                                                </Rectangle.Fill>
-                                            </Rectangle>
-
-                                            <Grid VerticalAlignment="Center" Margin="10,0,0,0">
-                                                <Grid.RowDefinitions>
-                                                    <RowDefinition Height="Auto" />
-                                                    <RowDefinition Height="Auto" />
-                                                </Grid.RowDefinitions>
-
-                                                <TextBlock Style="{ThemeResource TitleSecondary}" Text="{x:Bind Title}" />
-                                                <TextBlock Margin="0,-3,0,0" FontSize="12" Grid.Row="1" Style="{ThemeResource SubpointSecondary}">
-                                                    <Run Text="Version" />
-                                                    <Run Text="{x:Bind Version}" />
-                                                    <Run Text=" | " />
-                                                    <Run Text="{x:Bind Client}" />
-                                                </TextBlock>
-                                            </Grid>
-                                        </Grid>
-                                    </Grid>
-                                </DataTemplate>
-                            </GridView.ItemTemplate>
-                        </GridView>
-                    </ScrollViewer>
-                    <Button
-                        Name="bef"
-                        Margin="5,0,0,0"
-                        Padding="5"
-                        VerticalAlignment="Center"
-                        Background="Gray"
-                        Click="Button_Click"
-                        Content="&lt;" Visibility="Collapsed" />
-                    <Button
-                        Name="nex"
-                        Margin="0,0,5,0"
-                        Padding="5"
-                        HorizontalAlignment="Right"
-                        VerticalAlignment="Center"
-                        Background="Gray"
-                        Click="Button_Click_1"
-                        Content="&gt;" />
-                </Grid>
-
+                <ui:ScrollLane
+                    Margin="-20,0"
+                    ItemContainerStyle="{StaticResource ProfileGridViewItem}"
+                    ItemSelectionChanged="{x:Bind viewModel.OnItemSelectionChanged}"
+                    ItemTemplate="{StaticResource ProfileTemplate}"
+                    ItemsSource="{x:Bind viewModel.Profiles}" />
                 <StackPanel
                     Margin="0,100,0,0"
                     Orientation="Horizontal"
