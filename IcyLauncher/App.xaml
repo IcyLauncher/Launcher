@@ -4,17 +4,20 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:animatedvisuals="using:Microsoft.UI.Xaml.Controls.AnimatedVisuals"
     xmlns:controls="using:Microsoft.UI.Xaml.Controls"
+    xmlns:ex="using:CommunityToolkit.WinUI.UI"
     xmlns:local="using:IcyLauncher"
+    xmlns:md="using:CommunityToolkit.WinUI.UI.Media"
     xmlns:media="using:Microsoft.UI.Xaml.Media"
     xmlns:models="using:IcyLauncher.Core.Models"
     xmlns:primitives="using:Microsoft.UI.Xaml.Controls.Primitives"
-    xmlns:ui="using:IcyLauncher.UIElements"
+    xmlns:ui="using:IcyLauncher.UI"
     xmlns:xaml="using:IcyLauncher.Core.Xaml"
     RequestedTheme="Dark">
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <XamlControlsResources xmlns="using:Microsoft.UI.Xaml.Controls" />
+                <ui:ProfileDataTemplate />
             </ResourceDictionary.MergedDictionaries>
 
             <xaml:ArrayConverter x:Key="ArrayConverter" />
@@ -30,6 +33,7 @@
             <SolidColorBrush x:Key="BackgroundSolid" Color="{Binding Background.Solid, Source={ThemeResource Colors}, Mode=OneWay}" />
             <SolidColorBrush x:Key="BackgroundTransparent" Color="{Binding Background.Transparent, Source={ThemeResource Colors}, Mode=OneWay}" />
             <SolidColorBrush x:Key="BackgroundGradient" Color="{Binding Background.Gradient, Source={ThemeResource Colors}, Mode=OneWay}" />
+            <SolidColorBrush x:Key="BackgroundGradientTransparent" Color="{Binding Background.GradientTransparent, Source={ThemeResource Colors}, Mode=OneWay}" />
 
             <SolidColorBrush x:Key="TextPrimary" Color="{Binding Text.Primary, Source={ThemeResource Colors}, Mode=OneWay}" />
             <SolidColorBrush x:Key="TextSecondary" Color="{Binding Text.Secondary, Source={ThemeResource Colors}, Mode=OneWay}" />
@@ -45,7 +49,6 @@
             <SolidColorBrush x:Key="ControlSolidOutline" Color="{Binding Control.Solid.Outline, Source={ThemeResource Colors}, Mode=OneWay}" />
             <SolidColorBrush x:Key="ControlSolidPrimaryDisabled" Color="{Binding Control.Solid.PrimaryDisabled, Source={ThemeResource Colors}, Mode=OneWay}" />
             <SolidColorBrush x:Key="ControlSolidOutlineDisabled" Color="{Binding Control.Solid.OutlineDisabled, Source={ThemeResource Colors}, Mode=OneWay}" />
-
 
 
             <SolidColorBrush x:Key="ButtonBackground" Color="{Binding Color, Source={ThemeResource ControlPrimary}}" />
@@ -538,181 +541,171 @@
                                 <VisualStateManager.VisualStateGroups>
                                     <VisualStateGroup x:Name="PointerStates">
                                         <VisualState x:Name="Normal">
-                                            <VisualState.Storyboard>
-                                                <Storyboard>
-                                                    <ColorAnimation
-                                                        Storyboard.TargetName="LayoutRoot"
-                                                        Storyboard.TargetProperty="(UIElement.Background).(SolidColorBrush.Color)"
-                                                        To="Transparent"
-                                                        Duration="0:0:0.2" />
-                                                    <ColorAnimation
-                                                        Storyboard.TargetName="Icon"
-                                                        Storyboard.TargetProperty="(UIElement.Foreground).(SolidColorBrush.Color)"
-                                                        To="{Binding Text.Secondary, Source={ThemeResource Colors}, Mode=OneWay}"
-                                                        Duration="0:0:0.2" />
-                                                    <DoubleAnimation
-                                                        EnableDependentAnimation="true"
-                                                        Storyboard.TargetName="Icon"
-                                                        Storyboard.TargetProperty="Opacity"
-                                                        To="1"
-                                                        Duration="0:0:0.2" />
-                                                    <DoubleAnimation
-                                                        EnableDependentAnimation="true"
-                                                        Storyboard.TargetName="IconFilled"
-                                                        Storyboard.TargetProperty="Opacity"
-                                                        To="0"
-                                                        Duration="0:0:0.2" />
-                                                    <ColorAnimation
-                                                        Storyboard.TargetName="Title"
-                                                        Storyboard.TargetProperty="(UIElement.Foreground).(SolidColorBrush.Color)"
-                                                        To="{Binding Text.Secondary, Source={ThemeResource Colors}, Mode=OneWay}"
-                                                        Duration="0:0:0.2" />
-                                                    <DoubleAnimation
-                                                        EnableDependentAnimation="true"
-                                                        Storyboard.TargetName="TitleBox"
-                                                        Storyboard.TargetProperty="Height"
-                                                        To="14"
-                                                        Duration="0:0:0.1" />
-                                                </Storyboard>
-                                            </VisualState.Storyboard>
+                                            <Storyboard>
+                                                <ColorAnimation
+                                                    Storyboard.TargetName="LayoutRoot"
+                                                    Storyboard.TargetProperty="(UIElement.Background).(SolidColorBrush.Color)"
+                                                    To="Transparent"
+                                                    Duration="0:0:0.2" />
+                                                <ColorAnimation
+                                                    Storyboard.TargetName="Icon"
+                                                    Storyboard.TargetProperty="(UIElement.Foreground).(SolidColorBrush.Color)"
+                                                    To="{Binding Text.Secondary, Source={ThemeResource Colors}, Mode=OneWay}"
+                                                    Duration="0:0:0.2" />
+                                                <DoubleAnimation
+                                                    EnableDependentAnimation="true"
+                                                    Storyboard.TargetName="Icon"
+                                                    Storyboard.TargetProperty="Opacity"
+                                                    To="1"
+                                                    Duration="0:0:0.2" />
+                                                <DoubleAnimation
+                                                    EnableDependentAnimation="true"
+                                                    Storyboard.TargetName="IconFilled"
+                                                    Storyboard.TargetProperty="Opacity"
+                                                    To="0"
+                                                    Duration="0:0:0.2" />
+                                                <ColorAnimation
+                                                    Storyboard.TargetName="Title"
+                                                    Storyboard.TargetProperty="(UIElement.Foreground).(SolidColorBrush.Color)"
+                                                    To="{Binding Text.Secondary, Source={ThemeResource Colors}, Mode=OneWay}"
+                                                    Duration="0:0:0.2" />
+                                                <DoubleAnimation
+                                                    EnableDependentAnimation="true"
+                                                    Storyboard.TargetName="TitleBox"
+                                                    Storyboard.TargetProperty="Height"
+                                                    To="14"
+                                                    Duration="0:0:0.1" />
+                                            </Storyboard>
                                         </VisualState>
 
                                         <VisualState x:Name="PointerOver">
-                                            <VisualState.Storyboard>
-                                                <Storyboard>
-                                                    <ColorAnimation
-                                                        Storyboard.TargetName="LayoutRoot"
-                                                        Storyboard.TargetProperty="(UIElement.Background).(SolidColorBrush.Color)"
-                                                        To="{Binding Control.Primary, Source={ThemeResource Colors}, Mode=OneWay}"
-                                                        Duration="0:0:0.2" />
-                                                    <ColorAnimation
-                                                        Storyboard.TargetName="Icon"
-                                                        Storyboard.TargetProperty="(UIElement.Foreground).(SolidColorBrush.Color)"
-                                                        To="{Binding Text.Primary, Source={ThemeResource Colors}, Mode=OneWay}"
-                                                        Duration="0:0:0.2" />
-                                                    <DoubleAnimation
-                                                        EnableDependentAnimation="true"
-                                                        Storyboard.TargetName="Icon"
-                                                        Storyboard.TargetProperty="Opacity"
-                                                        To="1"
-                                                        Duration="0:0:0.2" />
-                                                    <DoubleAnimation
-                                                        EnableDependentAnimation="true"
-                                                        Storyboard.TargetName="IconFilled"
-                                                        Storyboard.TargetProperty="Opacity"
-                                                        To="0"
-                                                        Duration="0:0:0.2" />
-                                                    <ColorAnimation
-                                                        Storyboard.TargetName="Title"
-                                                        Storyboard.TargetProperty="(UIElement.Foreground).(SolidColorBrush.Color)"
-                                                        To="{Binding Text.Primary, Source={ThemeResource Colors}, Mode=OneWay}"
-                                                        Duration="0:0:0.2" />
-                                                </Storyboard>
-                                            </VisualState.Storyboard>
+                                            <Storyboard>
+                                                <ColorAnimation
+                                                    Storyboard.TargetName="LayoutRoot"
+                                                    Storyboard.TargetProperty="(UIElement.Background).(SolidColorBrush.Color)"
+                                                    To="{Binding Control.Primary, Source={ThemeResource Colors}, Mode=OneWay}"
+                                                    Duration="0:0:0.2" />
+                                                <ColorAnimation
+                                                    Storyboard.TargetName="Icon"
+                                                    Storyboard.TargetProperty="(UIElement.Foreground).(SolidColorBrush.Color)"
+                                                    To="{Binding Text.Primary, Source={ThemeResource Colors}, Mode=OneWay}"
+                                                    Duration="0:0:0.2" />
+                                                <DoubleAnimation
+                                                    EnableDependentAnimation="true"
+                                                    Storyboard.TargetName="Icon"
+                                                    Storyboard.TargetProperty="Opacity"
+                                                    To="1"
+                                                    Duration="0:0:0.2" />
+                                                <DoubleAnimation
+                                                    EnableDependentAnimation="true"
+                                                    Storyboard.TargetName="IconFilled"
+                                                    Storyboard.TargetProperty="Opacity"
+                                                    To="0"
+                                                    Duration="0:0:0.2" />
+                                                <ColorAnimation
+                                                    Storyboard.TargetName="Title"
+                                                    Storyboard.TargetProperty="(UIElement.Foreground).(SolidColorBrush.Color)"
+                                                    To="{Binding Text.Primary, Source={ThemeResource Colors}, Mode=OneWay}"
+                                                    Duration="0:0:0.2" />
+                                            </Storyboard>
                                         </VisualState>
 
                                         <VisualState x:Name="Pressed">
-                                            <VisualState.Storyboard>
-                                                <Storyboard>
-                                                    <ColorAnimation
-                                                        Storyboard.TargetName="LayoutRoot"
-                                                        Storyboard.TargetProperty="(UIElement.Background).(SolidColorBrush.Color)"
-                                                        To="{Binding Control.Outline, Source={ThemeResource Colors}, Mode=OneWay}"
-                                                        Duration="0:0:0.1" />
-                                                    <ColorAnimation
-                                                        Storyboard.TargetName="Icon"
-                                                        Storyboard.TargetProperty="(UIElement.Foreground).(SolidColorBrush.Color)"
-                                                        To="{Binding Text.Tertiary, Source={ThemeResource Colors}, Mode=OneWay}"
-                                                        Duration="0:0:0.1" />
-                                                    <DoubleAnimation
-                                                        EnableDependentAnimation="true"
-                                                        Storyboard.TargetName="Icon"
-                                                        Storyboard.TargetProperty="Opacity"
-                                                        To="1"
-                                                        Duration="0:0:0.2" />
-                                                    <DoubleAnimation
-                                                        EnableDependentAnimation="true"
-                                                        Storyboard.TargetName="IconFilled"
-                                                        Storyboard.TargetProperty="Opacity"
-                                                        To="0"
-                                                        Duration="0:0:0.2" />
-                                                    <ColorAnimation
-                                                        Storyboard.TargetName="Title"
-                                                        Storyboard.TargetProperty="(UIElement.Foreground).(SolidColorBrush.Color)"
-                                                        To="{Binding Text.Tertiary, Source={ThemeResource Colors}, Mode=OneWay}"
-                                                        Duration="0:0:0.1" />
-                                                </Storyboard>
-                                            </VisualState.Storyboard>
+                                            <Storyboard>
+                                                <ColorAnimation
+                                                    Storyboard.TargetName="LayoutRoot"
+                                                    Storyboard.TargetProperty="(UIElement.Background).(SolidColorBrush.Color)"
+                                                    To="{Binding Control.Outline, Source={ThemeResource Colors}, Mode=OneWay}"
+                                                    Duration="0:0:0.1" />
+                                                <ColorAnimation
+                                                    Storyboard.TargetName="Icon"
+                                                    Storyboard.TargetProperty="(UIElement.Foreground).(SolidColorBrush.Color)"
+                                                    To="{Binding Text.Tertiary, Source={ThemeResource Colors}, Mode=OneWay}"
+                                                    Duration="0:0:0.1" />
+                                                <DoubleAnimation
+                                                    EnableDependentAnimation="true"
+                                                    Storyboard.TargetName="Icon"
+                                                    Storyboard.TargetProperty="Opacity"
+                                                    To="1"
+                                                    Duration="0:0:0.2" />
+                                                <DoubleAnimation
+                                                    EnableDependentAnimation="true"
+                                                    Storyboard.TargetName="IconFilled"
+                                                    Storyboard.TargetProperty="Opacity"
+                                                    To="0"
+                                                    Duration="0:0:0.2" />
+                                                <ColorAnimation
+                                                    Storyboard.TargetName="Title"
+                                                    Storyboard.TargetProperty="(UIElement.Foreground).(SolidColorBrush.Color)"
+                                                    To="{Binding Text.Tertiary, Source={ThemeResource Colors}, Mode=OneWay}"
+                                                    Duration="0:0:0.1" />
+                                            </Storyboard>
                                         </VisualState>
 
                                         <VisualState x:Name="Selected">
-                                            <VisualState.Storyboard>
-                                                <Storyboard>
-                                                    <ColorAnimation
-                                                        Storyboard.TargetName="LayoutRoot"
-                                                        Storyboard.TargetProperty="(UIElement.Background).(SolidColorBrush.Color)"
-                                                        To="{Binding Control.Primary, Source={ThemeResource Colors}, Mode=OneWay}"
-                                                        Duration="0:0:0.2" />
-                                                    <ColorAnimation
-                                                        Storyboard.TargetName="Title"
-                                                        Storyboard.TargetProperty="(UIElement.Foreground).(SolidColorBrush.Color)"
-                                                        To="{Binding Accent.Primary, Source={ThemeResource Colors}, Mode=OneWay}"
-                                                        Duration="0:0:0.2" />
-                                                    <DoubleAnimation
-                                                        EnableDependentAnimation="true"
-                                                        Storyboard.TargetName="Icon"
-                                                        Storyboard.TargetProperty="Opacity"
-                                                        To="0"
-                                                        Duration="0:0:0.2" />
-                                                    <DoubleAnimation
-                                                        EnableDependentAnimation="true"
-                                                        Storyboard.TargetName="IconFilled"
-                                                        Storyboard.TargetProperty="Opacity"
-                                                        To="1"
-                                                        Duration="0:0:0.2" />
-                                                    <DoubleAnimation
-                                                        EnableDependentAnimation="true"
-                                                        Storyboard.TargetName="TitleBox"
-                                                        Storyboard.TargetProperty="Height"
-                                                        To="0"
-                                                        Duration="0:0:0.1" />
-                                                </Storyboard>
-                                            </VisualState.Storyboard>
+                                            <Storyboard>
+                                                <ColorAnimation
+                                                    Storyboard.TargetName="LayoutRoot"
+                                                    Storyboard.TargetProperty="(UIElement.Background).(SolidColorBrush.Color)"
+                                                    To="{Binding Control.Primary, Source={ThemeResource Colors}, Mode=OneWay}"
+                                                    Duration="0:0:0.2" />
+                                                <ColorAnimation
+                                                    Storyboard.TargetName="Title"
+                                                    Storyboard.TargetProperty="(UIElement.Foreground).(SolidColorBrush.Color)"
+                                                    To="{Binding Accent.Primary, Source={ThemeResource Colors}, Mode=OneWay}"
+                                                    Duration="0:0:0.2" />
+                                                <DoubleAnimation
+                                                    EnableDependentAnimation="true"
+                                                    Storyboard.TargetName="Icon"
+                                                    Storyboard.TargetProperty="Opacity"
+                                                    To="0"
+                                                    Duration="0:0:0.2" />
+                                                <DoubleAnimation
+                                                    EnableDependentAnimation="true"
+                                                    Storyboard.TargetName="IconFilled"
+                                                    Storyboard.TargetProperty="Opacity"
+                                                    To="1"
+                                                    Duration="0:0:0.2" />
+                                                <DoubleAnimation
+                                                    EnableDependentAnimation="true"
+                                                    Storyboard.TargetName="TitleBox"
+                                                    Storyboard.TargetProperty="Height"
+                                                    To="0"
+                                                    Duration="0:0:0.1" />
+                                            </Storyboard>
                                         </VisualState>
 
                                         <VisualState x:Name="PointerOverSelected">
-                                            <VisualState.Storyboard>
-                                                <Storyboard>
-                                                    <ColorAnimation
-                                                        Storyboard.TargetName="LayoutRoot"
-                                                        Storyboard.TargetProperty="(UIElement.Background).(SolidColorBrush.Color)"
-                                                        To="{Binding Control.Primary, Source={ThemeResource Colors}, Mode=OneWay}"
-                                                        Duration="0:0:0.2" />
-                                                    <ColorAnimation
-                                                        Storyboard.TargetName="Title"
-                                                        Storyboard.TargetProperty="(UIElement.Foreground).(SolidColorBrush.Color)"
-                                                        To="{Binding Accent.Primary, Source={ThemeResource Colors}, Mode=OneWay}"
-                                                        Duration="0:0:0.2" />
-                                                    <DoubleAnimation
-                                                        EnableDependentAnimation="true"
-                                                        Storyboard.TargetName="Icon"
-                                                        Storyboard.TargetProperty="Opacity"
-                                                        To="0"
-                                                        Duration="0:0:0.2" />
-                                                    <DoubleAnimation
-                                                        EnableDependentAnimation="true"
-                                                        Storyboard.TargetName="IconFilled"
-                                                        Storyboard.TargetProperty="Opacity"
-                                                        To="1"
-                                                        Duration="0:0:0.2" />
-                                                    <DoubleAnimation
-                                                        EnableDependentAnimation="true"
-                                                        Storyboard.TargetName="TitleBox"
-                                                        Storyboard.TargetProperty="Height"
-                                                        To="0"
-                                                        Duration="0:0:0.1" />
-                                                </Storyboard>
-                                            </VisualState.Storyboard>
+                                            <Storyboard>
+                                                <ColorAnimation
+                                                    Storyboard.TargetName="LayoutRoot"
+                                                    Storyboard.TargetProperty="(UIElement.Background).(SolidColorBrush.Color)"
+                                                    To="{Binding Control.Primary, Source={ThemeResource Colors}, Mode=OneWay}"
+                                                    Duration="0:0:0.2" />
+                                                <ColorAnimation
+                                                    Storyboard.TargetName="Title"
+                                                    Storyboard.TargetProperty="(UIElement.Foreground).(SolidColorBrush.Color)"
+                                                    To="{Binding Accent.Primary, Source={ThemeResource Colors}, Mode=OneWay}"
+                                                    Duration="0:0:0.2" />
+                                                <DoubleAnimation
+                                                    EnableDependentAnimation="true"
+                                                    Storyboard.TargetName="Icon"
+                                                    Storyboard.TargetProperty="Opacity"
+                                                    To="0"
+                                                    Duration="0:0:0.2" />
+                                                <DoubleAnimation
+                                                    EnableDependentAnimation="true"
+                                                    Storyboard.TargetName="IconFilled"
+                                                    Storyboard.TargetProperty="Opacity"
+                                                    To="1"
+                                                    Duration="0:0:0.2" />
+                                                <DoubleAnimation
+                                                    EnableDependentAnimation="true"
+                                                    Storyboard.TargetName="TitleBox"
+                                                    Storyboard.TargetProperty="Height"
+                                                    To="0"
+                                                    Duration="0:0:0.1" />
+                                            </Storyboard>
                                         </VisualState>
                                     </VisualStateGroup>
                                 </VisualStateManager.VisualStateGroups>
@@ -2519,6 +2512,195 @@
                                         </VisualState>
                                     </VisualStateGroup>
                                 </VisualStateManager.VisualStateGroups>
+                            </Grid>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+
+
+            <Style x:Key="ProfileGridViewItem" TargetType="GridViewItem">
+                <Setter Property="Width" Value="173" />
+                <Setter Property="Height" Value="94" />
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="GridViewItem">
+                            <Grid
+                                x:Name="ContentBorder"
+                                Margin="3"
+                                Control.IsTemplateFocusTarget="True">
+                                <ContentPresenter />
+
+                                <Rectangle
+                                    x:Name="BorderRectangle"
+                                    Margin="-3"
+                                    IsHitTestVisible="False"
+                                    RadiusX="8"
+                                    RadiusY="8"
+                                    Stroke="Transparent"
+                                    StrokeThickness="3" />
+
+                                <Border x:Name="MultiSelectSquare" Visibility="Collapsed">
+                                    <FontIcon x:Name="MultiSelectCheck" Visibility="Collapsed" />
+                                </Border>
+
+                                <VisualStateManager.VisualStateGroups>
+                                    <VisualStateGroup x:Name="CommonStates">
+                                        <VisualState x:Name="Normal">
+                                            <Storyboard>
+                                                <ColorAnimation
+                                                    Storyboard.TargetName="BorderRectangle"
+                                                    Storyboard.TargetProperty="(Rectangle.Stroke).(SolidColorBrush.Color)"
+                                                    To="Transparent"
+                                                    Duration="0:0:0.2" />
+
+                                                <PointerUpThemeAnimation Storyboard.TargetName="ContentBorder" />
+                                            </Storyboard>
+                                        </VisualState>
+
+                                        <VisualState x:Name="PointerOver">
+                                            <Storyboard>
+                                                <ColorAnimation
+                                                    Storyboard.TargetName="BorderRectangle"
+                                                    Storyboard.TargetProperty="(Rectangle.Stroke).(SolidColorBrush.Color)"
+                                                    To="{Binding Color, Source={ThemeResource AccentLight}}"
+                                                    Duration="0:0:0.2" />
+
+                                                <PointerUpThemeAnimation Storyboard.TargetName="ContentBorder" />
+                                            </Storyboard>
+                                        </VisualState>
+
+                                        <VisualState x:Name="Pressed">
+                                            <Storyboard>
+                                                <ColorAnimation
+                                                    Storyboard.TargetName="BorderRectangle"
+                                                    Storyboard.TargetProperty="(Rectangle.Stroke).(SolidColorBrush.Color)"
+                                                    To="{Binding Color, Source={ThemeResource AccentDark}}"
+                                                    Duration="0:0:0.2" />
+
+                                                <PointerDownThemeAnimation TargetName="ContentBorder" />
+                                            </Storyboard>
+                                        </VisualState>
+
+                                        <VisualState x:Name="Selected">
+                                            <Storyboard>
+                                                <ColorAnimation
+                                                    Storyboard.TargetName="BorderRectangle"
+                                                    Storyboard.TargetProperty="(Rectangle.Stroke).(SolidColorBrush.Color)"
+                                                    To="{Binding Color, Source={ThemeResource AccentPrimary}}"
+                                                    Duration="0:0:0.2" />
+
+                                                <PointerUpThemeAnimation Storyboard.TargetName="ContentBorder" />
+                                            </Storyboard>
+                                        </VisualState>
+
+                                        <VisualState x:Name="PointerOverSelected">
+                                            <Storyboard>
+                                                <ColorAnimation
+                                                    Storyboard.TargetName="BorderRectangle"
+                                                    Storyboard.TargetProperty="(Rectangle.Stroke).(SolidColorBrush.Color)"
+                                                    To="{Binding Color, Source={ThemeResource AccentPrimary}}"
+                                                    Duration="0:0:0.2" />
+
+                                                <PointerUpThemeAnimation Storyboard.TargetName="ContentBorder" />
+                                            </Storyboard>
+                                        </VisualState>
+                                    </VisualStateGroup>
+
+                                    <VisualStateGroup x:Name="DisabledStates">
+                                        <VisualState x:Name="Enabled" />
+
+                                        <VisualState x:Name="Disabled">
+                                            <Storyboard>
+                                                <DoubleAnimation
+                                                    Storyboard.TargetName="ContentBorder"
+                                                    Storyboard.TargetProperty="Opacity"
+                                                    To="{ThemeResource ListViewItemDisabledThemeOpacity}"
+                                                    Duration="0" />
+                                            </Storyboard>
+                                        </VisualState>
+                                    </VisualStateGroup>
+                                </VisualStateManager.VisualStateGroups>
+                            </Grid>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+
+
+            <Style TargetType="ui:ScrollLane">
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="ui:ScrollLane">
+                            <Grid
+                                x:Name="RootLayout"
+                                Width="{TemplateBinding Width}"
+                                Height="{TemplateBinding Height}"
+                                MinWidth="{TemplateBinding MinWidth}"
+                                MinHeight="{TemplateBinding MinHeight}"
+                                Margin="{TemplateBinding Margin}"
+                                Padding="{TemplateBinding Padding}"
+                                Background="{TemplateBinding Background}"
+                                Visibility="{TemplateBinding Visibility}">
+                                <Grid.Resources>
+                                    <AcrylicBrush
+                                        x:Key="ButtonBackground"
+                                        TintColor="{Binding Color, Source={ThemeResource ControlSolidPrimary}}"
+                                        TintOpacity="0.7" />
+                                    <AcrylicBrush
+                                        x:Key="ButtonBackgroundPointerOver"
+                                        TintColor="{Binding Color, Source={ThemeResource ControlSolidOutline}}"
+                                        TintOpacity="0.7" />
+                                    <AcrylicBrush
+                                        x:Key="ButtonBackgroundPressed"
+                                        TintColor="{Binding Color, Source={ThemeResource ControlSolidPrimaryDisabled}}"
+                                        TintOpacity="0.7" />
+                                    <AcrylicBrush
+                                        x:Key="ControlAcrylicOutlineDisabled"
+                                        TintColor="{Binding Color, Source={ThemeResource ControlSolidPrimaryDisabled}}"
+                                        TintOpacity="0.7" />
+                                </Grid.Resources>
+
+                                <ScrollViewer
+                                    x:Name="ScrollContainer"
+                                    Margin="30,0"
+                                    CanContentRenderOutsideBounds="true"
+                                    HorizontalScrollBarVisibility="Hidden"
+                                    HorizontalScrollMode="Disabled"
+                                    VerticalScrollBarVisibility="Hidden">
+                                    <GridView
+                                        x:Name="ItemsContainter"
+                                        ItemContainerStyle="{TemplateBinding ItemContainerStyle}"
+                                        ItemTemplate="{TemplateBinding ItemTemplate}"
+                                        ItemsSource="{TemplateBinding ItemsSource}">
+                                        <GridView.ItemsPanel>
+                                            <ItemsPanelTemplate>
+                                                <ItemsWrapGrid Orientation="Horizontal" />
+                                            </ItemsPanelTemplate>
+                                        </GridView.ItemsPanel>
+                                    </GridView>
+                                </ScrollViewer>
+
+                                <Button
+                                    Name="BackButton"
+                                    Width="20"
+                                    Height="39"
+                                    Margin="5,0,0,0"
+                                    Padding="-2"
+                                    VerticalAlignment="Center">
+                                    <FontIcon FontFamily="Assets/FluentSystemIcons-Filled.ttf#FluentSystemIcons-Filled" Glyph="&#xF2AB;" />
+                                </Button>
+                                <Button
+                                    Name="ForwardButton"
+                                    Width="20"
+                                    Height="39"
+                                    Margin="0,0,5,0"
+                                    Padding="-2"
+                                    HorizontalAlignment="Right"
+                                    VerticalAlignment="Center">
+                                    <FontIcon FontFamily="Assets/FluentSystemIcons-Filled.ttf#FluentSystemIcons-Filled" Glyph="&#xF2B1;" />
+                                </Button>
+
                             </Grid>
                         </ControlTemplate>
                     </Setter.Value>
