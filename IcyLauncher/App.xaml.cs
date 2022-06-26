@@ -40,7 +40,7 @@ public partial class App : Application
                 services.AddScoped<WindowHandler>();
                 services.AddScoped<IConverter, JsonConverter>();
                 services.AddScoped<INavigation>(provider => new Navigation(provider.GetRequiredService<ILogger<Navigation>>(), navigationView, contentFrame, backButton));
-                services.AddScoped<ControlReciever>();
+                services.AddScoped<UIElementReciever>();
                 services.AddScoped<AppStartupHandler>();
 
                 services.AddSingleton<HomeViewModel>();

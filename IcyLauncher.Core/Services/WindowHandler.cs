@@ -16,14 +16,14 @@ public class WindowHandler
 {
     readonly ILogger logger;
     readonly ThemeManager themeManager;
-    readonly ControlReciever controlReciever;
+    readonly UIElementReciever uiElementReciever;
     readonly Window shell;
 
-    public WindowHandler(ILogger<Window> logger, ThemeManager themeManager, ControlReciever controlReciever, Window shell)
+    public WindowHandler(ILogger<Window> logger, ThemeManager themeManager, UIElementReciever uiElementReciever, Window shell)
     {
         this.logger = logger;
         this.themeManager = themeManager;
-        this.controlReciever = controlReciever;
+        this.uiElementReciever = uiElementReciever;
         this.shell = shell;
 
         this.logger.Log("Registered WindowHandler");
@@ -223,10 +223,10 @@ public class WindowHandler
             switch (backgroundColor)
             {
                 case "Transparent":
-                    controlReciever.MainGrid.Background = new SolidColorBrush(Colors.Transparent);
+                    uiElementReciever.MainGrid.Background = new SolidColorBrush(Colors.Transparent);
                     break;
                 default:
-                    controlReciever.MainGrid.SetBinding(Panel.BackgroundProperty, new Binding()
+                    uiElementReciever.MainGrid.SetBinding(Panel.BackgroundProperty, new Binding()
                     {
                         Source = themeManager.Colors,
                         Converter = new BrushConverter(),

@@ -4,7 +4,7 @@ using Microsoft.UI.Xaml.Shapes;
 
 namespace IcyLauncher.Core.Services;
 
-public class ControlReciever
+public class UIElementReciever
 {
     readonly ILogger logger;
     readonly INavigation navigation;
@@ -18,7 +18,7 @@ public class ControlReciever
     public Grid CurrentNavigationViewItemLayoutRoot => 
         (Grid)VisualTreeHelper.GetChild(VisualTreeHelper.GetChild(VisualTreeHelper.GetChild(navigation.GetCurrentNavigationViewItem(), 0), 0), 0);
 
-    public ControlReciever(ILogger<ControlReciever> logger, INavigation navigation, Window shell)
+    public UIElementReciever(ILogger<UIElementReciever> logger, INavigation navigation, Window shell)
     {
         this.logger = logger;
         this.navigation = navigation;

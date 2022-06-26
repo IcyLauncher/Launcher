@@ -1,4 +1,6 @@
-﻿namespace IcyLauncher.Core.Services;
+﻿using CommunityToolkit.WinUI.UI;
+
+namespace IcyLauncher.Core.Services;
 
 public class AppStartupHandler
 {
@@ -8,14 +10,14 @@ public class AppStartupHandler
         ConfigurationManager configurationManagaer,
         ThemeManager themeManager,
         WindowHandler windowHandler,
-        ControlReciever controlReciever,
+        UIElementReciever uiElementReciever,
         Window shell,
         INavigation navigation)
     {
         AppDomain.CurrentDomain.FirstChanceException += (sender, args) =>
             logger.Log("Global Exception thrown", args.Exception);
              
-        windowHandler.SetTilteBar(true, controlReciever.TitleBar);
+        windowHandler.SetTilteBar(true, uiElementReciever.TitleBar);
         windowHandler.SetIcon("Assets/Icon.ico");
         windowHandler.SetMinSize(700, 400);
         windowHandler.SetSize(1031, 550);
@@ -29,7 +31,7 @@ public class AppStartupHandler
         themeManager.SetResourceColors();
         themeManager.SetUnbindableBindings();
 
-        controlReciever.BackButton.Click += (s, e) => navigation.GoBack();
+        uiElementReciever.BackButton.Click += (s, e) => navigation.GoBack();
         navigation.Navigate("Home");
 
         logger.Log("App fully startup");
