@@ -1,5 +1,4 @@
-﻿using IcyLauncher.Core.Xaml;
-using Microsoft.UI.Xaml.Data;
+﻿using Microsoft.UI.Xaml.Data;
 
 namespace IcyLauncher.UI;
 
@@ -7,21 +6,15 @@ public class TextBox : Microsoft.UI.Xaml.Controls.TextBox
 {
     Theme colors = default!;
 
-    public TextBox()
+    protected override void OnApplyTemplate()
     {
-        Loaded += OnLoaded;
-        IsEnabledChanged += UpdateBinding;
-    }
+        base.OnApplyTemplate();
 
-    private void OnLoaded(object sender, RoutedEventArgs e)
-    {
         colors = App.Provider.GetRequiredService<ThemeManager>().Colors;
-        UpdateBinding(sender, null);
-
-        Loaded -= OnLoaded;
+        UpdateBinding();
     }
 
-    private void UpdateBinding(object sender, object? args) =>
+    private void UpdateBinding() =>
         SetBinding(ForegroundProperty, new Binding()
         {
             Source = colors,
