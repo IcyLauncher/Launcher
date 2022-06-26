@@ -11,45 +11,14 @@ namespace IcyLauncher.Core.Helpers;
 
 public class UIElementProvider
 {
-    public static Storyboard Animate(DependencyObject element, string property, double startValue, double endValue, double lenght)
-    {
-        var keyFrameStart = new EasingDoubleKeyFrame() 
-        {
-            KeyTime = KeyTime.FromTimeSpan(TimeSpan.FromMilliseconds(0)),
-            Value = startValue,
-            EasingFunction = new ExponentialEase()
-            {
-                EasingMode = EasingMode.EaseInOut
-            }
-        };
-        var keyFrameEnd = new EasingDoubleKeyFrame() 
-        {
-            KeyTime = KeyTime.FromTimeSpan(TimeSpan.FromMilliseconds(lenght)),
-            Value = endValue,
-            EasingFunction = new ExponentialEase()
-            {
-                EasingMode = EasingMode.EaseInOut
-            }
-        };
-
-        var anim = new DoubleAnimationUsingKeyFrames() { EnableDependentAnimation = true };
-        anim.KeyFrames.Add(keyFrameStart);
-        anim.KeyFrames.Add(keyFrameEnd);
-
-        Storyboard.SetTarget(anim, element);
-        Storyboard.SetTargetProperty(anim, property);
-
-        var board = new Storyboard();
-        board.Children.Add(anim);
-
-        return board;
-    }
-    public static DoubleAnimation Animate(DependencyObject element, string property, double endValue, double lenght)
+    public static Timeline Animate(DependencyObject element, string property, double? startValue, double endValue, double lenght)
     {
         var anim = new DoubleAnimation()
         {
             Duration = TimeSpan.FromMilliseconds(lenght),
-            To = endValue
+            From = startValue,
+            To = endValue,
+            EnableDependentAnimation = true
         };
 
         Storyboard.SetTarget(anim, element);
@@ -80,12 +49,14 @@ public class UIElementProvider
         {
             Visibility = Visibility.Collapsed,
             Margin = new(4, 4, 0, 4),
-            Width = 32,
+            Width = 0,
             Height = 32,
             Padding = new(0),
             Background = new SolidColorBrush(Colors.Transparent),
             BorderBrush = new SolidColorBrush(Colors.Transparent),
-            Content = new Viewbox() { Child = backIcon, Width = 16, Height = 16},
+            Content = new Viewbox() { Child = backIcon, Width = 16, Height = 16 },
+            Opacity = 0,
+            OpacityTransition = new()
         };
         backButton.PointerEntered += (s, e) => AnimatedIcon.SetState(backIcon, "PointerOver");
         backButton.PointerExited += (s, e) => AnimatedIcon.SetState(backIcon, "Normal");

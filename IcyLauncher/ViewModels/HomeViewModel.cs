@@ -92,7 +92,7 @@ public partial class HomeViewModel : ObservableObject
         var icon = rootLayout.Children[2];
 
         details.Opacity = 0;
-        details.Translation = new Vector3(-10, 0, 0);
-        icon.Translation = new Vector3(0, 0, 0);
+        details.Translation = new(-10, 0, 0);
+        icon.Translation = new(0, 0, 0);
     }
 }

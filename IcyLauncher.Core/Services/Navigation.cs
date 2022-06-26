@@ -1,4 +1,6 @@
 ﻿using Microsoft.UI.Xaml.Controls;
+using Microsoft.UI.Xaml.Media.Animation;
+using System.Numerics;
 
 namespace IcyLauncher.Core.Services;
 
@@ -139,13 +141,16 @@ public class Navigation : INavigation
         if (canGoBack)
         {
             backButton.Visibility = Visibility.Visible;
-            UIElementProvider.Animate(backButton, "Opacity", 0, 1, 200).Begin();
-            UIElementProvider.Animate(backButton, "Width", 0, 32, 110).Begin();
+            backButton.Opacity = 1;
+            var board = new Storyboard();
+            board.Children.Add(UIElementProvider.Animate(backButton, "Width", 0, 32, 200));
+            board.Begin();
         }
         else
         {
-            UIElementProvider.Animate(backButton, "Opacity", 1, 0, 200).Begin();
-            var board = UIElementProvider.Animate(backButton, "Width", 32, 0, 110);
+            backButton.Opacity = 0;
+            var board = new Storyboard();
+            board.Children.Add(UIElementProvider.Animate(backButton, "Width", 32, 0, 200));
             board.Completed += (s, e) => backButton.Visibility = Visibility.Collapsed;
             board.Begin();
         }
