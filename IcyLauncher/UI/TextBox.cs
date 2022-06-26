@@ -1,6 +1,6 @@
 ﻿using IcyLauncher.Core.Xaml;
 
-namespace IcyLauncher.UIElements;
+namespace IcyLauncher.UI;
 
 public class TextBox : Microsoft.UI.Xaml.Controls.TextBox
 {
