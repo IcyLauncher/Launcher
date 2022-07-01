@@ -1,5 +1,6 @@
 ﻿using Microsoft.UI;
 using Microsoft.UI.Xaml.Controls;
+using Microsoft.UI.Xaml.Media.Animation;
 using System.Collections.ObjectModel;
 using Windows.UI;
 
@@ -50,13 +51,12 @@ public partial class HomeViewModel : ObservableObject
         //themeManager.Colors.Accent.Primary = accentPrimary;
         //themeManager.Colors.Accent.Light = accentLight;
         //themeManager.Colors.Accent.Dark = accentDark;
+        Profiles.Add(new());
         Profiles.Add(new()
         {
-            Width = 150, Height = 150,
-            Fill = new Microsoft.UI.Xaml.Media.SolidColorBrush(GetRandomColor())
+            Icon = "Redstone-Block.png".AsImage(),
+            Color = Colors.Red
         });
-        var s = 0;
-        System.Diagnostics.Debug.WriteLine(3234 / s);
     }
 
     [ObservableProperty]
@@ -70,7 +70,7 @@ public partial class HomeViewModel : ObservableObject
 
 
     [ObservableProperty]
-    ObservableCollection<Microsoft.UI.Xaml.Shapes.Rectangle> profiles = new();
+    ObservableCollection<Profile> profiles = new();
 
     public void OnItemSelectionChanged(object sender, SelectionChangedEventArgs e)
     {
@@ -78,11 +78,11 @@ public partial class HomeViewModel : ObservableObject
             return;
 
         var rootLayout = (Grid)((GridViewItem)((GridView)sender).ContainerFromItem(e.RemovedItems[0])).ContentTemplateRoot;
-        var details = rootLayout.Children[3];
-        var icon = rootLayout.Children[2];
+        var details = rootLayout.Children[4];
+        var icon = (Image)rootLayout.Children[2];
 
         details.Opacity = 0;
         details.Translation = new(-10, 0, 0);
-        icon.Translation = new(0, 0, 0);
+        ((Storyboard)icon.Resources["outBoard"]).Begin();
     }
 }

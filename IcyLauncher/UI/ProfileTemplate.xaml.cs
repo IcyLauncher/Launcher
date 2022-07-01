@@ -1,20 +1,24 @@
 ﻿using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Media;
+using Microsoft.UI.Xaml.Media.Animation;
 using System.Numerics;
 
 namespace IcyLauncher.UI;
 
-public partial class ProfileDataTemplate : ResourceDictionary
+public partial class ProfileTemplate : ResourceDictionary
 {
-    public ProfileDataTemplate() =>
+    public ProfileTemplate() =>
         InitializeComponent();
 
     private void OnRootLayoutLoaded(object sender, RoutedEventArgs e)
     {
         var rootLayout = (Grid)sender;
-        var details = rootLayout.Children[3];
-        var icon = rootLayout.Children[2];
+        var details = rootLayout.Children[4];
+        var icon = (Image)rootLayout.Children[2];
         var item = (GridViewItem)VisualTreeHelper.GetParent((Grid)((ContentPresenter)VisualTreeHelper.GetParent(rootLayout)).Parent);
+
+        var inBoard = (Storyboard)icon.Resources["inBoard"];
+        var outBoard = (Storyboard)icon.Resources["outBoard"];
 
         rootLayout.PointerEntered += (s, e) =>
         {
@@ -22,7 +26,7 @@ public partial class ProfileDataTemplate : ResourceDictionary
             {
                 details.Opacity = 1;
                 details.Translation = new Vector3(0, 0, 0);
-                icon.Translation = new Vector3(40, 0, 0);
+                inBoard.Begin();
             };
         };
         rootLayout.PointerExited += (s, e) =>
@@ -31,7 +35,7 @@ public partial class ProfileDataTemplate : ResourceDictionary
             {
                 details.Opacity = 0;
                 details.Translation = new Vector3(-10, 0, 0);
-                icon.Translation = new Vector3(0, 0, 0);
+                outBoard.Begin();
             }
         };
 

@@ -9,13 +9,8 @@
     mc:Ignorable="d">
 
     <Grid>
-        <TextBlock
-            FontSize="20"
-            Foreground="{StaticResource AccentPrimary}"
-            Text="some goofy ahh text" />
-
         <ScrollViewer>
-            <StackPanel Margin="50" Spacing="20">
+            <StackPanel Margin="12" Spacing="20">
                 <StackPanel Orientation="Horizontal" Spacing="50">
                     <ToggleSwitch Header="On-Enabled" IsOn="true" />
                     <ToggleSwitch
@@ -98,8 +93,37 @@
                 </StackPanel>
 
                 <ui:ScrollLane
-                    Margin="-20,0"
+                    Margin="0,0"
+                    ItemSelectionChanged="{x:Bind viewModel.OnItemSelectionChanged}"
+                    ItemContainerStyle="{ThemeResource ProfileGridViewItem}"
+                    ItemTemplate="{ThemeResource ProfileTemplate}"
                     ItemsSource="{x:Bind viewModel.Profiles}" />
+
+                <StackPanel>
+                    <Grid
+                        Width="300"
+                        Padding="12"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top"
+                        Background="{ThemeResource ControlPrimary}"
+                        CornerRadius="8">
+                        <TextBlock
+                            Margin="-2,-8,0,0"
+                            Style="{ThemeResource Title}"
+                            Text="News"
+                            TextTrimming="CharacterEllipsis" />
+                        <TextBlock
+                            Margin="0,23,0,0"
+                            Style="{ThemeResource Content}"
+                            TextWrapping="Wrap">
+                            - This is an example news [1]<LineBreak />
+                            - This is another example [2]<LineBreak />
+                            - And again, a fucking example
+                            news [3]<LineBreak />
+                            - End my suffer. Please. I cant
+                            do this anymore</TextBlock>
+                    </Grid>
+                </StackPanel>
 
                 <StackPanel
                     Margin="0,100,0,0"

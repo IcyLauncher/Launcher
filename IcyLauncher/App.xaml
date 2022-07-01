@@ -12,7 +12,7 @@
             <ResourceDictionary.MergedDictionaries>
                 <XamlControlsResources xmlns="using:Microsoft.UI.Xaml.Controls" />
 
-                <ui:ProfileDataTemplate />
+                <ui:ProfileTemplate />
             </ResourceDictionary.MergedDictionaries>
 
             <xaml:ArrayConverter x:Key="ArrayConverter" />
@@ -182,7 +182,7 @@
 
             <Style x:Key="Title" TargetType="TextBlock">
                 <Setter Property="FontFamily" Value="Segoe UI" />
-                <Setter Property="FontSize" Value="20" />
+                <Setter Property="FontSize" Value="24" />
                 <Setter Property="FontWeight" Value="SemiBold" />
                 <Setter Property="Foreground" Value="{ThemeResource TextPrimary}" />
                 <Setter Property="Typography.Capitals" Value="AllSmallCaps" />
@@ -212,14 +212,14 @@
             <Style x:Key="Subpoint" TargetType="TextBlock">
                 <Setter Property="FontFamily" Value="Segoe UI" />
                 <Setter Property="FontSize" Value="14" />
-                <Setter Property="FontWeight" Value="Normal" />
+                <Setter Property="FontWeight" Value="SemiLight" />
                 <Setter Property="Foreground" Value="{ThemeResource TextSecondary}" />
             </Style>
 
             <Style x:Key="SubpointSecondary" TargetType="TextBlock">
                 <Setter Property="FontFamily" Value="Segoe UI" />
                 <Setter Property="FontSize" Value="14" />
-                <Setter Property="FontWeight" Value="Normal" />
+                <Setter Property="FontWeight" Value="SemiLight" />
                 <Setter Property="Foreground" Value="{ThemeResource TextTertiary}" />
             </Style>
 
@@ -2657,7 +2657,7 @@
 
                                 <ScrollViewer
                                     x:Name="ScrollContainer"
-                                    Margin="30,0"
+                                    Margin="24,0"
                                     CanContentRenderOutsideBounds="true"
                                     HorizontalScrollBarVisibility="Hidden"
                                     HorizontalScrollMode="Disabled"

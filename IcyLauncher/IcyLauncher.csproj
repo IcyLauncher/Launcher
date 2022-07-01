@@ -38,7 +38,7 @@
 		<None Remove="Assets\LICENSE" />
 		<None Remove="Assets\NoImage.png" />
 		<None Remove="Assets\Redstone-Block.png" />
-		<None Remove="UI\ProfileDataTemplate.xaml" />
+		<None Remove="UI\ProfileTemplate.xaml" />
 		<None Remove="Views\HomeView.xaml" />
 		<None Remove="Views\ProfilesView.xaml" />
 	</ItemGroup>

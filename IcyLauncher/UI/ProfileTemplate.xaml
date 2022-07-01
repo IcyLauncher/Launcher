@@ -1,5 +1,5 @@
 ﻿<ResourceDictionary
-    x:Class="IcyLauncher.UI.ProfileDataTemplate"
+    x:Class="IcyLauncher.UI.ProfileTemplate"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:ex="using:CommunityToolkit.WinUI.UI"
@@ -11,21 +11,60 @@
             <Rectangle Fill="{x:Bind Color, Converter={StaticResource BrushConverter}}" Opacity="0.15" />
             <Grid Name="ShadowTarget" />
 
-            <Grid Width="68" Height="68">
-                <Grid.TranslationTransition>
-                    <Vector3Transition />
-                </Grid.TranslationTransition>
+            <Image
+                Name="icon"
+                Width="68"
+                Height="68"
+                Source="{x:Bind Icon}">
+                <Image.RenderTransform>
+                    <TranslateTransform />
+                </Image.RenderTransform>
+                <Image.Resources>
+                    <Storyboard x:Key="inBoard" BeginTime="0:0:0.1">
+                        <DoubleAnimation
+                            Storyboard.TargetName="icon"
+                            Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.X)"
+                            To="40"
+                            Duration="0:0:0.1" />
 
-                <Image Source="{x:Bind Icon}">
-                    <ex:Effects.Shadow>
-                        <ex:AttachedDropShadow
-                            BlurRadius="50"
-                            CastTo="{Binding ElementName=ShadowTarget}"
-                            Opacity="0.4"
-                            Offset="0,3,0" />
-                    </ex:Effects.Shadow>
-                </Image>
-            </Grid>
+                        <ObjectAnimationUsingKeyFrames
+                            BeginTime="00:00:00"
+                            Storyboard.TargetName="shadowIcon"
+                            Storyboard.TargetProperty="(UIElement.Visibility)">
+                            <DiscreteObjectKeyFrame Value="Collapsed" />
+                        </ObjectAnimationUsingKeyFrames>
+                    </Storyboard>
+
+                    <Storyboard x:Key="outBoard">
+                        <DoubleAnimation
+                            Storyboard.TargetName="icon"
+                            Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.X)"
+                            To="0"
+                            Duration="0:0:0.1" />
+
+                        <ObjectAnimationUsingKeyFrames
+                            BeginTime="0:0:0.1"
+                            Storyboard.TargetName="shadowIcon"
+                            Storyboard.TargetProperty="(UIElement.Visibility)">
+                            <DiscreteObjectKeyFrame Value="Visible" />
+                        </ObjectAnimationUsingKeyFrames>
+                    </Storyboard>
+                </Image.Resources>
+            </Image>
+
+            <Image
+                Name="shadowIcon"
+                Width="68"
+                Height="68"
+                Source="{x:Bind Icon}">
+                <ex:Effects.Shadow>
+                    <ex:AttachedDropShadow
+                        BlurRadius="50"
+                        CastTo="{Binding ElementName=ShadowTarget}"
+                        Opacity="0.4"
+                        Offset="0,3,0" />
+                </ex:Effects.Shadow>
+            </Image>
 
             <Grid
                 Width="173"
