@@ -22,7 +22,7 @@ public class Navigation : INavigation
             if (e.SelectedItemContainer is NavigationViewItem item && $"Views.{item.Tag}View".AsType() is Type type)
                 SetCurrentPage(type);
             else
-                this.logger.Log("Failed to set current NavigationView page: Unregistered Type");
+                this.logger.Log("Failed to set current NavigationView page");
         };
         this.navigationView.BackRequested += (s, e) => GoBack();
 
@@ -68,9 +68,9 @@ public class Navigation : INavigation
             logger.Log("Set current NavigationView item");
             return true;
         }
-        catch
+        catch (Exception ex)
         {
-            logger.Log("Failed to set current NavigationView item");
+            logger.Log("Failed to set current NavigationView item", ex);
             return false;
         }
     }
@@ -79,15 +79,15 @@ public class Navigation : INavigation
     {
         try
         {
-            frame.Navigate(type, parameter);
+            var navigate = frame.Navigate(type, parameter);
             CanGoBackChanged(frame.CanGoBack);
 
             logger.Log("Set current NavigationView page");
-            return true;
+            return navigate;
         }
-        catch
+        catch (Exception ex)
         {
-            logger.Log("Failed to set current NavigationView page");
+            logger.Log("Failed to set current NavigationView page", ex);
             return false;
         }
     }
@@ -125,9 +125,9 @@ public class Navigation : INavigation
             logger.Log("Current NavigationView page went back");
             return true;
         }
-        catch
+        catch (Exception ex)
         {
-            logger.Log("Current NavigationView page failed to go back");
+            logger.Log("Current NavigationView page failed to go back", ex);
             return false;
         }
     }

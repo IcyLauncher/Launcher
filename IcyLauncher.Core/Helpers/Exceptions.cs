@@ -3,4 +3,8 @@
 public class Exceptions
 {
     public static readonly Exception InvalidDeserializedResult = new("Deserialized Object returned invalid type or null");
+
+    public static readonly Exception Unsupported = new("Method or object is not supported on this hardware");
+
+    public static readonly Exception UnregisteredType = new("Type is not registered");
 }

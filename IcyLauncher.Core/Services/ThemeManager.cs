@@ -1,8 +1,6 @@
-﻿using IcyLauncher.Core.Xaml;
-using Microsoft.UI.Xaml.Controls;
+﻿using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Data;
 using Microsoft.UI.Xaml.Media;
-using Windows.UI;
 using Windows.UI.ViewManagement;
 
 namespace IcyLauncher.Core.Services;
@@ -140,7 +138,6 @@ public class ThemeManager
 
     private void SystemColorsValuesChanged(UISettings sender, object args)
     {
-        //var accentColor = sender.GetColorValue(UIColorType.Accent);
-        //var backgroundColor = sender.GetColorValue(UIColorType.Background);
+        logger.Log("YOUR MOM");
     }
 }

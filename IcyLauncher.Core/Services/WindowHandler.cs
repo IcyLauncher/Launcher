@@ -84,7 +84,7 @@ public class WindowHandler
     {
         if (!AppWindowTitleBar.IsCustomizationSupported())
         {
-            logger.Log("Tried to set TitleBar: Not supported", logLevel: LogLevel.Error);
+            logger.Log("Tried to set TitleBar", Exceptions.Unsupported);
             return false;
         }
 
@@ -143,7 +143,7 @@ public class WindowHandler
     {
         if (!AppWindowTitleBar.IsCustomizationSupported())
         {
-            logger.Log("Tried to set TitleBar Button Colors: Not supported", logLevel: LogLevel.Error);
+            logger.Log("Tried to set TitleBar Button Colors", Exceptions.Unsupported);
             return false;
         }
 

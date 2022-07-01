@@ -24,7 +24,10 @@ public class AcrylicBackdropHandler : IBackdropHandler
     public bool SetBackdrop(bool useDarkMode)
     {
         if (!DesktopAcrylicController.IsSupported())
+        {
+            logger.Log("Failed to set System Backdrop", Exceptions.Unsupported);
             return false;
+        }
 
         try
         {
@@ -47,7 +50,7 @@ public class AcrylicBackdropHandler : IBackdropHandler
         catch (Exception ex)
         {
             logger.Log("Failed to set System Backdrop", ex);
-            return true;
+            return false;
         }
     }
 
@@ -62,6 +65,6 @@ public class AcrylicBackdropHandler : IBackdropHandler
         controller.Dispose();
         controller = default!;
         backdropConfiguration = default!;
-        logger.Log("Unhooked Backdrophandler: Acrylic");
+        logger.Log("Unhooked Backdrophandler");
     }
 }

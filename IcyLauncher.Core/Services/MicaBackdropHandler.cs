@@ -25,7 +25,10 @@ public class MicaBackdropHandler : IBackdropHandler
     public bool SetBackdrop(bool useDarkMode)
     {
         if (!MicaController.IsSupported())
+        {
+            logger.Log("Failed to set System Backdrop", Exceptions.Unsupported);
             return false;
+        }
 
         try
         {
@@ -48,7 +51,7 @@ public class MicaBackdropHandler : IBackdropHandler
         catch (Exception ex)
         {
             logger.Log("Failed to set System Backdrop", ex);
-            return true;
+            return false;
         }
     }
 
@@ -63,6 +66,6 @@ public class MicaBackdropHandler : IBackdropHandler
         controller.Dispose();
         controller = default!;
         backdropConfiguration = default!;
-        logger.Log("Unhooked Backdrophandler: Mica");
+        logger.Log("Unhooked Backdrophandler");
     }
 }

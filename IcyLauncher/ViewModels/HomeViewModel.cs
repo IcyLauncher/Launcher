@@ -55,6 +55,8 @@ public partial class HomeViewModel : ObservableObject
             Width = 150, Height = 150,
             Fill = new Microsoft.UI.Xaml.Media.SolidColorBrush(GetRandomColor())
         });
+        var s = 0;
+        System.Diagnostics.Debug.WriteLine(3234 / s);
     }
 
     [ObservableProperty]
