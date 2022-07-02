@@ -2,6 +2,7 @@
     x:Class="IcyLauncher.App"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:ex="using:CommunityToolkit.WinUI.UI"
     xmlns:models="using:IcyLauncher.Core.Models"
     xmlns:primitives="using:Microsoft.UI.Xaml.Controls.Primitives"
     xmlns:ui="using:IcyLauncher.UI"
@@ -150,6 +151,7 @@
             <SolidColorBrush x:Key="ComboBoxPlaceHolderForeground" Color="{Binding Color, Source={ThemeResource TextTertiary}}" />
             <SolidColorBrush x:Key="ComboBoxPlaceHolderForegroundFocused" Color="{Binding Color, Source={ThemeResource TextTertiary}}" />
             <SolidColorBrush x:Key="ComboBoxPlaceHolderForegroundPointerOver" Color="{Binding Color, Source={ThemeResource TextTertiary}}" />
+            <SolidColorBrush x:Key="ComboBoxPlaceHolderForegroundPressed" Color="{Binding Color, Source={ThemeResource TextTertiary}}" />
             <SolidColorBrush x:Key="ComboBoxPlaceHolderForegroundDisabled" Color="{Binding Color, Source={ThemeResource TextDisabled}}" />
 
             <SolidColorBrush x:Key="ComboBoxDropDownGlyphForeground" Color="{Binding Color, Source={ThemeResource TextSecondary}}" />
@@ -221,6 +223,77 @@
                 <Setter Property="FontSize" Value="14" />
                 <Setter Property="FontWeight" Value="SemiLight" />
                 <Setter Property="Foreground" Value="{ThemeResource TextTertiary}" />
+            </Style>
+
+
+            <Style TargetType="ui:Card">
+                <Setter Property="Background" Value="{ThemeResource ControlPrimary}" />
+                <Setter Property="VerticalAlignment" Value="Top" />
+                <Setter Property="HorizontalAlignment" Value="Left" />
+                <Setter Property="Padding" Value="0" />
+                <Setter Property="CornerRadius" Value="8" />
+                <Setter Property="Foreground" Value="{ThemeResource TextSecondary}" />
+                <Setter Property="FontSize" Value="18" />
+                <Setter Property="FontFamily" Value="Segoe UI" />
+                <Setter Property="FontWeight" Value="Normal" />
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="ui:Card">
+                            <Grid
+                                Name="RootLayout"
+                                Width="{TemplateBinding Width}"
+                                Height="{TemplateBinding Height}"
+                                MinWidth="{TemplateBinding MinWidth}"
+                                MinHeight="{TemplateBinding MinHeight}"
+                                Margin="{TemplateBinding Margin}"
+                                Padding="{TemplateBinding Padding}"
+                                HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
+                                VerticalAlignment="{TemplateBinding VerticalAlignment}"
+                                ex:Effects.Shadow="{TemplateBinding ex:Effects.Shadow}"
+                                Background="{TemplateBinding Background}"
+                                CornerRadius="{TemplateBinding CornerRadius}"
+                                Visibility="{TemplateBinding Visibility}">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition />
+                                </Grid.RowDefinitions>
+
+                                <TextBlock
+                                    Name="Header"
+                                    Height="32"
+                                    Margin="12,0,12,0"
+                                    Opacity="1"
+                                    Style="{ThemeResource Title}"
+                                    Text="{TemplateBinding Title}"
+                                    TextTrimming="CharacterEllipsis">
+                                    <TextBlock.OpacityTransition>
+                                        <ScalarTransition />
+                                    </TextBlock.OpacityTransition>
+                                </TextBlock>
+
+                                <ScrollViewer
+                                    Name="ScrollContainer"
+                                    Grid.Row="1"
+                                    CanContentRenderOutsideBounds="True"
+                                    HorizontalScrollBarVisibility="{TemplateBinding HorizontalScrollBar}"
+                                    VerticalScrollBarVisibility="{TemplateBinding VerticalScrollBar}"
+                                    VerticalSnapPointsAlignment="Near"
+                                    VerticalSnapPointsType="MandatorySingle">
+                                    <ContentPresenter
+                                        Width="{TemplateBinding ContentWidth}"
+                                        Height="{TemplateBinding ContentHeight}"
+                                        Margin="12,0,12,12"
+                                        Content="{TemplateBinding Content}"
+                                        FontFamily="{TemplateBinding FontFamily}"
+                                        FontSize="{TemplateBinding FontSize}"
+                                        FontWeight="{TemplateBinding FontWeight}"
+                                        Foreground="{TemplateBinding Foreground}"
+                                        TextWrapping="Wrap" />
+                                </ScrollViewer>
+                            </Grid>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
             </Style>
 
 
