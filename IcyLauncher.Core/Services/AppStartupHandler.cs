@@ -12,8 +12,8 @@ public class AppStartupHandler
         Window shell,
         INavigation navigation)
     {
-        AppDomain.CurrentDomain.FirstChanceException += (sender, args) =>
-            logger.Log("Global Exception thrown", args.Exception, LogLevel.Error, "global", "?");
+        AppDomain.CurrentDomain.FirstChanceException += (s, e) =>
+            logger.Log("Global Exception thrown", e.Exception, LogLevel.Error, "global", "?");
              
         windowHandler.SetTilteBar(true, uiElementReciever.TitleBar);
         windowHandler.SetIcon("Assets/Icon.ico");

@@ -48,15 +48,9 @@ public partial class HomeViewModel : ObservableObject
     [ICommand]
     void UpdateAccent()
     {
-        //themeManager.Colors.Accent.Primary = accentPrimary;
-        //themeManager.Colors.Accent.Light = accentLight;
-        //themeManager.Colors.Accent.Dark = accentDark;
-        Profiles.Add(new());
-        Profiles.Add(new()
-        {
-            Icon = "Redstone-Block.png".AsImage(),
-            Color = Colors.Red
-        });
+        themeManager.Colors.Accent.Primary = accentPrimary;
+        themeManager.Colors.Accent.Light = accentLight;
+        themeManager.Colors.Accent.Dark = accentDark;
     }
 
     [ObservableProperty]
@@ -70,7 +64,16 @@ public partial class HomeViewModel : ObservableObject
 
 
     [ObservableProperty]
-    ObservableCollection<Profile> profiles = new();
+    ObservableCollection<Profile> profiles = new()
+    {
+        new(),
+        new()
+        {
+            Title = "Beta",
+            Icon = "Redstone-Block.png".AsImage(),
+            Color = Colors.Red
+        }
+    };
 
     public void OnItemSelectionChanged(object sender, SelectionChangedEventArgs e)
     {
