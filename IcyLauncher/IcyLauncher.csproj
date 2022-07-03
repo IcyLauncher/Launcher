@@ -32,12 +32,27 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+		<None Remove="Assets\Banners\TimeDependent\0.png" />
+		<None Remove="Assets\Banners\TimeDependent\Icy Village\0.png" />
+		<None Remove="Assets\Banners\TimeDependent\Icy Village\12.png" />
+		<None Remove="Assets\Banners\TimeDependent\Icy Village\14.png" />
+		<None Remove="Assets\Banners\TimeDependent\Icy Village\17.png" />
+		<None Remove="Assets\Banners\TimeDependent\Icy Village\20.png" />
+		<None Remove="Assets\Banners\TimeDependent\Icy Village\3.png" />
+		<None Remove="Assets\Banners\TimeDependent\Icy Village\6.png" />
+		<None Remove="Assets\Banners\TimeDependent\Icy Village\9.png" />
+		<None Remove="Assets\Banners\TimeDependent\Snowy Forest\0.png" />
+		<None Remove="Assets\Banners\TimeDependent\Snowy Forest\12.png" />
+		<None Remove="Assets\Banners\TimeDependent\Snowy Forest\14.png" />
+		<None Remove="Assets\Banners\TimeDependent\Snowy Forest\17.png" />
+		<None Remove="Assets\Banners\TimeDependent\Snowy Forest\20.png" />
+		<None Remove="Assets\Banners\TimeDependent\Snowy Forest\3.png" />
+		<None Remove="Assets\Banners\TimeDependent\Snowy Forest\6.png" />
+		<None Remove="Assets\Banners\TimeDependent\Snowy Forest\9.png" />
 		<None Remove="Assets\FluentSystemIcons-Filled.ttf" />
 		<None Remove="Assets\FluentSystemIcons-Regular.ttf" />
-		<None Remove="Assets\Icon.png" />
 		<None Remove="Assets\LICENSE" />
 		<None Remove="Assets\NoImage.png" />
-		<None Remove="Assets\Redstone-Block.png" />
 		<None Remove="UI\ProfileTemplate.xaml" />
 		<None Remove="Views\HomeView.xaml" />
 		<None Remove="Views\ProfilesView.xaml" />
@@ -95,9 +110,6 @@
 		<Content Update="Assets\Icon.ico">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</Content>
-		<Content Update="Assets\Icon.png">
-			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-		</Content>
 		<Content Update="Assets\LICENSE">
 			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</Content>
@@ -107,12 +119,57 @@
 		<Content Update="Assets\README.md">
 			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</Content>
-		<Content Update="Assets\Redstone-Block.png">
-		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-		</Content>
 	</ItemGroup>
 
 	<ItemGroup>
+		<Content Update="Assets\Banners\TimeDependent\Icy Village\0.png">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
+		<Content Update="Assets\Banners\TimeDependent\Icy Village\12.png">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
+		<Content Update="Assets\Banners\TimeDependent\Icy Village\14.png">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
+		<Content Update="Assets\Banners\TimeDependent\Icy Village\17.png">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
+		<Content Update="Assets\Banners\TimeDependent\Icy Village\20.png">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
+		<Content Update="Assets\Banners\TimeDependent\Icy Village\3.png">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
+		<Content Update="Assets\Banners\TimeDependent\Icy Village\6.png">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
+		<Content Update="Assets\Banners\TimeDependent\Icy Village\9.png">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
+		<Content Update="Assets\Banners\TimeDependent\Snowy Forest\0.png">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
+		<Content Update="Assets\Banners\TimeDependent\Snowy Forest\12.png">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
+		<Content Update="Assets\Banners\TimeDependent\Snowy Forest\14.png">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
+		<Content Update="Assets\Banners\TimeDependent\Snowy Forest\17.png">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
+		<Content Update="Assets\Banners\TimeDependent\Snowy Forest\20.png">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
+		<Content Update="Assets\Banners\TimeDependent\Snowy Forest\3.png">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
+		<Content Update="Assets\Banners\TimeDependent\Snowy Forest\6.png">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
+		<Content Update="Assets\Banners\TimeDependent\Snowy Forest\9.png">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
 		<None Update="Assets\README.md">
 			<Pack>True</Pack>
 			<PackagePath>\</PackagePath>
@@ -127,5 +184,10 @@
 		<Page Update="Views\HomeView.xaml">
 			<Generator>MSBuild:Compile</Generator>
 		</Page>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="Assets\Banners\Gallery\" />
+	  <Folder Include="Assets\Blocks\" />
 	</ItemGroup>
 </Project>

@@ -1,79 +1,123 @@
 ﻿using Microsoft.UI;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Media.Animation;
+using Microsoft.UI.Xaml.Media.Imaging;
 using System.Collections.ObjectModel;
-using Windows.UI;
+using System.Numerics;
+using Microsoft.UI.Xaml.Media;
+using Microsoft.UI.Composition;
+using Microsoft.UI.Xaml.Shapes;
+using Microsoft.UI.Xaml.Hosting;
 
 namespace IcyLauncher.ViewModels;
 
 public partial class HomeViewModel : ObservableObject
 {
-    readonly ThemeManager themeManager;
-    readonly WindowHandler windowHandler;
+    ILogger logger;
 
-    public HomeViewModel(ThemeManager themeManager, WindowHandler windowHandler)
-    {
-        this.themeManager = themeManager;
-        this.windowHandler = windowHandler;
-    }
-
-    static Color GetRandomColor(byte transparency = 255)
-    {
-        var random = new Random();
-        return Color.FromArgb(transparency, Convert.ToByte(random.Next(0, 255)), Convert.ToByte(random.Next(0, 255)), Convert.ToByte(random.Next(0, 255)));
-    }
-
-
-    [ObservableProperty]
-    BlurEffect selectedBlurEffect = BlurEffect.Mica;
-
-    partial void OnSelectedBlurEffectChanged(BlurEffect value)
-    {
-        windowHandler.SetBlur(value, true, darkMode);
+    public HomeViewModel(ILogger<HomeViewModel> logger)
+    { 
+        this.logger = logger;
     }
 
     [ObservableProperty]
-    IEnumerable<BlurEffect> blurEffects = Enum.GetValues(typeof(BlurEffect)).Cast<BlurEffect>();
+    int selectedBannerImage;
 
-
-    [ObservableProperty]
-    Color accentPrimary = GetRandomColor(255);
-
-    [ObservableProperty]
-    Color accentLight = GetRandomColor(255);
-
-    [ObservableProperty]
-    Color accentDark = GetRandomColor(255);
-
-    [ICommand]
-    void UpdateAccent()
+    partial void OnSelectedBannerImageChanged(int value)
     {
-        themeManager.Colors.Accent.Primary = accentPrimary;
-        themeManager.Colors.Accent.Light = accentLight;
-        themeManager.Colors.Accent.Dark = accentDark;
-    }
-
-    [ObservableProperty]
-    bool darkMode = true;
-
-    partial void OnDarkModeChanged(bool value)
-    {
-        themeManager.LoadTheme(value ? Theme.Dark : Theme.Light, true);
-        windowHandler.SetBlur(selectedBlurEffect, true, darkMode);
-    }
-
-
-    [ObservableProperty]
-    ObservableCollection<Profile> profiles = new()
-    {
-        new(),
-        new()
+        switch (value)
         {
-            Title = "Beta",
-            Icon = "Redstone-Block.png".AsImage(),
-            Color = Colors.Red
+            case 0:
+                BannerSource = null;
+                break;
+            case 1:
+                BannerSource = "Banners/TimeDependent/Snowy Forest/0.png".FromAssets();
+                break;
+            case 2:
+                BannerSource = "Banners/TimeDependent/Snowy Forest/3.png".FromAssets();
+                break;
+            case 3:
+                BannerSource = "Banners/TimeDependent/Snowy Forest/6.png".FromAssets();
+                break;
+            case 4:
+                BannerSource = "Banners/TimeDependent/Snowy Forest/9.png".FromAssets();
+                break;
+            case 5:
+                BannerSource = "Banners/TimeDependent/Snowy Forest/12.png".FromAssets();
+                break;
+            case 6:
+                BannerSource = "Banners/TimeDependent/Snowy Forest/14.png".FromAssets();
+                break;
+            case 7:
+                BannerSource = "Banners/TimeDependent/Snowy Forest/17.png".FromAssets();
+                break;
+            case 8:
+                BannerSource = "Banners/TimeDependent/Snowy Forest/20.png".FromAssets();
+                break;
         }
-    };
+    }
+
+
+    ContainerVisual banner = default!;
+    Compositor bannerCompositor = default!;
+    CompositionMaskBrush bannerMaskBrush = default!;
+    SpriteVisual bannerMaskVisual = default!;
+
+    public void OnBannerLoaded(object sender, RoutedEventArgs e)
+    {
+        if (banner is not null)
+            return;
+
+        var grid = (Grid)sender;
+        grid.SizeChanged += (s, e) =>
+            bannerMaskVisual.Size = new(e.NewSize._width, e.NewSize._height);
+
+        banner = ElementCompositionPreview.GetElementVisual(grid).Compositor.CreateContainerVisual();
+        ElementCompositionPreview.SetElementChildVisual(grid, banner);
+        bannerCompositor = banner.Compositor;
+
+        var bannerSourceGradient = bannerCompositor.CreateLinearGradientBrush();
+        bannerSourceGradient.StartPoint = new(0, 0);
+        bannerSourceGradient.EndPoint = new(0, 1);
+        bannerSourceGradient.ColorStops.Add(bannerCompositor.CreateColorGradientStop(0.5f, Colors.White));
+        bannerSourceGradient.ColorStops.Add(bannerCompositor.CreateColorGradientStop(1.0f, Colors.Transparent));
+
+        bannerMaskBrush = bannerCompositor.CreateMaskBrush();
+        bannerMaskBrush.Mask = bannerSourceGradient;
+
+        bannerMaskVisual = bannerCompositor.CreateSpriteVisual();
+        bannerMaskVisual.Brush = bannerMaskBrush;
+        bannerMaskVisual.Size = new(946, 243);
+
+        banner.Children.InsertAtTop(bannerMaskVisual);
+
+        logger.Log("Initialized banner image composition");
+    }
+
+    Uri? bannerSource = null;
+    public Uri? BannerSource
+    {
+        get => bannerSource;
+        set
+        {
+            SetProperty(ref bannerSource, value);
+
+            if (value is null)
+            {
+                bannerMaskBrush.Source = null;
+
+                logger.Log("Removed banner image composition");
+                return;
+            }
+
+            var bannerImageBrush = bannerCompositor.CreateSurfaceBrush(LoadedImageSurface.StartLoadFromUri(value));
+            bannerImageBrush.Stretch = CompositionStretch.UniformToFill;
+            bannerMaskBrush.Source = bannerImageBrush;
+
+            logger.Log("Updated banner image composition");
+        }
+    }
+
 
     public void OnItemSelectionChanged(object sender, SelectionChangedEventArgs e)
     {
