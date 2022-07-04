@@ -4,7 +4,7 @@ namespace IcyLauncher.Core.Services;
 
 public class JsonConverter : IConverter
 {
-    readonly ILogger logger;
+    readonly ILogger<JsonConverter> logger;
 
     public JsonConverter(ILogger<JsonConverter> logger)
     {
@@ -19,13 +19,6 @@ public class JsonConverter : IConverter
         logger.Log("Serializing object to string");
 
         return JsonConvert.SerializeObject(input);
-    }
-
-    public void SaveToPath(object input, string path)
-    {
-        logger.Log($"Serializing object to path ({path})");
-
-        throw new NotImplementedException();
     }
 
     public T ToObject<T>(string input, object? settings = null)

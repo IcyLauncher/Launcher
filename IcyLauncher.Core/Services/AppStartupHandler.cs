@@ -23,13 +23,15 @@ public class AppStartupHandler
         windowHandler.MakeTransparent();
         windowHandler.SetBlur(configuration.Value.Apperance.Blur, true, configuration.Value.Apperance.UseDarkModeBlur);
 
-        shell.Closed += (s, e) => logger.Log(configurationManagaer.Export());
+        shell.Closed += async (s, e) => 
+            await configurationManagaer.ExportAsync();
         shell.Activate();
 
         themeManager.SetResourceColors();
         themeManager.SetUnbindableBindings();
 
-        uiElementReciever.BackButton.Click += (s, e) => navigation.GoBack();
+        uiElementReciever.BackButton.Click += (s, e) =>
+            navigation.GoBack();
         navigation.Navigate("Home");
 
         logger.Log("App fully startup");

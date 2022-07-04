@@ -1,22 +1,27 @@
-﻿namespace IcyLauncher.Core.Services;
+﻿using System.Threading;
+using System.Threading.Tasks;
+
+namespace IcyLauncher.Core.Services;
 
 public class ConfigurationManager
 {
-    readonly ILogger logger;
     readonly Configuration configuration;
+    readonly ILogger logger;
     readonly IConverter converter;
+    readonly IFileSystem fileSystem;
 
-    public ConfigurationManager(IOptions<Configuration> configuration, ILogger<ConfigurationManager> logger, IConverter converter)
+    public ConfigurationManager(IOptions<Configuration> configuration, ILogger<ConfigurationManager> logger, IConverter converter, IFileSystem fileSystem)
     {
-        this.logger = logger;
         this.configuration = configuration.Value;
+        this.logger = logger;
         this.converter = converter;
+        this.fileSystem = fileSystem;
 
         this.logger.Log("Registered Configuration Manager");
     }
 
-    public string Export() =>
-        converter.ToString(configuration);
+    public async Task ExportAsync(CancellationToken cancellationToken = default) =>
+        await fileSystem.SaveAsTextAsync("Configuration.json", converter.ToString(configuration), true, cancellationToken);
 
     public void Load(Configuration input, bool IgnoreTheme = false)
     {
