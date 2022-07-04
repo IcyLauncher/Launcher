@@ -7,4 +7,6 @@ public class Exceptions
     public static readonly Exception Unsupported = new("Method or object is not supported on this hardware");
 
     public static readonly Exception UnregisteredType = new("Type is not registered");
+
+    public static readonly Exception IsNull = new("Object is null: Object has to be initialized before");
 }

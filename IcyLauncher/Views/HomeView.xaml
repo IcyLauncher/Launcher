@@ -8,7 +8,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:md="using:CommunityToolkit.WinUI.UI.Media"
     xmlns:ui="using:IcyLauncher.UI"
-    NavigationCacheMode="Enabled"
+    NavigationCacheMode="Enabled" Loaded="{x:Bind viewModel.OnPageLoaded}"
     mc:Ignorable="d">
     <Page.Resources>
         <md:AttachedCardShadow
@@ -33,19 +33,5 @@
             Stretch="UniformToFill" />-->
 
         <Grid Grid.Row="0" Loaded="{x:Bind viewModel.OnBannerLoaded}" />
-        <ComboBox
-            Grid.Row="1"
-            Header="Banner image"
-            SelectedIndex="{x:Bind viewModel.SelectedBannerImage, Mode=TwoWay}">
-            <ComboBoxItem Content="null" />
-            <ComboBoxItem Content="0" />
-            <ComboBoxItem Content="3" />
-            <ComboBoxItem Content="6" />
-            <ComboBoxItem Content="9" />
-            <ComboBoxItem Content="12" />
-            <ComboBoxItem Content="14" />
-            <ComboBoxItem Content="17" />
-            <ComboBoxItem Content="20" />
-        </ComboBox>
     </Grid>
 </Page>
