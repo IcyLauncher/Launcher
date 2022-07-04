@@ -8,7 +8,8 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:md="using:CommunityToolkit.WinUI.UI.Media"
     xmlns:ui="using:IcyLauncher.UI"
-    NavigationCacheMode="Enabled" Loaded="{x:Bind viewModel.OnPageLoaded}"
+    Loaded="{x:Bind viewModel.OnPageLoaded}"
+    NavigationCacheMode="Enabled"
     mc:Ignorable="d">
     <Page.Resources>
         <md:AttachedCardShadow
@@ -24,13 +25,6 @@
             <RowDefinition Height="243" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-
-        <!--<Image
-            Grid.Row="0"
-            HorizontalAlignment="Center"
-            VerticalAlignment="Center"
-            Source="{x:Bind viewModel.BannerSource, Mode=OneWay}"
-            Stretch="UniformToFill" />-->
 
         <Grid Grid.Row="0" Loaded="{x:Bind viewModel.OnBannerLoaded}" />
     </Grid>

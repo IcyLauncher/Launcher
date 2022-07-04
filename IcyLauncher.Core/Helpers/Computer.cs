@@ -4,6 +4,7 @@ public class Computer
 {
     public static string AppDataDirectory { get; } = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
     public static string LocalAppDataDirectory { get; } = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
+    public static string Desktop { get; } = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
 
     public static string CurrentDirectory { get; } = Environment.CurrentDirectory;
 

@@ -9,4 +9,6 @@ public class Exceptions
     public static readonly Exception UnregisteredType = new("Type is not registered");
 
     public static readonly Exception IsNull = new("Object is null: Object has to be initialized before");
+
+    public static readonly Exception FileExits = new("Failed to save file", new("File with the same name already exists in destination directory"));
 }

@@ -42,12 +42,13 @@ public partial class App : Application
                 services.AddScoped<Core.Services.ConfigurationManager>();
                 services.AddScoped<ThemeManager>();
                 services.AddScoped<WindowHandler>();
-                services.AddScoped<IConverter, JsonConverter>();
-                services.AddScoped<INavigation>(provider => new Navigation(provider.GetRequiredService<ILogger<Navigation>>(), navigationView, contentFrame, backButton));
                 services.AddScoped<UIElementReciever>();
                 services.AddScoped<ImagingUtility>();
                 services.AddScoped<AppStartupHandler>();
-
+                services.AddScoped<IConverter, JsonConverter>();
+                services.AddScoped<IFileSystem, FileSystem>();
+                services.AddScoped<INavigation>(provider => new Navigation(provider.GetRequiredService<ILogger<Navigation>>(), navigationView, contentFrame, backButton));
+                
                 services.AddSingleton<HomeViewModel>();
                 services.AddSingleton<ProfilesViewModel>();
 

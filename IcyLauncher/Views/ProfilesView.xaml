@@ -5,11 +5,15 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:media="using:CommunityToolkit.WinUI.UI.Media"
-    xmlns:ui="using:CommunityToolkit.WinUI.UI"
+    xmlns:ui="using:IcyLauncher.UI"
     Background="Transparent"
     NavigationCacheMode="Enabled"
     mc:Ignorable="d">
 
-    <Grid />
+    <Grid>
+        <Button Command="{x:Bind viewModel.TestCommand}" Content="Test" />
+
+        <ui:TextBox Margin="100" Text="{x:Bind viewModel.Configuration.Launcher.TexturepackDirectory, Mode=TwoWay}" />
+    </Grid>
 
 </Page>
