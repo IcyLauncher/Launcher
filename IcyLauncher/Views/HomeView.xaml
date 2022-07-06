@@ -16,7 +16,7 @@
             x:Key="CardShadow"
             BlurRadius="20"
             CornerRadius="8"
-            Opacity="0.2"
+            Opacity="0.3"
             Offset="0,3,0" />
     </Page.Resources>
 
@@ -26,6 +26,32 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-        <Grid Grid.Row="0" Loaded="{x:Bind viewModel.OnBannerLoaded}" />
+        <Grid Grid.Row="0">
+            <Rectangle Loaded="{x:Bind viewModel.OnBannerLoaded}" />
+
+            <TextBlock
+                Margin="12,8,0,0"
+                Style="{StaticResource Header}"
+                Text="Home" />
+
+            <Grid Margin="32,0,0,0" VerticalAlignment="Center">
+                <TextBlock
+                    FontSize="26"
+                    Style="{StaticResource Title}"
+                    Text="{x:Bind viewModel.SelectedProfile.Title}"
+                    Typography.Capitals="Normal" />
+                <TextBlock Margin="0,32,0,0" Style="{StaticResource Content}">
+                    <Run Text="Version" />
+                    <Run Text="{x:Bind viewModel.SelectedProfile.Version}" />
+                    <Run Text=" | " />
+                    <Run Text="{x:Bind viewModel.SelectedProfile.Client}" />
+                </TextBlock>
+
+                <Button
+                    Margin="0,65,0,0"
+                    ex:Effects.Shadow="{StaticResource CardShadow}"
+                    Style="{StaticResource LaunchButton}" />
+            </Grid>
+        </Grid>
     </Grid>
 </Page>
