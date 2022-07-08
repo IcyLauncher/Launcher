@@ -41,4 +41,18 @@ public partial class ProfileTemplate : ResourceDictionary
 
         rootLayout.Loaded -= OnRootLayoutLoaded;
     }
+
+    public static void UpdateProperties(GridView container, object item, double detailsOpacity, Vector3 detailsTranslation, string iconAnimation)
+    {
+        var rootLayout = (Grid)((GridViewItem)(container).ContainerFromItem(item)).ContentTemplateRoot;
+        var details = rootLayout.Children[4];
+        var icon = (Image)rootLayout.Children[2];
+
+        if (details.Opacity == detailsOpacity)
+            return;
+
+        details.Opacity = detailsOpacity;
+        details.Translation = detailsTranslation;
+        ((Storyboard)icon.Resources[iconAnimation]).Begin();
+    }
 }
