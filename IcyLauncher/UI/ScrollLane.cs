@@ -68,13 +68,12 @@ public class ScrollLane : GridView
             if (scrollContainer.ChangeView(newScroll, null, null))
                 UpdateButtonVisibilities(newScroll);
         };
-
-        UpdateButtonVisibilities(scrollContainer.HorizontalOffset);
     }
 
     private void OnScrollContainerLoaded(object sender, RoutedEventArgs e)
     {
         scrollContainer.SizeChanged += (s, e) => UpdateButtonVisibilities(scrollContainer.HorizontalOffset);
+        UpdateButtonVisibilities(scrollContainer.HorizontalOffset);
 
         scrollContainer.Loaded -= OnScrollContainerLoaded;
     }

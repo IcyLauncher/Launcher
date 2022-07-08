@@ -2854,7 +2854,7 @@
 
                                 <ScrollViewer
                                     x:Name="ScrollContainer"
-                                    Margin="24,0"
+                                    Margin="9,0,5,0"
                                     CanContentRenderOutsideBounds="true"
                                     HorizontalScrollBarVisibility="Hidden"
                                     HorizontalScrollMode="Disabled"
@@ -2864,7 +2864,8 @@
                                         Margin="0,0,0,-23"
                                         ItemContainerStyle="{TemplateBinding ItemContainerStyle}"
                                         ItemTemplate="{TemplateBinding ItemTemplate}"
-                                        ItemsSource="{TemplateBinding ItemsSource}">
+                                        ItemsSource="{TemplateBinding ItemsSource}"
+                                        SelectedItem="{Binding Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}, Path=SelectedItem}">
                                         <GridView.ItemsPanel>
                                             <ItemsPanelTemplate>
                                                 <ItemsWrapGrid Orientation="Horizontal" />
@@ -2877,7 +2878,7 @@
                                     Name="BackButton"
                                     Width="20"
                                     Height="39"
-                                    Margin="5,0,0,-11"
+                                    Margin="12,0,0,-11"
                                     Padding="-2"
                                     VerticalAlignment="Center">
                                     <FontIcon FontFamily="Assets/FluentSystemIcons-Filled.ttf#FluentSystemIcons-Filled" Glyph="&#xF2AB;" />
@@ -2886,7 +2887,7 @@
                                     Name="ForwardButton"
                                     Width="20"
                                     Height="39"
-                                    Margin="0,0,5,-11"
+                                    Margin="0,0,12,-11"
                                     Padding="-2"
                                     HorizontalAlignment="Right"
                                     VerticalAlignment="Center">
