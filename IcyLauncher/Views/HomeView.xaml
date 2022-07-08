@@ -23,6 +23,7 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="243" />
+            <RowDefinition Height="43" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
@@ -34,17 +35,27 @@
                 Style="{StaticResource Header}"
                 Text="Home" />
 
-            <Grid Margin="32,0,0,0" VerticalAlignment="Center">
+            <Grid
+                Margin="32,0,0,20"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Center">
+                <Grid.OpacityTransition>
+                    <ScalarTransition />
+                </Grid.OpacityTransition>
+                <Grid.Transitions>
+                    <ContentThemeTransition />
+                </Grid.Transitions>
+
                 <TextBlock
                     FontSize="26"
                     Style="{StaticResource Title}"
-                    Text="{x:Bind viewModel.SelectedProfile.Title}"
+                    Text="{x:Bind viewModel.SelectedProfile.Title, Mode=OneWay}"
                     Typography.Capitals="Normal" />
                 <TextBlock Margin="0,32,0,0" Style="{StaticResource Content}">
                     <Run Text="Version" />
-                    <Run Text="{x:Bind viewModel.SelectedProfile.Version}" />
+                    <Run Text="{x:Bind viewModel.SelectedProfile.Version, Mode=OneWay}" />
                     <Run Text=" | " />
-                    <Run Text="{x:Bind viewModel.SelectedProfile.Client}" />
+                    <Run Text="{x:Bind viewModel.SelectedProfile.Client, Mode=OneWay}" />
                 </TextBlock>
 
                 <Button
@@ -52,6 +63,22 @@
                     ex:Effects.Shadow="{StaticResource CardShadow}"
                     Style="{StaticResource LaunchButton}" />
             </Grid>
+        </Grid>
+
+        <ui:ScrollLane
+            Grid.Row="1"
+            Margin="0,-24,0,0"
+            ItemContainerStyle="{StaticResource ProfileGridViewItem}"
+            ItemSelectionChanged="{x:Bind viewModel.OnProfileSelectionChanged}"
+            ItemTemplate="{StaticResource ProfileTemplate}"
+            ItemsSource="{x:Bind viewModel.Profiles, Mode=OneWay}"
+            SelectedItem="{x:Bind viewModel.SelectedProfile, Mode=TwoWay}" />
+
+
+        <Grid Grid.Row="2" Margin="12">
+            <ui:Card>
+                <Button Command="{x:Bind viewModel.SexxCommand}" Content="Sex" />
+            </ui:Card>
         </Grid>
     </Grid>
 </Page>

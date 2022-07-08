@@ -4,6 +4,8 @@ using Microsoft.UI.Xaml.Media.Animation;
 using Microsoft.UI.Composition;
 using Windows.UI;
 using Microsoft.UI.Xaml.Shapes;
+using System.Collections.ObjectModel;
+using IcyLauncher.UI;
 
 namespace IcyLauncher.ViewModels;
 
@@ -37,8 +39,12 @@ public partial class HomeViewModel : ObservableObject
     }
 
 
-    public void OnPageLoaded(object sender, RoutedEventArgs e)
+    Grid mainGrid = default!;
+
+    public void OnPageLoaded(object sender, RoutedEventArgs? _1)
     {
+        mainGrid = (Grid)((Page)sender).Content;
+
         BannerSource = "Banners/TimeDependent/Icy Village/17.png";
     }
 
@@ -48,7 +54,7 @@ public partial class HomeViewModel : ObservableObject
     SpriteVisual? bannerMaskVisual;
     CompositionMaskBrush? bannerOverlayBrush;
 
-    public void OnBannerLoaded(object sender, RoutedEventArgs e)
+    public void OnBannerLoaded(object sender, RoutedEventArgs? _)
     {
         if (bannerMaskVisual is not null)
             return;
@@ -109,19 +115,39 @@ public partial class HomeViewModel : ObservableObject
 
 
     [ObservableProperty]
-    Profile selectedProfile = new();
-
-    public void OnItemSelectionChanged(object sender, SelectionChangedEventArgs e)
+    ObservableCollection<Profile> profiles = new()
     {
-        if (e.RemovedItems.Count == 0)
-            return;
+        new("Default Profile", Colors.White, "Blocks/Grass_Block.png".AsImage(), "1.19", "Vanilla"),
+        new("Beta", Colors.Red, "Blocks/Block_Of_Redstone.png".AsImage(), "1.18.2.3-beta", "Vanilla"),
+        new("PvP Profile", Colors.Aqua, "Blocks/Block_Of_Diamond.png".AsImage(), "1.17.1", "OnixClient"),
+        new("DebugTesting", Colors.GreenYellow, "Blocks/Slime_Block.png".AsImage(), "1.16.4", "MyCustomClient.dll"),
+        new("Survival SMP", Colors.Yellow, "Blocks/Furnace.png".AsImage(), "1.18", "Horion"),
+        new("RTX", Colors.Black, "Blocks/Glass.png".AsImage(), "1.16.1", "Vanilla"),
+    };
 
-        var rootLayout = (Grid)((GridViewItem)((GridView)sender).ContainerFromItem(e.RemovedItems[0])).ContentTemplateRoot;
-        var details = rootLayout.Children[4];
-        var icon = (Image)rootLayout.Children[2];
+    [ObservableProperty]
+    Profile? selectedProfile;
 
-        details.Opacity = 0;
-        details.Translation = new(-10, 0, 0);
-        ((Storyboard)icon.Resources["outBoard"]).Begin();
+    partial void OnSelectedProfileChanging(Profile? value)
+    {
+        (((Grid)(Grid)mainGrid.Children[0]).Children[2]).Opacity = 0;
+    }
+    partial void OnSelectedProfileChanged(Profile? value)
+    {
+        (((Grid)(Grid)mainGrid.Children[0]).Children[2]).Opacity = 1;
+    }
+
+    public void OnProfileSelectionChanged(object sender, SelectionChangedEventArgs e)
+    {
+        if (e.AddedItems.Count != 0)
+            ProfileTemplate.UpdateProperties((GridView)sender, e.AddedItems[0], 1, new(0, 0, 0), "inBoard");
+        if (e.RemovedItems.Count != 0)
+            ProfileTemplate.UpdateProperties((GridView)sender, e.RemovedItems[0], 0, new(-10, 0, 0), "outBoard");
+    }
+
+    [ICommand]
+    void Sexx()
+    {
+        SelectedProfile = Profiles.First();
     }
 }

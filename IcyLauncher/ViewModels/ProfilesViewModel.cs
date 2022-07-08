@@ -3,8 +3,8 @@
 public partial class ProfilesViewModel : ObservableObject
 {
     public Configuration Configuration;
-    ILogger<ProfilesViewModel> logger;
-    IFileSystem fileSystem;
+    readonly ILogger<ProfilesViewModel> logger;
+    readonly IFileSystem fileSystem;
 
     public ProfilesViewModel(IOptions<Configuration> configuration, ILogger<ProfilesViewModel> logger, IFileSystem fileSystem)
     {
@@ -15,7 +15,7 @@ public partial class ProfilesViewModel : ObservableObject
 
 
     [ICommand]
-    async void Test()
+    void Test()
     {
     }
 }
