@@ -49,6 +49,70 @@
 		<None Remove="Assets\Banners\TimeDependent\Snowy Forest\3.png" />
 		<None Remove="Assets\Banners\TimeDependent\Snowy Forest\6.png" />
 		<None Remove="Assets\Banners\TimeDependent\Snowy Forest\9.png" />
+		<None Remove="Assets\Blocks\Ancient_Debris.png" />
+		<None Remove="Assets\Blocks\Anvil.png" />
+		<None Remove="Assets\Blocks\Barrel.png" />
+		<None Remove="Assets\Blocks\Beacon.png" />
+		<None Remove="Assets\Blocks\Bedrock.png" />
+		<None Remove="Assets\Blocks\Bee_Nest.png" />
+		<None Remove="Assets\Blocks\Block_of_Coal.png" />
+		<None Remove="Assets\Blocks\Block_of_Diamond.png" />
+		<None Remove="Assets\Blocks\Block_of_Emerald.png" />
+		<None Remove="Assets\Blocks\Block_of_Gold.png" />
+		<None Remove="Assets\Blocks\Block_of_Iron.png" />
+		<None Remove="Assets\Blocks\Block_of_Lapis.png" />
+		<None Remove="Assets\Blocks\Block_of_Netherite.png" />
+		<None Remove="Assets\Blocks\Block_Of_Redstone.png" />
+		<None Remove="Assets\Blocks\Bookshelf.png" />
+		<None Remove="Assets\Blocks\Bricks.png" />
+		<None Remove="Assets\Blocks\Cactus.png" />
+		<None Remove="Assets\Blocks\Carved_Pumpkin.png" />
+		<None Remove="Assets\Blocks\Chest.png" />
+		<None Remove="Assets\Blocks\Cobblestone.png" />
+		<None Remove="Assets\Blocks\Cobblestone_Mossy.png" />
+		<None Remove="Assets\Blocks\Cobweb.png" />
+		<None Remove="Assets\Blocks\Command_Block.png" />
+		<None Remove="Assets\Blocks\Crafting_Table.png" />
+		<None Remove="Assets\Blocks\Dead_Bush.png" />
+		<None Remove="Assets\Blocks\Dirt.png" />
+		<None Remove="Assets\Blocks\Enchanting_Table.png" />
+		<None Remove="Assets\Blocks\End_Stone.png" />
+		<None Remove="Assets\Blocks\Furnace.png" />
+		<None Remove="Assets\Blocks\Furnace_Lit.png" />
+		<None Remove="Assets\Blocks\Glass.png" />
+		<None Remove="Assets\Blocks\Glowstone.png" />
+		<None Remove="Assets\Blocks\Grass.png" />
+		<None Remove="Assets\Blocks\Grass_Block.png" />
+		<None Remove="Assets\Blocks\Hay_Bale.png" />
+		<None Remove="Assets\Blocks\Honey_Block.png" />
+		<None Remove="Assets\Blocks\Leaves.png" />
+		<None Remove="Assets\Blocks\Log.png" />
+		<None Remove="Assets\Blocks\Mycelium.png" />
+		<None Remove="Assets\Blocks\Netherrack.png" />
+		<None Remove="Assets\Blocks\Nylium_Crimson.png" />
+		<None Remove="Assets\Blocks\Nylium_Warped.png" />
+		<None Remove="Assets\Blocks\Obsidian.png" />
+		<None Remove="Assets\Blocks\Ore_Coal.png" />
+		<None Remove="Assets\Blocks\Ore_Copper.png" />
+		<None Remove="Assets\Blocks\Ore_Diamond.png" />
+		<None Remove="Assets\Blocks\Ore_Emerald.png" />
+		<None Remove="Assets\Blocks\Ore_Gold.png" />
+		<None Remove="Assets\Blocks\Ore_Iron.png" />
+		<None Remove="Assets\Blocks\Ore_Lapis_Lazuli.png" />
+		<None Remove="Assets\Blocks\Ore_Nether_Quartz.png" />
+		<None Remove="Assets\Blocks\Ore_Redstone.png" />
+		<None Remove="Assets\Blocks\Planks.png" />
+		<None Remove="Assets\Blocks\Podzol.png" />
+		<None Remove="Assets\Blocks\Pumpkin_Carved.png" />
+		<None Remove="Assets\Blocks\Red_Mushroom.png" />
+		<None Remove="Assets\Blocks\Sand.png" />
+		<None Remove="Assets\Blocks\Sandstone.png" />
+		<None Remove="Assets\Blocks\Sandstone_Red.png" />
+		<None Remove="Assets\Blocks\Sand_Red.png" />
+		<None Remove="Assets\Blocks\Slime_Block.png" />
+		<None Remove="Assets\Blocks\Spawner.png" />
+		<None Remove="Assets\Blocks\Stone.png" />
+		<None Remove="Assets\Blocks\TNT.png" />
 		<None Remove="Assets\FluentSystemIcons-Filled.ttf" />
 		<None Remove="Assets\FluentSystemIcons-Regular.ttf" />
 		<None Remove="Assets\LICENSE" />
@@ -101,6 +165,198 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<Content Update="Assets\Blocks\Ancient_Debris.png">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
+		<Content Update="Assets\Blocks\Anvil.png">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
+		<Content Update="Assets\Blocks\Barrel.png">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
+		<Content Update="Assets\Blocks\Beacon.png">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
+		<Content Update="Assets\Blocks\Bedrock.png">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
+		<Content Update="Assets\Blocks\Bee_Nest.png">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
+		<Content Update="Assets\Blocks\Block_of_Coal.png">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
+		<Content Update="Assets\Blocks\Block_of_Diamond.png">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
+		<Content Update="Assets\Blocks\Block_of_Emerald.png">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
+		<Content Update="Assets\Blocks\Block_of_Gold.png">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
+		<Content Update="Assets\Blocks\Block_of_Iron.png">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
+		<Content Update="Assets\Blocks\Block_of_Lapis.png">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
+		<Content Update="Assets\Blocks\Block_of_Netherite.png">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
+		<Content Update="Assets\Blocks\Block_Of_Redstone.png">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
+		<Content Update="Assets\Blocks\Bookshelf.png">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
+		<Content Update="Assets\Blocks\Bricks.png">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
+		<Content Update="Assets\Blocks\Cactus.png">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
+		<Content Update="Assets\Blocks\Carved_Pumpkin.png">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
+		<Content Update="Assets\Blocks\Chest.png">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
+		<Content Update="Assets\Blocks\Cobblestone.png">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
+		<Content Update="Assets\Blocks\Cobblestone_Mossy.png">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
+		<Content Update="Assets\Blocks\Cobweb.png">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
+		<Content Update="Assets\Blocks\Command_Block.png">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
+		<Content Update="Assets\Blocks\Crafting_Table.png">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
+		<Content Update="Assets\Blocks\Dead_Bush.png">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
+		<Content Update="Assets\Blocks\Dirt.png">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
+		<Content Update="Assets\Blocks\Enchanting_Table.png">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
+		<Content Update="Assets\Blocks\End_Stone.png">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
+		<Content Update="Assets\Blocks\Furnace.png">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
+		<Content Update="Assets\Blocks\Furnace_Lit.png">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
+		<Content Update="Assets\Blocks\Glass.png">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
+		<Content Update="Assets\Blocks\Glowstone.png">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
+		<Content Update="Assets\Blocks\Grass.png">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
+		<Content Update="Assets\Blocks\Grass_Block.png">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
+		<Content Update="Assets\Blocks\Hay_Bale.png">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
+		<Content Update="Assets\Blocks\Honey_Block.png">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
+		<Content Update="Assets\Blocks\Leaves.png">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
+		<Content Update="Assets\Blocks\Log.png">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
+		<Content Update="Assets\Blocks\Mycelium.png">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
+		<Content Update="Assets\Blocks\Netherrack.png">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
+		<Content Update="Assets\Blocks\Nylium_Crimson.png">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
+		<Content Update="Assets\Blocks\Nylium_Warped.png">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
+		<Content Update="Assets\Blocks\Obsidian.png">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
+		<Content Update="Assets\Blocks\Ore_Coal.png">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
+		<Content Update="Assets\Blocks\Ore_Copper.png">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
+		<Content Update="Assets\Blocks\Ore_Diamond.png">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
+		<Content Update="Assets\Blocks\Ore_Emerald.png">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
+		<Content Update="Assets\Blocks\Ore_Gold.png">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
+		<Content Update="Assets\Blocks\Ore_Iron.png">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
+		<Content Update="Assets\Blocks\Ore_Lapis_Lazuli.png">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
+		<Content Update="Assets\Blocks\Ore_Nether_Quartz.png">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
+		<Content Update="Assets\Blocks\Ore_Redstone.png">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
+		<Content Update="Assets\Blocks\Planks.png">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
+		<Content Update="Assets\Blocks\Podzol.png">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
+		<Content Update="Assets\Blocks\Pumpkin_Carved.png">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
+		<Content Update="Assets\Blocks\Red_Mushroom.png">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
+		<Content Update="Assets\Blocks\Sand.png">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
+		<Content Update="Assets\Blocks\Sandstone.png">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
+		<Content Update="Assets\Blocks\Sandstone_Red.png">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
+		<Content Update="Assets\Blocks\Sand_Red.png">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
+		<Content Update="Assets\Blocks\Slime_Block.png">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
+		<Content Update="Assets\Blocks\Spawner.png">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
+		<Content Update="Assets\Blocks\Stone.png">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
+		<Content Update="Assets\Blocks\TNT.png">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
 		<Content Update="Assets\FluentSystemIcons-Filled.ttf">
 		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</Content>
@@ -188,6 +444,5 @@
 
 	<ItemGroup>
 	  <Folder Include="Assets\Banners\Gallery\" />
-	  <Folder Include="Assets\Blocks\" />
 	</ItemGroup>
 </Project>
