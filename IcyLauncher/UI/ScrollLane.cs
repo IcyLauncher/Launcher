@@ -1,4 +1,5 @@
 ﻿using Microsoft.UI.Xaml.Controls;
+using Windows.System;
 
 namespace IcyLauncher.UI;
 
@@ -47,6 +48,11 @@ public class ScrollLane : GridView
 
         scrollContainer.Loaded += OnScrollContainerLoaded;
         itemsContainter.SelectionChanged += ItemSelectionChanged;
+        itemsContainter.PreviewKeyDown += (s, e) =>
+        {
+            if (e.Key == VirtualKey.Left || e.Key == VirtualKey.Right)
+                e.Handled = true;
+        };
 
         itemsContainter.Items.VectorChanged += async (s, e) =>
         {
