@@ -39,12 +39,9 @@
                 Margin="32,0,0,20"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Center">
-                <Grid.OpacityTransition>
-                    <ScalarTransition />
-                </Grid.OpacityTransition>
-                <Grid.Transitions>
-                    <ContentThemeTransition />
-                </Grid.Transitions>
+                <Grid.TranslationTransition>
+                    <Vector3Transition Duration="0:0:0.1" />
+                </Grid.TranslationTransition>
 
                 <TextBlock
                     FontSize="26"

@@ -6,6 +6,7 @@ using Windows.UI;
 using Microsoft.UI.Xaml.Shapes;
 using System.Collections.ObjectModel;
 using IcyLauncher.UI;
+using System.Numerics;
 
 namespace IcyLauncher.ViewModels;
 
@@ -39,11 +40,15 @@ public partial class HomeViewModel : ObservableObject
     }
 
 
-    Grid mainGrid = default!;
-
-    public void OnPageLoaded(object sender, RoutedEventArgs? _1)
+    public void OnPageLoaded(object sender, RoutedEventArgs? _)
     {
-        mainGrid = (Grid)((Page)sender).Content;
+        bannerProfileGrid = (Grid)((Grid)((Grid)((Page)sender).Content).Children[0]).Children[2];
+
+        if (bannerProfileInBoard is null)
+        {
+            bannerProfileInBoard = new() ;
+            bannerProfileInBoard.Children.Add(UIElementProvider.Animate(bannerProfileGrid, "Opacity", null, 1, 100));
+        }
 
         BannerSource = "Banners/TimeDependent/Icy Village/17.png";
     }
@@ -114,6 +119,9 @@ public partial class HomeViewModel : ObservableObject
     }
 
 
+    Grid bannerProfileGrid = default!;
+    Storyboard bannerProfileInBoard = default!;
+
     [ObservableProperty]
     ObservableCollection<Profile> profiles = new()
     {
@@ -125,16 +133,26 @@ public partial class HomeViewModel : ObservableObject
         new("RTX", Colors.Black, "Blocks/Glass.png".AsImage(), "1.16.1", "Vanilla"),
     };
 
-    [ObservableProperty]
     Profile? selectedProfile;
-
-    partial void OnSelectedProfileChanging(Profile? value)
+    public Profile? SelectedProfile
     {
-        (((Grid)(Grid)mainGrid.Children[0]).Children[2]).Opacity = 0;
-    }
-    partial void OnSelectedProfileChanged(Profile? value)
-    {
-        (((Grid)(Grid)mainGrid.Children[0]).Children[2]).Opacity = 1;
+        get
+        {
+            return selectedProfile;
+        }
+        set
+        {
+            Storyboard outBoard = new();
+            outBoard.Children.Add(UIElementProvider.Animate(bannerProfileGrid, "Opacity", null, 0, 100));
+            outBoard.Completed += (s, e) =>
+            {
+                SetProperty(ref selectedProfile, value);
+                bannerProfileGrid.Translation = new Vector3(0, 0, 0);
+                bannerProfileInBoard.Begin();
+            };
+            bannerProfileGrid.Translation = new Vector3(-10, 0, 0);
+            outBoard.Begin();
+        }
     }
 
     public void OnProfileSelectionChanged(object sender, SelectionChangedEventArgs e)
