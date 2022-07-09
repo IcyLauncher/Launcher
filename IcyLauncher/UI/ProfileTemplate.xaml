@@ -8,7 +8,7 @@
 
     <DataTemplate x:Key="ProfileTemplate" x:DataType="models:Profile">
         <Grid CornerRadius="8" Loaded="OnRootLayoutLoaded">
-            <Rectangle Fill="{x:Bind Color, Converter={StaticResource BrushConverter}}" Opacity="0.15" />
+            <Rectangle Fill="{x:Bind Color, Converter={StaticResource BrushConverter}}" Opacity="0.2" />
             <Grid Name="ShadowTarget" />
 
             <Image

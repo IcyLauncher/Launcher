@@ -44,7 +44,7 @@ public partial class ProfileTemplate : ResourceDictionary
 
     public static void UpdateProperties(GridView container, object item, double detailsOpacity, Vector3 detailsTranslation, string iconAnimation)
     {
-        var rootLayout = (Grid)((GridViewItem)(container).ContainerFromItem(item)).ContentTemplateRoot;
+        var rootLayout = (Grid)((GridViewItem)container.ContainerFromItem(item)).ContentTemplateRoot;
         var details = rootLayout.Children[4];
         var icon = (Image)rootLayout.Children[2];
 
