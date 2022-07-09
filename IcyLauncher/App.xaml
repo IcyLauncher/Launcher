@@ -2716,10 +2716,7 @@
                 <Setter Property="Template">
                     <Setter.Value>
                         <ControlTemplate TargetType="GridViewItem">
-                            <Grid
-                                x:Name="ContentBorder"
-                                Margin="3"
-                                Control.IsTemplateFocusTarget="True">
+                            <Grid x:Name="ContentBorder" Margin="3">
                                 <ContentPresenter />
 
                                 <Rectangle
@@ -2858,8 +2855,9 @@
                                     CanContentRenderOutsideBounds="true"
                                     HorizontalScrollBarVisibility="Hidden"
                                     HorizontalScrollMode="Disabled"
-                                    VerticalScrollBarVisibility="Hidden">
-                                    <GridView
+                                    VerticalScrollMode="Disabled"
+                                    VerticalScrollBarVisibility="Disabled">
+                                    <GridView ScrollViewer.VerticalScrollBarVisibility="Disabled"
                                         x:Name="ItemsContainter"
                                         Margin="0,0,0,-23"
                                         ItemContainerStyle="{TemplateBinding ItemContainerStyle}"
