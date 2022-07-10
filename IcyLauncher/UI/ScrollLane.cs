@@ -29,6 +29,18 @@ public class ScrollLane : GridView
         set => SetValue(VerticalScrollBarVisibilityProperty, value);
     }
 
+    public static readonly DependencyProperty IsItemSelectionEnabledProperty = DependencyProperty.Register(
+        "IsItemSelectionEnabled",
+        typeof(bool),
+        typeof(ScrollLane),
+        new(true));
+
+    public bool IsItemSelectionEnabled
+    {
+        get => (bool)GetValue(IsItemSelectionEnabledProperty);
+        set => SetValue(IsItemSelectionEnabledProperty, value);
+    }
+
     public event SelectionChangedEventHandler? ItemSelectionChanged;
 
 

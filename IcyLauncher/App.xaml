@@ -19,6 +19,8 @@
 
             <xaml:ArrayConverter x:Key="ArrayConverter" />
             <xaml:BrushConverter x:Key="BrushConverter" />
+            <xaml:BoolDoubleConverter x:Key="BoolDoubleConverter" />
+            <xaml:InvertBool x:Key="InvertBool" />
 
 
             <models:Theme x:Key="Colors" />
@@ -86,7 +88,7 @@
                                         Background="{ThemeResource ControlPrimaryDisabled}"
                                         BorderBrush="{ThemeResource ControlOutlineDisabled}"
                                         BorderThickness="1"
-                                        Content="Launch"
+                                        Content="{TemplateBinding Content}"
                                         CornerRadius="4" />
 
                                     <VisualStateManager.VisualStateGroups>
@@ -118,12 +120,12 @@
                                                     <ColorAnimation
                                                         Storyboard.TargetName="ContentPresenter"
                                                         Storyboard.TargetProperty="(UIElement.Background).(SolidColorBrush.Color)"
-                                                        To="{Binding Color, Source={ThemeResource ControlOutline}}"
+                                                        To="{Binding Color, Source={ThemeResource ControlOutlineDisabled}}"
                                                         Duration="0:0:0.2" />
                                                     <ColorAnimation
                                                         Storyboard.TargetName="ContentPresenter"
                                                         Storyboard.TargetProperty="(UIElement.BorderBrush).(SolidColorBrush.Color)"
-                                                        To="{Binding Color, Source={ThemeResource ControlOutline}}"
+                                                        To="{Binding Color, Source={ThemeResource ControlOutlineDisabled}}"
                                                         Duration="0:0:0.2" />
                                                     <ColorAnimation
                                                         Storyboard.TargetName="ContentPresenter"
@@ -140,12 +142,12 @@
                                                     <ColorAnimation
                                                         Storyboard.TargetName="ContentPresenter"
                                                         Storyboard.TargetProperty="(UIElement.Background).(SolidColorBrush.Color)"
-                                                        To="{Binding Color, Source={ThemeResource ControlOutlineDisabled}}"
+                                                        To="{Binding Color, Source={ThemeResource ControlPrimaryDisabled}}"
                                                         Duration="0:0:0.2" />
                                                     <ColorAnimation
                                                         Storyboard.TargetName="ContentPresenter"
                                                         Storyboard.TargetProperty="(UIElement.BorderBrush).(SolidColorBrush.Color)"
-                                                        To="{Binding Color, Source={ThemeResource ControlOutlineDisabled}}"
+                                                        To="{Binding Color, Source={ThemeResource ControlPrimaryDisabled}}"
                                                         Duration="0:0:0.2" />
                                                     <ColorAnimation
                                                         Storyboard.TargetName="ContentPresenter"
@@ -162,12 +164,12 @@
                                                     <ColorAnimation
                                                         Storyboard.TargetName="ContentPresenter"
                                                         Storyboard.TargetProperty="(UIElement.Background).(SolidColorBrush.Color)"
-                                                        To="{Binding Color, Source={ThemeResource ControlPrimaryDisabled}}"
+                                                        To="{Binding Color, Source={ThemeResource ControlOutline}}"
                                                         Duration="0:0:0.2" />
                                                     <ColorAnimation
                                                         Storyboard.TargetName="ContentPresenter"
                                                         Storyboard.TargetProperty="(UIElement.BorderBrush).(SolidColorBrush.Color)"
-                                                        To="{Binding Color, Source={ThemeResource ControlOutlineDisabled}}"
+                                                        To="{Binding Color, Source={ThemeResource ControlOutline}}"
                                                         Duration="0:0:0.2" />
                                                     <ColorAnimation
                                                         Storyboard.TargetName="ContentPresenter"
@@ -296,6 +298,11 @@
             <SolidColorBrush x:Key="ScrollBarTrackFill" Color="{Binding Color, Source={ThemeResource ControlPrimary}}" />
             <SolidColorBrush x:Key="ScrollBarTrackFillPointerOver" Color="{Binding Color, Source={ThemeResource ControlOutline}}" />
             <SolidColorBrush x:Key="ScrollBarTrackFillDisabled" Color="{Binding Color, Source={ThemeResource ControlPrimaryDisabled}}" />
+
+
+            <Style TargetType="ProgressBar">
+                <Setter Property="Foreground" Value="{ThemeResource AccentPrimary}" />
+            </Style>
 
 
             <Style x:Key="Header" TargetType="TextBlock">
@@ -2855,14 +2862,16 @@
                                     CanContentRenderOutsideBounds="true"
                                     HorizontalScrollBarVisibility="Hidden"
                                     HorizontalScrollMode="Disabled"
-                                    VerticalScrollMode="Disabled"
-                                    VerticalScrollBarVisibility="Disabled">
-                                    <GridView ScrollViewer.VerticalScrollBarVisibility="Disabled"
+                                    VerticalScrollBarVisibility="Disabled"
+                                    VerticalScrollMode="Disabled">
+                                    <GridView
                                         x:Name="ItemsContainter"
                                         Margin="0,0,0,-23"
+                                        IsHitTestVisible="{TemplateBinding IsItemSelectionEnabled}"
                                         ItemContainerStyle="{TemplateBinding ItemContainerStyle}"
                                         ItemTemplate="{TemplateBinding ItemTemplate}"
                                         ItemsSource="{TemplateBinding ItemsSource}"
+                                        ScrollViewer.VerticalScrollBarVisibility="Disabled"
                                         SelectedItem="{Binding Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}, Path=SelectedItem}">
                                         <GridView.ItemsPanel>
                                             <ItemsPanelTemplate>
