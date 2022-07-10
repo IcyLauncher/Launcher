@@ -2,7 +2,6 @@
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Media.Animation;
 using Microsoft.UI.Composition;
-using Windows.UI;
 using Microsoft.UI.Xaml.Shapes;
 using System.Collections.ObjectModel;
 using IcyLauncher.UI;
@@ -49,6 +48,9 @@ public partial class HomeViewModel : ObservableObject
             bannerProfileInBoard = new() ;
             bannerProfileInBoard.Children.Add(UIElementProvider.Animate(bannerProfileGrid, "Opacity", null, 1, 100));
         }
+
+        if (SelectedProfile is null)
+            SelectedProfile = Profiles.First();
 
         BannerSource = "Banners/TimeDependent/Icy Village/17.png";
     }
@@ -119,13 +121,57 @@ public partial class HomeViewModel : ObservableObject
     }
 
 
+    [ObservableProperty]
+    int launchProgress;
+
+    [ObservableProperty]
+    string launchProgressDetails = "Launch";
+
+    [ICommand(AllowConcurrentExecutions = false, CanExecute = nameof(LaunchCanExecute), IncludeCancelCommand = true)]
+    async Task Launch(CancellationToken cancellationToken)
+    {
+        cancellationToken.Register(async () =>
+        {
+            LaunchProgress = 0;
+            LaunchProgressDetails = "Canceling...";
+
+            for (int i = 0; i < 5; i++)
+            {
+                LaunchProgress += 20;
+                await Task.Delay(1000);
+            }
+
+            LaunchProgress = 0;
+            LaunchProgressDetails = "Launch";
+            LaunchCommand.NotifyCanExecuteChanged();
+        });
+
+        LaunchProgress = 0;
+        LaunchProgressDetails = "Launching...";
+
+        for (int i = 0; i < 5; i++)
+        {
+            LaunchProgress += 20;
+            await Task.Delay(1000, cancellationToken);
+        }
+
+        LaunchProgress = 0;
+        LaunchProgressDetails = "Launched!";
+    }
+
+    bool LaunchCanExecute()
+    {
+        return SelectedProfile is not null && LaunchProgressDetails == "Launch";
+    }
+
+
     Grid bannerProfileGrid = default!;
     Storyboard bannerProfileInBoard = default!;
 
     [ObservableProperty]
     ObservableCollection<Profile> profiles = new()
     {
-        new("Default Profile", Colors.White, "Blocks/Grass_Block.png".AsImage(), "1.19", "Vanilla"),
+        new("Latest Release", Colors.White, "Blocks/Grass_Block.png".AsImage(), "1.19", "Vanilla"),
         new("Beta", Colors.Red, "Blocks/Block_Of_Redstone.png".AsImage(), "1.18.2.3-beta", "Vanilla"),
         new("PvP Profile", Colors.Aqua, "Blocks/Block_Of_Diamond.png".AsImage(), "1.17.1", "OnixClient"),
         new("DebugTesting", Colors.GreenYellow, "Blocks/Slime_Block.png".AsImage(), "1.16.4", "MyCustomClient.dll"),
@@ -146,7 +192,12 @@ public partial class HomeViewModel : ObservableObject
             outBoard.Children.Add(UIElementProvider.Animate(bannerProfileGrid, "Opacity", null, 0, 100));
             outBoard.Completed += (s, e) =>
             {
-                SetProperty(ref selectedProfile, value);
+                if (SetProperty(ref selectedProfile, value))
+                {
+                    BannerProfileDetails = value is null ? "Select a profile to start playing!" : $"Version {value.Version} | {value.Client}";
+                    LaunchCommand.NotifyCanExecuteChanged();
+                }
+
                 bannerProfileGrid.Translation = new Vector3(0, 0, 0);
                 bannerProfileInBoard.Begin();
             };
@@ -155,17 +206,14 @@ public partial class HomeViewModel : ObservableObject
         }
     }
 
+    [ObservableProperty]
+    string bannerProfileDetails = "Select a profile to start playing!";
+
     public void OnProfileSelectionChanged(object sender, SelectionChangedEventArgs e)
     {
         if (e.AddedItems.Count != 0)
             ProfileTemplate.UpdateProperties((GridView)sender, e.AddedItems[0], 1, new(0, 0, 0), "inBoard");
         if (e.RemovedItems.Count != 0)
             ProfileTemplate.UpdateProperties((GridView)sender, e.RemovedItems[0], 0, new(-10, 0, 0), "outBoard");
-    }
-
-    [ICommand]
-    void Sexx()
-    {
-        SelectedProfile = Profiles.First();
     }
 }
