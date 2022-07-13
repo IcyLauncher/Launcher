@@ -117,6 +117,25 @@
 		<None Remove="Assets\FluentSystemIcons-Regular.ttf" />
 		<None Remove="Assets\LICENSE" />
 		<None Remove="Assets\NoImage.png" />
+		<None Remove="Assets\Weather\0.png" />
+		<None Remove="Assets\Weather\01d.png" />
+		<None Remove="Assets\Weather\01n.png" />
+		<None Remove="Assets\Weather\02d.png" />
+		<None Remove="Assets\Weather\02n.png" />
+		<None Remove="Assets\Weather\03d.png" />
+		<None Remove="Assets\Weather\03n.png" />
+		<None Remove="Assets\Weather\04d.png" />
+		<None Remove="Assets\Weather\04n.png" />
+		<None Remove="Assets\Weather\09d.png" />
+		<None Remove="Assets\Weather\09n.png" />
+		<None Remove="Assets\Weather\10d.png" />
+		<None Remove="Assets\Weather\10n.png" />
+		<None Remove="Assets\Weather\11d.png" />
+		<None Remove="Assets\Weather\11n.png" />
+		<None Remove="Assets\Weather\13d.png" />
+		<None Remove="Assets\Weather\13n.png" />
+		<None Remove="Assets\Weather\50d.png" />
+		<None Remove="Assets\Weather\50n.png" />
 		<None Remove="UI\ProfileTemplate.xaml" />
 		<None Remove="Views\HomeView.xaml" />
 		<None Remove="Views\ProfilesView.xaml" />
@@ -430,6 +449,63 @@
 			<Pack>True</Pack>
 			<PackagePath>\</PackagePath>
 		</None>
+		<Content Update="Assets\Weather\0.png">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
+		<Content Update="Assets\Weather\01d.png">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
+		<Content Update="Assets\Weather\01n.png">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
+		<Content Update="Assets\Weather\02d.png">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
+		<Content Update="Assets\Weather\02n.png">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
+		<Content Update="Assets\Weather\03d.png">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
+		<Content Update="Assets\Weather\03n.png">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
+		<Content Update="Assets\Weather\04d.png">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
+		<Content Update="Assets\Weather\04n.png">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
+		<Content Update="Assets\Weather\09d.png">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
+		<Content Update="Assets\Weather\09n.png">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
+		<Content Update="Assets\Weather\10d.png">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
+		<Content Update="Assets\Weather\10n.png">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
+		<Content Update="Assets\Weather\11d.png">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
+		<Content Update="Assets\Weather\11n.png">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
+		<Content Update="Assets\Weather\13d.png">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
+		<Content Update="Assets\Weather\13n.png">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
+		<Content Update="Assets\Weather\50d.png">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
+		<Content Update="Assets\Weather\50n.png">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
 		<Page Update="UIElements\ProfileDataTemplate.xaml">
 		  <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
 		</Page>

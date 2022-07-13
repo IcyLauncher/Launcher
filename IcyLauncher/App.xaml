@@ -21,6 +21,8 @@
             <xaml:BrushConverter x:Key="BrushConverter" />
             <xaml:BoolDoubleConverter x:Key="BoolDoubleConverter" />
             <xaml:InvertBool x:Key="InvertBool" />
+            <xaml:JoinString x:Key="JoinString" />
+            <xaml:DateTimeFormatter x:Key="DateTimeFormatter" />
 
 
             <models:Theme x:Key="Colors" />

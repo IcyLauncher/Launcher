@@ -6,6 +6,7 @@
     xmlns:ex="using:CommunityToolkit.WinUI.UI"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:md="using:CommunityToolkit.WinUI.UI.Media"
+    xmlns:sys="using:System"
     xmlns:ui="using:IcyLauncher.UI"
     Loaded="{x:Bind viewModel.OnPageLoaded}"
     NavigationCacheMode="Enabled"
@@ -117,14 +118,30 @@
             <ui:Card
                 Title="News"
                 Grid.Column="0"
+                MaxHeight="300"
                 HorizontalAlignment="Stretch"
-                VerticalAlignment="Stretch" />
+                Content="{x:Bind viewModel.News, Mode=OneWay, Converter={StaticResource JoinString}, ConverterParameter='/n- ', ConverterLanguage='- '}"
+                VerticalScrollBar="Auto" />
 
             <ui:Card
                 Title="Weather"
                 Grid.Column="2"
                 HorizontalAlignment="Stretch"
-                VerticalAlignment="Stretch" />
+                VerticalAlignment="Stretch">
+                <Grid>
+                    <TextBlock Style="{StaticResource Content}">
+                        <Run Text="{x:Bind viewModel.WeatherData.City, Mode=OneWay}" />
+                        <Run Text=" | " />
+                        <Run Text="{x:Bind viewModel.WeatherData.State, Mode=OneWay}" />
+                        <Run Text=" | " />
+                        <Run Text="{x:Bind viewModel.WeatherData.Country, Mode=OneWay}" />
+                    </TextBlock>
+                    <TextBlock Style="{StaticResource Subpoint}" Text="{x:Bind viewModel.WeatherData.Recieved, Converter={StaticResource DateTimeFormatter}, ConverterParameter='MM/dd/yyyy, hh:mm tt', Mode=OneWay}" />
+                    <TextBlock Style="{StaticResource Header}" Text="{x:Bind viewModel.WeatherData.Degree, Mode=OneWay}" />
+                    <TextBlock Style="{StaticResource Subpoint}" Text="{x:Bind viewModel.WeatherData.Description, Mode=OneWay}" />
+                    <Image Source="{x:Bind viewModel.WeatherData.Icon, Mode=OneWay}" />
+                </Grid>
+            </ui:Card>
 
             <ui:Card
                 Title="About"

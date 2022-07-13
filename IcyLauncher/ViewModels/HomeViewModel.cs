@@ -16,7 +16,7 @@ public partial class HomeViewModel : ObservableObject
     readonly ThemeManager themeManager;
 
     public HomeViewModel(ILogger<HomeViewModel> logger, ImagingUtility imagingUtility, ThemeManager themeManager)
-    { 
+    {
         this.logger = logger;
         this.imagingUtility = imagingUtility;
         this.themeManager = themeManager;
@@ -45,7 +45,7 @@ public partial class HomeViewModel : ObservableObject
 
         if (bannerProfileInBoard is null)
         {
-            bannerProfileInBoard = new() ;
+            bannerProfileInBoard = new();
             bannerProfileInBoard.Children.Add(UIElementProvider.Animate(bannerProfileGrid, "Opacity", null, 1, 100));
         }
 
@@ -216,4 +216,17 @@ public partial class HomeViewModel : ObservableObject
         if (e.RemovedItems.Count != 0)
             ProfileTemplate.UpdateProperties((GridView)sender, e.RemovedItems[0], 0, new(-10, 0, 0), "outBoard");
     }
+
+
+    [ObservableProperty]
+    string[] news = new[]
+    {
+        "This is an example news [1]",
+        "This is another example [2]",
+        "And again, a fucking example news [3]",
+        "End my suffer. Please. I cant do this anymore"
+    };
+
+
+    public WeatherModel WeatherData = new();
 }
