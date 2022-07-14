@@ -4,6 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:ex="using:CommunityToolkit.WinUI.UI"
+    xmlns:hlp="using:IcyLauncher.Core.Helpers"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:md="using:CommunityToolkit.WinUI.UI.Media"
     xmlns:sys="using:System"
@@ -120,26 +121,66 @@
                 Grid.Column="0"
                 MaxHeight="300"
                 HorizontalAlignment="Stretch"
-                Content="{x:Bind viewModel.News, Mode=OneWay, Converter={StaticResource JoinString}, ConverterParameter='/n- ', ConverterLanguage='- '}"
+                Content="{x:Bind viewModel.News, Mode=OneWay, TargetNullValue='N/A', FallbackValue='N/A', Converter={StaticResource JoinString}, ConverterParameter='/n- ', ConverterLanguage='- '}"
                 VerticalScrollBar="Auto" />
 
             <ui:Card
                 Title="Weather"
                 Grid.Column="2"
                 HorizontalAlignment="Stretch"
-                VerticalAlignment="Stretch">
+                VerticalScrollBar="Auto">
                 <Grid>
-                    <TextBlock Style="{StaticResource Content}">
-                        <Run Text="{x:Bind viewModel.WeatherData.City, Mode=OneWay}" />
+                    <TextBlock
+                        HorizontalAlignment="Center"
+                        Style="{StaticResource Content}"
+                        TextTrimming="CharacterEllipsis">
+                        <Run Text="{x:Bind viewModel.WeatherData.City, Mode=OneWay, TargetNullValue='N/A', FallbackValue='N/A'}" />
                         <Run Text=" | " />
-                        <Run Text="{x:Bind viewModel.WeatherData.State, Mode=OneWay}" />
+                        <Run Text="{x:Bind viewModel.WeatherData.State, Mode=OneWay, TargetNullValue='N/A', FallbackValue='N/A'}" />
                         <Run Text=" | " />
-                        <Run Text="{x:Bind viewModel.WeatherData.Country, Mode=OneWay}" />
+                        <Run Text="{x:Bind viewModel.WeatherData.Country, Mode=OneWay, TargetNullValue='N/A', FallbackValue='N/A'}" />
                     </TextBlock>
-                    <TextBlock Style="{StaticResource Subpoint}" Text="{x:Bind viewModel.WeatherData.Recieved, Converter={StaticResource DateTimeFormatter}, ConverterParameter='MM/dd/yyyy, hh:mm tt', Mode=OneWay}" />
-                    <TextBlock Style="{StaticResource Header}" Text="{x:Bind viewModel.WeatherData.Degree, Mode=OneWay}" />
-                    <TextBlock Style="{StaticResource Subpoint}" Text="{x:Bind viewModel.WeatherData.Description, Mode=OneWay}" />
-                    <Image Source="{x:Bind viewModel.WeatherData.Icon, Mode=OneWay}" />
+                    <TextBlock
+                        Margin="0,23,0,0"
+                        HorizontalAlignment="Center"
+                        Style="{StaticResource SubpointSecondary}"
+                        Text="{x:Bind viewModel.WeatherData.Recieved, Mode=OneWay, TargetNullValue='N/A', FallbackValue='N/A', Converter={StaticResource DateTimeFormatter}, ConverterParameter='MM/dd/yyyy, hh:mm tt'}" />
+
+                    <Grid
+                        Margin="0,16,0,0"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+
+                        <Image
+                            Grid.Column="0"
+                            Width="62"
+                            Height="62"
+                            Source="{x:Bind viewModel.WeatherData.Icon, Mode=OneWay, TargetNullValue='N/A', FallbackValue='N/A'}" />
+
+                        <TextBlock
+                            Grid.Column="2"
+                            Margin="12,0,0,0"
+                            FontSize="28"
+                            Style="{StaticResource TitleSecondary}"
+                            Text="{x:Bind viewModel.FormatDegree(viewModel.WeatherData.Degree), Mode=OneWay, TargetNullValue='N/A', FallbackValue='N/A'}" />
+                        <TextBlock
+                            Grid.Column="2"
+                            Margin="12,34,0,0"
+                            Style="{StaticResource Subpoint}"
+                            Text="{x:Bind viewModel.WeatherData.Description, Mode=OneWay, TargetNullValue='N/A', FallbackValue='N/A'}" />
+
+                    </Grid>
+
+                    <Button
+                        Margin="0,119,0,0"
+                        Padding="35,2"
+                        HorizontalAlignment="Center"
+                        Command="{x:Bind viewModel.NavigateToWeatherCommand}"
+                        Content="More Info" />
                 </Grid>
             </ui:Card>
 
@@ -147,7 +188,25 @@
                 Title="About"
                 Grid.Column="4"
                 HorizontalAlignment="Stretch"
-                VerticalAlignment="Stretch" />
+                HorizontalScrollBar="Auto"
+                VerticalScrollBar="Auto">
+                <Grid>
+                    <TextBlock Style="{StaticResource ContentSecondary}">
+                        Version:<LineBreak />
+                        Minecraft:<LineBreak />
+                        CPU:<LineBreak />
+                        GPU:<LineBreak />
+                        RAM:<LineBreak />
+                        OS:</TextBlock>
+                    <TextBlock Margin="100,0,0,0" Style="{StaticResource Content}">
+                        <Run Text="{x:Bind hlp:Computer.CurrentAppVersion, TargetNullValue='N/A', FallbackValue='N/A'}" /><LineBreak />
+                        <Run Text="{x:Bind hlp:Computer.CurrentMinecraftVersion, TargetNullValue='N/A', FallbackValue='N/A'}" /><LineBreak />
+                        <Run Text="{x:Bind hlp:Computer.CurrentCPU, TargetNullValue='N/A', FallbackValue='N/A'}" /><LineBreak />
+                        <Run Text="{x:Bind hlp:Computer.CurrentGPU, TargetNullValue='N/A', FallbackValue='N/A'}" /><LineBreak />
+                        <Run Text="{x:Bind hlp:Computer.CurrentRAM, TargetNullValue='N/A', FallbackValue='N/A'}" /><Run Text=" GB" /><LineBreak />
+                        <Run Text="{x:Bind hlp:Computer.CurrentOS, TargetNullValue='N/A', FallbackValue='N/A'}" /></TextBlock>
+                </Grid>
+            </ui:Card>
         </Grid>
     </Grid>
 </Page>

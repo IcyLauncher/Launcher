@@ -1,30 +1,16 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
-using Microsoft.UI.Xaml.Media.Imaging;
+﻿using Microsoft.UI.Xaml.Media.Imaging;
 
 namespace IcyLauncher.Core.Models;
 
-public partial class WeatherModel : ObservableObject
+public class WeatherModel
 {
-    [ObservableProperty]
-    string city = "N/A";
+    public string City = "N/A";
+    public string State = "N/A";
+    public string Country = "N/A";
 
-    [ObservableProperty]
-    string state = "N/A";
+    public DateTime Recieved;
 
-    [ObservableProperty]
-    string country = "N/A";
-
-
-    [ObservableProperty]
-    DateTime recieved;
-
-
-    [ObservableProperty]
-    double degree;
-
-    [ObservableProperty]
-    BitmapImage icon = "Weather/0.png".AsImage();
-
-    [ObservableProperty]
-    string description = "N/A";
+    public double Degree;
+    public string Description = "N/A";
+    public BitmapImage Icon = "Weather/0.png".AsImage();
 }
