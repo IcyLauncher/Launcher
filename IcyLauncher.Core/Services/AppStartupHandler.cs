@@ -18,7 +18,7 @@ public class AppStartupHandler
         windowHandler.SetTilteBar(true, uiElementReciever.TitleBar);
         windowHandler.SetIcon("Assets/Icon.ico");
         windowHandler.SetMinSize(750, 500);
-        windowHandler.SetSize(1031, 550);
+        windowHandler.SetSize(1040, 555);
         windowHandler.SetPositionToCenter();
         windowHandler.MakeTransparent();
         windowHandler.SetBlur(configuration.Value.Apperance.Blur, true, configuration.Value.Apperance.UseDarkModeBlur);
