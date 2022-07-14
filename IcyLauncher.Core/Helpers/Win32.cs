@@ -152,6 +152,9 @@ public class Win32
     [DllImport("user32.dll")]
     public static extern bool SetWindowCompositionAttribute(IntPtr hwnd, ref WindowCompositionAttributeData data);
 
+    [DllImport("winbrand.dll", CharSet = CharSet.Unicode)]
+    public static extern string BrandingFormatString(string format);
+
 
     public static IntPtr NewWindowProc(IntPtr hWnd, int msg, IntPtr wParam, IntPtr lParam)
     {
