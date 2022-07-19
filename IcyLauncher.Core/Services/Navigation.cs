@@ -19,10 +19,8 @@ public class Navigation : INavigation
 
         this.navigationView.SelectionChanged += (s, e) =>
         {
-            if (e.SelectedItemContainer is NavigationViewItem item && $"Views.{item.Tag}View".AsType() is Type type)
-                SetCurrentPage(type);
-            else
-                this.logger.Log("Failed to set current NavigationView page");
+            if (e.SelectedItemContainer is NavigationViewItem item)
+                SetCurrentPage($"Views.{item.Tag}View".AsType() is Type type ? type : "Views.NoPageView".AsType());
         };
         this.navigationView.BackRequested += (s, e) => GoBack();
 
@@ -75,7 +73,7 @@ public class Navigation : INavigation
         }
     }
 
-    public bool SetCurrentPage(Type type, object? parameter = null)
+    public bool SetCurrentPage(Type? type, object? parameter = null)
     {
         try
         {
@@ -87,6 +85,9 @@ public class Navigation : INavigation
         }
         catch (Exception ex)
         {
+            frame.Navigate("Views.NoPageView".AsType(), ex);
+            CanGoBackChanged(frame.CanGoBack);
+
             logger.Log("Failed to set current NavigationView page", ex);
             return false;
         }
@@ -130,6 +131,12 @@ public class Navigation : INavigation
             logger.Log("Current NavigationView page failed to go back", ex);
             return false;
         }
+    }
+
+    public void ClearBackStack()
+    {
+        frame.BackStack.Clear();
+        CanGoBackChanged(false);
     }
 
     private void CanGoBackChanged(bool canGoBack)

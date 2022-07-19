@@ -53,6 +53,7 @@ public partial class App : Application
                 services.AddSingleton<HomeViewModel>();
                 services.AddSingleton<ProfilesViewModel>();
                 services.AddSingleton<SettingsViewModel>();
+                services.AddSingleton<NoPageViewModel>();
 
                 services.AddSingleton<Window>(provider => new() { Content = mainGrid, Title = "IcyLauncher" });
             }).Build();

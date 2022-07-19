@@ -1,0 +1,52 @@
+﻿<Page
+    x:Class="IcyLauncher.Views.NoPageView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:media="using:CommunityToolkit.WinUI.UI.Media"
+    xmlns:ui="using:IcyLauncher.UI"
+    NavigationCacheMode="Enabled"
+    mc:Ignorable="d">
+    <Page.Background>
+        <LinearGradientBrush StartPoint="0,1" EndPoint="1,0">
+            <GradientStop Offset="0" Color="#05ff0000" />
+            <GradientStop Offset="0.2" Color="#05ffff00" />
+            <GradientStop Offset="0.4" Color="#0500ff00" />
+            <GradientStop Offset="0.6" Color="#0500ffff" />
+            <GradientStop Offset="0.8" Color="#050000ff" />
+            <GradientStop Offset="1" Color="#05ff00ff" />
+        </LinearGradientBrush>
+    </Page.Background>
+
+    <StackPanel
+        HorizontalAlignment="Center"
+        VerticalAlignment="Center"
+        Spacing="12">
+        <TextBlock
+            HorizontalAlignment="Center"
+            FontSize="60"
+            Style="{StaticResource Title}"
+            Text=":(" />
+
+        <TextBlock HorizontalTextAlignment="Center" Style="{StaticResource TitleSecondary}">
+            Looks like this page does not exist.<LineBreak />
+            You should not be here, it is too dangerous out here for someone like you...<LineBreak />
+            You can return to a safer place now or you can report a bug, u will also get a cockie &lt;3</TextBlock>
+
+        <Grid HorizontalAlignment="Center">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition Width="4" />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <Button Command="{x:Bind viewModel.NavigateHomeCommand}" Content="Return to Home" />
+            <Button
+                Grid.Column="2"
+                Command="{x:Bind viewModel.ReportBugCommand}"
+                Content="Report a bug" />
+        </Grid>
+
+    </StackPanel>
+
+</Page>

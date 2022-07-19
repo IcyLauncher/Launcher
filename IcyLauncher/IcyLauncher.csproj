@@ -138,6 +138,7 @@
 		<None Remove="Assets\Weather\50n.png" />
 		<None Remove="UI\ProfileTemplate.xaml" />
 		<None Remove="Views\HomeView.xaml" />
+		<None Remove="Views\NoPageView.xaml" />
 		<None Remove="Views\ProfilesView.xaml" />
 		<None Remove="Views\SettingsView.xaml" />
 	</ItemGroup>
@@ -509,6 +510,10 @@
 		</Content>
 		<Page Update="UIElements\ProfileDataTemplate.xaml">
 		  <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+		</Page>
+		<Page Update="Views\NoPageView.xaml">
+		  <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+		  <SubType>Designer</SubType>
 		</Page>
 		<Page Update="Views\SettingsView.xaml">
 		  <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
