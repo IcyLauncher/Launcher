@@ -83,98 +83,107 @@
                                     </Rectangle>
 
                                     <ContentPresenter
-                                        x:Name="ContentPresenter"
+                                        x:Name="ColoredBackground"
                                         HorizontalContentAlignment="Center"
-                                        VerticalContentAlignment="Center"
+                                        VerticalContentAlignment="Bottom"
                                         ex:Effects.Shadow="{TemplateBinding ex:Effects.Shadow}"
-                                        Background="{ThemeResource ControlPrimaryDisabled}"
-                                        BorderBrush="{ThemeResource ControlOutlineDisabled}"
+                                        Background="{Binding Control.Primary, Source={ThemeResource Colors}, Mode=OneWay, Converter={StaticResource BrushConverter}}"
+                                        BorderBrush="{Binding Control.PrimaryDisabled, Source={ThemeResource Colors}, Mode=OneWay, Converter={StaticResource BrushConverter}}"
                                         BorderThickness="1"
                                         Content="{TemplateBinding Content}"
-                                        CornerRadius="4" />
+                                        CornerRadius="4"
+                                        Opacity="1" />
+                                    <TextBlock
+                                        x:Name="TextPresenter"
+                                        Margin="{TemplateBinding Padding}"
+                                        HorizontalAlignment="Center"
+                                        VerticalAlignment="Center"
+                                        FontFamily="{TemplateBinding FontFamily}"
+                                        Foreground="{Binding Text.Secondary, Source={ThemeResource Colors}, Mode=OneWay, Converter={StaticResource BrushConverter}}"
+                                        Text="{TemplateBinding Tag}" />
 
                                     <VisualStateManager.VisualStateGroups>
                                         <VisualStateGroup x:Name="CommonStates">
                                             <VisualState x:Name="Normal">
                                                 <Storyboard>
                                                     <ColorAnimation
-                                                        Storyboard.TargetName="ContentPresenter"
+                                                        Storyboard.TargetName="ColoredBackground"
                                                         Storyboard.TargetProperty="(UIElement.Background).(SolidColorBrush.Color)"
+                                                        To="{Binding Color, Source={ThemeResource ControlPrimary}}"
+                                                        Duration="0:0:0.2" />
+                                                    <ColorAnimation
+                                                        Storyboard.TargetName="ColoredBackground"
+                                                        Storyboard.TargetProperty="(UIElement.BorderBrush).(SolidColorBrush.Color)"
                                                         To="{Binding Color, Source={ThemeResource ControlPrimaryDisabled}}"
                                                         Duration="0:0:0.2" />
                                                     <ColorAnimation
-                                                        Storyboard.TargetName="ContentPresenter"
-                                                        Storyboard.TargetProperty="(UIElement.BorderBrush).(SolidColorBrush.Color)"
-                                                        To="{Binding Color, Source={ThemeResource ControlOutlineDisabled}}"
-                                                        Duration="0:0:0.2" />
-                                                    <ColorAnimation
-                                                        Storyboard.TargetName="ContentPresenter"
+                                                        Storyboard.TargetName="TextPresenter"
                                                         Storyboard.TargetProperty="(UIElement.Foreground).(SolidColorBrush.Color)"
                                                         To="{Binding Color, Source={ThemeResource ButtonForeground}}"
                                                         Duration="0:0:0.2" />
 
-                                                    <PointerUpThemeAnimation Storyboard.TargetName="ContentPresenter" />
+                                                    <PointerUpThemeAnimation Storyboard.TargetName="ColoredBackground" />
                                                 </Storyboard>
                                             </VisualState>
 
                                             <VisualState x:Name="PointerOver">
                                                 <Storyboard>
                                                     <ColorAnimation
-                                                        Storyboard.TargetName="ContentPresenter"
+                                                        Storyboard.TargetName="ColoredBackground"
                                                         Storyboard.TargetProperty="(UIElement.Background).(SolidColorBrush.Color)"
-                                                        To="{Binding Color, Source={ThemeResource ControlOutlineDisabled}}"
+                                                        To="{Binding Color, Source={ThemeResource ControlPrimaryDisabled}}"
                                                         Duration="0:0:0.2" />
                                                     <ColorAnimation
-                                                        Storyboard.TargetName="ContentPresenter"
+                                                        Storyboard.TargetName="ColoredBackground"
                                                         Storyboard.TargetProperty="(UIElement.BorderBrush).(SolidColorBrush.Color)"
-                                                        To="{Binding Color, Source={ThemeResource ControlOutlineDisabled}}"
+                                                        To="{Binding Color, Source={ThemeResource ControlPrimaryDisabled}}"
                                                         Duration="0:0:0.2" />
                                                     <ColorAnimation
-                                                        Storyboard.TargetName="ContentPresenter"
+                                                        Storyboard.TargetName="TextPresenter"
                                                         Storyboard.TargetProperty="(UIElement.Foreground).(SolidColorBrush.Color)"
                                                         To="{Binding Color, Source={ThemeResource ButtonForegroundPointerOver}}"
                                                         Duration="0:0:0.2" />
 
-                                                    <PointerUpThemeAnimation Storyboard.TargetName="ContentPresenter" />
+                                                    <PointerUpThemeAnimation Storyboard.TargetName="ColoredBackground" />
                                                 </Storyboard>
                                             </VisualState>
 
                                             <VisualState x:Name="Pressed">
                                                 <Storyboard>
                                                     <ColorAnimation
-                                                        Storyboard.TargetName="ContentPresenter"
+                                                        Storyboard.TargetName="ColoredBackground"
                                                         Storyboard.TargetProperty="(UIElement.Background).(SolidColorBrush.Color)"
-                                                        To="{Binding Color, Source={ThemeResource ControlPrimaryDisabled}}"
+                                                        To="{Binding Color, Source={ThemeResource ControlOutlineDisabled}}"
                                                         Duration="0:0:0.2" />
                                                     <ColorAnimation
-                                                        Storyboard.TargetName="ContentPresenter"
+                                                        Storyboard.TargetName="ColoredBackground"
                                                         Storyboard.TargetProperty="(UIElement.BorderBrush).(SolidColorBrush.Color)"
-                                                        To="{Binding Color, Source={ThemeResource ControlPrimaryDisabled}}"
+                                                        To="{Binding Color, Source={ThemeResource ControlOutlineDisabled}}"
                                                         Duration="0:0:0.2" />
                                                     <ColorAnimation
-                                                        Storyboard.TargetName="ContentPresenter"
+                                                        Storyboard.TargetName="TextPresenter"
                                                         Storyboard.TargetProperty="(UIElement.Foreground).(SolidColorBrush.Color)"
                                                         To="{Binding Color, Source={ThemeResource ButtonForegroundPressed}}"
                                                         Duration="0:0:0.2" />
 
-                                                    <PointerDownThemeAnimation Storyboard.TargetName="ContentPresenter" />
+                                                    <PointerDownThemeAnimation Storyboard.TargetName="ColoredBackground" />
                                                 </Storyboard>
                                             </VisualState>
 
                                             <VisualState x:Name="Disabled">
                                                 <Storyboard>
                                                     <ColorAnimation
-                                                        Storyboard.TargetName="ContentPresenter"
+                                                        Storyboard.TargetName="ColoredBackground"
                                                         Storyboard.TargetProperty="(UIElement.Background).(SolidColorBrush.Color)"
-                                                        To="{Binding Color, Source={ThemeResource ControlOutline}}"
+                                                        To="{Binding Color, Source={ThemeResource ControlOutlineDisabled}}"
                                                         Duration="0:0:0.2" />
                                                     <ColorAnimation
-                                                        Storyboard.TargetName="ContentPresenter"
+                                                        Storyboard.TargetName="ColoredBackground"
                                                         Storyboard.TargetProperty="(UIElement.BorderBrush).(SolidColorBrush.Color)"
-                                                        To="{Binding Color, Source={ThemeResource ControlOutline}}"
+                                                        To="{Binding Color, Source={ThemeResource ControlOutlineDisabled}}"
                                                         Duration="0:0:0.2" />
                                                     <ColorAnimation
-                                                        Storyboard.TargetName="ContentPresenter"
+                                                        Storyboard.TargetName="TextPresenter"
                                                         Storyboard.TargetProperty="(UIElement.Foreground).(SolidColorBrush.Color)"
                                                         To="{Binding Color, Source={ThemeResource ButtonForegroundDisabled}}"
                                                         Duration="0:0:0.2" />

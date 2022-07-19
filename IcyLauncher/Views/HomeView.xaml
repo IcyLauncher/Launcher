@@ -60,38 +60,30 @@
                     ex:Effects.Shadow="{StaticResource CardShadow}"
                     Command="{x:Bind viewModel.LaunchCommand}"
                     Style="{StaticResource LaunchButton}"
+                    Tag="{x:Bind viewModel.LaunchProgressDetails, Mode=OneWay}"
                     ToolTipService.ToolTip="Launch Minecraft">
-                    <Grid>
-                        <TextBlock
-                            HorizontalAlignment="Center"
-                            VerticalAlignment="Center"
-                            Text="{x:Bind viewModel.LaunchProgressDetails, Mode=OneWay}" />
-                        <ProgressBar
-                            Width="130"
-                            Margin="0,0,0,-7"
-                            VerticalAlignment="Bottom"
-                            Background="Transparent"
-                            CornerRadius="0"
-                            Value="{x:Bind viewModel.LaunchProgress, Mode=OneWay}" />
-                    </Grid>
+                    <ProgressBar
+                        Width="130"
+                        Margin="0,0,0,-1"
+                        Background="Transparent"
+                        CornerRadius="0"
+                        Value="{x:Bind viewModel.LaunchProgress, Mode=OneWay}" />
                 </Button>
                 <Button
                     Name="LaunchCancelButton"
                     Width="34"
                     Height="34"
                     Margin="136,65,0,0"
+                    Padding="0,0,0,-2"
                     Command="{x:Bind viewModel.LaunchCancelCommand}"
+                    FontFamily="Assets/FluentSystemIcons-Regular.ttf#FluentSystemIcons-Regular"
                     Opacity="{x:Bind LaunchCancelButton.IsEnabled, Mode=OneWay, Converter={StaticResource BoolDoubleConverter}}"
                     Style="{StaticResource LaunchButton}"
+                    Tag="&#xF367;"
                     ToolTipService.ToolTip="Cancel Minecraft Launch">
                     <Button.OpacityTransition>
                         <ScalarTransition />
                     </Button.OpacityTransition>
-
-                    <FontIcon
-                        Margin="0,2,0,0"
-                        FontFamily="Assets/FluentSystemIcons-Regular.ttf#FluentSystemIcons-Regular"
-                        Glyph="&#xF367;" />
                 </Button>
             </Grid>
         </Grid>
@@ -208,6 +200,5 @@
                 </Grid>
             </ui:Card>
         </Grid>
-        <Button Command="{x:Bind viewModel.ChangeThemeCommand}" Content="Sex" />
     </Grid>
 </Page>
