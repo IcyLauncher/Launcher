@@ -1,14 +1,13 @@
 ﻿using Microsoft.UI.Xaml.Controls;
-using Microsoft.UI.Xaml.Media.Animation;
 
 namespace IcyLauncher.UI;
 
-public class Card : ContentControl
+public class HCont : ContentControl
 {
     public static readonly DependencyProperty TitleProperty = DependencyProperty.Register(
         "Title",
         typeof(string),
-        typeof(Card),
+        typeof(HCont),
         new("Card Title"));
 
     public string Title
@@ -20,7 +19,7 @@ public class Card : ContentControl
     public static readonly DependencyProperty ContentHeightProperty = DependencyProperty.Register(
         "ContentHeight",
         typeof(double),
-        typeof(Card),
+        typeof(HCont),
         new(double.NaN));
 
     public double ContentHeight
@@ -32,7 +31,7 @@ public class Card : ContentControl
     public static readonly DependencyProperty ContentWidthProperty = DependencyProperty.Register(
         "ContentWidth",
         typeof(double),
-        typeof(Card),
+        typeof(HCont),
         new(double.NaN));
 
     public double ContentWidth
@@ -44,7 +43,7 @@ public class Card : ContentControl
     public static readonly DependencyProperty VerticalScrollBarProperty = DependencyProperty.Register(
         "VerticalScrollBar",
         typeof(ScrollBarVisibility),
-        typeof(Card),
+        typeof(HCont),
         new(ScrollBarVisibility.Disabled));
 
     public ScrollBarVisibility VerticalScrollBar
@@ -56,7 +55,7 @@ public class Card : ContentControl
     public static readonly DependencyProperty HorizontalScrollBarProperty = DependencyProperty.Register(
         "HorizontalScrollBar",
         typeof(ScrollBarVisibility),
-        typeof(Card),
+        typeof(HCont),
         new(ScrollBarVisibility.Disabled));
 
     public ScrollBarVisibility HorizontalScrollBar
@@ -73,6 +72,6 @@ public class Card : ContentControl
         var scrollContainer = (ScrollViewer)GetTemplateChild("ScrollContainer");
 
         scrollContainer.ViewChanged += (s, e) =>
-            header.Opacity = scrollContainer.VerticalOffset == 0 ? 1 : 0;
+            header.Opacity = scrollContainer.VerticalOffset <= 5 ? 1 : 0;
     }
 }

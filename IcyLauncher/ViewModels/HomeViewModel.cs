@@ -4,7 +4,7 @@ using Microsoft.UI.Xaml.Media.Animation;
 using Microsoft.UI.Composition;
 using Microsoft.UI.Xaml.Shapes;
 using System.Collections.ObjectModel;
-using IcyLauncher.UI;
+using IcyLauncher.UI.Xaml;
 using System.Numerics;
 
 namespace IcyLauncher.ViewModels;

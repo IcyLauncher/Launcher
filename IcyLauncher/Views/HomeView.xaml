@@ -108,18 +108,20 @@
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
 
-            <ui:Card
+            <ui:HCont
                 Title="News"
                 Grid.Column="0"
                 MaxHeight="300"
                 HorizontalAlignment="Stretch"
                 Content="{x:Bind viewModel.News, Mode=OneWay, TargetNullValue='N/A', FallbackValue='N/A', Converter={StaticResource JoinString}, ConverterParameter='/n- ', ConverterLanguage='- '}"
+                Style="{StaticResource Card}"
                 VerticalScrollBar="Auto" />
 
-            <ui:Card
+            <ui:HCont
                 Title="Weather"
                 Grid.Column="2"
                 HorizontalAlignment="Stretch"
+                Style="{StaticResource Card}"
                 VerticalScrollBar="Auto">
                 <Grid>
                     <TextBlock
@@ -174,13 +176,14 @@
                         Command="{x:Bind viewModel.NavigateToWeatherCommand}"
                         Content="More Info" />
                 </Grid>
-            </ui:Card>
+            </ui:HCont>
 
-            <ui:Card
+            <ui:HCont
                 Title="About"
                 Grid.Column="4"
                 HorizontalAlignment="Stretch"
                 HorizontalScrollBar="Auto"
+                Style="{StaticResource Card}"
                 VerticalScrollBar="Auto">
                 <Grid>
                     <TextBlock Style="{StaticResource ContentSecondary}">
@@ -198,7 +201,7 @@
                         <Run Text="{x:Bind hlp:Computer.CurrentRAM, TargetNullValue='N/A', FallbackValue='N/A'}" /><Run Text=" GB" /><LineBreak />
                         <Run Text="{x:Bind hlp:Computer.CurrentOS, TargetNullValue='N/A', FallbackValue='N/A'}" /></TextBlock>
                 </Grid>
-            </ui:Card>
+            </ui:HCont>
         </Grid>
     </Grid>
 </Page>

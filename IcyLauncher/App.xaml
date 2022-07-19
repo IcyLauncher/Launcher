@@ -7,6 +7,7 @@
     xmlns:models="using:IcyLauncher.Core.Models"
     xmlns:primitives="using:Microsoft.UI.Xaml.Controls.Primitives"
     xmlns:ui="using:IcyLauncher.UI"
+    xmlns:uix="using:IcyLauncher.UI.Xaml"
     xmlns:xaml="using:IcyLauncher.Core.Xaml"
     RequestedTheme="Dark">
     <Application.Resources>
@@ -14,7 +15,7 @@
             <ResourceDictionary.MergedDictionaries>
                 <XamlControlsResources xmlns="using:Microsoft.UI.Xaml.Controls" />
 
-                <ui:ProfileTemplate />
+                <uix:ProfileTemplate />
             </ResourceDictionary.MergedDictionaries>
 
             <xaml:ArrayConverter x:Key="ArrayConverter" />
@@ -367,7 +368,7 @@
             </Style>
 
 
-            <Style TargetType="ui:Card">
+            <Style x:Key="Card" TargetType="ui:HCont">
                 <Setter Property="Background" Value="{ThemeResource ControlPrimary}" />
                 <Setter Property="VerticalAlignment" Value="Top" />
                 <Setter Property="HorizontalAlignment" Value="Left" />
@@ -379,7 +380,7 @@
                 <Setter Property="FontWeight" Value="Normal" />
                 <Setter Property="Template">
                     <Setter.Value>
-                        <ControlTemplate TargetType="ui:Card">
+                        <ControlTemplate TargetType="ui:HCont">
                             <Grid
                                 Name="RootLayout"
                                 Width="{TemplateBinding Width}"
@@ -405,6 +406,77 @@
                                     Margin="12,0,12,0"
                                     Opacity="1"
                                     Style="{ThemeResource Title}"
+                                    Text="{TemplateBinding Title}"
+                                    TextTrimming="CharacterEllipsis">
+                                    <TextBlock.OpacityTransition>
+                                        <ScalarTransition />
+                                    </TextBlock.OpacityTransition>
+                                </TextBlock>
+
+                                <ScrollViewer
+                                    Name="ScrollContainer"
+                                    Grid.Row="1"
+                                    CanContentRenderOutsideBounds="True"
+                                    HorizontalScrollBarVisibility="{TemplateBinding HorizontalScrollBar}"
+                                    VerticalScrollBarVisibility="{TemplateBinding VerticalScrollBar}"
+                                    VerticalSnapPointsAlignment="Near"
+                                    VerticalSnapPointsType="MandatorySingle">
+                                    <ContentPresenter
+                                        Width="{TemplateBinding ContentWidth}"
+                                        Height="{TemplateBinding ContentHeight}"
+                                        Margin="12,0,12,12"
+                                        Content="{TemplateBinding Content}"
+                                        FontFamily="{TemplateBinding FontFamily}"
+                                        FontSize="{TemplateBinding FontSize}"
+                                        FontWeight="{TemplateBinding FontWeight}"
+                                        Foreground="{TemplateBinding Foreground}"
+                                        TextWrapping="Wrap" />
+                                </ScrollViewer>
+                            </Grid>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+
+            <Style x:Key="Page" TargetType="ui:HCont">
+                <Setter Property="Background" Value="Transparent" />
+                <Setter Property="VerticalAlignment" Value="Top" />
+                <Setter Property="HorizontalAlignment" Value="Left" />
+                <Setter Property="Padding" Value="0" />
+                <Setter Property="CornerRadius" Value="0" />
+                <Setter Property="Foreground" Value="{ThemeResource TextSecondary}" />
+                <Setter Property="FontSize" Value="18" />
+                <Setter Property="HorizontalAlignment" Value="Stretch" />
+                <Setter Property="VerticalAlignment" Value="Stretch" />
+                <Setter Property="FontFamily" Value="Segoe UI" />
+                <Setter Property="FontWeight" Value="Normal" />
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="ui:HCont">
+                            <Grid
+                                Name="RootLayout"
+                                Width="{TemplateBinding Width}"
+                                Height="{TemplateBinding Height}"
+                                MinWidth="{TemplateBinding MinWidth}"
+                                MinHeight="{TemplateBinding MinHeight}"
+                                Margin="{TemplateBinding Margin}"
+                                Padding="{TemplateBinding Padding}"
+                                HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
+                                VerticalAlignment="{TemplateBinding VerticalAlignment}"
+                                ex:Effects.Shadow="{TemplateBinding ex:Effects.Shadow}"
+                                Background="{TemplateBinding Background}"
+                                CornerRadius="{TemplateBinding CornerRadius}"
+                                Visibility="{TemplateBinding Visibility}">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition />
+                                </Grid.RowDefinitions>
+
+                                <TextBlock
+                                    Name="Header"
+                                    Margin="12,8"
+                                    Opacity="1"
+                                    Style="{ThemeResource Header}"
                                     Text="{TemplateBinding Title}"
                                     TextTrimming="CharacterEllipsis">
                                     <TextBlock.OpacityTransition>
