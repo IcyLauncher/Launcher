@@ -8,6 +8,9 @@
 		<PublishProfile>win10-$(Platform).pubxml</PublishProfile>
 		<UseWinUI>true</UseWinUI>
 		<Nullable>enable</Nullable>
+		<FileVersion>0.0.0.1</FileVersion>
+		<AssemblyVersion>0.0.0.1</AssemblyVersion>
+		<Version>0.0.0.1</Version>
 	</PropertyGroup>
 
 	<ItemGroup>

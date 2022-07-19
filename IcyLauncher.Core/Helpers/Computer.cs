@@ -15,18 +15,6 @@ public class Computer
     public static string MinecraftDirectory { get; } = $"{AppDataDirectory}\\Packages\\Microsoft.MinecraftUWP_8wekyb3d8bbwe\\LocalState";
 
 
-    public static Version? CurrentAppVersion
-    {
-        get
-        {
-            try
-            {
-                return Assembly.GetExecutingAssembly().GetName().Version;
-            }
-            catch { return null; }
-        }
-    }
-
     public static Version? CurrentMinecraftVersion
     {
         get

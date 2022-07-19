@@ -45,6 +45,7 @@ public partial class App : Application
                 services.AddScoped<UIElementReciever>();
                 services.AddScoped<ImagingUtility>();
                 services.AddScoped<AppStartupHandler>();
+                services.AddScoped<Updater>();
                 services.AddScoped<IConverter, JsonConverter>();
                 services.AddScoped<IFileSystem, FileSystem>();
                 services.AddScoped<INavigation>(provider => new Navigation(provider.GetRequiredService<ILogger<Navigation>>(), navigationView, contentFrame, backButton));

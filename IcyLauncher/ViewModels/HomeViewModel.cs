@@ -16,12 +16,16 @@ public partial class HomeViewModel : ObservableObject
     readonly ImagingUtility imagingUtility;
     readonly ThemeManager themeManager;
 
-    public HomeViewModel(IOptions<Configuration> configuration, ILogger<HomeViewModel> logger, ImagingUtility imagingUtility, ThemeManager themeManager)
+    public readonly Updater Updater;
+
+    public HomeViewModel(IOptions<Configuration> configuration, ILogger<HomeViewModel> logger, ImagingUtility imagingUtility, ThemeManager themeManager, Updater updater)
     {
         this.configuration = configuration.Value;
         this.logger = logger;
         this.imagingUtility = imagingUtility;
         this.themeManager = themeManager;
+
+        Updater = updater;
 
         this.themeManager.Colors.Background.PropertyChanged += (s, e) =>
         {
