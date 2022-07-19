@@ -139,6 +139,7 @@
 		<None Remove="UI\ProfileTemplate.xaml" />
 		<None Remove="Views\HomeView.xaml" />
 		<None Remove="Views\ProfilesView.xaml" />
+		<None Remove="Views\SettingsView.xaml" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -508,6 +509,10 @@
 		</Content>
 		<Page Update="UIElements\ProfileDataTemplate.xaml">
 		  <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+		</Page>
+		<Page Update="Views\SettingsView.xaml">
+		  <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+		  <SubType>Designer</SubType>
 		</Page>
 		<Page Update="Views\ProfilesView.xaml">
 			<XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
