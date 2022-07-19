@@ -1,6 +1,7 @@
 ﻿using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Data;
 using Microsoft.UI.Xaml.Media;
+using Windows.UI;
 using Windows.UI.ViewManagement;
 
 namespace IcyLauncher.Core.Services;
@@ -11,6 +12,7 @@ public class ThemeManager
     readonly Configuration configuration;
     readonly IConverter converter;
     readonly UIElementReciever uiElementReciever;
+    readonly Random random = new();
 
     public Theme Colors => configuration.Apperance.Colors;
 
@@ -30,6 +32,7 @@ public class ThemeManager
 
         this.logger.Log("Registered Theme Manager and hooked all ColorValue changes");
     }
+
 
     public string ExportTheme() =>
         converter.ToString(configuration.Apperance);
@@ -70,6 +73,52 @@ public class ThemeManager
         copyTo.Control.Solid.PrimaryDisabled = copyFrom.Control.Solid.Outline;
         copyTo.Control.Solid.OutlineDisabled = copyFrom.Control.Solid.Outline;
     }
+
+    /// <summary>
+    /// Use only for debugging.
+    /// </summary>
+    public void RandomizeTheme() =>
+        LoadTheme(new()
+        {
+            Accent = new()
+            {
+                Primary = GetRandomColor(255),
+                Light = GetRandomColor(255),
+                Dark = GetRandomColor(255)
+            },
+            Background = new()
+            {
+                Solid = GetRandomColor(255),
+                Transparent = GetRandomColor(180),
+                Gradient = GetRandomColor(255),
+                GradientTransparent = GetRandomColor(0)
+            },
+            Text = new()
+            {
+                Primary = GetRandomColor(255),
+                Secondary = GetRandomColor(196),
+                Tertiary = GetRandomColor(133),
+                Disabled = GetRandomColor(92),
+            },
+            Control = new()
+            {
+                Primary = GetRandomColor(13),
+                Outline = GetRandomColor(26),
+                PrimaryDisabled = GetRandomColor(38),
+                OutlineDisabled = GetRandomColor(51),
+                Solid = new()
+                {
+                    Primary = GetRandomColor(255),
+                    Outline = GetRandomColor(255),
+                    PrimaryDisabled = GetRandomColor(255),
+                    OutlineDisabled = GetRandomColor(255)
+                }
+            }
+        });
+
+    public Color GetRandomColor(byte transparency) =>
+        Color.FromArgb(transparency, Convert.ToByte(random.Next(0, 255)), Convert.ToByte(random.Next(0, 255)), Convert.ToByte(random.Next(0, 255)));
+
 
 
     public void SetResourceColors()

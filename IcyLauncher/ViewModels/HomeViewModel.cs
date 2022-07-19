@@ -250,4 +250,10 @@ public partial class HomeViewModel : ObservableObject
             Description = "mostly sunny"
         };
     }
+
+    [ICommand]
+    void ChangeTheme()
+    {
+        themeManager.RandomizeTheme();
+    }
 }

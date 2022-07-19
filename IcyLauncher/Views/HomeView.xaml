@@ -208,5 +208,6 @@
                 </Grid>
             </ui:Card>
         </Grid>
+        <Button Command="{x:Bind viewModel.ChangeThemeCommand}" Content="Sex" />
     </Grid>
 </Page>
