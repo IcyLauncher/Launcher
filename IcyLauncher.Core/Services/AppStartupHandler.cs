@@ -14,11 +14,11 @@ public class AppStartupHandler
     {
         AppDomain.CurrentDomain.FirstChanceException += (s, e) =>
             logger.Log("Global Exception thrown", e.Exception, LogLevel.Error, "global", "?");
-             
-        windowHandler.SetTilteBar(true, uiElementReciever.TitleBar);
+
+        bool customTitleBar = windowHandler.SetTilteBar(true, uiElementReciever.TitleBar);
         windowHandler.SetIcon("Assets/Icon.ico");
         windowHandler.SetMinSize(750, 500);
-        windowHandler.SetSize(1040, 555);
+        windowHandler.SetSize(1040, customTitleBar ? 555 : 538);
         windowHandler.SetPositionToCenter();
         windowHandler.MakeTransparent();
         windowHandler.SetBlur(configuration.Value.Apperance.Blur, true, configuration.Value.Apperance.UseDarkModeBlur);
