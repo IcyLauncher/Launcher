@@ -3,10 +3,13 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:ext="using:IcyLauncher.Core.Extentions"
+    xmlns:hlp="using:IcyLauncher.Core.Helpers"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:media="using:CommunityToolkit.WinUI.UI.Media"
     xmlns:ui="using:IcyLauncher.UI"
     Background="Transparent"
+    Loaded="{x:Bind viewModel.OnPageLoaded}"
     NavigationCacheMode="Enabled"
     mc:Ignorable="d">
 
@@ -14,20 +17,109 @@
         Title="Settings"
         Style="{StaticResource Page}"
         VerticalScrollBar="Auto">
-        <StackPanel Spacing="8">
-            <Rectangle
-                Width="100"
-                Height="100"
-                HorizontalAlignment="Left"
-                VerticalAlignment="Top"
-                Fill="Red" />
-            <Rectangle
-                Width="100"
-                Height="100"
-                HorizontalAlignment="Left"
-                VerticalAlignment="Top"
-                Fill="Red" />
-        </StackPanel>
-    </ui:HCont>
+        <Grid
+            Margin="0,6,0,0"
+            HorizontalAlignment="Stretch"
+            VerticalAlignment="Top">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="8" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
 
+            <Grid>
+                <Viewbox
+                    Width="59"
+                    Height="59"
+                    HorizontalAlignment="Left">
+                    <Path Data="{x:Bind hlp:UIElementProvider.IconPath}">
+                        <Path.Fill>
+                            <LinearGradientBrush StartPoint="0,0" EndPoint="0.625,1">
+                                <GradientStop Offset="0.1" Color="{Binding Color, Source={ThemeResource AccentLight}}" />
+                                <GradientStop Offset="1" Color="{Binding Color, Source={ThemeResource AccentDark}}" />
+                            </LinearGradientBrush>
+                        </Path.Fill>
+                    </Path>
+                </Viewbox>
+
+                <Grid Margin="71,0,0,0" VerticalAlignment="Center">
+                    <TextBlock
+                        Style="{StaticResource Title}"
+                        Text="IcyLauncher"
+                        Typography.Capitals="Normal" />
+                    <HyperlinkButton
+                        Margin="0,27,0,0"
+                        Padding="0"
+                        Content="About" />
+                </Grid>
+            </Grid>
+
+            <Button
+                Grid.Column="1"
+                Padding="6"
+                HorizontalAlignment="Right"
+                Background="Transparent"
+                BorderBrush="Transparent">
+                <Grid>
+                    <FontIcon
+                        Margin="0,0,0,-2"
+                        HorizontalAlignment="Left"
+                        FontFamily="Assets/FluentSystemIcons-Regular.ttf#FluentSystemIcons-Regular"
+                        FontSize="32"
+                        Glyph="&#xE493;" />
+
+                    <Grid Margin="40,0,0,0" VerticalAlignment="Center">
+                        <TextBlock
+                            FontSize="15"
+                            Style="{StaticResource Subpoint}"
+                            Text="Version" />
+                        <TextBlock Margin="0,15,0,0" Style="{StaticResource SubpointSecondary}">
+                            <Run Text="Launcher: " />
+                            <Run Text="{x:Bind viewModel.Updater.CurrentAppVersion, FallbackValue='N/A', TargetNullValue='N/A'}" />
+                            <Run Text=" | API: " />
+                            <Run Text="{x:Bind viewModel.Updater.CurrentApiVersion, FallbackValue='N/A', TargetNullValue='N/A'}" />
+                        </TextBlock>
+                    </Grid>
+                </Grid>
+            </Button>
+
+            <Button
+                Grid.Column="3"
+                Padding="6"
+                HorizontalAlignment="Right"
+                Background="{x:Bind viewModel.UpdateButtonBackground}"
+                BorderBrush="{x:Bind viewModel.UpdateButtonBorderBrush}"
+                Command="{x:Bind viewModel.UpdateCommand}">
+                <Grid>
+                    <FontIcon
+                        Margin="0,0,0,-2"
+                        HorizontalAlignment="Left"
+                        FontFamily="Assets/FluentSystemIcons-Regular.ttf#FluentSystemIcons-Regular"
+                        FontSize="32"
+                        Glyph="&#xE371;" />
+
+                    <Grid Margin="40,0,0,0" VerticalAlignment="Center">
+                        <TextBlock
+                            FontSize="15"
+                            Style="{StaticResource Subpoint}"
+                            Text="Update" />
+                        <TextBlock
+                            Margin="0,15,0,0"
+                            Style="{StaticResource SubpointSecondary}"
+                            Text="{x:Bind viewModel.UpdateStatus, Mode=OneWay, FallbackValue='N/A', TargetNullValue='N/A'}" />
+                    </Grid>
+                </Grid>
+            </Button>
+            <Ellipse
+                Grid.Column="3"
+                Width="13"
+                Height="13"
+                Margin="0,3,-3,0"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Top"
+                Fill="#90ffff00"
+                Visibility="{x:Bind viewModel.UpdateBadgeVisibility, Mode=OneWay}" />
+        </Grid>
+    </ui:HCont>
 </Page>
