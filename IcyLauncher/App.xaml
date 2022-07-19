@@ -312,6 +312,22 @@
             <SolidColorBrush x:Key="ScrollBarTrackFillDisabled" Color="{Binding Color, Source={ThemeResource ControlPrimaryDisabled}}" />
 
 
+            <SolidColorBrush x:Key="HyperlinkButtonForeground" Color="{Binding Color, Source={ThemeResource AccentPrimary}}" />
+            <SolidColorBrush x:Key="HyperlinkButtonForegroundPointerOver" Color="{Binding Color, Source={ThemeResource AccentLight}}" />
+            <SolidColorBrush x:Key="HyperlinkButtonForegroundPressed" Color="{Binding Color, Source={ThemeResource AccentDark}}" />
+            <SolidColorBrush x:Key="HyperlinkButtonForegroundDisabled" Color="{Binding Color, Source={ThemeResource TextDisabled}}" />
+
+            <SolidColorBrush x:Key="HyperlinkButtonBackground" Color="Transparent" />
+            <SolidColorBrush x:Key="HyperlinkButtonBackgroundPointerOver" Color="Transparent" />
+            <SolidColorBrush x:Key="HyperlinkButtonBackgroundPressed" Color="Transparent" />
+            <SolidColorBrush x:Key="HyperlinkButtonBackgroundDisabled" Color="Transparent" />
+
+            <SolidColorBrush x:Key="HyperlinkButtonBorderBrush" Color="Transparent" />
+            <SolidColorBrush x:Key="HyperlinkButtonBorderBrushPointerOver" Color="Transparent" />
+            <SolidColorBrush x:Key="HyperlinkButtonBorderBrushPressed" Color="Transparent" />
+            <SolidColorBrush x:Key="HyperlinkButtonBorderBrushDisabled" Color="Transparent" />
+
+
             <Style TargetType="ProgressBar">
                 <Setter Property="Foreground" Value="{ThemeResource AccentPrimary}" />
             </Style>
