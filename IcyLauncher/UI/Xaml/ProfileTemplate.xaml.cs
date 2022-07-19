@@ -3,7 +3,7 @@ using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Media.Animation;
 using System.Numerics;
 
-namespace IcyLauncher.UI;
+namespace IcyLauncher.UI.Xaml;
 
 public partial class ProfileTemplate : ResourceDictionary
 {

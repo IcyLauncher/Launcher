@@ -1,5 +1,5 @@
 ﻿<ResourceDictionary
-    x:Class="IcyLauncher.UI.ProfileTemplate"
+    x:Class="IcyLauncher.UI.Xaml.ProfileTemplate"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:ex="using:CommunityToolkit.WinUI.UI"
