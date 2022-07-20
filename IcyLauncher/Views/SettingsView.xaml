@@ -16,111 +16,163 @@
     <ui:HCont
         Title="Settings"
         Style="{StaticResource Page}"
-        VerticalScrollBar="{x:Bind viewModel.Configuration.Launcher.IsScrollbarsEnabled}">
-        <Grid
-            Margin="0,6,0,0"
-            HorizontalAlignment="Stretch"
-            VerticalAlignment="Top">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="Auto" />
-                <ColumnDefinition Width="8" />
-                <ColumnDefinition Width="Auto" />
-            </Grid.ColumnDefinitions>
+        VerticalScrollBar="{x:Bind viewModel.Configuration.Launcher.IsScrollbarsEnabled, Mode=OneWay, Converter={StaticResource BoolScrollbarVisibilityConverter}}">
+        <StackPanel Margin="0,6,0,0" Spacing="8">
+            <Grid Margin="0,0,0,12" VerticalAlignment="Top">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="8" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
 
-            <Grid>
-                <Viewbox
-                    Width="59"
-                    Height="59"
-                    HorizontalAlignment="Left">
-                    <Path Data="{x:Bind hlp:UIElementProvider.IconPath}">
-                        <Path.Fill>
-                            <LinearGradientBrush StartPoint="0,0" EndPoint="0.625,1">
-                                <GradientStop Offset="0.1" Color="{Binding Color, Source={ThemeResource AccentLight}}" />
-                                <GradientStop Offset="1" Color="{Binding Color, Source={ThemeResource AccentDark}}" />
-                            </LinearGradientBrush>
-                        </Path.Fill>
-                    </Path>
-                </Viewbox>
+                <Grid>
+                    <Viewbox
+                        Width="59"
+                        Height="59"
+                        HorizontalAlignment="Left">
+                        <Path Data="{x:Bind hlp:UIElementProvider.IconPath}">
+                            <Path.Fill>
+                                <LinearGradientBrush StartPoint="0,0" EndPoint="0.625,1">
+                                    <GradientStop Offset="0.1" Color="{Binding Color, Source={ThemeResource AccentLight}}" />
+                                    <GradientStop Offset="1" Color="{Binding Color, Source={ThemeResource AccentDark}}" />
+                                </LinearGradientBrush>
+                            </Path.Fill>
+                        </Path>
+                    </Viewbox>
 
-                <Grid Margin="71,0,0,0" VerticalAlignment="Center">
-                    <TextBlock
-                        Style="{StaticResource Title}"
-                        Text="IcyLauncher"
-                        Typography.Capitals="Normal" />
-                    <HyperlinkButton
-                        Margin="0,27,0,0"
-                        Padding="0"
-                        Content="About" />
+                    <Grid Margin="71,0,0,0" VerticalAlignment="Center">
+                        <TextBlock
+                            Style="{StaticResource Title}"
+                            Text="IcyLauncher"
+                            Typography.Capitals="Normal" />
+                        <HyperlinkButton
+                            Margin="0,27,0,0"
+                            Padding="0"
+                            Content="About" />
+                    </Grid>
                 </Grid>
+
+                <Button
+                    Grid.Column="1"
+                    Padding="6"
+                    HorizontalAlignment="Right"
+                    Background="Transparent"
+                    BorderBrush="Transparent"
+                    Command="{x:Bind viewModel.DebugCommand}">
+                    <Grid>
+                        <FontIcon
+                            Margin="0,0,0,-2"
+                            HorizontalAlignment="Left"
+                            FontFamily="Assets/FluentSystemIcons-Regular.ttf#FluentSystemIcons-Regular"
+                            FontSize="32"
+                            Glyph="&#xE493;" />
+
+                        <Grid Margin="40,0,0,0" VerticalAlignment="Center">
+                            <TextBlock
+                                FontSize="15"
+                                Style="{StaticResource Subpoint}"
+                                Text="Version" />
+                            <TextBlock Margin="0,15,0,0" Style="{StaticResource SubpointSecondary}">
+                                <Run Text="Launcher: " />
+                                <Run Text="{x:Bind viewModel.Updater.CurrentAppVersion, FallbackValue='N/A', TargetNullValue='N/A'}" />
+                                <Run Text=" | API: " />
+                                <Run Text="{x:Bind viewModel.Updater.CurrentApiVersion, FallbackValue='N/A', TargetNullValue='N/A'}" />
+                            </TextBlock>
+                        </Grid>
+                    </Grid>
+                </Button>
+
+                <Button
+                    Grid.Column="3"
+                    Padding="6"
+                    HorizontalAlignment="Right"
+                    Background="{x:Bind viewModel.UpdateButtonBackground}"
+                    BorderBrush="{x:Bind viewModel.UpdateButtonBorderBrush}"
+                    Command="{x:Bind viewModel.UpdateCommand}">
+                    <Grid>
+                        <FontIcon
+                            Margin="0,0,0,-2"
+                            HorizontalAlignment="Left"
+                            FontFamily="Assets/FluentSystemIcons-Regular.ttf#FluentSystemIcons-Regular"
+                            FontSize="32"
+                            Glyph="&#xE371;" />
+
+                        <Grid Margin="40,0,0,0" VerticalAlignment="Center">
+                            <TextBlock
+                                FontSize="15"
+                                Style="{StaticResource Subpoint}"
+                                Text="Update" />
+                            <TextBlock
+                                Margin="0,15,0,0"
+                                Style="{StaticResource SubpointSecondary}"
+                                Text="{x:Bind viewModel.UpdateStatus, Mode=OneWay, FallbackValue='N/A', TargetNullValue='N/A'}" />
+                        </Grid>
+                    </Grid>
+                </Button>
+                <Ellipse
+                    Grid.Column="3"
+                    Width="13"
+                    Height="13"
+                    Margin="0,3,-3,0"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Top"
+                    Fill="#90ffff00"
+                    Visibility="{x:Bind viewModel.UpdateBadgeVisibility, Mode=OneWay}" />
             </Grid>
 
-            <Button
-                Grid.Column="1"
-                Padding="6"
-                HorizontalAlignment="Right"
-                Background="Transparent"
-                BorderBrush="Transparent"
-                Command="{x:Bind viewModel.DebugCommand}">
-                <Grid>
-                    <FontIcon
-                        Margin="0,0,0,-2"
-                        HorizontalAlignment="Left"
-                        FontFamily="Assets/FluentSystemIcons-Regular.ttf#FluentSystemIcons-Regular"
-                        FontSize="32"
-                        Glyph="&#xE493;" />
+            <Expander
+                HorizontalAlignment="Stretch"
+                Header="&#xEE7D;|Launcher|General settings like Discord RPC, Scrollbars, Paths etc."
+                Template="{StaticResource SettingsExpander}">
+                <Expander.Tag>
+                    <StackPanel Spacing="8">
+                        <ContentControl Tag="Discord RPC|The ability to make all your friends jealous because you are using IcyLauncher" Template="{StaticResource SettingsCard}">
+                            <ToggleSwitch IsOn="{x:Bind viewModel.Configuration.Launcher.IsDiscordEnabled, Mode=TwoWay}" />
+                        </ContentControl>
+                        <ContentControl Tag="Scrollbars|Show scrollbars on every scrollable container" Template="{StaticResource SettingsCard}">
+                            <ToggleSwitch IsOn="{x:Bind viewModel.Configuration.Launcher.IsScrollbarsEnabled, Mode=TwoWay}" />
+                        </ContentControl>
+                        <ContentControl Tag="At Minecraft Launch|Option what the launcher does on launching Minecraft" Template="{StaticResource SettingsCard}">
+                            <ComboBox SelectedIndex="{x:Bind viewModel.Configuration.Launcher.AtMinecraftaunch, Mode=TwoWay}">
+                                <ComboBoxItem Content="Close" />
+                                <ComboBoxItem Content="Minimize (System Tray)" />
+                                <ComboBoxItem Content="Keep Open" />
+                            </ComboBox>
+                        </ContentControl>
+                    </StackPanel>
+                </Expander.Tag>
+            </Expander>
 
-                    <Grid Margin="40,0,0,0" VerticalAlignment="Center">
-                        <TextBlock
-                            FontSize="15"
-                            Style="{StaticResource Subpoint}"
-                            Text="Version" />
-                        <TextBlock Margin="0,15,0,0" Style="{StaticResource SubpointSecondary}">
-                            <Run Text="Launcher: " />
-                            <Run Text="{x:Bind viewModel.Updater.CurrentAppVersion, FallbackValue='N/A', TargetNullValue='N/A'}" />
-                            <Run Text=" | API: " />
-                            <Run Text="{x:Bind viewModel.Updater.CurrentApiVersion, FallbackValue='N/A', TargetNullValue='N/A'}" />
-                        </TextBlock>
-                    </Grid>
-                </Grid>
-            </Button>
+            <Expander
+                HorizontalAlignment="Stretch"
+                Header="&#xF2F5;|Apperance|Settings to customize IcyLauncher like play banner, colors and blur effect"
+                Template="{StaticResource SettingsExpander}" />
 
-            <Button
-                Grid.Column="3"
-                Padding="6"
-                HorizontalAlignment="Right"
-                Background="{x:Bind viewModel.UpdateButtonBackground}"
-                BorderBrush="{x:Bind viewModel.UpdateButtonBorderBrush}"
-                Command="{x:Bind viewModel.UpdateCommand}">
-                <Grid>
-                    <FontIcon
-                        Margin="0,0,0,-2"
-                        HorizontalAlignment="Left"
-                        FontFamily="Assets/FluentSystemIcons-Regular.ttf#FluentSystemIcons-Regular"
-                        FontSize="32"
-                        Glyph="&#xE371;" />
+            <Expander
+                HorizontalAlignment="Stretch"
+                Header="&#xEE4B;|Weather|Settings for the weather module inside IcyLauncher like location, unit etc."
+                Template="{StaticResource SettingsExpander}" />
 
-                    <Grid Margin="40,0,0,0" VerticalAlignment="Center">
-                        <TextBlock
-                            FontSize="15"
-                            Style="{StaticResource Subpoint}"
-                            Text="Update" />
-                        <TextBlock
-                            Margin="0,15,0,0"
-                            Style="{StaticResource SubpointSecondary}"
-                            Text="{x:Bind viewModel.UpdateStatus, Mode=OneWay, FallbackValue='N/A', TargetNullValue='N/A'}" />
-                    </Grid>
-                </Grid>
-            </Button>
-            <Ellipse
-                Grid.Column="3"
-                Width="13"
-                Height="13"
-                Margin="0,3,-3,0"
-                HorizontalAlignment="Right"
-                VerticalAlignment="Top"
-                Fill="#90ffff00"
-                Visibility="{x:Bind viewModel.UpdateBadgeVisibility, Mode=OneWay}" />
-        </Grid>
+            <Expander
+                HorizontalAlignment="Stretch"
+                Header="&#xE36E;|Date &amp; Time|Settings to customize the general date and time format"
+                Template="{StaticResource SettingsExpander}" />
+
+            <Expander
+                HorizontalAlignment="Stretch"
+                Header="&#xE91B;|Account|User settings like username, picture, email and password"
+                Template="{StaticResource SettingsExpander}" />
+
+            <Expander
+                HorizontalAlignment="Stretch"
+                Header="&#xF8B8;|Developer|Advanced settings only made for debugging"
+                Template="{StaticResource SettingsExpander}" />
+
+            <Expander
+                HorizontalAlignment="Stretch"
+                Header="&#xEA44;|Configuration|Options to save/load external configs and themes"
+                Template="{StaticResource SettingsExpander}" />
+        </StackPanel>
     </ui:HCont>
 </Page>
