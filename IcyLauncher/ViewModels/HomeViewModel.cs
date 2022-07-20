@@ -11,19 +11,21 @@ namespace IcyLauncher.ViewModels;
 
 public partial class HomeViewModel : ObservableObject
 {
-    readonly Configuration configuration;
     readonly ILogger<HomeViewModel> logger;
     readonly ImagingUtility imagingUtility;
     readonly ThemeManager themeManager;
+
+    readonly public Configuration Configuration;
 
     public readonly Updater Updater;
 
     public HomeViewModel(IOptions<Configuration> configuration, ILogger<HomeViewModel> logger, ImagingUtility imagingUtility, ThemeManager themeManager, Updater updater)
     {
-        this.configuration = configuration.Value;
         this.logger = logger;
         this.imagingUtility = imagingUtility;
         this.themeManager = themeManager;
+
+        Configuration = configuration.Value;
 
         Updater = updater;
 
@@ -238,7 +240,7 @@ public partial class HomeViewModel : ObservableObject
     WeatherModel weatherData = new();
 
     public string FormatDegree(double degree) =>
-        configuration.Weather.Unit == WeatherUnit.Celsius ? $"{degree} °C" : $"{degree * 1.8 + 32} °F";
+        Configuration.Weather.Unit == WeatherUnit.Celsius ? $"{degree} °C" : $"{degree * 1.8 + 32} °F";
 
     [ICommand]
     void NavigateToWeather()

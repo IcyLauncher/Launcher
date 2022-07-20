@@ -10,16 +10,18 @@ public partial class SettingsViewModel : ObservableObject
     readonly ConfigurationManager configurationManager;
     readonly ThemeManager themeManager;
     readonly IFileSystem fileSystem;
+    readonly INavigation navigation;
 
     public readonly Configuration Configuration;
     public readonly Updater Updater;
 
-    public SettingsViewModel(IOptions<Configuration> configuration, ILogger<ProfilesViewModel> logger, ConfigurationManager configurationManager, ThemeManager themeManager, IFileSystem fileSystem, Updater updater)
+    public SettingsViewModel(IOptions<Configuration> configuration, ILogger<ProfilesViewModel> logger, ConfigurationManager configurationManager, ThemeManager themeManager, IFileSystem fileSystem, Updater updater, INavigation navigation)
     {
         this.logger = logger;
         this.configurationManager = configurationManager;
         this.themeManager = themeManager;
         this.fileSystem = fileSystem;
+        this.navigation = navigation;
 
         Configuration = configuration.Value;
         Updater = updater;
@@ -28,6 +30,12 @@ public partial class SettingsViewModel : ObservableObject
 
     public void OnPageLoaded(object _, RoutedEventArgs _1) =>
         SetUIUpdate(Updater.UpdateAvailable);
+
+
+    [ICommand]
+    void Debug()
+    {
+    }
 
 
     [ObservableProperty]

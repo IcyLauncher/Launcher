@@ -114,14 +114,14 @@
                 HorizontalAlignment="Stretch"
                 Content="{x:Bind viewModel.News, Mode=OneWay, TargetNullValue='N/A', FallbackValue='N/A', Converter={StaticResource JoinString}, ConverterParameter='/n- ', ConverterLanguage='- '}"
                 Style="{StaticResource Card}"
-                VerticalScrollBar="Auto" />
+                VerticalScrollBar="{x:Bind viewModel.Configuration.Launcher.IsScrollbarsEnabled, Mode=OneWay, Converter={StaticResource BoolScrollbarVisibilityConverter}}" />
 
             <ui:HCont
                 Title="Weather"
                 Grid.Column="2"
                 HorizontalAlignment="Stretch"
                 Style="{StaticResource Card}"
-                VerticalScrollBar="Auto">
+                VerticalScrollBar="{x:Bind viewModel.Configuration.Launcher.IsScrollbarsEnabled, Mode=OneWay, Converter={StaticResource BoolScrollbarVisibilityConverter}}">
                 <Grid>
                     <TextBlock
                         HorizontalAlignment="Center"
@@ -183,7 +183,7 @@
                 HorizontalAlignment="Stretch"
                 HorizontalScrollBar="Auto"
                 Style="{StaticResource Card}"
-                VerticalScrollBar="Auto">
+                VerticalScrollBar="{x:Bind viewModel.Configuration.Launcher.IsScrollbarsEnabled, Mode=OneWay, Converter={StaticResource BoolScrollbarVisibilityConverter}}">
                 <Grid>
                     <TextBlock Style="{StaticResource ContentSecondary}">
                         Version:<LineBreak />

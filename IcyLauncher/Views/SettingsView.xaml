@@ -16,7 +16,7 @@
     <ui:HCont
         Title="Settings"
         Style="{StaticResource Page}"
-        VerticalScrollBar="Auto">
+        VerticalScrollBar="{x:Bind viewModel.Configuration.Launcher.IsScrollbarsEnabled}">
         <Grid
             Margin="0,6,0,0"
             HorizontalAlignment="Stretch"

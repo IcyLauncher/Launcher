@@ -24,6 +24,7 @@
             <xaml:InvertBool x:Key="InvertBool" />
             <xaml:JoinString x:Key="JoinString" />
             <xaml:DateTimeFormatter x:Key="DateTimeFormatter" />
+            <xaml:BoolScrollbarVisibilityConverter x:Key="BoolScrollbarVisibilityConverter" />
 
 
             <models:Theme x:Key="Colors" />
