@@ -329,6 +329,33 @@
             <SolidColorBrush x:Key="HyperlinkButtonBorderBrushDisabled" Color="Transparent" />
 
 
+            <SolidColorBrush x:Key="ExpanderHeaderBackground" Color="{Binding Color, Source={ThemeResource ControlPrimary}}" />
+
+            <SolidColorBrush x:Key="ExpanderHeaderBorderBrush" Color="{Binding Color, Source={ThemeResource ControlOutline}}" />
+            <SolidColorBrush x:Key="ExpanderHeaderBorderPointerOverBrush" Color="{Binding Color, Source={ThemeResource ControlOutlineDisabled}}" />
+            <SolidColorBrush x:Key="ExpanderHeaderBorderPressedBrush" Color="{Binding Color, Source={ThemeResource ControlOutlineDisabled}}" />
+            <SolidColorBrush x:Key="ExpanderHeaderDisabledBorderBrush" Color="{Binding Color, Source={ThemeResource ControlOutlineDisabled}}" />
+
+            <SolidColorBrush x:Key="ExpanderHeaderForeground" Color="{Binding Color, Source={ThemeResource TextSecondary}}" />
+            <SolidColorBrush x:Key="ExpanderHeaderForegroundPointerOver" Color="{Binding Color, Source={ThemeResource TextPrimary}}" />
+            <SolidColorBrush x:Key="ExpanderHeaderForegroundPressed" Color="{Binding Color, Source={ThemeResource TextTertiary}}" />
+            <SolidColorBrush x:Key="ExpanderHeaderDisabledForeground" Color="{Binding Color, Source={ThemeResource TextDisabled}}" />
+
+            <SolidColorBrush x:Key="ExpanderChevronBackground" Color="{Binding Color, Source={ThemeResource ControlPrimary}}" />
+            <SolidColorBrush x:Key="ExpanderChevronPointerOverBackground" Color="{Binding Color, Source={ThemeResource ControlOutline}}" />
+            <SolidColorBrush x:Key="ExpanderChevronPressedBackground" Color="{Binding Color, Source={ThemeResource ControlPrimaryDisabled}}" />
+
+            <SolidColorBrush x:Key="ExpanderChevronForeground" Color="{Binding Color, Source={ThemeResource TextSecondary}}" />
+            <SolidColorBrush x:Key="ExpanderChevronPointerOverForeground" Color="{Binding Color, Source={ThemeResource TextPrimary}}" />
+            <SolidColorBrush x:Key="ExpanderChevronPressedForeground" Color="{Binding Color, Source={ThemeResource TextTertiary}}" />
+
+            <SolidColorBrush
+                x:Key="ExpanderContentBackground"
+                Opacity="0.5"
+                Color="{Binding Color, Source={ThemeResource ControlPrimary}}" />
+            <SolidColorBrush x:Key="ExpanderContentBorderBrush" Color="{Binding Color, Source={ThemeResource ControlOutline}}" />
+
+
             <Style TargetType="ProgressBar">
                 <Setter Property="Foreground" Value="{ThemeResource AccentPrimary}" />
             </Style>
