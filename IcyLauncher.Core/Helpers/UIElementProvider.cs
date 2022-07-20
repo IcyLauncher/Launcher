@@ -107,14 +107,14 @@ public class UIElementProvider
             Path = new PropertyPath("CanGoBack"), 
             Mode = BindingMode.TwoWay });
 
-        containerNavigationView.MenuItems.Add(new NavigationViewItem() { Content = "\uE711,\uE71E", Tag = "Home" });
-        containerNavigationView.MenuItems.Add(new NavigationViewItem() { Content = "\uE065,\uE065", Tag = "Profiles" });
-        containerNavigationView.MenuItems.Add(new NavigationViewItem() { Content = "\uF593,\uF59D", Tag = "Cosmetics" });
-        containerNavigationView.MenuItems.Add(new NavigationViewItem() { Content = "\uF135,\uF135", Tag = "Texturepacks" });
-        //containerNavigationView.MenuItems.Add(new NavigationViewItem() { Content = "\uF451,\uF455", Tag = "Servers" });
+        containerNavigationView.MenuItems.Add(new NavigationViewItem() { Content = "\uE711|\uE71E", Tag = "Home" });
+        containerNavigationView.MenuItems.Add(new NavigationViewItem() { Content = "\uE065|\uE065", Tag = "Profiles" });
+        containerNavigationView.MenuItems.Add(new NavigationViewItem() { Content = "\uF593|\uF59D", Tag = "Cosmetics" });
+        containerNavigationView.MenuItems.Add(new NavigationViewItem() { Content = "\uF135|\uF135", Tag = "Texturepacks" });
+        //containerNavigationView.MenuItems.Add(new NavigationViewItem() { Content = "\uF451|\uF455", Tag = "Servers" });
 
-        containerNavigationView.FooterMenuItems.Add(new NavigationViewItem() { Content = "\uE9EE,\uE9F6", Tag = "Help" });
-        containerNavigationView.FooterMenuItems.Add(new NavigationViewItem() { Content = "\uEA95,\uEA9E", Tag = "Settings" });
+        containerNavigationView.FooterMenuItems.Add(new NavigationViewItem() { Content = "\uE9EE|\uE9F6", Tag = "Help" });
+        containerNavigationView.FooterMenuItems.Add(new NavigationViewItem() { Content = "\uEA95|\uEA9E", Tag = "Settings" });
 
         return containerNavigationView;
     }
