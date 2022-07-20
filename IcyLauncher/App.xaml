@@ -3034,6 +3034,64 @@
                 </Setter>
             </Style>
 
+            <ControlTemplate x:Key="SettingsExpander">
+                <Expander
+                    MinHeight="70"
+                    Padding="48,24"
+                    HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
+                    HorizontalContentAlignment="Stretch"
+                    Content="{TemplateBinding Tag}"
+                    CornerRadius="8">
+                    <Expander.Header>
+                        <Grid Margin="-2,0,0,0">
+                            <FontIcon
+                                Margin="0,4,0,0"
+                                HorizontalAlignment="Left"
+                                FontFamily="Assets/FluentSystemIcons-Regular.ttf#FluentSystemIcons-Regular"
+                                FontSize="40"
+                                Foreground="{ThemeResource TextSecondary}"
+                                Glyph="{Binding Header, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource ArrayConverter}, ConverterParameter=0}" />
+
+                            <Grid Margin="53,0,0,3" VerticalAlignment="Center">
+                                <TextBlock Style="{StaticResource Content}" Text="{Binding Header, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource ArrayConverter}, ConverterParameter=1}" />
+                                <TextBlock
+                                    Margin="0,20,0,0"
+                                    Style="{StaticResource Subpoint}"
+                                    Text="{Binding Header, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource ArrayConverter}, ConverterParameter=2}"
+                                    TextTrimming="CharacterEllipsis" />
+                            </Grid>
+                        </Grid>
+                    </Expander.Header>
+                </Expander>
+            </ControlTemplate>
+
+            <ControlTemplate x:Key="SettingsCard">
+                <Grid
+                    Padding="12"
+                    VerticalAlignment="Center"
+                    Background="{ThemeResource ControlPrimary}"
+                    CornerRadius="8">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="12" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock
+                        Margin="0,0,0,12"
+                        VerticalAlignment="Center"
+                        FontSize="15"
+                        Style="{StaticResource Subpoint}"
+                        Text="{Binding Tag, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource ArrayConverter}, ConverterParameter=0}" />
+                    <TextBlock
+                        Margin="0,16,0,0"
+                        VerticalAlignment="Center"
+                        Style="{StaticResource SubpointSecondary}"
+                        Text="{Binding Tag, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource ArrayConverter}, ConverterParameter=1}"
+                        TextTrimming="CharacterEllipsis" />
+                    <ContentPresenter Grid.Column="2" HorizontalAlignment="Right" />
+                </Grid>
+            </ControlTemplate>
+
         </ResourceDictionary>
     </Application.Resources>
 </Application>
