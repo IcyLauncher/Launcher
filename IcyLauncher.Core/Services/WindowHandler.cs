@@ -227,7 +227,7 @@ public class WindowHandler
                     uiElementReciever.MainGrid.SetBinding(Panel.BackgroundProperty, new Binding()
                     {
                         Source = themeManager.Colors,
-                        Converter = UIElementProvider.BrushConverter,
+                        Converter = UIElementProvider.BrushColorConverter,
                         Path = new PropertyPath(backgroundColor),
                         Mode = BindingMode.OneWay
                     });

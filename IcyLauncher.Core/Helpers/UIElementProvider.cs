@@ -12,7 +12,7 @@ namespace IcyLauncher.Core.Helpers;
 
 public class UIElementProvider
 {
-    public static readonly BrushConverter BrushConverter = new();
+    public static readonly BrushColorConverter BrushColorConverter = new();
     public static readonly ValidateNo255 ValidateNo255 = new();
 
     public static Timeline Animate(DependencyObject element, string property, double? startValue, double endValue, double lenght)

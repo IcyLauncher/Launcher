@@ -139,7 +139,7 @@ public class ThemeManager
         uiElementReciever.BackButton.SetBinding(IconElement.ForegroundProperty, new Binding()
         {
             Source = configuration,
-            Converter = UIElementProvider.BrushConverter,
+            Converter = UIElementProvider.BrushColorConverter,
             Path = new PropertyPath("Apperance.Colors.Text.Primary"),
             Mode = BindingMode.OneWay
         });
@@ -147,7 +147,7 @@ public class ThemeManager
         uiElementReciever.TitleBarTitle.SetBinding(TextBlock.ForegroundProperty, new Binding()
         {
             Source = configuration,
-            Converter = UIElementProvider.BrushConverter,
+            Converter = UIElementProvider.BrushColorConverter,
             Path = new PropertyPath("Apperance.Colors.Accent.Primary"),
             Mode = BindingMode.OneWay
         });
