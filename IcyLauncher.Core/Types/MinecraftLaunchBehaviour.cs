@@ -4,5 +4,5 @@ public enum MinecraftLaunchBehaviour
 {
     Close,
     Minimize,
-    KeppOpen
+    KeepOpen
 }

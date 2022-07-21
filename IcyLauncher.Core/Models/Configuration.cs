@@ -1,5 +1,4 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
-using Windows.UI;
 
 namespace IcyLauncher.Core.Models;
 
@@ -25,7 +24,7 @@ public partial class ConfigurationLauncher : ObservableObject
     bool isScrollbarsEnabled = true;
 
     [ObservableProperty]
-    MinecraftLaunchBehaviour atMinecraftaunch = MinecraftLaunchBehaviour.KeppOpen;
+    MinecraftLaunchBehaviour atMinecraftaunch = MinecraftLaunchBehaviour.Minimize;
 
     [ObservableProperty]
     string texturepackDirectory = $"{Computer.MinecraftDirectory}\\games\\com.mojang\\resource_packs";
