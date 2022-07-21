@@ -1,4 +1,6 @@
 ﻿using System.IO;
+using System.Security;
+using System.Security.Permissions;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -35,5 +37,29 @@ public class FileSystem : IFileSystem
             await File.WriteAllTextAsync(path, content, cancellationToken);
         else
             throw Exceptions.FileExits;
+    }
+
+
+    public bool DirectoryExists(string directory) =>
+        Directory.Exists(directory);
+
+    public bool DirectoryWritable(string directory)
+    {
+        try
+        {
+            using (File.Create(Path.Combine(directory, Path.GetRandomFileName()), 1, FileOptions.DeleteOnClose)) { }
+            logger.Log($"Checked if directory is writeable: true");
+            return true;
+        }
+        catch (UnauthorizedAccessException)
+        {
+            logger.Log($"Checked if directory is writeable: false");
+            return false;
+        }
+        catch (Exception)
+        {
+            logger.Log($"Failed checked if directory is writeable");
+            return false;
+        }
     }
 }

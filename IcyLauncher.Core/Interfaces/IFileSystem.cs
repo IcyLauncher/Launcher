@@ -11,4 +11,9 @@ public interface IFileSystem
     Task<string> ReadAsTextAsync(string path, CancellationToken cancellationToken = default);
 
     Task SaveAsTextAsync(string path, string content, bool overwrite, CancellationToken cancellationToken = default);
+
+
+    bool DirectoryExists(string directory);
+
+    bool DirectoryWritable(string directory);
 }
