@@ -80,6 +80,10 @@ public class WindowHandler
         SetPosition((ScreenSize.Width - Window.Size.Width) / 2, (ScreenSize.Height - Window.Size.Height) / 2);
 
 
+    public void Register(object target) =>
+        InitializeWithWindow.Initialize(target, HWnd);
+
+
     public bool SetTilteBar(bool isEnabled = false, UIElement? titleBar = null)
     {
         if (!AppWindowTitleBar.IsCustomizationSupported())
