@@ -9,5 +9,5 @@ public class Updater
 
     public readonly DateTime LastChecked = DateTime.Now;
 
-    public readonly bool UpdateAvailable = false;
+    public readonly bool IsUpdateAvailable = false;
 }
