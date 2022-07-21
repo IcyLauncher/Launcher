@@ -25,6 +25,7 @@
             <xaml:JoinString x:Key="JoinString" />
             <xaml:DateTimeFormatter x:Key="DateTimeFormatter" />
             <xaml:BoolScrollbarVisibilityConverter x:Key="BoolScrollbarVisibilityConverter" />
+            <xaml:EnumIntConverter x:Key="EnumIntConverter" />
 
 
             <models:Theme x:Key="Colors" />
@@ -3081,7 +3082,8 @@
                         VerticalAlignment="Center"
                         FontSize="15"
                         Style="{StaticResource Subpoint}"
-                        Text="{Binding Tag, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource ArrayConverter}, ConverterParameter=0}" />
+                        Text="{Binding Tag, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource ArrayConverter}, ConverterParameter=0}"
+                        TextTrimming="CharacterEllipsis" />
                     <TextBlock
                         Margin="0,16,0,0"
                         VerticalAlignment="Center"
