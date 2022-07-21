@@ -1,5 +1,9 @@
 ﻿using Microsoft.UI;
+using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Media;
+using System.ComponentModel.DataAnnotations;
+using Windows.Storage;
+using Windows.Storage.Pickers;
 using Windows.UI;
 
 namespace IcyLauncher.ViewModels;
@@ -30,14 +34,17 @@ public partial class SettingsViewModel : ObservableObject
     }
 
 
-    public void OnPageLoaded(object _, RoutedEventArgs _1) =>
+    public void OnPageLoaded(object _, RoutedEventArgs _1)
+    {
         IsUpdateVisible = Updater.IsUpdateAvailable;
+
+        windowHandler.Register(folderPicker);
+    }
 
 
     [ICommand]
     void Debug()
     {
-        themeManager.LoadTheme(Theme.Dark);
     }
 
 
@@ -86,5 +93,41 @@ public partial class SettingsViewModel : ObservableObject
     }
 
 
+    readonly FolderPicker folderPicker = new() { SuggestedStartLocation = PickerLocationId.DocumentsLibrary };
 
+    [ICommand(AllowConcurrentExecutions = false)]
+    async Task SelectDirectory(int directory)
+    {
+        var folder = await folderPicker.PickSingleFolderAsync();
+
+        if (folder is null || string.IsNullOrWhiteSpace(folder.Path))
+            return;
+
+        if (fileSystem.DirectoryExists(folder.Path) && fileSystem.DirectoryWritable(folder.Path))
+            switch (directory)
+            {
+                case 0:
+                    Configuration.Launcher.TexturepackDirectory = folder.Path;
+                    break;
+                case 1:
+                    Configuration.Launcher.VersionsDirectory = folder.Path;
+                    break;
+            }
+        //else
+        // show pop up
+    }
+
+    [ICommand]
+    void ResetDirectory(int directory)
+    {
+        switch (directory)
+        {
+            case 0:
+                Configuration.Launcher.TexturepackDirectory = $"{Computer.MinecraftDirectory}\\games\\com.mojang\\resource_packs";
+                break;
+            case 1:
+                Configuration.Launcher.VersionsDirectory = $"{Computer.CurrentDirectory}\\Versions";
+                break;
+        }
+    }
 }

@@ -7,11 +7,17 @@
     xmlns:hlp="using:IcyLauncher.Core.Helpers"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:media="using:CommunityToolkit.WinUI.UI.Media"
+    xmlns:tps="using:IcyLauncher.Core.Types"
     xmlns:ui="using:IcyLauncher.UI"
+    xmlns:xaml="using:IcyLauncher.Core.Xaml"
     Background="Transparent"
     Loaded="{x:Bind viewModel.OnPageLoaded}"
     NavigationCacheMode="Enabled"
     mc:Ignorable="d">
+    <Page.Resources>
+        <x:Int32 x:Key="par0">0</x:Int32>
+        <x:Int32 x:Key="par1">1</x:Int32>
+    </Page.Resources>
 
     <ui:HCont
         Title="Settings"
@@ -134,11 +140,66 @@
                             <ToggleSwitch IsOn="{x:Bind viewModel.Configuration.Launcher.IsScrollbarsEnabled, Mode=TwoWay}" />
                         </ContentControl>
                         <ContentControl Tag="At Minecraft Launch|Option what the launcher does on launching Minecraft" Template="{StaticResource SettingsCard}">
-                            <ComboBox SelectedIndex="{x:Bind viewModel.Configuration.Launcher.AtMinecraftaunch, Mode=TwoWay}">
+                            <ComboBox
+                                Width="200"
+                                PlaceholderText="Select..."
+                                SelectedIndex="{x:Bind viewModel.Configuration.Launcher.AtMinecraftaunch, Mode=TwoWay, Converter={StaticResource EnumIntConverter}}">
                                 <ComboBoxItem Content="Close" />
                                 <ComboBoxItem Content="Minimize (System Tray)" />
                                 <ComboBoxItem Content="Keep Open" />
                             </ComboBox>
+                        </ContentControl>
+                        <ContentControl Tag="Texturepacks|The directory where all texturepacks get downloaded to " Template="{StaticResource SettingsCard}">
+                            <Grid Width="400">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+
+                                <ui:TextBox
+                                    IsReadOnly="True"
+                                    PlaceholderText="C:\Some\Path"
+                                    Text="{x:Bind viewModel.Configuration.Launcher.TexturepackDirectory, Mode=OneWay}" />
+                                <Button
+                                    Grid.Column="1"
+                                    Margin="4,0,0,0"
+                                    Command="{x:Bind viewModel.SelectDirectoryCommand}"
+                                    CommandParameter="{StaticResource par0}"
+                                    Content="Select" />
+                                <Button
+                                    Grid.Column="2"
+                                    Margin="4,0,0,0"
+                                    Command="{x:Bind viewModel.ResetDirectoryCommand}"
+                                    CommandParameter="{StaticResource par0}"
+                                    Content="Reset" />
+                            </Grid>
+                        </ContentControl>
+                        <ContentControl Tag="Minecraft Installation|The directory IcyLauncher uses to download all Minecraft game versions " Template="{StaticResource SettingsCard}">
+                            <Grid Width="400">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+
+                                <ui:TextBox
+                                    IsReadOnly="True"
+                                    PlaceholderText="C:\Some\Path"
+                                    Text="{x:Bind viewModel.Configuration.Launcher.VersionsDirectory, Mode=OneWay}" />
+                                <Button
+                                    Grid.Column="1"
+                                    Margin="5,0,0,0"
+                                    Command="{x:Bind viewModel.SelectDirectoryCommand}"
+                                    CommandParameter="{StaticResource par1}"
+                                    Content="Select" />
+                                <Button
+                                    Grid.Column="2"
+                                    Margin="4,0,0,0"
+                                    Command="{x:Bind viewModel.ResetDirectoryCommand}"
+                                    CommandParameter="{StaticResource par1}"
+                                    Content="Reset" />
+                            </Grid>
                         </ContentControl>
                     </StackPanel>
                 </Expander.Tag>
