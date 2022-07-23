@@ -1,6 +1,5 @@
 ﻿using Microsoft.Win32;
 using System.Management;
-using System.Reflection;
 
 namespace IcyLauncher.Core.Helpers;
 
@@ -10,8 +9,9 @@ public class Computer
     public static string LocalAppDataDirectory { get; } = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
     public static string Desktop { get; } = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
 
-    public static string CurrentDirectory { get; } = Environment.CurrentDirectory;
+    public static bool IsWindows11 { get; } = Environment.OSVersion.Version.Build >= 22000;
 
+    public static string CurrentDirectory { get; } = Environment.CurrentDirectory;
     public static string MinecraftDirectory { get; } = $"{AppDataDirectory}\\Packages\\Microsoft.MinecraftUWP_8wekyb3d8bbwe\\LocalState";
 
 
