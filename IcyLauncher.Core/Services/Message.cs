@@ -56,4 +56,8 @@ public class Message : IMessage
         activeDialog.Closed += OnActiveDialogClosed;
         return await activeDialog.ShowAsync();
     }
+
+    public async void Show(string title, object content, bool awaitPreviousDialog, string? closeButton = "Cancel", string? primaryButton = null, string? secondaryButton = null) =>
+        await ShowAsync(title, content, awaitPreviousDialog, closeButton, primaryButton, secondaryButton);
+
 }
