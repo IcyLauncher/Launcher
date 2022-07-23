@@ -71,136 +71,21 @@
             <SolidColorBrush x:Key="ButtonForegroundPressed" Color="{Binding Color, Source={ThemeResource TextTertiary}}" />
             <SolidColorBrush x:Key="ButtonForegroundDisabled" Color="{Binding Color, Source={ThemeResource TextDisabled}}" />
 
-            <Style x:Key="LaunchButton" TargetType="Button">
-                <Style.Setters>
-                    <Setter Property="Width" Value="130" />
-                    <Setter Property="Height" Value="34" />
-                    <Setter Property="Template">
-                        <Setter.Value>
-                            <ControlTemplate TargetType="Button">
-                                <Grid>
-                                    <Rectangle RadiusX="4" RadiusY="4">
-                                        <Rectangle.Fill>
-                                            <md:BackdropBlurBrush Amount="3" />
-                                        </Rectangle.Fill>
-                                    </Rectangle>
 
-                                    <ContentPresenter
-                                        x:Name="ColoredBackground"
-                                        HorizontalContentAlignment="Center"
-                                        VerticalContentAlignment="Bottom"
-                                        ex:Effects.Shadow="{TemplateBinding ex:Effects.Shadow}"
-                                        Background="{Binding Control.Primary, Source={ThemeResource Colors}, Mode=OneWay, Converter={StaticResource BrushColorConverter}}"
-                                        BorderBrush="{Binding Control.PrimaryDisabled, Source={ThemeResource Colors}, Mode=OneWay, Converter={StaticResource BrushColorConverter}}"
-                                        BorderThickness="1"
-                                        Content="{TemplateBinding Content}"
-                                        CornerRadius="4"
-                                        Opacity="1" />
-                                    <TextBlock
-                                        x:Name="TextPresenter"
-                                        Margin="{TemplateBinding Padding}"
-                                        HorizontalAlignment="Center"
-                                        VerticalAlignment="Center"
-                                        FontFamily="{TemplateBinding FontFamily}"
-                                        Foreground="{Binding Text.Secondary, Source={ThemeResource Colors}, Mode=OneWay, Converter={StaticResource BrushColorConverter}}"
-                                        Text="{TemplateBinding Tag}" />
+            <SolidColorBrush x:Key="AccentButtonBackground" Color="{Binding Color, Source={ThemeResource AccentLight}}" />
+            <SolidColorBrush x:Key="AccentButtonBackgroundPointerOver" Color="{Binding Color, Source={ThemeResource AccentPrimary}}" />
+            <SolidColorBrush x:Key="AccentButtonBackgroundPressed" Color="{Binding Color, Source={ThemeResource AccentDark}}" />
+            <SolidColorBrush x:Key="AccentButtonBackgroundDisabled" Color="{Binding Color, Source={ThemeResource ControlPrimaryDisabled}}" />
 
-                                    <VisualStateManager.VisualStateGroups>
-                                        <VisualStateGroup x:Name="CommonStates">
-                                            <VisualState x:Name="Normal">
-                                                <Storyboard>
-                                                    <ColorAnimation
-                                                        Storyboard.TargetName="ColoredBackground"
-                                                        Storyboard.TargetProperty="(UIElement.Background).(SolidColorBrush.Color)"
-                                                        To="{Binding Color, Source={ThemeResource ControlPrimary}}"
-                                                        Duration="0:0:0.2" />
-                                                    <ColorAnimation
-                                                        Storyboard.TargetName="ColoredBackground"
-                                                        Storyboard.TargetProperty="(UIElement.BorderBrush).(SolidColorBrush.Color)"
-                                                        To="{Binding Color, Source={ThemeResource ControlPrimaryDisabled}}"
-                                                        Duration="0:0:0.2" />
-                                                    <ColorAnimation
-                                                        Storyboard.TargetName="TextPresenter"
-                                                        Storyboard.TargetProperty="(UIElement.Foreground).(SolidColorBrush.Color)"
-                                                        To="{Binding Color, Source={ThemeResource ButtonForeground}}"
-                                                        Duration="0:0:0.2" />
+            <SolidColorBrush x:Key="AccentButtonBorderBrush" Color="{Binding Color, Source={ThemeResource AccentPrimary}}" />
+            <SolidColorBrush x:Key="AccentButtonBorderBrushPointerOver" Color="{Binding Color, Source={ThemeResource AccentPrimary}}" />
+            <SolidColorBrush x:Key="AccentButtonBorderBrushPressed" Color="{Binding Color, Source={ThemeResource AccentDark}}" />
+            <SolidColorBrush x:Key="AccentButtonBorderBrushDisabled" Color="{Binding Color, Source={ThemeResource ControlOutlineDisabled}}" />
 
-                                                    <PointerUpThemeAnimation Storyboard.TargetName="ColoredBackground" />
-                                                </Storyboard>
-                                            </VisualState>
-
-                                            <VisualState x:Name="PointerOver">
-                                                <Storyboard>
-                                                    <ColorAnimation
-                                                        Storyboard.TargetName="ColoredBackground"
-                                                        Storyboard.TargetProperty="(UIElement.Background).(SolidColorBrush.Color)"
-                                                        To="{Binding Color, Source={ThemeResource ControlPrimaryDisabled}}"
-                                                        Duration="0:0:0.2" />
-                                                    <ColorAnimation
-                                                        Storyboard.TargetName="ColoredBackground"
-                                                        Storyboard.TargetProperty="(UIElement.BorderBrush).(SolidColorBrush.Color)"
-                                                        To="{Binding Color, Source={ThemeResource ControlPrimaryDisabled}}"
-                                                        Duration="0:0:0.2" />
-                                                    <ColorAnimation
-                                                        Storyboard.TargetName="TextPresenter"
-                                                        Storyboard.TargetProperty="(UIElement.Foreground).(SolidColorBrush.Color)"
-                                                        To="{Binding Color, Source={ThemeResource ButtonForegroundPointerOver}}"
-                                                        Duration="0:0:0.2" />
-
-                                                    <PointerUpThemeAnimation Storyboard.TargetName="ColoredBackground" />
-                                                </Storyboard>
-                                            </VisualState>
-
-                                            <VisualState x:Name="Pressed">
-                                                <Storyboard>
-                                                    <ColorAnimation
-                                                        Storyboard.TargetName="ColoredBackground"
-                                                        Storyboard.TargetProperty="(UIElement.Background).(SolidColorBrush.Color)"
-                                                        To="{Binding Color, Source={ThemeResource ControlOutlineDisabled}}"
-                                                        Duration="0:0:0.2" />
-                                                    <ColorAnimation
-                                                        Storyboard.TargetName="ColoredBackground"
-                                                        Storyboard.TargetProperty="(UIElement.BorderBrush).(SolidColorBrush.Color)"
-                                                        To="{Binding Color, Source={ThemeResource ControlOutlineDisabled}}"
-                                                        Duration="0:0:0.2" />
-                                                    <ColorAnimation
-                                                        Storyboard.TargetName="TextPresenter"
-                                                        Storyboard.TargetProperty="(UIElement.Foreground).(SolidColorBrush.Color)"
-                                                        To="{Binding Color, Source={ThemeResource ButtonForegroundPressed}}"
-                                                        Duration="0:0:0.2" />
-
-                                                    <PointerDownThemeAnimation Storyboard.TargetName="ColoredBackground" />
-                                                </Storyboard>
-                                            </VisualState>
-
-                                            <VisualState x:Name="Disabled">
-                                                <Storyboard>
-                                                    <ColorAnimation
-                                                        Storyboard.TargetName="ColoredBackground"
-                                                        Storyboard.TargetProperty="(UIElement.Background).(SolidColorBrush.Color)"
-                                                        To="{Binding Color, Source={ThemeResource ControlOutlineDisabled}}"
-                                                        Duration="0:0:0.2" />
-                                                    <ColorAnimation
-                                                        Storyboard.TargetName="ColoredBackground"
-                                                        Storyboard.TargetProperty="(UIElement.BorderBrush).(SolidColorBrush.Color)"
-                                                        To="{Binding Color, Source={ThemeResource ControlOutlineDisabled}}"
-                                                        Duration="0:0:0.2" />
-                                                    <ColorAnimation
-                                                        Storyboard.TargetName="TextPresenter"
-                                                        Storyboard.TargetProperty="(UIElement.Foreground).(SolidColorBrush.Color)"
-                                                        To="{Binding Color, Source={ThemeResource ButtonForegroundDisabled}}"
-                                                        Duration="0:0:0.2" />
-                                                </Storyboard>
-                                            </VisualState>
-
-                                        </VisualStateGroup>
-                                    </VisualStateManager.VisualStateGroups>
-                                </Grid>
-                            </ControlTemplate>
-                        </Setter.Value>
-                    </Setter>
-                </Style.Setters>
-            </Style>
+            <SolidColorBrush x:Key="AccentButtonForeground" Color="{Binding Color, Source={ThemeResource TextPrimary}}" />
+            <SolidColorBrush x:Key="AccentButtonForegroundPointerOver" Color="{Binding Color, Source={ThemeResource TextSecondary}}" />
+            <SolidColorBrush x:Key="AccentButtonForegroundPressed" Color="{Binding Color, Source={ThemeResource TextTertiary}}" />
+            <SolidColorBrush x:Key="AccentButtonForegroundDisabled" Color="{Binding Color, Source={ThemeResource TextDisabled}}" />
 
 
             <SolidColorBrush x:Key="CheckBoxCheckBackgroundFillUnchecked" Color="{Binding Color, Source={ThemeResource ControlPrimary}}" />
@@ -552,6 +437,138 @@
                         </ControlTemplate>
                     </Setter.Value>
                 </Setter>
+            </Style>
+
+
+            <Style x:Key="LaunchButton" TargetType="Button">
+                <Style.Setters>
+                    <Setter Property="Width" Value="130" />
+                    <Setter Property="Height" Value="34" />
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="Button">
+                                <Grid>
+                                    <Rectangle RadiusX="4" RadiusY="4">
+                                        <Rectangle.Fill>
+                                            <md:BackdropBlurBrush Amount="3" />
+                                        </Rectangle.Fill>
+                                    </Rectangle>
+
+                                    <ContentPresenter
+                                        x:Name="ColoredBackground"
+                                        HorizontalContentAlignment="Center"
+                                        VerticalContentAlignment="Bottom"
+                                        ex:Effects.Shadow="{TemplateBinding ex:Effects.Shadow}"
+                                        Background="{Binding Control.Primary, Source={ThemeResource Colors}, Mode=OneWay, Converter={StaticResource BrushColorConverter}}"
+                                        BorderBrush="{Binding Control.PrimaryDisabled, Source={ThemeResource Colors}, Mode=OneWay, Converter={StaticResource BrushColorConverter}}"
+                                        BorderThickness="1"
+                                        Content="{TemplateBinding Content}"
+                                        CornerRadius="4"
+                                        Opacity="1" />
+                                    <TextBlock
+                                        x:Name="TextPresenter"
+                                        Margin="{TemplateBinding Padding}"
+                                        HorizontalAlignment="Center"
+                                        VerticalAlignment="Center"
+                                        FontFamily="{TemplateBinding FontFamily}"
+                                        Foreground="{Binding Text.Secondary, Source={ThemeResource Colors}, Mode=OneWay, Converter={StaticResource BrushColorConverter}}"
+                                        Text="{TemplateBinding Tag}" />
+
+                                    <VisualStateManager.VisualStateGroups>
+                                        <VisualStateGroup x:Name="CommonStates">
+                                            <VisualState x:Name="Normal">
+                                                <Storyboard>
+                                                    <ColorAnimation
+                                                        Storyboard.TargetName="ColoredBackground"
+                                                        Storyboard.TargetProperty="(UIElement.Background).(SolidColorBrush.Color)"
+                                                        To="{Binding Color, Source={ThemeResource ControlPrimary}}"
+                                                        Duration="0:0:0.2" />
+                                                    <ColorAnimation
+                                                        Storyboard.TargetName="ColoredBackground"
+                                                        Storyboard.TargetProperty="(UIElement.BorderBrush).(SolidColorBrush.Color)"
+                                                        To="{Binding Color, Source={ThemeResource ControlPrimaryDisabled}}"
+                                                        Duration="0:0:0.2" />
+                                                    <ColorAnimation
+                                                        Storyboard.TargetName="TextPresenter"
+                                                        Storyboard.TargetProperty="(UIElement.Foreground).(SolidColorBrush.Color)"
+                                                        To="{Binding Color, Source={ThemeResource ButtonForeground}}"
+                                                        Duration="0:0:0.2" />
+
+                                                    <PointerUpThemeAnimation Storyboard.TargetName="ColoredBackground" />
+                                                </Storyboard>
+                                            </VisualState>
+
+                                            <VisualState x:Name="PointerOver">
+                                                <Storyboard>
+                                                    <ColorAnimation
+                                                        Storyboard.TargetName="ColoredBackground"
+                                                        Storyboard.TargetProperty="(UIElement.Background).(SolidColorBrush.Color)"
+                                                        To="{Binding Color, Source={ThemeResource ControlPrimaryDisabled}}"
+                                                        Duration="0:0:0.2" />
+                                                    <ColorAnimation
+                                                        Storyboard.TargetName="ColoredBackground"
+                                                        Storyboard.TargetProperty="(UIElement.BorderBrush).(SolidColorBrush.Color)"
+                                                        To="{Binding Color, Source={ThemeResource ControlPrimaryDisabled}}"
+                                                        Duration="0:0:0.2" />
+                                                    <ColorAnimation
+                                                        Storyboard.TargetName="TextPresenter"
+                                                        Storyboard.TargetProperty="(UIElement.Foreground).(SolidColorBrush.Color)"
+                                                        To="{Binding Color, Source={ThemeResource ButtonForegroundPointerOver}}"
+                                                        Duration="0:0:0.2" />
+
+                                                    <PointerUpThemeAnimation Storyboard.TargetName="ColoredBackground" />
+                                                </Storyboard>
+                                            </VisualState>
+
+                                            <VisualState x:Name="Pressed">
+                                                <Storyboard>
+                                                    <ColorAnimation
+                                                        Storyboard.TargetName="ColoredBackground"
+                                                        Storyboard.TargetProperty="(UIElement.Background).(SolidColorBrush.Color)"
+                                                        To="{Binding Color, Source={ThemeResource ControlOutlineDisabled}}"
+                                                        Duration="0:0:0.2" />
+                                                    <ColorAnimation
+                                                        Storyboard.TargetName="ColoredBackground"
+                                                        Storyboard.TargetProperty="(UIElement.BorderBrush).(SolidColorBrush.Color)"
+                                                        To="{Binding Color, Source={ThemeResource ControlOutlineDisabled}}"
+                                                        Duration="0:0:0.2" />
+                                                    <ColorAnimation
+                                                        Storyboard.TargetName="TextPresenter"
+                                                        Storyboard.TargetProperty="(UIElement.Foreground).(SolidColorBrush.Color)"
+                                                        To="{Binding Color, Source={ThemeResource ButtonForegroundPressed}}"
+                                                        Duration="0:0:0.2" />
+
+                                                    <PointerDownThemeAnimation Storyboard.TargetName="ColoredBackground" />
+                                                </Storyboard>
+                                            </VisualState>
+
+                                            <VisualState x:Name="Disabled">
+                                                <Storyboard>
+                                                    <ColorAnimation
+                                                        Storyboard.TargetName="ColoredBackground"
+                                                        Storyboard.TargetProperty="(UIElement.Background).(SolidColorBrush.Color)"
+                                                        To="{Binding Color, Source={ThemeResource ControlOutlineDisabled}}"
+                                                        Duration="0:0:0.2" />
+                                                    <ColorAnimation
+                                                        Storyboard.TargetName="ColoredBackground"
+                                                        Storyboard.TargetProperty="(UIElement.BorderBrush).(SolidColorBrush.Color)"
+                                                        To="{Binding Color, Source={ThemeResource ControlOutlineDisabled}}"
+                                                        Duration="0:0:0.2" />
+                                                    <ColorAnimation
+                                                        Storyboard.TargetName="TextPresenter"
+                                                        Storyboard.TargetProperty="(UIElement.Foreground).(SolidColorBrush.Color)"
+                                                        To="{Binding Color, Source={ThemeResource ButtonForegroundDisabled}}"
+                                                        Duration="0:0:0.2" />
+                                                </Storyboard>
+                                            </VisualState>
+
+                                        </VisualStateGroup>
+                                    </VisualStateManager.VisualStateGroups>
+                                </Grid>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style.Setters>
             </Style>
 
 
@@ -3093,6 +3110,319 @@
                     <ContentPresenter Grid.Column="2" HorizontalAlignment="Right" />
                 </Grid>
             </ControlTemplate>
+
+
+            <Style TargetType="ContentDialog">
+                <Setter Property="IsTabStop" Value="False" />
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="ContentDialog">
+                            <Border x:Name="Container">
+                                <Grid x:Name="LayoutRoot" Visibility="Collapsed">
+                                    <Grid.Background>
+                                        <SolidColorBrush Opacity="0.5" Color="{Binding Color, Source={ThemeResource BackgroundTransparent}}" />
+                                    </Grid.Background>
+
+                                    <Border
+                                        x:Name="BackgroundElement"
+                                        MinWidth="{ThemeResource ContentDialogMinWidth}"
+                                        MinHeight="{ThemeResource ContentDialogMinHeight}"
+                                        MaxWidth="{ThemeResource ContentDialogMaxWidth}"
+                                        MaxHeight="{ThemeResource ContentDialogMaxHeight}"
+                                        HorizontalAlignment="Center"
+                                        VerticalAlignment="Center"
+                                        Background="{ThemeResource ControlSolidPrimary}"
+                                        BorderBrush="{ThemeResource ControlSolidOutline}"
+                                        BorderThickness="{ThemeResource ContentDialogBorderWidth}"
+                                        CornerRadius="8"
+                                        FlowDirection="{TemplateBinding FlowDirection}"
+                                        RenderTransformOrigin="0.5,0.5">
+                                        <Border.RenderTransform>
+                                            <ScaleTransform x:Name="ScaleTransform" />
+                                        </Border.RenderTransform>
+
+                                        <Grid x:Name="DialogSpace" Padding="{ThemeResource ContentDialogPadding}">
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="*" />
+                                                <RowDefinition Height="Auto" />
+                                            </Grid.RowDefinitions>
+
+                                            <ScrollViewer
+                                                x:Name="ContentScrollViewer"
+                                                Margin="{ThemeResource ContentDialogContentScrollViewerMargin}"
+                                                HorizontalScrollBarVisibility="Disabled"
+                                                IsTabStop="False"
+                                                VerticalScrollBarVisibility="Disabled"
+                                                ZoomMode="Disabled">
+                                                <Grid>
+                                                    <Grid.RowDefinitions>
+                                                        <RowDefinition Height="Auto" />
+                                                        <RowDefinition Height="*" />
+                                                    </Grid.RowDefinitions>
+
+                                                    <ContentControl
+                                                        x:Name="Title"
+                                                        Margin="{ThemeResource ContentDialogTitleMargin}"
+                                                        HorizontalAlignment="Left"
+                                                        VerticalAlignment="Top"
+                                                        Content="{TemplateBinding Title}"
+                                                        ContentTemplate="{TemplateBinding TitleTemplate}"
+                                                        FontFamily="XamlAutoFontFamily"
+                                                        FontSize="20"
+                                                        FontWeight="Normal"
+                                                        Foreground="{ThemeResource TextPrimary}"
+                                                        IsTabStop="False">
+                                                        <ContentControl.Template>
+                                                            <ControlTemplate TargetType="ContentControl">
+                                                                <ContentPresenter
+                                                                    Margin="{TemplateBinding Padding}"
+                                                                    HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                                                    VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                                                    Content="{TemplateBinding Content}"
+                                                                    ContentTemplate="{TemplateBinding ContentTemplate}"
+                                                                    ContentTransitions="{TemplateBinding ContentTransitions}"
+                                                                    MaxLines="2"
+                                                                    TextWrapping="Wrap" />
+                                                            </ControlTemplate>
+                                                        </ContentControl.Template>
+                                                    </ContentControl>
+
+                                                    <ContentPresenter
+                                                        x:Name="Content"
+                                                        Grid.Row="1"
+                                                        Margin="0,0,0,12"
+                                                        Content="{TemplateBinding Content}"
+                                                        ContentTemplate="{TemplateBinding ContentTemplate}"
+                                                        FontFamily="{ThemeResource ContentControlThemeFontFamily}"
+                                                        FontSize="{ThemeResource ControlContentThemeFontSize}"
+                                                        Foreground="{ThemeResource TextSecondary}"
+                                                        TextWrapping="Wrap" />
+                                                </Grid>
+                                            </ScrollViewer>
+
+                                            <Rectangle
+                                                Grid.RowSpan="2"
+                                                Height="80"
+                                                Margin="-24,-18,-24,-24"
+                                                VerticalAlignment="Bottom"
+                                                Fill="{ThemeResource BackgroundGradient}"
+                                                Opacity="0.25" />
+                                            <Grid
+                                                x:Name="CommandSpace"
+                                                Grid.Row="1"
+                                                Margin="{ThemeResource ContentDialogCommandSpaceMargin}"
+                                                HorizontalAlignment="Stretch"
+                                                VerticalAlignment="Bottom"
+                                                XYFocusKeyboardNavigation="Enabled">
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition />
+                                                    <ColumnDefinition Width="0.5*" />
+                                                    <ColumnDefinition Width="0.5*" />
+                                                    <ColumnDefinition />
+                                                </Grid.ColumnDefinitions>
+
+                                                <Button
+                                                    x:Name="PrimaryButton"
+                                                    Grid.Column="0"
+                                                    Margin="0,0,2,0"
+                                                    HorizontalAlignment="Stretch"
+                                                    VerticalAlignment="Stretch"
+                                                    Content="{TemplateBinding PrimaryButtonText}"
+                                                    ElementSoundMode="FocusOnly"
+                                                    IsEnabled="{TemplateBinding IsPrimaryButtonEnabled}"
+                                                    Style="{StaticResource AccentButtonStyle}" />
+                                                <Button
+                                                    x:Name="SecondaryButton"
+                                                    Grid.Column="1"
+                                                    Grid.ColumnSpan="2"
+                                                    Margin="2,0,2,0"
+                                                    HorizontalAlignment="Stretch"
+                                                    VerticalAlignment="Stretch"
+                                                    Content="{TemplateBinding SecondaryButtonText}"
+                                                    ElementSoundMode="FocusOnly"
+                                                    IsEnabled="{TemplateBinding IsSecondaryButtonEnabled}" />
+                                                <Button
+                                                    x:Name="CloseButton"
+                                                    Grid.Column="3"
+                                                    Margin="2,0,0,0"
+                                                    HorizontalAlignment="Stretch"
+                                                    VerticalAlignment="Stretch"
+                                                    Content="{TemplateBinding CloseButtonText}"
+                                                    ElementSoundMode="FocusOnly" />
+                                            </Grid>
+                                        </Grid>
+                                    </Border>
+                                </Grid>
+
+                                <VisualStateManager.VisualStateGroups>
+                                    <VisualStateGroup x:Name="DialogShowingStates">
+                                        <VisualStateGroup.Transitions>
+                                            <VisualTransition To="DialogHidden">
+                                                <Storyboard>
+                                                    <ObjectAnimationUsingKeyFrames Storyboard.TargetName="LayoutRoot" Storyboard.TargetProperty="Visibility">
+                                                        <DiscreteObjectKeyFrame KeyTime="0:0:0" Value="Visible" />
+                                                    </ObjectAnimationUsingKeyFrames>
+
+                                                    <ObjectAnimationUsingKeyFrames Storyboard.TargetName="LayoutRoot" Storyboard.TargetProperty="IsHitTestVisible">
+                                                        <DiscreteObjectKeyFrame KeyTime="0:0:0" Value="False" />
+                                                    </ObjectAnimationUsingKeyFrames>
+
+                                                    <DoubleAnimationUsingKeyFrames Storyboard.TargetName="ScaleTransform" Storyboard.TargetProperty="ScaleX">
+                                                        <DiscreteDoubleKeyFrame KeyTime="0:0:0" Value="1.0" />
+                                                        <SplineDoubleKeyFrame
+                                                            KeySpline="0.1,0.9 0.2,1.0"
+                                                            KeyTime="0:0:0.5"
+                                                            Value="1.05" />
+                                                    </DoubleAnimationUsingKeyFrames>
+
+                                                    <DoubleAnimationUsingKeyFrames Storyboard.TargetName="ScaleTransform" Storyboard.TargetProperty="ScaleY">
+                                                        <DiscreteDoubleKeyFrame KeyTime="0:0:0" Value="1.0" />
+                                                        <SplineDoubleKeyFrame
+                                                            KeySpline="0.1,0.9 0.2,1.0"
+                                                            KeyTime="0:0:0.5"
+                                                            Value="1.05" />
+                                                    </DoubleAnimationUsingKeyFrames>
+
+                                                    <DoubleAnimationUsingKeyFrames Storyboard.TargetName="LayoutRoot" Storyboard.TargetProperty="Opacity">
+                                                        <DiscreteDoubleKeyFrame KeyTime="0:0:0" Value="1.0" />
+                                                        <LinearDoubleKeyFrame KeyTime="0:0:0.083" Value="0.0" />
+                                                    </DoubleAnimationUsingKeyFrames>
+                                                </Storyboard>
+                                            </VisualTransition>
+
+                                            <VisualTransition To="DialogShowing">
+                                                <Storyboard>
+                                                    <ObjectAnimationUsingKeyFrames Storyboard.TargetName="LayoutRoot" Storyboard.TargetProperty="Visibility">
+                                                        <DiscreteObjectKeyFrame KeyTime="0:0:0" Value="Visible" />
+                                                    </ObjectAnimationUsingKeyFrames>
+
+                                                    <DoubleAnimationUsingKeyFrames Storyboard.TargetName="ScaleTransform" Storyboard.TargetProperty="ScaleX">
+                                                        <DiscreteDoubleKeyFrame KeyTime="0:0:0" Value="1.05" />
+                                                        <SplineDoubleKeyFrame
+                                                            KeySpline="0.1,0.9 0.2,1.0"
+                                                            KeyTime="0:0:0.5"
+                                                            Value="1.0" />
+                                                    </DoubleAnimationUsingKeyFrames>
+
+                                                    <DoubleAnimationUsingKeyFrames Storyboard.TargetName="ScaleTransform" Storyboard.TargetProperty="ScaleY">
+                                                        <DiscreteDoubleKeyFrame KeyTime="0:0:0" Value="1.05" />
+                                                        <SplineDoubleKeyFrame
+                                                            KeySpline="0.1,0.9 0.2,1.0"
+                                                            KeyTime="0:0:0.5"
+                                                            Value="1.0" />
+                                                    </DoubleAnimationUsingKeyFrames>
+
+                                                    <DoubleAnimationUsingKeyFrames Storyboard.TargetName="LayoutRoot" Storyboard.TargetProperty="Opacity">
+                                                        <DiscreteDoubleKeyFrame KeyTime="0:0:0" Value="0.0" />
+                                                        <LinearDoubleKeyFrame KeyTime="0:0:0.167" Value="1.0" />
+                                                    </DoubleAnimationUsingKeyFrames>
+                                                </Storyboard>
+                                            </VisualTransition>
+                                        </VisualStateGroup.Transitions>
+
+                                        <VisualState x:Name="DialogHidden" />
+
+                                        <VisualState x:Name="DialogShowing">
+                                            <VisualState.Setters>
+                                                <Setter Target="LayoutRoot.Visibility" Value="Visible" />
+                                                <Setter Target="BackgroundElement.TabFocusNavigation" Value="Cycle" />
+                                            </VisualState.Setters>
+                                        </VisualState>
+
+                                        <VisualState x:Name="DialogShowingWithoutSmokeLayer">
+                                            <VisualState.Setters>
+                                                <Setter Target="LayoutRoot.Visibility" Value="Visible" />
+                                            </VisualState.Setters>
+                                        </VisualState>
+                                    </VisualStateGroup>
+
+                                    <VisualStateGroup x:Name="DialogSizingStates">
+                                        <VisualState x:Name="DefaultDialogSizing" />
+
+                                        <VisualState x:Name="FullDialogSizing">
+                                            <VisualState.Setters>
+                                                <Setter Target="BackgroundElement.VerticalAlignment" Value="Stretch" />
+                                            </VisualState.Setters>
+                                        </VisualState>
+                                    </VisualStateGroup>
+
+                                    <VisualStateGroup x:Name="ButtonsVisibilityStates">
+                                        <VisualState x:Name="AllVisible" />
+
+                                        <VisualState x:Name="NoneVisible">
+                                            <VisualState.Setters>
+                                                <Setter Target="CommandSpace.Visibility" Value="Collapsed" />
+                                            </VisualState.Setters>
+                                        </VisualState>
+
+                                        <VisualState x:Name="PrimaryVisible">
+                                            <VisualState.Setters>
+                                                <Setter Target="PrimaryButton.(Grid.Column)" Value="2" />
+                                                <Setter Target="PrimaryButton.(Grid.ColumnSpan)" Value="2" />
+                                                <Setter Target="PrimaryButton.Margin" Value="2,0,0,0" />
+                                                <Setter Target="SecondaryButton.Visibility" Value="Collapsed" />
+                                                <Setter Target="CloseButton.Visibility" Value="Collapsed" />
+                                            </VisualState.Setters>
+                                        </VisualState>
+
+                                        <VisualState x:Name="SecondaryVisible">
+                                            <VisualState.Setters>
+                                                <Setter Target="SecondaryButton.(Grid.Column)" Value="2" />
+                                                <Setter Target="SecondaryButton.(Grid.ColumnSpan)" Value="2" />
+                                                <Setter Target="SecondaryButton.Margin" Value="2,0,0,0" />
+                                                <Setter Target="PrimaryButton.Visibility" Value="Collapsed" />
+                                                <Setter Target="CloseButton.Visibility" Value="Collapsed" />
+                                            </VisualState.Setters>
+                                        </VisualState>
+
+                                        <VisualState x:Name="CloseVisible">
+                                            <VisualState.Setters>
+                                                <Setter Target="CloseButton.(Grid.Column)" Value="2" />
+                                                <Setter Target="CloseButton.(Grid.ColumnSpan)" Value="2" />
+                                                <Setter Target="CloseButton.Margin" Value="2,0,0,0" />
+                                                <Setter Target="PrimaryButton.Visibility" Value="Collapsed" />
+                                                <Setter Target="SecondaryButton.Visibility" Value="Collapsed" />
+                                            </VisualState.Setters>
+                                        </VisualState>
+
+                                        <VisualState x:Name="PrimaryAndSecondaryVisible">
+                                            <VisualState.Setters>
+                                                <Setter Target="PrimaryButton.(Grid.ColumnSpan)" Value="2" />
+                                                <Setter Target="SecondaryButton.(Grid.Column)" Value="2" />
+                                                <Setter Target="SecondaryButton.(Grid.ColumnSpan)" Value="2" />
+                                                <Setter Target="SecondaryButton.Margin" Value="2,0,0,0" />
+                                                <Setter Target="CloseButton.Visibility" Value="Collapsed" />
+                                            </VisualState.Setters>
+                                        </VisualState>
+
+                                        <VisualState x:Name="PrimaryAndCloseVisible">
+                                            <VisualState.Setters>
+                                                <Setter Target="PrimaryButton.(Grid.ColumnSpan)" Value="2" />
+                                                <Setter Target="CloseButton.(Grid.Column)" Value="2" />
+                                                <Setter Target="CloseButton.(Grid.ColumnSpan)" Value="2" />
+                                                <Setter Target="CloseButton.Margin" Value="2,0,0,0" />
+                                                <Setter Target="SecondaryButton.Visibility" Value="Collapsed" />
+                                            </VisualState.Setters>
+                                        </VisualState>
+
+                                        <VisualState x:Name="SecondaryAndCloseVisible">
+                                            <VisualState.Setters>
+                                                <Setter Target="SecondaryButton.(Grid.Column)" Value="0" />
+                                                <Setter Target="SecondaryButton.(Grid.ColumnSpan)" Value="2" />
+                                                <Setter Target="SecondaryButton.Margin" Value="0,0,2,0" />
+                                                <Setter Target="CloseButton.(Grid.Column)" Value="2" />
+                                                <Setter Target="CloseButton.(Grid.ColumnSpan)" Value="2" />
+                                                <Setter Target="CloseButton.Margin" Value="2,0,0,0" />
+                                                <Setter Target="PrimaryButton.Visibility" Value="Collapsed" />
+                                            </VisualState.Setters>
+                                        </VisualState>
+                                    </VisualStateGroup>
+                                </VisualStateManager.VisualStateGroups>
+                            </Border>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
 
         </ResourceDictionary>
     </Application.Resources>
