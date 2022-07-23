@@ -15,18 +15,28 @@ public partial class SettingsViewModel : ObservableObject
     readonly ThemeManager themeManager;
     readonly WindowHandler windowHandler;
     readonly IFileSystem fileSystem;
+    readonly IMessage message;
     readonly INavigation navigation;
 
     public readonly Configuration Configuration;
     public readonly Updater Updater;
 
-    public SettingsViewModel(IOptions<Configuration> configuration, ILogger<ProfilesViewModel> logger, ConfigurationManager configurationManager, ThemeManager themeManager, WindowHandler windowHandler, IFileSystem fileSystem, Updater updater, INavigation navigation)
+    public SettingsViewModel(IOptions<Configuration> configuration,
+        ILogger<ProfilesViewModel> logger,
+        ConfigurationManager configurationManager,
+        ThemeManager themeManager,
+        WindowHandler windowHandler,
+        Updater updater,
+        IFileSystem fileSystem,
+        IMessage message,
+        INavigation navigation)
     {
         this.logger = logger;
         this.configurationManager = configurationManager;
         this.themeManager = themeManager;
         this.windowHandler = windowHandler;
         this.fileSystem = fileSystem;
+        this.message = message;
         this.navigation = navigation;
 
         Configuration = configuration.Value;
@@ -42,9 +52,12 @@ public partial class SettingsViewModel : ObservableObject
     }
 
 
-    [ICommand]
-    void Debug()
+    [ICommand(AllowConcurrentExecutions = true)]
+    async Task Debug()
     {
+        await message.ShowAsync("Title", "content", false, "No", "Yes");
+        await Task.Delay(1000);
+        await message.ShowAsync("Title", "content2", false, "No", "Yes");
     }
 
 
@@ -113,8 +126,8 @@ public partial class SettingsViewModel : ObservableObject
                     Configuration.Launcher.VersionsDirectory = folder.Path;
                     break;
             }
-        //else
-        // show pop up
+        else
+            await message.ShowAsync("Something went wrong :(", "It looks like IcyLauncher cant write to this directory or it does not exist. Please verify that you have given permissions to IcyLauncher and this directory still exists.", true, null, null, "Ok");
     }
 
     [ICommand]

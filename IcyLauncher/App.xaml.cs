@@ -48,6 +48,7 @@ public partial class App : Application
                 services.AddScoped<Updater>();
                 services.AddScoped<IConverter, JsonConverter>();
                 services.AddScoped<IFileSystem, FileSystem>();
+                services.AddScoped<IMessage, Message>();
                 services.AddScoped<INavigation>(provider => new Navigation(provider.GetRequiredService<ILogger<Navigation>>(), navigationView, contentFrame, backButton));
                 
                 services.AddSingleton<HomeViewModel>();
