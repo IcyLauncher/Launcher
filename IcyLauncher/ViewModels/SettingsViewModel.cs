@@ -41,14 +41,28 @@ public partial class SettingsViewModel : ObservableObject
 
         Configuration = configuration.Value;
         Updater = updater;
+
+
+        this.windowHandler.Register(folderPicker);
+
+        Configuration.Apperance.PropertyChanged += (s, e) =>
+        {
+            switch (e.PropertyName)
+            {
+                case "Blur":
+                    if (windowHandler.CurrentBlur != Configuration.Apperance.Blur)
+                        windowHandler.SetBlur(Configuration.Apperance.Blur, true, Configuration.Apperance.UseDarkModeBlur);
+                    break;
+                case "UseDarkModeBlur":
+                    windowHandler.SetBlur(Configuration.Apperance.Blur, true, Configuration.Apperance.UseDarkModeBlur);
+                    break;
+            }
+        };
     }
 
 
     public void OnPageLoaded(object _, RoutedEventArgs _1)
     {
-        IsUpdateVisible = Updater.IsUpdateAvailable;
-
-        windowHandler.Register(folderPicker);
     }
 
 
@@ -127,7 +141,7 @@ public partial class SettingsViewModel : ObservableObject
                     break;
             }
         else
-            await message.ShowAsync("Something went wrong :(", "It looks like IcyLauncher cant write to this directory or it does not exist. Please verify that you have given permissions to IcyLauncher and this directory still exists.", true, null, null, "Ok");
+            await message.ShowAsync("Something went wrong :(", "It looks like IcyLauncher cant write to this directory or it does not exist. Please verify that you have given permissions to IcyLauncher and this directory still exists.", true, "Ok");
     }
 
     [ICommand]
@@ -143,4 +157,13 @@ public partial class SettingsViewModel : ObservableObject
                 break;
         }
     }
+
+
+    [ICommand]
+    void NavigateTo(string page) =>
+        navigation.Navigate(page);
+
+
+    public bool IsUseBlurDarkModeEnabled(int selectedIndex) =>
+        selectedIndex == 0 || selectedIndex == 1;
 }
