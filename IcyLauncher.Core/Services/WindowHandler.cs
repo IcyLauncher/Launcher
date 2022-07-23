@@ -41,6 +41,7 @@ public class WindowHandler
     public bool IsBlurAcrylicEnabled { get; private set; }
     public bool IsBlurSimpleEnabled { get; private set; }
     public bool IsBlurNoneEnabled { get; private set; }
+    public BlurEffect? CurrentBlur { get; private set; }
 
 
     public void SetIcon(string path)
@@ -264,8 +265,6 @@ public class WindowHandler
 
     private void RemoveAllBlur()
     {
-        SetMainBackground("Transparent");
-
         if (IsBlurMicaEnabled)
             SetBlurMica(false, false);
 
@@ -287,8 +286,13 @@ public class WindowHandler
             var setDarkMode = Win32.DwmSetWindowAttribute(HWnd, (int)Win32.DWMWINDOWATTRIBUTE.DWMWA_USE_IMMERSIVE_DARK_MODE, ref useDarkMode, sizeof(int));
             logger.Log($"Set DWM Window Attribute-d ({setDarkMode})");
 
-            if (setMica == 0)
+            var setMainBackground = SetMainBackground("Transparent");
+
+            if (setMica == 0 && setMainBackground)
+            {
                 IsBlurMicaEnabled = enable;
+                CurrentBlur = enable ? BlurEffect.Mica : null;
+            }
             return setMica == 0 && setDarkMode == 0;
         }
         catch (Exception ex)
@@ -304,7 +308,10 @@ public class WindowHandler
         var setMainBackground = SetMainBackground(enable ? "Background.Transparent" : "Transparent");
 
         if (setComposition && setMainBackground)
+        {
             IsBlurAcrylicEnabled = enable;
+            CurrentBlur = enable ? BlurEffect.Acrylic : null;
+        }
         return setComposition && setMainBackground;
     }
 
@@ -314,7 +321,10 @@ public class WindowHandler
         var setMainBackground = SetMainBackground(enable ? "Background.Transparent" : "Transparent");
 
         if (setComposition && setMainBackground)
+        {
             IsBlurSimpleEnabled = enable;
+            CurrentBlur = enable ? BlurEffect.Simple : null;
+        }
         return setComposition && setMainBackground;
     }
 
@@ -365,7 +375,10 @@ public class WindowHandler
         var setMainBackground = SetMainBackground(enable ? "Background.Solid" : "Transparent");
 
         if (setMainBackground)
+        {
             IsBlurNoneEnabled = enable;
+            CurrentBlur = enable ? BlurEffect.None : null;
+        }
         return setMainBackground;
     }
 }
