@@ -36,7 +36,10 @@ public partial class ConfigurationLauncher : ObservableObject
 public partial class ConfigurationApperance : ObservableObject
 {
     [ObservableProperty]
-    BannerType playBannerType = BannerType.TimeDependent;
+    BannerType homeBanner = BannerType.TimeDependent;
+
+    [ObservableProperty]
+    int selectedHomeBanner = -1;
 
     public Theme Colors { get; set; } = new();
 
