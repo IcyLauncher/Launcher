@@ -137,6 +137,8 @@
 		<None Remove="Assets\Weather\50d.png" />
 		<None Remove="Assets\Weather\50n.png" />
 		<None Remove="UI\ProfileTemplate.xaml" />
+		<None Remove="UI\Xaml\SolidColorTemplate.xaml" />
+		<None Remove="Views\BannerSettingsView.xaml" />
 		<None Remove="Views\HomeView.xaml" />
 		<None Remove="Views\NoPageView.xaml" />
 		<None Remove="Views\ProfilesView.xaml" />
@@ -511,7 +513,14 @@
 		<Page Update="UIElements\ProfileDataTemplate.xaml">
 		  <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
 		</Page>
+		<Page Update="UI\Xaml\SolidColorTemplate.xaml">
+		  <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+		</Page>
 		<Page Update="Views\NoPageView.xaml">
+		  <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+		  <SubType>Designer</SubType>
+		</Page>
+		<Page Update="Views\BannerSettingsView.xaml">
 		  <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
 		  <SubType>Designer</SubType>
 		</Page>
@@ -530,5 +539,6 @@
 
 	<ItemGroup>
 	  <Folder Include="Assets\Banners\Gallery\" />
+	  <Folder Include="Assets\Banners\Custom\" />
 	</ItemGroup>
 </Project>

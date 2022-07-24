@@ -1,0 +1,44 @@
+﻿<ResourceDictionary
+    x:Class="IcyLauncher.UI.Xaml.SolidColorTemplate"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:models="using:IcyLauncher.Core.Models">
+
+    <DataTemplate x:Key="SolidColorTemplate" x:DataType="models:SolidColor">
+        <Grid
+            Width="86"
+            Height="122"
+            Loaded="OnRootLayoutLoaded"
+            PointerPressed="OnRootLayoutPointerPressed">
+            <FlyoutBase.AttachedFlyout>
+                <MenuFlyout>
+                    <MenuFlyoutItem Text="Delete">
+                        <MenuFlyoutItem.Icon>
+                            <SymbolIcon Symbol="Delete" />
+                        </MenuFlyoutItem.Icon>
+                    </MenuFlyoutItem>
+                </MenuFlyout>
+            </FlyoutBase.AttachedFlyout>
+
+            <Rectangle
+                Margin="8,8,8,44"
+                Fill="{x:Bind Color, Converter={StaticResource BrushColorConverter}}"
+                RadiusX="4"
+                RadiusY="4"
+                Stroke="{ThemeResource ControlOutline}"
+                StrokeThickness="2" />
+            <TextBlock
+                Margin="8,80,0,0"
+                HorizontalAlignment="Left"
+                FontSize="15"
+                Style="{StaticResource TitleSecondary}"
+                Text="{x:Bind Name}"
+                TextTrimming="CharacterEllipsis" />
+            <TextBlock
+                Margin="8,99,0,0"
+                FontSize="12"
+                Style="{StaticResource Subpoint}"
+                Text="{x:Bind Color.ToString()}" />
+        </Grid>
+    </DataTemplate>
+</ResourceDictionary>
