@@ -9,7 +9,7 @@
     NavigationCacheMode="Enabled"
     mc:Ignorable="d">
     <Page.Background>
-        <LinearGradientBrush StartPoint="0,1" EndPoint="1,0">
+        <LinearGradientBrush Opacity="0" StartPoint="0,1" EndPoint="1,0">
             <GradientStop Offset="0" Color="#05ff0000" />
             <GradientStop Offset="0.2" Color="#05ffff00" />
             <GradientStop Offset="0.4" Color="#0500ff00" />
