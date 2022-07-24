@@ -114,10 +114,11 @@ public class Navigation : INavigation
     {
         try
         {
-            var item = GetNavigationViewItem(frame.BackStack.Last().SourcePageType.FullName, true);
-
-            if (!Navigate(item))
-                return false;
+            logger.Log(frame.BackStack.Last().SourcePageType.FullName);
+            if (GetNavigationViewItem(frame.BackStack.Last().SourcePageType.FullName, true) is NavigationViewItem item && (NavigationViewItem)navigationView.SelectedItem != item)
+                    SetCurrentNavigationViewItem(item);
+            else if (!SetCurrentPage(frame.BackStack.Last().SourcePageType))
+                    return false;
 
             frame.BackStack.RemoveAt(frame.BackStackDepth - 1);
             frame.BackStack.RemoveAt(frame.BackStackDepth - 1);

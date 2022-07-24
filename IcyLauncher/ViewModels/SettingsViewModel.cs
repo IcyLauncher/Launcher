@@ -161,7 +161,7 @@ public partial class SettingsViewModel : ObservableObject
 
     [ICommand]
     void NavigateTo(string page) =>
-        navigation.Navigate(page);
+        navigation.SetCurrentPage(page.AsType());
 
 
     public bool IsUseBlurDarkModeEnabled(int selectedIndex) =>
