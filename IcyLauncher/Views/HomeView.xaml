@@ -173,7 +173,8 @@
                         Padding="35,2"
                         HorizontalAlignment="Center"
                         Command="{x:Bind viewModel.NavigateToWeatherCommand}"
-                        Content="More Info" />
+                        Content="More Info"
+                        ToolTipService.ToolTip="Show full weather forecast" />
                 </Grid>
             </ui:HCont>
 

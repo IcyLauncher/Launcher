@@ -55,7 +55,8 @@
                         <HyperlinkButton
                             Margin="0,27,0,0"
                             Padding="0"
-                            Content="About" />
+                            Content="About"
+                            ToolTipService.ToolTip="Show info about IcyLauncher" />
                     </Grid>
                 </Grid>
 
@@ -65,7 +66,8 @@
                     HorizontalAlignment="Right"
                     Background="Transparent"
                     BorderBrush="Transparent"
-                    Command="{x:Bind viewModel.DebugCommand}">
+                    Command="{x:Bind viewModel.DebugCommand}"
+                    ToolTipService.ToolTip="Access to developer settings">
                     <Grid>
                         <FontIcon
                             Margin="0,0,0,-2"
@@ -95,7 +97,8 @@
                     HorizontalAlignment="Right"
                     Background="{x:Bind viewModel.UpdateButtonBackground}"
                     BorderBrush="{x:Bind viewModel.UpdateButtonBorderBrush}"
-                    Command="{x:Bind viewModel.UpdateCommand}">
+                    Command="{x:Bind viewModel.UpdateCommand}"
+                    ToolTipService.ToolTip="Check for updates">
                     <Grid>
                         <FontIcon
                             Margin="0,0,0,-2"
@@ -134,16 +137,17 @@
                 <Expander.Tag>
                     <StackPanel Spacing="8">
                         <ContentControl Tag="Discord RPC|The ability to make all your friends jealous because you are using IcyLauncher" Template="{StaticResource SettingsCard}">
-                            <ToggleSwitch IsOn="{x:Bind viewModel.Configuration.Launcher.IsDiscordEnabled, Mode=TwoWay}" />
+                            <ToggleSwitch IsOn="{x:Bind viewModel.Configuration.Launcher.IsDiscordEnabled, Mode=TwoWay}" ToolTipService.ToolTip="Enable/Disable Discord RPC" />
                         </ContentControl>
                         <ContentControl Tag="Scrollbars|Show scrollbars on every scrollable container" Template="{StaticResource SettingsCard}">
-                            <ToggleSwitch IsOn="{x:Bind viewModel.Configuration.Launcher.IsScrollbarsEnabled, Mode=TwoWay}" />
+                            <ToggleSwitch IsOn="{x:Bind viewModel.Configuration.Launcher.IsScrollbarsEnabled, Mode=TwoWay}" ToolTipService.ToolTip="Enable/Disable scrollbars" />
                         </ContentControl>
                         <ContentControl Tag="At Minecraft Launch|Option what the launcher does on launching Minecraft" Template="{StaticResource SettingsCard}">
                             <ComboBox
                                 Width="200"
                                 PlaceholderText="Select..."
-                                SelectedIndex="{x:Bind viewModel.Configuration.Launcher.AtMinecraftaunch, Mode=TwoWay, Converter={StaticResource EnumIntConverter}}">
+                                SelectedIndex="{x:Bind viewModel.Configuration.Launcher.AtMinecraftaunch, Mode=TwoWay, Converter={StaticResource EnumIntConverter}}"
+                                ToolTipService.ToolTip="Select behaviour at Minecraft launch">
                                 <ComboBoxItem Content="Close" />
                                 <ComboBoxItem Content="Minimize (System Tray)" />
                                 <ComboBoxItem Content="Keep Open" />
@@ -160,19 +164,22 @@
                                 <ui:TextBox
                                     IsReadOnly="True"
                                     PlaceholderText="C:\Some\Path"
-                                    Text="{x:Bind viewModel.Configuration.Launcher.TexturepackDirectory, Mode=OneWay}" />
+                                    Text="{x:Bind viewModel.Configuration.Launcher.TexturepackDirectory, Mode=OneWay}"
+                                    ToolTipService.ToolTip="Current texturepacks directory" />
                                 <Button
                                     Grid.Column="1"
                                     Margin="4,0,0,0"
                                     Command="{x:Bind viewModel.SelectDirectoryCommand}"
                                     CommandParameter="{StaticResource par0}"
-                                    Content="Select" />
+                                    Content="Select"
+                                    ToolTipService.ToolTip="Select texturepacks directory" />
                                 <Button
                                     Grid.Column="2"
                                     Margin="4,0,0,0"
                                     Command="{x:Bind viewModel.ResetDirectoryCommand}"
                                     CommandParameter="{StaticResource par0}"
-                                    Content="Reset" />
+                                    Content="Reset"
+                                    ToolTipService.ToolTip="Reset texturepack directory" />
                             </Grid>
                         </ContentControl>
                         <ContentControl Tag="Minecraft Installation|Directroy IcyLauncher uses to download all Minecraft game versions " Template="{StaticResource SettingsCard}">
@@ -186,19 +193,22 @@
                                 <ui:TextBox
                                     IsReadOnly="True"
                                     PlaceholderText="C:\Some\Path"
-                                    Text="{x:Bind viewModel.Configuration.Launcher.VersionsDirectory, Mode=OneWay}" />
+                                    Text="{x:Bind viewModel.Configuration.Launcher.VersionsDirectory, Mode=OneWay}"
+                                    ToolTipService.ToolTip="Current versions directory" />
                                 <Button
                                     Grid.Column="1"
                                     Margin="5,0,0,0"
                                     Command="{x:Bind viewModel.SelectDirectoryCommand}"
                                     CommandParameter="{StaticResource par1}"
-                                    Content="Select" />
+                                    Content="Select"
+                                    ToolTipService.ToolTip="Select versions directory" />
                                 <Button
                                     Grid.Column="2"
                                     Margin="4,0,0,0"
                                     Command="{x:Bind viewModel.ResetDirectoryCommand}"
                                     CommandParameter="{StaticResource par1}"
-                                    Content="Reset" />
+                                    Content="Reset"
+                                    ToolTipService.ToolTip="Reset versions directory" />
                             </Grid>
                         </ContentControl>
                     </StackPanel>
@@ -215,13 +225,15 @@
                             <Button
                                 Command="{x:Bind viewModel.NavigateToCommand}"
                                 CommandParameter="Views.BannerSettingsView"
-                                Content="Open banner settings" />
+                                Content="Open banner settings"
+                                ToolTipService.ToolTip="Open banner settings" />
                         </ContentControl>
                         <ContentControl Tag="Colors|General theme colors for the entire application" Template="{StaticResource SettingsCard}">
                             <Button
                                 Command="{x:Bind viewModel.NavigateToCommand}"
                                 CommandParameter="Views.ColorSettingsView"
-                                Content="Open color settings" />
+                                Content="Open color settings"
+                                ToolTipService.ToolTip="Open color settings" />
                         </ContentControl>
                         <ContentControl Tag="Application Background|Blur used for the main background" Template="{StaticResource SettingsCard}">
                             <Grid>
@@ -236,7 +248,8 @@
                                     Width="150"
                                     VerticalAlignment="Center"
                                     PlaceholderText="Select..."
-                                    SelectedIndex="{x:Bind viewModel.Configuration.Apperance.Blur, Mode=TwoWay, Converter={StaticResource EnumIntConverter}}">
+                                    SelectedIndex="{x:Bind viewModel.Configuration.Apperance.Blur, Mode=TwoWay, Converter={StaticResource EnumIntConverter}}"
+                                    ToolTipService.ToolTip="Select blur type">
                                     <ComboBoxItem Content="Mica (Win11)" IsEnabled="{x:Bind hlp:Computer.IsWindows11}" />
                                     <ComboBoxItem Content="Acyrlic" />
                                     <ComboBoxItem Content="Simple" />
@@ -248,7 +261,8 @@
                                     IsEnabled="{x:Bind viewModel.IsUseBlurDarkModeEnabled(Blur.SelectedIndex), Mode=OneWay}"
                                     IsOn="{x:Bind viewModel.Configuration.Apperance.UseDarkModeBlur, Mode=TwoWay}"
                                     OffContent="Light Mode"
-                                    OnContent="Dark Mode" />
+                                    OnContent="Dark Mode"
+                                    ToolTipService.ToolTip="Select blur theme color" />
                             </Grid>
                         </ContentControl>
                     </StackPanel>
