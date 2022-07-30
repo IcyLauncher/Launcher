@@ -55,7 +55,7 @@ public partial class BannerSettingsViewModel : ObservableObject
 
 
     [ObservableProperty]
-    ObservableCollection<SolidColor> solidColors;
+    ObservableCollection<SolidColor> solidColors = default!;
 
     [ObservableProperty]
     int selectedSolidColor = -1;
@@ -89,6 +89,38 @@ public partial class BannerSettingsViewModel : ObservableObject
     public async Task DeleteSolidColor(SolidColor solCol)
     {
         SolidColors.Remove(solCol);
+
+        await fileSystem.SaveAsTextAsync("Assets\\Banners\\SolidColors.json", converter.ToString(SolidColors), true);
+    }
+
+    [ICommand(AllowConcurrentExecutions = false)]
+    public async Task ResetSolidColors()
+    {
+        SolidColors.Clear();
+        
+        SolidColors.Add(new(Color.FromArgb(255, 244, 67, 54), "Red"));
+        SolidColors.Add(new(Color.FromArgb(255, 233, 30, 99), "Pink"));
+        SolidColors.Add(new(Color.FromArgb(255, 156, 39, 176), "Purple"));
+        SolidColors.Add(new(Color.FromArgb(255, 103, 55, 183), "Deep Purple"));
+        SolidColors.Add(new(Color.FromArgb(255, 63, 81, 181), "Indigo"));
+        SolidColors.Add(new(Color.FromArgb(255, 33, 150, 243), "Blue"));
+        SolidColors.Add(new(Color.FromArgb(255, 3, 169, 244), "Light Blue"));
+        SolidColors.Add(new(Color.FromArgb(255, 0, 188, 212), "Cyan"));
+        SolidColors.Add(new(Color.FromArgb(255, 0, 150, 136), "Teal"));
+        SolidColors.Add(new(Color.FromArgb(255, 78, 175, 80), "Green"));
+        SolidColors.Add(new(Color.FromArgb(255, 139, 195, 74), "Light Green"));
+        SolidColors.Add(new(Color.FromArgb(255, 205, 220, 57), "Lime"));
+        SolidColors.Add(new(Color.FromArgb(255, 255, 235, 59), "Yellow"));
+        SolidColors.Add(new(Color.FromArgb(255, 255, 193, 7), "Amber"));
+        SolidColors.Add(new(Color.FromArgb(255, 255, 152, 0), "Orange"));
+        SolidColors.Add(new(Color.FromArgb(255, 255, 87, 34), "Deep Orange"));
+        SolidColors.Add(new(Color.FromArgb(255, 121, 85, 72), "Brown"));
+        SolidColors.Add(new(Color.FromArgb(255, 158, 158, 158), "Grey"));
+        SolidColors.Add(new(Color.FromArgb(255, 96, 125, 139), "Blue Grey"));
+        SolidColors.Add(new(Color.FromArgb(255, 255, 255, 255), "White"));
+        SolidColors.Add(new(Color.FromArgb(255, 15, 15, 15), "Black"));
+        SolidColors.Add(new(Color.FromArgb(255, 0, 0, 0), "Pure Black"));
+
         await fileSystem.SaveAsTextAsync("Assets\\Banners\\SolidColors.json", converter.ToString(SolidColors), true);
     }
 }
