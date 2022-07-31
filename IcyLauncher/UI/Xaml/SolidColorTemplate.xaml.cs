@@ -13,7 +13,7 @@ public partial class SolidColorTemplate : ResourceDictionary
         InitializeComponent();
 
 
-    public readonly BannerSettingsViewModel viewModel = App.Provider.GetRequiredService<BannerSettingsViewModel>();
+    public readonly SolidColorCollection SolidColors = App.Provider.GetRequiredService<IOptions<SolidColorCollection>>().Value;
 
 
     private void OnRootLayoutPointerPressed(object sender, PointerRoutedEventArgs e)
@@ -31,14 +31,14 @@ public partial class SolidColorTemplate : ResourceDictionary
         var rect = (Rectangle)rootLayout.Children[0];
         var name = (TextBlock)rootLayout.Children[1];
 
-        var ele = viewModel.SolidColors.Where(solCol => solCol.Color == ((SolidColorBrush)rect.Fill).Color && solCol.Name == name.Text).ToArray();
+        var ele = SolidColors.Container.Where(solCol => solCol.Color == ((SolidColorBrush)rect.Fill).Color && solCol.Name == name.Text).ToArray();
         if (ele.Length == 0)
             return;
 
         var senderElement = (FrameworkElement)sender;
         var flyout = (MenuFlyout)FlyoutBase.GetAttachedFlyout(senderElement);
 
-        ((MenuFlyoutItem)flyout.Items[0]).Click += async (s, e) =>
-            await viewModel.DeleteSolidColor(ele[0]);
+        ((MenuFlyoutItem)flyout.Items[0]).Click += (s, e) =>
+            SolidColors.Container.Remove(ele[0]);
     }
 }

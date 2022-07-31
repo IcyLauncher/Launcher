@@ -161,7 +161,7 @@
                                     Padding="12,12,8,12"
                                     HorizontalAlignment="Center"
                                     ItemTemplate="{StaticResource SolidColorTemplate}"
-                                    ItemsSource="{x:Bind viewModel.SolidColors, Mode=OneWay}"
+                                    ItemsSource="{x:Bind viewModel.SolidColors.Container, Mode=OneWay}"
                                     SelectedIndex="{x:Bind viewModel.SelectedSolidColor, Mode=TwoWay}" />
                             </Grid>
                         </Grid>

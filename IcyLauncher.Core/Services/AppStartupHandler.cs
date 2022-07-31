@@ -1,15 +1,20 @@
-﻿namespace IcyLauncher.Core.Services;
+﻿using Windows.UI;
+
+namespace IcyLauncher.Core.Services;
 
 public class AppStartupHandler
 {
     public AppStartupHandler(
         IOptions<Configuration> configuration,
+        IOptions<SolidColorCollection> solidColors,
         ILogger<AppStartupHandler> logger,
         ConfigurationManager configurationManagaer,
         ThemeManager themeManager,
         WindowHandler windowHandler,
         UIElementReciever uiElementReciever,
         Window shell,
+        IConverter converter,
+        IFileSystem fileSystem,
         INavigation navigation)
     {
         AppDomain.CurrentDomain.FirstChanceException += (s, e) =>
@@ -23,12 +28,19 @@ public class AppStartupHandler
         windowHandler.MakeTransparent();
         windowHandler.SetBlur(configuration.Value.Apperance.Blur, true, configuration.Value.Apperance.UseDarkModeBlur);
 
-        shell.Closed += async (s, e) => 
+        shell.Closed += async (s, e) =>
+        {
             await configurationManagaer.ExportAsync();
+
+            await fileSystem.SaveAsTextAsync("Assets\\Banners\\SolidColors.json", converter.ToString(solidColors.Value), true);
+        };
         shell.Activate();
 
         themeManager.SetResourceColors();
         themeManager.SetUnbindableBindings();
+
+        if (solidColors.Value.Container is null)
+            solidColors.Value.Container = new(SolidColorCollection.Default);
 
         uiElementReciever.BackButton.Click += (s, e) =>
             navigation.GoBack();

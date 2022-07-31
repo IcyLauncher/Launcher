@@ -23,10 +23,13 @@ public partial class App : Application
             .ConfigureAppConfiguration((context, builder) =>
             {
                 builder.AddJsonFile("Configuration.json", true);
+                builder.AddJsonFile("Assets\\Banners\\SolidColors.json", true);
             })
             .ConfigureServices((context, services) =>
             {
                 services.Configure<Configuration>(context.Configuration);
+                services.Configure<SolidColorCollection>(context.Configuration);
+
                 var configuration = context.Configuration.Get<Configuration>();
 
                 var titleBar = UIElementProvider.TitleBar(
