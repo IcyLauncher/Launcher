@@ -93,6 +93,22 @@ public class ImagingUtility
         }
     }
 
+    public CompositionColorBrush? CreateColorBrush(Compositor compositor, Color color)
+    {
+        try
+        {
+            var brush = compositor.CreateColorBrush(color);
+
+            logger.Log("Created compositon color brush");
+            return brush;
+        }
+        catch (Exception ex)
+        {
+            logger.Log("Failed to create compositon color brush", ex);
+            return null;
+        }
+    }
+
     public SpriteVisual? CreateSpriteVisual(Compositor compositor, Vector2 size, CompositionBrush? brush)
     {
         try

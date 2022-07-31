@@ -6,6 +6,7 @@ using Microsoft.UI.Xaml.Shapes;
 using System.Collections.ObjectModel;
 using IcyLauncher.UI.Xaml;
 using System.Numerics;
+using Windows.UI;
 
 namespace IcyLauncher.ViewModels;
 
@@ -14,16 +15,24 @@ public partial class HomeViewModel : ObservableObject
     readonly ILogger<HomeViewModel> logger;
     readonly ImagingUtility imagingUtility;
     readonly ThemeManager themeManager;
+    readonly SolidColorCollection solidColors;
 
     readonly public Configuration Configuration;
 
     public readonly Updater Updater;
 
-    public HomeViewModel(IOptions<Configuration> configuration, ILogger<HomeViewModel> logger, ImagingUtility imagingUtility, ThemeManager themeManager, Updater updater)
+    public HomeViewModel(
+        IOptions<Configuration> configuration,
+        IOptions<SolidColorCollection> solidColors,
+        ILogger<HomeViewModel> logger,
+        ImagingUtility imagingUtility,
+        ThemeManager themeManager,
+        Updater updater)
     {
         this.logger = logger;
         this.imagingUtility = imagingUtility;
         this.themeManager = themeManager;
+        this.solidColors = solidColors.Value;
 
         Configuration = configuration.Value;
 
@@ -60,7 +69,20 @@ public partial class HomeViewModel : ObservableObject
         if (SelectedProfile is null)
             SelectedProfile = Profiles.First();
 
-        BannerSource = "Banners/TimeDependent/Icy Village/17.png";
+        switch (Configuration.Apperance.HomeBanner)
+        {
+            case BannerType.TimeDependent:
+                BannerSource = "Banners/TimeDependent/Icy Village/17.png";
+                break;
+            case BannerType.Gallery:
+                break;
+            case BannerType.CustomPicture:
+                break;
+            case BannerType.SolidColor:
+                if (solidColors.Container.Count > Configuration.Apperance.SelectedHomeBanner)
+                    BannerColor = solidColors.Container[Configuration.Apperance.SelectedHomeBanner].Color;
+                break;
+        };
     }
 
     Compositor? bannerCompositor;
@@ -98,7 +120,7 @@ public partial class HomeViewModel : ObservableObject
         bannerOverlayBrush = imagingUtility.CretaeMaskBrush(bannerCompositor, imagingUtility.CreateGradientBrush(bannerCompositor,
                 new(0, 0), new(1, 0),
                 new[] { (-0.2f, themeManager.Colors.Background.Gradient), (1f, themeManager.Colors.Background.GradientTransparent) }), maskOverlayBrush);
-        var bannerOverlayVisual = imagingUtility.CreateSpriteVisual(bannerCompositor, new(500, 243), bannerOverlayBrush);
+        var bannerOverlayVisual = imagingUtility.CreateSpriteVisual(bannerCompositor, new(500, 330), bannerOverlayBrush);
 
 
         banner.Children.InsertAtTop(bannerMaskVisual);
@@ -113,7 +135,7 @@ public partial class HomeViewModel : ObservableObject
         get => bannerSource;
         set
         {
-            if (BannerSource == value)
+            if (Configuration.Apperance.HomeBanner == BannerType.SolidColor || BannerSource == value)
                 return;
             if (bannerMaskBrush is null || bannerCompositor is null)
             {
@@ -125,6 +147,27 @@ public partial class HomeViewModel : ObservableObject
 
             bannerMaskBrush.Source = value is null ? null : imagingUtility.CreateImageBrush(bannerCompositor, value, CompositionStretch.UniformToFill);
             logger.Log("Updated banner image composition");
+        }
+    }
+
+    Color? bannerColor;
+    public Color? BannerColor
+    {
+        get => bannerColor;
+        set
+        {
+            if (Configuration.Apperance.HomeBanner != BannerType.SolidColor || BannerColor == value)
+                return;
+            if (bannerMaskBrush is null || bannerCompositor is null)
+            {
+                logger.Log("Tried to update banner color composition", Exceptions.IsNull);
+                return;
+            }
+
+            SetProperty(ref bannerColor, value);
+
+            bannerMaskBrush.Source = value is null ? null : imagingUtility.CreateColorBrush(bannerCompositor, value.Value);
+            logger.Log("Updated banner color composition");
         }
     }
 
@@ -184,7 +227,7 @@ public partial class HomeViewModel : ObservableObject
         new("PvP Profile", Colors.Aqua, "Blocks/Block_Of_Diamond.png".AsImage(), "1.17.1", "OnixClient"),
         new("DebugTesting", Colors.GreenYellow, "Blocks/Slime_Block.png".AsImage(), "1.16.4", "MyCustomClient.dll"),
         new("Survival SMP", Colors.Yellow, "Blocks/Furnace.png".AsImage(), "1.18", "Horion"),
-        new("RTX", Colors.Black, "Blocks/Glass.png".AsImage(), "1.16.1", "Vanilla"),
+        new("RTX", Colors.Black, "Blocks/Glass.png".AsImage(), "1.16.1", "Vanilla")
     };
 
     Profile? selectedProfile;
