@@ -76,11 +76,11 @@ public class ImagingUtility
         }
     }
 
-    public CompositionSurfaceBrush? CreateImageBrush(Compositor compositor, string source, CompositionStretch stretch)
+    public CompositionSurfaceBrush? CreateImageBrush(Compositor compositor, Uri source, CompositionStretch stretch)
     {
         try
         {
-            var brush = compositor.CreateSurfaceBrush(LoadedImageSurface.StartLoadFromUri(source.FromAssets()));
+            var brush = compositor.CreateSurfaceBrush(LoadedImageSurface.StartLoadFromUri(source));
             brush.Stretch = stretch;
 
             logger.Log("Created compositon surface (image) brush");
