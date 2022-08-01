@@ -18,6 +18,7 @@
 
                 <uix:ProfileTemplate />
                 <uix:SolidColorTemplate />
+                <uix:CustomPictureTemplate />
             </ResourceDictionary.MergedDictionaries>
 
             <xaml:ArrayConverter x:Key="ArrayConverter" />
@@ -28,6 +29,9 @@
             <xaml:DateTimeFormatter x:Key="DateTimeFormatter" />
             <xaml:BoolScrollbarVisibilityConverter x:Key="BoolScrollbarVisibilityConverter" />
             <xaml:EnumIntConverter x:Key="EnumIntConverter" />
+            <xaml:AsImage x:Key="AsImage" />
+            <xaml:ReplaceString x:Key="ReplaceString" />
+            <xaml:BoolVisibilityConverter x:Key="BoolVisibilityConverter" />
 
 
             <models:Theme x:Key="Colors" />
