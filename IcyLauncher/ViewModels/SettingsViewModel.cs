@@ -123,7 +123,7 @@ public partial class SettingsViewModel : ObservableObject
     readonly FolderPicker folderPicker = new() { SuggestedStartLocation = PickerLocationId.DocumentsLibrary };
 
     [ICommand(AllowConcurrentExecutions = false)]
-    async Task SelectDirectory(int directory)
+    async Task SelectDirectoryAsync(int directory)
     {
         var folder = await folderPicker.PickSingleFolderAsync();
 
