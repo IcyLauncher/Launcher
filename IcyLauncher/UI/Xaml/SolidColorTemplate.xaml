@@ -8,11 +8,13 @@
         <Grid
             Width="86"
             Height="122"
-            Loaded="OnRootLayoutLoaded"
             PointerPressed="OnRootLayoutPointerPressed">
             <FlyoutBase.AttachedFlyout>
                 <MenuFlyout>
-                    <MenuFlyoutItem Text="Delete">
+                    <MenuFlyoutItem
+                        Click="OnDeleteClick"
+                        Tag="{x:Bind}"
+                        Text="Delete">
                         <MenuFlyoutItem.Icon>
                             <SymbolIcon Symbol="Delete" />
                         </MenuFlyoutItem.Icon>
