@@ -56,9 +56,12 @@ public partial class HomeViewModel : ObservableObject
     }
 
 
+    readonly List<string> customBannerPictrues = new();
+
     public void OnPageLoaded(object sender, RoutedEventArgs? _)
     {
-        bannerProfileGrid = (Grid)((Grid)((Grid)((Page)sender).Content).Children[0]).Children[2];
+        if (bannerProfileGrid is null)
+            bannerProfileGrid = (Grid)((Grid)((Grid)((Page)sender).Content).Children[0]).Children[2];
 
         if (bannerProfileInBoard is null)
         {
@@ -72,15 +75,37 @@ public partial class HomeViewModel : ObservableObject
         switch (Configuration.Apperance.HomeBanner)
         {
             case BannerType.TimeDependent:
-                BannerSource = "Banners/TimeDependent/Icy Village/17.png";
+                BannerSource = "Banners/TimeDependent/Icy Village/17.png".FromAssets();
                 break;
             case BannerType.Gallery:
                 break;
             case BannerType.CustomPicture:
+                customBannerPictrues.Clear();
+                foreach (var img in Directory.GetFiles("Assets\\Banners\\Custom").Where(path =>
+                    path.EndsWith(".jpg") ||
+                    path.EndsWith(".jpeg") ||
+                    path.EndsWith(".png")))
+                    customBannerPictrues.Add(img);
+
+                logger.Log("Reloaded custom pictures");
+
+                if (Configuration.Apperance.SelectedHomeBanner < 0 || Configuration.Apperance.SelectedHomeBanner >= customBannerPictrues.Count)
+                {
+                    BannerSource = "Banners/NoBanner.png".FromAssets();
+                    return;
+                }
+
+                BannerSource = new(System.IO.Path.Combine(Computer.CurrentDirectory, customBannerPictrues[Configuration.Apperance.SelectedHomeBanner]));
                 break;
             case BannerType.SolidColor:
-                if (solidColors.Container.Count > Configuration.Apperance.SelectedHomeBanner)
-                    BannerColor = solidColors.Container[Configuration.Apperance.SelectedHomeBanner].Color;
+                if (Configuration.Apperance.SelectedHomeBanner < 0 || Configuration.Apperance.SelectedHomeBanner >= solidColors.Container.Count)
+                {
+                    BannerSource = "Banners/NoBanner.png".FromAssets();
+                    return;
+                }
+
+
+                BannerColor = solidColors.Container[Configuration.Apperance.SelectedHomeBanner].Color;
                 break;
         };
     }
@@ -129,13 +154,13 @@ public partial class HomeViewModel : ObservableObject
         logger.Log("Initialized banner image composition");
     }
 
-    string? bannerSource;
-    public string? BannerSource
+    Uri? bannerSource;
+    public Uri? BannerSource
     {
         get => bannerSource;
         set
         {
-            if (Configuration.Apperance.HomeBanner == BannerType.SolidColor || BannerSource == value)
+            if (value == BannerSource)
                 return;
             if (bannerMaskBrush is null || bannerCompositor is null)
             {
@@ -156,7 +181,7 @@ public partial class HomeViewModel : ObservableObject
         get => bannerColor;
         set
         {
-            if (Configuration.Apperance.HomeBanner != BannerType.SolidColor || BannerColor == value)
+            if (BannerColor == value)
                 return;
             if (bannerMaskBrush is null || bannerCompositor is null)
             {
