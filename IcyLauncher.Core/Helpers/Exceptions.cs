@@ -10,5 +10,9 @@ public class Exceptions
 
     public static readonly Exception IsNull = new("Object is null: Object has to be initialized before");
 
-    public static readonly Exception FileExits = new("Failed to save file", new("File with the same name already exists in destination directory"));
+    public static readonly Exception FileExits = new("File with the same name already exists in destination directory");
+
+    public static readonly Exception FileNotExistsOrLocked = new("File does not exist in destination directory or file is locked");
+
+    public static readonly Exception Timeout = new("Action failed: Timeout has been exceeded");
 }
