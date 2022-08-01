@@ -12,7 +12,6 @@
     xmlns:ui="using:IcyLauncher.UI"
     Name="RootPage"
     Background="Transparent"
-    Loaded="{x:Bind viewModel.OnPageLoaded}"
     NavigationCacheMode="Enabled"
     mc:Ignorable="d">
     <Page.Resources>
@@ -56,7 +55,7 @@
                         Name="BannerType"
                         Width="200"
                         PlaceholderText="Select..."
-                        SelectedIndex="{x:Bind viewModel.Configuration.Apperance.HomeBanner, Mode=TwoWay, Converter={StaticResource EnumIntConverter}}"
+                        SelectedIndex="{x:Bind viewModel.SelectedBannerType, Mode=TwoWay, Converter={StaticResource EnumIntConverter}}"
                         ToolTipService.ToolTip="Select banner type">
                         <ComboBoxItem Content="Time Dependent" />
                         <ComboBoxItem Content="Gallery" />
@@ -67,7 +66,7 @@
 
                 <Pivot
                     Grid.Row="2"
-                    SelectedIndex="{x:Bind BannerType.SelectedIndex, Mode=OneWay}"
+                    SelectedIndex="{x:Bind viewModel.SelectedBannerType, Mode=TwoWay, Converter={StaticResource EnumIntConverter}}"
                     Style="{StaticResource NoHeaderPivotStyle}">
                     <Pivot.HeaderTemplate>
                         <DataTemplate>
@@ -84,7 +83,55 @@
                     </PivotItem>
 
                     <PivotItem>
-                        <Grid Background="Green" />
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="12" />
+                                <RowDefinition Height="*" />
+                            </Grid.RowDefinitions>
+
+                            <ContentControl Tag="Custom Picture|Use your own picture as the home banner. " Template="{StaticResource SettingsCard}">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="8" />
+                                        <ColumnDefinition Width="160" />
+                                    </Grid.ColumnDefinitions>
+                                    <Button
+                                        Command="{x:Bind viewModel.AddCustomPictureCommand}"
+                                        Content="Add custom picture"
+                                        ToolTipService.ToolTip="Add custom picture" />
+
+                                    <Button
+                                        Grid.Column="2"
+                                        HorizontalAlignment="Stretch"
+                                        Command="{x:Bind viewModel.ResetCustomPicturesCommand}"
+                                        Content="Reset custom pictures"
+                                        ToolTipService.ToolTip="Reset custom pictures"
+                                        Visibility="{x:Bind viewModel.ResetCustomPicturesCommand.IsRunning, Mode=OneWay, Converter={StaticResource BoolVisibilityConverter}, ConverterParameter=0}" />
+                                    <Button
+                                        Grid.Column="2"
+                                        HorizontalAlignment="Stretch"
+                                        Command="{x:Bind viewModel.ResetCustomPicturesCancelCommand}"
+                                        Content="Cancel"
+                                        ToolTipService.ToolTip="Cancell resetting custom pictures"
+                                        Visibility="{x:Bind viewModel.ResetCustomPicturesCommand.IsRunning, Mode=OneWay, Converter={StaticResource BoolVisibilityConverter}, ConverterParameter=1}" />
+
+                                </Grid>
+                            </ContentControl>
+
+                            <Grid
+                                Grid.Row="2"
+                                Background="{ThemeResource ControlPrimary}"
+                                CornerRadius="8">
+                                <GridView
+                                    Padding="12,12,8,12"
+                                    HorizontalAlignment="Center"
+                                    ItemTemplate="{StaticResource CustomPictureTemplate}"
+                                    ItemsSource="{x:Bind viewModel.CustomPictures}"
+                                    SelectedIndex="{x:Bind viewModel.SelectedCustomPicture, Mode=TwoWay}" />
+                            </Grid>
+                        </Grid>
                     </PivotItem>
 
                     <PivotItem>
@@ -133,7 +180,7 @@
                                                             ToolTipService.ToolTip="Custom color name" />
                                                         <Button
                                                             Grid.Column="2"
-                                                            Command="{x:Bind viewModel.AddCustomColorCommand}"
+                                                            Command="{x:Bind viewModel.AddSolidColorCommand}"
                                                             CommandParameter="{x:Bind CustomColorFlyout}"
                                                             Content="Add"
                                                             IsEnabled="True"
