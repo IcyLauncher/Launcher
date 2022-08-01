@@ -1,6 +1,4 @@
 ﻿using System.IO;
-using System.Security;
-using System.Security.Permissions;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -20,6 +18,112 @@ public class FileSystem : IFileSystem
 
     public bool FileExists(string path) =>
         File.Exists(path);
+
+    public bool FileWritable(string path)
+    {
+        try
+        {
+            FileStream fs = new(path, FileMode.Open, FileAccess.Write);
+            fs.Close();
+            fs.Dispose();
+
+            logger.Log($"Checked if file writable: true {path}");
+            return true;
+        }
+        catch (Exception)
+        {
+            logger.Log($"Checked if file writable: false {path}");
+            return false;
+        }
+    }
+
+    public void CopyFile(string path, string destination, bool overwrite)
+    {
+        if (!FileExists(path))
+            throw Exceptions.FileNotExistsOrLocked;
+
+        if (FileExists(destination) && !overwrite)
+            throw Exceptions.FileExits;
+
+        File.Copy(path, destination, overwrite);
+
+        logger.Log($"Successfully copied file {path}");
+    }
+
+    public void DeleteFile(string path)
+    {
+        if (!FileExists(path) || !FileWritable(path))
+            throw Exceptions.FileNotExistsOrLocked;
+
+        File.Delete(path);
+
+        logger.Log($"Successfully deleted file {path}");
+    }
+
+    public async Task DeleteFileAsync(string path, int timeout = 60000, CancellationToken cancellationToken = default)
+    {
+        if (!FileExists(path) || !FileWritable(path))
+            throw Exceptions.FileNotExistsOrLocked;
+
+        using (FileSystemWatcher fw = new(Path.GetDirectoryName(path)!) { EnableRaisingEvents = true })
+        {
+            bool done = false;
+            int cycles = 0;
+
+            fw.Deleted += (object sender, FileSystemEventArgs e) =>
+                done = e.Name == Path.GetFileName(path);
+
+            File.Delete(path);
+            logger.Log($"Delete file asynchronous: started {path}");
+
+            while (!done)
+            {
+                if (cancellationToken.IsCancellationRequested)
+                {
+                    logger.Log($"Delete file asynchronous: cancelled {path}");
+                    return;
+                }
+
+                if (cycles >= timeout / 1000)
+                {
+                    logger.Log($"Delete file asynchronous: timeout {path}");
+                    throw Exceptions.Timeout;
+                }
+                timeout += 1;
+                await Task.Delay(1000, cancellationToken);
+            }
+
+            logger.Log($"Delete file asynchronous: finished {path}");
+        }
+    }
+
+    public async Task<bool> WaitForFileLock(string path, int timeout = 60000, CancellationToken cancellationToken = default)
+    {
+        if (!FileExists(path))
+            throw Exceptions.FileNotExistsOrLocked;
+
+        int cycles = 0;
+
+        while (!FileWritable(path))
+        {
+            if (cancellationToken.IsCancellationRequested)
+            {
+                logger.Log($"Waited for file lock: cancelled  {path}");
+                return false;
+            }
+
+            if (cycles >= timeout / 1000)
+            {
+                logger.Log($"Waited for file lock: timeout  {path}");
+                throw Exceptions.Timeout;
+            }
+            timeout += 1;
+            await Task.Delay(1000, cancellationToken);
+        }
+
+        logger.Log($"Waited for file lock: true {path}");
+        return true;
+    }
 
 
     public Task<string> ReadAsTextAsync(string path, CancellationToken cancellationToken = default)
@@ -48,6 +152,7 @@ public class FileSystem : IFileSystem
         try
         {
             using (File.Create(Path.Combine(directory, Path.GetRandomFileName()), 1, FileOptions.DeleteOnClose)) { }
+
             logger.Log($"Checked if directory is writeable: true");
             return true;
         }
