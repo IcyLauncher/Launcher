@@ -9,7 +9,7 @@
     xmlns:md="using:CommunityToolkit.WinUI.UI.Media"
     xmlns:media="using:CommunityToolkit.WinUI.UI.Media"
     xmlns:models="using:IcyLauncher.Core.Models"
-    xmlns:ui="using:IcyLauncher.UI"
+    xmlns:ui="using:IcyLauncher.UI" Loaded="{x:Bind viewModel.OnPageLoaded}"
     Name="RootPage"
     Background="Transparent"
     NavigationCacheMode="Enabled"

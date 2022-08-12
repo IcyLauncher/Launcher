@@ -14,6 +14,8 @@ public interface INavigation
 
     bool SetCurrentNavigationViewItem(NavigationViewItem item);
 
+    bool SetCurrentIndex(int index);
+
     bool SetCurrentPage(Type? type, object? parameter = null);
 
     bool Navigate(string page);

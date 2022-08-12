@@ -9,6 +9,9 @@ public class Navigation : INavigation
     readonly NavigationView navigationView;
     readonly Frame frame;
     readonly Button backButton;
+    readonly IEnumerable<object> navigationViewItems;
+
+    bool skipEvent = false;
 
     public Navigation(ILogger<Navigation> logger, NavigationView navigationView, Frame frame, Button backButton)
     {
@@ -17,9 +20,11 @@ public class Navigation : INavigation
         this.frame = frame;
         this.backButton = backButton;
 
+        navigationViewItems = this.navigationView.MenuItems.Concat(navigationView.FooterMenuItems);
+
         this.navigationView.SelectionChanged += (s, e) =>
         {
-            if (e.SelectedItemContainer is NavigationViewItem item)
+            if (!skipEvent && e.SelectedItemContainer is NavigationViewItem item)
                 SetCurrentPage($"Views.{item.Tag}View".AsType() is Type type ? type : "Views.NoPageView".AsType());
         };
         this.navigationView.BackRequested += (s, e) => GoBack();
@@ -64,6 +69,23 @@ public class Navigation : INavigation
             navigationView.SelectedItem = item;
 
             logger.Log("Set current NavigationView item");
+            return true;
+        }
+        catch (Exception ex)
+        {
+            logger.Log("Failed to set current NavigationView item", ex);
+            return false;
+        }
+    }
+    public bool SetCurrentIndex(int index)
+    {
+        try
+        {
+            skipEvent = true;
+            navigationView.SelectedItem = navigationViewItems.ElementAt(index);
+            skipEvent = false;
+
+            logger.Log("Set current NavigationView item without updating page");
             return true;
         }
         catch (Exception ex)

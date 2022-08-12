@@ -13,6 +13,7 @@ public partial class BannerSettingsViewModel : ObservableObject
     readonly WindowHandler windowHandler;
     readonly IFileSystem fileSystem;
     readonly IMessage message;
+    readonly INavigation navigation;
 
     public readonly Configuration Configuration;
     public readonly SolidColorCollection SolidColors;
@@ -23,12 +24,14 @@ public partial class BannerSettingsViewModel : ObservableObject
         ILogger<ProfilesViewModel> logger,
         WindowHandler windowHandler,
         IFileSystem fileSystem,
-        IMessage message)
+        IMessage message,
+        INavigation navigation)
     {
         this.logger = logger;
         this.windowHandler = windowHandler;
         this.fileSystem = fileSystem;
         this.message = message;
+        this.navigation = navigation;
 
         Configuration = configuration.Value;
         SolidColors = solidColors.Value;
@@ -69,7 +72,11 @@ public partial class BannerSettingsViewModel : ObservableObject
     [ObservableProperty]
     Visibility solidColorVisibility = Visibility.Collapsed;
 
-    
+
+    public void OnPageLoaded(object _, RoutedEventArgs _1) =>
+        navigation.SetCurrentIndex(5);
+
+
     [ObservableProperty]
     Brush bannerBrush = default!;
 
