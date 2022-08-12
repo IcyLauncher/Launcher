@@ -64,156 +64,159 @@
                     </ComboBox>
                 </ContentControl>
 
-                <Pivot
-                    Grid.Row="2"
-                    SelectedIndex="{x:Bind viewModel.SelectedBannerType, Mode=TwoWay, Converter={StaticResource EnumIntConverter}}"
-                    Style="{StaticResource NoHeaderPivotStyle}">
-                    <Pivot.HeaderTemplate>
-                        <DataTemplate>
-                            <Grid />
-                        </DataTemplate>
-                    </Pivot.HeaderTemplate>
+                <Grid Grid.Row="2">
+                    <Grid.Transitions>
+                        <ContentThemeTransition />
+                    </Grid.Transitions>
 
-                    <PivotItem>
-                        <Grid Background="Blue" />
-                    </PivotItem>
+                    <Grid Background="Blue" Visibility="{x:Bind viewModel.TimeDependentVisibility, Mode=OneWay}" />
 
-                    <PivotItem>
-                        <Grid Background="Red" />
-                    </PivotItem>
+                    <Grid Visibility="{x:Bind viewModel.GalleryVisibility, Mode=OneWay}">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="12" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
 
-                    <PivotItem>
-                        <Grid>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto" />
-                                <RowDefinition Height="12" />
-                                <RowDefinition Height="*" />
-                            </Grid.RowDefinitions>
+                        <ContentControl Tag="Gallery|Use a pre-made banner that fits perfectly with IcyLauncher. " Template="{StaticResource SettingsCard}" />
 
-                            <ContentControl Tag="Custom Picture|Use your own picture as the home banner. " Template="{StaticResource SettingsCard}">
-                                <Grid>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="Auto" />
-                                        <ColumnDefinition Width="8" />
-                                        <ColumnDefinition Width="160" />
-                                    </Grid.ColumnDefinitions>
-                                    <Button
-                                        Command="{x:Bind viewModel.AddCustomPictureCommand}"
-                                        Content="Add custom picture"
-                                        ToolTipService.ToolTip="Add custom picture" />
-
-                                    <Button
-                                        Grid.Column="2"
-                                        HorizontalAlignment="Stretch"
-                                        Command="{x:Bind viewModel.ResetCustomPicturesCommand}"
-                                        Content="Reset custom pictures"
-                                        ToolTipService.ToolTip="Reset custom pictures"
-                                        Visibility="{x:Bind viewModel.ResetCustomPicturesCommand.IsRunning, Mode=OneWay, Converter={StaticResource BoolVisibilityConverter}, ConverterParameter=0}" />
-                                    <Button
-                                        Grid.Column="2"
-                                        HorizontalAlignment="Stretch"
-                                        Command="{x:Bind viewModel.ResetCustomPicturesCancelCommand}"
-                                        Content="Cancel"
-                                        ToolTipService.ToolTip="Cancell resetting custom pictures"
-                                        Visibility="{x:Bind viewModel.ResetCustomPicturesCommand.IsRunning, Mode=OneWay, Converter={StaticResource BoolVisibilityConverter}, ConverterParameter=1}" />
-
-                                </Grid>
-                            </ContentControl>
-
-                            <Grid
-                                Grid.Row="2"
-                                Background="{ThemeResource ControlPrimary}"
-                                CornerRadius="8">
-                                <GridView
-                                    Padding="12,12,8,12"
-                                    HorizontalAlignment="Center"
-                                    ItemTemplate="{StaticResource CustomPictureTemplate}"
-                                    ItemsSource="{x:Bind viewModel.CustomPictures}"
-                                    SelectedIndex="{x:Bind viewModel.SelectedCustomPicture, Mode=TwoWay}" />
-                            </Grid>
+                        <Grid
+                            Grid.Row="2"
+                            Background="{ThemeResource ControlPrimary}"
+                            CornerRadius="8">
+                            <GridView Padding="12,12,8,12" HorizontalAlignment="Center" />
                         </Grid>
-                    </PivotItem>
+                    </Grid>
 
-                    <PivotItem>
-                        <Grid>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto" />
-                                <RowDefinition Height="12" />
-                                <RowDefinition Height="*" />
-                            </Grid.RowDefinitions>
+                    <Grid Visibility="{x:Bind viewModel.CustomPictureVisibility, Mode=OneWay}">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="12" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
 
-                            <ContentControl Tag="Solid Color|Select any solid color from the list below or choose your own color. " Template="{StaticResource SettingsCard}">
-                                <Grid>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="Auto" />
-                                        <ColumnDefinition Width="8" />
-                                        <ColumnDefinition Width="Auto" />
-                                    </Grid.ColumnDefinitions>
-                                    <Button Content="Add custom color" ToolTipService.ToolTip="Add custom color">
-                                        <Button.Flyout>
-                                            <Flyout x:Name="CustomColorFlyout" Placement="Left">
-                                                <Grid>
-                                                    <Grid.RowDefinitions>
-                                                        <RowDefinition Height="Auto" />
-                                                        <RowDefinition Height="12" />
-                                                        <RowDefinition Height="Auto" />
-                                                    </Grid.RowDefinitions>
+                        <ContentControl Tag="Custom Picture|Use your own picture as the home banner. " Template="{StaticResource SettingsCard}">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="8" />
+                                    <ColumnDefinition Width="160" />
+                                </Grid.ColumnDefinitions>
+                                <Button
+                                    Command="{x:Bind viewModel.AddCustomPictureCommand}"
+                                    Content="Add custom picture"
+                                    ToolTipService.ToolTip="Add custom picture" />
 
-                                                    <Viewbox Width="200" Height="200">
-                                                        <ColorPicker
-                                                            IsColorChannelTextInputVisible="False"
-                                                            IsColorSliderVisible="True"
-                                                            IsHexInputVisible="False"
-                                                            Color="{x:Bind viewModel.CustomColorValue, Mode=TwoWay}" />
-                                                    </Viewbox>
+                                <Button
+                                    Grid.Column="2"
+                                    HorizontalAlignment="Stretch"
+                                    Command="{x:Bind viewModel.ResetCustomPicturesCommand}"
+                                    Content="Reset custom pictures"
+                                    ToolTipService.ToolTip="Reset custom pictures"
+                                    Visibility="{x:Bind viewModel.ResetCustomPicturesCommand.IsRunning, Mode=OneWay, Converter={StaticResource BoolVisibilityConverter}, ConverterParameter=0}" />
+                                <Button
+                                    Grid.Column="2"
+                                    HorizontalAlignment="Stretch"
+                                    Command="{x:Bind viewModel.ResetCustomPicturesCancelCommand}"
+                                    Content="Cancel"
+                                    ToolTipService.ToolTip="Cancell resetting custom pictures"
+                                    Visibility="{x:Bind viewModel.ResetCustomPicturesCommand.IsRunning, Mode=OneWay, Converter={StaticResource BoolVisibilityConverter}, ConverterParameter=1}" />
 
-                                                    <Grid Grid.Row="2">
-                                                        <Grid.ColumnDefinitions>
-                                                            <ColumnDefinition Width="*" />
-                                                            <ColumnDefinition Width="12" />
-                                                            <ColumnDefinition Width="Auto" />
-                                                        </Grid.ColumnDefinitions>
+                            </Grid>
+                        </ContentControl>
 
-                                                        <ui:TextBox
-                                                            PlaceholderText="Name..."
-                                                            Text="{x:Bind viewModel.CustomColorName, Mode=TwoWay}"
-                                                            ToolTipService.ToolTip="Custom color name" />
-                                                        <Button
-                                                            Grid.Column="2"
-                                                            Command="{x:Bind viewModel.AddSolidColorCommand}"
-                                                            CommandParameter="{x:Bind CustomColorFlyout}"
-                                                            Content="Add"
-                                                            IsEnabled="True"
-                                                            ToolTipService.ToolTip="Add custom color" />
-                                                    </Grid>
+                        <Grid
+                            Grid.Row="2"
+                            Background="{ThemeResource ControlPrimary}"
+                            CornerRadius="8">
+                            <GridView
+                                Padding="12,12,8,12"
+                                HorizontalAlignment="Center"
+                                ItemTemplate="{StaticResource CustomPictureTemplate}"
+                                ItemsSource="{x:Bind viewModel.CustomPictures}"
+                                SelectedIndex="{x:Bind viewModel.SelectedCustomPicture, Mode=TwoWay}" />
+                        </Grid>
+                    </Grid>
+
+                    <Grid Visibility="{x:Bind viewModel.SolidColorVisibility, Mode=OneWay}">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="12" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+
+                        <ContentControl Tag="Solid Color|Use any solid color from the list below or create your own color. " Template="{StaticResource SettingsCard}">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="8" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+                                <Button Content="Add custom color" ToolTipService.ToolTip="Add custom color">
+                                    <Button.Flyout>
+                                        <Flyout x:Name="CustomColorFlyout" Placement="Left">
+                                            <Grid>
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition Height="Auto" />
+                                                    <RowDefinition Height="12" />
+                                                    <RowDefinition Height="Auto" />
+                                                </Grid.RowDefinitions>
+
+                                                <Viewbox Width="200" Height="200">
+                                                    <ColorPicker
+                                                        IsColorChannelTextInputVisible="False"
+                                                        IsColorSliderVisible="True"
+                                                        IsHexInputVisible="False"
+                                                        Color="{x:Bind viewModel.CustomColorValue, Mode=TwoWay}" />
+                                                </Viewbox>
+
+                                                <Grid Grid.Row="2">
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="*" />
+                                                        <ColumnDefinition Width="12" />
+                                                        <ColumnDefinition Width="Auto" />
+                                                    </Grid.ColumnDefinitions>
+
+                                                    <ui:TextBox
+                                                        PlaceholderText="Name..."
+                                                        Text="{x:Bind viewModel.CustomColorName, Mode=TwoWay}"
+                                                        ToolTipService.ToolTip="Custom color name" />
+                                                    <Button
+                                                        Grid.Column="2"
+                                                        Command="{x:Bind viewModel.AddSolidColorCommand}"
+                                                        CommandParameter="{x:Bind CustomColorFlyout}"
+                                                        Content="Add"
+                                                        IsEnabled="True"
+                                                        ToolTipService.ToolTip="Add custom color" />
                                                 </Grid>
-                                            </Flyout>
-                                        </Button.Flyout>
-                                    </Button>
+                                            </Grid>
+                                        </Flyout>
+                                    </Button.Flyout>
+                                </Button>
 
-                                    <Button
-                                        Grid.Column="2"
-                                        Command="{x:Bind viewModel.ResetSolidColorsCommand}"
-                                        Content="Reset custom colors"
-                                        ToolTipService.ToolTip="Reset custom colors" />
+                                <Button
+                                    Grid.Column="2"
+                                    Command="{x:Bind viewModel.ResetSolidColorsCommand}"
+                                    Content="Reset custom colors"
+                                    ToolTipService.ToolTip="Reset custom colors" />
 
-                                </Grid>
-                            </ContentControl>
-
-                            <Grid
-                                Grid.Row="2"
-                                Background="{ThemeResource ControlPrimary}"
-                                CornerRadius="8">
-                                <GridView
-                                    Padding="12,12,8,12"
-                                    HorizontalAlignment="Center"
-                                    ItemTemplate="{StaticResource SolidColorTemplate}"
-                                    ItemsSource="{x:Bind viewModel.SolidColors.Container, Mode=OneWay}"
-                                    SelectedIndex="{x:Bind viewModel.SelectedSolidColor, Mode=TwoWay}" />
                             </Grid>
+                        </ContentControl>
+
+                        <Grid
+                            Grid.Row="2"
+                            Background="{ThemeResource ControlPrimary}"
+                            CornerRadius="8">
+                            <GridView
+                                Padding="12,12,8,12"
+                                HorizontalAlignment="Center"
+                                ItemTemplate="{StaticResource SolidColorTemplate}"
+                                ItemsSource="{x:Bind viewModel.SolidColors.Container, Mode=OneWay}"
+                                SelectedIndex="{x:Bind viewModel.SelectedSolidColor, Mode=TwoWay}" />
                         </Grid>
-                    </PivotItem>
-                </Pivot>
+                    </Grid>
+                </Grid>
+
             </Grid>
         </Grid>
     </ui:HCont>

@@ -57,7 +57,19 @@ public partial class BannerSettingsViewModel : ObservableObject
         filePicker.FileTypeFilter.Add(".png");
     }
 
+    [ObservableProperty]
+    Visibility timeDependentVisibility = Visibility.Collapsed;
 
+    [ObservableProperty]
+    Visibility galleryVisibility = Visibility.Collapsed;
+
+    [ObservableProperty]
+    Visibility customPictureVisibility = Visibility.Collapsed;
+
+    [ObservableProperty]
+    Visibility solidColorVisibility = Visibility.Collapsed;
+
+    
     [ObservableProperty]
     Brush bannerBrush = default!;
 
@@ -76,13 +88,31 @@ public partial class BannerSettingsViewModel : ObservableObject
         switch (value)
         {
             case BannerType.TimeDependent:
+                TimeDependentVisibility = Visibility.Visible;
+                GalleryVisibility = Visibility.Collapsed;
+                CustomPictureVisibility = Visibility.Collapsed;
+                SolidColorVisibility = Visibility.Collapsed;
                 break;
             case BannerType.Gallery:
+                TimeDependentVisibility = Visibility.Collapsed;
+                GalleryVisibility = Visibility.Visible;
+                CustomPictureVisibility = Visibility.Collapsed;
+                SolidColorVisibility = Visibility.Collapsed;
                 break;
             case BannerType.CustomPicture:
+                TimeDependentVisibility = Visibility.Collapsed;
+                GalleryVisibility = Visibility.Collapsed;
+                CustomPictureVisibility = Visibility.Visible;
+                SolidColorVisibility = Visibility.Collapsed;
+
                 OnSelectedCustomPictureChanged(SelectedCustomPicture);
                 break;
             case BannerType.SolidColor:
+                TimeDependentVisibility = Visibility.Collapsed;
+                GalleryVisibility = Visibility.Collapsed;
+                CustomPictureVisibility = Visibility.Collapsed;
+                SolidColorVisibility = Visibility.Visible;
+
                 OnSelectedSolidColorChanged(SelectedSolidColor);
                 break;
         };
