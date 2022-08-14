@@ -1,0 +1,19 @@
+﻿<ResourceDictionary
+    x:Class="IcyLauncher.UI.Xaml.BannerGalleryItemTemplate"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <DataTemplate x:Key="BannerGalleryItemTemplate" x:DataType="x:String">
+        <Rectangle
+            Width="270"
+            Height="66"
+            RadiusX="4"
+            RadiusY="4"
+            Stroke="{ThemeResource ControlOutline}"
+            StrokeThickness="2">
+            <Rectangle.Fill>
+                <ImageBrush ImageSource="{x:Bind Converter={StaticResource AsImage}, ConverterParameter=1}" />
+            </Rectangle.Fill>
+        </Rectangle>
+    </DataTemplate>
+</ResourceDictionary>

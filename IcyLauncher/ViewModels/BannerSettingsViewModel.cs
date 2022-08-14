@@ -1,4 +1,6 @@
-﻿using Microsoft.UI;
+﻿using IcyLauncher.UI;
+using IcyLauncher.UI.Xaml;
+using Microsoft.UI;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Media;
 using System.Collections.ObjectModel;
@@ -37,6 +39,7 @@ public partial class BannerSettingsViewModel : ObservableObject
         SolidColors = solidColors.Value;
 
 
+        LoadGallery();
         LoadCustomPictures();
 
         switch (Configuration.Apperance.HomeBanner)
@@ -44,6 +47,7 @@ public partial class BannerSettingsViewModel : ObservableObject
             case BannerType.TimeDependent:
                 break;
             case BannerType.Gallery:
+                BannerBrush = new ImageBrush() { ImageSource = Uri.IsWellFormedUriString(Configuration.Apperance.HomeBannerUri, UriKind.Absolute) ? Configuration.Apperance.HomeBannerUri.AsImage(false) : "Banners/NoBanner.png".AsImage(), Stretch = Stretch.UniformToFill };
                 break;
             case BannerType.CustomPicture:
                 SelectedCustomPicture = Configuration.Apperance.SelectedHomeBanner;
@@ -129,9 +133,70 @@ public partial class BannerSettingsViewModel : ObservableObject
     }
 
 
+    void LoadGallery()
+    {
+        GalleryItems.Clear();
+
+        // API STUFF => API NOT DONE: EXAMPLE BANNER GALLERY ITEMS
+        GalleryItems.Add(new("Icy Village", new()
+        {
+            "ms-appx:///Assets/Banners/TimeDependent/Icy Village/0.png",
+            "ms-appx:///Assets/Banners/TimeDependent/Icy Village/3.png",
+            "ms-appx:///Assets/Banners/TimeDependent/Icy Village/6.png",
+            "ms-appx:///Assets/Banners/TimeDependent/Icy Village/9.png",
+            "ms-appx:///Assets/Banners/TimeDependent/Icy Village/12.png",
+            "ms-appx:///Assets/Banners/TimeDependent/Icy Village/14.png",
+            "ms-appx:///Assets/Banners/TimeDependent/Icy Village/17.png",
+            "ms-appx:///Assets/Banners/TimeDependent/Icy Village/20.png",
+        }));
+        GalleryItems.Add(new("Snowy Forest", new()
+        {
+            "ms-appx:///Assets/Banners/TimeDependent/Snowy Forest/0.png",
+            "ms-appx:///Assets/Banners/TimeDependent/Snowy Forest/3.png",
+            "ms-appx:///Assets/Banners/TimeDependent/Snowy Forest/6.png",
+            "ms-appx:///Assets/Banners/TimeDependent/Snowy Forest/9.png",
+            "ms-appx:///Assets/Banners/TimeDependent/Snowy Forest/12.png",
+            "ms-appx:///Assets/Banners/TimeDependent/Snowy Forest/14.png",
+            "ms-appx:///Assets/Banners/TimeDependent/Snowy Forest/17.png",
+            "ms-appx:///Assets/Banners/TimeDependent/Snowy Forest/20.png",
+        }));
+        GalleryItems.Add(new("Fortnite", new()
+        {
+            "https://cdn1.epicgames.com/offer/fn/21BR_KeyArt_EGS_Launcher_Blade_2560x1440_2560x1440-5335449297e75a6cc7c72ad01609b8e1",
+            "https://pbs.twimg.com/media/Eaqp2csWsAEHSYx.jpg",
+            "https://i0.wp.com/mentalmars.com/wp-content/uploads/2018/05/Fortnite-Wallpaper-Preview.jpg?fit=800%2C450&ssl=1",
+            "https://wallpaper.dog/large/20344409.jpg"
+        }));
+
+        logger.Log("Reloaded gallery items");
+    }
+
+    public ObservableCollection<BannerGalleryItem> GalleryItems = new();
+
+    public async Task OpenBannerGalleryItem(BannerGalleryItem item)
+    {
+        var element = new ScrollLane() { ItemsSource = item.Collection, ItemTemplate = (DataTemplate)Application.Current.Resources["BannerGalleryItemTemplate"] };
+
+        if (await message.ShowAsync($"{item.Title} - Count: {item.Collection.Count}", element, true, primaryButton: "Ok") != ContentDialogResult.Primary)
+            return;
+
+        if (string.IsNullOrEmpty((string)element.SelectedItem))
+        {
+            ResetBannerBrush();
+            return;
+        }
+
+        BannerBrush = new ImageBrush() { ImageSource = Uri.IsWellFormedUriString((string)element.SelectedItem, UriKind.Absolute) ? ((string)element.SelectedItem).AsImage(false) : "Banners/NoBanner.png".AsImage(), Stretch = Stretch.UniformToFill };
+
+        Configuration.Apperance.HomeBannerUri = (string)element.SelectedItem;
+        logger.Log("Set home banner: Gallery");
+    }
+
+
     void LoadCustomPictures()
     {
         CustomPictures.Clear();
+
         foreach (var img in Directory.GetFiles("Assets\\Banners\\Custom").Where(path =>
             path.EndsWith(".jpg") ||
             path.EndsWith(".jpeg") ||

@@ -41,6 +41,9 @@ public partial class ConfigurationApperance : ObservableObject
     [ObservableProperty]
     int selectedHomeBanner = -1;
 
+    [ObservableProperty]
+    string homeBannerUri = "ms-appx:///Assets/Banners/NoBanner.png";
+
     public Theme Colors { get; set; } = new();
 
     [ObservableProperty]

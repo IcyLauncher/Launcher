@@ -78,6 +78,7 @@ public partial class HomeViewModel : ObservableObject
                 BannerSource = "Banners/TimeDependent/Icy Village/17.png".FromAssets();
                 break;
             case BannerType.Gallery:
+                BannerSource = Uri.IsWellFormedUriString(Configuration.Apperance.HomeBannerUri, UriKind.Absolute) ? new(Configuration.Apperance.HomeBannerUri) : "Banners/NoBanner.png".FromAssets();
                 break;
             case BannerType.CustomPicture:
                 customBannerPictrues.Clear();

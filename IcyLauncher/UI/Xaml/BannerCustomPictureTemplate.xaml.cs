@@ -5,9 +5,9 @@ using Microsoft.UI.Xaml.Input;
 
 namespace IcyLauncher.UI.Xaml;
 
-public partial class CustomPictureTemplate : ResourceDictionary
+public partial class BannerCustomPictureTemplate : ResourceDictionary
 {
-    public CustomPictureTemplate() =>
+    public BannerCustomPictureTemplate() =>
         InitializeComponent();
 
 

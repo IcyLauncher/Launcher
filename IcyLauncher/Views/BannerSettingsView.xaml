@@ -9,9 +9,10 @@
     xmlns:md="using:CommunityToolkit.WinUI.UI.Media"
     xmlns:media="using:CommunityToolkit.WinUI.UI.Media"
     xmlns:models="using:IcyLauncher.Core.Models"
-    xmlns:ui="using:IcyLauncher.UI" Loaded="{x:Bind viewModel.OnPageLoaded}"
+    xmlns:ui="using:IcyLauncher.UI"
     Name="RootPage"
     Background="Transparent"
+    Loaded="{x:Bind viewModel.OnPageLoaded}"
     NavigationCacheMode="Enabled"
     mc:Ignorable="d">
     <Page.Resources>
@@ -84,7 +85,12 @@
                             Grid.Row="2"
                             Background="{ThemeResource ControlPrimary}"
                             CornerRadius="8">
-                            <GridView Padding="12,12,8,12" HorizontalAlignment="Center" />
+                            <GridView
+                                Padding="12,12,8,12"
+                                HorizontalAlignment="Center"
+                                ItemTemplate="{StaticResource BannerGalleryTemplate}"
+                                ItemsSource="{x:Bind viewModel.GalleryItems}"
+                                SelectionMode="None" />
                         </Grid>
                     </Grid>
 
@@ -132,7 +138,7 @@
                             <GridView
                                 Padding="12,12,8,12"
                                 HorizontalAlignment="Center"
-                                ItemTemplate="{StaticResource CustomPictureTemplate}"
+                                ItemTemplate="{StaticResource BannerCustomPictureTemplate}"
                                 ItemsSource="{x:Bind viewModel.CustomPictures}"
                                 SelectedIndex="{x:Bind viewModel.SelectedCustomPicture, Mode=TwoWay}" />
                         </Grid>
