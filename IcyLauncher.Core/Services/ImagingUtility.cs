@@ -58,7 +58,7 @@ public class ImagingUtility
         }
     }
 
-    public CompositionMaskBrush? CretaeMaskBrush(Compositor compositor, CompositionBrush? source, CompositionBrush? mask)
+    public CompositionMaskBrush? CreateMaskBrush(Compositor compositor, CompositionBrush? source, CompositionBrush? mask)
     {
         try
         {
@@ -76,12 +76,14 @@ public class ImagingUtility
         }
     }
 
-    public CompositionSurfaceBrush? CreateImageBrush(Compositor compositor, Uri source, CompositionStretch stretch)
+    public CompositionSurfaceBrush? CreateImageBrush(Compositor compositor, Uri source, CompositionStretch stretch, float horizontalAlignmentRatio = 0.0f, float verticalAlignmentRatio = 0.5f)
     {
         try
         {
             var brush = compositor.CreateSurfaceBrush(LoadedImageSurface.StartLoadFromUri(source));
             brush.Stretch = stretch;
+            brush.HorizontalAlignmentRatio = horizontalAlignmentRatio;
+            brush.VerticalAlignmentRatio = verticalAlignmentRatio;
 
             logger.Log("Created compositon surface (image) brush");
             return brush;
@@ -109,13 +111,14 @@ public class ImagingUtility
         }
     }
 
-    public SpriteVisual? CreateSpriteVisual(Compositor compositor, Vector2 size, CompositionBrush? brush)
+    public SpriteVisual? CreateSpriteVisual(Compositor compositor, Vector2 size, CompositionBrush? brush, Vector3 offset = default)
     {
         try
         {
             var visual = compositor.CreateSpriteVisual();
             visual.Brush = brush;
             visual.Size = size;
+            visual.Offset = offset;
 
             logger.Log("Created sprite visual");
             return visual;
