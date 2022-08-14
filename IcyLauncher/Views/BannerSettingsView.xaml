@@ -70,7 +70,27 @@
                         <ContentThemeTransition />
                     </Grid.Transitions>
 
-                    <Grid Background="Blue" Visibility="{x:Bind viewModel.TimeDependentVisibility, Mode=OneWay}" />
+                    <Grid Visibility="{x:Bind viewModel.TimeDependentVisibility, Mode=OneWay}">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="12" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+
+                        <ContentControl Tag="Time Dependent|Use a beautiful wallpaper which changes throughout the day." Template="{StaticResource SettingsCard}" />
+
+                        <Grid
+                            Grid.Row="2"
+                            Background="{ThemeResource ControlPrimary}"
+                            CornerRadius="8">
+                            <GridView
+                                Padding="12,12,8,12"
+                                HorizontalAlignment="Center"
+                                ItemTemplate="{StaticResource BannerTimeDependentTemplate}"
+                                ItemsSource="{x:Bind viewModel.TimeDependentItems}"
+                                SelectedIndex="{x:Bind viewModel.SelectedTimeDependentItem, Mode=TwoWay}" />
+                        </Grid>
+                    </Grid>
 
                     <Grid Visibility="{x:Bind viewModel.GalleryVisibility, Mode=OneWay}">
                         <Grid.RowDefinitions>
@@ -79,7 +99,7 @@
                             <RowDefinition Height="*" />
                         </Grid.RowDefinitions>
 
-                        <ContentControl Tag="Gallery|Use a pre-made banner that fits perfectly with IcyLauncher. " Template="{StaticResource SettingsCard}" />
+                        <ContentControl Tag="Gallery|Use a pre-made banner which perfectly fits IcyLauncher. " Template="{StaticResource SettingsCard}" />
 
                         <Grid
                             Grid.Row="2"

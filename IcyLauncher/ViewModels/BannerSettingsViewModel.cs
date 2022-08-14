@@ -39,12 +39,37 @@ public partial class BannerSettingsViewModel : ObservableObject
         SolidColors = solidColors.Value;
 
 
+        this.windowHandler.Register(filePicker);
+        filePicker.FileTypeFilter.Add(".jpg");
+        filePicker.FileTypeFilter.Add(".jpeg");
+        filePicker.FileTypeFilter.Add(".png");
+
+        SetupBannerSettingsViewModel();
+    }
+
+    [ObservableProperty]
+    Visibility timeDependentVisibility = Visibility.Visible;
+
+    [ObservableProperty]
+    Visibility galleryVisibility = Visibility.Collapsed;
+
+    [ObservableProperty]
+    Visibility customPictureVisibility = Visibility.Collapsed;
+
+    [ObservableProperty]
+    Visibility solidColorVisibility = Visibility.Collapsed;
+
+
+    public void SetupBannerSettingsViewModel()
+    {
+        LoadTimeDependent();
         LoadGallery();
         LoadCustomPictures();
 
         switch (Configuration.Apperance.HomeBanner)
         {
             case BannerType.TimeDependent:
+                SelectedTimeDependentItem = Configuration.Apperance.SelectedHomeBanner;
                 break;
             case BannerType.Gallery:
                 BannerBrush = new ImageBrush() { ImageSource = Uri.IsWellFormedUriString(Configuration.Apperance.HomeBannerUri, UriKind.Absolute) ? Configuration.Apperance.HomeBannerUri.AsImage(false) : "Banners/NoBanner.png".AsImage(), Stretch = Stretch.UniformToFill };
@@ -57,25 +82,7 @@ public partial class BannerSettingsViewModel : ObservableObject
                 break;
         };
         SelectedBannerType = Configuration.Apperance.HomeBanner;
-
-        this.windowHandler.Register(filePicker);
-        filePicker.FileTypeFilter.Add(".jpg");
-        filePicker.FileTypeFilter.Add(".jpeg");
-        filePicker.FileTypeFilter.Add(".png");
     }
-
-    [ObservableProperty]
-    Visibility timeDependentVisibility = Visibility.Collapsed;
-
-    [ObservableProperty]
-    Visibility galleryVisibility = Visibility.Collapsed;
-
-    [ObservableProperty]
-    Visibility customPictureVisibility = Visibility.Collapsed;
-
-    [ObservableProperty]
-    Visibility solidColorVisibility = Visibility.Collapsed;
-
 
     public void OnPageLoaded(object _, RoutedEventArgs _1) =>
         navigation.SetCurrentIndex(5);
@@ -103,6 +110,8 @@ public partial class BannerSettingsViewModel : ObservableObject
                 GalleryVisibility = Visibility.Collapsed;
                 CustomPictureVisibility = Visibility.Collapsed;
                 SolidColorVisibility = Visibility.Collapsed;
+
+                OnSelectedTimeDependentItemChanged(SelectedTimeDependentItem);
                 break;
             case BannerType.Gallery:
                 TimeDependentVisibility = Visibility.Collapsed;
@@ -130,6 +139,68 @@ public partial class BannerSettingsViewModel : ObservableObject
 
         Configuration.Apperance.HomeBanner = value;
         logger.Log("Selected banner type changed");
+    }
+
+
+    void LoadTimeDependent()
+    {
+        TimeDependentItems.Clear();
+
+        // API STUFF => API NOT DONE: LOCAL TIME DEPENDENT ITEMS
+        TimeDependentItems.Add(new("Icy Village",
+            "ms-appx:///Assets/Banners/TimeDependent/Icy Village/0.png",
+            "ms-appx:///Assets/Banners/TimeDependent/Icy Village/3.png",
+            "ms-appx:///Assets/Banners/TimeDependent/Icy Village/6.png",
+            "ms-appx:///Assets/Banners/TimeDependent/Icy Village/9.png",
+            "ms-appx:///Assets/Banners/TimeDependent/Icy Village/12.png",
+            "ms-appx:///Assets/Banners/TimeDependent/Icy Village/15.png",
+            "ms-appx:///Assets/Banners/TimeDependent/Icy Village/18.png",
+            "ms-appx:///Assets/Banners/TimeDependent/Icy Village/21.png"));
+        TimeDependentItems.Add(new("Showy Forest",
+            "ms-appx:///Assets/Banners/TimeDependent/Snowy Forest/0.png",
+            "ms-appx:///Assets/Banners/TimeDependent/Snowy Forest/3.png",
+            "ms-appx:///Assets/Banners/TimeDependent/Snowy Forest/6.png",
+            "ms-appx:///Assets/Banners/TimeDependent/Snowy Forest/9.png",
+            "ms-appx:///Assets/Banners/TimeDependent/Snowy Forest/12.png",
+            "ms-appx:///Assets/Banners/TimeDependent/Snowy Forest/15.png",
+            "ms-appx:///Assets/Banners/TimeDependent/Snowy Forest/18.png",
+            "ms-appx:///Assets/Banners/TimeDependent/Snowy Forest/21.png"));
+
+        logger.Log("Reloaded time dependent items");
+    }
+
+    public ObservableCollection<BannerTimeDependentItem> TimeDependentItems = new();
+
+    [ObservableProperty]
+    int selectedTimeDependentItem = -1;
+
+    partial void OnSelectedTimeDependentItemChanged(int value)
+    {
+        Configuration.Apperance.SelectedHomeBanner = value;
+
+        if (value < 0 || value >= TimeDependentItems.Count)
+        {
+            ResetBannerBrush();
+            return;
+        }
+
+        BannerBrush = new ImageBrush()
+        {
+            ImageSource = (DateTime.Now.Hour.RoundDown(new[] { 0, 3, 6, 9, 12, 15, 18, 21 }) switch
+            {
+                0 => TimeDependentItems[SelectedTimeDependentItem].I_0,
+                3 => TimeDependentItems[SelectedTimeDependentItem].I_3,
+                6 => TimeDependentItems[SelectedTimeDependentItem].I_6,
+                9 => TimeDependentItems[SelectedTimeDependentItem].I_9,
+                12 => TimeDependentItems[SelectedTimeDependentItem].I_12,
+                15 => TimeDependentItems[SelectedTimeDependentItem].I_15,
+                18 => TimeDependentItems[SelectedTimeDependentItem].I_18,
+                21 => TimeDependentItems[SelectedTimeDependentItem].I_21,
+                _ => "ms-appx:///Assets/Banners/NoBanner.png"
+            }).AsImage(false),
+            Stretch = Stretch.UniformToFill
+        };
+        logger.Log("Set home banner: TimeDependent" + DateTime.Now.Hour.RoundDown(new[] { 0, 3, 6, 9, 12, 15, 18, 21 }));
     }
 
 
@@ -186,9 +257,9 @@ public partial class BannerSettingsViewModel : ObservableObject
             return;
         }
 
-        BannerBrush = new ImageBrush() { ImageSource = Uri.IsWellFormedUriString((string)element.SelectedItem, UriKind.Absolute) ? ((string)element.SelectedItem).AsImage(false) : "Banners/NoBanner.png".AsImage(), Stretch = Stretch.UniformToFill };
-
         Configuration.Apperance.HomeBannerUri = (string)element.SelectedItem;
+
+        BannerBrush = new ImageBrush() { ImageSource = Uri.IsWellFormedUriString((string)element.SelectedItem, UriKind.Absolute) ? ((string)element.SelectedItem).AsImage(false) : "Banners/NoBanner.png".AsImage(), Stretch = Stretch.UniformToFill };
         logger.Log("Set home banner: Gallery");
     }
 

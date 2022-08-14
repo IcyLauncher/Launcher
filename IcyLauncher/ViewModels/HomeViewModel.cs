@@ -56,7 +56,8 @@ public partial class HomeViewModel : ObservableObject
     }
 
 
-    readonly List<string> customBannerPictrues = new();
+    readonly List<string> bannerCustomPictures = new();
+    readonly List<BannerTimeDependentItem> bannerTimeDependentItems = new();
 
     public void OnPageLoaded(object sender, RoutedEventArgs? _)
     {
@@ -75,28 +76,70 @@ public partial class HomeViewModel : ObservableObject
         switch (Configuration.Apperance.HomeBanner)
         {
             case BannerType.TimeDependent:
-                BannerSource = "Banners/TimeDependent/Icy Village/17.png".FromAssets();
-                break;
-            case BannerType.Gallery:
-                BannerSource = Uri.IsWellFormedUriString(Configuration.Apperance.HomeBannerUri, UriKind.Absolute) ? new(Configuration.Apperance.HomeBannerUri) : "Banners/NoBanner.png".FromAssets();
-                break;
-            case BannerType.CustomPicture:
-                customBannerPictrues.Clear();
-                foreach (var img in Directory.GetFiles("Assets\\Banners\\Custom").Where(path =>
-                    path.EndsWith(".jpg") ||
-                    path.EndsWith(".jpeg") ||
-                    path.EndsWith(".png")))
-                    customBannerPictrues.Add(img);
+                bannerTimeDependentItems.Clear();
 
-                logger.Log("Reloaded custom pictures");
+                // API STUFF => API NOT DONE: LOCAL TIME DEPENDENT ITEMS
+                bannerTimeDependentItems.Add(new("Icy Village",
+                    "ms-appx:///Assets/Banners/TimeDependent/Icy Village/0.png",
+                    "ms-appx:///Assets/Banners/TimeDependent/Icy Village/3.png",
+                    "ms-appx:///Assets/Banners/TimeDependent/Icy Village/6.png",
+                    "ms-appx:///Assets/Banners/TimeDependent/Icy Village/9.png",
+                    "ms-appx:///Assets/Banners/TimeDependent/Icy Village/12.png",
+                    "ms-appx:///Assets/Banners/TimeDependent/Icy Village/15.png",
+                    "ms-appx:///Assets/Banners/TimeDependent/Icy Village/18.png",
+                    "ms-appx:///Assets/Banners/TimeDependent/Icy Village/21.png"));
+                bannerTimeDependentItems.Add(new("Showy Forest",
+                    "ms-appx:///Assets/Banners/TimeDependent/Snowy Forest/0.png",
+                    "ms-appx:///Assets/Banners/TimeDependent/Snowy Forest/3.png",
+                    "ms-appx:///Assets/Banners/TimeDependent/Snowy Forest/6.png",
+                    "ms-appx:///Assets/Banners/TimeDependent/Snowy Forest/9.png",
+                    "ms-appx:///Assets/Banners/TimeDependent/Snowy Forest/12.png",
+                    "ms-appx:///Assets/Banners/TimeDependent/Snowy Forest/15.png",
+                    "ms-appx:///Assets/Banners/TimeDependent/Snowy Forest/18.png",
+                    "ms-appx:///Assets/Banners/TimeDependent/Snowy Forest/21.png"));
 
-                if (Configuration.Apperance.SelectedHomeBanner < 0 || Configuration.Apperance.SelectedHomeBanner >= customBannerPictrues.Count)
+                logger.Log("Reloaded time dependent items");
+
+                if (Configuration.Apperance.SelectedHomeBanner < 0 || Configuration.Apperance.SelectedHomeBanner >= bannerTimeDependentItems.Count)
                 {
                     BannerSource = "Banners/NoBanner.png".FromAssets();
                     return;
                 }
 
-                BannerSource = new(System.IO.Path.Combine(Computer.CurrentDirectory, customBannerPictrues[Configuration.Apperance.SelectedHomeBanner]));
+                BannerSource = new(DateTime.Now.Hour.RoundDown(new[] { 0, 3, 6, 9, 12, 15, 18, 21 }) switch
+                {
+                    0 => bannerTimeDependentItems[Configuration.Apperance.SelectedHomeBanner].I_0,
+                    3 => bannerTimeDependentItems[Configuration.Apperance.SelectedHomeBanner].I_3,
+                    6 => bannerTimeDependentItems[Configuration.Apperance.SelectedHomeBanner].I_6,
+                    9 => bannerTimeDependentItems[Configuration.Apperance.SelectedHomeBanner].I_9,
+                    12 => bannerTimeDependentItems[Configuration.Apperance.SelectedHomeBanner].I_12,
+                    15 => bannerTimeDependentItems[Configuration.Apperance.SelectedHomeBanner].I_15,
+                    18 => bannerTimeDependentItems[Configuration.Apperance.SelectedHomeBanner].I_18,
+                    21 => bannerTimeDependentItems[Configuration.Apperance.SelectedHomeBanner].I_21,
+                    _ => "ms-appx:///Assets/Banners/NoBanner.png"
+                });
+                break;
+            case BannerType.Gallery:
+                BannerSource = Uri.IsWellFormedUriString(Configuration.Apperance.HomeBannerUri, UriKind.Absolute) ? new(Configuration.Apperance.HomeBannerUri) : "Banners/NoBanner.png".FromAssets();
+                break;
+            case BannerType.CustomPicture:
+                bannerCustomPictures.Clear();
+
+                foreach (var img in Directory.GetFiles("Assets\\Banners\\Custom").Where(path =>
+                    path.EndsWith(".jpg") ||
+                    path.EndsWith(".jpeg") ||
+                    path.EndsWith(".png")))
+                    bannerCustomPictures.Add(img);
+
+                logger.Log("Reloaded custom pictures");
+
+                if (Configuration.Apperance.SelectedHomeBanner < 0 || Configuration.Apperance.SelectedHomeBanner >= bannerCustomPictures.Count)
+                {
+                    BannerSource = "Banners/NoBanner.png".FromAssets();
+                    return;
+                }
+
+                BannerSource = new(System.IO.Path.Combine(Computer.CurrentDirectory, bannerCustomPictures[Configuration.Apperance.SelectedHomeBanner]));
                 break;
             case BannerType.SolidColor:
                 if (Configuration.Apperance.SelectedHomeBanner < 0 || Configuration.Apperance.SelectedHomeBanner >= solidColors.Container.Count)
@@ -104,7 +147,6 @@ public partial class HomeViewModel : ObservableObject
                     BannerSource = "Banners/NoBanner.png".FromAssets();
                     return;
                 }
-
 
                 BannerColor = solidColors.Container[Configuration.Apperance.SelectedHomeBanner].Color;
                 break;
@@ -140,10 +182,10 @@ public partial class HomeViewModel : ObservableObject
                 new(0, 0), new(0, 1),
                 new[] { (0.5f, Colors.White), (1.0f, Colors.Transparent) });
 
-        bannerMaskBrush = imagingUtility.CretaeMaskBrush(bannerCompositor, null, maskOverlayBrush);
+        bannerMaskBrush = imagingUtility.CreateMaskBrush(bannerCompositor, null, maskOverlayBrush);
         bannerMaskVisual = imagingUtility.CreateSpriteVisual(bannerCompositor, new(946, 243), bannerMaskBrush);
 
-        bannerOverlayBrush = imagingUtility.CretaeMaskBrush(bannerCompositor, imagingUtility.CreateGradientBrush(bannerCompositor,
+        bannerOverlayBrush = imagingUtility.CreateMaskBrush(bannerCompositor, imagingUtility.CreateGradientBrush(bannerCompositor,
                 new(0, 0), new(1, 0),
                 new[] { (-0.2f, themeManager.Colors.Background.Gradient), (1f, themeManager.Colors.Background.GradientTransparent) }), maskOverlayBrush);
         var bannerOverlayVisual = imagingUtility.CreateSpriteVisual(bannerCompositor, new(500, 330), bannerOverlayBrush);
