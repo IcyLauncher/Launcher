@@ -36,17 +36,17 @@
 		<None Remove="Assets\Banners\TimeDependent\0.png" />
 		<None Remove="Assets\Banners\TimeDependent\Icy Village\0.png" />
 		<None Remove="Assets\Banners\TimeDependent\Icy Village\12.png" />
-		<None Remove="Assets\Banners\TimeDependent\Icy Village\14.png" />
-		<None Remove="Assets\Banners\TimeDependent\Icy Village\17.png" />
-		<None Remove="Assets\Banners\TimeDependent\Icy Village\20.png" />
+		<None Remove="Assets\Banners\TimeDependent\Icy Village\15.png" />
+		<None Remove="Assets\Banners\TimeDependent\Icy Village\18.png" />
+		<None Remove="Assets\Banners\TimeDependent\Icy Village\21.png" />
 		<None Remove="Assets\Banners\TimeDependent\Icy Village\3.png" />
 		<None Remove="Assets\Banners\TimeDependent\Icy Village\6.png" />
 		<None Remove="Assets\Banners\TimeDependent\Icy Village\9.png" />
 		<None Remove="Assets\Banners\TimeDependent\Snowy Forest\0.png" />
 		<None Remove="Assets\Banners\TimeDependent\Snowy Forest\12.png" />
-		<None Remove="Assets\Banners\TimeDependent\Snowy Forest\14.png" />
-		<None Remove="Assets\Banners\TimeDependent\Snowy Forest\17.png" />
-		<None Remove="Assets\Banners\TimeDependent\Snowy Forest\20.png" />
+		<None Remove="Assets\Banners\TimeDependent\Snowy Forest\15.png" />
+		<None Remove="Assets\Banners\TimeDependent\Snowy Forest\18.png" />
+		<None Remove="Assets\Banners\TimeDependent\Snowy Forest\21.png" />
 		<None Remove="Assets\Banners\TimeDependent\Snowy Forest\3.png" />
 		<None Remove="Assets\Banners\TimeDependent\Snowy Forest\6.png" />
 		<None Remove="Assets\Banners\TimeDependent\Snowy Forest\9.png" />
@@ -141,6 +141,7 @@
 		<None Remove="UI\Xaml\BannerCustomPictureTemplate.xaml" />
 		<None Remove="UI\Xaml\BannerGalleryItemTemplate.xaml" />
 		<None Remove="UI\Xaml\BannerGalleryTemplate.xaml" />
+		<None Remove="UI\Xaml\BannerTimeDependentTemplate.xaml" />
 		<None Remove="UI\Xaml\SolidColorTemplate.xaml" />
 		<None Remove="Views\BannerSettingsView.xaml" />
 		<None Remove="Views\HomeView.xaml" />
@@ -414,13 +415,13 @@
 		<Content Update="Assets\Banners\TimeDependent\Icy Village\12.png">
 		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</Content>
-		<Content Update="Assets\Banners\TimeDependent\Icy Village\14.png">
+		<Content Update="Assets\Banners\TimeDependent\Icy Village\15.png">
 		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</Content>
-		<Content Update="Assets\Banners\TimeDependent\Icy Village\17.png">
+		<Content Update="Assets\Banners\TimeDependent\Icy Village\18.png">
 		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</Content>
-		<Content Update="Assets\Banners\TimeDependent\Icy Village\20.png">
+		<Content Update="Assets\Banners\TimeDependent\Icy Village\21.png">
 		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</Content>
 		<Content Update="Assets\Banners\TimeDependent\Icy Village\3.png">
@@ -438,13 +439,13 @@
 		<Content Update="Assets\Banners\TimeDependent\Snowy Forest\12.png">
 		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</Content>
-		<Content Update="Assets\Banners\TimeDependent\Snowy Forest\14.png">
+		<Content Update="Assets\Banners\TimeDependent\Snowy Forest\15.png">
 		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</Content>
-		<Content Update="Assets\Banners\TimeDependent\Snowy Forest\17.png">
+		<Content Update="Assets\Banners\TimeDependent\Snowy Forest\18.png">
 		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</Content>
-		<Content Update="Assets\Banners\TimeDependent\Snowy Forest\20.png">
+		<Content Update="Assets\Banners\TimeDependent\Snowy Forest\21.png">
 		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</Content>
 		<Content Update="Assets\Banners\TimeDependent\Snowy Forest\3.png">
@@ -520,6 +521,10 @@
 		<Page Update="UIElements\ProfileDataTemplate.xaml">
 		  <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
 		</Page>
+		<Page Update="UI\Xaml\BannerTimeDependentTemplate.xaml">
+		  <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+		  <SubType>Designer</SubType>
+		</Page>
 		<Page Update="UI\Xaml\BannerGalleryTemplate.xaml">
 		  <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
 		  <SubType>Designer</SubType>
@@ -557,7 +562,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Folder Include="Assets\Banners\Gallery\" />
 	  <Folder Include="Assets\Banners\Custom\" />
 	</ItemGroup>
 </Project>

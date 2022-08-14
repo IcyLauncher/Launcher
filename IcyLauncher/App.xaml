@@ -21,6 +21,7 @@
                 <uix:BannerGalleryTemplate />
                 <uix:BannerGalleryItemTemplate />
                 <uix:BannerCustomPictureTemplate />
+                <uix:BannerTimeDependentTemplate />
             </ResourceDictionary.MergedDictionaries>
 
             <xaml:ArrayConverter x:Key="ArrayConverter" />
