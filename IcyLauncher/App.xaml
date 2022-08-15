@@ -3186,6 +3186,40 @@
                 </Expander>
             </ControlTemplate>
 
+            <ControlTemplate x:Key="CardExpander">
+                <Expander
+                    MinHeight="70"
+                    Padding="48,24"
+                    HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
+                    HorizontalContentAlignment="Stretch"
+                    Content="{TemplateBinding Tag}"
+                    CornerRadius="8">
+                    <Expander.Header>
+                        <Grid VerticalAlignment="Center" CornerRadius="8">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="12" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <TextBlock
+                                Margin="0,0,0,12"
+                                VerticalAlignment="Center"
+                                FontSize="15"
+                                Style="{StaticResource Subpoint}"
+                                Text="{Binding Header, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource ArrayConverter}, ConverterParameter=0}"
+                                TextTrimming="CharacterEllipsis" />
+                            <TextBlock
+                                Margin="0,16,0,0"
+                                VerticalAlignment="Center"
+                                Style="{StaticResource SubpointSecondary}"
+                                Text="{Binding Header, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource ArrayConverter}, ConverterParameter=1}"
+                                TextTrimming="CharacterEllipsis" />
+                            <ContentPresenter Grid.Column="2" HorizontalAlignment="Right" />
+                        </Grid>
+                    </Expander.Header>
+                </Expander>
+            </ControlTemplate>
+
             <ControlTemplate x:Key="SettingsCard">
                 <Grid
                     Padding="12"
@@ -3535,8 +3569,8 @@
                             <Grid
                                 Width="1000"
                                 Height="500"
-                                Background="{ThemeResource BackgroundSolid}"
-                                BorderBrush="{ThemeResource AccentPrimary}"
+                                Background="{TemplateBinding BackgroundSolid}"
+                                BorderBrush="{TemplateBinding AccentPrimary}"
                                 BorderThickness="2"
                                 CornerRadius="8">
                                 <Grid Height="40" VerticalAlignment="Top">
@@ -3568,7 +3602,7 @@
                                         Margin="10,0,0,2"
                                         VerticalAlignment="Center"
                                         FontSize="12"
-                                        Foreground="{ThemeResource AccentPrimary}"
+                                        Foreground="{TemplateBinding AccentPrimary}"
                                         Text="IcyLauncher" />
                                 </Grid>
 
@@ -3577,23 +3611,87 @@
                                     Margin="0,40,0,0"
                                     HorizontalAlignment="Left"
                                     IsHitTestVisible="False"
-                                    Spacing="-8">
-                                    <NavigationViewItem
-                                        Margin="0,5,0,0"
-                                        Content="&#xE711;|&#xE71E;"
-                                        IsSelected="True"
-                                        Tag="Home" />
-                                    <NavigationViewItem
-                                        Margin="0,12,0,0"
-                                        Content="&#xE065;|&#xE065;"
-                                        Tag="" />
-                                    <NavigationViewItem Content="&#xF593;|&#xF59D;" Tag="" />
-                                    <NavigationViewItem Content="&#xF135;|&#xF135;" Tag="" />
-                                    <NavigationViewItem
-                                        Margin="0,110,0,0"
-                                        Content="&#xE9EE;|&#xE9F6;"
-                                        Tag="" />
-                                    <NavigationViewItem Content="&#xEA95;|&#xEA9E;" Tag="" />
+                                    Spacing="0">
+                                    <Grid
+                                        Height="58"
+                                        Margin="4"
+                                        HorizontalAlignment="Stretch"
+                                        Background="{TemplateBinding ControlPrimary}"
+                                        CornerRadius="4">
+                                        <FontIcon
+                                            HorizontalAlignment="Center"
+                                            VerticalAlignment="Center"
+                                            FontFamily="Assets/FluentSystemIcons-Filled.ttf#FluentSystemIcons-Filled"
+                                            Foreground="{TemplateBinding AccentPrimary}"
+                                            Glyph="&#xE71E;" />
+                                        <TextBlock
+                                            Margin="0,0,0,4"
+                                            HorizontalAlignment="Center"
+                                            VerticalAlignment="Bottom"
+                                            FontSize="11"
+                                            Foreground="{TemplateBinding AccentPrimary}"
+                                            Text="Home" />
+                                    </Grid>
+                                    <Grid
+                                        Height="58"
+                                        Margin="4"
+                                        HorizontalAlignment="Stretch"
+                                        CornerRadius="4">
+                                        <FontIcon
+                                            HorizontalAlignment="Center"
+                                            VerticalAlignment="Center"
+                                            FontFamily="Assets/FluentSystemIcons-Regular.ttf#FluentSystemIcons-Regular"
+                                            Foreground="{TemplateBinding TextSecondary}"
+                                            Glyph="&#xE065;" />
+                                    </Grid>
+                                    <Grid
+                                        Height="58"
+                                        Margin="4"
+                                        HorizontalAlignment="Stretch"
+                                        CornerRadius="4">
+                                        <FontIcon
+                                            HorizontalAlignment="Center"
+                                            VerticalAlignment="Center"
+                                            FontFamily="Assets/FluentSystemIcons-Regular.ttf#FluentSystemIcons-Regular"
+                                            Foreground="{TemplateBinding TextSecondary}"
+                                            Glyph="&#xF593;" />
+                                    </Grid>
+                                    <Grid
+                                        Height="58"
+                                        Margin="4"
+                                        HorizontalAlignment="Stretch"
+                                        CornerRadius="4">
+                                        <FontIcon
+                                            HorizontalAlignment="Center"
+                                            VerticalAlignment="Center"
+                                            FontFamily="Assets/FluentSystemIcons-Regular.ttf#FluentSystemIcons-Regular"
+                                            Foreground="{TemplateBinding TextSecondary}"
+                                            Glyph="&#xF135;" />
+                                    </Grid>
+                                    <Grid
+                                        Height="58"
+                                        Margin="4,60,4,4"
+                                        HorizontalAlignment="Stretch"
+                                        CornerRadius="4">
+                                        <FontIcon
+                                            HorizontalAlignment="Center"
+                                            VerticalAlignment="Center"
+                                            FontFamily="Assets/FluentSystemIcons-Regular.ttf#FluentSystemIcons-Regular"
+                                            Foreground="{TemplateBinding TextSecondary}"
+                                            Glyph="&#xE9EE;" />
+                                    </Grid>
+                                    <Grid
+                                        Height="58"
+                                        Margin="4"
+                                        HorizontalAlignment="Stretch"
+                                        CornerRadius="4">
+                                        <FontIcon
+                                            HorizontalAlignment="Center"
+                                            VerticalAlignment="Center"
+                                            FontFamily="Assets/FluentSystemIcons-Regular.ttf#FluentSystemIcons-Regular"
+                                            Foreground="{TemplateBinding TextSecondary}"
+                                            Glyph="&#xEA95;" />
+                                    </Grid>
                                 </StackPanel>
 
                                 <Grid
@@ -3602,7 +3700,7 @@
                                     Margin="0,0,-1,-1"
                                     HorizontalAlignment="Right"
                                     VerticalAlignment="Bottom"
-                                    Background="{ThemeResource ControlPrimary}"
+                                    Background="{TemplateBinding ControlPrimary}"
                                     CornerRadius="8,0,0,0">
 
                                     <Grid Height="186" VerticalAlignment="Top">
@@ -3613,24 +3711,24 @@
                                             HorizontalAlignment="Left">
                                             <Rectangle.Fill>
                                                 <LinearGradientBrush StartPoint="1,0" EndPoint="0,0">
-                                                    <GradientStop Offset="0" Color="{Binding Color, Source={ThemeResource BackgroundGradientTransparent}}" />
-                                                    <GradientStop Offset="1" Color="{Binding Color, Source={ThemeResource BackgroundGradient}}" />
+                                                    <GradientStop Offset="0" Color="{Binding Path=BackgroundGradientTransparent.Color, RelativeSource={RelativeSource TemplatedParent}}" />
+                                                    <GradientStop Offset="1" Color="{Binding Path=BackgroundGradient.Color, RelativeSource={RelativeSource TemplatedParent}}" />
                                                 </LinearGradientBrush>
                                             </Rectangle.Fill>
                                         </Rectangle>
                                         <Rectangle>
                                             <Rectangle.Fill>
                                                 <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
-                                                    <GradientStop Offset="0" Color="{Binding Color, Source={ThemeResource BackgroundGradientTransparent}}" />
-                                                    <GradientStop Offset="1" Color="{Binding Color, Source={ThemeResource BackgroundSolid}}" />
+                                                    <GradientStop Offset="0" Color="{Binding Path=BackgroundGradientTransparent.Color, RelativeSource={RelativeSource TemplatedParent}}" />
+                                                    <GradientStop Offset="1" Color="{Binding Path=BackgroundSolid.Color, RelativeSource={RelativeSource TemplatedParent}}" />
                                                 </LinearGradientBrush>
                                             </Rectangle.Fill>
                                         </Rectangle>
                                         <Rectangle>
                                             <Rectangle.Fill>
                                                 <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
-                                                    <GradientStop Offset="0" Color="{Binding Color, Source={ThemeResource BackgroundGradientTransparent}}" />
-                                                    <GradientStop Offset="1" Color="{Binding Color, Source={ThemeResource ControlPrimary}}" />
+                                                    <GradientStop Offset="0" Color="{Binding Path=BackgroundGradientTransparent.Color, RelativeSource={RelativeSource TemplatedParent}}" />
+                                                    <GradientStop Offset="1" Color="{Binding Path=ControlPrimary.Color, RelativeSource={RelativeSource TemplatedParent}}" />
                                                 </LinearGradientBrush>
                                             </Rectangle.Fill>
                                         </Rectangle>
@@ -3644,7 +3742,7 @@
                                         <Grid
                                             Width="170"
                                             Background="#40ffffff"
-                                            BorderBrush="{ThemeResource AccentPrimary}"
+                                            BorderBrush="{TemplateBinding AccentPrimary}"
                                             BorderThickness="4"
                                             CornerRadius="8">
                                             <Image
@@ -3655,14 +3753,15 @@
                                             <Rectangle>
                                                 <Rectangle.Fill>
                                                     <LinearGradientBrush StartPoint="1,0" EndPoint="0,0">
-                                                        <GradientStop Offset="0" Color="{Binding Color, Source={ThemeResource BackgroundGradientTransparent}}" />
-                                                        <GradientStop Offset="1" Color="{Binding Color, Source={ThemeResource BackgroundGradient}}" />
+                                                        <GradientStop Offset="0" Color="{Binding Path=BackgroundGradientTransparent.Color, RelativeSource={RelativeSource TemplatedParent}}" />
+                                                        <GradientStop Offset="1" Color="{Binding Path=BackgroundGradient.Color, RelativeSource={RelativeSource TemplatedParent}}" />
                                                     </LinearGradientBrush>
                                                 </Rectangle.Fill>
                                             </Rectangle>
                                             <TextBlock
                                                 Margin="10,0,0,0"
                                                 VerticalAlignment="Center"
+                                                Foreground="{TemplateBinding TextSecondary}"
                                                 Style="{StaticResource Content}"
                                                 Text="Profile" />
                                         </Grid>
@@ -3713,14 +3812,14 @@
                                             <ColumnDefinition Width="*" />
                                         </Grid.ColumnDefinitions>
 
-                                        <Grid Background="{ThemeResource ControlPrimary}" CornerRadius="8" />
+                                        <Grid Background="{TemplateBinding ControlPrimary}" CornerRadius="8" />
                                         <Grid
                                             Grid.Column="2"
-                                            Background="{ThemeResource ControlPrimary}"
+                                            Background="{TemplateBinding ControlPrimary}"
                                             CornerRadius="8" />
                                         <Grid
                                             Grid.Column="4"
-                                            Background="{ThemeResource ControlPrimary}"
+                                            Background="{TemplateBinding ControlPrimary}"
                                             CornerRadius="8" />
 
                                     </Grid>
