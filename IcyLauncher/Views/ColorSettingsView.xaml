@@ -1,0 +1,125 @@
+﻿<Page
+    x:Class="IcyLauncher.Views.ColorSettingsView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:ex="using:CommunityToolkit.WinUI.UI"
+    xmlns:hlp="using:IcyLauncher.Core.Helpers"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:md="using:CommunityToolkit.WinUI.UI.Media"
+    xmlns:media="using:CommunityToolkit.WinUI.UI.Media"
+    xmlns:models="using:IcyLauncher.Core.Models"
+    xmlns:ui="using:IcyLauncher.UI"
+    Name="RootPage"
+    Background="Transparent"
+    NavigationCacheMode="Enabled"
+    mc:Ignorable="d">
+    <Page.Resources>
+        <md:AttachedCardShadow
+            x:Key="CardShadow"
+            BlurRadius="40"
+            CornerRadius="8"
+            Opacity="0.3"
+            Offset="0,10,0" />
+
+        <x:Int32 x:Key="par0">0</x:Int32>
+        <x:Int32 x:Key="par1">1</x:Int32>
+    </Page.Resources>
+
+    <ui:HCont
+        Title="Settings  |  Home Banner"
+        Style="{StaticResource Page}"
+        VerticalScrollBar="{x:Bind viewModel.Configuration.Launcher.IsScrollbarsEnabled, Mode=OneWay, Converter={StaticResource BoolScrollbarVisibilityConverter}}">
+
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="32" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="12" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <Viewbox
+                MaxWidth="500"
+                Margin="0,12,0,0"
+                VerticalAlignment="Top"
+                ex:Effects.Shadow="{StaticResource CardShadow}">
+                <ui:MiniLauncher
+                    AccentPrimary="{x:Bind viewModel.LocalColors.Accent.Primary, Mode=OneWay, Converter={StaticResource BrushColorConverter}}"
+                    BackgroundGradient="{x:Bind viewModel.LocalColors.Background.Gradient, Mode=OneWay, Converter={StaticResource BrushColorConverter}}"
+                    BackgroundGradientTransparent="{x:Bind viewModel.LocalColors.Background.GradientTransparent, Mode=OneWay, Converter={StaticResource BrushColorConverter}}"
+                    BackgroundSolid="{x:Bind viewModel.LocalColors.Background.Solid, Mode=OneWay, Converter={StaticResource BrushColorConverter}}"
+                    ControlPrimary="{x:Bind viewModel.LocalColors.Control.Primary, Mode=OneWay, Converter={StaticResource BrushColorConverter}}"
+                    TextSecondary="{x:Bind viewModel.LocalColors.Text.Secondary, Mode=OneWay, Converter={StaticResource BrushColorConverter}}">
+                    <ui:MiniLauncher.BannerBrush>
+                        <ImageBrush ImageSource="/Assets/Banners/TimeDependent/Snowy Forest/18.png" Stretch="UniformToFill" />
+                    </ui:MiniLauncher.BannerBrush>
+                </ui:MiniLauncher>
+            </Viewbox>
+
+            <Grid Grid.Row="2" HorizontalAlignment="Center">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="8" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+
+                <Button Command="{x:Bind viewModel.SaveColorsCommand}" Content="Save Colors" />
+
+                <Button Grid.Column="2" Content="Reset Colors">
+                    <Button.Flyout>
+                        <MenuFlyout>
+                            <MenuFlyoutItem
+                                Command="{x:Bind viewModel.ResetColorsCommand}"
+                                CommandParameter="{StaticResource par0}"
+                                Text="Light Theme" />
+                            <MenuFlyoutItem
+                                Command="{x:Bind viewModel.ResetColorsCommand}"
+                                CommandParameter="{StaticResource par1}"
+                                Text="Dark Theme" />
+                        </MenuFlyout>
+                    </Button.Flyout>
+                </Button>
+            </Grid>
+
+            <Grid Grid.Row="4" VerticalAlignment="Top">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="12" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+
+                <Expander
+                    HorizontalAlignment="Stretch"
+                    Header="Accent|All colored aspects (Primary, Light, Dark)"
+                    Template="{StaticResource CardExpander}">
+                    <Expander.Tag>
+                        <ContentControl Tag="Primary|Main accent color" Template="{StaticResource SettingsCard}">
+                            <SplitButton Padding="0">
+                                <Border
+                                    x:Name="CurrentColor"
+                                    Width="32"
+                                    Height="32"
+                                    Margin="0,2"
+                                    Background="{x:Bind viewModel.LocalColors.Accent.Primary, Mode=OneWay, Converter={StaticResource BrushColorConverter}}"
+                                    CornerRadius="4,0,0,4" />
+                                <SplitButton.Flyout>
+                                    <Flyout Placement="Left">
+                                        <Viewbox Width="200" Height="200">
+                                            <ColorPicker
+                                                IsColorChannelTextInputVisible="False"
+                                                IsColorSliderVisible="True"
+                                                IsHexInputVisible="False"
+                                                Color="{x:Bind viewModel.LocalColors.Accent.Primary, Mode=TwoWay}" />
+                                        </Viewbox>
+                                    </Flyout>
+                                </SplitButton.Flyout>
+                            </SplitButton>
+                        </ContentControl>
+                    </Expander.Tag>
+                </Expander>
+            </Grid>
+        </Grid>
+    </ui:HCont>
+</Page>

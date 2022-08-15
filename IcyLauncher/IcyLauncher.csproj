@@ -144,6 +144,7 @@
 		<None Remove="UI\Xaml\BannerTimeDependentTemplate.xaml" />
 		<None Remove="UI\Xaml\SolidColorTemplate.xaml" />
 		<None Remove="Views\BannerSettingsView.xaml" />
+		<None Remove="Views\ColorSettingsView.xaml" />
 		<None Remove="Views\HomeView.xaml" />
 		<None Remove="Views\NoPageView.xaml" />
 		<None Remove="Views\ProfilesView.xaml" />
@@ -539,6 +540,10 @@
 		</Page>
 		<Page Update="UI\Xaml\SolidColorTemplate.xaml">
 		  <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+		</Page>
+		<Page Update="Views\ColorSettingsView.xaml">
+		  <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+		  <SubType>Designer</SubType>
 		</Page>
 		<Page Update="Views\NoPageView.xaml">
 		  <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
