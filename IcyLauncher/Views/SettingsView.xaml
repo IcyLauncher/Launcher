@@ -229,11 +229,25 @@
                                 ToolTipService.ToolTip="Open banner settings" />
                         </ContentControl>
                         <ContentControl Tag="Colors|General theme colors for the entire application" Template="{StaticResource SettingsCard}">
-                            <Button
-                                Command="{x:Bind viewModel.NavigateToCommand}"
-                                CommandParameter="Views.ColorSettingsView"
-                                Content="Open color settings"
-                                ToolTipService.ToolTip="Open color settings" />
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="8" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+
+                                <Button
+                                    Command="{x:Bind viewModel.NavigateToCommand}"
+                                    CommandParameter="Views.ColorSettingsView"
+                                    Content="Open color settings"
+                                    ToolTipService.ToolTip="Open color settings" />
+
+                                <Button Grid.Column="2"
+                                    Command="{x:Bind viewModel.ToggleLightDarkModeCommand}"
+                                    CommandParameter="Views.ColorSettingsView"
+                                    Content="{x:Bind viewModel.ToggleLightDarkModeText, Mode=OneWay}"
+                                    ToolTipService.ToolTip="{x:Bind viewModel.ToggleLightDarkModeText, Mode=OneWay}" />
+                            </Grid>
                         </ContentControl>
                         <ContentControl Tag="Application Background|Blur used for the main background" Template="{StaticResource SettingsCard}">
                             <Grid>

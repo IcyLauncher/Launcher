@@ -45,6 +45,8 @@ public partial class SettingsViewModel : ObservableObject
 
         this.windowHandler.Register(folderPicker);
 
+        IsUpdateVisible = Updater.IsUpdateAvailable;
+
         Configuration.Apperance.PropertyChanged += (s, e) =>
         {
             switch (e.PropertyName)
@@ -163,6 +165,22 @@ public partial class SettingsViewModel : ObservableObject
     void NavigateTo(string page) =>
         navigation.SetCurrentPage(page.AsType());
 
+
+    [ObservableProperty]
+    string toggleLightDarkModeText = "Enable light mode";
+
+    [ICommand(AllowConcurrentExecutions = false)]
+    async Task ToggleLightDarkModeAsync()
+    {
+        bool darkMode = ToggleLightDarkModeText == "Enable dark mode";
+
+        if (await message.ShowAsync("Are you sure?", $"If you click Ok your current color settings will be overwritten to the default {(darkMode ? "dark" : "light")} mode colors.\nThis will not effect the blur color mode.", true, primaryButton: "Ok") != ContentDialogResult.Primary)
+            return;
+
+        themeManager.LoadTheme(darkMode ? Theme.Dark : Theme.Light, true);
+        Configuration.Apperance.UseDarkModeBlur = darkMode;
+        ToggleLightDarkModeText = $"Enable {(darkMode ? "light" : "dark")} mode";
+    }
 
     public bool IsUseBlurDarkModeEnabled(int selectedIndex) =>
         selectedIndex == 0 || selectedIndex == 1;
