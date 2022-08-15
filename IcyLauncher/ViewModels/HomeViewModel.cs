@@ -180,10 +180,10 @@ public partial class HomeViewModel : ObservableObject
         maskOverlayBrush = imagingUtility.CreateGradientBrush(
                 bannerCompositor,
                 new(0, 0), new(0, 1),
-                new[] { (0.5f, Colors.White), (1.0f, Colors.Transparent) });
+                new[] { (0.5f, Colors.Gray), (1.0f, Colors.Transparent) });
 
         bannerMaskBrush = imagingUtility.CreateMaskBrush(bannerCompositor, null, maskOverlayBrush);
-        bannerMaskVisual = imagingUtility.CreateSpriteVisual(bannerCompositor, new(946, 243), bannerMaskBrush);
+        bannerMaskVisual = imagingUtility.CreateSpriteVisual(bannerCompositor, new((float)grid.ActualWidth, (float)grid.ActualHeight), bannerMaskBrush);
 
         bannerOverlayBrush = imagingUtility.CreateMaskBrush(bannerCompositor, imagingUtility.CreateGradientBrush(bannerCompositor,
                 new(0, 0), new(1, 0),
@@ -213,7 +213,7 @@ public partial class HomeViewModel : ObservableObject
 
             SetProperty(ref bannerSource, value);
 
-            bannerMaskBrush.Source = value is null ? null : imagingUtility.CreateImageBrush(bannerCompositor, value, CompositionStretch.UniformToFill);
+            bannerMaskBrush.Source = value is null ? null : imagingUtility.CreateImageBrush(bannerCompositor, value, CompositionStretch.UniformToFill, 0.5f);
             logger.Log("Updated banner image composition");
         }
     }
