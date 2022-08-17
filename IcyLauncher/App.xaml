@@ -215,6 +215,17 @@
             <SolidColorBrush x:Key="ScrollBarTrackFillDisabled" Color="{Binding Color, Source={ThemeResource ControlPrimaryDisabled}}" />
 
 
+            <SolidColorBrush x:Key="MenuFlyoutItemBackground" Color="Transparent" />
+            <SolidColorBrush x:Key="MenuFlyoutItemBackgroundPointerOver" Color="{Binding Color, Source={ThemeResource ControlOutline}}" />
+            <SolidColorBrush x:Key="MenuFlyoutItemBackgroundPressed" Color="{Binding Color, Source={ThemeResource ControlPrimaryDisabled}}" />
+            <SolidColorBrush x:Key="MenuFlyoutItemBackgroundDisabled" Color="{Binding Color, Source={ThemeResource ControlPrimaryDisabled}}" />
+
+            <SolidColorBrush x:Key="MenuFlyoutItemForeground" Color="{Binding Color, Source={ThemeResource TextSecondary}}" />
+            <SolidColorBrush x:Key="MenuFlyoutItemForegroundPointerOver" Color="{Binding Color, Source={ThemeResource TextPrimary}}" />
+            <SolidColorBrush x:Key="MenuFlyoutItemForegroundPressed" Color="{Binding Color, Source={ThemeResource TextTertiary}}" />
+            <SolidColorBrush x:Key="MenuFlyoutItemForegroundDisabled" Color="{Binding Color, Source={ThemeResource TextDisabled}}" />
+
+
             <SolidColorBrush x:Key="HyperlinkButtonForeground" Color="{Binding Color, Source={ThemeResource AccentPrimary}}" />
             <SolidColorBrush x:Key="HyperlinkButtonForegroundPointerOver" Color="{Binding Color, Source={ThemeResource AccentLight}}" />
             <SolidColorBrush x:Key="HyperlinkButtonForegroundPressed" Color="{Binding Color, Source={ThemeResource AccentDark}}" />
@@ -242,6 +253,43 @@
             <SolidColorBrush x:Key="GridViewItemSelectedPointerOverBorderBrush" Color="{Binding Color, Source={ThemeResource AccentPrimary}}" />
             <SolidColorBrush x:Key="GridViewItemSelectedPressedBorderBrush" Color="{Binding Color, Source={ThemeResource AccentPrimary}}" />
             <SolidColorBrush x:Key="GridViewItemSelectedDisabledBorderBrush" Color="{Binding Color, Source={ThemeResource AccentPrimary}}" />
+
+
+            <SolidColorBrush x:Key="SplitButtonBackground" Color="{Binding Color, Source={ThemeResource ControlPrimary}}" />
+            <SolidColorBrush x:Key="SplitButtonBackgroundPointerOver" Color="{Binding Color, Source={ThemeResource ControlOutline}}" />
+            <SolidColorBrush x:Key="SplitButtonBackgroundPressed" Color="{Binding Color, Source={ThemeResource ControlPrimaryDisabled}}" />
+            <SolidColorBrush x:Key="SplitButtonBackgroundDisabled" Color="{Binding Color, Source={ThemeResource ControlPrimaryDisabled}}" />
+
+            <SolidColorBrush x:Key="SplitButtonBackgroundChecked" Color="{Binding Color, Source={ThemeResource ControlPrimary}}" />
+            <SolidColorBrush x:Key="SplitButtonBackgroundCheckedPointerOver" Color="{Binding Color, Source={ThemeResource ControlOutline}}" />
+            <SolidColorBrush x:Key="SplitButtonBackgroundCheckedPressed" Color="{Binding Color, Source={ThemeResource ControlPrimaryDisabled}}" />
+            <SolidColorBrush x:Key="SplitButtonBackgroundCheckedDisabled" Color="{Binding Color, Source={ThemeResource ControlPrimaryDisabled}}" />
+
+            <SolidColorBrush x:Key="SplitButtonBorderBrush" Color="{Binding Color, Source={ThemeResource ControlOutline}}" />
+            <SolidColorBrush x:Key="SplitButtonBorderBrushPointerOver" Color="{Binding Color, Source={ThemeResource ControlOutline}}" />
+            <SolidColorBrush x:Key="SplitButtonBorderBrushPressed" Color="{Binding Color, Source={ThemeResource ControlOutlineDisabled}}" />
+            <SolidColorBrush x:Key="SplitButtonBorderBrushDisabled" Color="{Binding Color, Source={ThemeResource ControlOutlineDisabled}}" />
+
+            <SolidColorBrush x:Key="SplitButtonBorderBrushChecked" Color="{Binding Color, Source={ThemeResource ControlOutline}}" />
+            <SolidColorBrush x:Key="SplitButtonBorderBrushCheckedPointerOver" Color="{Binding Color, Source={ThemeResource ControlOutline}}" />
+            <SolidColorBrush x:Key="SplitButtonBorderBrushCheckedPressed" Color="{Binding Color, Source={ThemeResource ControlOutlineDisabled}}" />
+            <SolidColorBrush x:Key="SplitButtonBorderBrushCheckedDisabled" Color="{Binding Color, Source={ThemeResource ControlOutlineDisabled}}" />
+
+            <SolidColorBrush x:Key="SplitButtonForeground" Color="{Binding Color, Source={ThemeResource TextSecondary}}" />
+            <SolidColorBrush x:Key="SplitButtonForegroundPointerOver" Color="{Binding Color, Source={ThemeResource TextPrimary}}" />
+            <SolidColorBrush x:Key="SplitButtonForegroundPressed" Color="{Binding Color, Source={ThemeResource TextTertiary}}" />
+            <SolidColorBrush x:Key="SplitButtonForegroundDisabled" Color="{Binding Color, Source={ThemeResource TextDisabled}}" />
+
+            <SolidColorBrush x:Key="SplitButtonForegroundChecked" Color="{Binding Color, Source={ThemeResource TextSecondary}}" />
+            <SolidColorBrush x:Key="SplitButtonForegroundCheckedPointerOver" Color="{Binding Color, Source={ThemeResource TextPrimary}}" />
+            <SolidColorBrush x:Key="SplitButtonForegroundCheckedPressed" Color="{Binding Color, Source={ThemeResource TextTertiary}}" />
+            <SolidColorBrush x:Key="SplitButtonForegroundCheckedDisabled" Color="{Binding Color, Source={ThemeResource TextDisabled}}" />
+
+            <SolidColorBrush x:Key="SplitButtonForegroundSecondary" Color="{Binding Color, Source={ThemeResource TextSecondary}}" />
+            <SolidColorBrush x:Key="SplitButtonForegroundSecondaryPressed" Color="{Binding Color, Source={ThemeResource TextTertiary}}" />
+
+            <SolidColorBrush x:Key="SplitButtonBorderBrushDivider" Color="{Binding Color, Source={ThemeResource ControlOutline}}" />
+            <SolidColorBrush x:Key="SplitButtonBorderBrushCheckedDivider" Color="{Binding Color, Source={ThemeResource ControlOutline}}" />
 
 
             <SolidColorBrush x:Key="ExpanderHeaderBackground" Color="{Binding Color, Source={ThemeResource ControlPrimary}}" />
@@ -328,8 +376,31 @@
 
 
             <Style TargetType="FlyoutPresenter">
-                <Setter Property="Background" Value="{StaticResource ComboBoxDropDownBackground}" />
-                <Setter Property="BorderBrush" Value="{StaticResource ComboBoxDropDownBorderBrush}" />
+                <Setter Property="CornerRadius" Value="8" />
+                <Setter Property="Background">
+                    <Setter.Value>
+                        <AcrylicBrush TintColor="{Binding Color, Source={ThemeResource ControlSolidPrimary}}" TintOpacity="0.75" />
+                    </Setter.Value>
+                </Setter>
+                <Setter Property="BorderBrush">
+                    <Setter.Value>
+                        <AcrylicBrush TintColor="{Binding Color, Source={ThemeResource ControlSolidOutline}}" TintOpacity="0.75" />
+                    </Setter.Value>
+                </Setter>
+            </Style>
+
+            <Style TargetType="MenuFlyoutPresenter">
+                <Setter Property="CornerRadius" Value="8" />
+                <Setter Property="Background">
+                    <Setter.Value>
+                        <AcrylicBrush TintColor="{Binding Color, Source={ThemeResource ControlSolidPrimary}}" TintOpacity="0.75" />
+                    </Setter.Value>
+                </Setter>
+                <Setter Property="BorderBrush">
+                    <Setter.Value>
+                        <AcrylicBrush TintColor="{Binding Color, Source={ThemeResource ControlSolidOutline}}" TintOpacity="0.75" />
+                    </Setter.Value>
+                </Setter>
             </Style>
 
 
@@ -3223,6 +3294,7 @@
             <ControlTemplate x:Key="SettingsCard">
                 <Grid
                     Padding="12"
+                    HorizontalAlignment="Stretch"
                     VerticalAlignment="Center"
                     Background="{ThemeResource ControlPrimary}"
                     CornerRadius="8">
@@ -4144,6 +4216,32 @@
                     </Setter.Value>
                 </Setter>
             </Style>
+
+
+
+            <ControlTemplate x:Key="ColorPickerButton" TargetType="ColorPicker">
+                <SplitButton Padding="0">
+                    <Border
+                        Width="32"
+                        Height="32"
+                        Margin="0,2"
+                        Background="{Binding Color, RelativeSource={RelativeSource TemplatedParent}, Mode=OneWay, Converter={StaticResource BrushColorConverter}}"
+                        CornerRadius="4,0,0,4" />
+                    <SplitButton.Flyout>
+                        <Flyout Placement="Left">
+                            <Viewbox Width="200" Height="232">
+                                <ColorPicker
+                                    IsAlphaEnabled="True"
+                                    IsAlphaTextInputVisible="False"
+                                    IsColorChannelTextInputVisible="False"
+                                    IsColorSliderVisible="True"
+                                    IsHexInputVisible="False"
+                                    Color="{Binding Color, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}" />
+                            </Viewbox>
+                        </Flyout>
+                    </SplitButton.Flyout>
+                </SplitButton>
+            </ControlTemplate>
 
         </ResourceDictionary>
     </Application.Resources>
