@@ -242,7 +242,8 @@
                                     Content="Open color settings"
                                     ToolTipService.ToolTip="Open color settings" />
 
-                                <Button Grid.Column="2"
+                                <Button
+                                    Grid.Column="2"
                                     Command="{x:Bind viewModel.ToggleLightDarkModeCommand}"
                                     CommandParameter="Views.ColorSettingsView"
                                     Content="{x:Bind viewModel.ToggleLightDarkModeText, Mode=OneWay}"

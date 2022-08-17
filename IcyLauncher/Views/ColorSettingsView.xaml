@@ -83,43 +83,171 @@
                 </Button>
             </Grid>
 
-            <Grid Grid.Row="4" VerticalAlignment="Top">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="12" />
-                    <RowDefinition Height="*" />
-                </Grid.RowDefinitions>
+            <StackPanel Grid.Row="4" Spacing="8">
+                <Expander
+                    HorizontalAlignment="Stretch"
+                    Header="Accent|Colored aspects (Primary, Light, Dark)"
+                    Template="{StaticResource CardExpander}">
+                    <Expander.Tag>
+                        <StackPanel Spacing="8">
+                            <ContentControl Tag="Primary|Main color" Template="{StaticResource SettingsCard}">
+                                <ColorPicker
+                                    Margin="0,0,-241,0"
+                                    Template="{StaticResource ColorPickerButton}"
+                                    Color="{x:Bind viewModel.LocalColors.Accent.Primary, Mode=TwoWay}" />
+                            </ContentControl>
+                            <ContentControl Tag="Light|Lighter color used for highlights" Template="{StaticResource SettingsCard}">
+                                <ColorPicker
+                                    Margin="0,0,-241,0"
+                                    Template="{StaticResource ColorPickerButton}"
+                                    Color="{x:Bind viewModel.LocalColors.Accent.Light, Mode=TwoWay}" />
+                            </ContentControl>
+                            <ContentControl Tag="Dark|Darker color used for highlights" Template="{StaticResource SettingsCard}">
+                                <ColorPicker
+                                    Margin="0,0,-241,0"
+                                    Template="{StaticResource ColorPickerButton}"
+                                    Color="{x:Bind viewModel.LocalColors.Accent.Dark, Mode=TwoWay}" />
+                            </ContentControl>
+                        </StackPanel>
+                    </Expander.Tag>
+                </Expander>
 
                 <Expander
                     HorizontalAlignment="Stretch"
-                    Header="Accent|All colored aspects (Primary, Light, Dark)"
+                    Header="Background|Backgrounds and gradients (Solid, Transparent, Gradient, Gradient Transparent)"
                     Template="{StaticResource CardExpander}">
                     <Expander.Tag>
-                        <ContentControl Tag="Primary|Main accent color" Template="{StaticResource SettingsCard}">
-                            <SplitButton Padding="0">
-                                <Border
-                                    x:Name="CurrentColor"
-                                    Width="32"
-                                    Height="32"
-                                    Margin="0,2"
-                                    Background="{x:Bind viewModel.LocalColors.Accent.Primary, Mode=OneWay, Converter={StaticResource BrushColorConverter}}"
-                                    CornerRadius="4,0,0,4" />
-                                <SplitButton.Flyout>
-                                    <Flyout Placement="Left">
-                                        <Viewbox Width="200" Height="200">
-                                            <ColorPicker
-                                                IsColorChannelTextInputVisible="False"
-                                                IsColorSliderVisible="True"
-                                                IsHexInputVisible="False"
-                                                Color="{x:Bind viewModel.LocalColors.Accent.Primary, Mode=TwoWay}" />
-                                        </Viewbox>
-                                    </Flyout>
-                                </SplitButton.Flyout>
-                            </SplitButton>
-                        </ContentControl>
+                        <StackPanel Spacing="8">
+                            <ContentControl Tag="Solid|Solid color used for application background" Template="{StaticResource SettingsCard}">
+                                <ColorPicker
+                                    Margin="0,0,-241,0"
+                                    Template="{StaticResource ColorPickerButton}"
+                                    Color="{x:Bind viewModel.LocalColors.Background.Solid, Mode=TwoWay}" />
+                            </ContentControl>
+                            <ContentControl Tag="Transparent|Transparent color used for application background" Template="{StaticResource SettingsCard}">
+                                <ColorPicker
+                                    Margin="0,0,-241,0"
+                                    Template="{StaticResource ColorPickerButton}"
+                                    Color="{x:Bind viewModel.LocalColors.Background.Transparent, Mode=TwoWay}" />
+                            </ContentControl>
+                            <ContentControl Tag="Gradient|Solid color used for opacity masks on gradients" Template="{StaticResource SettingsCard}">
+                                <ColorPicker
+                                    Margin="0,0,-241,0"
+                                    Template="{StaticResource ColorPickerButton}"
+                                    Color="{x:Bind viewModel.LocalColors.Background.Gradient, Mode=TwoWay}" />
+                            </ContentControl>
+                            <ContentControl Tag="Gradient Transparent|Transparent color used for opacity masks on gradients" Template="{StaticResource SettingsCard}">
+                                <ColorPicker
+                                    Margin="0,0,-241,0"
+                                    Template="{StaticResource ColorPickerButton}"
+                                    Color="{x:Bind viewModel.LocalColors.Background.GradientTransparent, Mode=TwoWay}" />
+                            </ContentControl>
+                        </StackPanel>
                     </Expander.Tag>
                 </Expander>
-            </Grid>
+
+                <Expander
+                    HorizontalAlignment="Stretch"
+                    Header="Text|Title and content texts (Primary, Secondary, Tertiary, Disabled)"
+                    Template="{StaticResource CardExpander}">
+                    <Expander.Tag>
+                        <StackPanel Spacing="8">
+                            <ContentControl Tag="Primary|Lightest color mostly used for titles" Template="{StaticResource SettingsCard}">
+                                <ColorPicker
+                                    Margin="0,0,-241,0"
+                                    Template="{StaticResource ColorPickerButton}"
+                                    Color="{x:Bind viewModel.LocalColors.Text.Primary, Mode=TwoWay}" />
+                            </ContentControl>
+                            <ContentControl Tag="Secondary|Main color used for content and subpoints" Template="{StaticResource SettingsCard}">
+                                <ColorPicker
+                                    Margin="0,0,-241,0"
+                                    Template="{StaticResource ColorPickerButton}"
+                                    Color="{x:Bind viewModel.LocalColors.Text.Secondary, Mode=TwoWay}" />
+                            </ContentControl>
+                            <ContentControl Tag="Tertiary|Darkest color mostly used for headers, secondary content and secondary subpoints" Template="{StaticResource SettingsCard}">
+                                <ColorPicker
+                                    Margin="0,0,-241,0"
+                                    Template="{StaticResource ColorPickerButton}"
+                                    Color="{x:Bind viewModel.LocalColors.Text.Tertiary, Mode=TwoWay}" />
+                            </ContentControl>
+                            <ContentControl Tag="Disabled|Disabled color for disabled text" Template="{StaticResource SettingsCard}">
+                                <ColorPicker
+                                    Margin="0,0,-241,0"
+                                    Template="{StaticResource ColorPickerButton}"
+                                    Color="{x:Bind viewModel.LocalColors.Text.Disabled, Mode=TwoWay}" />
+                            </ContentControl>
+                        </StackPanel>
+                    </Expander.Tag>
+                </Expander>
+
+                <Expander
+                    HorizontalAlignment="Stretch"
+                    Header="Control|Background and border (Primary, Outline, Primary Disabled, Outline Disabled)"
+                    Template="{StaticResource CardExpander}">
+                    <Expander.Tag>
+                        <StackPanel Spacing="8">
+                            <ContentControl Tag="Primary|Background color used for almost all controls" Template="{StaticResource SettingsCard}">
+                                <ColorPicker
+                                    Margin="0,0,-241,0"
+                                    Template="{StaticResource ColorPickerButton}"
+                                    Color="{x:Bind viewModel.LocalColors.Control.Primary, Mode=TwoWay}" />
+                            </ContentControl>
+                            <ContentControl Tag="Outline|Border color used for almost all controls" Template="{StaticResource SettingsCard}">
+                                <ColorPicker
+                                    Margin="0,0,-241,0"
+                                    Template="{StaticResource ColorPickerButton}"
+                                    Color="{x:Bind viewModel.LocalColors.Control.Outline, Mode=TwoWay}" />
+                            </ContentControl>
+                            <ContentControl Tag="Primary Disabled|Disabled background color for disabled controls" Template="{StaticResource SettingsCard}">
+                                <ColorPicker
+                                    Margin="0,0,-241,0"
+                                    Template="{StaticResource ColorPickerButton}"
+                                    Color="{x:Bind viewModel.LocalColors.Control.PrimaryDisabled, Mode=TwoWay}" />
+                            </ContentControl>
+                            <ContentControl Tag="Outline|Disabled border color for disabled controls" Template="{StaticResource SettingsCard}">
+                                <ColorPicker
+                                    Margin="0,0,-241,0"
+                                    Template="{StaticResource ColorPickerButton}"
+                                    Color="{x:Bind viewModel.LocalColors.Control.OutlineDisabled, Mode=TwoWay}" />
+                            </ContentControl>
+
+                            <Expander
+                                HorizontalAlignment="Stretch"
+                                Header="Solid|Solid Background and Solid border (Primary, Outline, Primary Disabled, Outline Disabled)"
+                                Template="{StaticResource CardExpander}">
+                                <Expander.Tag>
+                                    <StackPanel Spacing="8">
+                                        <ContentControl Tag="Primary|Solid background color used for almost all controls" Template="{StaticResource SettingsCard}">
+                                            <ColorPicker
+                                                Margin="0,0,-241,0"
+                                                Template="{StaticResource ColorPickerButton}"
+                                                Color="{x:Bind viewModel.LocalColors.Control.Solid.Primary, Mode=TwoWay}" />
+                                        </ContentControl>
+                                        <ContentControl Tag="Outline|Solid border color used for almost all controls" Template="{StaticResource SettingsCard}">
+                                            <ColorPicker
+                                                Margin="0,0,-241,0"
+                                                Template="{StaticResource ColorPickerButton}"
+                                                Color="{x:Bind viewModel.LocalColors.Control.Solid.Outline, Mode=TwoWay}" />
+                                        </ContentControl>
+                                        <ContentControl Tag="Primary Disabled|Disabled solid background color for disabled controls" Template="{StaticResource SettingsCard}">
+                                            <ColorPicker
+                                                Margin="0,0,-241,0"
+                                                Template="{StaticResource ColorPickerButton}"
+                                                Color="{x:Bind viewModel.LocalColors.Control.Solid.PrimaryDisabled, Mode=TwoWay}" />
+                                        </ContentControl>
+                                        <ContentControl Tag="Outline|Disabled solid border color for disabled controls" Template="{StaticResource SettingsCard}">
+                                            <ColorPicker
+                                                Margin="0,0,-241,0"
+                                                Template="{StaticResource ColorPickerButton}"
+                                                Color="{x:Bind viewModel.LocalColors.Control.Solid.OutlineDisabled, Mode=TwoWay}" />
+                                        </ContentControl>
+                                    </StackPanel>
+                                </Expander.Tag>
+                            </Expander>
+                        </StackPanel>
+                    </Expander.Tag>
+                </Expander>
+            </StackPanel>
         </Grid>
     </ui:HCont>
 </Page>
