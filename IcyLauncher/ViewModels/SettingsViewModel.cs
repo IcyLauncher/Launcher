@@ -174,7 +174,7 @@ public partial class SettingsViewModel : ObservableObject
     {
         bool darkMode = ToggleLightDarkModeText == "Enable dark mode";
 
-        if (await message.ShowAsync("Are you sure?", $"If you click Ok your current color settings will be overwritten to the default {(darkMode ? "dark" : "light")} mode colors.\nThis will not effect the blur color mode.", true, primaryButton: "Ok") != ContentDialogResult.Primary)
+        if (await message.ShowAsync("Are you sure?", $"If you click Ok your current color settings will be overwritten to the default {(darkMode ? "dark" : "light")} mode colors.\nThis will also effect the blur color mode.", true, primaryButton: "Ok") != ContentDialogResult.Primary)
             return;
 
         themeManager.LoadTheme(darkMode ? Theme.Dark : Theme.Light, true);
