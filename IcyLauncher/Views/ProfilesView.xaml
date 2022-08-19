@@ -13,7 +13,7 @@
     <Grid>
         <Button Command="{x:Bind viewModel.TestCommand}" Content="Test" />
 
-        <ui:TextBox Margin="100" Text="{x:Bind viewModel.Configuration.Launcher.TexturepackDirectory, Mode=TwoWay}" />
+        <TextBox Margin="100" Text="{x:Bind viewModel.Configuration.Launcher.TexturepackDirectory, Mode=TwoWay}" />
     </Grid>
 
 </Page>

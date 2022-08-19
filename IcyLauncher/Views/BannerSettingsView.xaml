@@ -210,7 +210,7 @@
                                                         <ColumnDefinition Width="Auto" />
                                                     </Grid.ColumnDefinitions>
 
-                                                    <ui:TextBox
+                                                    <TextBox
                                                         PlaceholderText="Name..."
                                                         Text="{x:Bind viewModel.CustomColorName, Mode=TwoWay}"
                                                         ToolTipService.ToolTip="Custom color name" />

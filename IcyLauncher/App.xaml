@@ -27,6 +27,7 @@
             <xaml:ArrayConverter x:Key="ArrayConverter" />
             <xaml:ColorBrushConverter x:Key="ColorBrushConverter" />
             <xaml:BoolDoubleConverter x:Key="BoolDoubleConverter" />
+            <xaml:ValidateNo255 x:Key="ValidateNo255" />
             <xaml:InvertBool x:Key="InvertBool" />
             <xaml:JoinString x:Key="JoinString" />
             <xaml:DateTimeFormatter x:Key="DateTimeFormatter" />
@@ -747,7 +748,7 @@
             </Style>
 
 
-            <Style TargetType="ui:TextBox">
+            <Style TargetType="TextBox">
                 <Setter Property="Background" Value="{ThemeResource TextSecondary}" />
                 <Setter Property="Background" Value="{ThemeResource ControlPrimary}" />
                 <Setter Property="BorderBrush" Value="{ThemeResource ControlOutline}" />
@@ -763,7 +764,7 @@
                 <Setter Property="BackgroundSizing" Value="InnerBorderEdge" />
                 <Setter Property="Template">
                     <Setter.Value>
-                        <ControlTemplate TargetType="ui:TextBox">
+                        <ControlTemplate TargetType="TextBox">
                             <Grid>
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="Auto" />
@@ -820,7 +821,7 @@
                                     Margin="{TemplateBinding BorderThickness}"
                                     Padding="{TemplateBinding Padding}"
                                     AutomationProperties.AccessibilityView="Raw"
-                                    Foreground="{TemplateBinding Foreground}"
+                                    Foreground="{Binding Color, Source={ThemeResource TextSecondary}, Converter={StaticResource ValidateNo255}}"
                                     HorizontalScrollBarVisibility="{TemplateBinding ScrollViewer.HorizontalScrollBarVisibility}"
                                     HorizontalScrollMode="{TemplateBinding ScrollViewer.HorizontalScrollMode}"
                                     IsDeferredScrollingEnabled="{TemplateBinding ScrollViewer.IsDeferredScrollingEnabled}"
@@ -867,13 +868,16 @@
                                         <VisualState x:Name="Normal">
                                             <Storyboard>
                                                 <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentElement" Storyboard.TargetProperty="Foreground">
-                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource TextSecondary}" />
+                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="{Binding Color, Source={ThemeResource TextSecondary}}" />
                                                 </ObjectAnimationUsingKeyFrames>
                                             </Storyboard>
                                         </VisualState>
 
                                         <VisualState x:Name="Disabled">
                                             <Storyboard>
+                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentElement" Storyboard.TargetProperty="Foreground">
+                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="{Binding Color, Source={ThemeResource TextDisabled}, Converter={StaticResource ValidateNo255}}" />
+                                                </ObjectAnimationUsingKeyFrames>
                                                 <ObjectAnimationUsingKeyFrames Storyboard.TargetName="HeaderContentPresenter" Storyboard.TargetProperty="Foreground">
                                                     <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource TextDisabled}" />
                                                 </ObjectAnimationUsingKeyFrames>
@@ -888,6 +892,9 @@
 
                                         <VisualState x:Name="PointerOver">
                                             <Storyboard>
+                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentElement" Storyboard.TargetProperty="Foreground">
+                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="{Binding Color, Source={ThemeResource TextPrimary}, Converter={StaticResource ValidateNo255}}" />
+                                                </ObjectAnimationUsingKeyFrames>
                                                 <ObjectAnimationUsingKeyFrames Storyboard.TargetName="BorderElement" Storyboard.TargetProperty="BorderBrush">
                                                     <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource ControlOutline}" />
                                                 </ObjectAnimationUsingKeyFrames>
@@ -902,6 +909,9 @@
 
                                         <VisualState x:Name="Focused">
                                             <Storyboard>
+                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentElement" Storyboard.TargetProperty="Foreground">
+                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="{Binding Color, Source={ThemeResource TextTertiary}, Converter={StaticResource ValidateNo255}}" />
+                                                </ObjectAnimationUsingKeyFrames>
                                                 <ObjectAnimationUsingKeyFrames Storyboard.TargetName="PlaceholderTextContentPresenter" Storyboard.TargetProperty="Foreground">
                                                     <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource TextTertiary}" />
                                                 </ObjectAnimationUsingKeyFrames>
@@ -3303,14 +3313,14 @@
                         <ColumnDefinition Width="Auto" />
                     </Grid.ColumnDefinitions>
                     <TextBlock
-                        Margin="0,0,0,12"
+                        Margin="0,0,0,13"
                         VerticalAlignment="Center"
                         FontSize="15"
                         Style="{StaticResource Subpoint}"
                         Text="{Binding Tag, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource ArrayConverter}, ConverterParameter=0}"
                         TextTrimming="CharacterEllipsis" />
                     <TextBlock
-                        Margin="0,16,0,0"
+                        Margin="0,17,0,0"
                         VerticalAlignment="Center"
                         Style="{StaticResource SubpointSecondary}"
                         Text="{Binding Tag, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource ArrayConverter}, ConverterParameter=1}"
@@ -4225,7 +4235,7 @@
                         <ColumnDefinition Width="Auto" />
                     </Grid.ColumnDefinitions>
 
-                    <ui:TextBox
+                    <TextBox
                         Height="36"
                         HorizontalAlignment="Stretch"
                         VerticalAlignment="Center"
