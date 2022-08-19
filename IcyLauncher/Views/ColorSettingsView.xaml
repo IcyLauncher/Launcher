@@ -65,9 +65,15 @@
                     <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
 
-                <Button Command="{x:Bind viewModel.SaveColorsCommand}" Content="Save Colors" />
+                <Button
+                    Command="{x:Bind viewModel.SaveColorsCommand}"
+                    Content="Save Colors"
+                    ToolTipService.ToolTip="Save current colors" />
 
-                <Button Grid.Column="2" Content="Reset Colors">
+                <Button
+                    Grid.Column="2"
+                    Content="Reset Colors"
+                    ToolTipService.ToolTip="Reset colors to default">
                     <Button.Flyout>
                         <MenuFlyout>
                             <MenuFlyoutItem
