@@ -24,7 +24,7 @@
 
             <Rectangle
                 Margin="8,8,8,44"
-                Fill="{x:Bind Color, Converter={StaticResource BrushColorConverter}}"
+                Fill="{x:Bind Color, Converter={StaticResource ColorBrushConverter}}"
                 RadiusX="4"
                 RadiusY="4"
                 Stroke="{ThemeResource ControlOutline}"

@@ -46,12 +46,12 @@
                 VerticalAlignment="Top"
                 ex:Effects.Shadow="{StaticResource CardShadow}">
                 <ui:MiniLauncher
-                    AccentPrimary="{x:Bind viewModel.LocalColors.Accent.Primary, Mode=OneWay, Converter={StaticResource BrushColorConverter}}"
-                    BackgroundGradient="{x:Bind viewModel.LocalColors.Background.Gradient, Mode=OneWay, Converter={StaticResource BrushColorConverter}}"
-                    BackgroundGradientTransparent="{x:Bind viewModel.LocalColors.Background.GradientTransparent, Mode=OneWay, Converter={StaticResource BrushColorConverter}}"
-                    BackgroundSolid="{x:Bind viewModel.LocalColors.Background.Solid, Mode=OneWay, Converter={StaticResource BrushColorConverter}}"
-                    ControlPrimary="{x:Bind viewModel.LocalColors.Control.Primary, Mode=OneWay, Converter={StaticResource BrushColorConverter}}"
-                    TextSecondary="{x:Bind viewModel.LocalColors.Text.Secondary, Mode=OneWay, Converter={StaticResource BrushColorConverter}}">
+                    AccentPrimary="{x:Bind viewModel.LocalColors.Accent.Primary, Mode=OneWay, Converter={StaticResource ColorBrushConverter}}"
+                    BackgroundGradient="{x:Bind viewModel.LocalColors.Background.Gradient, Mode=OneWay, Converter={StaticResource ColorBrushConverter}}"
+                    BackgroundGradientTransparent="{x:Bind viewModel.LocalColors.Background.GradientTransparent, Mode=OneWay, Converter={StaticResource ColorBrushConverter}}"
+                    BackgroundSolid="{x:Bind viewModel.LocalColors.Background.Solid, Mode=OneWay, Converter={StaticResource ColorBrushConverter}}"
+                    ControlPrimary="{x:Bind viewModel.LocalColors.Control.Primary, Mode=OneWay, Converter={StaticResource ColorBrushConverter}}"
+                    TextSecondary="{x:Bind viewModel.LocalColors.Text.Secondary, Mode=OneWay, Converter={StaticResource ColorBrushConverter}}">
                     <ui:MiniLauncher.BannerBrush>
                         <ImageBrush ImageSource="/Assets/Banners/TimeDependent/Snowy Forest/18.png" Stretch="UniformToFill" />
                     </ui:MiniLauncher.BannerBrush>

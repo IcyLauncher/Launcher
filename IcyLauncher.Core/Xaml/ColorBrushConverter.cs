@@ -4,7 +4,7 @@ using Windows.UI;
 
 namespace IcyLauncher.Core.Xaml;
 
-public class BrushColorConverter : IValueConverter
+public class ColorBrushConverter : IValueConverter
 {
     public object Convert(object value, Type targetType, object parameter, string language) =>
         new SolidColorBrush((Color)value);

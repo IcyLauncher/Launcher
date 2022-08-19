@@ -25,7 +25,7 @@
             </ResourceDictionary.MergedDictionaries>
 
             <xaml:ArrayConverter x:Key="ArrayConverter" />
-            <xaml:BrushColorConverter x:Key="BrushColorConverter" />
+            <xaml:ColorBrushConverter x:Key="ColorBrushConverter" />
             <xaml:BoolDoubleConverter x:Key="BoolDoubleConverter" />
             <xaml:InvertBool x:Key="InvertBool" />
             <xaml:JoinString x:Key="JoinString" />
@@ -634,8 +634,8 @@
                                         HorizontalContentAlignment="Center"
                                         VerticalContentAlignment="Bottom"
                                         ex:Effects.Shadow="{TemplateBinding ex:Effects.Shadow}"
-                                        Background="{Binding Control.Primary, Source={ThemeResource Colors}, Mode=OneWay, Converter={StaticResource BrushColorConverter}}"
-                                        BorderBrush="{Binding Control.PrimaryDisabled, Source={ThemeResource Colors}, Mode=OneWay, Converter={StaticResource BrushColorConverter}}"
+                                        Background="{Binding Control.Primary, Source={ThemeResource Colors}, Mode=OneWay, Converter={StaticResource ColorBrushConverter}}"
+                                        BorderBrush="{Binding Control.PrimaryDisabled, Source={ThemeResource Colors}, Mode=OneWay, Converter={StaticResource ColorBrushConverter}}"
                                         BorderThickness="1"
                                         Content="{TemplateBinding Content}"
                                         CornerRadius="4"
@@ -646,7 +646,7 @@
                                         HorizontalAlignment="Center"
                                         VerticalAlignment="Center"
                                         FontFamily="{TemplateBinding FontFamily}"
-                                        Foreground="{Binding Text.Secondary, Source={ThemeResource Colors}, Mode=OneWay, Converter={StaticResource BrushColorConverter}}"
+                                        Foreground="{Binding Text.Secondary, Source={ThemeResource Colors}, Mode=OneWay, Converter={StaticResource ColorBrushConverter}}"
                                         Text="{TemplateBinding Tag}" />
 
                                     <VisualStateManager.VisualStateGroups>
@@ -1028,7 +1028,7 @@
                                                 <FontIcon
                                                     x:Name="Icon"
                                                     FontFamily="Assets/FluentSystemIcons-Regular.ttf#FluentSystemIcons-Regular"
-                                                    Foreground="{Binding Text.Secondary, Source={ThemeResource Colors}, Mode=OneWay, Converter={StaticResource BrushColorConverter}}"
+                                                    Foreground="{Binding Text.Secondary, Source={ThemeResource Colors}, Mode=OneWay, Converter={StaticResource ColorBrushConverter}}"
                                                     Glyph="{Binding Content, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource ArrayConverter}, ConverterParameter=0}" />
                                                 <FontIcon
                                                     x:Name="IconFilled"
@@ -1048,7 +1048,7 @@
                                                 xaml:AncestorSource.AncestorType="NavigationViewItem"
                                                 AutomationProperties.AccessibilityView="Raw"
                                                 FontSize="11"
-                                                Foreground="{Binding Text.Secondary, Source={ThemeResource Colors}, Mode=OneWay, Converter={StaticResource BrushColorConverter}}"
+                                                Foreground="{Binding Text.Secondary, Source={ThemeResource Colors}, Mode=OneWay, Converter={StaticResource ColorBrushConverter}}"
                                                 Text="{Binding Tag}" />
                                         </Grid>
                                     </Grid>
@@ -4237,7 +4237,7 @@
                             Width="32"
                             Height="32"
                             Margin="0,2"
-                            Background="{Binding Color, RelativeSource={RelativeSource TemplatedParent}, Mode=OneWay, Converter={StaticResource BrushColorConverter}}"
+                            Background="{Binding Color, RelativeSource={RelativeSource TemplatedParent}, Mode=OneWay, Converter={StaticResource ColorBrushConverter}}"
                             CornerRadius="4,0,0,4" />
                         <SplitButton.Flyout>
                             <Flyout Placement="Left">
