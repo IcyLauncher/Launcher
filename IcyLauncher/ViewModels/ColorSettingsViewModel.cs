@@ -11,20 +11,20 @@ namespace IcyLauncher.ViewModels;
 
 public partial class ColorSettingsViewModel : ObservableObject
 {
-    readonly ILogger<ProfilesViewModel> logger;
     readonly ThemeManager themeManager;
     readonly IMessage message;
+    readonly INavigation navigation;
 
     public readonly Configuration Configuration;
 
     public ColorSettingsViewModel(IOptions<Configuration> configuration,
-        ILogger<ProfilesViewModel> logger,
         ThemeManager themeManager,
-        IMessage message)
+        IMessage message,
+        INavigation navigation)
     {
-        this.logger = logger;
         this.message = message;
         this.themeManager = themeManager;
+        this.navigation = navigation;
 
         Configuration = configuration.Value;
 
@@ -32,8 +32,11 @@ public partial class ColorSettingsViewModel : ObservableObject
         ThemeManager.CopyTheme(LocalColors, themeManager.Colors);
     }
 
-
     public Theme LocalColors = new();
+
+
+    public void OnPageLoaded(object _, RoutedEventArgs _1) =>
+        navigation.SetCurrentIndex(5);
 
 
     [ICommand]
@@ -45,7 +48,7 @@ public partial class ColorSettingsViewModel : ObservableObject
     {
         bool darkMode = darkMode_ == 1;
 
-        if (await message.ShowAsync("Are you sure?", $"If you click Ok your current color settings will be overwritten to the default {(darkMode ? "dark" : "light")} mode colors.\nThis will not effect the blur color mode. To change the blur color mode, change 'Application Background' in the main settings.", true, primaryButton: "Ok") != ContentDialogResult.Primary)
+        if (await message.ShowAsync("Are you sure?", $"If you click Ok your current color settings will be overwritten by the default {(darkMode ? "dark" : "light")} mode colors.\nThis will also effect your current accent colors.\nThis will not effect the blur color mode. To change the blur color mode, change 'Application Background' in the main settings.", true, primaryButton: "Ok") != ContentDialogResult.Primary)
             return;
 
         ThemeManager.CopyTheme(LocalColors, darkMode ? Theme.Dark : Theme.Light);

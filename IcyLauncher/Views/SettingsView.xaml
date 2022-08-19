@@ -242,12 +242,20 @@
                                     Content="Open color settings"
                                     ToolTipService.ToolTip="Open color settings" />
 
-                                <Button
-                                    Grid.Column="2"
-                                    Command="{x:Bind viewModel.ToggleLightDarkModeCommand}"
-                                    CommandParameter="Views.ColorSettingsView"
-                                    Content="{x:Bind viewModel.ToggleLightDarkModeText, Mode=OneWay}"
-                                    ToolTipService.ToolTip="{x:Bind viewModel.ToggleLightDarkModeText, Mode=OneWay}" />
+                                <Button Grid.Column="2" Content="Reset Colors">
+                                    <Button.Flyout>
+                                        <MenuFlyout>
+                                            <MenuFlyoutItem
+                                                Command="{x:Bind viewModel.ResetColorsCommand}"
+                                                CommandParameter="{StaticResource par0}"
+                                                Text="Light Theme" />
+                                            <MenuFlyoutItem
+                                                Command="{x:Bind viewModel.ResetColorsCommand}"
+                                                CommandParameter="{StaticResource par1}"
+                                                Text="Dark Theme" />
+                                        </MenuFlyout>
+                                    </Button.Flyout>
+                                </Button>
                             </Grid>
                         </ContentControl>
                         <ContentControl Tag="Application Background|Blur used for the main background" Template="{StaticResource SettingsCard}">

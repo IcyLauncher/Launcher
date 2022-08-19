@@ -68,12 +68,10 @@ public partial class SettingsViewModel : ObservableObject
     }
 
 
-    [ICommand(AllowConcurrentExecutions = true)]
-    async Task Debug()
+    [ICommand]
+    void Debug()
     {
-        await message.ShowAsync("Title", "content", false, "No", "Yes");
-        await Task.Delay(1000);
-        await message.ShowAsync("Title", "content2", false, "No", "Yes");
+        themeManager.RandomizeTheme();
     }
 
 
@@ -166,20 +164,16 @@ public partial class SettingsViewModel : ObservableObject
         navigation.SetCurrentPage(page.AsType());
 
 
-    [ObservableProperty]
-    string toggleLightDarkModeText = "Enable light mode";
-
     [ICommand(AllowConcurrentExecutions = false)]
-    async Task ToggleLightDarkModeAsync()
+    async Task ResetColorsAsync(int darkMode_)
     {
-        bool darkMode = ToggleLightDarkModeText == "Enable dark mode";
+        bool darkMode = darkMode_ == 1;
 
-        if (await message.ShowAsync("Are you sure?", $"If you click Ok your current color settings will be overwritten to the default {(darkMode ? "dark" : "light")} mode colors.\nThis will also effect the blur color mode.", true, primaryButton: "Ok") != ContentDialogResult.Primary)
+        if (await message.ShowAsync("Are you sure?", $"If you click Ok your current color settings will be overwritten by the default {(darkMode ? "dark" : "light")} mode colors.\nThis will not effect your current accent colors.\nThis will also effect the blur color mode.", true, primaryButton: "Ok") != ContentDialogResult.Primary)
             return;
 
         themeManager.LoadTheme(darkMode ? Theme.Dark : Theme.Light, true);
         Configuration.Apperance.UseDarkModeBlur = darkMode;
-        ToggleLightDarkModeText = $"Enable {(darkMode ? "light" : "dark")} mode";
     }
 
     public bool IsUseBlurDarkModeEnabled(int selectedIndex) =>
