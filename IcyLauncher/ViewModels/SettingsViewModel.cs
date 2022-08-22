@@ -14,6 +14,7 @@ public partial class SettingsViewModel : ObservableObject
     readonly ConfigurationManager configurationManager;
     readonly ThemeManager themeManager;
     readonly WindowHandler windowHandler;
+    readonly IConverter converter;
     readonly IFileSystem fileSystem;
     readonly IMessage message;
     readonly INavigation navigation;
@@ -27,6 +28,7 @@ public partial class SettingsViewModel : ObservableObject
         ThemeManager themeManager,
         WindowHandler windowHandler,
         Updater updater,
+        IConverter converter,
         IFileSystem fileSystem,
         IMessage message,
         INavigation navigation)
@@ -35,6 +37,7 @@ public partial class SettingsViewModel : ObservableObject
         this.configurationManager = configurationManager;
         this.themeManager = themeManager;
         this.windowHandler = windowHandler;
+        this.converter = converter;
         this.fileSystem = fileSystem;
         this.message = message;
         this.navigation = navigation;
@@ -44,6 +47,13 @@ public partial class SettingsViewModel : ObservableObject
 
 
         this.windowHandler.Register(folderPicker);
+
+        this.windowHandler.Register(savePicker);
+        savePicker.FileTypeChoices.Add(new("JSON", new List<string>() { ".json" }));
+        savePicker.FileTypeChoices.Add("Plain Text", new List<string>() { ".txt" });
+
+        this.windowHandler.Register(filePicker);
+        filePicker.FileTypeFilter.Add(".json");
 
         IsUpdateVisible = Updater.IsUpdateAvailable;
 
@@ -139,7 +149,7 @@ public partial class SettingsViewModel : ObservableObject
     readonly FolderPicker folderPicker = new() { SuggestedStartLocation = PickerLocationId.DocumentsLibrary };
 
     [ICommand(AllowConcurrentExecutions = false)]
-    async Task SelectDirectoryAsync(int directory)
+    async Task SelectDirectoryAsync(bool texturepackDirectory)
     {
         var folder = await folderPicker.PickSingleFolderAsync();
 
@@ -147,31 +157,21 @@ public partial class SettingsViewModel : ObservableObject
             return;
 
         if (fileSystem.DirectoryExists(folder.Path) && fileSystem.DirectoryWritable(folder.Path))
-            switch (directory)
-            {
-                case 0:
-                    Configuration.Launcher.TexturepackDirectory = folder.Path;
-                    break;
-                case 1:
-                    Configuration.Launcher.VersionsDirectory = folder.Path;
-                    break;
-            }
+            if (texturepackDirectory)
+                Configuration.Launcher.TexturepackDirectory = folder.Path;
+            else
+                Configuration.Launcher.VersionsDirectory = folder.Path;
         else
             await message.ShowAsync("Something went wrong :(", "It looks like IcyLauncher cant write to this directory or it does not exist. Please verify that you have given permissions to IcyLauncher and this directory still exists.", true, "Ok");
     }
 
     [ICommand]
-    void ResetDirectory(int directory)
+    void ResetDirectory(bool texturepackDirectory)
     {
-        switch (directory)
-        {
-            case 0:
-                Configuration.Launcher.TexturepackDirectory = $"{Computer.MinecraftDirectory}\\games\\com.mojang\\resource_packs";
-                break;
-            case 1:
-                Configuration.Launcher.VersionsDirectory = $"{Computer.CurrentDirectory}\\Versions";
-                break;
-        }
+        if (texturepackDirectory)
+            Configuration.Launcher.TexturepackDirectory = $"{Computer.MinecraftDirectory}\\games\\com.mojang\\resource_packs";
+        else
+            Configuration.Launcher.VersionsDirectory = $"{Computer.CurrentDirectory}\\Versions";
     }
 
 
@@ -181,17 +181,56 @@ public partial class SettingsViewModel : ObservableObject
 
 
     [ICommand(AllowConcurrentExecutions = false)]
-    async Task ResetColorsAsync(int darkMode_)
+    async Task ResetColorsAsync(bool darkMode)
     {
-        bool darkMode = darkMode_ == 1;
-
         if (await message.ShowAsync("Are you sure?", $"If you click Ok your current color settings will be overwritten by the default {(darkMode ? "dark" : "light")} mode colors.\nThis will not effect your current accent colors.\nThis will also effect the blur color mode.", true, primaryButton: "Ok") != ContentDialogResult.Primary)
             return;
 
-        themeManager.LoadTheme(darkMode ? Theme.Dark : Theme.Light, true);
+        themeManager.Load(darkMode ? Theme.Dark : Theme.Light, true);
         Configuration.Apperance.UseDarkModeBlur = darkMode;
     }
 
     public bool IsUseBlurDarkModeEnabled(int selectedIndex) =>
         selectedIndex == 0 || selectedIndex == 1;
+
+
+    readonly FileSavePicker savePicker = new() { SuggestedStartLocation = PickerLocationId.Desktop };
+
+    [ICommand(AllowConcurrentExecutions = false)]
+    async Task ExportAsync(bool saveConfig)
+    {
+        savePicker.SuggestedFileName = saveConfig ? "Config" : "Theme";
+        var save = await savePicker.PickSaveFileAsync();
+
+        if (save is null || string.IsNullOrWhiteSpace(save.Path))
+            return;
+
+        if (fileSystem.FileWritable(save.Path))
+            await fileSystem.SaveAsTextAsync(save.Path, saveConfig ? configurationManager.Export() : themeManager.Export(), true);
+        else
+            await message.ShowAsync("Something went wrong :(", "It looks like IcyLauncher cant write to this file. Please verify that you have given permissions to IcyLauncher.", true, "Ok");
+    }
+
+    readonly FileOpenPicker filePicker = new() { SuggestedStartLocation = PickerLocationId.Desktop };
+
+    [ICommand(AllowConcurrentExecutions = false)]
+    async Task LoadAsync(bool loadConfig)
+    {
+        var file = await filePicker.PickSingleFileAsync();
+
+        if (file is null || string.IsNullOrWhiteSpace(file.Path))
+            return;
+
+        if (fileSystem.FileExists(file.Path))
+        {
+            var str = loadConfig ? "configuration" : "theme";
+            if (await message.ShowAsync("Are you sure?", $"Do you really want to overwrite your current {str} by this external {str}?\nLoading external {str}s can be dangerous. Make sure you backup your current {str}.\nDo you want to continue?", true, "No", "Yes") == ContentDialogResult.Primary)
+                if (loadConfig)
+                    configurationManager.Load(converter.ToObject<Configuration>(await fileSystem.ReadAsTextAsync(file.Path)), true);
+                else
+                    themeManager.Load(converter.ToObject<Theme>(await fileSystem.ReadAsTextAsync(file.Path)));
+        }
+        else
+            await message.ShowAsync("Something went wrong :(", "It looks like this file does no longer exist. Please verify the file still exists.", true, "Ok");
+    }
 }
