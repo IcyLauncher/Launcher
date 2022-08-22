@@ -44,10 +44,8 @@ public partial class ColorSettingsViewModel : ObservableObject
         themeManager.LoadTheme(LocalColors);
 
     [ICommand(AllowConcurrentExecutions = false)]
-    async Task ResetColorsAsync(int darkMode_)
+    async Task ResetColorsAsync(bool darkMode)
     {
-        bool darkMode = darkMode_ == 1;
-
         if (await message.ShowAsync("Are you sure?", $"If you click Ok your current color settings will be overwritten by the default {(darkMode ? "dark" : "light")} mode colors.\nThis will also effect your current accent colors.\nThis will not effect the blur color mode. To change the blur color mode, change 'Application Background' in the main settings.", true, primaryButton: "Ok") != ContentDialogResult.Primary)
             return;
 

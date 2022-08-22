@@ -22,8 +22,8 @@
             Opacity="0.3"
             Offset="0,10,0" />
 
-        <x:Int32 x:Key="par0">0</x:Int32>
-        <x:Int32 x:Key="par1">1</x:Int32>
+        <x:Boolean x:Key="par0">False</x:Boolean>
+        <x:Boolean x:Key="par1">True</x:Boolean>
     </Page.Resources>
 
     <ui:HCont
