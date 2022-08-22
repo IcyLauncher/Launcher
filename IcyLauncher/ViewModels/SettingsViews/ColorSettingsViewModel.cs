@@ -41,7 +41,7 @@ public partial class ColorSettingsViewModel : ObservableObject
 
     [ICommand]
     void SaveColors() =>
-        themeManager.LoadTheme(LocalColors);
+        themeManager.Load(LocalColors);
 
     [ICommand(AllowConcurrentExecutions = false)]
     async Task ResetColorsAsync(bool darkMode)

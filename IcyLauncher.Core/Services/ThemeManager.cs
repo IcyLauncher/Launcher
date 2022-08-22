@@ -35,9 +35,9 @@ public class ThemeManager
 
 
     public string Export() =>
-        converter.ToString(configuration.Apperance);
+        converter.ToString(configuration.Apperance.Colors);
 
-    public void LoadTheme(Theme input, bool ignoreAccent = false)
+    public void Load(Theme input, bool ignoreAccent = false)
     {
         CopyTheme(Colors, input, ignoreAccent);
 
@@ -78,7 +78,7 @@ public class ThemeManager
     /// Use only for debugging.
     /// </summary>
     public void RandomizeTheme() =>
-        LoadTheme(new()
+        Load(new()
         {
             Accent = new()
             {
