@@ -8,20 +8,19 @@ public class ConfigurationManager
     readonly Configuration configuration;
     readonly ILogger logger;
     readonly IConverter converter;
-    readonly IFileSystem fileSystem;
 
-    public ConfigurationManager(IOptions<Configuration> configuration, ILogger<ConfigurationManager> logger, IConverter converter, IFileSystem fileSystem)
+    public ConfigurationManager(IOptions<Configuration> configuration, ILogger<ConfigurationManager> logger, IConverter converter)
     {
         this.configuration = configuration.Value;
         this.logger = logger;
         this.converter = converter;
-        this.fileSystem = fileSystem;
 
         this.logger.Log("Registered Configuration Manager");
     }
 
-    public async Task ExportAsync(CancellationToken cancellationToken = default) =>
-        await fileSystem.SaveAsTextAsync("Configuration.json", converter.ToString(configuration), true, cancellationToken);
+
+    public string Export() =>
+        converter.ToString(configuration);
 
     public void Load(Configuration input, bool IgnoreTheme = false)
     {

@@ -34,7 +34,7 @@ public class ThemeManager
     }
 
 
-    public string ExportTheme() =>
+    public string Export() =>
         converter.ToString(configuration.Apperance);
 
     public void LoadTheme(Theme input, bool ignoreAccent = false)

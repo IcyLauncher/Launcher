@@ -30,7 +30,7 @@ public class AppStartupHandler
 
         shell.Closed += async (s, e) =>
         {
-            await configurationManagaer.ExportAsync();
+            await fileSystem.SaveAsTextAsync("Configuration.json", configurationManagaer.Export(), true);
 
             await fileSystem.SaveAsTextAsync("Assets\\Banners\\SolidColors.json", converter.ToString(solidColors.Value), true);
         };
