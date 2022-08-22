@@ -59,7 +59,10 @@ public partial class ConfigurationWeather : ObservableObject
     bool isEnabled = true;
 
     [ObservableProperty]
-    string location = "$IP";
+    bool isAutoLocationEnabled = true;
+
+    [ObservableProperty]
+    string location = "New York";
 
     [ObservableProperty]
     WeatherUnit unit = WeatherUnit.Celsius;
@@ -68,17 +71,17 @@ public partial class ConfigurationWeather : ObservableObject
 public partial class ConfigurationDateTime : ObservableObject
 {
     [ObservableProperty]
-    string dateFormat  = "dd.MM.yyyy";
+    string dateFormat  = "MM/dd/yyyy";
 
     [ObservableProperty]
-    string timeFormat  = "HH:mm:ss";
+    string timeFormat  = "hh:mm tt";
 }
 
 public partial class ConfigurationDeveloper : ObservableObject
 {
     [ObservableProperty]
-    bool isSaveLoginEnabled = false;
+    bool isOneClickEnabled = false;
 
     [ObservableProperty]
-    bool isOneClickEnabled = false;
+    bool isWarningEnabled = false;
 }
