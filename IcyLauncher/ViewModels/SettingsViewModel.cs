@@ -68,10 +68,26 @@ public partial class SettingsViewModel : ObservableObject
     }
 
 
-    [ICommand]
-    void Debug()
+    int presses = 0;
+
+    [ICommand(AllowConcurrentExecutions = true)]
+    async Task DebugAsync()
     {
-        themeManager.RandomizeTheme();
+        if (presses >= 5 || Configuration.Developer.IsOneClickEnabled)
+        {
+            presses = 0;
+
+            if (!Configuration.Developer.IsWarningEnabled || await message.ShowAsync("This might be dangerous!", "Playing around here can be dangerous and ruin your experience with IcyLauncher. It is not recommended to go here.\nDo you really want to continue?", true, "Cancel", "Yes, im a pro") == ContentDialogResult.Primary)
+                navigation.SetCurrentPage("Views.DeveloperSettingsView".AsType());
+
+            return;
+        }
+
+        presses++;
+        await Task.Delay(1000);
+
+        if (presses > 0)
+            presses--;
     }
 
 

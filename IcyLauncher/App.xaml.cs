@@ -53,13 +53,14 @@ public partial class App : Application
                 services.AddScoped<IFileSystem, FileSystem>();
                 services.AddScoped<IMessage, Message>();
                 services.AddScoped<INavigation>(provider => new Navigation(provider.GetRequiredService<ILogger<Navigation>>(), navigationView, contentFrame, backButton));
-                
+
+                services.AddSingleton<NoPageViewModel>();
                 services.AddSingleton<HomeViewModel>();
                 services.AddSingleton<ProfilesViewModel>();
                 services.AddSingleton<SettingsViewModel>();
                 services.AddSingleton<BannerSettingsViewModel>();
                 services.AddSingleton<ColorSettingsViewModel>();
-                services.AddSingleton<NoPageViewModel>();
+                services.AddSingleton<DeveloperSettingsViewModel>();
 
                 services.AddSingleton<Window>(provider => new() { Content = mainGrid, Title = "IcyLauncher" });
             }).Build();

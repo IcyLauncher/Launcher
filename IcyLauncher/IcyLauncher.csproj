@@ -149,6 +149,7 @@
 		<None Remove="Views\NoPageView.xaml" />
 		<None Remove="Views\ProfilesView.xaml" />
 		<None Remove="Views\SettingsView.xaml" />
+		<None Remove="Views\SettingsViews\DeveloperSettingsView.xaml" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -541,7 +542,10 @@
 		<Page Update="UI\Xaml\SolidColorTemplate.xaml">
 		  <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
 		</Page>
-		<Page Update="Views\ColorSettingsView.xaml">
+		<Page Update="Views\SettingsViews\DeveloperSettingsView.xaml">
+		  <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+		</Page>
+		<Page Update="Views\Settings\ColorSettingsView.xaml">
 		  <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
 		  <SubType>Designer</SubType>
 		</Page>
@@ -549,7 +553,7 @@
 		  <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
 		  <SubType>Designer</SubType>
 		</Page>
-		<Page Update="Views\BannerSettingsView.xaml">
+		<Page Update="Views\Settings\BannerSettingsView.xaml">
 		  <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
 		  <SubType>Designer</SubType>
 		</Page>
