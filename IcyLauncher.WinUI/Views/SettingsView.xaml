@@ -1,0 +1,438 @@
+﻿<Page
+    x:Class="IcyLauncher.WinUI.Views.SettingsView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:hlprs="using:IcyLauncher.Helpers"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:media="using:CommunityToolkit.WinUI.UI.Media"
+    xmlns:typs="using:IcyLauncher.Data.Types"
+    xmlns:xmle="using:IcyLauncher.Xaml.Elements"
+    xmlns:xtntns="using:IcyLauncher.Helpers.Extentions"
+    Background="Transparent"
+    Loaded="{x:Bind viewModel.OnPageLoaded}"
+    NavigationCacheMode="Enabled"
+    mc:Ignorable="d">
+    <Page.Resources>
+        <x:Boolean x:Key="par0">False</x:Boolean>
+        <x:Boolean x:Key="par1">True</x:Boolean>
+    </Page.Resources>
+
+    <xmle:HCont
+        Title="Settings"
+        Style="{StaticResource Page}"
+        VerticalScrollBar="{x:Bind viewModel.Configuration.Launcher.IsScrollbarsEnabled, Mode=OneWay, Converter={StaticResource BoolScrollbarVisibilityConverter}}">
+        <StackPanel Margin="0,6,0,0" Spacing="8">
+            <Grid Margin="0,0,0,12" VerticalAlignment="Top">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="8" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+
+                <Grid>
+                    <Viewbox
+                        Width="59"
+                        Height="59"
+                        HorizontalAlignment="Left">
+                        <Path Data="{x:Bind hlprs:UIElementProvider.IconPath}">
+                            <Path.Fill>
+                                <LinearGradientBrush StartPoint="0,0" EndPoint="0.625,1">
+                                    <GradientStop Offset="0.1" Color="{Binding Color, Source={ThemeResource AccentLight}}" />
+                                    <GradientStop Offset="1" Color="{Binding Color, Source={ThemeResource AccentDark}}" />
+                                </LinearGradientBrush>
+                            </Path.Fill>
+                        </Path>
+                    </Viewbox>
+
+                    <Grid Margin="71,0,0,0" VerticalAlignment="Center">
+                        <TextBlock
+                            Style="{StaticResource Title}"
+                            Text="IcyLauncher"
+                            Typography.Capitals="Normal" />
+                        <HyperlinkButton
+                            Margin="0,27,0,0"
+                            Padding="0"
+                            Content="About"
+                            ToolTipService.ToolTip="Show info about IcyLauncher" />
+                    </Grid>
+                </Grid>
+
+                <Button
+                    Grid.Column="1"
+                    Padding="6"
+                    HorizontalAlignment="Right"
+                    Background="Transparent"
+                    BorderBrush="Transparent"
+                    Command="{x:Bind viewModel.DebugCommand}"
+                    ToolTipService.ToolTip="Access to developer settings">
+                    <Grid>
+                        <FontIcon
+                            Margin="0,0,0,-2"
+                            HorizontalAlignment="Left"
+                            FontFamily="Assets/FluentSystemIcons-Regular.ttf#FluentSystemIcons-Regular"
+                            FontSize="32"
+                            Glyph="&#xE493;" />
+
+                        <Grid Margin="40,0,0,0" VerticalAlignment="Center">
+                            <TextBlock
+                                FontSize="15"
+                                Style="{StaticResource Subpoint}"
+                                Text="Version" />
+                            <TextBlock Margin="0,15,0,0" Style="{StaticResource SubpointSecondary}">
+                                <Run Text="Launcher: " />
+                                <Run Text="{x:Bind viewModel.Updater.CurrentAppVersion, FallbackValue='N/A', TargetNullValue='N/A'}" />
+                                <Run Text=" | API: " />
+                                <Run Text="{x:Bind viewModel.Updater.CurrentApiVersion, FallbackValue='N/A', TargetNullValue='N/A'}" />
+                            </TextBlock>
+                        </Grid>
+                    </Grid>
+                </Button>
+
+                <Button
+                    Grid.Column="3"
+                    Padding="6"
+                    HorizontalAlignment="Right"
+                    Background="{x:Bind viewModel.UpdateButtonBackground}"
+                    BorderBrush="{x:Bind viewModel.UpdateButtonBorderBrush}"
+                    Command="{x:Bind viewModel.UpdateCommand}"
+                    ToolTipService.ToolTip="Check for updates">
+                    <Grid>
+                        <FontIcon
+                            Margin="0,0,0,-2"
+                            HorizontalAlignment="Left"
+                            FontFamily="Assets/FluentSystemIcons-Regular.ttf#FluentSystemIcons-Regular"
+                            FontSize="32"
+                            Glyph="&#xE371;" />
+
+                        <Grid Margin="40,0,0,0" VerticalAlignment="Center">
+                            <TextBlock
+                                FontSize="15"
+                                Style="{StaticResource Subpoint}"
+                                Text="Update" />
+                            <TextBlock
+                                Margin="0,15,0,0"
+                                Style="{StaticResource SubpointSecondary}"
+                                Text="{x:Bind viewModel.UpdateStatus, Mode=OneWay, FallbackValue='N/A', TargetNullValue='N/A'}" />
+                        </Grid>
+                    </Grid>
+                </Button>
+                <Ellipse
+                    Grid.Column="3"
+                    Width="13"
+                    Height="13"
+                    Margin="0,3,-3,0"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Top"
+                    Fill="#90ffff00"
+                    Visibility="{x:Bind viewModel.UpdateBadgeVisibility, Mode=OneWay}" />
+            </Grid>
+
+            <Expander
+                HorizontalAlignment="Stretch"
+                Header="&#xEE7D;|Launcher|General settings like Discord RPC, Scrollbars, Paths etc."
+                Template="{StaticResource SettingsExpander}">
+                <Expander.Tag>
+                    <StackPanel Spacing="8">
+                        <ContentControl Tag="Discord RPC|The ability to make all your friends jealous because you are using IcyLauncher" Template="{StaticResource SettingsCard}">
+                            <ToggleSwitch IsOn="{x:Bind viewModel.Configuration.Launcher.IsDiscordEnabled, Mode=TwoWay}" ToolTipService.ToolTip="Enable/Disable Discord RPC" />
+                        </ContentControl>
+
+                        <ContentControl Tag="Scrollbars|Show scrollbars on every scrollable container" Template="{StaticResource SettingsCard}">
+                            <ToggleSwitch IsOn="{x:Bind viewModel.Configuration.Launcher.IsScrollbarsEnabled, Mode=TwoWay}" ToolTipService.ToolTip="Enable/Disable scrollbars" />
+                        </ContentControl>
+
+                        <ContentControl Tag="At Minecraft Launch|Option what the launcher does on launching Minecraft" Template="{StaticResource SettingsCard}">
+                            <ComboBox
+                                Width="200"
+                                PlaceholderText="Behavior..."
+                                SelectedIndex="{x:Bind viewModel.Configuration.Launcher.AtMinecraftaunch, Mode=TwoWay, Converter={StaticResource EnumIntConverter}}"
+                                ToolTipService.ToolTip="Select behaviour at Minecraft launch">
+                                <ComboBoxItem Content="Close" />
+                                <ComboBoxItem Content="Minimize (System Tray)" />
+                                <ComboBoxItem Content="Keep Open" />
+                            </ComboBox>
+                        </ContentControl>
+
+                        <ContentControl Tag="Texturepacks|Directroy where all texturepacks get downloaded to " Template="{StaticResource SettingsCard}">
+                            <Grid Width="400">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+
+                                <TextBox
+                                    IsReadOnly="True"
+                                    PlaceholderText="C:\Some\Path"
+                                    Text="{x:Bind viewModel.Configuration.Launcher.TexturepackDirectory, Mode=OneWay}"
+                                    ToolTipService.ToolTip="Current texturepacks directory" />
+                                <Button
+                                    Grid.Column="1"
+                                    Margin="4,0,0,0"
+                                    Command="{x:Bind viewModel.SelectDirectoryCommand}"
+                                    CommandParameter="{StaticResource par0}"
+                                    Content="Select"
+                                    ToolTipService.ToolTip="Select texturepacks directory" />
+                                <Button
+                                    Grid.Column="2"
+                                    Margin="4,0,0,0"
+                                    Command="{x:Bind viewModel.ResetDirectoryCommand}"
+                                    CommandParameter="{StaticResource par0}"
+                                    Content="Reset"
+                                    ToolTipService.ToolTip="Reset texturepack directory" />
+                            </Grid>
+                        </ContentControl>
+
+                        <ContentControl Tag="Minecraft Installation|Directroy IcyLauncher uses to download all Minecraft game versions " Template="{StaticResource SettingsCard}">
+                            <Grid Width="400">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+
+                                <TextBox
+                                    IsReadOnly="True"
+                                    PlaceholderText="C:\Some\Path"
+                                    Text="{x:Bind viewModel.Configuration.Launcher.VersionsDirectory, Mode=OneWay}"
+                                    ToolTipService.ToolTip="Current versions directory" />
+                                <Button
+                                    Grid.Column="1"
+                                    Margin="5,0,0,0"
+                                    Command="{x:Bind viewModel.SelectDirectoryCommand}"
+                                    CommandParameter="{StaticResource par1}"
+                                    Content="Select"
+                                    ToolTipService.ToolTip="Select versions directory" />
+                                <Button
+                                    Grid.Column="2"
+                                    Margin="4,0,0,0"
+                                    Command="{x:Bind viewModel.ResetDirectoryCommand}"
+                                    CommandParameter="{StaticResource par1}"
+                                    Content="Reset"
+                                    ToolTipService.ToolTip="Reset versions directory" />
+                            </Grid>
+                        </ContentControl>
+                    </StackPanel>
+                </Expander.Tag>
+            </Expander>
+
+            <Expander
+                HorizontalAlignment="Stretch"
+                Header="&#xF2F5;|Apperance|Settings to customize IcyLauncher like play banner, colors and blur effect"
+                Template="{StaticResource SettingsExpander}">
+                <Expander.Tag>
+                    <StackPanel Spacing="8">
+                        <ContentControl Tag="Home Banner|Image/Color which is showed on the home page" Template="{StaticResource SettingsCard}">
+                            <Button
+                                Command="{x:Bind viewModel.NavigateToCommand}"
+                                CommandParameter="Views.BannerSettingsView"
+                                Content="Open banner settings"
+                                ToolTipService.ToolTip="Open banner settings" />
+                        </ContentControl>
+
+                        <ContentControl Tag="Colors|General theme colors for the entire application" Template="{StaticResource SettingsCard}">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="8" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+
+                                <Button
+                                    Command="{x:Bind viewModel.NavigateToCommand}"
+                                    CommandParameter="Views.ColorSettingsView"
+                                    Content="Open color settings"
+                                    ToolTipService.ToolTip="Open color settings" />
+
+                                <Button
+                                    Grid.Column="2"
+                                    Content="Reset Colors"
+                                    ToolTipService.ToolTip="Reset colors to default">
+                                    <Button.Flyout>
+                                        <MenuFlyout>
+                                            <MenuFlyoutItem
+                                                Command="{x:Bind viewModel.ResetColorsCommand}"
+                                                CommandParameter="{StaticResource par0}"
+                                                Text="Light Theme" />
+                                            <MenuFlyoutItem
+                                                Command="{x:Bind viewModel.ResetColorsCommand}"
+                                                CommandParameter="{StaticResource par1}"
+                                                Text="Dark Theme" />
+                                        </MenuFlyout>
+                                    </Button.Flyout>
+                                </Button>
+                            </Grid>
+                        </ContentControl>
+
+                        <ContentControl Tag="Application Background|Blur used for the main background" Template="{StaticResource SettingsCard}">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="8" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+
+                                <ComboBox
+                                    Name="Blur"
+                                    Width="150"
+                                    VerticalAlignment="Center"
+                                    PlaceholderText="Blur..."
+                                    SelectedIndex="{x:Bind viewModel.Configuration.Apperance.Blur, Mode=TwoWay, Converter={StaticResource EnumIntConverter}}"
+                                    ToolTipService.ToolTip="Select blur type">
+                                    <ComboBoxItem Content="Mica (Win11)" IsEnabled="{x:Bind hlprs:Computer.IsWindows11}" />
+                                    <ComboBoxItem Content="Acyrlic" />
+                                    <ComboBoxItem Content="Simple" />
+                                    <ComboBoxItem Content="None" />
+                                </ComboBox>
+
+                                <ToggleSwitch
+                                    Grid.Column="2"
+                                    IsEnabled="{x:Bind viewModel.IsUseBlurDarkModeEnabled(Blur.SelectedIndex), Mode=OneWay}"
+                                    IsOn="{x:Bind viewModel.Configuration.Apperance.UseDarkModeBlur, Mode=TwoWay}"
+                                    OffContent="Light Mode"
+                                    OnContent="Dark Mode"
+                                    ToolTipService.ToolTip="Select blur theme color" />
+                            </Grid>
+                        </ContentControl>
+                    </StackPanel>
+                </Expander.Tag>
+            </Expander>
+
+            <Expander
+                HorizontalAlignment="Stretch"
+                Header="&#xEE4B;|Weather|Settings for the weather module inside IcyLauncher like location, unit etc."
+                Template="{StaticResource SettingsExpander}">
+                <Expander.Tag>
+                    <StackPanel Spacing="8">
+                        <ContentControl Tag="Weather|Weather widget enabled on the home page" Template="{StaticResource SettingsCard}">
+                            <ToggleSwitch IsOn="{x:Bind viewModel.Configuration.Weather.IsEnabled, Mode=TwoWay}" ToolTipService.ToolTip="Enable/Disable weather" />
+                        </ContentControl>
+
+                        <ContentControl Tag="Auto Location|Automatically locate current city using IP-address" Template="{StaticResource SettingsCard}">
+                            <ToggleSwitch
+                                Name="AutoLocation"
+                                IsOn="{x:Bind viewModel.Configuration.Weather.IsAutoLocationEnabled, Mode=TwoWay}"
+                                ToolTipService.ToolTip="Enable/Disable auto location" />
+                        </ContentControl>
+
+                        <ContentControl Tag="City|City used for weather forecasts" Template="{StaticResource SettingsCard}">
+                            <TextBox
+                                Width="250"
+                                IsEnabled="{Binding IsOn, ElementName=AutoLocation, Mode=OneWay, Converter={StaticResource InvertBool}}"
+                                PlaceholderText="City..."
+                                Text="{x:Bind viewModel.Configuration.Weather.Location, Mode=TwoWay}"
+                                ToolTipService.ToolTip="Weather city" />
+                        </ContentControl>
+
+                        <ContentControl Tag="Unit|Unit in which temperatures are displayed" Template="{StaticResource SettingsCard}">
+                            <ComboBox
+                                Width="150"
+                                VerticalAlignment="Center"
+                                PlaceholderText="Unit..."
+                                SelectedIndex="{x:Bind viewModel.Configuration.Weather.Unit, Mode=TwoWay, Converter={StaticResource EnumIntConverter}}"
+                                ToolTipService.ToolTip="Select unit">
+                                <ComboBoxItem Content="Celsius" />
+                                <ComboBoxItem Content="Farenheit" />
+                            </ComboBox>
+                        </ContentControl>
+                    </StackPanel>
+                </Expander.Tag>
+            </Expander>
+
+            <Expander
+                HorizontalAlignment="Stretch"
+                Header="&#xE36E;|Date &amp; Time|Settings to customize the general date and time format"
+                Template="{StaticResource SettingsExpander}">
+                <Expander.Tag>
+                    <StackPanel Spacing="8">
+                        <ContentControl Tag="Date format|Format in which dates are displayed (Av: dd, ddd, dddd; MM, MMM, MMMM; yy, yyyy)" Template="{StaticResource SettingsCard}">
+                            <TextBox
+                                Width="150"
+                                PlaceholderText="Format..."
+                                Text="{x:Bind viewModel.Configuration.DateTime.DateFormat, Mode=TwoWay}"
+                                ToolTipService.ToolTip="Date format" />
+                        </ContentControl>
+
+                        <ContentControl Tag="Time format|Format in which times are displayed (Av: ss; mm; hh, HH, tt)" Template="{StaticResource SettingsCard}">
+                            <TextBox
+                                Width="150"
+                                PlaceholderText="Format..."
+                                Text="{x:Bind viewModel.Configuration.DateTime.TimeFormat, Mode=TwoWay}"
+                                ToolTipService.ToolTip="Time format" />
+                        </ContentControl>
+                    </StackPanel>
+                </Expander.Tag>
+            </Expander>
+
+            <Expander
+                HorizontalAlignment="Stretch"
+                Header="&#xE91B;|Account|User settings like username, picture, email and password"
+                Template="{StaticResource SettingsExpander}" />
+
+            <Expander
+                HorizontalAlignment="Stretch"
+                Header="&#xF8B8;|Developer|Advanced settings only made for debugging"
+                Template="{StaticResource SettingsExpander}">
+                <Expander.Tag>
+                    <StackPanel Spacing="8">
+                        <ContentControl Tag="One Click Button|Only press the debug button once instead of 5 times" Template="{StaticResource SettingsCard}">
+                            <ToggleSwitch IsOn="{x:Bind viewModel.Configuration.Developer.IsOneClickEnabled, Mode=TwoWay}" ToolTipService.ToolTip="Enable/Disable One Click Button" />
+                        </ContentControl>
+
+                        <ContentControl Tag="Warning|Show pop up warning before going to developer page" Template="{StaticResource SettingsCard}">
+                            <ToggleSwitch IsOn="{x:Bind viewModel.Configuration.Developer.IsWarningEnabled, Mode=TwoWay}" ToolTipService.ToolTip="Enable/Disable warning" />
+                        </ContentControl>
+                    </StackPanel>
+                </Expander.Tag>
+            </Expander>
+
+            <Expander
+                HorizontalAlignment="Stretch"
+                Header="&#xEA44;|Configuration|Options to export/load external configs and themes"
+                Template="{StaticResource SettingsExpander}">
+                <Expander.Tag>
+                    <Grid HorizontalAlignment="Stretch">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="8" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="12" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="8" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+
+                        <Button
+                            Grid.Column="0"
+                            HorizontalAlignment="Stretch"
+                            Command="{x:Bind viewModel.ExportCommand}"
+                            CommandParameter="{StaticResource par1}"
+                            Content="Export Config"
+                            Style="{StaticResource AccentButtonStyle}" />
+                        <Button
+                            Grid.Column="2"
+                            HorizontalAlignment="Stretch"
+                            Command="{x:Bind viewModel.LoadCommand}"
+                            CommandParameter="{StaticResource par1}"
+                            Content="Load Config" />
+                        <Button
+                            Grid.Column="4"
+                            HorizontalAlignment="Stretch"
+                            Command="{x:Bind viewModel.ExportCommand}"
+                            CommandParameter="{StaticResource par0}"
+                            Content="Export Theme"
+                            Style="{StaticResource AccentButtonStyle}" />
+                        <Button
+                            Grid.Column="6"
+                            HorizontalAlignment="Stretch"
+                            Command="{x:Bind viewModel.LoadCommand}"
+                            CommandParameter="{StaticResource par0}"
+                            Content="Load Theme" />
+                    </Grid>
+                </Expander.Tag>
+            </Expander>
+        </StackPanel>
+    </xmle:HCont>
+</Page>

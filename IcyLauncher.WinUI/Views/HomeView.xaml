@@ -1,0 +1,207 @@
+﻿<Page
+    x:Class="IcyLauncher.WinUI.Views.HomeView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:ex="using:CommunityToolkit.WinUI.UI"
+    xmlns:hlprs="using:IcyLauncher.Helpers"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:md="using:CommunityToolkit.WinUI.UI.Media"
+    xmlns:xmle="using:IcyLauncher.Xaml.Elements"
+    Loaded="{x:Bind viewModel.OnPageLoaded}"
+    NavigationCacheMode="Enabled"
+    mc:Ignorable="d">
+    <Page.Resources>
+        <md:AttachedCardShadow
+            x:Key="CardShadow"
+            BlurRadius="20"
+            CornerRadius="8"
+            Opacity="0.3"
+            Offset="0,3,0" />
+    </Page.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="243" />
+            <RowDefinition Height="43" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0">
+            <Rectangle Loaded="{x:Bind viewModel.OnBannerLoaded}" />
+
+            <TextBlock
+                Margin="12,8,0,0"
+                Style="{StaticResource Header}"
+                Text="Home" />
+
+            <Grid
+                Margin="32,0,0,20"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Center">
+                <Grid.TranslationTransition>
+                    <Vector3Transition Duration="0:0:0.1" />
+                </Grid.TranslationTransition>
+
+                <TextBlock
+                    FontSize="26"
+                    Style="{StaticResource Title}"
+                    Text="{x:Bind viewModel.SelectedProfile.Title, Mode=OneWay, FallbackValue=':('}"
+                    Typography.Capitals="Normal" />
+                <TextBlock
+                    Margin="0,32,0,0"
+                    Style="{StaticResource Content}"
+                    Text="{x:Bind viewModel.BannerProfileDetails, Mode=OneWay}" />
+
+                <Button
+                    Margin="0,65,0,0"
+                    Padding="0"
+                    ex:Effects.Shadow="{StaticResource CardShadow}"
+                    Command="{x:Bind viewModel.LaunchCommand}"
+                    Style="{StaticResource LaunchButton}"
+                    Tag="{x:Bind viewModel.LaunchProgressDetails, Mode=OneWay}"
+                    ToolTipService.ToolTip="Launch Minecraft">
+                    <ProgressBar
+                        Width="130"
+                        Margin="0,0,0,-1"
+                        Background="Transparent"
+                        CornerRadius="0"
+                        Value="{x:Bind viewModel.LaunchProgress, Mode=OneWay}" />
+                </Button>
+                <Button
+                    Name="LaunchCancelButton"
+                    Width="34"
+                    Height="34"
+                    Margin="136,65,0,0"
+                    Padding="0,0,0,-2"
+                    Command="{x:Bind viewModel.LaunchCancelCommand}"
+                    FontFamily="Assets/FluentSystemIcons-Regular.ttf#FluentSystemIcons-Regular"
+                    Opacity="{x:Bind LaunchCancelButton.IsEnabled, Mode=OneWay, Converter={StaticResource BoolDoubleConverter}}"
+                    Style="{StaticResource LaunchButton}"
+                    Tag="&#xF367;"
+                    ToolTipService.ToolTip="Cancel Minecraft Launch">
+                    <Button.OpacityTransition>
+                        <ScalarTransition />
+                    </Button.OpacityTransition>
+                </Button>
+            </Grid>
+        </Grid>
+
+        <xmle:ScrollLane
+            Grid.Row="1"
+            Margin="0,-24,0,0"
+            IsItemSelectionEnabled="{x:Bind viewModel.LaunchCommand.IsRunning, Mode=OneWay, Converter={StaticResource InvertBool}}"
+            ItemContainerStyle="{StaticResource ProfileGridViewItem}"
+            ItemSelectionChanged="{x:Bind viewModel.OnProfileSelectionChanged}"
+            ItemTemplate="{StaticResource ProfileTemplate}"
+            ItemsSource="{x:Bind viewModel.Profiles, Mode=OneWay}"
+            SelectedItem="{x:Bind viewModel.SelectedProfile, Mode=TwoWay}" />
+
+
+        <Grid Grid.Row="2" Margin="12">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition Width="12" />
+                <ColumnDefinition />
+                <ColumnDefinition Width="12" />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+
+            <xmle:HCont
+                Title="News"
+                Grid.Column="0"
+                MaxHeight="300"
+                HorizontalAlignment="Stretch"
+                Content="{x:Bind viewModel.News, Mode=OneWay, TargetNullValue='N/A', FallbackValue='N/A', Converter={StaticResource JoinString}, ConverterParameter='/n- ', ConverterLanguage='- '}"
+                Style="{StaticResource Card}"
+                VerticalScrollBar="{x:Bind viewModel.Configuration.Launcher.IsScrollbarsEnabled, Mode=OneWay, Converter={StaticResource BoolScrollbarVisibilityConverter}}" />
+
+            <xmle:HCont
+                Title="Weather"
+                Grid.Column="2"
+                HorizontalAlignment="Stretch"
+                Style="{StaticResource Card}"
+                VerticalScrollBar="{x:Bind viewModel.Configuration.Launcher.IsScrollbarsEnabled, Mode=OneWay, Converter={StaticResource BoolScrollbarVisibilityConverter}}">
+                <Grid>
+                    <TextBlock
+                        HorizontalAlignment="Center"
+                        Style="{StaticResource Content}"
+                        TextTrimming="CharacterEllipsis">
+                        <Run Text="{x:Bind viewModel.WeatherData.City, Mode=OneWay, TargetNullValue='N/A', FallbackValue='N/A'}" />
+                        <Run Text=" | " />
+                        <Run Text="{x:Bind viewModel.WeatherData.State, Mode=OneWay, TargetNullValue='N/A', FallbackValue='N/A'}" />
+                        <Run Text=" | " />
+                        <Run Text="{x:Bind viewModel.WeatherData.Country, Mode=OneWay, TargetNullValue='N/A', FallbackValue='N/A'}" />
+                    </TextBlock>
+                    <TextBlock
+                        Margin="0,23,0,0"
+                        HorizontalAlignment="Center"
+                        Style="{StaticResource SubpointSecondary}"
+                        Text="{x:Bind viewModel.WeatherData.Recieved, Mode=OneWay, TargetNullValue='N/A', FallbackValue='N/A', Converter={StaticResource DateTimeFormatter}, ConverterParameter='MM/dd/yyyy, hh:mm tt'}" />
+
+                    <Grid
+                        Margin="0,16,0,0"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+
+                        <Image
+                            Grid.Column="0"
+                            Width="62"
+                            Height="62"
+                            Source="{x:Bind viewModel.WeatherData.Icon, Mode=OneWay, TargetNullValue='N/A', FallbackValue='N/A'}" />
+
+                        <TextBlock
+                            Grid.Column="2"
+                            Margin="12,0,0,0"
+                            FontSize="28"
+                            Style="{StaticResource TitleSecondary}"
+                            Text="{x:Bind viewModel.FormatDegree(viewModel.WeatherData.Degree), Mode=OneWay, TargetNullValue='N/A', FallbackValue='N/A'}" />
+                        <TextBlock
+                            Grid.Column="2"
+                            Margin="12,34,0,0"
+                            Style="{StaticResource Subpoint}"
+                            Text="{x:Bind viewModel.WeatherData.Description, Mode=OneWay, TargetNullValue='N/A', FallbackValue='N/A'}" />
+
+                    </Grid>
+
+                    <Button
+                        Margin="0,119,0,0"
+                        Padding="35,2"
+                        HorizontalAlignment="Center"
+                        Command="{x:Bind viewModel.NavigateToWeatherCommand}"
+                        Content="More Info"
+                        ToolTipService.ToolTip="Show full weather forecast" />
+                </Grid>
+            </xmle:HCont>
+
+            <xmle:HCont
+                Title="About"
+                Grid.Column="4"
+                HorizontalAlignment="Stretch"
+                HorizontalScrollBar="Auto"
+                Style="{StaticResource Card}"
+                VerticalScrollBar="{x:Bind viewModel.Configuration.Launcher.IsScrollbarsEnabled, Mode=OneWay, Converter={StaticResource BoolScrollbarVisibilityConverter}}">
+                <Grid>
+                    <TextBlock Style="{StaticResource ContentSecondary}">
+                        Version:<LineBreak />
+                        Minecraft:<LineBreak />
+                        CPU:<LineBreak />
+                        GPU:<LineBreak />
+                        RAM:<LineBreak />
+                        OS:</TextBlock>
+                    <TextBlock Margin="100,0,0,0" Style="{StaticResource Content}">
+                        <Run Text="{x:Bind viewModel.Updater.CurrentAppVersion, TargetNullValue='N/A', FallbackValue='N/A'}" /><LineBreak />
+                        <Run Text="{x:Bind hlprs:Computer.CurrentMinecraftVersion, TargetNullValue='N/A', FallbackValue='N/A'}" /><LineBreak />
+                        <Run Text="{x:Bind hlprs:Computer.CurrentCPU, TargetNullValue='N/A', FallbackValue='N/A'}" /><LineBreak />
+                        <Run Text="{x:Bind hlprs:Computer.CurrentGPU, TargetNullValue='N/A', FallbackValue='N/A'}" /><LineBreak />
+                        <Run Text="{x:Bind hlprs:Computer.CurrentRAM, TargetNullValue='N/A', FallbackValue='N/A'}" /><Run Text=" GB" /><LineBreak />
+                        <Run Text="{x:Bind hlprs:Computer.CurrentOS, TargetNullValue='N/A', FallbackValue='N/A'}" /></TextBlock>
+                </Grid>
+            </xmle:HCont>
+        </Grid>
+    </Grid>
+</Page>
