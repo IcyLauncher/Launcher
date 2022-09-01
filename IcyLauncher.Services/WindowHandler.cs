@@ -6,6 +6,7 @@ using Microsoft.UI.Xaml.Data;
 using Microsoft.UI.Xaml.Media;
 using System.Runtime.InteropServices;
 using Windows.Graphics;
+using Windows.System;
 using WinRT.Interop;
 
 namespace IcyLauncher.Services;
@@ -30,6 +31,7 @@ public class WindowHandler
 
     AppWindow Window => AppWindow.GetFromWindowId(Win32Interop.GetWindowIdFromWindow(HWnd));
     OverlappedPresenter Presenter => (OverlappedPresenter)Window.Presenter;
+    object? dispatcherQueueController;
 
     public IntPtr HWnd => WindowNative.GetWindowHandle(shell);
 
@@ -86,7 +88,27 @@ public class WindowHandler
         InitializeWithWindow.Initialize(target, HWnd);
 
 
-    public bool SetTilteBar(bool isEnabled = false, UIElement? titleBar = null)
+    public bool EnsureWindowsSystemDispatcherQueueController()
+    {
+        if (DispatcherQueue.GetForCurrentThread() is not null || dispatcherQueueController is not null)
+        {
+            logger.Log("Tried to ensure windows system dispatcher queue controller", Exceptions.IsNotNull);
+            return false;
+        }
+
+        Win32.CreateDispatcherQueueController(new()
+        {
+            dwSize = Marshal.SizeOf(typeof(Win32.DISPATCHERQUEUEOPTIONS)),
+            threadType = 2,
+            apartmentType = 2
+        }, ref dispatcherQueueController);
+
+        logger.Log("Ensured windows system dispatcher queue controller");
+        return true;
+    }
+
+
+    public bool SetTitleBar(bool isEnabled = false, UIElement? titleBar = null)
     {
         if (!AppWindowTitleBar.IsCustomizationSupported())
         {
@@ -220,7 +242,7 @@ public class WindowHandler
         return false;
     }
 
-    private bool SetMainBackground(string backgroundColor)
+    public bool SetMainBackground(string backgroundColor)
     {
         try
         {

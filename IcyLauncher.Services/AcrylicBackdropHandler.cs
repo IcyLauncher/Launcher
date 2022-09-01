@@ -8,63 +8,80 @@ public class AcrylicBackdropHandler : IBackdropHandler
 {
     readonly ILogger logger;
     readonly Window shell;
-    readonly WindowsSystemDispatcherQueueHelper dispatcherQueueHelper = new();
-    DesktopAcrylicController controller = new();
-    SystemBackdropConfiguration backdropConfiguration = new();
+    readonly WindowHandler windowHandler;
 
-    public AcrylicBackdropHandler(ILogger<AcrylicBackdropHandler> logger, Window shell)
+    readonly DesktopAcrylicController controller = new();
+
+    public AcrylicBackdropHandler(
+        ILogger<AcrylicBackdropHandler> logger,
+        Window shell,
+        WindowHandler windowHandler)
     {
         this.logger = logger;
         this.shell = shell;
+        this.windowHandler = windowHandler;
 
-        this.logger.Log("Registered BackdropHandler");
+        windowHandler.EnsureWindowsSystemDispatcherQueueController();
+        controller.SetSystemBackdropConfiguration(new() { Theme = SystemBackdropTheme.Dark });
+
+        IsDarkModeEnabled = true;
+
+        this.logger.Log("Registered backdrop handler and set backdrop configuration");
     }
 
 
-    public bool SetBackdrop(bool useDarkMode)
+    public bool EnableBackdrop()
     {
         if (!DesktopAcrylicController.IsSupported())
         {
-            logger.Log("Failed to set System Backdrop", Exceptions.Unsupported);
+            logger.Log("Failed to set system backdrop", Exceptions.Unsupported);
             return false;
         }
 
         try
         {
-            dispatcherQueueHelper.EnsureWindowsSystemDispatcherQueueController();
-            logger.Log("Ensured WindowsSystemDispatcherQueueController");
-
-            shell.Activated += ShellActivated;
-            shell.Closed += ShellClosed;
-            logger.Log("Hooked Activated/Closed handlers");
-
-            backdropConfiguration.IsInputActive = true;
-            backdropConfiguration.Theme = useDarkMode ? SystemBackdropTheme.Dark : SystemBackdropTheme.Light;
-            logger.Log("Configured Backdrop Configuration");
-
+            windowHandler.SetMainBackground("Background.Transparent");
             controller.AddSystemBackdropTarget(shell.As<ICompositionSupportsSystemBackdrop>());
-            controller.SetSystemBackdropConfiguration(backdropConfiguration);
-            logger.Log("Set System Backdrop");
+
+            logger.Log("Set system backdrop");
             return true;
         }
         catch (Exception ex)
         {
-            logger.Log("Failed to set System Backdrop", ex);
+            logger.Log("Failed to set system backdrop", ex);
             return false;
         }
     }
 
-
-    void ShellActivated(object sender, WindowActivatedEventArgs args) =>
-        backdropConfiguration.IsInputActive = args.WindowActivationState is not WindowActivationState.Deactivated;
-
-    void ShellClosed(object sender, WindowEventArgs args)
+    public bool DisableBackdrop()
     {
-        shell.Activated -= ShellActivated;
+        try
+        {
+            controller.ResetProperties();
+            windowHandler.SetMainBackground("Transparent");
+            controller.RemoveSystemBackdropTarget(shell.As<ICompositionSupportsSystemBackdrop>());
 
-        controller.Dispose();
-        controller = default!;
-        backdropConfiguration = default!;
-        logger.Log("Unhooked Backdrophandler");
+            logger.Log("Disabled system backdrop and reset controller");
+            return true;
+        }
+        catch (Exception ex)
+        {
+            logger.Log("Failed to disable system backdrop and reset controller", ex);
+            return false;
+        }
+    }
+
+    bool isDarkModeEnabled;
+    public bool IsDarkModeEnabled
+    {
+        get => isDarkModeEnabled;
+        set
+        {
+            controller.ResetProperties();
+            controller.LuminosityOpacity = value ? 0 : 1;
+
+            isDarkModeEnabled = value;
+            logger.Log($"Updated system backdrop dark mode ({value})");
+        }
     }
 }

@@ -12,16 +12,22 @@ public class ThemeManager
     readonly ILogger logger;
     readonly Configuration configuration;
     readonly IConverter converter;
+    readonly INavigation navigation;
     readonly UIElementReciever uiElementReciever;
     readonly Random random = new();
 
     public Theme Colors => configuration.Apperance.Colors;
 
-    public ThemeManager(ILogger<ConfigurationManager> logger, IOptions<Configuration> configuration, IConverter converter, UIElementReciever uiElementReciever)
+    public ThemeManager(ILogger<ConfigurationManager> logger,
+        IOptions<Configuration> configuration,
+        IConverter converter,
+        INavigation navigation,
+        UIElementReciever uiElementReciever)
     {
         this.logger = logger;
         this.configuration = configuration.Value;
         this.converter = converter;
+        this.navigation = navigation;
         this.uiElementReciever = uiElementReciever;
 
         this.configuration.Apperance.Colors.Accent.PropertyChanged += AccentColorsValuesChanged;
@@ -181,7 +187,8 @@ public class ThemeManager
         switch (e.PropertyName)
         {
             case "Primary":
-                uiElementReciever.CurrentNavigationViewItemLayoutRoot.Background = new SolidColorBrush(configuration.Apperance.Colors.Control.Primary);
+                if (navigation.GetCurrentNavigationViewItemLayoutRoot() is Grid layoutRoot)
+                    layoutRoot.Background = new SolidColorBrush(configuration.Apperance.Colors.Control.Primary);
 
                 logger.Log($"Updated current NavigationViewItem LayoutRoot");
                 break;
