@@ -10,6 +10,7 @@ public partial class App : Application
 
     public static IServiceProvider Provider { get; private set; } = default!;
 
+
     public App()
     {
         host = Host.CreateDefaultBuilder()
@@ -30,16 +31,6 @@ public partial class App : Application
 
                 var configuration = context.Configuration.Get<Configuration>();
 
-                var titleBar = UIElementProvider.TitleBar(
-                    configuration.Apperance.Colors.Accent.Light,
-                    configuration.Apperance.Colors.Accent.Dark,
-                    out Button backButton);
-                var navigationView = UIElementProvider.NavigationView(
-                    out Frame contentFrame);
-                var mainGrid = UIElementProvider.MainGrid(
-                    new GridLength[] { new(), new(1, GridUnitType.Star) }, 
-                    titleBar, navigationView);
-
                 services.AddScoped<Services.ConfigurationManager>();
                 services.AddScoped<ThemeManager>();
                 services.AddScoped<WindowHandler>();
@@ -50,7 +41,9 @@ public partial class App : Application
                 services.AddScoped<IConverter, JsonConverter>();
                 services.AddScoped<IFileSystem, FileSystem>();
                 services.AddScoped<IMessage, Message>();
-                services.AddScoped<INavigation>(provider => new Navigation(provider.GetRequiredService<ILogger<Navigation>>(), navigationView, contentFrame, backButton));
+                services.AddScoped<INavigation, Navigation>();
+                services.AddScoped<MicaBackdropHandler>();
+                services.AddScoped<AcrylicBackdropHandler>();
 
                 services.AddSingleton<NoPageViewModel>();
                 services.AddSingleton<HomeViewModel>();
@@ -60,7 +53,14 @@ public partial class App : Application
                 services.AddSingleton<ColorSettingsViewModel>();
                 services.AddSingleton<DeveloperSettingsViewModel>();
 
-                services.AddSingleton<Window>(provider => new() { Content = mainGrid, Title = "IcyLauncher" });
+                services.AddSingleton<Window>(provider => new()
+                {
+                    Content = UIElementProvider.MainGrid(
+                        new GridLength[] { new(), new(1, GridUnitType.Star) },
+                        UIElementProvider.TitleBar(configuration.Apperance.Colors.Accent.Light, configuration.Apperance.Colors.Accent.Dark),
+                        UIElementProvider.NavigationView()),
+                    Title = "IcyLauncher"
+                });
             }).Build();
 
         Provider = host.Services;

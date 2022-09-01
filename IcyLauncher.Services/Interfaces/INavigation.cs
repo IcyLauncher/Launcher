@@ -1,5 +1,4 @@
 ﻿using Microsoft.UI.Xaml.Controls;
-using System.Collections.Generic;
 
 namespace IcyLauncher.Services.Interfaces;
 
@@ -7,8 +6,8 @@ public interface INavigation
 {
     NavigationViewItem? GetCurrentNavigationViewItem();
 
+    Grid? GetCurrentNavigationViewItemLayoutRoot();
 
-    List<NavigationViewItem> GetNavigationViewItems();
 
     NavigationViewItem? GetNavigationViewItem(string? searchFor, bool searchForTag = false, StringComparison comparision = StringComparison.InvariantCultureIgnoreCase);
 

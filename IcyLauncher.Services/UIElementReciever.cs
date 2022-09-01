@@ -6,29 +6,28 @@ namespace IcyLauncher.Services;
 
 public class UIElementReciever
 {
-    readonly ILogger logger;
-    readonly INavigation navigation;
-
     public Grid MainGrid;
+    public NavigationView NavigationView;
+    public Frame NavigationFrame;
     public StackPanel TitleBar;
     public Button BackButton;
     public AnimatedIcon BackButtonIcon;
     public GradientStopCollection TitleBarIconGradientStops;
     public TextBlock TitleBarTitle;
-    public Grid CurrentNavigationViewItemLayoutRoot => (Grid)VisualTreeHelper.GetChild(VisualTreeHelper.GetChild(VisualTreeHelper.GetChild(navigation.GetCurrentNavigationViewItem(), 0), 0), 0);
 
-    public UIElementReciever(ILogger<UIElementReciever> logger, INavigation navigation, Window shell)
+    public UIElementReciever(
+        ILogger<UIElementReciever> logger,
+        Window shell)
     {
-        this.logger = logger;
-        this.navigation = navigation;
-
         MainGrid = (Grid)shell.Content;
+        NavigationView = (NavigationView)MainGrid.Children[1];
+        NavigationFrame = (Frame)NavigationView.Content;
         TitleBar = (StackPanel)MainGrid.Children[0];
         BackButton = (Button)TitleBar.Children[0];
         BackButtonIcon = (AnimatedIcon)((Viewbox)BackButton.Content).Child;
         TitleBarIconGradientStops = ((LinearGradientBrush)((Path)((Viewbox)TitleBar.Children[1]).Child).Fill).GradientStops;
         TitleBarTitle = (TextBlock)TitleBar.Children[2];
 
-        this.logger.Log("Registered UIElement Reciever and casted all UIElements");
+        logger.Log("Registered UIElement Reciever and casted all UIElements");
     }
 }

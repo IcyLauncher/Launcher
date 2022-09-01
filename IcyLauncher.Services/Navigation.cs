@@ -1,4 +1,5 @@
 ﻿using Microsoft.UI.Xaml.Controls;
+using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Media.Animation;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,46 +9,37 @@ namespace IcyLauncher.Services;
 public class Navigation : INavigation
 {
     readonly ILogger logger;
-    readonly NavigationView navigationView;
-    readonly Frame frame;
-    readonly Button backButton;
-    readonly IEnumerable<object> navigationViewItems;
+    readonly UIElementReciever uIElementReciever;
 
+    readonly List<NavigationViewItem> items;
     bool skipEvent = false;
 
-    public Navigation(ILogger<Navigation> logger, NavigationView navigationView, Frame frame, Button backButton)
+    public Navigation(
+        ILogger<Navigation> logger,
+        UIElementReciever uIElementReciever)
     {
         this.logger = logger;
-        this.navigationView = navigationView;
-        this.frame = frame;
-        this.backButton = backButton;
+        this.uIElementReciever = uIElementReciever;
 
-        navigationViewItems = this.navigationView.MenuItems.Concat(navigationView.FooterMenuItems);
+        items = uIElementReciever.NavigationView.MenuItems.Concat(uIElementReciever.NavigationView.FooterMenuItems).Select(item => (NavigationViewItem)item).ToList();
 
-        this.navigationView.SelectionChanged += (s, e) =>
+        uIElementReciever.NavigationView.SelectionChanged += (s, e) =>
         {
             if (!skipEvent && e.SelectedItemContainer is NavigationViewItem item)
                 SetCurrentPage($"Views.{item.Tag}View".AsType() is Type type ? type : "Views.NoPageView".AsType());
         };
-        this.navigationView.BackRequested += (s, e) => GoBack();
+        uIElementReciever.NavigationView.BackRequested += (s, e) => GoBack();
 
-        this.logger.Log("Registered NavigationView");
+        logger.Log("Registered NavigationView");
     }
 
 
     public NavigationViewItem? GetCurrentNavigationViewItem() =>
-        navigationView.SelectedItem is NavigationViewItem current ? current : null;
+        uIElementReciever.NavigationView.SelectedItem is NavigationViewItem current ? current : null;
 
+    public Grid? GetCurrentNavigationViewItemLayoutRoot() =>
+        (Grid)VisualTreeHelper.GetChild(VisualTreeHelper.GetChild(VisualTreeHelper.GetChild(GetCurrentNavigationViewItem(), 0), 0), 0);
 
-    public List<NavigationViewItem> GetNavigationViewItems()
-    {
-        List<NavigationViewItem> result = new();
-
-        var items = navigationView.MenuItems.Select(item => (NavigationViewItem)item).ToList();
-        items.AddRange(navigationView.FooterMenuItems.Select(item => (NavigationViewItem)item));
-
-        return items;
-    }
 
     public NavigationViewItem? GetNavigationViewItem(string? searchFor, bool searchForTag = false, StringComparison comparision = StringComparison.InvariantCultureIgnoreCase)
     {
@@ -55,8 +47,6 @@ public class Navigation : INavigation
         {
             if (string.IsNullOrWhiteSpace(searchFor))
                 return null;
-
-            var items = GetNavigationViewItems();
 
             return items.Find(item => searchFor.Equals(searchForTag ? $"IcyLauncher.WinUI.Views.{item.Tag}View" : item.Tag.ToString(), comparision));
         }
@@ -68,7 +58,7 @@ public class Navigation : INavigation
     {
         try
         {
-            navigationView.SelectedItem = item;
+            uIElementReciever.NavigationView.SelectedItem = item;
 
             logger.Log("Set current NavigationView item");
             return true;
@@ -84,7 +74,7 @@ public class Navigation : INavigation
         try
         {
             skipEvent = true;
-            navigationView.SelectedItem = navigationViewItems.ElementAt(index);
+            uIElementReciever.NavigationView.SelectedItem = items.ElementAt(index);
             skipEvent = false;
 
             logger.Log("Set current NavigationView item without updating page");
@@ -101,16 +91,16 @@ public class Navigation : INavigation
     {
         try
         {
-            var navigate = frame.Navigate(type, parameter);
-            CanGoBackChanged(frame.CanGoBack);
+            var navigate = uIElementReciever.NavigationFrame.Navigate(type, parameter);
+            CanGoBackChanged(uIElementReciever.NavigationFrame.CanGoBack);
 
             logger.Log("Set current NavigationView page");
             return navigate;
         }
         catch (Exception ex)
         {
-            frame.Navigate("Views.NoPageView".AsType(), ex);
-            CanGoBackChanged(frame.CanGoBack);
+            uIElementReciever.NavigationFrame.Navigate("Views.NoPageView".AsType(), ex);
+            CanGoBackChanged(uIElementReciever.NavigationFrame.CanGoBack);
 
             logger.Log("Failed to set current NavigationView page", ex);
             return false;
@@ -138,15 +128,14 @@ public class Navigation : INavigation
     {
         try
         {
-            logger.Log(frame.BackStack.Last().SourcePageType.FullName);
-            if (GetNavigationViewItem(frame.BackStack.Last().SourcePageType.FullName, true) is NavigationViewItem item && (NavigationViewItem)navigationView.SelectedItem != item)
+            if (GetNavigationViewItem(uIElementReciever.NavigationFrame.BackStack.Last().SourcePageType.FullName, true) is NavigationViewItem item && (NavigationViewItem)uIElementReciever.NavigationView.SelectedItem != item)
                 SetCurrentNavigationViewItem(item);
-            else if (!SetCurrentPage(frame.BackStack.Last().SourcePageType))
+            else if (!SetCurrentPage(uIElementReciever.NavigationFrame.BackStack.Last().SourcePageType))
                 return false;
 
-            frame.BackStack.RemoveAt(frame.BackStackDepth - 1);
-            frame.BackStack.RemoveAt(frame.BackStackDepth - 1);
-            CanGoBackChanged(frame.CanGoBack);
+            uIElementReciever.NavigationFrame.BackStack.RemoveAt(uIElementReciever.NavigationFrame.BackStackDepth - 1);
+            uIElementReciever.NavigationFrame.BackStack.RemoveAt(uIElementReciever.NavigationFrame.BackStackDepth - 1);
+            CanGoBackChanged(uIElementReciever.NavigationFrame.CanGoBack);
 
             logger.Log("Current NavigationView page went back");
             return true;
@@ -160,27 +149,27 @@ public class Navigation : INavigation
 
     public void ClearBackStack()
     {
-        frame.BackStack.Clear();
+        uIElementReciever.NavigationFrame.BackStack.Clear();
         CanGoBackChanged(false);
     }
 
     private void CanGoBackChanged(bool canGoBack)
     {
-        if (canGoBack == (backButton.Opacity != 0))
+        if (canGoBack == (uIElementReciever.BackButton.Opacity != 0))
             return;
 
         if (canGoBack)
         {
-            backButton.Opacity = 1;
+            uIElementReciever.BackButton.Opacity = 1;
             var board = new Storyboard();
-            board.Children.Add(UIElementProvider.Animate(backButton, "Width", 0, 32, 200));
+            board.Children.Add(UIElementProvider.Animate(uIElementReciever.BackButton, "Width", 0, 32, 200));
             board.Begin();
         }
         else
         {
-            backButton.Opacity = 0;
+            uIElementReciever.BackButton.Opacity = 0;
             var board = new Storyboard();
-            board.Children.Add(UIElementProvider.Animate(backButton, "Width", 32, 0, 200));
+            board.Children.Add(UIElementProvider.Animate(uIElementReciever.BackButton, "Width", 32, 0, 200));
             board.Begin();
         }
     }
