@@ -2,20 +2,57 @@
 
 public partial class ProfilesViewModel : ObservableObject
 {
-    public Configuration Configuration;
-    readonly ILogger<ProfilesViewModel> logger;
-    readonly IFileSystem fileSystem;
+    readonly MicaBackdropHandler mica;
+    readonly AcrylicBackdropHandler acrylic;
 
-    public ProfilesViewModel(IOptions<Configuration> configuration, ILogger<ProfilesViewModel> logger, IFileSystem fileSystem)
+    public ProfilesViewModel(
+        MicaBackdropHandler mica,
+        AcrylicBackdropHandler acrylic
+        )
     {
-        Configuration = configuration.Value;
-        this.logger = logger;
-        this.fileSystem = fileSystem;
+        this.mica = mica;
+        this.acrylic = acrylic;
     }
 
 
     [RelayCommand]
-    void Test()
+    void EnableMica()
     {
+        mica.EnableBackdrop();
+    }
+
+    [RelayCommand]
+    void DisableMica()
+    {
+        mica.DisableBackdrop();
+    }
+
+    [ObservableProperty]
+    bool isMicaDark = true;
+
+    partial void OnIsMicaDarkChanged(bool value)
+    {
+        mica.IsDarkModeEnabled = value;
+    }
+
+
+    [RelayCommand]
+    void EnableAcrylic()
+    {
+        acrylic.EnableBackdrop();
+    }
+
+    [RelayCommand]
+    void DisableAcrliyc()
+    {
+        acrylic.DisableBackdrop();
+    }
+
+    [ObservableProperty]
+    bool isAcrylicDark = true;
+
+    partial void OnIsAcrylicDarkChanged(bool value)
+    {
+        acrylic.IsDarkModeEnabled = value;
     }
 }

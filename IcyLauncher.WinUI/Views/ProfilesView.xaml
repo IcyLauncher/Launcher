@@ -10,10 +10,14 @@
     NavigationCacheMode="Enabled"
     mc:Ignorable="d">
 
-    <Grid>
-        <Button Command="{x:Bind viewModel.TestCommand}" Content="Test" />
+    <StackPanel>
+        <Button Command="{x:Bind viewModel.EnableMicaCommand}" Content="Mica" />
+        <Button Command="{x:Bind viewModel.DisableMicaCommand}" Content="Mica-d" />
+        <ToggleSwitch IsOn="{x:Bind viewModel.IsMicaDark, Mode=TwoWay}" Header="Mica Dark"/>
+        <Button Command="{x:Bind viewModel.EnableAcrylicCommand}" Content="Acrylic" />
+        <Button Command="{x:Bind viewModel.DisableAcrliycCommand}" Content="Acyrlic-d" />
+        <ToggleSwitch IsOn="{x:Bind viewModel.IsAcrylicDark, Mode=TwoWay}" Header="Acrylic Dark"/>
 
-        <TextBox Margin="100" Text="{x:Bind viewModel.Configuration.Launcher.TexturepackDirectory, Mode=TwoWay}" />
-    </Grid>
+    </StackPanel>
 
 </Page>
