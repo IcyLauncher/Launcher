@@ -13,10 +13,13 @@
     <StackPanel>
         <Button Command="{x:Bind viewModel.EnableMicaCommand}" Content="Mica" />
         <Button Command="{x:Bind viewModel.DisableMicaCommand}" Content="Mica-d" />
-        <ToggleSwitch IsOn="{x:Bind viewModel.IsMicaDark, Mode=TwoWay}" Header="Mica Dark"/>
+        <ToggleSwitch Header="Mica Dark" IsOn="{x:Bind viewModel.IsMicaDark, Mode=TwoWay}" />
         <Button Command="{x:Bind viewModel.EnableAcrylicCommand}" Content="Acrylic" />
         <Button Command="{x:Bind viewModel.DisableAcrliycCommand}" Content="Acyrlic-d" />
-        <ToggleSwitch IsOn="{x:Bind viewModel.IsAcrylicDark, Mode=TwoWay}" Header="Acrylic Dark"/>
+        <ToggleSwitch Header="Acrylic Dark" IsOn="{x:Bind viewModel.IsAcrylicDark, Mode=TwoWay}" />
+        <Button Command="{x:Bind viewModel.EnableVibrancyCommand}" Content="Vibrancy" />
+        <Button Command="{x:Bind viewModel.DisableVibrancyCommand}" Content="Vibrancy-d" />
+        <ToggleSwitch Header="Vibrancy Dark" IsOn="{x:Bind viewModel.IsVibrancyDark, Mode=TwoWay}" />
 
     </StackPanel>
 

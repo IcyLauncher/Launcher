@@ -2,16 +2,19 @@
 
 public partial class ProfilesViewModel : ObservableObject
 {
-    readonly MicaBackdropHandler mica;
-    readonly AcrylicBackdropHandler acrylic;
+    readonly IBackdropHandler mica;
+    readonly IBackdropHandler acrylic;
+    readonly IBackdropHandler vibrancy;
 
     public ProfilesViewModel(
         MicaBackdropHandler mica,
-        AcrylicBackdropHandler acrylic
+        AcrylicBackdropHandler acrylic,
+        VibrancyBackdropHandler vibrancy
         )
     {
         this.mica = mica;
         this.acrylic = acrylic;
+        this.vibrancy = vibrancy;
     }
 
 
@@ -54,5 +57,26 @@ public partial class ProfilesViewModel : ObservableObject
     partial void OnIsAcrylicDarkChanged(bool value)
     {
         acrylic.IsDarkModeEnabled = value;
+    }
+
+
+    [RelayCommand]
+    void EnableVibrancy()
+    {
+        vibrancy.EnableBackdrop();
+    }
+
+    [RelayCommand]
+    void DisableVibrancy()
+    {
+        vibrancy.DisableBackdrop();
+    }
+
+    [ObservableProperty]
+    bool isVibrancyDark = true;
+
+    partial void OnIsVibrancyDarkChanged(bool value)
+    {
+        vibrancy.IsDarkModeEnabled = value;
     }
 }

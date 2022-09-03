@@ -44,6 +44,7 @@ public partial class App : Application
                 services.AddScoped<INavigation, Navigation>();
                 services.AddScoped<MicaBackdropHandler>();
                 services.AddScoped<AcrylicBackdropHandler>();
+                services.AddScoped<VibrancyBackdropHandler>();
 
                 services.AddSingleton<NoPageViewModel>();
                 services.AddSingleton<HomeViewModel>();
