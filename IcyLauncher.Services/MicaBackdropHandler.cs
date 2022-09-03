@@ -7,7 +7,7 @@ namespace IcyLauncher.Services;
 public class MicaBackdropHandler : IBackdropHandler
 {
     readonly ILogger logger;
-    readonly Window shell;
+    readonly ICompositionSupportsSystemBackdrop shell;
 
     readonly MicaController controller = new();
 
@@ -17,7 +17,7 @@ public class MicaBackdropHandler : IBackdropHandler
         WindowHandler windowHandler)
     {
         this.logger = logger;
-        this.shell = shell;
+        this.shell = (ICompositionSupportsSystemBackdrop)shell;
 
         windowHandler.EnsureWindowsSystemDispatcherQueueController();
 
@@ -37,7 +37,13 @@ public class MicaBackdropHandler : IBackdropHandler
 
         try
         {
-            controller.AddSystemBackdropTarget(shell.As<ICompositionSupportsSystemBackdrop>());
+            if (shell.SystemBackdrop is not null)
+            {
+                logger.Log("Failed to set system backdrop", Exceptions.IsNotNull);
+                return false;
+            }
+
+            controller.AddSystemBackdropTarget(shell);
 
             logger.Log("Set system backdrop");
             return true;
@@ -54,7 +60,7 @@ public class MicaBackdropHandler : IBackdropHandler
         try
         {
             controller.ResetProperties();
-            controller.RemoveSystemBackdropTarget(shell.As<ICompositionSupportsSystemBackdrop>());
+            controller.RemoveSystemBackdropTarget(shell);
 
             logger.Log("Disabled system backdrop and reset controller");
             return true;
@@ -72,7 +78,6 @@ public class MicaBackdropHandler : IBackdropHandler
         get => isDarkModeEnabled;
         set
         {
-            controller.ResetProperties();
             controller.SetSystemBackdropConfiguration(new() { Theme = value ? SystemBackdropTheme.Dark : SystemBackdropTheme.Light });
 
             isDarkModeEnabled = value;

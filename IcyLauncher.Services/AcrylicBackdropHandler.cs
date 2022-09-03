@@ -7,7 +7,7 @@ namespace IcyLauncher.Services;
 public class AcrylicBackdropHandler : IBackdropHandler
 {
     readonly ILogger logger;
-    readonly Window shell;
+    readonly ICompositionSupportsSystemBackdrop shell;
     readonly WindowHandler windowHandler;
 
     readonly DesktopAcrylicController controller = new();
@@ -18,7 +18,7 @@ public class AcrylicBackdropHandler : IBackdropHandler
         WindowHandler windowHandler)
     {
         this.logger = logger;
-        this.shell = shell;
+        this.shell = (ICompositionSupportsSystemBackdrop)shell;
         this.windowHandler = windowHandler;
 
         windowHandler.EnsureWindowsSystemDispatcherQueueController();
@@ -40,9 +40,16 @@ public class AcrylicBackdropHandler : IBackdropHandler
 
         try
         {
-            windowHandler.SetMainBackground("Background.Transparent");
-            controller.AddSystemBackdropTarget(shell.As<ICompositionSupportsSystemBackdrop>());
+            if (shell.SystemBackdrop is not null)
+            {
+                logger.Log("Failed to set system backdrop", Exceptions.IsNotNull);
+                return false;
+            }
 
+            controller.LuminosityOpacity = IsDarkModeEnabled ? 0 : 1;
+            windowHandler.SetMainBackground("Background.Transparent");
+            controller.AddSystemBackdropTarget(shell);
+            
             logger.Log("Set system backdrop");
             return true;
         }
@@ -59,7 +66,7 @@ public class AcrylicBackdropHandler : IBackdropHandler
         {
             controller.ResetProperties();
             windowHandler.SetMainBackground("Transparent");
-            controller.RemoveSystemBackdropTarget(shell.As<ICompositionSupportsSystemBackdrop>());
+            controller.RemoveSystemBackdropTarget(shell);
 
             logger.Log("Disabled system backdrop and reset controller");
             return true;
@@ -77,7 +84,6 @@ public class AcrylicBackdropHandler : IBackdropHandler
         get => isDarkModeEnabled;
         set
         {
-            controller.ResetProperties();
             controller.LuminosityOpacity = value ? 0 : 1;
 
             isDarkModeEnabled = value;
