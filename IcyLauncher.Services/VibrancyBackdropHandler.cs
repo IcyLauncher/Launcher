@@ -23,8 +23,6 @@ public class VibrancyBackdropHandler : IBackdropHandler
         controller.SetSystemBackdropConfiguration(new() { Theme = SystemBackdropTheme.Dark });
         controller.Kind = MicaKind.BaseAlt;
 
-        IsDarkModeEnabled = true;
-
         logger.Log("Registered backdrop handler and set backdrop configuration");
     }
 
@@ -78,5 +76,6 @@ public class VibrancyBackdropHandler : IBackdropHandler
     /// <summary>
     /// VibrancyBackdropHandler does not implement light/dark mode. This boolean wont affect this system backdrop.
     /// </summary>
+    [Obsolete("No implementation for light/dark mode")]
     public bool IsDarkModeEnabled { get; set; } = true;
 }
