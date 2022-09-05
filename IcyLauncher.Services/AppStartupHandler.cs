@@ -17,17 +17,17 @@ public class AppStartupHandler
     {
         AppDomain.CurrentDomain.FirstChanceException += (s, e) =>
         {
-            if (e.Exception.Source != "CommunityToolkit.WinUI.UI")
-                logger.Log("Global Exception thrown", e.Exception, LogLevel.Error, "global", "?");
+            //e.Exception.Source != "CommunityToolkit.WinUI.UI"
+            logger.Log("Global exception thrown", e.Exception, LogLevel.Error, "global", "?");
         };
 
-        bool customTitleBar = windowHandler.SetTilteBar(true, uiElementReciever.TitleBar);
+        bool customTitleBar = windowHandler.SetTitleBar(true, uiElementReciever.TitleBar);
         windowHandler.SetIcon("Assets/Icon.ico");
         windowHandler.SetMinSize(750, 500);
         windowHandler.SetSize(1040, customTitleBar ? 555 : 538);
         windowHandler.SetPositionToCenter();
-        windowHandler.MakeTransparent();
-        windowHandler.SetBlur(configuration.Value.Apperance.Blur, true, configuration.Value.Apperance.UseDarkModeBlur);
+        //windowHandler.MakeTransparent();
+        //windowHandler.SetBlur(configuration.Value.Apperance.Blur, true, configuration.Value.Apperance.UseDarkModeBlur);
 
         shell.Closed += async (s, e) =>
         {
