@@ -9,8 +9,7 @@ public partial class ProfilesViewModel : ObservableObject
     public ProfilesViewModel(
         MicaBackdropHandler mica,
         AcrylicBackdropHandler acrylic,
-        VibrancyBackdropHandler vibrancy
-        )
+        VibrancyBackdropHandler vibrancy)
     {
         this.mica = mica;
         this.acrylic = acrylic;

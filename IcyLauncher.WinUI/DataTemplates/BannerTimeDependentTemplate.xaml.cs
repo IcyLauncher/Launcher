@@ -1,9 +1,5 @@
-﻿using IcyLauncher.WinUI.ViewModels;
-using Microsoft.UI;
+﻿using Microsoft.UI;
 using Microsoft.UI.Composition;
-using Microsoft.UI.Xaml.Controls;
-using Microsoft.UI.Xaml.Controls.Primitives;
-using Microsoft.UI.Xaml.Input;
 using Microsoft.UI.Xaml.Shapes;
 
 namespace IcyLauncher.WinUI.DataTemplates;
@@ -17,7 +13,7 @@ public partial class BannerTimeDependentTemplate : ResourceDictionary
     ImagingUtility imagingUtility = default!;
 
 
-    private void OnImageLoaded(object sender, RoutedEventArgs e)
+    private void OnImageLoaded(object sender, RoutedEventArgs _)
     {
         if (imagingUtility is null)
             imagingUtility = App.Provider.GetRequiredService<ImagingUtility>();

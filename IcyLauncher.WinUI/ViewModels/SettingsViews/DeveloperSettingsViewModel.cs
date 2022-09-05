@@ -6,7 +6,8 @@ public partial class DeveloperSettingsViewModel : ObservableObject
 
     public readonly Configuration Configuration;
 
-    public DeveloperSettingsViewModel(IOptions<Configuration> configuration,
+    public DeveloperSettingsViewModel(
+        IOptions<Configuration> configuration,
         INavigation navigation)
     {
         this.navigation = navigation;

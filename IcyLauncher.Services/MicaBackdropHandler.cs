@@ -1,6 +1,5 @@
 ﻿using Microsoft.UI.Composition;
 using Microsoft.UI.Composition.SystemBackdrops;
-using WinRT;
 
 namespace IcyLauncher.Services;
 
@@ -23,7 +22,7 @@ public class MicaBackdropHandler : IBackdropHandler
 
         IsDarkModeEnabled = true;
 
-        logger.Log("Registered backdrop handler and set backdrop configuration");
+        logger.Log("Registered backdrop handler");
     }
 
 

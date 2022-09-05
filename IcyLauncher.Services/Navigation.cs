@@ -41,7 +41,10 @@ public class Navigation : INavigation
         (Grid)VisualTreeHelper.GetChild(VisualTreeHelper.GetChild(VisualTreeHelper.GetChild(GetCurrentNavigationViewItem(), 0), 0), 0);
 
 
-    public NavigationViewItem? GetNavigationViewItem(string? searchFor, bool searchForTag = false, StringComparison comparision = StringComparison.InvariantCultureIgnoreCase)
+    public NavigationViewItem? GetNavigationViewItem(
+        string? searchFor,
+        bool searchForTag = false,
+        StringComparison comparision = StringComparison.InvariantCultureIgnoreCase)
     {
         try
         {
@@ -54,7 +57,8 @@ public class Navigation : INavigation
     }
 
 
-    public bool SetCurrentNavigationViewItem(NavigationViewItem item)
+    public bool SetCurrentNavigationViewItem(
+        NavigationViewItem item)
     {
         try
         {
@@ -69,7 +73,8 @@ public class Navigation : INavigation
             return false;
         }
     }
-    public bool SetCurrentIndex(int index)
+    public bool SetCurrentIndex(
+        int index)
     {
         try
         {
@@ -87,7 +92,9 @@ public class Navigation : INavigation
         }
     }
 
-    public bool SetCurrentPage(Type? type, object? parameter = null)
+    public bool SetCurrentPage(
+        Type? type,
+        object? parameter = null)
     {
         try
         {
@@ -107,7 +114,8 @@ public class Navigation : INavigation
         }
     }
 
-    public bool Navigate(NavigationViewItem? item)
+    public bool Navigate(
+        NavigationViewItem? item)
     {
         if (item is null || string.IsNullOrWhiteSpace(item.Tag.ToString()))
             return false;
@@ -117,7 +125,8 @@ public class Navigation : INavigation
         else
             return false;
     }
-    public bool Navigate(string page)
+    public bool Navigate(
+        string page)
     {
         var item = GetNavigationViewItem(page);
 
@@ -153,7 +162,8 @@ public class Navigation : INavigation
         CanGoBackChanged(false);
     }
 
-    private void CanGoBackChanged(bool canGoBack)
+    private void CanGoBackChanged(
+        bool canGoBack)
     {
         if (canGoBack == (uIElementReciever.BackButton.Opacity != 0))
             return;

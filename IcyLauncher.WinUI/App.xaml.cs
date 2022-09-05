@@ -26,26 +26,32 @@ public partial class App : Application
             })
             .ConfigureServices((context, services) =>
             {
+                // Configuration
                 services.Configure<Configuration>(context.Configuration);
                 services.Configure<SolidColorCollection>(context.Configuration);
 
                 var configuration = context.Configuration.Get<Configuration>();
 
+                // Managers
                 services.AddScoped<Services.ConfigurationManager>();
                 services.AddScoped<ThemeManager>();
+                // App/UI Handlers
+                services.AddScoped<AppStartupHandler>();
                 services.AddScoped<WindowHandler>();
                 services.AddScoped<UIElementReciever>();
-                services.AddScoped<ImagingUtility>();
-                services.AddScoped<AppStartupHandler>();
-                services.AddScoped<Updater>();
-                services.AddScoped<IConverter, JsonConverter>();
-                services.AddScoped<IFileSystem, FileSystem>();
-                services.AddScoped<IMessage, Message>();
-                services.AddScoped<INavigation, Navigation>();
                 services.AddScoped<MicaBackdropHandler>();
                 services.AddScoped<AcrylicBackdropHandler>();
                 services.AddScoped<VibrancyBackdropHandler>();
-
+                // Utilities
+                services.AddScoped<IConverter, JsonConverter>();
+                services.AddScoped<ImagingUtility>();
+                // Local
+                services.AddScoped<IFileSystem, FileSystem>();
+                services.AddScoped<Updater>();
+                // Navigation
+                services.AddScoped<INavigation, Navigation>();
+                services.AddScoped<IMessage, Message>();
+                // ViewModels
                 services.AddSingleton<NoPageViewModel>();
                 services.AddSingleton<HomeViewModel>();
                 services.AddSingleton<ProfilesViewModel>();
@@ -54,6 +60,7 @@ public partial class App : Application
                 services.AddSingleton<ColorSettingsViewModel>();
                 services.AddSingleton<DeveloperSettingsViewModel>();
 
+                // Window
                 services.AddSingleton<Window>(provider => new()
                 {
                     Content = UIElementProvider.MainGrid(

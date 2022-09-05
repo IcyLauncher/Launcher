@@ -10,7 +10,8 @@ public class ImagingUtility
 {
     readonly ILogger<ImagingUtility> logger;
 
-    public ImagingUtility(ILogger<ImagingUtility> logger)
+    public ImagingUtility(
+        ILogger<ImagingUtility> logger)
     {
         this.logger = logger;
 
@@ -18,7 +19,10 @@ public class ImagingUtility
     }
 
 
-    public void InitializeUIElement(UIElement element, out Compositor? compositor, out ContainerVisual? container)
+    public void InitializeUIElement(
+        UIElement element,
+        out Compositor? compositor,
+        out ContainerVisual? container)
     {
 
         try
@@ -38,7 +42,11 @@ public class ImagingUtility
         }
     }
 
-    public CompositionLinearGradientBrush? CreateGradientBrush(Compositor compositor, Vector2 startPoint, Vector2 endPoint, (float offset, Color color)[] gradientStops)
+    public CompositionLinearGradientBrush? CreateGradientBrush(
+        Compositor compositor,
+        Vector2 startPoint,
+        Vector2 endPoint,
+        (float offset, Color color)[] gradientStops)
     {
         try
         {
@@ -58,7 +66,10 @@ public class ImagingUtility
         }
     }
 
-    public CompositionMaskBrush? CreateMaskBrush(Compositor compositor, CompositionBrush? source, CompositionBrush? mask)
+    public CompositionMaskBrush? CreateMaskBrush(
+        Compositor compositor,
+        CompositionBrush? source,
+        CompositionBrush? mask)
     {
         try
         {
@@ -76,7 +87,12 @@ public class ImagingUtility
         }
     }
 
-    public CompositionSurfaceBrush? CreateImageBrush(Compositor compositor, Uri source, CompositionStretch stretch, float horizontalAlignmentRatio = 0.0f, float verticalAlignmentRatio = 0.5f)
+    public CompositionSurfaceBrush? CreateImageBrush(
+        Compositor compositor,
+        Uri source,
+        CompositionStretch stretch,
+        float horizontalAlignmentRatio = 0.0f,
+        float verticalAlignmentRatio = 0.5f)
     {
         try
         {
@@ -95,7 +111,9 @@ public class ImagingUtility
         }
     }
 
-    public CompositionColorBrush? CreateColorBrush(Compositor compositor, Color color)
+    public CompositionColorBrush? CreateColorBrush(
+        Compositor compositor,
+        Color color)
     {
         try
         {
@@ -111,7 +129,11 @@ public class ImagingUtility
         }
     }
 
-    public SpriteVisual? CreateSpriteVisual(Compositor compositor, Vector2 size, CompositionBrush? brush, Vector3 offset = default)
+    public SpriteVisual? CreateSpriteVisual(
+        Compositor compositor,
+        Vector2 size,
+        CompositionBrush? brush,
+        Vector3 offset = default)
     {
         try
         {

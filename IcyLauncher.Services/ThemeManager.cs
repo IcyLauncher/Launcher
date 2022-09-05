@@ -2,6 +2,7 @@
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Data;
 using Microsoft.UI.Xaml.Media;
+using System.ComponentModel;
 using Windows.UI;
 using Windows.UI.ViewManagement;
 
@@ -18,7 +19,8 @@ public class ThemeManager
 
     public Theme Colors => configuration.Apperance.Colors;
 
-    public ThemeManager(ILogger<ConfigurationManager> logger,
+    public ThemeManager(
+        ILogger<ConfigurationManager> logger,
         IOptions<Configuration> configuration,
         IConverter converter,
         INavigation navigation,
@@ -44,14 +46,19 @@ public class ThemeManager
     public string Export() =>
         converter.ToString(configuration.Apperance.Colors);
 
-    public void Load(Theme input, bool ignoreAccent = false)
+    public void Load(
+        Theme input,
+        bool ignoreAccent = false)
     {
         CopyTheme(Colors, input, ignoreAccent);
 
         logger.Log($"Loaded theme configuration from input");
     }
 
-    public static void CopyTheme(Theme copyTo, Theme copyFrom, bool ignoreAccent = false)
+    public static void CopyTheme(
+        Theme copyTo,
+        Theme copyFrom,
+        bool ignoreAccent = false)
     {
         if (!ignoreAccent)
         {
@@ -165,7 +172,7 @@ public class ThemeManager
     }
 
 
-    private void AccentColorsValuesChanged(object? sender, System.ComponentModel.PropertyChangedEventArgs e)
+    private void AccentColorsValuesChanged(object? _, PropertyChangedEventArgs e)
     {
         switch (e.PropertyName)
         {
@@ -182,7 +189,7 @@ public class ThemeManager
         }
     }
 
-    private void ControlColorsValuesChanged(object? sender, System.ComponentModel.PropertyChangedEventArgs e)
+    private void ControlColorsValuesChanged(object? _, PropertyChangedEventArgs e)
     {
         switch (e.PropertyName)
         {
@@ -195,7 +202,7 @@ public class ThemeManager
         }
     }
 
-    private void SystemColorsValuesChanged(UISettings sender, object args)
+    private void SystemColorsValuesChanged(UISettings _, object _1)
     {
         logger.Log("YOUR MOM");
     }

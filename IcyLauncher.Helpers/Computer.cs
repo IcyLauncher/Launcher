@@ -23,7 +23,10 @@ public class Computer
             {
                 return null;
             }
-            catch { return null; }
+            catch
+            {
+                return null;
+            }
         }
     }
 
@@ -34,12 +37,13 @@ public class Computer
             try
             {
                 return Registry.GetValue(@"HKEY_LOCAL_MACHINE\HARDWARE\DESCRIPTION\SYSTEM\CentralProcessor\0", "ProcessorNameString", null) is string name
-                    ? name.ToString()
-                        .Replace("Processor", "")
-                        .Replace("Six-Core", "") :
+                    ? name.ToString().Replace("Processor", "").Replace("Six-Core", "") :
                     null;
             }
-            catch { return null; }
+            catch
+            {
+                return null;
+            }
         }
     }
 
@@ -53,7 +57,10 @@ public class Computer
                     return i["Caption"].ToString();
                 return null;
             }
-            catch { return null; }
+            catch
+            {
+                return null;
+            }
         }
     }
 
@@ -67,7 +74,10 @@ public class Computer
                     return Math.Round(Convert.ToDouble(i["TotalVisibleMemorySize"]) / 1048576, 2);
                 return null;
             }
-            catch { return null; }
+            catch
+            {
+                return null;
+            }
         }
     }
 
@@ -79,7 +89,10 @@ public class Computer
             {
                 return $"{Win32.BrandingFormatString("%WINDOWS_LONG%")} {Registry.GetValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion", "DisplayVersion", null)}";
             }
-            catch { return null; }
+            catch
+            {
+                return null;
+            }
         }
     }
 }

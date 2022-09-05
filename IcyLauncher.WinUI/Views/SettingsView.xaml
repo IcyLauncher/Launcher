@@ -7,6 +7,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:media="using:CommunityToolkit.WinUI.UI.Media"
     xmlns:typs="using:IcyLauncher.Data.Types"
+    xmlns:vwmdls="using:IcyLauncher.WinUI.ViewModels"
     xmlns:xmle="using:IcyLauncher.Xaml.Elements"
     xmlns:xtntns="using:IcyLauncher.Helpers.Extentions"
     Background="Transparent"
@@ -289,7 +290,7 @@
 
                                 <ToggleSwitch
                                     Grid.Column="2"
-                                    IsEnabled="{x:Bind viewModel.IsUseBlurDarkModeEnabled(Blur.SelectedIndex), Mode=OneWay}"
+                                    IsEnabled="{x:Bind vwmdls:SettingsViewModel.IsUseBlurDarkModeEnabled(Blur.SelectedIndex), Mode=OneWay}"
                                     IsOn="{x:Bind viewModel.Configuration.Apperance.UseDarkModeBlur, Mode=TwoWay}"
                                     OffContent="Light Mode"
                                     OnContent="Dark Mode"

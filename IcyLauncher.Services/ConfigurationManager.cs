@@ -6,20 +6,25 @@ public class ConfigurationManager
     readonly ILogger logger;
     readonly IConverter converter;
 
-    public ConfigurationManager(IOptions<Configuration> configuration, ILogger<ConfigurationManager> logger, IConverter converter)
+    public ConfigurationManager(
+        IOptions<Configuration> configuration,
+        ILogger<ConfigurationManager> logger,
+        IConverter converter)
     {
         this.configuration = configuration.Value;
         this.logger = logger;
         this.converter = converter;
 
-        this.logger.Log("Registered Configuration Manager");
+        this.logger.Log("Registered configuration manager");
     }
 
 
     public string Export() =>
         converter.ToString(configuration);
 
-    public void Load(Configuration input, bool ignoreTheme = false)
+    public void Load(
+        Configuration input,
+        bool ignoreTheme = false)
     {
         if (!ignoreTheme)
             ThemeManager.CopyTheme(configuration.Apperance.Colors, input.Apperance.Colors);
@@ -47,6 +52,6 @@ public class ConfigurationManager
         configuration.Developer.IsOneClickEnabled = input.Developer.IsOneClickEnabled;
         configuration.Developer.IsWarningEnabled = input.Developer.IsWarningEnabled;
 
-        logger.Log($"Loaded app configuration from string");
+        logger.Log($"Loaded app configuration from input");
     }
 }

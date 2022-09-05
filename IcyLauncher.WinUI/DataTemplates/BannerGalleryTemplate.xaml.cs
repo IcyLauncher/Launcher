@@ -1,6 +1,4 @@
-﻿using IcyLauncher.WinUI.ViewModels;
-using Microsoft.UI.Xaml.Controls;
-using Microsoft.UI.Xaml.Media;
+﻿using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Shapes;
 
 namespace IcyLauncher.WinUI.DataTemplates;
@@ -14,7 +12,7 @@ public partial class BannerGalleryTemplate : ResourceDictionary
     BannerSettingsViewModel viewModel = default!;
 
 
-    private void OnRootLayoutLoaded(object sender, RoutedEventArgs e)
+    private void OnRootLayoutLoaded(object sender, RoutedEventArgs _)
     {
         var layoutRoot = (Grid)sender;
         var gallery = (BannerGalleryItem)layoutRoot.DataContext;
@@ -36,7 +34,7 @@ public partial class BannerGalleryTemplate : ResourceDictionary
         ((Rectangle)layoutRoot.Children[3]).Fill = new ImageBrush() { ImageSource = gallery.Collection[3].AsImage(false), Stretch = Stretch.UniformToFill };
     }
 
-    private async void OnOpenItemClicked(object sender, RoutedEventArgs e)
+    private async void OnOpenItemClicked(object sender, RoutedEventArgs _)
     {
         if (viewModel is null)
             viewModel = App.Provider.GetRequiredService<BannerSettingsViewModel>();

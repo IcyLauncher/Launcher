@@ -6,10 +6,7 @@ namespace IcyLauncher.Xaml.Elements;
 public class ScrollLane : GridView
 {
     public static readonly DependencyProperty CanContentRenderOutsideBoundsProperty = DependencyProperty.Register(
-        "CanContentRenderOutsideBounds",
-        typeof(bool),
-        typeof(ScrollLane),
-        new(true));
+        "CanContentRenderOutsideBounds", typeof(bool), typeof(ScrollLane), new(true));
 
     public bool CanContentRenderOutsideBounds
     {
@@ -17,11 +14,9 @@ public class ScrollLane : GridView
         set => SetValue(CanContentRenderOutsideBoundsProperty, value);
     }
 
+
     public static readonly DependencyProperty VerticalScrollBarVisibilityProperty = DependencyProperty.Register(
-        "VerticalScrollBarVisibility",
-        typeof(ScrollBarVisibility),
-        typeof(ScrollLane),
-        new(ScrollBarVisibility.Hidden));
+        "VerticalScrollBarVisibility", typeof(ScrollBarVisibility), typeof(ScrollLane), new(ScrollBarVisibility.Hidden));
 
     public ScrollBarVisibility VerticalScrollBarVisibility
     {
@@ -29,11 +24,9 @@ public class ScrollLane : GridView
         set => SetValue(VerticalScrollBarVisibilityProperty, value);
     }
 
+
     public static readonly DependencyProperty IsItemSelectionEnabledProperty = DependencyProperty.Register(
-        "IsItemSelectionEnabled",
-        typeof(bool),
-        typeof(ScrollLane),
-        new(true));
+        "IsItemSelectionEnabled", typeof(bool), typeof(ScrollLane), new(true));
 
     public bool IsItemSelectionEnabled
     {
@@ -41,8 +34,8 @@ public class ScrollLane : GridView
         set => SetValue(IsItemSelectionEnabledProperty, value);
     }
 
-    public event SelectionChangedEventHandler? ItemSelectionChanged;
 
+    public event SelectionChangedEventHandler? ItemSelectionChanged;
 
     ScrollViewer scrollContainer = default!;
     GridView itemsContainter = default!;

@@ -8,7 +8,12 @@ public class Profile
 {
     public Profile() { }
 
-    public Profile(string title, Color color, BitmapImage icon, string version, string client)
+    public Profile(
+        string title,
+        Color color,
+        BitmapImage icon,
+        string version,
+        string client)
     {
         Title = title;
         Color = color;

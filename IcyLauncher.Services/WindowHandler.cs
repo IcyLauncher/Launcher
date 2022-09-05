@@ -18,7 +18,11 @@ public class WindowHandler
     readonly UIElementReciever uiElementReciever;
     readonly Window shell;
 
-    public WindowHandler(ILogger<Window> logger, ThemeManager themeManager, UIElementReciever uiElementReciever, Window shell)
+    public WindowHandler(
+        ILogger<Window> logger,
+        ThemeManager themeManager,
+        UIElementReciever uiElementReciever,
+        Window shell)
     {
         this.logger = logger;
         this.themeManager = themeManager;

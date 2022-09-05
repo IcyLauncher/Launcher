@@ -11,7 +11,13 @@ public class ColorStringConverter : IValueConverter
 
     public object ConvertBack(object value, Type targetType, object parameter, string language)
     {
-        try { return XamlBindingHelper.ConvertValue(typeof(Color), value); }
-        catch { return Colors.Black; }
+        try
+        {
+            return XamlBindingHelper.ConvertValue(typeof(Color), value);
+        }
+        catch
+        {
+            return Colors.Black;
+        }
     }
 }

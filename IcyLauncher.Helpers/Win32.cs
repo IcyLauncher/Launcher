@@ -48,12 +48,12 @@ public class Win32
     [StructLayout(LayoutKind.Sequential)]
     public struct RECT
     {
-        public RECT(int Left, int Top, int Right, int Bottom)
+        public RECT(int left, int top, int right, int bottom)
         {
-            left = Left;
-            top = Top;
-            right = Right;
-            bottom = Bottom;
+            this.left = left;
+            this.top = top;
+            this.right = right;
+            this.bottom = bottom;
         }
 
         public int left;

@@ -1,6 +1,5 @@
 ﻿using Microsoft.UI.Composition;
 using Microsoft.UI.Composition.SystemBackdrops;
-using WinRT;
 
 namespace IcyLauncher.Services;
 
@@ -23,7 +22,7 @@ public class VibrancyBackdropHandler : IBackdropHandler
         controller.SetSystemBackdropConfiguration(new() { Theme = SystemBackdropTheme.Dark });
         controller.Kind = MicaKind.BaseAlt;
 
-        logger.Log("Registered backdrop handler and set backdrop configuration");
+        logger.Log("Registered backdrop handler, set backdrop configuration and set controller kind");
     }
 
 

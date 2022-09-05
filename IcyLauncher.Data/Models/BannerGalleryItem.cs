@@ -6,7 +6,9 @@ public class BannerGalleryItem
 {
     public BannerGalleryItem() { }
 
-    public BannerGalleryItem(string title, List<string> collection)
+    public BannerGalleryItem(
+        string title,
+        List<string> collection)
     {
         Title = title;
         Collection = collection;

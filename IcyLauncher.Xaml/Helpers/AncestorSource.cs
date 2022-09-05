@@ -4,18 +4,24 @@ namespace IcyLauncher.Xaml.Helpers;
 
 public class AncestorSource
 {
-    public static readonly DependencyProperty AncestorTypeProperty =
-        DependencyProperty.RegisterAttached(
-            "AncestorType",
-            typeof(Type),
-            typeof(AncestorSource),
-            new(default(Type), OnAncestorTypeChanged));
+    public static readonly DependencyProperty AncestorTypeProperty = DependencyProperty.RegisterAttached(
+            "AncestorType", typeof(Type), typeof(AncestorSource), new(default(Type), OnAncestorTypeChanged));
+
 
     public static void SetAncestorType(FrameworkElement element, Type value) =>
         element.SetValue(AncestorTypeProperty, value);
 
     public static Type GetAncestorType(FrameworkElement element) =>
         (Type)element.GetValue(AncestorTypeProperty);
+
+    private static void SetDataContext(FrameworkElement target)
+    {
+        Type ancestorType = GetAncestorType(target);
+
+        if (ancestorType is not null)
+            target.DataContext = FindParent(target, ancestorType);
+    }
+
 
     private static void OnAncestorTypeChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
     {
@@ -35,13 +41,6 @@ public class AncestorSource
         target.Loaded -= OnTargetLoaded;
     }
 
-    private static void SetDataContext(FrameworkElement target)
-    {
-        Type ancestorType = GetAncestorType(target);
-
-        if (ancestorType is not null)
-            target.DataContext = FindParent(target, ancestorType);
-    }
 
     private static object? FindParent(DependencyObject dependencyObject, Type ancestorType)
     {

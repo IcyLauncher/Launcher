@@ -8,7 +8,8 @@ public class FileSystem : IFileSystem
 {
     readonly ILogger<FileSystem> logger;
 
-    public FileSystem(ILogger<FileSystem> logger)
+    public FileSystem(
+        ILogger<FileSystem> logger)
     {
         this.logger = logger;
 
@@ -19,7 +20,8 @@ public class FileSystem : IFileSystem
     public bool FileExists(string path) =>
         File.Exists(path);
 
-    public bool FileWritable(string path)
+    public bool FileWritable(
+        string path)
     {
         try
         {
@@ -37,7 +39,10 @@ public class FileSystem : IFileSystem
         }
     }
 
-    public void CopyFile(string path, string destination, bool overwrite)
+    public void CopyFile(
+        string path,
+        string destination,
+        bool overwrite)
     {
         if (!FileExists(path))
             throw Exceptions.FileNotExistsOrLocked;
@@ -50,7 +55,8 @@ public class FileSystem : IFileSystem
         logger.Log($"Successfully copied file {path}");
     }
 
-    public void DeleteFile(string path)
+    public void DeleteFile(
+        string path)
     {
         if (!FileExists(path) || !FileWritable(path))
             throw Exceptions.FileNotExistsOrLocked;
@@ -60,7 +66,10 @@ public class FileSystem : IFileSystem
         logger.Log($"Successfully deleted file {path}");
     }
 
-    public async Task DeleteFileAsync(string path, int timeout = 60000, CancellationToken cancellationToken = default)
+    public async Task DeleteFileAsync(
+        string path,
+        int timeout = 60000,
+        CancellationToken cancellationToken = default)
     {
         if (!FileExists(path) || !FileWritable(path))
             throw Exceptions.FileNotExistsOrLocked;
@@ -95,7 +104,10 @@ public class FileSystem : IFileSystem
         logger.Log($"Delete file asynchronous: finished {path}");
     }
 
-    public async Task<bool> WaitForFileLock(string path, int timeout = 60000, CancellationToken cancellationToken = default)
+    public async Task<bool> WaitForFileLock(
+        string path,
+        int timeout = 60000,
+        CancellationToken cancellationToken = default)
     {
         if (!FileExists(path))
             throw Exceptions.FileNotExistsOrLocked;
@@ -124,14 +136,20 @@ public class FileSystem : IFileSystem
     }
 
 
-    public Task<string> ReadAsTextAsync(string path, CancellationToken cancellationToken = default)
+    public Task<string> ReadAsTextAsync(
+        string path,
+        CancellationToken cancellationToken = default)
     {
         logger.Log($"Reading all text asynchronous to {path}");
 
         return File.ReadAllTextAsync(path, cancellationToken);
     }
 
-    public async Task SaveAsTextAsync(string path, string content, bool overwrite, CancellationToken cancellationToken = default)
+    public async Task SaveAsTextAsync(
+        string path,
+        string content,
+        bool overwrite,
+        CancellationToken cancellationToken = default)
     {
         logger.Log($"Saving all text asynchronous to {path}");
 
@@ -145,7 +163,8 @@ public class FileSystem : IFileSystem
     public bool DirectoryExists(string directory) =>
         Directory.Exists(directory);
 
-    public bool DirectoryWritable(string directory)
+    public bool DirectoryWritable(
+        string directory)
     {
         try
         {

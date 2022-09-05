@@ -1,11 +1,4 @@
-﻿using Microsoft.UI;
-using Microsoft.UI.Xaml.Controls;
-using Microsoft.UI.Xaml.Media;
-using System.Collections.ObjectModel;
-using Windows.Storage.Pickers;
-using Windows.UI;
-
-namespace IcyLauncher.WinUI.ViewModels;
+﻿namespace IcyLauncher.WinUI.ViewModels;
 
 public partial class ColorSettingsViewModel : ObservableObject
 {
@@ -15,7 +8,8 @@ public partial class ColorSettingsViewModel : ObservableObject
 
     public readonly Configuration Configuration;
 
-    public ColorSettingsViewModel(IOptions<Configuration> configuration,
+    public ColorSettingsViewModel(
+        IOptions<Configuration> configuration,
         ThemeManager themeManager,
         IMessage message,
         INavigation navigation)

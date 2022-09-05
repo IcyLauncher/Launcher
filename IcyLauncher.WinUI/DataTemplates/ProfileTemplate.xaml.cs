@@ -1,5 +1,4 @@
-﻿using Microsoft.UI.Xaml.Controls;
-using Microsoft.UI.Xaml.Media;
+﻿using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Media.Animation;
 using System.Numerics;
 
@@ -10,7 +9,7 @@ public partial class ProfileTemplate : ResourceDictionary
     public ProfileTemplate() =>
         InitializeComponent();
 
-    private void OnRootLayoutLoaded(object sender, RoutedEventArgs e)
+    private void OnRootLayoutLoaded(object sender, RoutedEventArgs _)
     {
         var rootLayout = (Grid)sender;
         var details = rootLayout.Children[4];
@@ -42,7 +41,13 @@ public partial class ProfileTemplate : ResourceDictionary
         rootLayout.Loaded -= OnRootLayoutLoaded;
     }
 
-    public static void UpdateProperties(GridView container, object item, double detailsOpacity, Vector3 detailsTranslation, string iconAnimation)
+
+    public static void UpdateProperties(
+        GridView container,
+        object item,
+        double detailsOpacity,
+        Vector3 detailsTranslation,
+        string iconAnimation)
     {
         var rootLayout = (Grid)((GridViewItem)container.ContainerFromItem(item)).ContentTemplateRoot;
         var details = rootLayout.Children[4];

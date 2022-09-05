@@ -1,6 +1,4 @@
-﻿using IcyLauncher.WinUI.ViewModels;
-using Microsoft.UI.Xaml.Controls;
-using Microsoft.UI.Xaml.Controls.Primitives;
+﻿using Microsoft.UI.Xaml.Controls.Primitives;
 using Microsoft.UI.Xaml.Input;
 
 namespace IcyLauncher.WinUI.DataTemplates;

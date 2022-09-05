@@ -8,7 +8,9 @@ public class Message : IMessage
     readonly ILogger logger;
     readonly UIElementReciever uiElementReciever;
 
-    public Message(ILogger<Message> logger, UIElementReciever uiElementReciever)
+    public Message(
+        ILogger<Message> logger,
+        UIElementReciever uiElementReciever)
     {
         this.logger = logger;
         this.uiElementReciever = uiElementReciever;
@@ -27,7 +29,14 @@ public class Message : IMessage
             activeDialog.Closed -= OnActiveDialogClosed;
     }
 
-    public async Task<ContentDialogResult> ShowAsync(string title, object content, bool awaitPreviousDialog, string? closeButton = "Cancel", string? primaryButton = null, string? secondaryButton = null)
+
+    public async Task<ContentDialogResult> ShowAsync(
+        string title,
+        object content,
+        bool awaitPreviousDialog,
+        string? closeButton = "Cancel",
+        string? primaryButton = null,
+        string? secondaryButton = null)
     {
         logger.Log($"Requested dialog: AwaitPrev-{awaitPreviousDialog}");
 
@@ -57,7 +66,13 @@ public class Message : IMessage
         return await activeDialog.ShowAsync();
     }
 
-    public async void Show(string title, object content, bool awaitPreviousDialog, string? closeButton = "Cancel", string? primaryButton = null, string? secondaryButton = null) =>
+    public async void Show(
+        string title,
+        object content,
+        bool awaitPreviousDialog,
+        string? closeButton = "Cancel",
+        string? primaryButton = null,
+        string? secondaryButton = null) =>
         await ShowAsync(title, content, awaitPreviousDialog, closeButton, primaryButton, secondaryButton);
 
 }

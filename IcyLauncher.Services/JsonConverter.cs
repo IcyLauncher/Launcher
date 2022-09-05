@@ -6,7 +6,8 @@ public class JsonConverter : IConverter
 {
     readonly ILogger<JsonConverter> logger;
 
-    public JsonConverter(ILogger<JsonConverter> logger)
+    public JsonConverter(
+        ILogger<JsonConverter> logger)
     {
         this.logger = logger;
 
@@ -14,14 +15,17 @@ public class JsonConverter : IConverter
     }
 
 
-    public string ToString(object input)
+    public string ToString(
+        object input)
     {
         logger.Log("Serializing object to string");
 
         return JsonConvert.SerializeObject(input);
     }
 
-    public T ToObject<T>(string input, object? settings = null)
+    public T ToObject<T>(
+        string input,
+        object? settings = null)
     {
         logger.Log("Deserializing string to object");
 
@@ -29,7 +33,9 @@ public class JsonConverter : IConverter
             result : throw Exceptions.InvalidDeserializedResult;
     }
 
-    public bool TryToObject<T>(out T result, string input)
+    public bool TryToObject<T>(
+        out T result,
+        string input)
     {
         bool success = true;
 

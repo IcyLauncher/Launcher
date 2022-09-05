@@ -22,7 +22,8 @@ public partial class SettingsViewModel : ObservableObject
     public readonly Configuration Configuration;
     public readonly Updater Updater;
 
-    public SettingsViewModel(IOptions<Configuration> configuration,
+    public SettingsViewModel(
+        IOptions<Configuration> configuration,
         ILogger<ProfilesViewModel> logger,
         ConfigurationManager configurationManager,
         ThemeManager themeManager,
@@ -190,7 +191,8 @@ public partial class SettingsViewModel : ObservableObject
         Configuration.Apperance.UseDarkModeBlur = darkMode;
     }
 
-    public bool IsUseBlurDarkModeEnabled(int selectedIndex) =>
+
+    public static bool IsUseBlurDarkModeEnabled(int selectedIndex) =>
         selectedIndex == 0 || selectedIndex == 1;
 
 

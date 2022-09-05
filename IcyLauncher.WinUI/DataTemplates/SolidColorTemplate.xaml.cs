@@ -1,5 +1,4 @@
-﻿using Microsoft.UI.Xaml.Controls;
-using Microsoft.UI.Xaml.Controls.Primitives;
+﻿using Microsoft.UI.Xaml.Controls.Primitives;
 using Microsoft.UI.Xaml.Input;
 
 namespace IcyLauncher.WinUI.DataTemplates;
@@ -22,6 +21,6 @@ public partial class SolidColorTemplate : ResourceDictionary
         FlyoutBase.GetAttachedFlyout(senderElement).ShowAt(senderElement);
     }
 
-    private void OnDeleteClick(object sender, RoutedEventArgs e) =>
+    private void OnDeleteClick(object sender, RoutedEventArgs _) =>
             SolidColors.Container.Remove((SolidColor)((MenuFlyoutItem)sender).Tag);
 }

@@ -4,7 +4,8 @@ public class BannerTimeDependentItem
 {
     public BannerTimeDependentItem() { }
 
-    public BannerTimeDependentItem(string title,
+    public BannerTimeDependentItem(
+        string title,
         string i_0,
         string i_3,
         string i_6,

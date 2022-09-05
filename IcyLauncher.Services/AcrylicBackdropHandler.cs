@@ -1,6 +1,5 @@
 ﻿using Microsoft.UI.Composition;
 using Microsoft.UI.Composition.SystemBackdrops;
-using WinRT;
 
 namespace IcyLauncher.Services;
 
@@ -77,6 +76,7 @@ public class AcrylicBackdropHandler : IBackdropHandler
             return false;
         }
     }
+
 
     bool isDarkModeEnabled;
     public bool IsDarkModeEnabled
