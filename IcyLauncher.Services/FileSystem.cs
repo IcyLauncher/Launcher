@@ -98,7 +98,7 @@ public class FileSystem : IFileSystem
                 throw Exceptions.Timeout;
             }
             timeout += 1;
-            await Task.Delay(1000, cancellationToken);
+            await Task.Delay(1000, cancellationToken).ConfigureAwait(false);
         }
 
         logger.Log($"Delete file asynchronous: finished {path}");
@@ -128,7 +128,7 @@ public class FileSystem : IFileSystem
                 throw Exceptions.Timeout;
             }
             timeout += 1;
-            await Task.Delay(1000, cancellationToken);
+            await Task.Delay(1000, cancellationToken).ConfigureAwait(false);
         }
 
         logger.Log($"Waited for file lock: true {path}");
@@ -154,7 +154,7 @@ public class FileSystem : IFileSystem
         logger.Log($"Saving all text asynchronous to {path}");
 
         if (!FileExists(path) || overwrite)
-            await File.WriteAllTextAsync(path, content, cancellationToken);
+            await File.WriteAllTextAsync(path, content, cancellationToken).ConfigureAwait(false);
         else
             throw Exceptions.FileExits;
     }

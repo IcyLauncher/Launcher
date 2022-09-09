@@ -77,7 +77,7 @@ public partial class App : Application
 
     protected override async void OnLaunched(LaunchActivatedEventArgs args)
     {
-        await host.StartAsync();
+        await host.StartAsync().ConfigureAwait(false);
 
         Provider.GetRequiredService<AppStartupHandler>();
     }

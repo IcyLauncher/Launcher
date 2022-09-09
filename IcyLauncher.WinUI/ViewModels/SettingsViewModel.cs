@@ -94,7 +94,7 @@ public partial class SettingsViewModel : ObservableObject
         }
 
         presses++;
-        await Task.Delay(1000);
+        await Task.Delay(1000).ConfigureAwait(false);
 
         if (presses > 0)
             presses--;
@@ -207,7 +207,7 @@ public partial class SettingsViewModel : ObservableObject
             return;
 
         if (fileSystem.FileWritable(save.Path))
-            await fileSystem.SaveAsTextAsync(save.Path, saveConfig ? configurationManager.Export() : themeManager.Export(), true);
+            await fileSystem.SaveAsTextAsync(save.Path, saveConfig ? configurationManager.Export() : themeManager.Export(), true).ConfigureAwait(false);
         else
             await message.ShowAsync("Something went wrong :(", "It looks like IcyLauncher cant write to this file. Please verify that you have given permissions to IcyLauncher.", closeButton: "Ok");
     }
@@ -227,9 +227,9 @@ public partial class SettingsViewModel : ObservableObject
             var str = loadConfig ? "configuration" : "theme";
             if (await message.ShowAsync("Are you sure?", $"Do you really want to overwrite your current {str} by this external {str}?\nLoading external {str}s can be dangerous. Make sure you backup your current {str}.\nDo you want to continue?", closeButton: "No", primaryButton: "Yes") == ContentDialogResult.Primary)
                 if (loadConfig)
-                    configurationManager.Load(converter.ToObject<Configuration>(await fileSystem.ReadAsTextAsync(file.Path)), true);
+                    configurationManager.Load(converter.ToObject<Configuration>(await fileSystem.ReadAsTextAsync(file.Path).ConfigureAwait(false)), true);
                 else
-                    themeManager.Load(converter.ToObject<Theme>(await fileSystem.ReadAsTextAsync(file.Path)));
+                    themeManager.Load(converter.ToObject<Theme>(await fileSystem.ReadAsTextAsync(file.Path).ConfigureAwait(false)));
         }
         else
             await message.ShowAsync("Something went wrong :(", "It looks like this file does no longer exist. Please verify the file still exists.", true, "Ok");

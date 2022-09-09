@@ -39,6 +39,6 @@ public partial class BannerGalleryTemplate : ResourceDictionary
         if (viewModel is null)
             viewModel = App.Provider.GetRequiredService<BannerSettingsViewModel>();
 
-        await viewModel.OpenBannerGalleryItem((BannerGalleryItem)((Grid)((Button)sender).Parent).DataContext);
+        await viewModel.OpenBannerGalleryItem((BannerGalleryItem)((Grid)((Button)sender).Parent).DataContext).ConfigureAwait(false);
     }
 }

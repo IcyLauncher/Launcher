@@ -334,7 +334,7 @@ public partial class BannerSettingsViewModel : ObservableObject
 
             try
             {
-                await fileSystem.DeleteFileAsync(file, 1000, cancellationToken);
+                await fileSystem.DeleteFileAsync(file, 1000, cancellationToken).ConfigureAwait(false);
             }
             catch (Exception ex)
             {
@@ -353,7 +353,7 @@ public partial class BannerSettingsViewModel : ObservableObject
 
         try
         {
-            await fileSystem.DeleteFileAsync(file, 100000, CancellationToken.None);
+            await fileSystem.DeleteFileAsync(file, 100000, CancellationToken.None).ConfigureAwait(false);
         }
         catch (Exception ex)
         {

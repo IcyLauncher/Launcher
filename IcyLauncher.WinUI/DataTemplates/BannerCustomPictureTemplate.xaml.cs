@@ -25,5 +25,5 @@ public partial class BannerCustomPictureTemplate : ResourceDictionary
     }
 
     async void OnDeleteClick(object sender, RoutedEventArgs _) =>
-        await viewModel.RemoveCustomPicture((string)((MenuFlyoutItem)sender).Tag);
+        await viewModel.RemoveCustomPicture((string)((MenuFlyoutItem)sender).Tag).ConfigureAwait(false);
 }
