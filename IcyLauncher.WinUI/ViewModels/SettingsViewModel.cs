@@ -88,7 +88,7 @@ public partial class SettingsViewModel : ObservableObject
         {
             presses = 0;
 
-            if (!Configuration.Developer.IsWarningEnabled || await message.ShowAsync("This might be dangerous!", "Playing around here can be dangerous and ruin your experience with IcyLauncher. It is not recommended to go here.\nDo you really want to continue?", true, "Cancel", "Yes, im a pro") == ContentDialogResult.Primary)
+            if (!Configuration.Developer.IsWarningEnabled || await message.ShowAsync("This might be dangerous!", "Playing around here can be dangerous and ruin your experience with IcyLauncher. It is not recommended to go here.\nDo you really want to continue?", closeButton: "Cancel", primaryButton: "Yes, im a pro") == ContentDialogResult.Primary)
                 navigation.SetCurrentPage("Views.DeveloperSettingsView".AsType());
 
             return;
@@ -163,7 +163,7 @@ public partial class SettingsViewModel : ObservableObject
             else
                 Configuration.Launcher.VersionsDirectory = folder.Path;
         else
-            await message.ShowAsync("Something went wrong :(", "It looks like IcyLauncher cant write to this directory or it does not exist. Please verify that you have given permissions to IcyLauncher and this directory still exists.", true, "Ok");
+            await message.ShowAsync("Something went wrong :(", "It looks like IcyLauncher cant write to this directory or it does not exist. Please verify that you have given permissions to IcyLauncher and this directory still exists.", closeButton: "Ok");
     }
 
     [RelayCommand]
@@ -184,7 +184,7 @@ public partial class SettingsViewModel : ObservableObject
     [RelayCommand(AllowConcurrentExecutions = false)]
     async Task ResetColorsAsync(bool darkMode)
     {
-        if (await message.ShowAsync("Are you sure?", $"If you click Ok your current color settings will be overwritten by the default {(darkMode ? "dark" : "light")} mode colors.\nThis will not effect your current accent colors.\nThis will also effect the blur color mode.", true, primaryButton: "Ok") != ContentDialogResult.Primary)
+        if (await message.ShowAsync("Are you sure?", $"If you click Ok your current color settings will be overwritten by the default {(darkMode ? "dark" : "light")} mode colors.\nThis will not effect your current accent colors.\nThis will also effect the blur color mode.", primaryButton: "Ok") != ContentDialogResult.Primary)
             return;
 
         themeManager.Load(darkMode ? Theme.Dark : Theme.Light, true);
@@ -210,7 +210,7 @@ public partial class SettingsViewModel : ObservableObject
         if (fileSystem.FileWritable(save.Path))
             await fileSystem.SaveAsTextAsync(save.Path, saveConfig ? configurationManager.Export() : themeManager.Export(), true);
         else
-            await message.ShowAsync("Something went wrong :(", "It looks like IcyLauncher cant write to this file. Please verify that you have given permissions to IcyLauncher.", true, "Ok");
+            await message.ShowAsync("Something went wrong :(", "It looks like IcyLauncher cant write to this file. Please verify that you have given permissions to IcyLauncher.", closeButton: "Ok");
     }
 
     readonly FileOpenPicker filePicker = new() { SuggestedStartLocation = PickerLocationId.Desktop };
@@ -226,7 +226,7 @@ public partial class SettingsViewModel : ObservableObject
         if (fileSystem.FileExists(file.Path))
         {
             var str = loadConfig ? "configuration" : "theme";
-            if (await message.ShowAsync("Are you sure?", $"Do you really want to overwrite your current {str} by this external {str}?\nLoading external {str}s can be dangerous. Make sure you backup your current {str}.\nDo you want to continue?", true, "No", "Yes") == ContentDialogResult.Primary)
+            if (await message.ShowAsync("Are you sure?", $"Do you really want to overwrite your current {str} by this external {str}?\nLoading external {str}s can be dangerous. Make sure you backup your current {str}.\nDo you want to continue?", closeButton: "No", primaryButton: "Yes") == ContentDialogResult.Primary)
                 if (loadConfig)
                     configurationManager.Load(converter.ToObject<Configuration>(await fileSystem.ReadAsTextAsync(file.Path)), true);
                 else

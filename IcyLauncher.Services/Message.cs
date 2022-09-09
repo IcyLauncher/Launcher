@@ -1,4 +1,5 @@
 ﻿using Microsoft.UI.Xaml.Controls;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace IcyLauncher.Services;
@@ -25,6 +26,7 @@ public class Message : IMessage
     void OnActiveDialogClosed(ContentDialog _, ContentDialogClosedEventArgs _1)
     {
         dialogAwaiter.TrySetResult(true);
+
         if (activeDialog is not null)
             activeDialog.Closed -= OnActiveDialogClosed;
     }
@@ -33,7 +35,7 @@ public class Message : IMessage
     public async Task<ContentDialogResult> ShowAsync(
         string title,
         object content,
-        bool awaitPreviousDialog,
+        bool awaitPreviousDialog = false,
         string? closeButton = "Cancel",
         string? primaryButton = null,
         string? secondaryButton = null)
@@ -45,10 +47,11 @@ public class Message : IMessage
             if (awaitPreviousDialog)
             {
                 await dialogAwaiter.Task;
+
                 dialogAwaiter = new();
             }
-            else
-                activeDialog.Hide();
+            
+            activeDialog.Hide();
         }
 
         activeDialog = new ContentDialog()
@@ -66,10 +69,12 @@ public class Message : IMessage
         return await activeDialog.ShowAsync();
     }
 
+
+
     public async void Show(
         string title,
         object content,
-        bool awaitPreviousDialog,
+        bool awaitPreviousDialog = false,
         string? closeButton = "Cancel",
         string? primaryButton = null,
         string? secondaryButton = null) =>

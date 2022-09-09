@@ -246,7 +246,7 @@ public partial class BannerSettingsViewModel : ObservableObject
     {
         var element = new ScrollLane() { ItemsSource = item.Collection, ItemTemplate = (DataTemplate)Application.Current.Resources["BannerGalleryItemTemplate"] };
 
-        if (await message.ShowAsync($"{item.Title} - Count: {item.Collection.Count}", element, true, primaryButton: "Ok") != ContentDialogResult.Primary)
+        if (await message.ShowAsync($"{item.Title} - Count: {item.Collection.Count}", element, primaryButton: "Ok") != ContentDialogResult.Primary)
             return;
 
         if (string.IsNullOrEmpty((string)element.SelectedItem))
@@ -309,7 +309,7 @@ public partial class BannerSettingsViewModel : ObservableObject
         {
             string requestedPath = Path.Combine(Computer.CurrentDirectory, "Assets\\Banners\\Custom", file.Name);
 
-            if (fileSystem.FileExists(requestedPath) && await message.ShowAsync("Banner already exists :(", $"It looks like there is already a banner with the same file name ({file.DisplayName}). Do you want to override it?", true, "No", "Yes") != ContentDialogResult.Primary)
+            if (fileSystem.FileExists(requestedPath) && await message.ShowAsync("Banner already exists :(", $"It looks like there is already a banner with the same file name ({file.DisplayName}). Do you want to override it?", closeButton: "No", primaryButton: "Yes") != ContentDialogResult.Primary)
                 return;
 
             fileSystem.CopyFile(file.Path, requestedPath, true);
@@ -318,7 +318,7 @@ public partial class BannerSettingsViewModel : ObservableObject
         }
         catch (Exception ex)
         {
-            await message.ShowAsync("Something went wrong :(", $"It looks like IcyLauncher cant copy this file. Please verify that the file still exists ({file.DisplayName}).\n\nError: {ex.Message}", true, "Ok");
+            await message.ShowAsync("Something went wrong :(", $"It looks like IcyLauncher cant copy this file. Please verify that the file still exists ({file.DisplayName}).\n\nError: {ex.Message}", closeButton: "Ok");
         }
 
         logger.Log("Added custom picture");
@@ -339,7 +339,7 @@ public partial class BannerSettingsViewModel : ObservableObject
             catch (Exception ex)
             {
                 if (ex is not OperationCanceledException)
-                    await message.ShowAsync("Somethig went wrong :(", $"It looks like IcyLauncher cant delete this file ({file}).\n\nError: {ex.Message}", true, "Ok");
+                    await message.ShowAsync("Somethig went wrong :(", $"It looks like IcyLauncher cant delete this file ({file}).\n\nError: {ex.Message}", closeButton: "Ok");
             }
         }
 
@@ -357,7 +357,7 @@ public partial class BannerSettingsViewModel : ObservableObject
         }
         catch (Exception ex)
         {
-            await message.ShowAsync("Something went wrong :(", $"It looks like IcyLauncher cant delete this file. Please verify that you have given permissions to IcyLauncher and the file is not locked.\n\nError: {ex.Message}", true, "Ok");
+            await message.ShowAsync("Something went wrong :(", $"It looks like IcyLauncher cant delete this file. Please verify that you have given permissions to IcyLauncher and the file is not locked.\n\nError: {ex.Message}", closeButton: "Ok");
         }
 
         LoadCustomPictures();
