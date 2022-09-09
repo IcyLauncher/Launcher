@@ -162,7 +162,7 @@ public class Navigation : INavigation
         CanGoBackChanged(false);
     }
 
-    private void CanGoBackChanged(
+    void CanGoBackChanged(
         bool canGoBack)
     {
         if (canGoBack == (uIElementReciever.BackButton.Opacity != 0))

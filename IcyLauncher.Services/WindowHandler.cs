@@ -199,7 +199,8 @@ public class WindowHandler
             return false;
         }
     }
-    private void TextControlColorsValueChanged(object? sender, System.ComponentModel.PropertyChangedEventArgs e)
+
+    void TextControlColorsValueChanged(object? sender, System.ComponentModel.PropertyChangedEventArgs e)
     {
         if (e.PropertyName == "Outline" ||
             e.PropertyName == "Primary" ||
@@ -290,7 +291,7 @@ public class WindowHandler
         };
     }
 
-    private void RemoveAllBlur()
+    void RemoveAllBlur()
     {
         if (IsBlurMicaEnabled)
             SetBlurMica(false, false);
@@ -303,7 +304,7 @@ public class WindowHandler
     }
 
 
-    private bool SetBlurMica(bool enable, bool useDarkMode)
+    bool SetBlurMica(bool enable, bool useDarkMode)
     {
         try
         {
@@ -329,7 +330,7 @@ public class WindowHandler
         }
     }
 
-    private bool SetBlurAcrylic(bool enable, bool useDarkMode)
+    bool SetBlurAcrylic(bool enable, bool useDarkMode)
     {
         var setComposition = SetComposition(Win32.AccentState.ACCENT_ENABLE_ACRYLICBLURBEHIND, enable, useDarkMode);
         var setMainBackground = SetMainBackground(enable ? "Background.Transparent" : "Transparent");
@@ -342,7 +343,7 @@ public class WindowHandler
         return setComposition && setMainBackground;
     }
 
-    private bool SetBlurSimple(bool enable, bool useDarkMode)
+    bool SetBlurSimple(bool enable, bool useDarkMode)
     {
         var setComposition = SetComposition(Win32.AccentState.ACCENT_ENABLE_BLURBEHIND, enable, useDarkMode);
         var setMainBackground = SetMainBackground(enable ? "Background.Transparent" : "Transparent");
@@ -355,7 +356,7 @@ public class WindowHandler
         return setComposition && setMainBackground;
     }
 
-    private bool SetComposition(Win32.AccentState state, bool enable, bool useDarkMode)
+    bool SetComposition(Win32.AccentState state, bool enable, bool useDarkMode)
     {
         try
         {
@@ -397,7 +398,7 @@ public class WindowHandler
         }
     }
 
-    private bool SetBlurNone(bool enable)
+    bool SetBlurNone(bool enable)
     {
         var setMainBackground = SetMainBackground(enable ? "Background.Solid" : "Transparent");
 

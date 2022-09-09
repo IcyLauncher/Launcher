@@ -12,7 +12,7 @@ public partial class SolidColorTemplate : ResourceDictionary
     public readonly SolidColorCollection SolidColors = App.Provider.GetRequiredService<IOptions<SolidColorCollection>>().Value;
 
 
-    private void OnRootLayoutPointerPressed(object sender, PointerRoutedEventArgs e)
+    void OnRootLayoutPointerPressed(object sender, PointerRoutedEventArgs e)
     {
         if (!e.GetCurrentPoint((UIElement)sender).Properties.IsRightButtonPressed)
             return;
@@ -21,6 +21,6 @@ public partial class SolidColorTemplate : ResourceDictionary
         FlyoutBase.GetAttachedFlyout(senderElement).ShowAt(senderElement);
     }
 
-    private void OnDeleteClick(object sender, RoutedEventArgs _) =>
+    void OnDeleteClick(object sender, RoutedEventArgs _) =>
             SolidColors.Container.Remove((SolidColor)((MenuFlyoutItem)sender).Tag);
 }

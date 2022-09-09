@@ -81,7 +81,7 @@ public class ScrollLane : GridView
         };
     }
 
-    private void OnScrollContainerLoaded(object sender, RoutedEventArgs e)
+    void OnScrollContainerLoaded(object sender, RoutedEventArgs e)
     {
         scrollContainer.SizeChanged += (s, e) => UpdateButtonVisibilities(scrollContainer.HorizontalOffset);
         UpdateButtonVisibilities(scrollContainer.HorizontalOffset);
@@ -90,7 +90,7 @@ public class ScrollLane : GridView
     }
 
 
-    private void UpdateButtonVisibilities(double newScroll)
+    void UpdateButtonVisibilities(double newScroll)
     {
         backButton.Visibility = newScroll > 0 && scrollContainer.ScrollableWidth > 0 ? Visibility.Visible : Visibility.Collapsed;
         forwardButton.Visibility = newScroll < scrollContainer.ScrollableWidth && scrollContainer.ScrollableWidth > 0 ? Visibility.Visible : Visibility.Collapsed;

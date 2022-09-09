@@ -172,7 +172,7 @@ public class ThemeManager
     }
 
 
-    private void AccentColorsValuesChanged(object? _, PropertyChangedEventArgs e)
+    void AccentColorsValuesChanged(object? _, PropertyChangedEventArgs e)
     {
         switch (e.PropertyName)
         {
@@ -189,7 +189,7 @@ public class ThemeManager
         }
     }
 
-    private void ControlColorsValuesChanged(object? _, PropertyChangedEventArgs e)
+    void ControlColorsValuesChanged(object? _, PropertyChangedEventArgs e)
     {
         switch (e.PropertyName)
         {
@@ -202,7 +202,7 @@ public class ThemeManager
         }
     }
 
-    private void SystemColorsValuesChanged(UISettings _, object _1)
+    void SystemColorsValuesChanged(UISettings _, object _1)
     {
         logger.Log("YOUR MOM");
     }

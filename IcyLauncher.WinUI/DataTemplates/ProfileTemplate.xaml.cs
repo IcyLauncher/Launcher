@@ -9,7 +9,7 @@ public partial class ProfileTemplate : ResourceDictionary
     public ProfileTemplate() =>
         InitializeComponent();
 
-    private void OnRootLayoutLoaded(object sender, RoutedEventArgs _)
+    void OnRootLayoutLoaded(object sender, RoutedEventArgs _)
     {
         var rootLayout = (Grid)sender;
         var details = rootLayout.Children[4];

@@ -12,7 +12,7 @@ public partial class BannerGalleryTemplate : ResourceDictionary
     BannerSettingsViewModel viewModel = default!;
 
 
-    private void OnRootLayoutLoaded(object sender, RoutedEventArgs _)
+    void OnRootLayoutLoaded(object sender, RoutedEventArgs _)
     {
         var layoutRoot = (Grid)sender;
         var gallery = (BannerGalleryItem)layoutRoot.DataContext;
@@ -34,7 +34,7 @@ public partial class BannerGalleryTemplate : ResourceDictionary
         ((Rectangle)layoutRoot.Children[3]).Fill = new ImageBrush() { ImageSource = gallery.Collection[3].AsImage(false), Stretch = Stretch.UniformToFill };
     }
 
-    private async void OnOpenItemClicked(object sender, RoutedEventArgs _)
+    async void OnOpenItemClicked(object sender, RoutedEventArgs _)
     {
         if (viewModel is null)
             viewModel = App.Provider.GetRequiredService<BannerSettingsViewModel>();
