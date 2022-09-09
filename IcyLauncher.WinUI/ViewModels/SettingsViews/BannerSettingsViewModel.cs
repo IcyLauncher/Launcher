@@ -377,7 +377,7 @@ public partial class BannerSettingsViewModel : ObservableObject
             return;
         }
 
-        BannerBrush = new SolidColorBrush(SolidColors.Container[value].Color);
+        BannerBrush = SolidColors.Container[value].Color.AsSolid();
         logger.Log("Set home banner: SolidColor");
     }
 

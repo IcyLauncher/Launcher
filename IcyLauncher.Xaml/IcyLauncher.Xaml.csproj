@@ -28,5 +28,7 @@
 		<Using Include="Microsoft.UI.Xaml" />
 		<Using Include="Microsoft.UI.Xaml.Controls" />
 		<Using Include="Microsoft.UI.Xaml.Data" />
+		
+		<Using Include="IcyLauncher.Helpers.Extentions" />
 	</ItemGroup>
 </Project>

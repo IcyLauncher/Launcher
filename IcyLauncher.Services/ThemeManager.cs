@@ -195,7 +195,7 @@ public class ThemeManager
         {
             case "Primary":
                 if (navigation.GetCurrentNavigationViewItemLayoutRoot() is Grid layoutRoot)
-                    layoutRoot.Background = new SolidColorBrush(configuration.Apperance.Colors.Control.Primary);
+                    layoutRoot.Background = configuration.Apperance.Colors.Control.Primary.AsSolid();
 
                 logger.Log($"Updated current NavigationViewItem LayoutRoot");
                 break;

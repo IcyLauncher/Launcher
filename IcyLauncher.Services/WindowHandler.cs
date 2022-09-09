@@ -253,7 +253,7 @@ public class WindowHandler
             switch (backgroundColor)
             {
                 case "Transparent":
-                    uiElementReciever.MainGrid.Background = new SolidColorBrush(Colors.Transparent);
+                    uiElementReciever.MainGrid.Background = Colors.Transparent.AsSolid();
                     break;
                 default:
                     uiElementReciever.MainGrid.SetBinding(Panel.BackgroundProperty, new Binding()

@@ -63,8 +63,8 @@ public class UIElementProvider
             Width = 0,
             Height = 32,
             Padding = new(0),
-            Background = new SolidColorBrush(Colors.Transparent),
-            BorderBrush = new SolidColorBrush(Colors.Transparent),
+            Background = Colors.Transparent.AsSolid(),
+            BorderBrush = Colors.Transparent.AsSolid(),
             Content = new Viewbox() { Child = backIcon, Width = 16, Height = 16 },
             Opacity = 0,
             OpacityTransition = new()

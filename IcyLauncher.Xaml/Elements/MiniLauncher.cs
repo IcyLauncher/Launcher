@@ -6,7 +6,7 @@ namespace IcyLauncher.Xaml.Elements;
 public class MiniLauncher : ContentControl
 {
     public static readonly DependencyProperty BannerBrushProperty = DependencyProperty.Register(
-        "BannerBrush", typeof(Brush), typeof(MiniLauncher), new(new SolidColorBrush(Colors.White)));
+        "BannerBrush", typeof(Brush), typeof(MiniLauncher), new(Colors.White.AsSolid()));
 
     public Brush BannerBrush
     {
@@ -16,7 +16,7 @@ public class MiniLauncher : ContentControl
 
 
     public static readonly DependencyProperty BackgroundSolidProperty = DependencyProperty.Register(
-        "BackgroundSolid", typeof(SolidColorBrush), typeof(MiniLauncher), new(new SolidColorBrush(Colors.White)));
+        "BackgroundSolid", typeof(SolidColorBrush), typeof(MiniLauncher), new(Colors.White.AsSolid()));
 
     public SolidColorBrush BackgroundSolid
     {
@@ -26,7 +26,7 @@ public class MiniLauncher : ContentControl
 
 
     public static readonly DependencyProperty AccentPrimaryPorperty = DependencyProperty.Register(
-        "AccentPrimary", typeof(SolidColorBrush), typeof(MiniLauncher), new(new SolidColorBrush(Colors.White)));
+        "AccentPrimary", typeof(SolidColorBrush), typeof(MiniLauncher), new(Colors.White.AsSolid()));
 
     public SolidColorBrush AccentPrimary
     {
@@ -36,7 +36,7 @@ public class MiniLauncher : ContentControl
 
 
     public static readonly DependencyProperty ControlPrimaryProperty = DependencyProperty.Register(
-        "ControlPrimary", typeof(SolidColorBrush), typeof(MiniLauncher), new(new SolidColorBrush(Colors.White)));
+        "ControlPrimary", typeof(SolidColorBrush), typeof(MiniLauncher), new(Colors.White.AsSolid()));
 
     public SolidColorBrush ControlPrimary
     {
@@ -46,7 +46,7 @@ public class MiniLauncher : ContentControl
 
 
     public static readonly DependencyProperty BackgroundGradientTransparentProperty = DependencyProperty.Register(
-        "BackgroundGradientTransparent", typeof(SolidColorBrush), typeof(MiniLauncher), new(new SolidColorBrush(Colors.White)));
+        "BackgroundGradientTransparent", typeof(SolidColorBrush), typeof(MiniLauncher), new(Colors.White.AsSolid()));
 
     public SolidColorBrush BackgroundGradientTransparent
     {
@@ -56,7 +56,7 @@ public class MiniLauncher : ContentControl
 
 
     public static readonly DependencyProperty BackgroundGradientProperty = DependencyProperty.Register(
-        "BackgroundGradient", typeof(SolidColorBrush), typeof(MiniLauncher), new(new SolidColorBrush(Colors.White)));
+        "BackgroundGradient", typeof(SolidColorBrush), typeof(MiniLauncher), new(Colors.White.AsSolid()));
 
     public SolidColorBrush BackgroundGradient
     {
@@ -66,7 +66,7 @@ public class MiniLauncher : ContentControl
 
 
     public static readonly DependencyProperty TextSecondaryProperty = DependencyProperty.Register(
-        "TextSecondary", typeof(SolidColorBrush), typeof(MiniLauncher), new(new SolidColorBrush(Colors.White)));
+        "TextSecondary", typeof(SolidColorBrush), typeof(MiniLauncher), new(Colors.White.AsSolid()));
 
     public SolidColorBrush TextSecondary
     {

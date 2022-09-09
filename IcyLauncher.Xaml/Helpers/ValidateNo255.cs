@@ -10,9 +10,9 @@ public class ValidateNo255 : IValueConverter
         var col = (Color)value;
 
         if (col.R == 255 && col.G == 255 && col.B == 255)
-            return new SolidColorBrush(Color.FromArgb(col.A, 253, 253, 253));
+            return Color.FromArgb(col.A, 253, 253, 253).AsSolid();
 
-        return new SolidColorBrush(col);
+        return col.AsSolid();
     }
 
     public object ConvertBack(object value, Type targetType, object parameter, string language) =>
