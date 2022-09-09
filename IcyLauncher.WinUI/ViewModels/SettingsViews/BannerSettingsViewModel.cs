@@ -312,7 +312,7 @@ public partial class BannerSettingsViewModel : ObservableObject
             if (fileSystem.FileExists(requestedPath) && await message.ShowAsync("Banner already exists :(", $"It looks like there is already a banner with the same file name ({file.DisplayName}). Do you want to override it?", closeButton: "No", primaryButton: "Yes") != ContentDialogResult.Primary)
                 return;
 
-            fileSystem.CopyFile(file.Path, requestedPath, true);
+            await fileSystem.CopyFileAsync(file.Path, requestedPath, true);
 
             LoadCustomPictures();
         }
@@ -334,7 +334,7 @@ public partial class BannerSettingsViewModel : ObservableObject
 
             try
             {
-                await fileSystem.DeleteFileAsync(file, 1000, cancellationToken).ConfigureAwait(false);
+                await fileSystem.DeleteFileAsync(file, 1000, cancellationToken);
             }
             catch (Exception ex)
             {
@@ -353,7 +353,7 @@ public partial class BannerSettingsViewModel : ObservableObject
 
         try
         {
-            await fileSystem.DeleteFileAsync(file, 100000, CancellationToken.None).ConfigureAwait(false);
+            await fileSystem.DeleteFileAsync(file, 100000, CancellationToken.None);
         }
         catch (Exception ex)
         {

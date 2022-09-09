@@ -9,11 +9,22 @@ public interface IFileSystem
 
     bool FileWritable(string path);
 
+
+    /// <summary>
+    /// Not recommended: Use Async method
+    /// </summary>
     void CopyFile(string path, string destination, bool overwrite);
 
+    Task CopyFileAsync(string path, string destination, bool overwrite, CancellationToken cancellationToken = default);
+
+
+    /// <summary>
+    /// Not recommended: Use Async method
+    /// </summary>
     void DeleteFile(string path);
 
     Task DeleteFileAsync(string path, int timeout = 60000, CancellationToken cancellationToken = default);
+
 
     Task<bool> WaitForFileLock(string path, int timeout = 60000, CancellationToken cancellationToken = default);
 

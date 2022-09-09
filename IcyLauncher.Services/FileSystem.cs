@@ -39,6 +39,10 @@ public class FileSystem : IFileSystem
         }
     }
 
+
+    /// <summary>
+    /// Not recommended: Use Async method
+    /// </summary>
     public void CopyFile(
         string path,
         string destination,
@@ -55,6 +59,31 @@ public class FileSystem : IFileSystem
         logger.Log($"Successfully copied file {path}");
     }
 
+    public async Task CopyFileAsync(
+        string path,
+        string destination,
+        bool overwrite,
+        CancellationToken cancellationToken = default)
+    {
+        if (!FileExists(path))
+            throw Exceptions.FileNotExistsOrLocked;
+
+        if (FileExists(destination) && !overwrite)
+            throw Exceptions.FileExits;
+
+        var fileOptions = FileOptions.Asynchronous | FileOptions.SequentialScan;
+        var bufferSize = 4096;
+
+        using var sourceStream = new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.Read, bufferSize, fileOptions);
+        using var destinationStream = new FileStream(destination, FileMode.CreateNew, FileAccess.Write, FileShare.None, bufferSize, fileOptions);
+
+        await sourceStream.CopyToAsync(destinationStream, bufferSize, cancellationToken).ConfigureAwait(continueOnCapturedContext: false);
+    }
+
+
+    /// <summary>
+    /// Not recommended: Use Async method
+    /// </summary>
     public void DeleteFile(
         string path)
     {
@@ -104,7 +133,8 @@ public class FileSystem : IFileSystem
         logger.Log($"Delete file asynchronous: finished {path}");
     }
 
-    public async Task<bool> WaitForFileLock(
+
+    public async Task<bool> WaitForFileLockAsync(
         string path,
         int timeout = 60000,
         CancellationToken cancellationToken = default)
