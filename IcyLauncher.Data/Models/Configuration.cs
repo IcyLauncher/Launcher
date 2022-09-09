@@ -80,8 +80,11 @@ public partial class ConfigurationDateTime : ObservableObject
 public partial class ConfigurationDeveloper : ObservableObject
 {
     [ObservableProperty]
+    bool isDeveloperModeEnabled = false;
+
+    [ObservableProperty]
     bool isOneClickEnabled = false;
 
     [ObservableProperty]
-    bool isWarningEnabled = false;
+    bool isWarningEnabled = true;
 }

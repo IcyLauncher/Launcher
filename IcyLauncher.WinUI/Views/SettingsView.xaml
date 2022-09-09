@@ -67,6 +67,7 @@
                     Background="Transparent"
                     BorderBrush="Transparent"
                     Command="{x:Bind viewModel.DebugCommand}"
+                    IsHitTestVisible="{x:Bind viewModel.Configuration.Developer.IsDeveloperModeEnabled, Mode=TwoWay}"
                     ToolTipService.ToolTip="Access to developer settings">
                     <Grid>
                         <FontIcon
@@ -378,6 +379,10 @@
                 Template="{StaticResource SettingsExpander}">
                 <Expander.Tag>
                     <StackPanel Spacing="8">
+                        <ContentControl Tag="Developer Mode|Is developer mode enabled" Template="{StaticResource SettingsCard}">
+                            <ToggleSwitch IsOn="{x:Bind viewModel.Configuration.Developer.IsDeveloperModeEnabled, Mode=TwoWay}" ToolTipService.ToolTip="Enable/Disable One Click Button" />
+                        </ContentControl>
+
                         <ContentControl Tag="One Click Button|Only press the debug button once instead of 5 times" Template="{StaticResource SettingsCard}">
                             <ToggleSwitch IsOn="{x:Bind viewModel.Configuration.Developer.IsOneClickEnabled, Mode=TwoWay}" ToolTipService.ToolTip="Enable/Disable One Click Button" />
                         </ContentControl>
