@@ -15,7 +15,7 @@ public class ImagingUtility
     {
         this.logger = logger;
 
-        this.logger.Log("Registered ImagingUtility");
+        logger.Log("Registered ImagingUtility");
     }
 
 

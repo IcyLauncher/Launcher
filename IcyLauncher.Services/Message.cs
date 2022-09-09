@@ -15,7 +15,7 @@ public class Message : IMessage
         this.logger = logger;
         this.uiElementReciever = uiElementReciever;
 
-        this.logger.Log("Registered Message serivce and initialized content dialog");
+        logger.Log("Registered Message serivce and initialized content dialog");
     }
 
 

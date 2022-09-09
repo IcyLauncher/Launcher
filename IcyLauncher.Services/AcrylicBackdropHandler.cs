@@ -25,7 +25,7 @@ public class AcrylicBackdropHandler : IBackdropHandler
 
         IsDarkModeEnabled = true;
 
-        this.logger.Log("Registered backdrop handler and set backdrop configuration");
+        logger.Log("Registered backdrop handler and set backdrop configuration");
     }
 
 

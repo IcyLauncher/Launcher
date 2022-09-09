@@ -29,7 +29,7 @@ public class WindowHandler
         this.uiElementReciever = uiElementReciever;
         this.shell = shell;
 
-        this.logger.Log("Registered WindowHandler");
+        logger.Log("Registered WindowHandler");
     }
 
 

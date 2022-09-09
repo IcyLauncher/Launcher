@@ -11,7 +11,7 @@ public class JsonConverter : IConverter
     {
         this.logger = logger;
 
-        this.logger.Log("Registered Converter (Json)");
+        logger.Log("Registered Converter (Json)");
     }
 
 

@@ -13,7 +13,7 @@ public class FileSystem : IFileSystem
     {
         this.logger = logger;
 
-        this.logger.Log("Registered FileSystem");
+        logger.Log("Registered FileSystem");
     }
 
 

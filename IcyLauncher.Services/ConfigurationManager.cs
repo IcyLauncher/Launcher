@@ -15,7 +15,7 @@ public class ConfigurationManager
         this.logger = logger;
         this.converter = converter;
 
-        this.logger.Log("Registered configuration manager");
+        logger.Log("Registered configuration manager");
     }
 
 

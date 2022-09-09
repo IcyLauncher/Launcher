@@ -39,7 +39,7 @@ public class ThemeManager
         //this.configuration.Apperance.Colors.Control.Solid.PropertyChanged += ControlSolidColorsValuesChanged;
         new UISettings().ColorValuesChanged += SystemColorsValuesChanged;
 
-        this.logger.Log("Registered Theme Manager and hooked all ColorValue changes");
+        logger.Log("Registered Theme Manager and hooked all ColorValue changes");
     }
 
 
