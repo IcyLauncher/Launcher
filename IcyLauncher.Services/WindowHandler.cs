@@ -44,12 +44,6 @@ public class WindowHandler
     public PointInt32 Position => Window.Position;
     public RectInt32 ScreenSize => DisplayArea.GetFromWindowId(Win32Interop.GetWindowIdFromWindow(HWnd), DisplayAreaFallback.Nearest).WorkArea;
 
-    public bool IsBlurMicaEnabled { get; private set; }
-    public bool IsBlurAcrylicEnabled { get; private set; }
-    public bool IsBlurSimpleEnabled { get; private set; }
-    public bool IsBlurNoneEnabled { get; private set; }
-    public BlurEffect? CurrentBlur { get; private set; }
-
 
     public void SetIcon(string path)
     {
@@ -221,32 +215,6 @@ public class WindowHandler
     }
 
 
-    public bool MakeTransparent()
-    {
-        try
-        {
-            Win32.SubClassDelegate = new(Win32.WindowSubClass);
-            var setWindowSubClass = Win32.SetWindowSubclass(HWnd, Win32.SubClassDelegate, 0, 0);
-            logger.Log("Set Window Sub Class Delegate");
-
-            long nExStyle = Win32.GetWindowLong(HWnd, -20);
-            if ((nExStyle & 0x00080000) == 0)
-            {
-                var setWindowLong = Win32.SetWindowLong(HWnd, -20, (IntPtr)(nExStyle | 0x00080000));
-                logger.Log("Set Window Long");
-                var setLayeredWindowAttributes = Win32.SetLayeredWindowAttributes(HWnd, (uint)System.Drawing.ColorTranslator.ToWin32(System.Drawing.Color.Magenta), 0, 0x00000001);
-                logger.Log("Set Layered Window Attributes");
-
-                return setWindowSubClass && setWindowLong && setLayeredWindowAttributes;
-            }
-        }
-        catch (Exception ex)
-        {
-            logger.Log("Failed making window transparent", ex);
-        }
-        return false;
-    }
-
     public bool SetMainBackground(string backgroundColor)
     {
         try
@@ -275,138 +243,5 @@ public class WindowHandler
             logger.Log($"Failed setting background color on MainGrid ({backgroundColor})", ex);
             return false;
         }
-    }
-
-
-    public bool SetBlur(BlurEffect blurEffect, bool enable, bool useDarkMode = true)
-    {
-        RemoveAllBlur();
-
-        return blurEffect switch
-        {
-            BlurEffect.Mica => SetBlurMica(enable, useDarkMode),
-            BlurEffect.Acrylic => SetBlurAcrylic(enable, useDarkMode),
-            BlurEffect.Simple => SetBlurSimple(enable, useDarkMode),
-            _ => SetBlurNone(enable),
-        };
-    }
-
-    void RemoveAllBlur()
-    {
-        if (IsBlurMicaEnabled)
-            SetBlurMica(false, false);
-
-        if (IsBlurAcrylicEnabled)
-            SetBlurAcrylic(false, false);
-
-        if (IsBlurSimpleEnabled)
-            SetBlurSimple(false, false);
-    }
-
-
-    bool SetBlurMica(bool enable, bool useDarkMode)
-    {
-        try
-        {
-            var setMica = Win32.DwmSetWindowAttribute(HWnd, (int)Win32.DWMWINDOWATTRIBUTE.DWMWA_MICA_EFFECT, ref enable, sizeof(int));
-            logger.Log($"Set DWM Window Attribute ({setMica})");
-
-            var setDarkMode = Win32.DwmSetWindowAttribute(HWnd, (int)Win32.DWMWINDOWATTRIBUTE.DWMWA_USE_IMMERSIVE_DARK_MODE, ref useDarkMode, sizeof(int));
-            logger.Log($"Set DWM Window Attribute-d ({setDarkMode})");
-
-            var setMainBackground = SetMainBackground("Transparent");
-
-            if (setMica == 0 && setMainBackground)
-            {
-                IsBlurMicaEnabled = enable;
-                CurrentBlur = enable ? BlurEffect.Mica : null;
-            }
-            return setMica == 0 && setDarkMode == 0;
-        }
-        catch (Exception ex)
-        {
-            logger.Log($"Failed setting DWM Window Attribute ({enable})", ex);
-            return false;
-        }
-    }
-
-    bool SetBlurAcrylic(bool enable, bool useDarkMode)
-    {
-        var setComposition = SetComposition(Win32.AccentState.ACCENT_ENABLE_ACRYLICBLURBEHIND, enable, useDarkMode);
-        var setMainBackground = SetMainBackground(enable ? "Background.Transparent" : "Transparent");
-
-        if (setComposition && setMainBackground)
-        {
-            IsBlurAcrylicEnabled = enable;
-            CurrentBlur = enable ? BlurEffect.Acrylic : null;
-        }
-        return setComposition && setMainBackground;
-    }
-
-    bool SetBlurSimple(bool enable, bool useDarkMode)
-    {
-        var setComposition = SetComposition(Win32.AccentState.ACCENT_ENABLE_BLURBEHIND, enable, useDarkMode);
-        var setMainBackground = SetMainBackground(enable ? "Background.Transparent" : "Transparent");
-
-        if (setComposition && setMainBackground)
-        {
-            IsBlurSimpleEnabled = enable;
-            CurrentBlur = enable ? BlurEffect.Simple : null;
-        }
-        return setComposition && setMainBackground;
-    }
-
-    bool SetComposition(Win32.AccentState state, bool enable, bool useDarkMode)
-    {
-        try
-        {
-            var policy = enable ?
-            new Win32.AccentPolicy()
-            {
-                AccentState = state,
-                GradientColor = Convert.ToUInt32(useDarkMode ? 0x990000 : 0xFFFFFF)
-            } :
-            new Win32.AccentPolicy()
-            {
-                AccentState = 0
-            };
-            logger.Log($"Created composition accent policy ({enable}-{useDarkMode})");
-
-            var structSize = Marshal.SizeOf(policy);
-            var ptrData = Marshal.AllocHGlobal(structSize);
-            Marshal.StructureToPtr(policy, ptrData, false);
-            logger.Log($"Marshaled composition struct & ptr");
-
-            var data = new Win32.WindowCompositionAttributeData()
-            {
-                Attribute = Win32.WindowCompositionAttribute.WCA_ACCENT_POLICY,
-                SizeOfData = structSize,
-                Data = ptrData
-            };
-            logger.Log($"Created composition data");
-
-            var setWindowComposition = Win32.SetWindowCompositionAttribute(HWnd, ref data);
-            Marshal.FreeHGlobal(ptrData);
-            logger.Log($"Set Window Composition Attribute");
-
-            return setWindowComposition;
-        }
-        catch (Exception ex)
-        {
-            logger.Log($"Failed setting Window Composition Attribute ({enable})", ex);
-            return false;
-        }
-    }
-
-    bool SetBlurNone(bool enable)
-    {
-        var setMainBackground = SetMainBackground(enable ? "Background.Solid" : "Transparent");
-
-        if (setMainBackground)
-        {
-            IsBlurNoneEnabled = enable;
-            CurrentBlur = enable ? BlurEffect.None : null;
-        }
-        return setMainBackground;
     }
 }

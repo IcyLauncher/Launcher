@@ -12,13 +12,11 @@ public class VibrancyBackdropHandler : IBackdropHandler
 
     public VibrancyBackdropHandler(
         ILogger<VibrancyBackdropHandler> logger,
-        Window shell,
-        WindowHandler windowHandler)
+        Window shell)
     {
         this.logger = logger;
         this.shell = (ICompositionSupportsSystemBackdrop)shell;
 
-        windowHandler.EnsureWindowsSystemDispatcherQueueController();
         controller.SetSystemBackdropConfiguration(new() { Theme = SystemBackdropTheme.Dark });
         controller.Kind = MicaKind.BaseAlt;
 

@@ -20,7 +20,6 @@ public class AcrylicBackdropHandler : IBackdropHandler
         this.shell = (ICompositionSupportsSystemBackdrop)shell;
         this.windowHandler = windowHandler;
 
-        windowHandler.EnsureWindowsSystemDispatcherQueueController();
         controller.SetSystemBackdropConfiguration(new() { Theme = SystemBackdropTheme.Dark });
 
         IsDarkModeEnabled = true;

@@ -1,9 +1,9 @@
 ﻿namespace IcyLauncher.Data.Types;
 
-public enum BlurEffect
+public enum Backdrop
 {
     Mica,
     Acrylic,
-    Simple,
+    Vibrancy,
     None
 }

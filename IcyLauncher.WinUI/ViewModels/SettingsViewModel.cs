@@ -13,7 +13,6 @@ public partial class SettingsViewModel : ObservableObject
     readonly ILogger<ProfilesViewModel> logger;
     readonly ConfigurationManager configurationManager;
     readonly ThemeManager themeManager;
-    readonly WindowHandler windowHandler;
     readonly IConverter converter;
     readonly IFileSystem fileSystem;
     readonly IMessage message;
@@ -28,6 +27,7 @@ public partial class SettingsViewModel : ObservableObject
         ConfigurationManager configurationManager,
         ThemeManager themeManager,
         WindowHandler windowHandler,
+        BackdropHandler backdropHandler,
         Updater updater,
         IConverter converter,
         IFileSystem fileSystem,
@@ -37,7 +37,6 @@ public partial class SettingsViewModel : ObservableObject
         this.logger = logger;
         this.configurationManager = configurationManager;
         this.themeManager = themeManager;
-        this.windowHandler = windowHandler;
         this.converter = converter;
         this.fileSystem = fileSystem;
         this.message = message;
@@ -47,13 +46,13 @@ public partial class SettingsViewModel : ObservableObject
         Updater = updater;
 
 
-        this.windowHandler.Register(folderPicker);
+        windowHandler.Register(folderPicker);
 
-        this.windowHandler.Register(savePicker);
+        windowHandler.Register(savePicker);
         savePicker.FileTypeChoices.Add(new("JSON", new List<string>() { ".json" }));
         savePicker.FileTypeChoices.Add("Plain Text", new List<string>() { ".txt" });
 
-        this.windowHandler.Register(filePicker);
+        windowHandler.Register(filePicker);
         filePicker.FileTypeFilter.Add(".json");
 
         IsUpdateVisible = Updater.IsUpdateAvailable;
@@ -62,12 +61,12 @@ public partial class SettingsViewModel : ObservableObject
         {
             switch (e.PropertyName)
             {
-                case "Blur":
-                    if (windowHandler.CurrentBlur != Configuration.Apperance.Blur)
-                        windowHandler.SetBlur(Configuration.Apperance.Blur, true, Configuration.Apperance.UseDarkModeBlur);
+                case "Backdrop":
+                    if (backdropHandler.Current != Configuration.Apperance.Backdrop)
+                        backdropHandler.SetBackdrop(Configuration.Apperance.Backdrop, true, Configuration.Apperance.IsDarkModeBackdropEnabled);
                     break;
-                case "UseDarkModeBlur":
-                    windowHandler.SetBlur(Configuration.Apperance.Blur, true, Configuration.Apperance.UseDarkModeBlur);
+                case "IsDarkModeBackdropEnabled":
+                    backdropHandler.SetDarkMode(Configuration.Apperance.Backdrop, Configuration.Apperance.IsDarkModeBackdropEnabled);
                     break;
             }
         };
@@ -188,11 +187,11 @@ public partial class SettingsViewModel : ObservableObject
             return;
 
         themeManager.Load(darkMode ? Theme.Dark : Theme.Light, true);
-        Configuration.Apperance.UseDarkModeBlur = darkMode;
+        Configuration.Apperance.IsDarkModeBackdropEnabled = darkMode;
     }
 
 
-    public static bool IsUseBlurDarkModeEnabled(int selectedIndex) =>
+    public static bool IsDarkModeBackdropEnabled(int selectedIndex) =>
         selectedIndex == 0 || selectedIndex == 1;
 
 

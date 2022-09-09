@@ -42,6 +42,7 @@ public partial class App : Application
                 services.AddScoped<MicaBackdropHandler>();
                 services.AddScoped<AcrylicBackdropHandler>();
                 services.AddScoped<VibrancyBackdropHandler>();
+                services.AddScoped<BackdropHandler>();
                 // Utilities
                 services.AddScoped<IConverter, JsonConverter>();
                 services.AddScoped<ImagingUtility>();

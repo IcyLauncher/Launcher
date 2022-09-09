@@ -47,10 +47,10 @@ public partial class ConfigurationApperance : ObservableObject
     public Theme Colors { get; set; } = new();
 
     [ObservableProperty]
-    BlurEffect blur = BlurEffect.Mica;
+    Backdrop backdrop = Backdrop.Mica;
 
     [ObservableProperty]
-    bool useDarkModeBlur = true;
+    bool isDarkModeBackdropEnabled = true;
 }
 
 public partial class ConfigurationWeather : ObservableObject

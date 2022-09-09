@@ -12,13 +12,10 @@ public class MicaBackdropHandler : IBackdropHandler
 
     public MicaBackdropHandler(
         ILogger<MicaBackdropHandler> logger,
-        Window shell,
-        WindowHandler windowHandler)
+        Window shell)
     {
         this.logger = logger;
         this.shell = (ICompositionSupportsSystemBackdrop)shell;
-
-        windowHandler.EnsureWindowsSystemDispatcherQueueController();
 
         IsDarkModeEnabled = true;
 

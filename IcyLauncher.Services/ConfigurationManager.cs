@@ -38,8 +38,8 @@ public class ConfigurationManager
         configuration.Apperance.HomeBanner = input.Apperance.HomeBanner;
         configuration.Apperance.SelectedHomeBanner = input.Apperance.SelectedHomeBanner;
         configuration.Apperance.HomeBannerUri = input.Apperance.HomeBannerUri;
-        configuration.Apperance.Blur = input.Apperance.Blur;
-        configuration.Apperance.UseDarkModeBlur = input.Apperance.UseDarkModeBlur;
+        configuration.Apperance.Backdrop = input.Apperance.Backdrop;
+        configuration.Apperance.IsDarkModeBackdropEnabled = input.Apperance.IsDarkModeBackdropEnabled;
 
         configuration.Weather.IsEnabled = input.Weather.IsEnabled;
         configuration.Weather.IsAutoLocationEnabled = input.Weather.IsAutoLocationEnabled;

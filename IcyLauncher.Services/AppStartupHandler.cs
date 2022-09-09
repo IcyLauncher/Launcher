@@ -9,6 +9,7 @@ public class AppStartupHandler
         ConfigurationManager configurationManagaer,
         ThemeManager themeManager,
         WindowHandler windowHandler,
+        BackdropHandler backdropHandler,
         UIElementReciever uiElementReciever,
         Window shell,
         IConverter converter,
@@ -17,7 +18,7 @@ public class AppStartupHandler
     {
         AppDomain.CurrentDomain.FirstChanceException += (s, e) =>
         {
-            //e.Exception.Source != "CommunityToolkit.WinUI.UI"
+            //e.Exception.Source != "CommunityToolkit.WinUI.UI" || e.Exception is OperationCanceledException
             logger.Log("Global exception thrown", e.Exception, LogLevel.Error, "global", "?");
         };
 
@@ -26,8 +27,8 @@ public class AppStartupHandler
         windowHandler.SetMinSize(750, 500);
         windowHandler.SetSize(1040, customTitleBar ? 555 : 538);
         windowHandler.SetPositionToCenter();
-        //windowHandler.MakeTransparent();
-        //windowHandler.SetBlur(configuration.Value.Apperance.Blur, true, configuration.Value.Apperance.UseDarkModeBlur);
+
+        backdropHandler.SetBackdrop(configuration.Value.Apperance.Backdrop, true, configuration.Value.Apperance.IsDarkModeBackdropEnabled);
 
         shell.Closed += async (s, e) =>
         {
