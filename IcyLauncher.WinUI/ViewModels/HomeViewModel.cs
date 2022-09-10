@@ -48,7 +48,7 @@ public partial class HomeViewModel : ObservableObject
                             new(0, 0), new(1, 0),
                             new[] { (0f, themeManager.Colors.Background.Gradient), (1f, themeManager.Colors.Background.GradientTransparent) });
 
-                    logger.Log("Updated banner image (overlay) composition colors");
+                    logger.Log("Updated banner image composition [overlay]");
                     break;
             }
         };
@@ -97,7 +97,7 @@ public partial class HomeViewModel : ObservableObject
                     "ms-appx:///Assets/Banners/TimeDependent/Snowy Forest/18.png",
                     "ms-appx:///Assets/Banners/TimeDependent/Snowy Forest/21.png"));
 
-                logger.Log("Reloaded time dependent items");
+                logger.Log("Reloaded TimeDependentItems");
 
                 if (Configuration.Apperance.SelectedHomeBanner < 0 || Configuration.Apperance.SelectedHomeBanner >= bannerTimeDependentItems.Count)
                 {
@@ -131,7 +131,7 @@ public partial class HomeViewModel : ObservableObject
                         path.EndsWith(".png")))
                         bannerCustomPictures.Add(img);
 
-                logger.Log("Reloaded custom pictures");
+                logger.Log("Reloaded CustomPictures");
 
                 if (Configuration.Apperance.SelectedHomeBanner < 0 || Configuration.Apperance.SelectedHomeBanner >= bannerCustomPictures.Count)
                 {
@@ -207,7 +207,7 @@ public partial class HomeViewModel : ObservableObject
                 return;
             if (bannerMaskBrush is null || bannerCompositor is null)
             {
-                logger.Log("Tried to update banner image composition", Exceptions.IsNull);
+                logger.Log("Failed to update banner image composition", Exceptions.IsNull);
                 return;
             }
 
@@ -228,7 +228,7 @@ public partial class HomeViewModel : ObservableObject
                 return;
             if (bannerMaskBrush is null || bannerCompositor is null)
             {
-                logger.Log("Tried to update banner color composition", Exceptions.IsNull);
+                logger.Log("Failed to update banner color composition", Exceptions.IsNull);
                 return;
             }
 

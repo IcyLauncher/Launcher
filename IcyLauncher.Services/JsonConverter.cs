@@ -11,7 +11,7 @@ public class JsonConverter : IConverter
     {
         this.logger = logger;
 
-        logger.Log("Registered Converter (Json)");
+        logger.Log("Registered converter");
     }
 
 
@@ -46,7 +46,7 @@ public class JsonConverter : IConverter
                 MissingMemberHandling = MissingMemberHandling.Error
             });
 
-        logger.Log($"Tried to deserialize string to object (Result: {success})");
+        logger.Log($"Tried to deserialize string to object [{success}]");
         return success;
     }
 }

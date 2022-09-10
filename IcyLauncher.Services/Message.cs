@@ -16,7 +16,7 @@ public class Message : IMessage
         this.logger = logger;
         this.uiElementReciever = uiElementReciever;
 
-        logger.Log("Registered Message serivce and initialized content dialog");
+        logger.Log("Registered message");
     }
 
 
@@ -40,7 +40,7 @@ public class Message : IMessage
         string? primaryButton = null,
         string? secondaryButton = null)
     {
-        logger.Log($"Requested dialog: AwaitPrev-{awaitPreviousDialog}");
+        logger.Log($"Requested dialog [await:{awaitPreviousDialog}]");
 
         if (activeDialog is not null)
         {

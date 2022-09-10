@@ -28,6 +28,6 @@ public class UIElementReciever
         TitleBarIconGradientStops = ((LinearGradientBrush)((Path)((Viewbox)TitleBar.Children[1]).Child).Fill).GradientStops;
         TitleBarTitle = (TextBlock)TitleBar.Children[2];
 
-        logger.Log("Registered UIElement Reciever and casted all UIElements");
+        logger.Log("Registered UIElement reciever and casted all UIElements");
     }
 }

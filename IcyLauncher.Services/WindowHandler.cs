@@ -29,7 +29,7 @@ public class WindowHandler
         this.uiElementReciever = uiElementReciever;
         this.shell = shell;
 
-        logger.Log("Registered WindowHandler");
+        logger.Log("Registered window handler");
     }
 
 
@@ -45,21 +45,26 @@ public class WindowHandler
     public RectInt32 ScreenSize => DisplayArea.GetFromWindowId(Win32Interop.GetWindowIdFromWindow(HWnd), DisplayAreaFallback.Nearest).WorkArea;
 
 
-    public void SetIcon(string path)
+    public void SetIcon(
+        string path)
     {
         Window.SetIcon(path);
 
-        logger.Log($"Set app icon to \"{path}\"");
+        logger.Log($"Set app icon [{path}]");
     }
 
-    public void SetSize(int width, int height)
+    public void SetSize(
+        int width,
+        int height)
     {
         Window.Resize(new(width, height));
 
-        logger.Log($"Set window size to \"{width}x{height}\"");
+        logger.Log($"Set window size [{width}x{height}]");
     }
 
-    public void SetMinSize(int width, int height)
+    public void SetMinSize(
+        int width,
+        int height)
     {
         var dpi = Win32.GetDpiForWindow(HWnd);
 
@@ -69,14 +74,16 @@ public class WindowHandler
         Win32.NewWndProc = new Win32.WinProc(Win32.NewWindowProc);
         Win32.OldWndProc = Win32.SetWindowLong(HWnd, -16 | 0x4 | 0x8, Win32.NewWndProc);
 
-        logger.Log($"Set window minimum size to \"{width}x{height}\"");
+        logger.Log($"Set window minimum size [{width}x{height}]");
     }
 
-    public void SetPosition(int x, int y)
+    public void SetPosition(
+        int x,
+        int y)
     {
         Window.Move(new(x, y));
 
-        logger.Log($"Set window position to \"{x}, {y}\"");
+        logger.Log($"Set window position [{x}, {y}]");
     }
     public void SetPositionToCenter() =>
         SetPosition((ScreenSize.Width - Window.Size.Width) / 2, (ScreenSize.Height - Window.Size.Height) / 2);
@@ -90,7 +97,7 @@ public class WindowHandler
     {
         if (DispatcherQueue.GetForCurrentThread() is not null || dispatcherQueueController is not null)
         {
-            logger.Log("Tried to ensure windows system dispatcher queue controller", Exceptions.IsNotNull);
+            logger.Log("Failed to ensure DispatcherQueueController", Exceptions.IsNotNull);
             return false;
         }
 
@@ -101,16 +108,18 @@ public class WindowHandler
             apartmentType = 2
         }, ref dispatcherQueueController);
 
-        logger.Log("Ensured windows system dispatcher queue controller");
+        logger.Log("Ensured DispatcherQueueController");
         return true;
     }
 
 
-    public bool SetTitleBar(bool isEnabled = false, UIElement? titleBar = null)
+    public bool SetTitleBar(
+        bool isEnabled = false,
+        UIElement? titleBar = null)
     {
         if (!AppWindowTitleBar.IsCustomizationSupported())
         {
-            logger.Log("Tried to set TitleBar", Exceptions.Unsupported);
+            logger.Log("Failed to set TitleBar", Exceptions.Unsupported);
             return false;
         }
 
@@ -122,7 +131,7 @@ public class WindowHandler
 
             Presenter.SetBorderAndTitleBar(true, false);
 
-            logger.Log("Set TitleBar to nothing");
+            logger.Log("Set TitleBar [null]");
             return true;
         }
 
@@ -134,7 +143,7 @@ public class WindowHandler
 
             Window.TitleBar.ExtendsContentIntoTitleBar = false;
 
-            logger.Log("Set TitleBar to default");
+            logger.Log("Set TitleBar [default]");
             return true;
         }
 
@@ -155,21 +164,23 @@ public class WindowHandler
             themeManager.Colors.Text.PropertyChanged += TextControlColorsValueChanged;
             TextControlColorsValueChanged(null, new("Primary"));
 
-            logger.Log("Set TitleBar to UIElement");
+            logger.Log("Set TitleBar [UIElement]");
             return true;
         }
         catch (Exception ex)
         {
-            logger.Log("Failed to set TitleBar to UIElement", ex);
+            logger.Log("Failed to set TitleBar [UIElement]", ex);
             return false;
         }
     }
 
-    public bool SetTitleBarButtonColors(ButtonColors backgroundColors, ButtonColors foregroundColors)
+    public bool SetTitleBarButtonColors(
+        ButtonColors backgroundColors,
+        ButtonColors foregroundColors)
     {
         if (!AppWindowTitleBar.IsCustomizationSupported())
         {
-            logger.Log("Tried to set TitleBar Button Colors", Exceptions.Unsupported);
+            logger.Log("Failed to set TitleBar button colors", Exceptions.Unsupported);
             return false;
         }
 
@@ -189,12 +200,12 @@ public class WindowHandler
         }
         catch (Exception ex)
         {
-            logger.Log("Failed to set TitleBar Button Colors", ex);
+            logger.Log("Failed to set TitleBar button colors", ex);
             return false;
         }
     }
 
-    void TextControlColorsValueChanged(object? sender, System.ComponentModel.PropertyChangedEventArgs e)
+    void TextControlColorsValueChanged(object? _, System.ComponentModel.PropertyChangedEventArgs e)
     {
         if (e.PropertyName == "Outline" ||
             e.PropertyName == "Primary" ||
@@ -215,7 +226,8 @@ public class WindowHandler
     }
 
 
-    public bool SetMainBackground(string backgroundColor)
+    public bool SetMainBackground(
+        string backgroundColor)
     {
         try
         {
@@ -235,12 +247,12 @@ public class WindowHandler
                     break;
             }
 
-            logger.Log($"Set background color on MainGrid ({backgroundColor})");
+            logger.Log($"Set background color on MainGrid [{backgroundColor}]");
             return true;
         }
         catch (Exception ex)
         {
-            logger.Log($"Failed setting background color on MainGrid ({backgroundColor})", ex);
+            logger.Log($"Failed to set background color on MainGrid [{backgroundColor}]", ex);
             return false;
         }
     }

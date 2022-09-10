@@ -20,7 +20,7 @@ public class VibrancyBackdropHandler : IBackdropHandler
         controller.SetSystemBackdropConfiguration(new() { Theme = SystemBackdropTheme.Dark });
         controller.Kind = MicaKind.BaseAlt;
 
-        logger.Log("Registered backdrop handler, set backdrop configuration and set controller kind");
+        logger.Log("Registered backdrop handler, set configuration and set controller kind");
     }
 
 

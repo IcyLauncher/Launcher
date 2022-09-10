@@ -39,7 +39,7 @@ public class ThemeManager
         //this.configuration.Apperance.Colors.Control.Solid.PropertyChanged += ControlSolidColorsValuesChanged;
         new UISettings().ColorValuesChanged += SystemColorsValuesChanged;
 
-        logger.Log("Registered Theme Manager and hooked all ColorValue changes");
+        logger.Log("Registered theme manager and hooked all ColorValueChanged events");
     }
 
 
@@ -145,7 +145,7 @@ public class ThemeManager
             resourceColors.Control = Colors.Control;
         }
 
-        logger.Log($"Set resource colors to configuration");
+        logger.Log($"Set resource colors from configuration");
     }
 
     public void SetUnbindableBindings()
@@ -168,7 +168,7 @@ public class ThemeManager
             Mode = BindingMode.OneWay
         });
 
-        logger.Log($"Set unbindable bindings to bindings");
+        logger.Log($"Binded unbindable bindings");
     }
 
 
@@ -179,12 +179,12 @@ public class ThemeManager
             case "Light":
                 uiElementReciever.TitleBarIconGradientStops[0].Color = configuration.Apperance.Colors.Accent.Light;
 
-                logger.Log($"Updated TitleBar icon gradient stop (0)");
+                logger.Log($"Updated TitleBarIconGradientStop [0]");
                 break;
             case "Dark":
                 uiElementReciever.TitleBarIconGradientStops[1].Color = configuration.Apperance.Colors.Accent.Dark;
 
-                logger.Log($"Updated TitleBar icon gradient stop (1)");
+                logger.Log($"Updated TitleBarIconGradientStop [1]");
                 break;
         }
     }
@@ -197,13 +197,13 @@ public class ThemeManager
                 if (navigation.GetCurrentNavigationViewItemLayoutRoot() is Grid layoutRoot)
                     layoutRoot.Background = configuration.Apperance.Colors.Control.Primary.AsSolid();
 
-                logger.Log($"Updated current NavigationViewItem LayoutRoot");
+                logger.Log($"Updated current NavigationLayoutRoot color");
                 break;
         }
     }
 
     void SystemColorsValuesChanged(UISettings _, object _1)
     {
-        logger.Log("YOUR MOM");
+        logger.Log("System color value changed");
     }
 }

@@ -15,7 +15,7 @@ public class ImagingUtility
     {
         this.logger = logger;
 
-        logger.Log("Registered ImagingUtility");
+        logger.Log("Registered imaging utility");
     }
 
 
@@ -31,14 +31,14 @@ public class ImagingUtility
             ElementCompositionPreview.SetElementChildVisual(element, container);
             compositor = container.Compositor;
 
-            logger.Log("Initialized UIElement compositor and containerVisual");
+            logger.Log("Initialized UIElement compositor and container");
         }
         catch (Exception ex)
         {
             container = null;
             compositor = null;
 
-            logger.Log("Failed to initialize UIElement compositor and containerVisual", ex);
+            logger.Log("Failed to initialize UIElement compositor and comntainer", ex);
         }
     }
 
@@ -77,12 +77,12 @@ public class ImagingUtility
             brush.Source = source;
             brush.Mask = mask;
 
-            logger.Log("Created Compositon Mask Brush");
+            logger.Log("Created compositon mask brush");
             return brush;
         }
         catch (Exception ex)
         {
-            logger.Log("Failed to create Compositon Mask Brush", ex);
+            logger.Log("Failed to create compositon mask brush", ex);
             return null;
         }
     }
@@ -101,12 +101,12 @@ public class ImagingUtility
             brush.HorizontalAlignmentRatio = horizontalAlignmentRatio;
             brush.VerticalAlignmentRatio = verticalAlignmentRatio;
 
-            logger.Log("Created compositon surface (image) brush");
+            logger.Log("Created compositon image brush");
             return brush;
         }
         catch (Exception ex)
         {
-            logger.Log("Failed to create compositon surface (image) brush", ex);
+            logger.Log("Failed to create compositon image brush", ex);
             return null;
         }
     }

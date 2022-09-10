@@ -30,7 +30,7 @@ public class Navigation : INavigation
         };
         uIElementReciever.NavigationView.BackRequested += (s, e) => GoBack();
 
-        logger.Log("Registered NavigationView");
+        logger.Log("Registered navigation");
     }
 
 
@@ -64,12 +64,12 @@ public class Navigation : INavigation
         {
             uIElementReciever.NavigationView.SelectedItem = item;
 
-            logger.Log("Set current NavigationView item");
+            logger.Log("Set current navigation item");
             return true;
         }
         catch (Exception ex)
         {
-            logger.Log("Failed to set current NavigationView item", ex);
+            logger.Log("Failed to set current navigation item", ex);
             return false;
         }
     }
@@ -87,12 +87,12 @@ public class Navigation : INavigation
             uIElementReciever.NavigationView.SelectedItem = selectedItem;
             skipEvent = false;
 
-            logger.Log("Set current NavigationView item without updating page");
+            logger.Log("Set current navigation item without updating page");
             return true;
         }
         catch (Exception ex)
         {
-            logger.Log("Failed to set current NavigationView item", ex);
+            logger.Log("Failed to set current navigation item without updating page", ex);
             return false;
         }
     }
@@ -106,7 +106,7 @@ public class Navigation : INavigation
             var navigate = uIElementReciever.NavigationFrame.Navigate(type, parameter);
             CanGoBackChanged(uIElementReciever.NavigationFrame.CanGoBack);
 
-            logger.Log("Set current NavigationView page");
+            logger.Log("Set current navigation page");
             return navigate;
         }
         catch (Exception ex)
@@ -114,7 +114,7 @@ public class Navigation : INavigation
             uIElementReciever.NavigationFrame.Navigate("Views.NoPageView".AsType(), ex);
             CanGoBackChanged(uIElementReciever.NavigationFrame.CanGoBack);
 
-            logger.Log("Failed to set current NavigationView page", ex);
+            logger.Log("Failed to set current navigation page", ex);
             return false;
         }
     }
@@ -155,7 +155,7 @@ public class Navigation : INavigation
         }
         catch (Exception ex)
         {
-            logger.Log("Current NavigationView page failed to go back", ex);
+            logger.Log("Failed to go back current navigation page", ex);
             return false;
         }
     }

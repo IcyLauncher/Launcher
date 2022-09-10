@@ -92,7 +92,7 @@ public partial class BannerSettingsViewModel : ObservableObject
     void ResetBannerBrush()
     {
         BannerBrush = new ImageBrush() { ImageSource = "Banners/NoBanner.png".AsImage(), Stretch = Stretch.UniformToFill };
-        logger.Log("Reset banner brush: NoBanner.png");
+        logger.Log("Reset banner brush");
     }
 
 
@@ -136,7 +136,7 @@ public partial class BannerSettingsViewModel : ObservableObject
         };
 
         Configuration.Apperance.HomeBanner = value;
-        logger.Log("Selected banner type changed");
+        logger.Log("Selected BannerType changed");
     }
 
 
@@ -164,7 +164,7 @@ public partial class BannerSettingsViewModel : ObservableObject
             "ms-appx:///Assets/Banners/TimeDependent/Snowy Forest/18.png",
             "ms-appx:///Assets/Banners/TimeDependent/Snowy Forest/21.png"));
 
-        logger.Log("Reloaded time dependent items");
+        logger.Log("Reloaded TimeDependentItems");
     }
 
     public ObservableCollection<BannerTimeDependentItem> TimeDependentItems = new();
@@ -237,7 +237,7 @@ public partial class BannerSettingsViewModel : ObservableObject
             "https://wallpaper.dog/large/20344409.jpg"
         }));
 
-        logger.Log("Reloaded gallery items");
+        logger.Log("Reloaded GalleryItems");
     }
 
     public ObservableCollection<BannerGalleryItem> GalleryItems = new();
@@ -273,7 +273,7 @@ public partial class BannerSettingsViewModel : ObservableObject
                 path.EndsWith(".png")))
                 CustomPictures.Add(img);
 
-        logger.Log("Reloaded custom pictures");
+        logger.Log("Reloaded CustomPictures");
     }
 
     public ObservableCollection<string> CustomPictures = new();
@@ -321,7 +321,7 @@ public partial class BannerSettingsViewModel : ObservableObject
             await message.ShowAsync("Something went wrong :(", $"It looks like IcyLauncher cant copy this file. Please verify that the file still exists ({file.DisplayName}).\n\nError: {ex.Message}", closeButton: "Ok");
         }
 
-        logger.Log("Added custom picture");
+        logger.Log("Added new CustomPicture");
     }
 
     [RelayCommand(AllowConcurrentExecutions = false, FlowExceptionsToTaskScheduler = true, IncludeCancelCommand = true)]
@@ -344,7 +344,7 @@ public partial class BannerSettingsViewModel : ObservableObject
         }
 
         LoadCustomPictures();
-        logger.Log("Reset custom pictures");
+        logger.Log("Reset CustomPictures");
     }
 
     public async Task RemoveCustomPicture(string banner)
@@ -393,7 +393,7 @@ public partial class BannerSettingsViewModel : ObservableObject
         SolidColors.Container.Add(new(CustomColorValue, CustomColorName));
         sender.Hide();
 
-        logger.Log("Added custom solid color");
+        logger.Log("Added new SolidColor");
     }
 
     [RelayCommand]
@@ -402,6 +402,6 @@ public partial class BannerSettingsViewModel : ObservableObject
         SolidColors.Container = new(SolidColorCollection.Default);
         SelectedSolidColor = -1;
 
-        logger.Log("Reset solid color");
+        logger.Log("Reset SolidColors");
     }
 }

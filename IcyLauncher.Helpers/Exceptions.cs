@@ -19,4 +19,6 @@ public class Exceptions
     public static readonly Exception DirectoryExists = new("Direcotry with the same name already exists");
 
     public static readonly Exception Timeout = new("Action failed", new("Timeout has been exceeded"));
+
+    public static readonly Exception Cancelled = new("Action failed", new("Cancelled by user"));
 }

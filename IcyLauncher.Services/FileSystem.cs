@@ -13,7 +13,7 @@ public class FileSystem : IFileSystem
     {
         this.logger = logger;
 
-        logger.Log("Registered FileSystem");
+        logger.Log("Registered file system");
     }
 
 
@@ -29,12 +29,12 @@ public class FileSystem : IFileSystem
             fs.Close();
             fs.Dispose();
 
-            logger.Log($"Checked if file writable: true {path}");
+            logger.Log($"Checked if file writable: [true-{path}]");
             return true;
         }
         catch (Exception)
         {
-            logger.Log($"Checked if file writable: false {path}");
+            logger.Log($"Checked if file writable: [false-{path}]");
             return false;
         }
     }
@@ -59,7 +59,7 @@ public class FileSystem : IFileSystem
 
         File.Copy(path, destination, overwrite);
 
-        logger.Log($"Successfully copied file {path}");
+        logger.Log($"Copied file [{path}]");
     }
 
     public async Task CopyFileAsync(
@@ -85,7 +85,7 @@ public class FileSystem : IFileSystem
 
         await sourceStream.CopyToAsync(destinationStream, bufferSize, cancellationToken).ConfigureAwait(continueOnCapturedContext: false);
 
-        logger.Log($"Successfully copied file asynchronous {path}");
+        logger.Log($"Copied file asynchronous [{path}]");
     }
 
 
@@ -100,7 +100,7 @@ public class FileSystem : IFileSystem
 
         File.Delete(path);
 
-        logger.Log($"Successfully deleted file {path}");
+        logger.Log($"Deleted file [{path}]");
     }
 
     public async Task DeleteFileAsync(
@@ -119,26 +119,25 @@ public class FileSystem : IFileSystem
             done = e.Name == Path.GetFileName(path);
 
         File.Delete(path);
-        logger.Log($"Delete file asynchronous: started {path}");
 
         while (!done)
         {
             if (cancellationToken.IsCancellationRequested)
             {
-                logger.Log($"Delete file asynchronous: cancelled {path}");
+                logger.Log($"Failed to delete file asynchronous [{path}]", Exceptions.Cancelled);
                 return;
             }
 
             if (cycles >= timeout / 1000)
             {
-                logger.Log($"Delete file asynchronous: timeout {path}");
+                logger.Log($"Failed to delete file asynchronous [{path}]", Exceptions.Timeout);
                 throw Exceptions.Timeout;
             }
             timeout += 1;
             await Task.Delay(1000, cancellationToken).ConfigureAwait(false);
         }
 
-        logger.Log($"Delete file asynchronous: finished {path}");
+        logger.Log($"Deleted file asynchronous [{path}]");
     }
 
 
@@ -156,20 +155,21 @@ public class FileSystem : IFileSystem
         {
             if (cancellationToken.IsCancellationRequested)
             {
-                logger.Log($"Waited for file lock: cancelled  {path}");
+                logger.Log($"Failed to wait for file lock [{path}]", Exceptions.Cancelled);
                 return false;
             }
 
             if (cycles >= timeout / 1000)
             {
-                logger.Log($"Waited for file lock: timeout  {path}");
-                throw Exceptions.Timeout;
+                logger.Log($"Failed to wait for file lock [{path}]", Exceptions.Timeout);
+                return false;
             }
+
             timeout += 1;
             await Task.Delay(1000, cancellationToken).ConfigureAwait(false);
         }
 
-        logger.Log($"Waited for file lock: true {path}");
+        logger.Log($"Waited for file lock [{path}]");
         return true;
     }
 
@@ -178,7 +178,7 @@ public class FileSystem : IFileSystem
         string path,
         CancellationToken cancellationToken = default)
     {
-        logger.Log($"Reading all text asynchronous to {path}");
+        logger.Log($"Reading all text asynchronous [{path}]");
 
         return File.ReadAllTextAsync(path, cancellationToken);
     }
@@ -189,7 +189,7 @@ public class FileSystem : IFileSystem
         bool overwrite,
         CancellationToken cancellationToken = default)
     {
-        logger.Log($"Saving all text asynchronous to {path}");
+        logger.Log($"Saving all text asynchronous [{path}]");
 
         if (!FileExists(path) || overwrite)
             await File.WriteAllTextAsync(path, content, cancellationToken).ConfigureAwait(false);
@@ -208,17 +208,17 @@ public class FileSystem : IFileSystem
         {
             using (File.Create(Path.Combine(directory, Path.GetRandomFileName()), 1, FileOptions.DeleteOnClose)) { }
 
-            logger.Log($"Checked if directory is writeable: true");
+            logger.Log($"Checked if directory is writeable [true-{directory}]");
             return true;
         }
         catch (UnauthorizedAccessException)
         {
-            logger.Log($"Checked if directory is writeable: false");
+            logger.Log($"Checked if directory is writeable [false-{directory}]");
             return false;
         }
         catch (Exception)
         {
-            logger.Log($"Failed checked if directory is writeable");
+            logger.Log($"Failed to check if directory is writeable");
             return false;
         }
     }
@@ -232,6 +232,6 @@ public class FileSystem : IFileSystem
 
         Directory.CreateDirectory(directory);
 
-        logger.Log($"Successfully created directory {directory}");
+        logger.Log($"Created directory [{directory}]");
     }
 }
