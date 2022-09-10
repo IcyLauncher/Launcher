@@ -50,10 +50,11 @@ public class ImagingUtility
     {
         try
         {
-            var brush = compositor.CreateLinearGradientBrush();
+            CompositionLinearGradientBrush brush = compositor.CreateLinearGradientBrush();
             brush.StartPoint = startPoint;
             brush.EndPoint = endPoint;
-            foreach (var (offset, color) in gradientStops)
+
+            foreach ((float offset, Color color) in gradientStops)
                 brush.ColorStops.Add(compositor.CreateColorGradientStop(offset, color));
 
             logger.Log("Created compositon linear gradient brush");
@@ -73,7 +74,7 @@ public class ImagingUtility
     {
         try
         {
-            var brush = compositor.CreateMaskBrush();
+            CompositionMaskBrush brush = compositor.CreateMaskBrush();
             brush.Source = source;
             brush.Mask = mask;
 
@@ -96,7 +97,7 @@ public class ImagingUtility
     {
         try
         {
-            var brush = compositor.CreateSurfaceBrush(LoadedImageSurface.StartLoadFromUri(source));
+            CompositionSurfaceBrush brush = compositor.CreateSurfaceBrush(LoadedImageSurface.StartLoadFromUri(source));
             brush.Stretch = stretch;
             brush.HorizontalAlignmentRatio = horizontalAlignmentRatio;
             brush.VerticalAlignmentRatio = verticalAlignmentRatio;
@@ -117,7 +118,7 @@ public class ImagingUtility
     {
         try
         {
-            var brush = compositor.CreateColorBrush(color);
+            CompositionColorBrush brush = compositor.CreateColorBrush(color);
 
             logger.Log("Created compositon color brush");
             return brush;
@@ -137,7 +138,7 @@ public class ImagingUtility
     {
         try
         {
-            var visual = compositor.CreateSpriteVisual();
+            SpriteVisual visual = compositor.CreateSpriteVisual();
             visual.Brush = brush;
             visual.Size = size;
             visual.Offset = offset;

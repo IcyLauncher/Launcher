@@ -1,5 +1,4 @@
 ﻿using Microsoft.UI.Xaml.Controls;
-using System.Threading;
 using System.Threading.Tasks;
 
 namespace IcyLauncher.Services;
@@ -50,7 +49,7 @@ public class Message : IMessage
 
                 dialogAwaiter = new();
             }
-            
+
             activeDialog.Hide();
         }
 

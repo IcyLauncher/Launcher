@@ -77,11 +77,11 @@ public class FileSystem : IFileSystem
         if (!DirectoryExists(Path.GetDirectoryName(destination)!))
             CreateDirectory(Path.GetDirectoryName(destination)!);
 
-        var fileOptions = FileOptions.Asynchronous | FileOptions.SequentialScan;
-        var bufferSize = 4096;
+        FileOptions fileOptions = FileOptions.Asynchronous | FileOptions.SequentialScan;
+        int bufferSize = 4096;
 
-        using var sourceStream = new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.Read, bufferSize, fileOptions);
-        using var destinationStream = new FileStream(destination, FileMode.CreateNew, FileAccess.Write, FileShare.None, bufferSize, fileOptions);
+        using FileStream sourceStream = new(path, FileMode.Open, FileAccess.Read, FileShare.Read, bufferSize, fileOptions);
+        using FileStream destinationStream = new(destination, FileMode.CreateNew, FileAccess.Write, FileShare.None, bufferSize, fileOptions);
 
         await sourceStream.CopyToAsync(destinationStream, bufferSize, cancellationToken).ConfigureAwait(continueOnCapturedContext: false);
 

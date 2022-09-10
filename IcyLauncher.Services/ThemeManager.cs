@@ -1,7 +1,6 @@
 ﻿using IcyLauncher.Xaml.Converters;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Data;
-using Microsoft.UI.Xaml.Media;
 using System.ComponentModel;
 using Windows.UI;
 using Windows.UI.ViewManagement;

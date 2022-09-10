@@ -56,8 +56,8 @@ public class HCont : ContentControl
     {
         base.OnApplyTemplate();
 
-        var header = (TextBlock)GetTemplateChild("Header");
-        var scrollContainer = (ScrollViewer)GetTemplateChild("ScrollContainer");
+        TextBlock header = (TextBlock)GetTemplateChild("Header");
+        ScrollViewer scrollContainer = (ScrollViewer)GetTemplateChild("ScrollContainer");
 
         scrollContainer.ViewChanged += (s, e) =>
             header.Opacity = scrollContainer.VerticalOffset <= 5 ? 1 : 0;

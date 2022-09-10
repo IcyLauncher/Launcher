@@ -20,6 +20,7 @@ public interface INavigation
 
     bool Navigate(string page);
 
+
     bool GoBack();
 
     void ClearBackStack();

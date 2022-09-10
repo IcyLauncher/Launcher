@@ -71,10 +71,10 @@ public partial class ConfigurationWeather : ObservableObject
 public partial class ConfigurationDateTime : ObservableObject
 {
     [ObservableProperty]
-    string dateFormat  = "MM/dd/yyyy";
+    string dateFormat = "MM/dd/yyyy";
 
     [ObservableProperty]
-    string timeFormat  = "hh:mm tt";
+    string timeFormat = "hh:mm tt";
 }
 
 public partial class ConfigurationDeveloper : ObservableObject

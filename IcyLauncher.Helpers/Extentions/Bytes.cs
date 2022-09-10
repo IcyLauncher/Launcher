@@ -14,7 +14,7 @@ public static class BytesExtentions
     public static async Task<BitmapImage> AsImage(this byte[] input)
     {
         BitmapImage Result = new();
-        using (var stream = new InMemoryRandomAccessStream())
+        using (InMemoryRandomAccessStream stream = new())
         {
             await stream.WriteAsync(input.AsBuffer());
             stream.Seek(0);

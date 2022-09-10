@@ -3,7 +3,6 @@ using Microsoft.UI;
 using Microsoft.UI.Windowing;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Data;
-using Microsoft.UI.Xaml.Media;
 using System.Runtime.InteropServices;
 using Windows.Graphics;
 using Windows.System;
@@ -66,7 +65,7 @@ public class WindowHandler
         int width,
         int height)
     {
-        var dpi = Win32.GetDpiForWindow(HWnd);
+        IntPtr dpi = Win32.GetDpiForWindow(HWnd);
 
         Win32.MinWidth = (int)(width * (float)dpi / 96);
         Win32.MinHeight = (int)(height * (float)dpi / 96);

@@ -1,5 +1,4 @@
-﻿using IcyLauncher.Helpers.Extentions;
-using Microsoft.Extensions.Logging;
+﻿using Microsoft.Extensions.Logging;
 using System.Runtime.CompilerServices;
 
 namespace IcyLauncher.Helpers.Extentions;

@@ -19,7 +19,7 @@ public class UIElementProvider
         double endValue,
         double lenght)
     {
-        var anim = new DoubleAnimation()
+        DoubleAnimation anim = new()
         {
             Duration = TimeSpan.FromMilliseconds(lenght),
             From = startValue,

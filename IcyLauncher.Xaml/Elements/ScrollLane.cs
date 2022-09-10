@@ -67,14 +67,14 @@ public class ScrollLane : GridView
 
         backButton.Click += (s, e) =>
         {
-            var newScroll = scrollContainer.HorizontalOffset - scrollContainer.ActualWidth + 50;
+            double newScroll = scrollContainer.HorizontalOffset - scrollContainer.ActualWidth + 50;
 
             if (scrollContainer.ChangeView(newScroll, null, null))
                 UpdateButtonVisibilities(newScroll);
         };
         forwardButton.Click += (s, e) =>
         {
-            var newScroll = scrollContainer.HorizontalOffset + scrollContainer.ActualWidth - 50;
+            double newScroll = scrollContainer.HorizontalOffset + scrollContainer.ActualWidth - 50;
 
             if (scrollContainer.ChangeView(newScroll, null, null))
                 UpdateButtonVisibilities(newScroll);

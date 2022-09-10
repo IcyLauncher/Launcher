@@ -20,7 +20,7 @@ public partial class BannerCustomPictureTemplate : ResourceDictionary
         if (viewModel is null)
             viewModel = App.Provider.GetRequiredService<BannerSettingsViewModel>();
 
-        var senderElement = (FrameworkElement)sender;
+        FrameworkElement senderElement = (FrameworkElement)sender;
         FlyoutBase.GetAttachedFlyout(senderElement).ShowAt(senderElement);
     }
 

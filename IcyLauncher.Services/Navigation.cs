@@ -38,7 +38,7 @@ public class Navigation : INavigation
         uIElementReciever.NavigationView.SelectedItem is NavigationViewItem current ? current : null;
 
     public Grid? GetCurrentNavigationViewItemLayoutRoot() =>
-        (Grid)VisualTreeHelper.GetChild(VisualTreeHelper.GetChild(VisualTreeHelper.GetChild(GetCurrentNavigationViewItem(), 0), 0), 0);
+        GetCurrentNavigationViewItem() is NavigationViewItem item ? (Grid)VisualTreeHelper.GetChild(VisualTreeHelper.GetChild(VisualTreeHelper.GetChild(item, 0), 0), 0) : null;
 
 
     public NavigationViewItem? GetNavigationViewItem(
@@ -78,7 +78,7 @@ public class Navigation : INavigation
     {
         try
         {
-            var selectedItem = items.ElementAt(index);
+            NavigationViewItem selectedItem = items.ElementAt(index);
 
             if ((NavigationViewItem)uIElementReciever.NavigationView.SelectedItem == selectedItem)
                 return false;
@@ -103,7 +103,7 @@ public class Navigation : INavigation
     {
         try
         {
-            var navigate = uIElementReciever.NavigationFrame.Navigate(type, parameter);
+            bool navigate = uIElementReciever.NavigationFrame.Navigate(type, parameter);
             CanGoBackChanged(uIElementReciever.NavigationFrame.CanGoBack);
 
             logger.Log("Set current navigation page");
@@ -130,13 +130,10 @@ public class Navigation : INavigation
         else
             return false;
     }
-    public bool Navigate(
-        string page)
-    {
-        var item = GetNavigationViewItem(page);
 
-        return Navigate(item);
-    }
+    public bool Navigate(string page) =>
+        Navigate(GetNavigationViewItem(page));
+
 
     public bool GoBack()
     {
@@ -175,14 +172,14 @@ public class Navigation : INavigation
         if (canGoBack)
         {
             uIElementReciever.BackButton.Opacity = 1;
-            var board = new Storyboard();
+            Storyboard board = new();
             board.Children.Add(UIElementProvider.Animate(uIElementReciever.BackButton, "Width", 0, 32, 200));
             board.Begin();
         }
         else
         {
             uIElementReciever.BackButton.Opacity = 0;
-            var board = new Storyboard();
+            Storyboard board = new();
             board.Children.Add(UIElementProvider.Animate(uIElementReciever.BackButton, "Width", 32, 0, 200));
             board.Begin();
         }

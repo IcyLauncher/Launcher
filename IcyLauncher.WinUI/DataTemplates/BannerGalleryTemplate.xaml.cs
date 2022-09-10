@@ -14,8 +14,8 @@ public partial class BannerGalleryTemplate : ResourceDictionary
 
     void OnRootLayoutLoaded(object sender, RoutedEventArgs _)
     {
-        var layoutRoot = (Grid)sender;
-        var gallery = (BannerGalleryItem)layoutRoot.DataContext;
+        Grid layoutRoot = (Grid)sender;
+        BannerGalleryItem gallery = (BannerGalleryItem)layoutRoot.DataContext;
 
         if (0 >= gallery.Collection.Count)
             return;

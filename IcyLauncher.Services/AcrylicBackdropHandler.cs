@@ -47,7 +47,7 @@ public class AcrylicBackdropHandler : IBackdropHandler
             controller.LuminosityOpacity = IsDarkModeEnabled ? 0 : 1;
             windowHandler.SetMainBackground("Background.Transparent");
             controller.AddSystemBackdropTarget(shell);
-            
+
             logger.Log("Set system backdrop");
             return true;
         }

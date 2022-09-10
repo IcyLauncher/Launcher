@@ -11,13 +11,13 @@ public partial class ProfileTemplate : ResourceDictionary
 
     void OnRootLayoutLoaded(object sender, RoutedEventArgs _)
     {
-        var rootLayout = (Grid)sender;
-        var details = rootLayout.Children[4];
-        var icon = (Image)rootLayout.Children[2];
-        var item = (GridViewItem)VisualTreeHelper.GetParent((Grid)((ContentPresenter)VisualTreeHelper.GetParent(rootLayout)).Parent);
+        Grid rootLayout = (Grid)sender;
+        UIElement details = rootLayout.Children[4];
+        Image icon = (Image)rootLayout.Children[2];
+        GridViewItem item = (GridViewItem)VisualTreeHelper.GetParent((Grid)((ContentPresenter)VisualTreeHelper.GetParent(rootLayout)).Parent);
 
-        var inBoard = (Storyboard)icon.Resources["inBoard"];
-        var outBoard = (Storyboard)icon.Resources["outBoard"];
+        Storyboard inBoard = (Storyboard)icon.Resources["inBoard"];
+        Storyboard outBoard = (Storyboard)icon.Resources["outBoard"];
 
         rootLayout.PointerEntered += (s, e) =>
         {
@@ -49,9 +49,9 @@ public partial class ProfileTemplate : ResourceDictionary
         Vector3 detailsTranslation,
         string iconAnimation)
     {
-        var rootLayout = (Grid)((GridViewItem)container.ContainerFromItem(item)).ContentTemplateRoot;
-        var details = rootLayout.Children[4];
-        var icon = (Image)rootLayout.Children[2];
+        Grid rootLayout = (Grid)((GridViewItem)container.ContainerFromItem(item)).ContentTemplateRoot;
+        UIElement details = rootLayout.Children[4];
+        Image icon = (Image)rootLayout.Children[2];
 
         if (details.Opacity == detailsOpacity)
             return;

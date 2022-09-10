@@ -2,6 +2,7 @@
 using Microsoft.UI;
 using Microsoft.UI.Xaml.Media;
 using System.Collections.ObjectModel;
+using Windows.Storage;
 using Windows.Storage.Pickers;
 using Windows.UI;
 
@@ -242,7 +243,7 @@ public partial class BannerSettingsViewModel : ObservableObject
 
     public async Task OpenBannerGalleryItem(BannerGalleryItem item)
     {
-        var element = new ScrollLane() { ItemsSource = item.Collection, ItemTemplate = (DataTemplate)Application.Current.Resources["BannerGalleryItemTemplate"] };
+        ScrollLane element = new() { ItemsSource = item.Collection, ItemTemplate = (DataTemplate)Application.Current.Resources["BannerGalleryItemTemplate"] };
 
         if (await message.ShowAsync($"{item.Title} - Count: {item.Collection.Count}", element, primaryButton: "Ok") != ContentDialogResult.Primary)
             return;
@@ -265,7 +266,7 @@ public partial class BannerSettingsViewModel : ObservableObject
         CustomPictures.Clear();
 
         if (fileSystem.DirectoryExists("Assets\\Banners\\Custom"))
-            foreach (var img in Directory.GetFiles("Assets\\Banners\\Custom").Where(path =>
+            foreach (string img in Directory.GetFiles("Assets\\Banners\\Custom").Where(path =>
                 path.EndsWith(".jpg") ||
                 path.EndsWith(".jpeg") ||
                 path.EndsWith(".png")))
@@ -298,7 +299,7 @@ public partial class BannerSettingsViewModel : ObservableObject
     [RelayCommand(AllowConcurrentExecutions = false)]
     async Task AddCustomPicture()
     {
-        var file = await filePicker.PickSingleFileAsync();
+        StorageFile file = await filePicker.PickSingleFileAsync();
 
         if (file is null || string.IsNullOrWhiteSpace(file.Path))
             return;
@@ -347,7 +348,7 @@ public partial class BannerSettingsViewModel : ObservableObject
 
     public async Task RemoveCustomPicture(string banner)
     {
-        var file = Path.Combine(Computer.CurrentDirectory, banner);
+        string file = Path.Combine(Computer.CurrentDirectory, banner);
 
         try
         {

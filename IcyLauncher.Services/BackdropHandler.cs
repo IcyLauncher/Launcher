@@ -32,7 +32,10 @@ public class BackdropHandler
     public Backdrop? Current { get; private set; }
 
 
-    public bool SetBackdrop(Backdrop backdrop, bool enable, bool? useDarkMode = null)
+    public bool SetBackdrop(
+        Backdrop backdrop,
+        bool enable,
+        bool? useDarkMode = null)
     {
         RemoveAllBackdrops();
 
@@ -45,7 +48,9 @@ public class BackdropHandler
         };
     }
 
-    public void SetDarkMode(Backdrop backdrop, bool useDarkMode = true)
+    public void SetDarkMode(
+        Backdrop backdrop,
+        bool useDarkMode = true)
     {
         switch (backdrop)
         {
@@ -74,9 +79,11 @@ public class BackdropHandler
     }
 
 
-    bool SetMicaBackdrop(bool enable, bool? useDarkMode = null)
+    bool SetMicaBackdrop(
+        bool enable,
+        bool? useDarkMode = null)
     {
-        var setMica = enable ? micaBackdropHandler.EnableBackdrop() : micaBackdropHandler.DisableBackdrop();
+        bool setMica = enable ? micaBackdropHandler.EnableBackdrop() : micaBackdropHandler.DisableBackdrop();
         if (useDarkMode.HasValue && IsMicaDarkModeEnabled != useDarkMode.Value)
             IsMicaDarkModeEnabled = useDarkMode.Value;
 
@@ -95,9 +102,11 @@ public class BackdropHandler
     }
 
 
-    bool SetAcrylicBackdrop(bool enable, bool? useDarkMode = null)
+    bool SetAcrylicBackdrop(
+        bool enable,
+        bool? useDarkMode = null)
     {
-        var setAcrylic = enable ? acrylicBackdropHandler.EnableBackdrop() : acrylicBackdropHandler.DisableBackdrop();
+        bool setAcrylic = enable ? acrylicBackdropHandler.EnableBackdrop() : acrylicBackdropHandler.DisableBackdrop();
         if (useDarkMode.HasValue && IsAcrylicDarkModeEnabled != useDarkMode.Value)
             IsAcrylicDarkModeEnabled = useDarkMode.Value;
 
@@ -116,9 +125,10 @@ public class BackdropHandler
     }
 
 
-    bool SetVibrancyBackdrop(bool enable)
+    bool SetVibrancyBackdrop(
+        bool enable)
     {
-        var setVibrancy = enable ? vibrancyBackdropHandler.EnableBackdrop() : vibrancyBackdropHandler.DisableBackdrop();
+        bool setVibrancy = enable ? vibrancyBackdropHandler.EnableBackdrop() : vibrancyBackdropHandler.DisableBackdrop();
 
         if (setVibrancy)
         {
@@ -129,9 +139,10 @@ public class BackdropHandler
     }
 
 
-    bool SetNoneBackdrop(bool enable)
+    bool SetNoneBackdrop(
+        bool enable)
     {
-        var setMainBackground = windowHandler.SetMainBackground(enable ? "Background.Solid" : "Transparent");
+        bool setMainBackground = windowHandler.SetMainBackground(enable ? "Background.Solid" : "Transparent");
 
         if (setMainBackground)
         {

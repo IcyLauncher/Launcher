@@ -30,7 +30,7 @@ public partial class App : Application
                 services.Configure<Configuration>(context.Configuration);
                 services.Configure<SolidColorCollection>(context.Configuration);
 
-                var configuration = context.Configuration.Get<Configuration>();
+                Configuration configuration = context.Configuration.Get<Configuration>();
 
                 // Managers
                 services.AddScoped<Services.ConfigurationManager>();

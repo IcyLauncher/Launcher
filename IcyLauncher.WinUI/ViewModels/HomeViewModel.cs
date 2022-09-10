@@ -1,10 +1,9 @@
-﻿using Microsoft.UI;
-using Microsoft.UI.Xaml.Controls;
-using Microsoft.UI.Xaml.Media.Animation;
+﻿using IcyLauncher.WinUI.DataTemplates;
+using Microsoft.UI;
 using Microsoft.UI.Composition;
+using Microsoft.UI.Xaml.Media.Animation;
 using Microsoft.UI.Xaml.Shapes;
 using System.Collections.ObjectModel;
-using IcyLauncher.WinUI.DataTemplates;
 using System.Numerics;
 using Windows.UI;
 
@@ -124,7 +123,7 @@ public partial class HomeViewModel : ObservableObject
                 bannerCustomPictures.Clear();
 
                 if (Directory.Exists("Assets\\Banners\\Custom"))
-                    foreach (var img in Directory.GetFiles("Assets\\Banners\\Custom").Where(path =>
+                    foreach (string img in Directory.GetFiles("Assets\\Banners\\Custom").Where(path =>
                         path.EndsWith(".jpg") ||
                         path.EndsWith(".jpeg") ||
                         path.EndsWith(".png")))
@@ -163,7 +162,7 @@ public partial class HomeViewModel : ObservableObject
         if (bannerMaskVisual is not null)
             return;
 
-        var grid = (Rectangle)sender;
+        Rectangle grid = (Rectangle)sender;
         grid.SizeChanged += (s, e) =>
         {
             if (bannerMaskVisual is not null)
@@ -171,7 +170,7 @@ public partial class HomeViewModel : ObservableObject
         };
 
 
-        imagingUtility.InitializeUIElement(grid, out bannerCompositor, out var banner);
+        imagingUtility.InitializeUIElement(grid, out bannerCompositor, out ContainerVisual? banner);
 
         if (bannerCompositor is null || banner is null)
             return;
@@ -187,7 +186,7 @@ public partial class HomeViewModel : ObservableObject
         bannerOverlayBrush = imagingUtility.CreateMaskBrush(bannerCompositor, imagingUtility.CreateGradientBrush(bannerCompositor,
                 new(0, 0), new(1, 0),
                 new[] { (-0.2f, themeManager.Colors.Background.Gradient), (1f, themeManager.Colors.Background.GradientTransparent) }), maskOverlayBrush);
-        var bannerOverlayVisual = imagingUtility.CreateSpriteVisual(bannerCompositor, new(500, 330), bannerOverlayBrush);
+        SpriteVisual? bannerOverlayVisual = imagingUtility.CreateSpriteVisual(bannerCompositor, new(500, 330), bannerOverlayBrush);
 
 
         banner.Children.InsertAtTop(bannerMaskVisual);

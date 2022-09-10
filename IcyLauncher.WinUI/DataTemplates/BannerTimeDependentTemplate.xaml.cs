@@ -18,11 +18,11 @@ public partial class BannerTimeDependentTemplate : ResourceDictionary
         if (imagingUtility is null)
             imagingUtility = App.Provider.GetRequiredService<ImagingUtility>();
 
-        var grid = (Rectangle)sender;
-        var timeDependent = (BannerTimeDependentItem)grid.DataContext;
+        Rectangle grid = (Rectangle)sender;
+        BannerTimeDependentItem timeDependent = (BannerTimeDependentItem)grid.DataContext;
 
 
-        imagingUtility.InitializeUIElement(grid, out var bannerCompositor, out var banner);
+        imagingUtility.InitializeUIElement(grid, out Compositor? bannerCompositor, out ContainerVisual? banner);
 
         if (bannerCompositor is null || banner is null)
             return;
@@ -34,8 +34,8 @@ public partial class BannerTimeDependentTemplate : ResourceDictionary
         AddImagePart(banner, bannerCompositor, timeDependent.I_15, 5);
         AddImagePart(banner, bannerCompositor, timeDependent.I_21, 7);
 
-        var backgroundBrush = imagingUtility.CreateImageBrush(bannerCompositor, new(timeDependent.I_0), CompositionStretch.UniformToFill);
-        var backgroundVisual = imagingUtility.CreateSpriteVisual(bannerCompositor, new(270f, 66f), backgroundBrush);
+        CompositionSurfaceBrush? backgroundBrush = imagingUtility.CreateImageBrush(bannerCompositor, new(timeDependent.I_0), CompositionStretch.UniformToFill);
+        SpriteVisual? backgroundVisual = imagingUtility.CreateSpriteVisual(bannerCompositor, new(270f, 66f), backgroundBrush);
 
         banner.Children.InsertAtBottom(backgroundVisual);
     }

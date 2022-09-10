@@ -1,7 +1,5 @@
 ﻿using Microsoft.UI;
-using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Media;
-using System.ComponentModel.DataAnnotations;
 using Windows.Storage;
 using Windows.Storage.Pickers;
 using Windows.UI;
@@ -131,7 +129,7 @@ public partial class SettingsViewModel : ObservableObject
                 return;
             }
 
-            var dif = DateTime.Now - Updater.LastChecked;
+            TimeSpan dif = DateTime.Now - Updater.LastChecked;
             UpdateStatus = dif.Hours == 0 ? $"Last checked: {Math.Round(dif.TotalMinutes, 0)} min" : $"Last checked: {Math.Round(dif.TotalHours, 1)} hrs";
             UpdateBadgeVisibility = Visibility.Collapsed;
             UpdateButtonBackground.Color = Colors.Transparent;
@@ -151,7 +149,7 @@ public partial class SettingsViewModel : ObservableObject
     [RelayCommand(AllowConcurrentExecutions = false)]
     async Task SelectDirectoryAsync(bool texturepackDirectory)
     {
-        var folder = await folderPicker.PickSingleFolderAsync();
+        StorageFolder folder = await folderPicker.PickSingleFolderAsync();
 
         if (folder is null || string.IsNullOrWhiteSpace(folder.Path))
             return;
@@ -201,7 +199,7 @@ public partial class SettingsViewModel : ObservableObject
     async Task ExportAsync(bool saveConfig)
     {
         savePicker.SuggestedFileName = saveConfig ? "Config" : "Theme";
-        var save = await savePicker.PickSaveFileAsync();
+        StorageFile save = await savePicker.PickSaveFileAsync();
 
         if (save is null || string.IsNullOrWhiteSpace(save.Path))
             return;
@@ -217,14 +215,14 @@ public partial class SettingsViewModel : ObservableObject
     [RelayCommand(AllowConcurrentExecutions = false)]
     async Task LoadAsync(bool loadConfig)
     {
-        var file = await filePicker.PickSingleFileAsync();
+        StorageFile file = await filePicker.PickSingleFileAsync();
 
         if (file is null || string.IsNullOrWhiteSpace(file.Path))
             return;
 
         if (fileSystem.FileExists(file.Path))
         {
-            var str = loadConfig ? "configuration" : "theme";
+            string str = loadConfig ? "configuration" : "theme";
             if (await message.ShowAsync("Are you sure?", $"Do you really want to overwrite your current {str} by this external {str}?\nLoading external {str}s can be dangerous. Make sure you backup your current {str}.\nDo you want to continue?", closeButton: "No", primaryButton: "Yes") == ContentDialogResult.Primary)
                 if (loadConfig)
                     configurationManager.Load(converter.ToObject<Configuration>(await fileSystem.ReadAsTextAsync(file.Path).ConfigureAwait(false)), true);

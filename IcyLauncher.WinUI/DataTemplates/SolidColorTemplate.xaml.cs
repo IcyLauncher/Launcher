@@ -17,7 +17,7 @@ public partial class SolidColorTemplate : ResourceDictionary
         if (!e.GetCurrentPoint((UIElement)sender).Properties.IsRightButtonPressed)
             return;
 
-        var senderElement = (FrameworkElement)sender;
+        FrameworkElement senderElement = (FrameworkElement)sender;
         FlyoutBase.GetAttachedFlyout(senderElement).ShowAt(senderElement);
     }
 

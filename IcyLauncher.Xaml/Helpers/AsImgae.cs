@@ -1,7 +1,6 @@
-﻿using System.IO;
-using IcyLauncher.Helpers;
-using IcyLauncher.Helpers.Extentions;
+﻿using IcyLauncher.Helpers;
 using Microsoft.UI.Xaml.Media.Imaging;
+using System.IO;
 
 namespace IcyLauncher.Xaml.Helpers;
 
