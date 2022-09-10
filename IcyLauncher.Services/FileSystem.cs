@@ -54,6 +54,9 @@ public class FileSystem : IFileSystem
         if (FileExists(destination) && !overwrite)
             throw Exceptions.FileExits;
 
+        if (!DirectoryExists(Path.GetDirectoryName(destination)!))
+            CreateDirectory(Path.GetDirectoryName(destination)!);
+
         File.Copy(path, destination, overwrite);
 
         logger.Log($"Successfully copied file {path}");
@@ -71,6 +74,9 @@ public class FileSystem : IFileSystem
         if (FileExists(destination) && !overwrite)
             throw Exceptions.FileExits;
 
+        if (!DirectoryExists(Path.GetDirectoryName(destination)!))
+            CreateDirectory(Path.GetDirectoryName(destination)!);
+
         var fileOptions = FileOptions.Asynchronous | FileOptions.SequentialScan;
         var bufferSize = 4096;
 
@@ -78,6 +84,8 @@ public class FileSystem : IFileSystem
         using var destinationStream = new FileStream(destination, FileMode.CreateNew, FileAccess.Write, FileShare.None, bufferSize, fileOptions);
 
         await sourceStream.CopyToAsync(destinationStream, bufferSize, cancellationToken).ConfigureAwait(continueOnCapturedContext: false);
+
+        logger.Log($"Successfully copied file asynchronous {path}");
     }
 
 
@@ -213,5 +221,17 @@ public class FileSystem : IFileSystem
             logger.Log($"Failed checked if directory is writeable");
             return false;
         }
+    }
+
+
+    public void CreateDirectory(
+        string directory)
+    {
+        if (DirectoryExists(directory))
+            throw Exceptions.DirectoryExists;
+
+        Directory.CreateDirectory(directory);
+
+        logger.Log($"Successfully created directory {directory}");
     }
 }

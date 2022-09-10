@@ -16,5 +16,7 @@ public class Exceptions
 
     public static readonly Exception FileNotExistsOrLocked = new("File does not exist in destination directory or file is locked");
 
+    public static readonly Exception DirectoryExists = new("Direcotry with the same name already exists");
+
     public static readonly Exception Timeout = new("Action failed", new("Timeout has been exceeded"));
 }
