@@ -3,20 +3,20 @@
 public partial class ColorSettingsViewModel : ObservableObject
 {
     readonly ThemeManager themeManager;
-    readonly IMessage message;
     readonly INavigation navigation;
+    readonly IMessage message;
 
     public readonly Configuration Configuration;
 
     public ColorSettingsViewModel(
         IOptions<Configuration> configuration,
         ThemeManager themeManager,
-        IMessage message,
-        INavigation navigation)
+        INavigation navigation,
+        IMessage message)
     {
-        this.message = message;
         this.themeManager = themeManager;
         this.navigation = navigation;
+        this.message = message;
 
         Configuration = configuration.Value;
 

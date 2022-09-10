@@ -3,24 +3,32 @@
 public class AppStartupHandler
 {
     public AppStartupHandler(
+        ILogger<AppStartupHandler> logger,
         IOptions<Configuration> configuration,
         IOptions<SolidColorCollection> solidColors,
-        ILogger<AppStartupHandler> logger,
         ConfigurationManager configurationManagaer,
         ThemeManager themeManager,
         WindowHandler windowHandler,
-        BackdropHandler backdropHandler,
         UIElementReciever uiElementReciever,
-        Window shell,
+        BackdropHandler backdropHandler,
         IConverter converter,
         IFileSystem fileSystem,
-        INavigation navigation)
+        INavigation navigation,
+        Window shell)
     {
         AppDomain.CurrentDomain.FirstChanceException += (s, e) =>
         {
-            //e.Exception.Source != "CommunityToolkit.WinUI.UI" || e.Exception is OperationCanceledException
             logger.Log("Global exception thrown", e.Exception, LogLevel.Error, "global", "?");
+
+            //e.Exception.Source != "CommunityToolkit.WinUI.UI" || e.Exception is OperationCanceledException
+            // => Show message popup
         };
+
+        if (solidColors.Value.Container is null)
+            solidColors.Value.Container = new(SolidColorCollection.Default);
+
+        themeManager.SetResourceColors();
+        themeManager.SetUnbindableBindings();
 
         bool customTitleBar = windowHandler.SetTitleBar(true, uiElementReciever.TitleBar);
         windowHandler.SetIcon("Assets/Icon.ico");
@@ -30,23 +38,16 @@ public class AppStartupHandler
 
         backdropHandler.SetBackdrop(configuration.Value.Apperance.Backdrop, true, configuration.Value.Apperance.IsDarkModeBackdropEnabled);
 
-        shell.Closed += async (s, e) =>
-        {
-            await fileSystem.SaveAsTextAsync("Configuration.json", configurationManagaer.Export(), true).ConfigureAwait(false);
-
-            await fileSystem.SaveAsTextAsync("Assets\\Banners\\SolidColors.json", converter.ToString(solidColors.Value), true).ConfigureAwait(false);
-        };
-        shell.Activate();
-
-        themeManager.SetResourceColors();
-        themeManager.SetUnbindableBindings();
-
-        if (solidColors.Value.Container is null)
-            solidColors.Value.Container = new(SolidColorCollection.Default);
-
         uiElementReciever.BackButton.Click += (s, e) =>
             navigation.GoBack();
         navigation.Navigate("Home");
+
+        shell.Closed += async (s, e) =>
+        {
+            await fileSystem.SaveAsTextAsync("Configuration.json", configurationManagaer.Export(), true).ConfigureAwait(false);
+            await fileSystem.SaveAsTextAsync("Assets\\Banners\\SolidColors.json", converter.ToString(solidColors.Value), true).ConfigureAwait(false);
+        };
+        shell.Activate();
 
         logger.Log("App fully startup");
     }

@@ -2,17 +2,17 @@
 
 public class ConfigurationManager
 {
-    readonly Configuration configuration;
     readonly ILogger logger;
+    readonly Configuration configuration;
     readonly IConverter converter;
 
     public ConfigurationManager(
-        IOptions<Configuration> configuration,
         ILogger<ConfigurationManager> logger,
+        IOptions<Configuration> configuration,
         IConverter converter)
     {
-        this.configuration = configuration.Value;
         this.logger = logger;
+        this.configuration = configuration.Value;
         this.converter = converter;
 
         logger.Log("Registered configuration manager");

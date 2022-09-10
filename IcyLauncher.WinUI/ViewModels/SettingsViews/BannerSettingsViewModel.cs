@@ -10,28 +10,26 @@ namespace IcyLauncher.WinUI.ViewModels;
 public partial class BannerSettingsViewModel : ObservableObject
 {
     readonly ILogger<ProfilesViewModel> logger;
-    readonly WindowHandler windowHandler;
     readonly IFileSystem fileSystem;
-    readonly IMessage message;
     readonly INavigation navigation;
+    readonly IMessage message;
 
     public readonly Configuration Configuration;
     public readonly SolidColorCollection SolidColors;
 
     public BannerSettingsViewModel(
+        ILogger<ProfilesViewModel> logger,
         IOptions<Configuration> configuration,
         IOptions<SolidColorCollection> solidColors,
-        ILogger<ProfilesViewModel> logger,
         WindowHandler windowHandler,
         IFileSystem fileSystem,
-        IMessage message,
-        INavigation navigation)
+        INavigation navigation,
+        IMessage message)
     {
         this.logger = logger;
-        this.windowHandler = windowHandler;
         this.fileSystem = fileSystem;
-        this.message = message;
         this.navigation = navigation;
+        this.message = message;
 
         Configuration = configuration.Value;
         SolidColors = solidColors.Value;

@@ -6,19 +6,19 @@ namespace IcyLauncher.Services;
 public class AcrylicBackdropHandler : IBackdropHandler
 {
     readonly ILogger logger;
-    readonly ICompositionSupportsSystemBackdrop shell;
     readonly WindowHandler windowHandler;
+    readonly ICompositionSupportsSystemBackdrop shell;
 
     readonly DesktopAcrylicController controller = new();
 
     public AcrylicBackdropHandler(
         ILogger<AcrylicBackdropHandler> logger,
-        Window shell,
-        WindowHandler windowHandler)
+        WindowHandler windowHandler,
+        Window shell)
     {
         this.logger = logger;
-        this.shell = (ICompositionSupportsSystemBackdrop)shell;
         this.windowHandler = windowHandler;
+        this.shell = (ICompositionSupportsSystemBackdrop)shell;
 
         controller.SetSystemBackdropConfiguration(new() { Theme = SystemBackdropTheme.Dark });
 

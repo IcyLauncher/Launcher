@@ -13,26 +13,25 @@ namespace IcyLauncher.WinUI.ViewModels;
 public partial class HomeViewModel : ObservableObject
 {
     readonly ILogger<HomeViewModel> logger;
-    readonly ImagingUtility imagingUtility;
-    readonly ThemeManager themeManager;
     readonly SolidColorCollection solidColors;
+    readonly ThemeManager themeManager;
+    readonly ImagingUtility imagingUtility;
 
-    readonly public Configuration Configuration;
-
+    public readonly Configuration Configuration;
     public readonly Updater Updater;
 
     public HomeViewModel(
+        ILogger<HomeViewModel> logger,
         IOptions<Configuration> configuration,
         IOptions<SolidColorCollection> solidColors,
-        ILogger<HomeViewModel> logger,
-        ImagingUtility imagingUtility,
         ThemeManager themeManager,
+        ImagingUtility imagingUtility,
         Updater updater)
     {
         this.logger = logger;
-        this.imagingUtility = imagingUtility;
-        this.themeManager = themeManager;
         this.solidColors = solidColors.Value;
+        this.themeManager = themeManager;
+        this.imagingUtility = imagingUtility;
 
         Configuration = configuration.Value;
         Updater = updater;

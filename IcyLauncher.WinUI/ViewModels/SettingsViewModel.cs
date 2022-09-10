@@ -15,32 +15,32 @@ public partial class SettingsViewModel : ObservableObject
     readonly ThemeManager themeManager;
     readonly IConverter converter;
     readonly IFileSystem fileSystem;
-    readonly IMessage message;
     readonly INavigation navigation;
+    readonly IMessage message;
 
     public readonly Configuration Configuration;
     public readonly Updater Updater;
 
     public SettingsViewModel(
-        IOptions<Configuration> configuration,
         ILogger<ProfilesViewModel> logger,
+        IOptions<Configuration> configuration,
         ConfigurationManager configurationManager,
         ThemeManager themeManager,
         WindowHandler windowHandler,
         BackdropHandler backdropHandler,
-        Updater updater,
         IConverter converter,
         IFileSystem fileSystem,
-        IMessage message,
-        INavigation navigation)
+        Updater updater,
+        INavigation navigation,
+        IMessage message)
     {
         this.logger = logger;
         this.configurationManager = configurationManager;
         this.themeManager = themeManager;
         this.converter = converter;
         this.fileSystem = fileSystem;
-        this.message = message;
         this.navigation = navigation;
+        this.message = message;
 
         Configuration = configuration.Value;
         Updater = updater;

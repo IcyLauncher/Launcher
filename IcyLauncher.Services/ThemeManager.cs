@@ -12,25 +12,24 @@ public class ThemeManager
 {
     readonly ILogger logger;
     readonly Configuration configuration;
+    readonly UIElementReciever uiElementReciever;
     readonly IConverter converter;
     readonly INavigation navigation;
-    readonly UIElementReciever uiElementReciever;
-    readonly Random random = new();
 
     public Theme Colors => configuration.Apperance.Colors;
 
     public ThemeManager(
         ILogger<ConfigurationManager> logger,
         IOptions<Configuration> configuration,
+        UIElementReciever uiElementReciever,
         IConverter converter,
-        INavigation navigation,
-        UIElementReciever uiElementReciever)
+        INavigation navigation)
     {
         this.logger = logger;
         this.configuration = configuration.Value;
+        this.uiElementReciever = uiElementReciever;
         this.converter = converter;
         this.navigation = navigation;
-        this.uiElementReciever = uiElementReciever;
 
         this.configuration.Apperance.Colors.Accent.PropertyChanged += AccentColorsValuesChanged;
         //this.configuration.Apperance.Colors.Background.PropertyChanged += BackgroundColorsValuesChanged;
@@ -41,6 +40,9 @@ public class ThemeManager
 
         logger.Log("Registered theme manager and hooked all ColorValueChanged events");
     }
+
+
+    readonly Random random = new();
 
 
     public string Export() =>
