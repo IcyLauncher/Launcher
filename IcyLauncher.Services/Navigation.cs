@@ -78,8 +78,13 @@ public class Navigation : INavigation
     {
         try
         {
+            var selectedItem = items.ElementAt(index);
+
+            if ((NavigationViewItem)uIElementReciever.NavigationView.SelectedItem == selectedItem)
+                return false;
+
             skipEvent = true;
-            uIElementReciever.NavigationView.SelectedItem = items.ElementAt(index);
+            uIElementReciever.NavigationView.SelectedItem = selectedItem;
             skipEvent = false;
 
             logger.Log("Set current NavigationView item without updating page");
@@ -146,7 +151,6 @@ public class Navigation : INavigation
             uIElementReciever.NavigationFrame.BackStack.RemoveAt(uIElementReciever.NavigationFrame.BackStackDepth - 1);
             CanGoBackChanged(uIElementReciever.NavigationFrame.CanGoBack);
 
-            logger.Log("Current NavigationView page went back");
             return true;
         }
         catch (Exception ex)
