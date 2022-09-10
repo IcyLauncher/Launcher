@@ -37,7 +37,7 @@ public partial class BannerSettingsViewModel : ObservableObject
         SolidColors = solidColors.Value;
 
 
-        this.windowHandler.Register(filePicker);
+        windowHandler.Register(filePicker);
         filePicker.FileTypeFilter.Add(".jpg");
         filePicker.FileTypeFilter.Add(".jpeg");
         filePicker.FileTypeFilter.Add(".png");

@@ -6,9 +6,7 @@ namespace IcyLauncher.Data.Models;
 
 public class SolidColor
 {
-    public SolidColor()
-    {
-    }
+    public SolidColor() { }
 
     public SolidColor(
         Color color,

@@ -35,10 +35,9 @@ public partial class HomeViewModel : ObservableObject
         this.solidColors = solidColors.Value;
 
         Configuration = configuration.Value;
-
         Updater = updater;
 
-        this.themeManager.Colors.Background.PropertyChanged += (s, e) =>
+        themeManager.Colors.Background.PropertyChanged += (s, e) =>
         {
             switch (e.PropertyName)
             {

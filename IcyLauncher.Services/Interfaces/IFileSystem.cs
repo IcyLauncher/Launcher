@@ -26,7 +26,7 @@ public interface IFileSystem
     Task DeleteFileAsync(string path, int timeout = 60000, CancellationToken cancellationToken = default);
 
 
-    Task<bool> WaitForFileLock(string path, int timeout = 60000, CancellationToken cancellationToken = default);
+    Task<bool> WaitForFileLockAsync(string path, int timeout = 60000, CancellationToken cancellationToken = default);
 
 
     Task<string> ReadAsTextAsync(string path, CancellationToken cancellationToken = default);
