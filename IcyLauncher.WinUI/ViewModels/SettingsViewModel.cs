@@ -26,6 +26,7 @@ public partial class SettingsViewModel : ObservableObject
         ThemeManager themeManager,
         WindowHandler windowHandler,
         BackdropHandler backdropHandler,
+        UIElementReciever uIElementReciever,
         IConverter converter,
         IFileSystem fileSystem,
         Updater updater,
@@ -65,6 +66,17 @@ public partial class SettingsViewModel : ObservableObject
                     break;
                 case "IsDarkModeBackdropEnabled":
                     backdropHandler.SetDarkMode(Configuration.Apperance.Backdrop, Configuration.Apperance.IsDarkModeBackdropEnabled);
+                    break;
+            }
+        };
+
+        Configuration.Developer.PropertyChanged += (s, e) =>
+        {
+            switch (e.PropertyName)
+            {
+                case "UseCustomTitleBar":
+                    if (windowHandler.HasCustomTitleBar != Configuration.Developer.UseCustomTitleBar)
+                        windowHandler.SetTitleBar(Configuration.Developer.UseCustomTitleBar ? uIElementReciever.TitleBarDragArea : null, uIElementReciever.TitleBarContainer);
                     break;
             }
         };

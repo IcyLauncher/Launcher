@@ -87,4 +87,7 @@ public partial class ConfigurationDeveloper : ObservableObject
 
     [ObservableProperty]
     bool isWarningEnabled = true;
+
+    [ObservableProperty]
+    bool useCustomTitleBar = true;
 }

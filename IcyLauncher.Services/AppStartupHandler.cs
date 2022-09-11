@@ -30,10 +30,11 @@ public class AppStartupHandler
         themeManager.SetResourceColors();
         themeManager.SetUnbindableBindings();
 
-        bool customTitleBar = windowHandler.SetTitleBar(true, uiElementReciever.TitleBar);
+        if (configuration.Value.Developer.UseCustomTitleBar)
+            windowHandler.SetTitleBar(uiElementReciever.TitleBarDragArea, uiElementReciever.TitleBarContainer);
         windowHandler.SetIcon("Assets/Icon.ico");
         windowHandler.SetMinSize(750, 500);
-        windowHandler.SetSize(1040, customTitleBar ? 555 : 538);
+        windowHandler.SetSize(1040, windowHandler.HasCustomTitleBar ? 556 : 538);
         windowHandler.SetPositionToCenter();
 
         backdropHandler.SetBackdrop(configuration.Value.Apperance.Backdrop, true, configuration.Value.Apperance.IsDarkModeBackdropEnabled);

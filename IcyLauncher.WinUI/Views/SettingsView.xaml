@@ -380,7 +380,7 @@
                 <Expander.Tag>
                     <StackPanel Spacing="8">
                         <ContentControl Tag="Developer Mode|Is developer mode enabled" Template="{StaticResource SettingsCard}">
-                            <ToggleSwitch IsOn="{x:Bind viewModel.Configuration.Developer.IsDeveloperModeEnabled, Mode=TwoWay}" ToolTipService.ToolTip="Enable/Disable One Click Button" />
+                            <ToggleSwitch IsOn="{x:Bind viewModel.Configuration.Developer.IsDeveloperModeEnabled, Mode=TwoWay}" ToolTipService.ToolTip="Enable/Disable developer mode" />
                         </ContentControl>
 
                         <ContentControl Tag="One Click Button|Only press the debug button once instead of 5 times" Template="{StaticResource SettingsCard}">
@@ -389,6 +389,10 @@
 
                         <ContentControl Tag="Warning|Show pop up warning before going to developer page" Template="{StaticResource SettingsCard}">
                             <ToggleSwitch IsOn="{x:Bind viewModel.Configuration.Developer.IsWarningEnabled, Mode=TwoWay}" ToolTipService.ToolTip="Enable/Disable warning" />
+                        </ContentControl>
+
+                        <ContentControl Tag="Custom TitleBar|Use fluent Windows 11 TitleBar: Disabling will remove the go back button" Template="{StaticResource SettingsCard}">
+                            <ToggleSwitch IsOn="{x:Bind viewModel.Configuration.Developer.UseCustomTitleBar, Mode=TwoWay}" ToolTipService.ToolTip="Enable/Disable custom TitleBar" />
                         </ContentControl>
                     </StackPanel>
                 </Expander.Tag>

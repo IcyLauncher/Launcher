@@ -33,12 +33,11 @@ public class WindowHandler
 
 
     AppWindow Window => AppWindow.GetFromWindowId(Win32Interop.GetWindowIdFromWindow(HWnd));
-    OverlappedPresenter Presenter => (OverlappedPresenter)Window.Presenter;
     object? dispatcherQueueController;
 
     public IntPtr HWnd => WindowNative.GetWindowHandle(shell);
 
-    public bool HasTilteBar { get; private set; } = true;
+    public bool HasCustomTitleBar { get; private set; }
     public SizeInt32 Size => Window.Size;
     public PointInt32 Position => Window.Position;
     public RectInt32 ScreenSize => DisplayArea.GetFromWindowId(Win32Interop.GetWindowIdFromWindow(HWnd), DisplayAreaFallback.Nearest).WorkArea;
@@ -112,116 +111,40 @@ public class WindowHandler
     }
 
 
-    public bool SetTitleBar(
-        bool isEnabled = false,
-        UIElement? titleBar = null)
+    public bool SetTitleBar(UIElement? titleBar, UIElement? container = null)
     {
-        if (!AppWindowTitleBar.IsCustomizationSupported())
-        {
-            logger.Log("Failed to set TitleBar", Exceptions.Unsupported);
-            return false;
-        }
-
-        if (!isEnabled)
-        {
-            if (titleBar is not null)
-                titleBar.Visibility = Visibility.Collapsed;
-            HasTilteBar = false;
-
-            Presenter.SetBorderAndTitleBar(true, false);
-
-            logger.Log("Set TitleBar [null]");
-            return true;
-        }
-
-        if (titleBar is null)
-        {
-            HasTilteBar = false;
-
-            Presenter.SetBorderAndTitleBar(true, true);
-
-            Window.TitleBar.ExtendsContentIntoTitleBar = false;
-
-            logger.Log("Set TitleBar [default]");
-            return true;
-        }
-
         try
         {
-            titleBar.Visibility = Visibility.Visible;
-            HasTilteBar = true;
+            if (titleBar is null)
+            {
+                if (container is not null)
+                    container.Visibility = Visibility.Collapsed;
 
-            Presenter.SetBorderAndTitleBar(true, true);
+                shell.ExtendsContentIntoTitleBar = false;
+                shell.SetTitleBar(null);
 
-            Window.TitleBar.ExtendsContentIntoTitleBar = true;
-            Window.TitleBar.SetDragRectangles(new RectInt32[] { new(40, 0, ScreenSize.Width, 48) });
+                HasCustomTitleBar = false;
 
+                logger.Log("Removed TitleBar [Win10-UIElement]");
+                return true;
+            }
 
+            if (container is not null)
+                container.Visibility = Visibility.Visible;
+
+            shell.ExtendsContentIntoTitleBar = true;
             shell.SetTitleBar(titleBar);
 
-            themeManager.Colors.Control.PropertyChanged += TextControlColorsValueChanged;
-            themeManager.Colors.Text.PropertyChanged += TextControlColorsValueChanged;
-            TextControlColorsValueChanged(null, new("Primary"));
+            HasCustomTitleBar = true;
 
-            logger.Log("Set TitleBar [UIElement]");
+            logger.Log("Set TitleBar [Win10-UIElement]");
             return true;
         }
         catch (Exception ex)
         {
-            logger.Log("Failed to set TitleBar [UIElement]", ex);
+            logger.Log("Failed to set TitleBar [Win10-UIElement]", ex);
             return false;
         }
-    }
-
-    public bool SetTitleBarButtonColors(
-        ButtonColors backgroundColors,
-        ButtonColors foregroundColors)
-    {
-        if (!AppWindowTitleBar.IsCustomizationSupported())
-        {
-            logger.Log("Failed to set TitleBar button colors", Exceptions.Unsupported);
-            return false;
-        }
-
-        try
-        {
-            Window.TitleBar.ButtonBackgroundColor = backgroundColors.Normal;
-            Window.TitleBar.ButtonHoverBackgroundColor = backgroundColors.Hover;
-            Window.TitleBar.ButtonPressedBackgroundColor = backgroundColors.Pressed;
-            Window.TitleBar.ButtonInactiveBackgroundColor = backgroundColors.Inactive;
-
-            Window.TitleBar.ButtonForegroundColor = foregroundColors.Normal;
-            Window.TitleBar.ButtonHoverForegroundColor = foregroundColors.Hover;
-            Window.TitleBar.ButtonPressedForegroundColor = foregroundColors.Pressed;
-            Window.TitleBar.ButtonInactiveForegroundColor = foregroundColors.Inactive;
-
-            return true;
-        }
-        catch (Exception ex)
-        {
-            logger.Log("Failed to set TitleBar button colors", ex);
-            return false;
-        }
-    }
-
-    void TextControlColorsValueChanged(object? _, System.ComponentModel.PropertyChangedEventArgs e)
-    {
-        if (e.PropertyName == "Outline" ||
-            e.PropertyName == "Primary" ||
-            e.PropertyName == "Secondary" ||
-            e.PropertyName == "Tertiary" ||
-            e.PropertyName == "Disabled")
-            SetTitleBarButtonColors(
-                new(
-                    Colors.Transparent,
-                    themeManager.Colors.Control.Outline,
-                    themeManager.Colors.Control.Primary,
-                    Colors.Transparent),
-                new(
-                    themeManager.Colors.Text.Secondary,
-                    themeManager.Colors.Text.Primary,
-                    themeManager.Colors.Text.Tertiary,
-                    themeManager.Colors.Text.Disabled));
     }
 
 

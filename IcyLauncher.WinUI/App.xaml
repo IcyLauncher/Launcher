@@ -68,6 +68,15 @@
 
 
 
+            <SolidColorBrush x:Key="WindowCaptionBackground" Color="Transparent" />
+            <SolidColorBrush x:Key="WindowCaptionBackgroundDisabled" Color="Transparent" />
+
+            <SolidColorBrush x:Key="WindowCaptionForeground" Color="Gray" />
+            <SolidColorBrush x:Key="WindowCaptionForegroundDisabled" Color="Gray" />
+
+            <SolidColorBrush x:Key="SystemControlPageBackgroundMediumAltMediumBrush" Color="Transparent" />
+
+
             <SolidColorBrush x:Key="ButtonBackground" Color="{Binding Color, Source={ThemeResource ControlPrimary}}" />
             <SolidColorBrush x:Key="ButtonBackgroundPointerOver" Color="{Binding Color, Source={ThemeResource ControlOutline}}" />
             <SolidColorBrush x:Key="ButtonBackgroundPressed" Color="{Binding Color, Source={ThemeResource ControlPrimaryDisabled}}" />
@@ -3330,16 +3339,18 @@
                 </Grid>
             </ControlTemplate>
 
-
             <Style TargetType="ContentDialog">
                 <Setter Property="IsTabStop" Value="False" />
                 <Setter Property="Template">
                     <Setter.Value>
                         <ControlTemplate TargetType="ContentDialog">
                             <Border x:Name="Container">
-                                <Grid x:Name="LayoutRoot" Visibility="Collapsed">
+                                <Grid
+                                    x:Name="LayoutRoot"
+                                    Margin="0,-32,0,0"
+                                    Visibility="Collapsed">
                                     <Grid.Background>
-                                        <SolidColorBrush Opacity="0.5" Color="{Binding Color, Source={ThemeResource BackgroundTransparent}}" />
+                                        <SolidColorBrush Opacity="0.7" Color="{Binding Color, Source={ThemeResource BackgroundSolid}}" />
                                     </Grid.Background>
 
                                     <Border
@@ -3348,6 +3359,7 @@
                                         MinHeight="{ThemeResource ContentDialogMinHeight}"
                                         MaxWidth="{ThemeResource ContentDialogMaxWidth}"
                                         MaxHeight="{ThemeResource ContentDialogMaxHeight}"
+                                        Margin="0,32,0,0"
                                         HorizontalAlignment="Center"
                                         VerticalAlignment="Center"
                                         Background="{ThemeResource ControlSolidPrimary}"
