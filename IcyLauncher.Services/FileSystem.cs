@@ -29,12 +29,12 @@ public class FileSystem : IFileSystem
             fs.Close();
             fs.Dispose();
 
-            logger.Log($"Checked if file writable: [true-{path}]");
+            logger.Log($"Checked if file writable: [True-{path}]");
             return true;
         }
         catch (Exception)
         {
-            logger.Log($"Checked if file writable: [false-{path}]");
+            logger.Log($"Checked if file writable: [False-{path}]");
             return false;
         }
     }
@@ -208,12 +208,12 @@ public class FileSystem : IFileSystem
         {
             using (File.Create(Path.Combine(directory, Path.GetRandomFileName()), 1, FileOptions.DeleteOnClose)) { }
 
-            logger.Log($"Checked if directory is writeable [true-{directory}]");
+            logger.Log($"Checked if directory is writeable [True-{directory}]");
             return true;
         }
         catch (UnauthorizedAccessException)
         {
-            logger.Log($"Checked if directory is writeable [false-{directory}]");
+            logger.Log($"Checked if directory is writeable [False-{directory}]");
             return false;
         }
         catch (Exception)
