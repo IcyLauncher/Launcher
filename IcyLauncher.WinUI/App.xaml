@@ -304,6 +304,24 @@
             <SolidColorBrush x:Key="SplitButtonBorderBrushCheckedDivider" Color="{Binding Color, Source={ThemeResource ControlOutline}}" />
 
 
+            <SolidColorBrush x:Key="TabViewItemHeaderBackgroundSelected" Color="{Binding Color, Source={ThemeResource ControlOutline}}" />
+            <SolidColorBrush x:Key="TabViewItemHeaderBackgroundPointerOver" Color="{Binding Color, Source={ThemeResource ControlOutline}}" />
+            <SolidColorBrush x:Key="TabViewItemHeaderBackgroundPressed" Color="{Binding Color, Source={ThemeResource ControlPrimaryDisabled}}" />
+            <SolidColorBrush x:Key="TabViewItemHeaderBackgroundDisabled" Color="{Binding Color, Source={ThemeResource ControlPrimaryDisabled}}" />
+
+            <SolidColorBrush x:Key="TabViewItemHeaderForeground" Color="{Binding Color, Source={ThemeResource TextSecondary}}" />
+            <SolidColorBrush x:Key="TabViewItemHeaderForegroundSelected" Color="{Binding Color, Source={ThemeResource TextPrimary}}" />
+            <SolidColorBrush x:Key="TabViewItemHeaderForegroundPointerOver" Color="{Binding Color, Source={ThemeResource TextPrimary}}" />
+            <SolidColorBrush x:Key="TabViewItemHeaderForegroundPressed" Color="{Binding Color, Source={ThemeResource TextTertiary}}" />
+            <SolidColorBrush x:Key="TabViewItemHeaderForegroundDisabled" Color="{Binding Color, Source={ThemeResource TextDisabled}}" />
+
+            <SolidColorBrush x:Key="TabViewItemIconForeground" Color="{Binding Color, Source={ThemeResource TextSecondary}}" />
+            <SolidColorBrush x:Key="TabViewItemIconForegroundSelected" Color="{Binding Color, Source={ThemeResource TextPrimary}}" />
+            <SolidColorBrush x:Key="TabViewItemIconForegroundPointerOver" Color="{Binding Color, Source={ThemeResource TextPrimary}}" />
+            <SolidColorBrush x:Key="TabViewItemIconForegroundPressed" Color="{Binding Color, Source={ThemeResource TextTertiary}}" />
+            <SolidColorBrush x:Key="TabViewItemIconForegroundDisabled" Color="{Binding Color, Source={ThemeResource TextDisabled}}" />
+
+
             <SolidColorBrush x:Key="ExpanderHeaderBackground" Color="{Binding Color, Source={ThemeResource ControlPrimary}}" />
 
             <SolidColorBrush x:Key="ExpanderHeaderBorderBrush" Color="{Binding Color, Source={ThemeResource ControlOutline}}" />
@@ -3299,7 +3317,7 @@
                                 Text="{Binding Header, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource ArrayHelper}, ConverterParameter=0}"
                                 TextTrimming="CharacterEllipsis" />
                             <TextBlock
-                                Margin="0,16,0,0"
+                                Margin="0,10,0,0"
                                 VerticalAlignment="Center"
                                 Style="{StaticResource SubpointSecondary}"
                                 Text="{Binding Header, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource ArrayHelper}, ConverterParameter=1}"
