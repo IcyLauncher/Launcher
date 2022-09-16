@@ -12,7 +12,7 @@
     xmlns:xmle="using:IcyLauncher.Xaml.Elements"
     Background="Transparent"
     Loaded="{x:Bind viewModel.OnPageLoaded}"
-    NavigationCacheMode="Enabled"
+    NavigationCacheMode="Disabled"
     mc:Ignorable="d">
     <Page.Resources>
         <md:AttachedCardShadow
@@ -26,11 +26,76 @@
         <x:Boolean x:Key="par1">True</x:Boolean>
     </Page.Resources>
 
-    <xmle:HCont
-        Title="Settings  |  Developer"
-        Style="{StaticResource Page}"
-        VerticalScrollBar="{x:Bind viewModel.Configuration.Launcher.IsScrollbarsEnabled, Mode=OneWay, Converter={StaticResource BoolScrollbarVisibilityConverter}}">
+    <TabView
+        VerticalAlignment="Stretch"
+        AllowDrop="False"
+        AllowDropTabs="False"
+        CanDrag="False"
+        CanDragTabs="False"
+        CanReorderTabs="False"
+        IsAddTabButtonVisible="False">
 
-        <Grid />
-    </xmle:HCont>
+        <TabViewItem Header="ILogger&lt;SampleClass&gt;" IsClosable="False">
+            <ScrollViewer Padding="8,12" VerticalAlignment="Stretch">
+                <StackPanel>
+                    <Expander
+                        HorizontalAlignment="Stretch"
+                        VerticalAlignment="Top"
+                        Header="Log()|Logs any message or exception to the console and writes it to a local text file"
+                        IsExpanded="True"
+                        Template="{StaticResource CardExpander}">
+                        <Expander.Tag>
+                            <StackPanel Spacing="8">
+                                <ContentControl Tag="message|Type: object" Template="{StaticResource SettingsCard}">
+                                    <TextBox
+                                        Width="400"
+                                        PlaceholderText="Message..."
+                                        Text="{x:Bind viewModel.Logger_message, Mode=TwoWay}" />
+                                </ContentControl>
+                                <ContentControl Tag="exception|[optional] [default: null]  Type: Exception?" Template="{StaticResource SettingsCard}">
+                                    <TextBox
+                                        Width="400"
+                                        PlaceholderText="Exception..."
+                                        Text="{x:Bind viewModel.Logger_exception, Mode=TwoWay}" />
+                                </ContentControl>
+                                <ContentControl Tag="logLevel|[optional] [default: Information]  Type: LogLevel" Template="{StaticResource SettingsCard}">
+                                    <ComboBox
+                                        Width="125"
+                                        PlaceholderText="Log Level..."
+                                        SelectedIndex="{x:Bind viewModel.Logger_logLevel, Mode=TwoWay, Converter={StaticResource EnumIntConverter}}">
+                                        <ComboBoxItem Content="Trace" />
+                                        <ComboBoxItem Content="Debug" />
+                                        <ComboBoxItem Content="Information" />
+                                        <ComboBoxItem Content="Warning" />
+                                        <ComboBoxItem Content="Error" />
+                                        <ComboBoxItem Content="Critical" />
+                                    </ComboBox>
+                                </ContentControl>
+                                <ContentControl Tag="filePath|[CallerFilePath] [optional] [default: &quot;&quot;]  Type: string" Template="{StaticResource SettingsCard}">
+                                    <TextBox
+                                        Width="200"
+                                        PlaceholderText="File Path..."
+                                        Text="{x:Bind viewModel.Logger_filePath, Mode=TwoWay}" />
+                                </ContentControl>
+                                <ContentControl Tag="memberName|[CallerMemberName] [optional] [default: &quot;&quot;]  Type: string" Template="{StaticResource SettingsCard}">
+                                    <TextBox
+                                        Width="200"
+                                        PlaceholderText="File Path..."
+                                        Text="{x:Bind viewModel.Logger_memberName, Mode=TwoWay}" />
+                                </ContentControl>
+                            </StackPanel>
+                        </Expander.Tag>
+
+                        <Button Command="{x:Bind viewModel.Logger_TestCommand}" Content="Test Mehthod" />
+                    </Expander>
+
+                    <Button Command="{x:Bind viewModel.Logger_HookCommand}" Content="Hook" />
+                </StackPanel>
+            </ScrollViewer>
+        </TabViewItem>
+
+        <TabViewItem Header="Theme Manager" IsClosable="False">
+            <Button Content="Test" />
+        </TabViewItem>
+    </TabView>
 </Page>
