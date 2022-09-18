@@ -37,7 +37,11 @@
 
         <TabViewItem Header="ILogger&lt;SampleClass&gt;" IsClosable="False">
             <ScrollViewer Padding="8,12" VerticalAlignment="Stretch">
-                <StackPanel>
+                <StackPanel Spacing="8">
+                    <ContentControl Tag="Show Logger|Create a new window and hook all new logger events" Template="{StaticResource SettingsCard}">
+                        <Button Command="{x:Bind viewModel.Logger_ShowCommand}" Content="Show window" />
+                    </ContentControl>
+
                     <Expander
                         HorizontalAlignment="Stretch"
                         VerticalAlignment="Top"
@@ -89,7 +93,6 @@
                         <Button Command="{x:Bind viewModel.Logger_TestCommand}" Content="Test Mehthod" />
                     </Expander>
 
-                    <Button Command="{x:Bind viewModel.Logger_HookCommand}" Content="Hook" />
                 </StackPanel>
             </ScrollViewer>
         </TabViewItem>

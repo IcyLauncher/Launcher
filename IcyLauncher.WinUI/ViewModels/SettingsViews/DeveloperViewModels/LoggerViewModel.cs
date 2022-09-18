@@ -1,5 +1,5 @@
-﻿using System.Diagnostics;
-using System.Runtime.InteropServices;
+﻿using IcyLauncher.Xaml.Converters;
+using Microsoft.UI.Xaml.Data;
 
 namespace IcyLauncher.WinUI.ViewModels;
 
@@ -27,7 +27,36 @@ public partial class DeveloperSettingsViewModel : ObservableObject
 
 
     [RelayCommand]
-    void Logger_Hook()
+    void Logger_Show()
     {
+        if (windowHandler.LoggerWindow is not null)
+        {
+            windowHandler.LoggerWindow.Activate();
+            return;
+        }
+
+        Window loggerWindow = UIElementProvider.LoggerWindow(out TextBlock content, out ScrollViewer container);
+        container.SetBinding(Control.BackgroundProperty, new Binding()
+        {
+            Source = themeManager.Colors,
+            Converter = new ColorBrushConverter(),
+            Path = new PropertyPath("Background.Solid"),
+            Mode = BindingMode.OneWay
+        });
+
+        void handler(object? s, string e) => content.Text += e;
+
+        App.Sink.OnNewLog += handler;
+        loggerWindow.Closed += (s, e) =>
+        {
+            App.Sink.OnNewLog -= handler;
+            windowHandler.LoggerWindow = null;
+        };
+
+        windowHandler.SetSize(loggerWindow, 700, 400);
+        windowHandler.LoggerWindow = loggerWindow;
+        loggerWindow.Activate();
+
+        logger.Log("Created new window and hooked all logger events");
     }
 }

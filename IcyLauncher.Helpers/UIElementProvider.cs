@@ -161,4 +161,28 @@ public class UIElementProvider
 
         return containerNavigationView;
     }
+
+
+    public static Window LoggerWindow(out TextBlock content, out ScrollViewer container)
+    {
+        content = new()
+        {
+            HorizontalAlignment = HorizontalAlignment.Left,
+            VerticalAlignment = VerticalAlignment.Top,
+            Margin = new(4),
+            Height = double.NaN
+        };
+        container = new()
+        {
+            Content = content,
+            HorizontalScrollBarVisibility = ScrollBarVisibility.Auto,
+            VerticalScrollBarVisibility = ScrollBarVisibility.Auto
+        };
+
+        return new()
+        {
+            Content = container,
+            Title = "IcyLauncher - Logger"
+        };
+    }
 }

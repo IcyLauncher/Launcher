@@ -9,6 +9,7 @@ public partial class App : Application
     readonly IHost host;
 
     public static IServiceProvider Provider { get; private set; } = default!;
+    public static InMemorySink Sink { get; private set; } = new();
 
 
     public App()
@@ -17,6 +18,7 @@ public partial class App : Application
             .UseSerilog((context, configuration) =>
             {
                 configuration.WriteTo.Debug();
+                configuration.WriteTo.Sink(Sink);
                 configuration.WriteTo.File("Logs\\Log-.txt", rollingInterval: RollingInterval.Day, retainedFileCountLimit: 10);
             })
             .ConfigureAppConfiguration((context, builder) =>

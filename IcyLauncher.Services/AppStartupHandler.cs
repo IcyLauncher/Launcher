@@ -45,6 +45,9 @@ public class AppStartupHandler
 
         shell.Closed += async (s, e) =>
         {
+            if (windowHandler.LoggerWindow is not null)
+                windowHandler.LoggerWindow.Close();
+           
             await fileSystem.SaveAsTextAsync("Configuration.json", configurationManagaer.Export(), true).ConfigureAwait(false);
             await fileSystem.SaveAsTextAsync("Assets\\Banners\\SolidColors.json", converter.ToString(solidColors.Value), true).ConfigureAwait(false);
         };

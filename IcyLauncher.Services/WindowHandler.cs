@@ -42,6 +42,8 @@ public class WindowHandler
     public PointInt32 Position => Window.Position;
     public RectInt32 ScreenSize => DisplayArea.GetFromWindowId(Win32Interop.GetWindowIdFromWindow(HWnd), DisplayAreaFallback.Nearest).WorkArea;
 
+    public Window? LoggerWindow = null;
+
 
     public void SetIcon(
         string path)
@@ -58,6 +60,18 @@ public class WindowHandler
         Window.Resize(new(width, height));
 
         logger.Log($"Set window size [{width}x{height}]");
+    }
+    public void SetSize(
+        Window externalWindow,
+        int width,
+        int height)
+    {
+        IntPtr hWnd = WindowNative.GetWindowHandle(externalWindow);
+        AppWindow window = AppWindow.GetFromWindowId(Win32Interop.GetWindowIdFromWindow(hWnd));
+
+        window.Resize(new(width, height));
+
+        logger.Log($"Set external window size [{width}x{height}]");
     }
 
     public void SetMinSize(
