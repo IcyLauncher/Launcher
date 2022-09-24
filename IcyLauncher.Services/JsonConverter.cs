@@ -16,11 +16,12 @@ public class JsonConverter : IConverter
 
 
     public string ToString(
-        object input)
+        object input,
+        object? formatting = null)
     {
         logger.Log("Serializing object to string");
 
-        return JsonConvert.SerializeObject(input);
+        return JsonConvert.SerializeObject(input, formatting is Formatting format ? format : Formatting.None);
     }
 
     public T ToObject<T>(
@@ -34,17 +35,25 @@ public class JsonConverter : IConverter
     }
 
     public bool TryToObject<T>(
-        out T result,
+        out T? result,
         string input)
     {
         bool success = true;
 
-        result = ToObject<T>(input,
-            new JsonSerializerSettings()
-            {
-                Error = (s, e) => (e.ErrorContext.Handled, success) = (true, false),
-                MissingMemberHandling = MissingMemberHandling.Error
-            });
+        try
+        {
+            result = ToObject<T>(input,
+                new JsonSerializerSettings()
+                {
+                    Error = (s, e) => (e.ErrorContext.Handled, success) = (true, false),
+                    MissingMemberHandling = MissingMemberHandling.Error
+                });
+        }
+        catch
+        {
+            result = default;
+            success = false;
+        }
 
         logger.Log($"Tried to deserialize string to object [{success}]");
         return success;
