@@ -39,7 +39,7 @@
             <ScrollViewer Padding="8,12" VerticalAlignment="Stretch">
                 <StackPanel Spacing="8">
                     <ContentControl Tag="Show Logger|Create a new window and hook all new logger events" Template="{StaticResource SettingsCard}">
-                        <Button Command="{x:Bind viewModel.Logger_ShowCommand}" Content="Show window" />
+                        <Button Command="{x:Bind viewModel.Logger_ShowCommand}" Content="Show logger" />
                     </ContentControl>
 
                     <Expander
@@ -90,15 +90,90 @@
                             </StackPanel>
                         </Expander.Tag>
 
-                        <Button Command="{x:Bind viewModel.Logger_TestCommand}" Content="Test Mehthod" />
+                        <Button Command="{x:Bind viewModel.Logger_TestCommand}" Content="Test Method" />
                     </Expander>
 
                 </StackPanel>
             </ScrollViewer>
         </TabViewItem>
 
-        <TabViewItem Header="Theme Manager" IsClosable="False">
-            <Button Content="Test" />
+        <TabViewItem Header="ConfigurationManager" IsClosable="False">
+            <Grid Padding="8,12">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="8" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="8" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+
+                <ContentControl Tag="Export()|Export current configuration in bottom textbox" Template="{StaticResource SettingsCard}">
+                    <Button Command="{x:Bind viewModel.ConfigurationManager_ExportCommand}" Content="Test Method" />
+                </ContentControl>
+
+                <Expander
+                    Grid.Row="2"
+                    HorizontalAlignment="Stretch"
+                    VerticalAlignment="Top"
+                    Header="Load()|Load configuration from bottom textbox"
+                    IsExpanded="True"
+                    Template="{StaticResource CardExpander}">
+                    <Expander.Tag>
+                        <ContentControl Tag="ignoreTheme|Type: bool" Template="{StaticResource SettingsCard}">
+                            <ToggleSwitch Grid.Column="2" IsOn="{x:Bind viewModel.ConfigurationManager_ignoreTheme, Mode=TwoWay}" />
+                        </ContentControl>
+                    </Expander.Tag>
+
+                    <Button Command="{x:Bind viewModel.ConfigurationManager_LoadCommand}" Content="Test Method" />
+                </Expander>
+
+                <TextBox
+                    Grid.Row="4"
+                    Height="Auto"
+                    VerticalAlignment="Top"
+                    AcceptsReturn="True"
+                    PlaceholderText="Configuration..."
+                    ScrollViewer.VerticalScrollBarVisibility="Visible"
+                    Text="{x:Bind viewModel.ConfigurationManager_currentConfig, Mode=TwoWay}" />
+            </Grid>
         </TabViewItem>
+
+        <TabViewItem Header="ThemeManager" IsClosable="False">
+            <ScrollViewer Padding="8,12" VerticalAlignment="Stretch">
+                <StackPanel Spacing="8">
+
+                    <ContentControl Tag="Export()|Export current configuration in bottom textbox" Template="{StaticResource SettingsCard}">
+                        <Button Command="{x:Bind viewModel.ConfigurationManager_ExportCommand}" Content="Test Method" />
+                    </ContentControl>
+
+                    <Expander
+                        Grid.Row="2"
+                        HorizontalAlignment="Stretch"
+                        VerticalAlignment="Top"
+                        Header="Load()|Load configuration from bottom textbox"
+                        IsExpanded="True"
+                        Template="{StaticResource CardExpander}">
+                        <Expander.Tag>
+                            <ContentControl Tag="ignoreTheme|Type: bool" Template="{StaticResource SettingsCard}">
+                                <ToggleSwitch Grid.Column="2" IsOn="{x:Bind viewModel.ConfigurationManager_ignoreTheme, Mode=TwoWay}" />
+                            </ContentControl>
+                        </Expander.Tag>
+
+                        <Button Command="{x:Bind viewModel.ConfigurationManager_LoadCommand}" Content="Test Method" />
+                    </Expander>
+
+                    <TextBox
+                        Grid.Row="4"
+                        Height="Auto"
+                        VerticalAlignment="Top"
+                        AcceptsReturn="True"
+                        PlaceholderText="Configuration..."
+                        ScrollViewer.VerticalScrollBarVisibility="Visible"
+                        Text="{x:Bind viewModel.ConfigurationManager_currentConfig, Mode=TwoWay}" />
+                </StackPanel>
+            </ScrollViewer>
+        </TabViewItem>
+
+
     </TabView>
 </Page>

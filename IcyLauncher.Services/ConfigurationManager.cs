@@ -1,4 +1,6 @@
-﻿namespace IcyLauncher.Services;
+﻿using Newtonsoft.Json;
+
+namespace IcyLauncher.Services;
 
 public class ConfigurationManager
 {
@@ -20,7 +22,7 @@ public class ConfigurationManager
 
 
     public string Export() =>
-        converter.ToString(configuration);
+        converter.ToString(configuration, Formatting.Indented);
 
     public void Load(
         Configuration input,
