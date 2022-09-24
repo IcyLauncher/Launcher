@@ -6,9 +6,11 @@ public partial class DeveloperSettingsViewModel : ObservableObject
     readonly ConfigurationManager configurationManager;
     readonly ThemeManager themeManager;
     readonly WindowHandler windowHandler;
+    readonly UIElementReciever uiElementReciever;
     readonly IConverter converter;
-    readonly IMessage message;
+    readonly IFileSystem fileSystem;
     readonly INavigation navigation;
+    readonly IMessage message;
 
     public readonly Configuration Configuration;
 
@@ -18,19 +20,26 @@ public partial class DeveloperSettingsViewModel : ObservableObject
         ConfigurationManager configurationManager,
         ThemeManager themeManager,
         WindowHandler windowHandler,
+        UIElementReciever uiElementReciever,
         IConverter converter,
-        IMessage message,
-        INavigation navigation)
+        IFileSystem fileSystem,
+        INavigation navigation,
+        IMessage message)
     {
         this.logger = logger;
         this.configurationManager = configurationManager;
         this.themeManager = themeManager;
         this.windowHandler = windowHandler;
+        this.uiElementReciever = uiElementReciever;
         this.converter = converter;
-        this.message = message;
+        this.fileSystem = fileSystem;
         this.navigation = navigation;
+        this.message = message;
 
         Configuration = configuration.Value;
+
+
+        SetupWindowHandlerViewModel();
     }
 
 

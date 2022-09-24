@@ -39,7 +39,7 @@
             <ScrollViewer Padding="8,12" VerticalAlignment="Stretch">
                 <StackPanel Spacing="8">
                     <ContentControl Tag="Show Logger|Create a new window and hook all new logger events" Template="{StaticResource SettingsCard}">
-                        <Button Command="{x:Bind viewModel.Logger_ShowCommand}" Content="Show logger" />
+                        <Button Command="{x:Bind viewModel.Logger_ShowCommand}" Content="Show Logger" />
                     </ContentControl>
 
                     <Expander
@@ -172,6 +172,193 @@
             </ScrollViewer>
         </TabViewItem>
 
+        <TabViewItem
+            Header="AppStartupHandler"
+            IsClosable="False"
+            IsEnabled="False" />
 
+        <TabViewItem Header="WindowHandler" IsClosable="False">
+            <ScrollViewer VerticalAlignment="Stretch">
+                <StackPanel Padding="8,12" Spacing="8">
+                    <ContentControl Tag="HWnd|Type: IntPtr" Template="{StaticResource SettingsCard}">
+                        <StackPanel Orientation="Horizontal" Spacing="8">
+                            <TextBox IsHitTestVisible="False" Text="{x:Bind viewModel.WindowHandler_hWnd, Mode=OneWay}" />
+                            <Button Command="{x:Bind viewModel.WindowHandler_UpdateHWndCommand}" Content="Update" />
+                        </StackPanel>
+                    </ContentControl>
+
+                    <ContentControl Tag="HasCustomTitleBar|Type: bool" Template="{StaticResource SettingsCard}">
+                        <StackPanel Orientation="Horizontal" Spacing="8">
+                            <ToggleSwitch IsHitTestVisible="False" IsOn="{x:Bind viewModel.WindowHandler_hasCustomTitleBar, Mode=OneWay}" />
+                            <Button Command="{x:Bind viewModel.WindowHandler_UpdateHasCustomTitlebarCommand}" Content="Update" />
+                        </StackPanel>
+                    </ContentControl>
+
+                    <ContentControl Tag="Size|Type: SizeInt32" Template="{StaticResource SettingsCard}">
+                        <StackPanel Orientation="Horizontal" Spacing="8">
+                            <TextBox IsHitTestVisible="False" Text="{x:Bind viewModel.WindowHandler_size, Mode=OneWay}" />
+                            <Button Command="{x:Bind viewModel.WindowHandler_UpdateSizeCommand}" Content="Update" />
+                        </StackPanel>
+                    </ContentControl>
+
+                    <ContentControl Tag="Position|Type: PointInt32" Template="{StaticResource SettingsCard}">
+                        <StackPanel Orientation="Horizontal" Spacing="8">
+                            <TextBox IsHitTestVisible="False" Text="{x:Bind viewModel.WindowHandler_position, Mode=OneWay}" />
+                            <Button Command="{x:Bind viewModel.WindowHandler_UpdatePositionCommand}" Content="Update" />
+                        </StackPanel>
+                    </ContentControl>
+
+                    <ContentControl Tag="ScreenSize|Type: RectInt32" Template="{StaticResource SettingsCard}">
+                        <StackPanel Orientation="Horizontal" Spacing="8">
+                            <TextBox IsHitTestVisible="False" Text="{x:Bind viewModel.WindowHandler_screenSize, Mode=OneWay}" />
+                            <Button Command="{x:Bind viewModel.WindowHandler_UpdateScreenSizeCommand}" Content="Update" />
+                        </StackPanel>
+                    </ContentControl>
+
+                    <ContentControl Tag="LoggerWindow|Type: Window?" Template="{StaticResource SettingsCard}">
+                        <Button Content="Show Logger" IsEnabled="False" />
+                    </ContentControl>
+
+                    <Expander
+                        HorizontalAlignment="Stretch"
+                        VerticalAlignment="Top"
+                        Header="SetIcon()|Sets the application icon for the current window"
+                        Template="{StaticResource CardExpander}">
+                        <Expander.Tag>
+                            <ContentControl Tag="path|Type: string" Template="{StaticResource SettingsCard}">
+                                <TextBox
+                                    Name="WindowHandler_IconPath"
+                                    Width="400"
+                                    PlaceholderText="Path..." />
+                            </ContentControl>
+                        </Expander.Tag>
+
+                        <Button
+                            Command="{x:Bind viewModel.WindowHandler_SetIconCommand}"
+                            CommandParameter="{Binding Text, ElementName=WindowHandler_IconPath}"
+                            Content="Test Method" />
+                    </Expander>
+
+                    <Expander
+                        HorizontalAlignment="Stretch"
+                        VerticalAlignment="Top"
+                        Header="SetSize()|Sets the size for the current window"
+                        Template="{StaticResource CardExpander}">
+                        <Expander.Tag>
+                            <StackPanel Spacing="8">
+                                <ContentControl Tag="externalWindow|[optional] [default: Window]  Type: Window?" Template="{StaticResource SettingsCard}">
+                                    <Button Content="Set Window" IsEnabled="False" />
+                                </ContentControl>
+
+                                <ContentControl Tag="width|Type: int" Template="{StaticResource SettingsCard}">
+                                    <NumberBox SpinButtonPlacementMode="Compact" Value="{x:Bind viewModel.WindowHandler_sizeWidth, Mode=TwoWay}" />
+                                </ContentControl>
+
+                                <ContentControl Tag="height|Type: int" Template="{StaticResource SettingsCard}">
+                                    <NumberBox SpinButtonPlacementMode="Compact" Value="{x:Bind viewModel.WindowHandler_sizeHeight, Mode=TwoWay}" />
+                                </ContentControl>
+                            </StackPanel>
+                        </Expander.Tag>
+
+                        <Button Command="{x:Bind viewModel.WindowHandler_SetSizeCommand}" Content="Test Method" />
+                    </Expander>
+
+                    <Expander
+                        HorizontalAlignment="Stretch"
+                        VerticalAlignment="Top"
+                        Header="SetMinSize()|[experimental]  Sets the minimum size for the current window"
+                        Template="{StaticResource CardExpander}">
+                        <Expander.Tag>
+                            <StackPanel Spacing="8">
+                                <ContentControl Tag="width|Type: int" Template="{StaticResource SettingsCard}">
+                                    <NumberBox SpinButtonPlacementMode="Compact" Value="{x:Bind viewModel.WindowHandler_minSizeWidth, Mode=TwoWay}" />
+                                </ContentControl>
+
+                                <ContentControl Tag="height|Type: int" Template="{StaticResource SettingsCard}">
+                                    <NumberBox SpinButtonPlacementMode="Compact" Value="{x:Bind viewModel.WindowHandler_minSizeHeight, Mode=TwoWay}" />
+                                </ContentControl>
+                            </StackPanel>
+                        </Expander.Tag>
+
+                        <Button Command="{x:Bind viewModel.WindowHandler_SetMinSizeCommand}" Content="Test Method" />
+                    </Expander>
+
+                    <Expander
+                        HorizontalAlignment="Stretch"
+                        VerticalAlignment="Top"
+                        Header="SetPosition()|Sets the position of the current window"
+                        Template="{StaticResource CardExpander}">
+                        <Expander.Tag>
+                            <StackPanel Spacing="8">
+                                <ContentControl Tag="x|Type: int" Template="{StaticResource SettingsCard}">
+                                    <NumberBox SpinButtonPlacementMode="Compact" Value="{x:Bind viewModel.WindowHandler_positionX, Mode=TwoWay}" />
+                                </ContentControl>
+
+                                <ContentControl Tag="y|Type: int" Template="{StaticResource SettingsCard}">
+                                    <NumberBox SpinButtonPlacementMode="Compact" Value="{x:Bind viewModel.WindowHandler_positionY, Mode=TwoWay}" />
+                                </ContentControl>
+                            </StackPanel>
+                        </Expander.Tag>
+
+                        <Button Command="{x:Bind viewModel.WindowHandler_SetPositionCommand}" Content="Test Method" />
+                    </Expander>
+
+                    <ContentControl Tag="SetPositionToCenter()|Sets the postion of the current window to the screen center" Template="{StaticResource SettingsCard}">
+                        <Button Command="{x:Bind viewModel.WindowHandler_SetPositionToCenterCommand}" Content="Test Method" />
+                    </ContentControl>
+
+                    <Expander
+                        HorizontalAlignment="Stretch"
+                        VerticalAlignment="Top"
+                        Header="Register()|Initializes an object with the current window"
+                        Template="{StaticResource CardExpander}">
+                        <Expander.Tag>
+                            <ContentControl Tag="target|Type: object" Template="{StaticResource SettingsCard}">
+                                <Button Content="Set Target" IsEnabled="False" />
+                            </ContentControl>
+                        </Expander.Tag>
+
+                        <Button Content="Test Method" IsEnabled="False" />
+                    </Expander>
+
+                    <ContentControl Tag="EnsureWindowsSystemDispatcherQueueController()|Ensures there is a windows DispatcherQueue contrroller" Template="{StaticResource SettingsCard}">
+                        <Button Command="{x:Bind viewModel.WindowHandler_EnsureWindowsSystemDispatcherQueueControllerCommand}" Content="Test Method" />
+                    </ContentControl>
+
+                    <Expander
+                        HorizontalAlignment="Stretch"
+                        VerticalAlignment="Top"
+                        Header="SetTitleBar()|Sets an UIElement as the title bar for the current window"
+                        Template="{StaticResource CardExpander}">
+                        <Expander.Tag>
+                            <StackPanel Spacing="8">
+                                <ContentControl Tag="titleBar|Type: UIElement?" Template="{StaticResource SettingsCard}">
+                                    <StackPanel Orientation="Horizontal">
+                                        <ToggleSwitch
+                                            IsOn="{x:Bind viewModel.WindowHandler_titleBarIsNull, Mode=TwoWay}"
+                                            OffContent="Is Null"
+                                            OnContent="Is Null" />
+                                        <Button Content="Set UIElement" IsEnabled="False" />
+                                    </StackPanel>
+                                </ContentControl>
+
+                                <ContentControl Tag="container|[optional] [default: null]  Type: UIElement?" Template="{StaticResource SettingsCard}">
+                                    <StackPanel Orientation="Horizontal">
+                                        <ToggleSwitch
+                                            IsOn="{x:Bind viewModel.WindowHandler_titleBarContainerIsNull, Mode=TwoWay}"
+                                            OffContent="Is Null"
+                                            OnContent="Is Null" />
+                                        <Button Content="Set UIElement" IsEnabled="False" />
+                                    </StackPanel>
+                                </ContentControl>
+                            </StackPanel>
+                        </Expander.Tag>
+
+                        <Button Command="{x:Bind viewModel.WindowHandler_SetTitleBarCommand}" Content="Test Method" />
+                    </Expander>
+
+                </StackPanel>
+            </ScrollViewer>
+        </TabViewItem>
     </TabView>
 </Page>
