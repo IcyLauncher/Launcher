@@ -3296,7 +3296,7 @@
 
             <ControlTemplate x:Key="CardExpander">
                 <Expander
-                    MinHeight="70"
+                    MinHeight="60"
                     Padding="48,24"
                     HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
                     HorizontalContentAlignment="Stretch"
@@ -3330,7 +3330,7 @@
 
             <ControlTemplate x:Key="SettingsCard">
                 <Grid
-                    Padding="12"
+                    Padding="12,12,8,12"
                     HorizontalAlignment="Stretch"
                     VerticalAlignment="Center"
                     Background="{ThemeResource ControlPrimary}"
@@ -3353,7 +3353,10 @@
                         Style="{StaticResource SubpointSecondary}"
                         Text="{Binding Tag, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource ArrayHelper}, ConverterParameter=1}"
                         TextTrimming="CharacterEllipsis" />
-                    <ContentPresenter Grid.Column="2" HorizontalAlignment="Right" />
+                    <ContentPresenter
+                        Grid.Column="2"
+                        Margin="0,0,4,0"
+                        HorizontalAlignment="Right" />
                 </Grid>
             </ControlTemplate>
 
