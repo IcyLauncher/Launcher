@@ -36,11 +36,20 @@ public partial class DeveloperSettingsViewModel : ObservableObject
         }
 
         Window loggerWindow = UIElementProvider.LoggerWindow(out TextBlock content, out ScrollViewer container);
+
+        ColorBrushConverter colorBrushConverter = new();
         container.SetBinding(Control.BackgroundProperty, new Binding()
         {
             Source = themeManager.Colors,
-            Converter = new ColorBrushConverter(),
+            Converter = colorBrushConverter,
             Path = new PropertyPath("Background.Solid"),
+            Mode = BindingMode.OneWay
+        });
+        content.SetBinding(TextBlock.ForegroundProperty, new Binding()
+        {
+            Source = themeManager.Colors,
+            Converter = colorBrushConverter,
+            Path = new PropertyPath("Text.Secondary"),
             Mode = BindingMode.OneWay
         });
 
