@@ -1,6 +1,7 @@
 ﻿using IcyLauncher.Xaml.Converters;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Data;
+using Newtonsoft.Json;
 using System.ComponentModel;
 using Windows.UI;
 using Windows.UI.ViewManagement;
@@ -45,7 +46,7 @@ public class ThemeManager
 
 
     public string Export() =>
-        converter.ToString(configuration.Apperance.Colors);
+        converter.ToString(configuration.Apperance.Colors, Formatting.Indented);
 
     public void Load(
         Theme input,
@@ -146,7 +147,7 @@ public class ThemeManager
             resourceColors.Control = Colors.Control;
         }
 
-        logger.Log($"Set resource colors from configuration");
+        logger.Log($"Set resource colors from current theme");
     }
 
     public void SetUnbindableBindings()

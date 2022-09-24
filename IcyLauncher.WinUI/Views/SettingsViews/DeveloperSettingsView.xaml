@@ -46,7 +46,6 @@
                         HorizontalAlignment="Stretch"
                         VerticalAlignment="Top"
                         Header="Log()|Logs any message or exception to the console and writes it to a local text file"
-                        IsExpanded="True"
                         Template="{StaticResource CardExpander}">
                         <Expander.Tag>
                             <StackPanel Spacing="8">
@@ -116,11 +115,10 @@
                     HorizontalAlignment="Stretch"
                     VerticalAlignment="Top"
                     Header="Load()|Load configuration from bottom textbox"
-                    IsExpanded="True"
                     Template="{StaticResource CardExpander}">
                     <Expander.Tag>
                         <ContentControl Tag="ignoreTheme|Type: bool" Template="{StaticResource SettingsCard}">
-                            <ToggleSwitch Grid.Column="2" IsOn="{x:Bind viewModel.ConfigurationManager_ignoreTheme, Mode=TwoWay}" />
+                            <ToggleSwitch IsOn="{x:Bind viewModel.ConfigurationManager_ignoreTheme, Mode=TwoWay}" />
                         </ContentControl>
                     </Expander.Tag>
 
@@ -141,35 +139,35 @@
         <TabViewItem Header="ThemeManager" IsClosable="False">
             <ScrollViewer Padding="8,12" VerticalAlignment="Stretch">
                 <StackPanel Spacing="8">
-
-                    <ContentControl Tag="Export()|Export current configuration in bottom textbox" Template="{StaticResource SettingsCard}">
-                        <Button Command="{x:Bind viewModel.ConfigurationManager_ExportCommand}" Content="Test Method" />
+                    <ContentControl Tag="Export()|Export current theme in bottom textbox" Template="{StaticResource SettingsCard}">
+                        <Button Content="Test Method" IsEnabled="False" />
                     </ContentControl>
 
                     <Expander
-                        Grid.Row="2"
                         HorizontalAlignment="Stretch"
                         VerticalAlignment="Top"
-                        Header="Load()|Load configuration from bottom textbox"
-                        IsExpanded="True"
+                        Header="Load()|Load theme from bottom textbox"
                         Template="{StaticResource CardExpander}">
                         <Expander.Tag>
-                            <ContentControl Tag="ignoreTheme|Type: bool" Template="{StaticResource SettingsCard}">
-                                <ToggleSwitch Grid.Column="2" IsOn="{x:Bind viewModel.ConfigurationManager_ignoreTheme, Mode=TwoWay}" />
+                            <ContentControl Tag="ignoreAccent|Type: bool" Template="{StaticResource SettingsCard}">
+                                <ToggleSwitch IsEnabled="False" />
                             </ContentControl>
                         </Expander.Tag>
 
-                        <Button Command="{x:Bind viewModel.ConfigurationManager_LoadCommand}" Content="Test Method" />
+                        <Button Content="Test Method" IsEnabled="False" />
                     </Expander>
 
-                    <TextBox
-                        Grid.Row="4"
-                        Height="Auto"
-                        VerticalAlignment="Top"
-                        AcceptsReturn="True"
-                        PlaceholderText="Configuration..."
-                        ScrollViewer.VerticalScrollBarVisibility="Visible"
-                        Text="{x:Bind viewModel.ConfigurationManager_currentConfig, Mode=TwoWay}" />
+                    <ContentControl Tag="RandomizeTheme()|Randomize every single color in current theme" Template="{StaticResource SettingsCard}">
+                        <Button Command="{x:Bind viewModel.ThemeManager_RandomizeThemeCommand}" Content="Test Method" />
+                    </ContentControl>
+
+                    <ContentControl Tag="SetResourceColors()|Sets resource colors from current configuration" Template="{StaticResource SettingsCard}">
+                        <Button Command="{x:Bind viewModel.ThemeManager_SetResourceColorsCommand}" Content="Test Method" />
+                    </ContentControl>
+
+                    <ContentControl Tag="SetUnbindableBindings()|Binds non-bindable properties of UIElementReciever elements to their respected colors" Template="{StaticResource SettingsCard}">
+                        <Button Command="{x:Bind viewModel.ThemeManager_SetUnbindableBindingsCommand}" Content="Test Method" />
+                    </ContentControl>
                 </StackPanel>
             </ScrollViewer>
         </TabViewItem>
