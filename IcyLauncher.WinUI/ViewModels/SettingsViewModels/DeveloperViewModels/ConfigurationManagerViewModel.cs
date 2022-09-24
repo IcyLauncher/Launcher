@@ -18,6 +18,6 @@ public partial class DeveloperSettingsViewModel : ObservableObject
         if (converter.TryToObject(out Configuration? configuration, ConfigurationManager_currentConfig) == true)
             configurationManager.Load(configuration!, ConfigurationManager_ignoreTheme);
         else
-            await message.ShowAsync("Something went wrong :(", "It looks like this is not a valid configuration. Please verify every property is being set.");
+            await message.ShowAsync("Something went wrong :(", "It looks like this is not a valid configuration. Please verify every property is being set.", closeButton: "Ok");
     }
 }
