@@ -321,6 +321,26 @@
             <SolidColorBrush x:Key="TabViewItemIconForegroundPressed" Color="{Binding Color, Source={ThemeResource TextTertiary}}" />
             <SolidColorBrush x:Key="TabViewItemIconForegroundDisabled" Color="{Binding Color, Source={ThemeResource TextDisabled}}" />
 
+            <SolidColorBrush x:Key="TabViewButtonBackground" Color="{Binding Color, Source={ThemeResource ControlPrimary}}" />
+            <SolidColorBrush x:Key="TabViewButtonBackgroundPointerOver" Color="{Binding Color, Source={ThemeResource ControlOutline}}" />
+            <SolidColorBrush x:Key="TabViewButtonBackgroundPressed" Color="{Binding Color, Source={ThemeResource ControlPrimaryDisabled}}" />
+            <SolidColorBrush x:Key="TabViewButtonBackgroundDisabled" Color="{Binding Color, Source={ThemeResource ControlPrimaryDisabled}}" />
+
+            <SolidColorBrush x:Key="TabViewButtonForeground" Color="{Binding Color, Source={ThemeResource TextSecondary}}" />
+            <SolidColorBrush x:Key="TabViewButtonForegroundPointerOver" Color="{Binding Color, Source={ThemeResource TextPrimary}}" />
+            <SolidColorBrush x:Key="TabViewButtonForegroundPressed" Color="{Binding Color, Source={ThemeResource TextTertiary}}" />
+            <SolidColorBrush x:Key="TabViewButtonForegroundDisabled" Color="{Binding Color, Source={ThemeResource TextDisabled}}" />
+
+            <SolidColorBrush x:Key="TabViewScrollButtonBackground" Color="{Binding Color, Source={ThemeResource ControlPrimary}}" />
+            <SolidColorBrush x:Key="TabViewScrollButtonBackgroundPointerOver" Color="{Binding Color, Source={ThemeResource ControlOutline}}" />
+            <SolidColorBrush x:Key="TabViewScrollButtonBackgroundPressed" Color="{Binding Color, Source={ThemeResource ControlPrimaryDisabled}}" />
+            <SolidColorBrush x:Key="TabViewScrollButtonBackgroundDisabled" Color="{Binding Color, Source={ThemeResource ControlPrimaryDisabled}}" />
+
+            <SolidColorBrush x:Key="TabViewScrollButtonForeground" Color="{Binding Color, Source={ThemeResource TextSecondary}}" />
+            <SolidColorBrush x:Key="TabViewScrollButtonForegroundPointerOver" Color="{Binding Color, Source={ThemeResource TextPrimary}}" />
+            <SolidColorBrush x:Key="TabViewScrollButtonForegroundPressed" Color="{Binding Color, Source={ThemeResource TextTertiary}}" />
+            <SolidColorBrush x:Key="TabViewScrollButtonForegroundDisabled" Color="{Binding Color, Source={ThemeResource TextDisabled}}" />
+
 
             <SolidColorBrush x:Key="ExpanderHeaderBackground" Color="{Binding Color, Source={ThemeResource ControlPrimary}}" />
 
