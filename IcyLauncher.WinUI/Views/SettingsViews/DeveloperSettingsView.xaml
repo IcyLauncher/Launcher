@@ -33,7 +33,7 @@
         CanDrag="False"
         CanDragTabs="False"
         CanReorderTabs="False"
-        IsAddTabButtonVisible="False">
+        IsAddTabButtonVisible="True">
 
         <TabViewItem Header="ILogger&lt;SampleClass&gt;" IsClosable="False">
             <ScrollViewer Padding="8,12" VerticalAlignment="Stretch">
@@ -156,6 +156,12 @@
 
                         <Button Content="Test Method" IsEnabled="False" />
                     </Expander>
+
+                    <TextBox
+                        Grid.Row="4"
+                        VerticalAlignment="Top"
+                        IsEnabled="False"
+                        PlaceholderText="Theme..." />
 
                     <ContentControl Tag="RandomizeTheme()|Randomize every single color in current theme" Template="{StaticResource SettingsCard}">
                         <Button Command="{x:Bind viewModel.ThemeManager_RandomizeThemeCommand}" Content="Test Method" />
@@ -321,7 +327,7 @@
                         <Button Content="Test Method" IsEnabled="False" />
                     </Expander>
 
-                    <ContentControl Tag="EnsureWindowsSystemDispatcherQueueController()|Ensures there is a windows DispatcherQueue contrroller" Template="{StaticResource SettingsCard}">
+                    <ContentControl Tag="EnsureWindowsSystemDispatcherQueueController()|Ensures there is a windows DispatcherQueueContrroller" Template="{StaticResource SettingsCard}">
                         <Button Command="{x:Bind viewModel.WindowHandler_EnsureWindowsSystemDispatcherQueueControllerCommand}" Content="Test Method" />
                     </ContentControl>
 
@@ -333,22 +339,22 @@
                         <Expander.Tag>
                             <StackPanel Spacing="8">
                                 <ContentControl Tag="titleBar|Type: UIElement?" Template="{StaticResource SettingsCard}">
-                                    <StackPanel Orientation="Horizontal">
+                                    <StackPanel Orientation="Horizontal" Spacing="8">
+                                        <Button Content="Set UIElement" IsEnabled="False" />
                                         <ToggleSwitch
                                             IsOn="{x:Bind viewModel.WindowHandler_titleBarIsNull, Mode=TwoWay}"
                                             OffContent="Is Null"
                                             OnContent="Is Null" />
-                                        <Button Content="Set UIElement" IsEnabled="False" />
                                     </StackPanel>
                                 </ContentControl>
 
                                 <ContentControl Tag="container|[optional] [default: null]  Type: UIElement?" Template="{StaticResource SettingsCard}">
-                                    <StackPanel Orientation="Horizontal">
+                                    <StackPanel Orientation="Horizontal" Spacing="8">
+                                        <Button Content="Set UIElement" IsEnabled="False" />
                                         <ToggleSwitch
                                             IsOn="{x:Bind viewModel.WindowHandler_titleBarContainerIsNull, Mode=TwoWay}"
                                             OffContent="Is Null"
                                             OnContent="Is Null" />
-                                        <Button Content="Set UIElement" IsEnabled="False" />
                                     </StackPanel>
                                 </ContentControl>
                             </StackPanel>
@@ -360,5 +366,263 @@
                 </StackPanel>
             </ScrollViewer>
         </TabViewItem>
+
+        <TabViewItem Header="UIElementReciever" IsClosable="False">
+            <ScrollViewer VerticalAlignment="Stretch">
+                <StackPanel Padding="8,12" Spacing="8">
+                    <ContentControl Tag="MainGrid|Type: Grid" Template="{StaticResource SettingsCard}">
+                        <TextBox IsHitTestVisible="False" Text="{x:Bind viewModel.UIElementReviever_mainGrid, Mode=OneWay}" />
+                    </ContentControl>
+
+                    <ContentControl Tag="NavigationView|Type: NavigationView" Template="{StaticResource SettingsCard}">
+                        <TextBox IsHitTestVisible="False" Text="{x:Bind viewModel.UIElementReviever_navigationView, Mode=OneWay}" />
+                    </ContentControl>
+
+                    <ContentControl Tag="NavigationFrame|Type: Frame" Template="{StaticResource SettingsCard}">
+                        <TextBox IsHitTestVisible="False" Text="{x:Bind viewModel.UIElementReviever_navigationFrame, Mode=OneWay}" />
+                    </ContentControl>
+
+                    <ContentControl Tag="TitleBarContainer|Type: Grid" Template="{StaticResource SettingsCard}">
+                        <TextBox IsHitTestVisible="False" Text="{x:Bind viewModel.UIElementReviever_titleBarContainer, Mode=OneWay}" />
+                    </ContentControl>
+
+                    <ContentControl Tag="TitleBar|Type: StackPanel" Template="{StaticResource SettingsCard}">
+                        <TextBox IsHitTestVisible="False" Text="{x:Bind viewModel.UIElementReviever_titleBar, Mode=OneWay}" />
+                    </ContentControl>
+
+                    <ContentControl Tag="TitleBarDragArea|Type: Grid" Template="{StaticResource SettingsCard}">
+                        <TextBox IsHitTestVisible="False" Text="{x:Bind viewModel.UIElementReviever_titleBarDragArea, Mode=OneWay}" />
+                    </ContentControl>
+
+                    <ContentControl Tag="BackButton|Type: Button" Template="{StaticResource SettingsCard}">
+                        <TextBox IsHitTestVisible="False" Text="{x:Bind viewModel.UIElementReviever_backButton, Mode=OneWay}" />
+                    </ContentControl>
+
+                    <ContentControl Tag="BackButtonIcon|Type: AnimatedIcon" Template="{StaticResource SettingsCard}">
+                        <TextBox IsHitTestVisible="False" Text="{x:Bind viewModel.UIElementReviever_backButtonIcon, Mode=OneWay}" />
+                    </ContentControl>
+
+                    <ContentControl Tag="TitleBarIconGradientStops|Type: GradientStopCollection" Template="{StaticResource SettingsCard}">
+                        <TextBox IsHitTestVisible="False" Text="{x:Bind viewModel.UIElementReviever_titleBarIconGradientStops, Mode=OneWay}" />
+                    </ContentControl>
+
+                    <ContentControl Tag="TitleBarTitle|Type: TextBlock" Template="{StaticResource SettingsCard}">
+                        <TextBox IsHitTestVisible="False" Text="{x:Bind viewModel.UIElementReviever_titleBarTitle, Mode=OneWay}" />
+                    </ContentControl>
+                </StackPanel>
+            </ScrollViewer>
+        </TabViewItem>
+
+        <TabViewItem Header="MicaBackdropHandler" IsClosable="False">
+            <ScrollViewer VerticalAlignment="Stretch">
+                <StackPanel Padding="8,12" Spacing="8">
+                    <ContentControl Tag="EnableBackdrop()|Enable mica backdrop for the current window" Template="{StaticResource SettingsCard}">
+                        <Button Command="{x:Bind viewModel.MicaBackdropHandler_EnableBackdropCommand}" Content="Test Method" />
+                    </ContentControl>
+
+                    <ContentControl Tag="DisableBackdrop()|Disable mica backdrop for the current window" Template="{StaticResource SettingsCard}">
+                        <Button Command="{x:Bind viewModel.MicaBackdropHandler_DisableBackdropCommand}" Content="Test Method" />
+                    </ContentControl>
+
+                    <ContentControl Tag="IsDarkModeEnabled|Type: bool" Template="{StaticResource SettingsCard}">
+                        <ToggleSwitch IsOn="{x:Bind viewModel.MicaBackdropHandler_isDarkModeEnabled, Mode=TwoWay}" />
+                    </ContentControl>
+                </StackPanel>
+            </ScrollViewer>
+        </TabViewItem>
+
+        <TabViewItem Header="AcrylicBackdropHandler" IsClosable="False">
+            <ScrollViewer VerticalAlignment="Stretch">
+                <StackPanel Padding="8,12" Spacing="8">
+                    <ContentControl Tag="EnableBackdrop()|Enable acrylic backdrop for the current window" Template="{StaticResource SettingsCard}">
+                        <Button Command="{x:Bind viewModel.AcrylicBackdropHandler_EnableBackdropCommand}" Content="Test Method" />
+                    </ContentControl>
+
+                    <ContentControl Tag="DisableBackdrop()|Disable acrylic backdrop for the current window" Template="{StaticResource SettingsCard}">
+                        <Button Command="{x:Bind viewModel.AcrylicBackdropHandler_DisableBackdropCommand}" Content="Test Method" />
+                    </ContentControl>
+
+                    <ContentControl Tag="IsDarkModeEnabled|Type: bool" Template="{StaticResource SettingsCard}">
+                        <ToggleSwitch IsOn="{x:Bind viewModel.AcrylicBackdropHandler_isDarkModeEnabled, Mode=TwoWay}" />
+                    </ContentControl>
+                </StackPanel>
+            </ScrollViewer>
+        </TabViewItem>
+
+        <TabViewItem Header="VibrancyBackdropHandler" IsClosable="False">
+            <ScrollViewer VerticalAlignment="Stretch">
+                <StackPanel Padding="8,12" Spacing="8">
+                    <ContentControl Tag="EnableBackdrop()|Enable vibrancy backdrop for the current window" Template="{StaticResource SettingsCard}">
+                        <Button Command="{x:Bind viewModel.VibrancyBackdropHandler_EnableBackdropCommand}" Content="Test Method" />
+                    </ContentControl>
+
+                    <ContentControl Tag="DisableBackdrop()|Disable vibrancy backdrop for the current window" Template="{StaticResource SettingsCard}">
+                        <Button Command="{x:Bind viewModel.VibrancyBackdropHandler_DisableBackdropCommand}" Content="Test Method" />
+                    </ContentControl>
+                </StackPanel>
+            </ScrollViewer>
+        </TabViewItem>
+
+        <TabViewItem Header="BackdropHandler" IsClosable="False">
+            <ScrollViewer VerticalAlignment="Stretch">
+                <StackPanel Padding="8,12" Spacing="8">
+                    <ContentControl Tag="IsMicaEnabled|Type: bool" Template="{StaticResource SettingsCard}">
+                        <StackPanel Orientation="Horizontal" Spacing="8">
+                            <ToggleSwitch IsHitTestVisible="False" IsOn="{x:Bind viewModel.BackdropHandler_isMicaEnabled, Mode=OneWay}" />
+                            <Button Command="{x:Bind viewModel.BackdropHandler_UpdateIsMicaEnabledCommand}" Content="Update" />
+                        </StackPanel>
+                    </ContentControl>
+
+                    <ContentControl Tag="IsAcrylicEnabled|Type: bool" Template="{StaticResource SettingsCard}">
+                        <StackPanel Orientation="Horizontal" Spacing="8">
+                            <ToggleSwitch IsHitTestVisible="False" IsOn="{x:Bind viewModel.BackdropHandler_isAcrylicEnabled, Mode=OneWay}" />
+                            <Button Command="{x:Bind viewModel.BackdropHandler_UpdateIsAcrylicEnabledCommand}" Content="Update" />
+                        </StackPanel>
+                    </ContentControl>
+
+                    <ContentControl Tag="IsVibrancyEnabled|Type: bool" Template="{StaticResource SettingsCard}">
+                        <StackPanel Orientation="Horizontal" Spacing="8">
+                            <ToggleSwitch IsHitTestVisible="False" IsOn="{x:Bind viewModel.BackdropHandler_isVibrancyEnabled, Mode=OneWay}" />
+                            <Button Command="{x:Bind viewModel.BackdropHandler_UpdateIsVibrancyEnabledCommand}" Content="Update" />
+                        </StackPanel>
+                    </ContentControl>
+
+                    <ContentControl Tag="IsNoneEnabled|Type: bool" Template="{StaticResource SettingsCard}">
+                        <StackPanel Orientation="Horizontal" Spacing="8">
+                            <ToggleSwitch IsHitTestVisible="False" IsOn="{x:Bind viewModel.BackdropHandler_isNoneEnabled, Mode=OneWay}" />
+                            <Button Command="{x:Bind viewModel.BackdropHandler_UpdateIsNoneEnabledCommand}" Content="Update" />
+                        </StackPanel>
+                    </ContentControl>
+
+                    <ContentControl Tag="Current|Type: Backdrop?" Template="{StaticResource SettingsCard}">
+                        <StackPanel Orientation="Horizontal" Spacing="8">
+                            <ComboBox
+                                Width="110"
+                                IsHitTestVisible="False"
+                                PlaceholderText="Backdrop..."
+                                SelectedIndex="{x:Bind viewModel.BackdropHandler_current, Mode=OneWay, Converter={StaticResource EnumIntConverter}}">
+                                <ComboBoxItem Content="Mica" />
+                                <ComboBoxItem Content="Acrylic" />
+                                <ComboBoxItem Content="Vibrancy" />
+                                <ComboBoxItem Content="None" />
+                            </ComboBox>
+                            <Button Command="{x:Bind viewModel.BackdropHandler_UpdateCurrentCommand}" Content="Update" />
+                        </StackPanel>
+                    </ContentControl>
+
+                    <Expander
+                        HorizontalAlignment="Stretch"
+                        VerticalAlignment="Top"
+                        Header="SetBackdrop()|Enables or disables a backdrop and updates backdrop darkmode for the current window"
+                        Template="{StaticResource CardExpander}">
+                        <Expander.Tag>
+                            <StackPanel Spacing="8">
+                                <ContentControl Tag="backdrop|Type: Backdrop" Template="{StaticResource SettingsCard}">
+                                    <ComboBox
+                                        Width="110"
+                                        PlaceholderText="Backdrop..."
+                                        SelectedIndex="{x:Bind viewModel.BackdropHandler_backdrop, Mode=TwoWay, Converter={StaticResource EnumIntConverter}}">
+                                        <ComboBoxItem Content="Mica" />
+                                        <ComboBoxItem Content="Acrylic" />
+                                        <ComboBoxItem Content="Vibrancy" />
+                                        <ComboBoxItem Content="None" />
+                                    </ComboBox>
+                                </ContentControl>
+                                <ContentControl Tag="enable|Type: bool" Template="{StaticResource SettingsCard}">
+                                    <ToggleSwitch IsOn="{x:Bind viewModel.BackdropHandler_enable, Mode=TwoWay}" />
+                                </ContentControl>
+                                <ContentControl Tag="useDarkMode|[optional] [default: null]  Type: bool?" Template="{StaticResource SettingsCard}">
+                                    <StackPanel Orientation="Horizontal" Spacing="8">
+                                        <ToggleSwitch IsOn="{x:Bind viewModel.BackdropHandler_useDarkMode, Mode=TwoWay}" />
+                                        <ToggleSwitch
+                                            IsOn="{x:Bind viewModel.BackdropHandler_useDarkModeIsNull, Mode=TwoWay}"
+                                            OffContent="Is Null"
+                                            OnContent="Is Null" />
+                                    </StackPanel>
+                                </ContentControl>
+                            </StackPanel>
+                        </Expander.Tag>
+
+                        <Button Command="{x:Bind viewModel.BackdropHandler_SetBackdropCommand}" Content="Test Method" />
+                    </Expander>
+
+                    <Expander
+                        HorizontalAlignment="Stretch"
+                        VerticalAlignment="Top"
+                        Header="SetDarkMode()|Updates backdrop darkmode for the current window"
+                        Template="{StaticResource CardExpander}">
+                        <Expander.Tag>
+                            <StackPanel Spacing="8">
+                                <ContentControl Tag="backdrop|Type: Backdrop" Template="{StaticResource SettingsCard}">
+                                    <ComboBox
+                                        Width="110"
+                                        PlaceholderText="Backdrop..."
+                                        SelectedIndex="{x:Bind viewModel.BackdropHandler_backdrop, Mode=TwoWay, Converter={StaticResource EnumIntConverter}}">
+                                        <ComboBoxItem Content="Mica" />
+                                        <ComboBoxItem Content="Acrylic" />
+                                        <ComboBoxItem Content="Vibrancy" />
+                                        <ComboBoxItem Content="None" />
+                                    </ComboBox>
+                                </ContentControl>
+                                <ContentControl Tag="useDarkMode|[optional] [default: true]  Type: bool" Template="{StaticResource SettingsCard}">
+                                    <ToggleSwitch IsOn="{x:Bind viewModel.BackdropHandler_useDarkMode, Mode=TwoWay}" />
+                                </ContentControl>
+                            </StackPanel>
+                        </Expander.Tag>
+
+                        <Button Command="{x:Bind viewModel.BackdropHandler_SetDarkModeCommand}" Content="Test Method" />
+                    </Expander>
+                </StackPanel>
+            </ScrollViewer>
+        </TabViewItem>
+
+        <TabViewItem Header="IConverter" IsClosable="False">
+            <ScrollViewer VerticalAlignment="Stretch">
+                <StackPanel Padding="8,12" Spacing="8">
+                    <ContentControl Tag="Test Object|This is an exmaple SolidColor object to test json converting" Template="{StaticResource SettingsCard}">
+                        <StackPanel Orientation="Horizontal" Spacing="8">
+                            <TextBox MaxWidth="200" MinWidth="100" Text="{x:Bind viewModel.IConverter_object.Name, Mode=TwoWay}" />
+                            <ColorPicker
+                                Margin="0,0,-117,0"
+                                Template="{StaticResource ColorPickerButton}"
+                                Color="{x:Bind viewModel.IConverter_object.Color, Mode=TwoWay}" />
+                        </StackPanel>
+                    </ContentControl>
+
+                    <TextBox
+                        Height="Auto"
+                        MinHeight="100"
+                        MaxHeight="200"
+                        VerticalAlignment="Top"
+                        AcceptsReturn="True"
+                        PlaceholderText="Input..."
+                        ScrollViewer.VerticalScrollBarVisibility="Visible"
+                        Text="{x:Bind viewModel.IConverter_input, Mode=TwoWay}" />
+
+                    <Expander Margin="0,12,0,0"
+                        HorizontalAlignment="Stretch"
+                        VerticalAlignment="Top"
+                        Header="ToString()|Converts any object into a json string"
+                        Template="{StaticResource CardExpander}">
+                        <Expander.Tag>
+                            <StackPanel Spacing="8">
+                                <ContentControl Tag="formatting|[optional] [default = null] Type: object?" Template="{StaticResource SettingsCard}">
+                                    <ComboBox
+                                        Width="110"
+                                        PlaceholderText="Backdrop..."
+                                        SelectedIndex="{x:Bind viewModel.IConverter_formatting, Mode=TwoWay, Converter={StaticResource EnumIntConverter}}">
+                                        <ComboBoxItem Content="None" />
+                                        <ComboBoxItem Content="Indented" />
+                                    </ComboBox>
+                                </ContentControl>
+                            </StackPanel>
+                        </Expander.Tag>
+
+                        <Button Command="{x:Bind viewModel.IConverter_ToStringCommand}" Content="Test Method" />
+                    </Expander>
+                </StackPanel>
+            </ScrollViewer>
+        </TabViewItem>
+
     </TabView>
 </Page>

@@ -7,6 +7,10 @@ public partial class DeveloperSettingsViewModel : ObservableObject
     readonly ThemeManager themeManager;
     readonly WindowHandler windowHandler;
     readonly UIElementReciever uiElementReciever;
+    readonly IBackdropHandler micaBackdropHandler;
+    readonly IBackdropHandler acrylicBackdropHandler;
+    readonly IBackdropHandler vibrancyBackdropHandler;
+    readonly BackdropHandler backdropHandler;
     readonly IConverter converter;
     readonly IFileSystem fileSystem;
     readonly INavigation navigation;
@@ -21,6 +25,10 @@ public partial class DeveloperSettingsViewModel : ObservableObject
         ThemeManager themeManager,
         WindowHandler windowHandler,
         UIElementReciever uiElementReciever,
+        MicaBackdropHandler micaBackdropHandler,
+        AcrylicBackdropHandler acrylicBackdropHandler,
+        VibrancyBackdropHandler vibrancyBackdropHandler,
+        BackdropHandler backdropHandler,
         IConverter converter,
         IFileSystem fileSystem,
         INavigation navigation,
@@ -31,6 +39,10 @@ public partial class DeveloperSettingsViewModel : ObservableObject
         this.themeManager = themeManager;
         this.windowHandler = windowHandler;
         this.uiElementReciever = uiElementReciever;
+        this.micaBackdropHandler = micaBackdropHandler;
+        this.acrylicBackdropHandler = acrylicBackdropHandler;
+        this.vibrancyBackdropHandler = vibrancyBackdropHandler;
+        this.backdropHandler = backdropHandler;
         this.converter = converter;
         this.fileSystem = fileSystem;
         this.navigation = navigation;
@@ -40,6 +52,10 @@ public partial class DeveloperSettingsViewModel : ObservableObject
 
 
         SetupWindowHandlerViewModel();
+        SetupUIElementRevieverViewModel();
+        SetupMicaBackdropHandlerViewModel();
+        SetupAcrylicBackdropHandlerViewModel();
+        SetupBackdropHandlerViewModel();
     }
 
 
