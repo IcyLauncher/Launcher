@@ -15,7 +15,7 @@ public partial class DeveloperSettingsViewModel : ObservableObject
 
 
     [ObservableProperty]
-    string windowHandler_hWnd;
+    string windowHandler_hWnd = default;
 
     [RelayCommand]
     void WindowHandler_UpdateHWnd() =>
@@ -23,7 +23,7 @@ public partial class DeveloperSettingsViewModel : ObservableObject
 
 
     [ObservableProperty]
-    bool windowHandler_hasCustomTitleBar;
+    bool windowHandler_hasCustomTitleBar = default;
 
     [RelayCommand]
     void WindowHandler_UpdateHasCustomTitlebar() =>
@@ -31,7 +31,7 @@ public partial class DeveloperSettingsViewModel : ObservableObject
 
 
     [ObservableProperty]
-    string windowHandler_size;
+    string windowHandler_size = default;
 
     [RelayCommand]
     void WindowHandler_UpdateSize()
@@ -42,7 +42,7 @@ public partial class DeveloperSettingsViewModel : ObservableObject
 
 
     [ObservableProperty]
-    string windowHandler_position;
+    string windowHandler_position = default;
 
     [RelayCommand]
     void WindowHandler_UpdatePosition()
@@ -53,7 +53,7 @@ public partial class DeveloperSettingsViewModel : ObservableObject
 
 
     [ObservableProperty]
-    string windowHandler_screenSize;
+    string windowHandler_screenSize = default;
 
     [RelayCommand]
     void WindowHandler_UpdateScreenSize()

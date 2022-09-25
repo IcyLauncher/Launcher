@@ -139,7 +139,7 @@ public class WindowHandler
 
                 HasCustomTitleBar = false;
 
-                logger.Log("Removed TitleBar [Win10-UIElement]");
+                logger.Log("Removed custom TitleBar");
                 return true;
             }
 
@@ -151,12 +151,12 @@ public class WindowHandler
 
             HasCustomTitleBar = true;
 
-            logger.Log("Set TitleBar [Win10-UIElement]");
+            logger.Log("Set custom TitleBar");
             return true;
         }
         catch (Exception ex)
         {
-            logger.Log("Failed to set TitleBar [Win10-UIElement]", ex);
+            logger.Log("Failed to set custom TitleBar", ex);
             return false;
         }
     }
