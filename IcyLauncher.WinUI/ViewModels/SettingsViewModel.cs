@@ -232,16 +232,29 @@ public partial class SettingsViewModel : ObservableObject
         if (file is null || string.IsNullOrWhiteSpace(file.Path))
             return;
 
-        if (fileSystem.FileExists(file.Path))
+        if (!fileSystem.FileExists(file.Path))
         {
-            string str = loadConfig ? "configuration" : "theme";
-            if (await message.ShowAsync("Are you sure?", $"Do you really want to overwrite your current {str} by this external {str}?\nLoading external {str}s can be dangerous. Make sure you backup your current {str}.\nDo you want to continue?", closeButton: "No", primaryButton: "Yes") == ContentDialogResult.Primary)
-                if (loadConfig)
-                    configurationManager.Load(converter.ToObject<Configuration>(await fileSystem.ReadAsTextAsync(file.Path).ConfigureAwait(false)), true);
-                else
-                    themeManager.Load(converter.ToObject<Theme>(await fileSystem.ReadAsTextAsync(file.Path).ConfigureAwait(false)));
+            await message.ShowAsync("Something went wrong :(", "It looks like this file does no longer exist. Please verify the file still exists.", true, "Ok");
+            return;
+        }
+
+        string str = loadConfig ? "configuration" : "theme";
+        if (await message.ShowAsync("Are you sure?", $"Do you really want to overwrite your current {str} by this external {str}?\nLoading external {str}s can be dangerous. Make sure you backup your current {str}.\nDo you want to continue?", closeButton: "No", primaryButton: "Yes") != ContentDialogResult.Primary)
+            return;
+
+        if (loadConfig)
+        {
+            if (converter.TryToObject(out Configuration? configuration, await fileSystem.ReadAsTextAsync(file.Path).ConfigureAwait(false)) == true)
+                configurationManager.Load(configuration!, true);
+            else
+                await message.ShowAsync("Something went wrong :(", "It looks like this is not a valid configuration.\nPlease verify the file is a proper JSON and every property is being set.", closeButton: "Ok");
         }
         else
-            await message.ShowAsync("Something went wrong :(", "It looks like this file does no longer exist. Please verify the file still exists.", true, "Ok");
+        {
+            if (converter.TryToObject(out Theme? configuration, await fileSystem.ReadAsTextAsync(file.Path).ConfigureAwait(false)) == true)
+                themeManager.Load(configuration!);
+            else
+                await message.ShowAsync("Something went wrong :(", "It looks like this is not a valid configuration.\nPlease verify the file is a proper JSON and every property is being set.", closeButton: "Ok");
+        }
     }
 }
