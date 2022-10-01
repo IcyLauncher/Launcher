@@ -99,19 +99,30 @@
         <TabViewItem Header="ConfigurationManager" IsClosable="False">
             <Grid Padding="8,12">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="8" />
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="8" />
                     <RowDefinition Height="*" />
+                    <RowDefinition Height="8" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="8" />
+                    <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
 
-                <ContentControl Tag="Export()|Export current configuration in bottom textbox" Template="{StaticResource SettingsCard}">
+                <TextBox
+                    Height="Auto"
+                    VerticalAlignment="Top"
+                    AcceptsReturn="True"
+                    PlaceholderText="Configuration..."
+                    ScrollViewer.VerticalScrollBarVisibility="Visible"
+                    Text="{x:Bind viewModel.ConfigurationManager_currentConfig, Mode=TwoWay}" />
+
+                <ContentControl
+                    Grid.Row="2"
+                    Tag="Export()|Export current configuration in bottom textbox"
+                    Template="{StaticResource SettingsCard}">
                     <Button Command="{x:Bind viewModel.ConfigurationManager_ExportCommand}" Content="Test Method" />
                 </ContentControl>
 
                 <Expander
-                    Grid.Row="2"
+                    Grid.Row="4"
                     HorizontalAlignment="Stretch"
                     VerticalAlignment="Top"
                     Header="Load()|Load configuration from bottom textbox"
@@ -124,21 +135,17 @@
 
                     <Button Command="{x:Bind viewModel.ConfigurationManager_LoadCommand}" Content="Test Method" />
                 </Expander>
-
-                <TextBox
-                    Grid.Row="4"
-                    Height="Auto"
-                    VerticalAlignment="Top"
-                    AcceptsReturn="True"
-                    PlaceholderText="Configuration..."
-                    ScrollViewer.VerticalScrollBarVisibility="Visible"
-                    Text="{x:Bind viewModel.ConfigurationManager_currentConfig, Mode=TwoWay}" />
             </Grid>
         </TabViewItem>
 
         <TabViewItem Header="ThemeManager" IsClosable="False">
             <ScrollViewer Padding="8,12" VerticalAlignment="Stretch">
                 <StackPanel Spacing="8">
+                    <TextBox
+                        VerticalAlignment="Top"
+                        IsEnabled="False"
+                        PlaceholderText="Theme..." />
+
                     <ContentControl Tag="Export()|Export current theme in bottom textbox" Template="{StaticResource SettingsCard}">
                         <Button Content="Test Method" IsEnabled="False" />
                     </ContentControl>
@@ -156,12 +163,6 @@
 
                         <Button Content="Test Method" IsEnabled="False" />
                     </Expander>
-
-                    <TextBox
-                        Grid.Row="4"
-                        VerticalAlignment="Top"
-                        IsEnabled="False"
-                        PlaceholderText="Theme..." />
 
                     <ContentControl Tag="RandomizeTheme()|Randomize every single color in current theme" Template="{StaticResource SettingsCard}">
                         <Button Command="{x:Bind viewModel.ThemeManager_RandomizeThemeCommand}" Content="Test Method" />
@@ -581,7 +582,10 @@
                 <StackPanel Padding="8,12" Spacing="8">
                     <ContentControl Tag="Test Object|This is an exmaple SolidColor object to test json converting" Template="{StaticResource SettingsCard}">
                         <StackPanel Orientation="Horizontal" Spacing="8">
-                            <TextBox MaxWidth="200" MinWidth="100" Text="{x:Bind viewModel.IConverter_object.Name, Mode=TwoWay}" />
+                            <TextBox
+                                MinWidth="100"
+                                MaxWidth="200"
+                                Text="{x:Bind viewModel.IConverter_object.Name, Mode=TwoWay}" />
                             <ColorPicker
                                 Margin="0,0,-117,0"
                                 Template="{StaticResource ColorPickerButton}"
@@ -599,27 +603,161 @@
                         ScrollViewer.VerticalScrollBarVisibility="Visible"
                         Text="{x:Bind viewModel.IConverter_input, Mode=TwoWay}" />
 
-                    <Expander Margin="0,12,0,0"
+                    <Expander
+                        Margin="0,12,0,0"
                         HorizontalAlignment="Stretch"
                         VerticalAlignment="Top"
                         Header="ToString()|Converts any object into a json string"
                         Template="{StaticResource CardExpander}">
                         <Expander.Tag>
-                            <StackPanel Spacing="8">
-                                <ContentControl Tag="formatting|[optional] [default = null] Type: object?" Template="{StaticResource SettingsCard}">
-                                    <ComboBox
-                                        Width="110"
-                                        PlaceholderText="Backdrop..."
-                                        SelectedIndex="{x:Bind viewModel.IConverter_formatting, Mode=TwoWay, Converter={StaticResource EnumIntConverter}}">
-                                        <ComboBoxItem Content="None" />
-                                        <ComboBoxItem Content="Indented" />
-                                    </ComboBox>
-                                </ContentControl>
-                            </StackPanel>
+                            <ContentControl Tag="formatting|[optional] [default = null] Type: object?" Template="{StaticResource SettingsCard}">
+                                <ComboBox
+                                    Width="110"
+                                    PlaceholderText="Formatting..."
+                                    SelectedIndex="{x:Bind viewModel.IConverter_formatting, Mode=TwoWay, Converter={StaticResource EnumIntConverter}}">
+                                    <ComboBoxItem Content="None" />
+                                    <ComboBoxItem Content="Indented" />
+                                </ComboBox>
+                            </ContentControl>
                         </Expander.Tag>
 
                         <Button Command="{x:Bind viewModel.IConverter_ToStringCommand}" Content="Test Method" />
                     </Expander>
+
+                    <Expander
+                        HorizontalAlignment="Stretch"
+                        VerticalAlignment="Top"
+                        Header="ToObject&lt;T&gt;()|Converts any json string into an object"
+                        Template="{StaticResource CardExpander}">
+                        <Expander.Tag>
+                            <ContentControl Tag="settings|[optional] [default = null] Type: object?" Template="{StaticResource SettingsCard}">
+                                <Button Content="Set Settings" IsEnabled="False" />
+                            </ContentControl>
+                        </Expander.Tag>
+
+                        <Button Command="{x:Bind viewModel.IConverter_ToObjectCommand}" Content="Test Method" />
+                    </Expander>
+
+                    <Expander
+                        HorizontalAlignment="Stretch"
+                        VerticalAlignment="Top"
+                        Header="TryToObject&lt;T&gt;()|Tries to convert any json string into an object and returns a boolean"
+                        Template="{StaticResource CardExpander}">
+                        <Expander.Tag>
+                            <ContentControl Tag="result|[out]  Type: T?" Template="{StaticResource SettingsCard}" />
+                        </Expander.Tag>
+
+                        <Button Command="{x:Bind viewModel.IConverter_TryToObjectCommand}" Content="Test Method" />
+                    </Expander>
+                </StackPanel>
+            </ScrollViewer>
+        </TabViewItem>
+
+        <TabViewItem
+            Header="ImagingUtility"
+            IsClosable="False"
+            IsEnabled="False" />
+
+        <TabViewItem Header="IFileSystem" IsClosable="False">
+            <ScrollViewer VerticalAlignment="Stretch">
+                <StackPanel Padding="8,12" Spacing="8">
+                    <Expander
+                        HorizontalAlignment="Stretch"
+                        VerticalAlignment="Top"
+                        Header="FileExists()|Checks if a file exists"
+                        Template="{StaticResource CardExpander}">
+                        <Expander.Tag>
+                            <ContentControl Tag="path|Type: string" Template="{StaticResource SettingsCard}">
+                                <TextBox
+                                    MinWidth="400"
+                                    MaxWidth="500"
+                                    Text="{x:Bind viewModel.IFileSystem_path, Mode=TwoWay}" />
+                            </ContentControl>
+                        </Expander.Tag>
+
+                        <Button Command="{x:Bind viewModel.IFileSystem_FileExistsCommand}" Content="Test Method" />
+                    </Expander>
+
+                    <Expander
+                        HorizontalAlignment="Stretch"
+                        VerticalAlignment="Top"
+                        Header="FileWritable()|Checks if a file exists and is writeable"
+                        Template="{StaticResource CardExpander}">
+                        <Expander.Tag>
+                            <ContentControl Tag="path|Type: string" Template="{StaticResource SettingsCard}">
+                                <TextBox
+                                    MinWidth="400"
+                                    MaxWidth="500"
+                                    Text="{x:Bind viewModel.IFileSystem_path, Mode=TwoWay}" />
+                            </ContentControl>
+                        </Expander.Tag>
+
+                        <Button Command="{x:Bind viewModel.IFileSystem_FileWritableCommand}" Content="Test Method" />
+                    </Expander>
+
+                    <Expander
+                        HorizontalAlignment="Stretch"
+                        VerticalAlignment="Top"
+                        Header="CopyFile()|[Obsolete: Use async]  Copies a file to a new destination and optionally overwrites it"
+                        Template="{StaticResource CardExpander}">
+                        <Expander.Tag>
+                            <StackPanel Spacing="8">
+                                <ContentControl Tag="path|Type: string" Template="{StaticResource SettingsCard}">
+                                    <TextBox
+                                        MinWidth="400"
+                                        MaxWidth="500"
+                                        Text="{x:Bind viewModel.IFileSystem_path, Mode=TwoWay}" />
+                                </ContentControl>
+
+                                <ContentControl Tag="destination|Type: string" Template="{StaticResource SettingsCard}">
+                                    <TextBox
+                                        MinWidth="400"
+                                        MaxWidth="500"
+                                        Text="{x:Bind viewModel.IFileSystem_destination, Mode=TwoWay}" />
+                                </ContentControl>
+
+                                <ContentControl Tag="overwrite|Type: bool" Template="{StaticResource SettingsCard}">
+                                    <ToggleSwitch IsOn="{x:Bind viewModel.IFileSystem_overwrite, Mode=TwoWay}" />
+                                </ContentControl>
+                            </StackPanel>
+                        </Expander.Tag>
+
+                        <Button Command="{x:Bind viewModel.IFileSystem_CopyFileCommand}" Content="Test Method" />
+                    </Expander>
+
+                    <Expander
+                        HorizontalAlignment="Stretch"
+                        VerticalAlignment="Top"
+                        Header="CopyFileAsync()|Copies a file to a new destination and optionally overwrites it"
+                        Template="{StaticResource CardExpander}">
+                        <Expander.Tag>
+                            <StackPanel Spacing="8">
+                                <ContentControl Tag="path|Type: string" Template="{StaticResource SettingsCard}">
+                                    <TextBox
+                                        MinWidth="400"
+                                        MaxWidth="500"
+                                        Text="{x:Bind viewModel.IFileSystem_path, Mode=TwoWay}" />
+                                </ContentControl>
+
+                                <ContentControl Tag="destination|Type: string" Template="{StaticResource SettingsCard}">
+                                    <TextBox
+                                        MinWidth="400"
+                                        MaxWidth="500"
+                                        Text="{x:Bind viewModel.IFileSystem_destination, Mode=TwoWay}" />
+                                </ContentControl>
+
+                                <ContentControl Tag="overwrite|Type: bool" Template="{StaticResource SettingsCard}">
+                                    <ToggleSwitch IsOn="{x:Bind viewModel.IFileSystem_overwrite, Mode=TwoWay}" />
+                                </ContentControl>
+                            </StackPanel>
+                        </Expander.Tag>
+
+                        <StackPanel Orientation="Horizontal" Spacing="8">
+                            <Button Command="{x:Bind viewModel.IFileSystem_CopyFileACommand}" Content="Test Method" />
+                            <Button Command="{x:Bind viewModel.IFileSystem_CopyFileACancelCommand}" Content="Cancel Method" />
+                        </StackPanel>
+                    </Expander>
+
                 </StackPanel>
             </ScrollViewer>
         </TabViewItem>
