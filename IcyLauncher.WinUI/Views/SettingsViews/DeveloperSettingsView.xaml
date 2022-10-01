@@ -27,6 +27,7 @@
     </Page.Resources>
 
     <TabView
+        Margin="12,0"
         VerticalAlignment="Stretch"
         AllowDrop="False"
         AllowDropTabs="False"
@@ -35,8 +36,11 @@
         CanReorderTabs="False"
         IsAddTabButtonVisible="True">
 
-        <TabViewItem Header="ILogger&lt;SampleClass&gt;" IsClosable="False">
-            <ScrollViewer Padding="8,12" VerticalAlignment="Stretch">
+        <TabViewItem
+            Header="ILogger&lt;SampleClass&gt;"
+            IsClosable="False"
+            ToolTipService.ToolTip="Service to log everything">
+            <ScrollViewer Padding="0,0,0,12" VerticalAlignment="Stretch">
                 <StackPanel Spacing="8">
                     <ContentControl Tag="Show Logger|Create a new window and hook all new logger events" Template="{StaticResource SettingsCard}">
                         <Button Command="{x:Bind viewModel.Logger_ShowCommand}" Content="Show Logger" />
@@ -49,19 +53,19 @@
                         Template="{StaticResource CardExpander}">
                         <Expander.Tag>
                             <StackPanel Spacing="8">
-                                <ContentControl Tag="message|Type: object" Template="{StaticResource SettingsCard}">
+                                <ContentControl Tag="message|[Type: object]" Template="{StaticResource SettingsCard}">
                                     <TextBox
                                         Width="400"
                                         PlaceholderText="Message..."
                                         Text="{x:Bind viewModel.Logger_message, Mode=TwoWay}" />
                                 </ContentControl>
-                                <ContentControl Tag="exception|[optional] [default: null]  Type: Exception?" Template="{StaticResource SettingsCard}">
+                                <ContentControl Tag="exception|[optional: null] [Type: Exception?]" Template="{StaticResource SettingsCard}">
                                     <TextBox
                                         Width="400"
                                         PlaceholderText="Exception..."
                                         Text="{x:Bind viewModel.Logger_exception, Mode=TwoWay}" />
                                 </ContentControl>
-                                <ContentControl Tag="logLevel|[optional] [default: Information]  Type: LogLevel" Template="{StaticResource SettingsCard}">
+                                <ContentControl Tag="logLevel|] [optional: Information] [Type: LogLevel]" Template="{StaticResource SettingsCard}">
                                     <ComboBox
                                         Width="125"
                                         PlaceholderText="Log Level..."
@@ -74,13 +78,13 @@
                                         <ComboBoxItem Content="Critical" />
                                     </ComboBox>
                                 </ContentControl>
-                                <ContentControl Tag="filePath|[CallerFilePath] [optional] [default: &quot;&quot;]  Type: string" Template="{StaticResource SettingsCard}">
+                                <ContentControl Tag="filePath|[CallerFilePath] [optional: &quot;&quot;] [Type: string]" Template="{StaticResource SettingsCard}">
                                     <TextBox
                                         Width="200"
                                         PlaceholderText="File Path..."
                                         Text="{x:Bind viewModel.Logger_filePath, Mode=TwoWay}" />
                                 </ContentControl>
-                                <ContentControl Tag="memberName|[CallerMemberName] [optional] [default: &quot;&quot;]  Type: string" Template="{StaticResource SettingsCard}">
+                                <ContentControl Tag="memberName|[CallerMemberName] [optional: &quot;&quot;] [Type: string]" Template="{StaticResource SettingsCard}">
                                     <TextBox
                                         Width="200"
                                         PlaceholderText="File Path..."
@@ -96,8 +100,11 @@
             </ScrollViewer>
         </TabViewItem>
 
-        <TabViewItem Header="ConfigurationManager" IsClosable="False">
-            <Grid Padding="8,12">
+        <TabViewItem
+            Header="ConfigurationManager"
+            IsClosable="False"
+            ToolTipService.ToolTip="Manager of the current configuration">
+            <Grid Padding="0,0,0,12">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*" />
                     <RowDefinition Height="8" />
@@ -108,7 +115,7 @@
 
                 <TextBox
                     Height="Auto"
-                    VerticalAlignment="Top"
+                    VerticalAlignment="Stretch"
                     AcceptsReturn="True"
                     PlaceholderText="Configuration..."
                     ScrollViewer.VerticalScrollBarVisibility="Visible"
@@ -116,7 +123,7 @@
 
                 <ContentControl
                     Grid.Row="2"
-                    Tag="Export()|Export current configuration in bottom textbox"
+                    Tag="Export()|[Returns: string]  Exports the current configuration as a string"
                     Template="{StaticResource SettingsCard}">
                     <Button Command="{x:Bind viewModel.ConfigurationManager_ExportCommand}" Content="Test Method" />
                 </ContentControl>
@@ -125,12 +132,17 @@
                     Grid.Row="4"
                     HorizontalAlignment="Stretch"
                     VerticalAlignment="Top"
-                    Header="Load()|Load configuration from bottom textbox"
+                    Header="Load()|Loads a configuration as the current configuration"
                     Template="{StaticResource CardExpander}">
                     <Expander.Tag>
-                        <ContentControl Tag="ignoreTheme|Type: bool" Template="{StaticResource SettingsCard}">
-                            <ToggleSwitch IsOn="{x:Bind viewModel.ConfigurationManager_ignoreTheme, Mode=TwoWay}" />
-                        </ContentControl>
+                        <StackPanel Spacing="8">
+                            <ContentControl Tag="input|[Type: Configuration]  The configuration which should get loaded" Template="{StaticResource SettingsCard}">
+                                <Button Content="Set Configuration" IsEnabled="False" />
+                            </ContentControl>
+                            <ContentControl Tag="ignoreTheme|[Type: bool] The boolean wether the theme should be ignored while loading" Template="{StaticResource SettingsCard}">
+                                <ToggleSwitch IsOn="{x:Bind viewModel.ConfigurationManager_ignoreTheme, Mode=TwoWay}" />
+                            </ContentControl>
+                        </StackPanel>
                     </Expander.Tag>
 
                     <Button Command="{x:Bind viewModel.ConfigurationManager_LoadCommand}" Content="Test Method" />
@@ -138,37 +150,73 @@
             </Grid>
         </TabViewItem>
 
-        <TabViewItem Header="ThemeManager" IsClosable="False">
-            <ScrollViewer Padding="8,12" VerticalAlignment="Stretch">
+        <TabViewItem
+            Header="ThemeManager"
+            IsClosable="False"
+            ToolTipService.ToolTip="Manager of the current therme">
+            <ScrollViewer Padding="0,0,0,12" VerticalAlignment="Stretch">
                 <StackPanel Spacing="8">
+                    <ContentControl Tag="Colors|The current theme" Template="{StaticResource SettingsCard}">
+                        <Button Content="configuration.Apperance.Colors" IsEnabled="False" />
+                    </ContentControl>
+
                     <TextBox
                         VerticalAlignment="Top"
                         IsEnabled="False"
                         PlaceholderText="Theme..." />
 
-                    <ContentControl Tag="Export()|Export current theme in bottom textbox" Template="{StaticResource SettingsCard}">
+                    <ContentControl Tag="Export()|[Returns: string]  Exports the current theme as a string" Template="{StaticResource SettingsCard}">
                         <Button Content="Test Method" IsEnabled="False" />
                     </ContentControl>
 
                     <Expander
                         HorizontalAlignment="Stretch"
                         VerticalAlignment="Top"
-                        Header="Load()|Load theme from bottom textbox"
+                        Header="Load()|Loads a theme as the current theme"
                         Template="{StaticResource CardExpander}">
                         <Expander.Tag>
-                            <ContentControl Tag="ignoreAccent|Type: bool" Template="{StaticResource SettingsCard}">
-                                <ToggleSwitch IsEnabled="False" />
-                            </ContentControl>
+                            <StackPanel Spacing="8">
+                                <ContentControl Tag="input|[Type: Theme]  The theme which should get loaded" Template="{StaticResource SettingsCard}">
+                                    <ToggleSwitch IsEnabled="False" />
+                                </ContentControl>
+                                <ContentControl Tag="ignoreAccent|[Type: bool]  The boolean wether the accent should be ignored while loading" Template="{StaticResource SettingsCard}">
+                                    <ToggleSwitch IsEnabled="False" />
+                                </ContentControl>
+                            </StackPanel>
                         </Expander.Tag>
 
                         <Button Content="Test Method" IsEnabled="False" />
                     </Expander>
 
-                    <ContentControl Tag="RandomizeTheme()|Randomize every single color in current theme" Template="{StaticResource SettingsCard}">
+                    <ContentControl Tag="RandomizeTheme()|Randomizes every color of the current theme. Use for debugging only" Template="{StaticResource SettingsCard}">
                         <Button Command="{x:Bind viewModel.ThemeManager_RandomizeThemeCommand}" Content="Test Method" />
                     </ContentControl>
 
-                    <ContentControl Tag="SetResourceColors()|Sets resource colors from current configuration" Template="{StaticResource SettingsCard}">
+                    <Expander
+                        HorizontalAlignment="Stretch"
+                        VerticalAlignment="Top"
+                        Header="GetRandomColor()|[Returns: Color]  Generates a random color"
+                        Template="{StaticResource CardExpander}">
+                        <Expander.Tag>
+                            <ContentControl Tag="transparency|[optional: 255] [Type: byte?]  The transparency which the color should have" Template="{StaticResource SettingsCard}">
+                                <NumberBox
+                                    Maximum="255"
+                                    Minimum="0"
+                                    SpinButtonPlacementMode="Compact"
+                                    Value="{x:Bind viewModel.ThemeManager_transparency, Mode=TwoWay}" />
+                            </ContentControl>
+                        </Expander.Tag>
+
+                        <StackPanel Orientation="Horizontal" Spacing="8">
+                            <ColorPicker Margin="0,0,-117,0"
+                                IsHitTestVisible="False"
+                                Template="{StaticResource ColorPickerButton}"
+                                Color="{x:Bind viewModel.ThemeManager_randomColor, Mode=OneWay}" />
+                            <Button Command="{x:Bind viewModel.ThemeManager_GetRandomColorCommand}" Content="Test Method" />
+                        </StackPanel>
+                    </Expander>
+
+                    <ContentControl Tag="SetResourceColors()|Sets resource colors from current theme" Template="{StaticResource SettingsCard}">
                         <Button Command="{x:Bind viewModel.ThemeManager_SetResourceColorsCommand}" Content="Test Method" />
                     </ContentControl>
 
@@ -182,57 +230,61 @@
         <TabViewItem
             Header="AppStartupHandler"
             IsClosable="False"
-            IsEnabled="False" />
+            IsEnabled="False"
+            ToolTipService.ToolTip="Handler which configures the entire application on startup" />
 
-        <TabViewItem Header="WindowHandler" IsClosable="False">
+        <TabViewItem
+            Header="WindowHandler"
+            IsClosable="False"
+            ToolTipService.ToolTip="Handler to configure the current main window">
             <ScrollViewer VerticalAlignment="Stretch">
-                <StackPanel Padding="8,12" Spacing="8">
-                    <ContentControl Tag="HWnd|Type: IntPtr" Template="{StaticResource SettingsCard}">
+                <StackPanel Padding="0,0,0,12" Spacing="8">
+                    <ContentControl Tag="HWnd|[Type: IntPtr]  HWND of the current main window" Template="{StaticResource SettingsCard}">
                         <StackPanel Orientation="Horizontal" Spacing="8">
                             <TextBox IsHitTestVisible="False" Text="{x:Bind viewModel.WindowHandler_hWnd, Mode=OneWay}" />
                             <Button Command="{x:Bind viewModel.WindowHandler_UpdateHWndCommand}" Content="Update" />
                         </StackPanel>
                     </ContentControl>
 
-                    <ContentControl Tag="HasCustomTitleBar|Type: bool" Template="{StaticResource SettingsCard}">
+                    <ContentControl Tag="HasCustomTitleBar|[Type: bool]  Boolean wether the current main window has a custom title bar" Template="{StaticResource SettingsCard}">
                         <StackPanel Orientation="Horizontal" Spacing="8">
                             <ToggleSwitch IsHitTestVisible="False" IsOn="{x:Bind viewModel.WindowHandler_hasCustomTitleBar, Mode=OneWay}" />
                             <Button Command="{x:Bind viewModel.WindowHandler_UpdateHasCustomTitlebarCommand}" Content="Update" />
                         </StackPanel>
                     </ContentControl>
 
-                    <ContentControl Tag="Size|Type: SizeInt32" Template="{StaticResource SettingsCard}">
+                    <ContentControl Tag="Size|[Type: SizeInt32]  Size of the current main window" Template="{StaticResource SettingsCard}">
                         <StackPanel Orientation="Horizontal" Spacing="8">
                             <TextBox IsHitTestVisible="False" Text="{x:Bind viewModel.WindowHandler_size, Mode=OneWay}" />
                             <Button Command="{x:Bind viewModel.WindowHandler_UpdateSizeCommand}" Content="Update" />
                         </StackPanel>
                     </ContentControl>
 
-                    <ContentControl Tag="Position|Type: PointInt32" Template="{StaticResource SettingsCard}">
+                    <ContentControl Tag="Position|[Type: PointInt32]  Position of the current main window" Template="{StaticResource SettingsCard}">
                         <StackPanel Orientation="Horizontal" Spacing="8">
                             <TextBox IsHitTestVisible="False" Text="{x:Bind viewModel.WindowHandler_position, Mode=OneWay}" />
                             <Button Command="{x:Bind viewModel.WindowHandler_UpdatePositionCommand}" Content="Update" />
                         </StackPanel>
                     </ContentControl>
 
-                    <ContentControl Tag="ScreenSize|Type: RectInt32" Template="{StaticResource SettingsCard}">
+                    <ContentControl Tag="ScreenSize|[Type: RectInt32]  Size of the current main screen" Template="{StaticResource SettingsCard}">
                         <StackPanel Orientation="Horizontal" Spacing="8">
                             <TextBox IsHitTestVisible="False" Text="{x:Bind viewModel.WindowHandler_screenSize, Mode=OneWay}" />
                             <Button Command="{x:Bind viewModel.WindowHandler_UpdateScreenSizeCommand}" Content="Update" />
                         </StackPanel>
                     </ContentControl>
 
-                    <ContentControl Tag="LoggerWindow|Type: Window?" Template="{StaticResource SettingsCard}">
+                    <ContentControl Tag="LoggerWindow|[Type: Window?]  Active logger window (null if none is active)" Template="{StaticResource SettingsCard}">
                         <Button Content="Show Logger" IsEnabled="False" />
                     </ContentControl>
 
                     <Expander
                         HorizontalAlignment="Stretch"
                         VerticalAlignment="Top"
-                        Header="SetIcon()|Sets the application icon for the current window"
+                        Header="SetIcon()|Sets a custom icon on the current main window"
                         Template="{StaticResource CardExpander}">
                         <Expander.Tag>
-                            <ContentControl Tag="path|Type: string" Template="{StaticResource SettingsCard}">
+                            <ContentControl Tag="path|[Type: string]  The file path to the icon" Template="{StaticResource SettingsCard}">
                                 <TextBox
                                     Name="WindowHandler_IconPath"
                                     Width="400"
@@ -249,19 +301,19 @@
                     <Expander
                         HorizontalAlignment="Stretch"
                         VerticalAlignment="Top"
-                        Header="SetSize()|Sets the size for the current window"
+                        Header="SetSize()|Sets the size of the current main window"
                         Template="{StaticResource CardExpander}">
                         <Expander.Tag>
                             <StackPanel Spacing="8">
-                                <ContentControl Tag="externalWindow|[optional] [default: Window]  Type: Window?" Template="{StaticResource SettingsCard}">
+                                <ContentControl Tag="externalWindow|[optional: Window] [Type: Window?]  The window to set the size to" Template="{StaticResource SettingsCard}">
                                     <Button Content="Set Window" IsEnabled="False" />
                                 </ContentControl>
 
-                                <ContentControl Tag="width|Type: int" Template="{StaticResource SettingsCard}">
+                                <ContentControl Tag="width|[Type: int]  The width of the new size" Template="{StaticResource SettingsCard}">
                                     <NumberBox SpinButtonPlacementMode="Compact" Value="{x:Bind viewModel.WindowHandler_sizeWidth, Mode=TwoWay}" />
                                 </ContentControl>
 
-                                <ContentControl Tag="height|Type: int" Template="{StaticResource SettingsCard}">
+                                <ContentControl Tag="height|[Type: int]  The height of the new size" Template="{StaticResource SettingsCard}">
                                     <NumberBox SpinButtonPlacementMode="Compact" Value="{x:Bind viewModel.WindowHandler_sizeHeight, Mode=TwoWay}" />
                                 </ContentControl>
                             </StackPanel>
@@ -273,15 +325,15 @@
                     <Expander
                         HorizontalAlignment="Stretch"
                         VerticalAlignment="Top"
-                        Header="SetMinSize()|[experimental]  Sets the minimum size for the current window"
+                        Header="SetMinSize()|[experimental]  Sets the minimum size of the current main window"
                         Template="{StaticResource CardExpander}">
                         <Expander.Tag>
                             <StackPanel Spacing="8">
-                                <ContentControl Tag="width|Type: int" Template="{StaticResource SettingsCard}">
+                                <ContentControl Tag="width|[Type: int]  The width of the new size" Template="{StaticResource SettingsCard}">
                                     <NumberBox SpinButtonPlacementMode="Compact" Value="{x:Bind viewModel.WindowHandler_minSizeWidth, Mode=TwoWay}" />
                                 </ContentControl>
 
-                                <ContentControl Tag="height|Type: int" Template="{StaticResource SettingsCard}">
+                                <ContentControl Tag="height|[Type: int]  The height of the new size" Template="{StaticResource SettingsCard}">
                                     <NumberBox SpinButtonPlacementMode="Compact" Value="{x:Bind viewModel.WindowHandler_minSizeHeight, Mode=TwoWay}" />
                                 </ContentControl>
                             </StackPanel>
@@ -293,15 +345,15 @@
                     <Expander
                         HorizontalAlignment="Stretch"
                         VerticalAlignment="Top"
-                        Header="SetPosition()|Sets the position of the current window"
+                        Header="SetPosition()|Sets the position of the current main window"
                         Template="{StaticResource CardExpander}">
                         <Expander.Tag>
                             <StackPanel Spacing="8">
-                                <ContentControl Tag="x|Type: int" Template="{StaticResource SettingsCard}">
+                                <ContentControl Tag="x|[Type: int]  The x coordinate of the new size" Template="{StaticResource SettingsCard}">
                                     <NumberBox SpinButtonPlacementMode="Compact" Value="{x:Bind viewModel.WindowHandler_positionX, Mode=TwoWay}" />
                                 </ContentControl>
 
-                                <ContentControl Tag="y|Type: int" Template="{StaticResource SettingsCard}">
+                                <ContentControl Tag="y|[Type: int]  The y coordinate of the new size" Template="{StaticResource SettingsCard}">
                                     <NumberBox SpinButtonPlacementMode="Compact" Value="{x:Bind viewModel.WindowHandler_positionY, Mode=TwoWay}" />
                                 </ContentControl>
                             </StackPanel>
@@ -310,17 +362,17 @@
                         <Button Command="{x:Bind viewModel.WindowHandler_SetPositionCommand}" Content="Test Method" />
                     </Expander>
 
-                    <ContentControl Tag="SetPositionToCenter()|Sets the postion of the current window to the screen center" Template="{StaticResource SettingsCard}">
+                    <ContentControl Tag="SetPositionToCenter()|Sets the position of the current main window to the center of the main screen" Template="{StaticResource SettingsCard}">
                         <Button Command="{x:Bind viewModel.WindowHandler_SetPositionToCenterCommand}" Content="Test Method" />
                     </ContentControl>
 
                     <Expander
                         HorizontalAlignment="Stretch"
                         VerticalAlignment="Top"
-                        Header="Register()|Initializes an object with the current window"
+                        Header="Register()|Initializes a target with the current main window"
                         Template="{StaticResource CardExpander}">
                         <Expander.Tag>
-                            <ContentControl Tag="target|Type: object" Template="{StaticResource SettingsCard}">
+                            <ContentControl Tag="target|[Type: object]  The target to register" Template="{StaticResource SettingsCard}">
                                 <Button Content="Set Target" IsEnabled="False" />
                             </ContentControl>
                         </Expander.Tag>
@@ -328,18 +380,18 @@
                         <Button Content="Test Method" IsEnabled="False" />
                     </Expander>
 
-                    <ContentControl Tag="EnsureWindowsSystemDispatcherQueueController()|Ensures there is a windows DispatcherQueueContrroller" Template="{StaticResource SettingsCard}">
+                    <ContentControl Tag="EnsureWindowsSystemDispatcherQueueController()|[Returns: bool]  Ensures there is a windows system dispatcher queue controller" Template="{StaticResource SettingsCard}">
                         <Button Command="{x:Bind viewModel.WindowHandler_EnsureWindowsSystemDispatcherQueueControllerCommand}" Content="Test Method" />
                     </ContentControl>
 
                     <Expander
                         HorizontalAlignment="Stretch"
                         VerticalAlignment="Top"
-                        Header="SetTitleBar()|Sets an UIElement as the title bar for the current window"
+                        Header="SetTitleBar()|[Returns: bool]  Sets an UIElement as a custom title bar on the current main window"
                         Template="{StaticResource CardExpander}">
                         <Expander.Tag>
                             <StackPanel Spacing="8">
-                                <ContentControl Tag="titleBar|Type: UIElement?" Template="{StaticResource SettingsCard}">
+                                <ContentControl Tag="titleBar|[Type: UIElement?]  The UIElement to set as a title bar" Template="{StaticResource SettingsCard}">
                                     <StackPanel Orientation="Horizontal" Spacing="8">
                                         <Button Content="Set UIElement" IsEnabled="False" />
                                         <ToggleSwitch
@@ -349,7 +401,7 @@
                                     </StackPanel>
                                 </ContentControl>
 
-                                <ContentControl Tag="container|[optional] [default: null]  Type: UIElement?" Template="{StaticResource SettingsCard}">
+                                <ContentControl Tag="container|[optional: null] [Type: UIElement?]  The container UIElement of the title bar to update visibilies" Template="{StaticResource SettingsCard}">
                                     <StackPanel Orientation="Horizontal" Spacing="8">
                                         <Button Content="Set UIElement" IsEnabled="False" />
                                         <ToggleSwitch
@@ -364,138 +416,169 @@
                         <Button Command="{x:Bind viewModel.WindowHandler_SetTitleBarCommand}" Content="Test Method" />
                     </Expander>
 
+                    <Expander
+                        HorizontalAlignment="Stretch"
+                        VerticalAlignment="Top"
+                        Header="SetMainBackground()|[Returns: bool]  Sets a binded color as the main background of the current main window"
+                        Template="{StaticResource CardExpander}">
+                        <Expander.Tag>
+                            <ContentControl Tag="backgroundColor|[Type: string]  The property path of themeManager.Colors" Template="{StaticResource SettingsCard}">
+                                <TextBox
+                                    MinWidth="200"
+                                    MaxWidth="300"
+                                    Text="{x:Bind viewModel.WindowHandler_mainBackground}" />
+                            </ContentControl>
+                        </Expander.Tag>
+
+                        <Button Content="Test Method" IsEnabled="False" />
+                    </Expander>
                 </StackPanel>
             </ScrollViewer>
         </TabViewItem>
 
-        <TabViewItem Header="UIElementReciever" IsClosable="False">
+        <TabViewItem
+            Header="UIElementReciever"
+            IsClosable="False"
+            ToolTipService.ToolTip="Reciever and caster of all UIElements of the current main window">
             <ScrollViewer VerticalAlignment="Stretch">
-                <StackPanel Padding="8,12" Spacing="8">
-                    <ContentControl Tag="MainGrid|Type: Grid" Template="{StaticResource SettingsCard}">
+                <StackPanel Padding="0,0,0,12" Spacing="8">
+                    <ContentControl Tag="MainGrid|[Type: Grid]  The container of the current main window" Template="{StaticResource SettingsCard}">
                         <TextBox IsHitTestVisible="False" Text="{x:Bind viewModel.UIElementReviever_mainGrid, Mode=OneWay}" />
                     </ContentControl>
 
-                    <ContentControl Tag="NavigationView|Type: NavigationView" Template="{StaticResource SettingsCard}">
+                    <ContentControl Tag="NavigationView|[Type: NavigationView]  The navigation container of the current main window" Template="{StaticResource SettingsCard}">
                         <TextBox IsHitTestVisible="False" Text="{x:Bind viewModel.UIElementReviever_navigationView, Mode=OneWay}" />
                     </ContentControl>
 
-                    <ContentControl Tag="NavigationFrame|Type: Frame" Template="{StaticResource SettingsCard}">
+                    <ContentControl Tag="NavigationFrame|[Type: Frame]  The navigation frame of the current main window" Template="{StaticResource SettingsCard}">
                         <TextBox IsHitTestVisible="False" Text="{x:Bind viewModel.UIElementReviever_navigationFrame, Mode=OneWay}" />
                     </ContentControl>
 
-                    <ContentControl Tag="TitleBarContainer|Type: Grid" Template="{StaticResource SettingsCard}">
+                    <ContentControl Tag="TitleBarContainer|[Type: Grid]  The container of the custom title bar" Template="{StaticResource SettingsCard}">
                         <TextBox IsHitTestVisible="False" Text="{x:Bind viewModel.UIElementReviever_titleBarContainer, Mode=OneWay}" />
                     </ContentControl>
 
-                    <ContentControl Tag="TitleBar|Type: StackPanel" Template="{StaticResource SettingsCard}">
+                    <ContentControl Tag="TitleBar|[Type: StackPanel]  The custom title bar of the current main window" Template="{StaticResource SettingsCard}">
                         <TextBox IsHitTestVisible="False" Text="{x:Bind viewModel.UIElementReviever_titleBar, Mode=OneWay}" />
                     </ContentControl>
 
-                    <ContentControl Tag="TitleBarDragArea|Type: Grid" Template="{StaticResource SettingsCard}">
+                    <ContentControl Tag="TitleBarDragArea|[Type: Grid]  The drag area of the custom title bar" Template="{StaticResource SettingsCard}">
                         <TextBox IsHitTestVisible="False" Text="{x:Bind viewModel.UIElementReviever_titleBarDragArea, Mode=OneWay}" />
                     </ContentControl>
 
-                    <ContentControl Tag="BackButton|Type: Button" Template="{StaticResource SettingsCard}">
+                    <ContentControl Tag="BackButton|[Type: Button]  The navigation back button of the navigation view" Template="{StaticResource SettingsCard}">
                         <TextBox IsHitTestVisible="False" Text="{x:Bind viewModel.UIElementReviever_backButton, Mode=OneWay}" />
                     </ContentControl>
 
-                    <ContentControl Tag="BackButtonIcon|Type: AnimatedIcon" Template="{StaticResource SettingsCard}">
+                    <ContentControl Tag="BackButtonIcon|[Type: AnimatedIcon]  The icon of the back button" Template="{StaticResource SettingsCard}">
                         <TextBox IsHitTestVisible="False" Text="{x:Bind viewModel.UIElementReviever_backButtonIcon, Mode=OneWay}" />
                     </ContentControl>
 
-                    <ContentControl Tag="TitleBarIconGradientStops|Type: GradientStopCollection" Template="{StaticResource SettingsCard}">
+                    <ContentControl Tag="TitleBarIconGradientStops|[Type: GradientStopCollection]  The icon gradient stop collection of the custom title bar" Template="{StaticResource SettingsCard}">
                         <TextBox IsHitTestVisible="False" Text="{x:Bind viewModel.UIElementReviever_titleBarIconGradientStops, Mode=OneWay}" />
                     </ContentControl>
 
-                    <ContentControl Tag="TitleBarTitle|Type: TextBlock" Template="{StaticResource SettingsCard}">
+                    <ContentControl Tag="TitleBarTitle|[Type: TextBlock]  The title of the custom title bar" Template="{StaticResource SettingsCard}">
                         <TextBox IsHitTestVisible="False" Text="{x:Bind viewModel.UIElementReviever_titleBarTitle, Mode=OneWay}" />
                     </ContentControl>
                 </StackPanel>
             </ScrollViewer>
         </TabViewItem>
 
-        <TabViewItem Header="MicaBackdropHandler" IsClosable="False">
+        <TabViewItem
+            Header="MicaBackdropHandler"
+            IsClosable="False"
+            ToolTipService.ToolTip="Handler to confgure a mica backdrop effect on the current main window (Win11+)">
             <ScrollViewer VerticalAlignment="Stretch">
-                <StackPanel Padding="8,12" Spacing="8">
-                    <ContentControl Tag="EnableBackdrop()|Enable mica backdrop for the current window" Template="{StaticResource SettingsCard}">
+                <StackPanel Padding="0,0,0,12" Spacing="8">
+                    <ContentControl Tag="EnableBackdrop()|[Returns: bool]  Enables the backdrop effect" Template="{StaticResource SettingsCard}">
                         <Button Command="{x:Bind viewModel.MicaBackdropHandler_EnableBackdropCommand}" Content="Test Method" />
                     </ContentControl>
 
-                    <ContentControl Tag="DisableBackdrop()|Disable mica backdrop for the current window" Template="{StaticResource SettingsCard}">
+                    <ContentControl Tag="DisableBackdrop()|[Returns: bool]  Disables the backdrop effect" Template="{StaticResource SettingsCard}">
                         <Button Command="{x:Bind viewModel.MicaBackdropHandler_DisableBackdropCommand}" Content="Test Method" />
                     </ContentControl>
 
-                    <ContentControl Tag="IsDarkModeEnabled|Type: bool" Template="{StaticResource SettingsCard}">
+                    <ContentControl Tag="IsDarkModeEnabled|[Type: bool]  Sets and gets the dark mode of the backdrop effect" Template="{StaticResource SettingsCard}">
                         <ToggleSwitch IsOn="{x:Bind viewModel.MicaBackdropHandler_isDarkModeEnabled, Mode=TwoWay}" />
                     </ContentControl>
                 </StackPanel>
             </ScrollViewer>
         </TabViewItem>
 
-        <TabViewItem Header="AcrylicBackdropHandler" IsClosable="False">
+        <TabViewItem
+            Header="AcrylicBackdropHandler"
+            IsClosable="False"
+            ToolTipService.ToolTip="Handler to confgure an acrylic backdrop effect on the current main window (Win10+)">
             <ScrollViewer VerticalAlignment="Stretch">
-                <StackPanel Padding="8,12" Spacing="8">
-                    <ContentControl Tag="EnableBackdrop()|Enable acrylic backdrop for the current window" Template="{StaticResource SettingsCard}">
+                <StackPanel Padding="0,0,0,12" Spacing="8">
+                    <ContentControl Tag="EnableBackdrop()|[Returns: bool]  Enables the backdrop" Template="{StaticResource SettingsCard}">
                         <Button Command="{x:Bind viewModel.AcrylicBackdropHandler_EnableBackdropCommand}" Content="Test Method" />
                     </ContentControl>
 
-                    <ContentControl Tag="DisableBackdrop()|Disable acrylic backdrop for the current window" Template="{StaticResource SettingsCard}">
+                    <ContentControl Tag="DisableBackdrop()|[Returns: bool]  Disables the backdrop" Template="{StaticResource SettingsCard}">
                         <Button Command="{x:Bind viewModel.AcrylicBackdropHandler_DisableBackdropCommand}" Content="Test Method" />
                     </ContentControl>
 
-                    <ContentControl Tag="IsDarkModeEnabled|Type: bool" Template="{StaticResource SettingsCard}">
+                    <ContentControl Tag="IsDarkModeEnabled|[Type: bool]  Gets and sets the dark mode of the backdrop effect" Template="{StaticResource SettingsCard}">
                         <ToggleSwitch IsOn="{x:Bind viewModel.AcrylicBackdropHandler_isDarkModeEnabled, Mode=TwoWay}" />
                     </ContentControl>
                 </StackPanel>
             </ScrollViewer>
         </TabViewItem>
 
-        <TabViewItem Header="VibrancyBackdropHandler" IsClosable="False">
+        <TabViewItem
+            Header="VibrancyBackdropHandler"
+            IsClosable="False"
+            ToolTipService.ToolTip="Handler to confgure a vibrancy backdrop effect on the current main window (Win11+)">
             <ScrollViewer VerticalAlignment="Stretch">
-                <StackPanel Padding="8,12" Spacing="8">
-                    <ContentControl Tag="EnableBackdrop()|Enable vibrancy backdrop for the current window" Template="{StaticResource SettingsCard}">
+                <StackPanel Padding="0,0,0,12" Spacing="8">
+                    <ContentControl Tag="EnableBackdrop()|[Returns: bool]  Enables the backdrop effect" Template="{StaticResource SettingsCard}">
                         <Button Command="{x:Bind viewModel.VibrancyBackdropHandler_EnableBackdropCommand}" Content="Test Method" />
                     </ContentControl>
 
-                    <ContentControl Tag="DisableBackdrop()|Disable vibrancy backdrop for the current window" Template="{StaticResource SettingsCard}">
+                    <ContentControl Tag="DisableBackdrop()|[Returns: bool]  Disables the backdrop effect" Template="{StaticResource SettingsCard}">
                         <Button Command="{x:Bind viewModel.VibrancyBackdropHandler_DisableBackdropCommand}" Content="Test Method" />
                     </ContentControl>
                 </StackPanel>
             </ScrollViewer>
         </TabViewItem>
 
-        <TabViewItem Header="BackdropHandler" IsClosable="False">
+        <TabViewItem
+            Header="BackdropHandler"
+            IsClosable="False"
+            ToolTipService.ToolTip="Handler to configure all backdrop effects on the current main window">
             <ScrollViewer VerticalAlignment="Stretch">
-                <StackPanel Padding="8,12" Spacing="8">
-                    <ContentControl Tag="IsMicaEnabled|Type: bool" Template="{StaticResource SettingsCard}">
+                <StackPanel Padding="0,0,0,12" Spacing="8">
+                    <ContentControl Tag="IsMicaEnabled|[Type: bool]  Boolean wether a mica backdrop effect is enabled" Template="{StaticResource SettingsCard}">
                         <StackPanel Orientation="Horizontal" Spacing="8">
                             <ToggleSwitch IsHitTestVisible="False" IsOn="{x:Bind viewModel.BackdropHandler_isMicaEnabled, Mode=OneWay}" />
                             <Button Command="{x:Bind viewModel.BackdropHandler_UpdateIsMicaEnabledCommand}" Content="Update" />
                         </StackPanel>
                     </ContentControl>
 
-                    <ContentControl Tag="IsAcrylicEnabled|Type: bool" Template="{StaticResource SettingsCard}">
+                    <ContentControl Tag="IsAcrylicEnabled|[Type: bool]  Boolean wether an acrylic backdrop effect is enabled" Template="{StaticResource SettingsCard}">
                         <StackPanel Orientation="Horizontal" Spacing="8">
                             <ToggleSwitch IsHitTestVisible="False" IsOn="{x:Bind viewModel.BackdropHandler_isAcrylicEnabled, Mode=OneWay}" />
                             <Button Command="{x:Bind viewModel.BackdropHandler_UpdateIsAcrylicEnabledCommand}" Content="Update" />
                         </StackPanel>
                     </ContentControl>
 
-                    <ContentControl Tag="IsVibrancyEnabled|Type: bool" Template="{StaticResource SettingsCard}">
+                    <ContentControl Tag="IsVibrancyEnabled|[Type: bool]  Boolean wether a vivrancy backdrop effect is enabled" Template="{StaticResource SettingsCard}">
                         <StackPanel Orientation="Horizontal" Spacing="8">
                             <ToggleSwitch IsHitTestVisible="False" IsOn="{x:Bind viewModel.BackdropHandler_isVibrancyEnabled, Mode=OneWay}" />
                             <Button Command="{x:Bind viewModel.BackdropHandler_UpdateIsVibrancyEnabledCommand}" Content="Update" />
                         </StackPanel>
                     </ContentControl>
 
-                    <ContentControl Tag="IsNoneEnabled|Type: bool" Template="{StaticResource SettingsCard}">
+                    <ContentControl Tag="IsNoneEnabled|[Type: bool]  Boolean wether no backdrop effect is enabled" Template="{StaticResource SettingsCard}">
                         <StackPanel Orientation="Horizontal" Spacing="8">
                             <ToggleSwitch IsHitTestVisible="False" IsOn="{x:Bind viewModel.BackdropHandler_isNoneEnabled, Mode=OneWay}" />
                             <Button Command="{x:Bind viewModel.BackdropHandler_UpdateIsNoneEnabledCommand}" Content="Update" />
                         </StackPanel>
                     </ContentControl>
 
-                    <ContentControl Tag="Current|Type: Backdrop?" Template="{StaticResource SettingsCard}">
+                    <ContentControl Tag="Current|[Type: Backdrop?]  The currently activated backdrop effect" Template="{StaticResource SettingsCard}">
                         <StackPanel Orientation="Horizontal" Spacing="8">
                             <ComboBox
                                 Width="110"
@@ -514,11 +597,11 @@
                     <Expander
                         HorizontalAlignment="Stretch"
                         VerticalAlignment="Top"
-                        Header="SetBackdrop()|Enables or disables a backdrop and updates backdrop darkmode for the current window"
+                        Header="SetBackdrop()|[Returns: bool]  Enables/Disables a backdrop effect on the current main window and optionally updates the dark mode"
                         Template="{StaticResource CardExpander}">
                         <Expander.Tag>
                             <StackPanel Spacing="8">
-                                <ContentControl Tag="backdrop|Type: Backdrop" Template="{StaticResource SettingsCard}">
+                                <ContentControl Tag="backdrop|[Type: Backdrop]  The backdrop effect to enable/disable" Template="{StaticResource SettingsCard}">
                                     <ComboBox
                                         Width="110"
                                         PlaceholderText="Backdrop..."
@@ -529,10 +612,10 @@
                                         <ComboBoxItem Content="None" />
                                     </ComboBox>
                                 </ContentControl>
-                                <ContentControl Tag="enable|Type: bool" Template="{StaticResource SettingsCard}">
+                                <ContentControl Tag="enable|[Type: bool]  The boolean wether the backdrop effect should be enabled/disabled" Template="{StaticResource SettingsCard}">
                                     <ToggleSwitch IsOn="{x:Bind viewModel.BackdropHandler_enable, Mode=TwoWay}" />
                                 </ContentControl>
-                                <ContentControl Tag="useDarkMode|[optional] [default: null]  Type: bool?" Template="{StaticResource SettingsCard}">
+                                <ContentControl Tag="useDarkMode|[optional: null] [Type: bool?]  The boolean wether dark mode should be actived" Template="{StaticResource SettingsCard}">
                                     <StackPanel Orientation="Horizontal" Spacing="8">
                                         <ToggleSwitch IsOn="{x:Bind viewModel.BackdropHandler_useDarkMode, Mode=TwoWay}" />
                                         <ToggleSwitch
@@ -550,11 +633,11 @@
                     <Expander
                         HorizontalAlignment="Stretch"
                         VerticalAlignment="Top"
-                        Header="SetDarkMode()|Updates backdrop darkmode for the current window"
+                        Header="SetDarkMode()|Sets wether dark mode should be actived on the given backdrop effect"
                         Template="{StaticResource CardExpander}">
                         <Expander.Tag>
                             <StackPanel Spacing="8">
-                                <ContentControl Tag="backdrop|Type: Backdrop" Template="{StaticResource SettingsCard}">
+                                <ContentControl Tag="backdrop|[Type: Backdrop]  The backdrop effect to set the dark mode" Template="{StaticResource SettingsCard}">
                                     <ComboBox
                                         Width="110"
                                         PlaceholderText="Backdrop..."
@@ -565,7 +648,7 @@
                                         <ComboBoxItem Content="None" />
                                     </ComboBox>
                                 </ContentControl>
-                                <ContentControl Tag="useDarkMode|[optional] [default: true]  Type: bool" Template="{StaticResource SettingsCard}">
+                                <ContentControl Tag="useDarkMode|[optional: true] [Type: bool]  The boolean wether the backdrop effect should be enabled/disabled" Template="{StaticResource SettingsCard}">
                                     <ToggleSwitch IsOn="{x:Bind viewModel.BackdropHandler_useDarkMode, Mode=TwoWay}" />
                                 </ContentControl>
                             </StackPanel>
@@ -577,10 +660,13 @@
             </ScrollViewer>
         </TabViewItem>
 
-        <TabViewItem Header="IConverter" IsClosable="False">
+        <TabViewItem
+            Header="IConverter"
+            IsClosable="False"
+            ToolTipService.ToolTip="Converter which converts strings and objects">
             <ScrollViewer VerticalAlignment="Stretch">
-                <StackPanel Padding="8,12" Spacing="8">
-                    <ContentControl Tag="Test Object|This is an exmaple SolidColor object to test json converting" Template="{StaticResource SettingsCard}">
+                <StackPanel Padding="0,0,0,12" Spacing="8">
+                    <ContentControl Tag="Test Object|[Type: SolidColor]  Exmaple object to test converting" Template="{StaticResource SettingsCard}">
                         <StackPanel Orientation="Horizontal" Spacing="8">
                             <TextBox
                                 MinWidth="100"
@@ -607,18 +693,23 @@
                         Margin="0,12,0,0"
                         HorizontalAlignment="Stretch"
                         VerticalAlignment="Top"
-                        Header="ToString()|Converts any object into a json string"
+                        Header="ToString()|[Returns: string]  Converts an object into a string"
                         Template="{StaticResource CardExpander}">
                         <Expander.Tag>
-                            <ContentControl Tag="formatting|[optional] [default = null] Type: object?" Template="{StaticResource SettingsCard}">
-                                <ComboBox
-                                    Width="110"
-                                    PlaceholderText="Formatting..."
-                                    SelectedIndex="{x:Bind viewModel.IConverter_formatting, Mode=TwoWay, Converter={StaticResource EnumIntConverter}}">
-                                    <ComboBoxItem Content="None" />
-                                    <ComboBoxItem Content="Indented" />
-                                </ComboBox>
-                            </ContentControl>
+                            <StackPanel Spacing="8">
+                                <ContentControl Tag="input|[Type: object]  The object to convert" Template="{StaticResource SettingsCard}">
+                                    <Button Content="Set Input" IsEnabled="False" />
+                                </ContentControl>
+                                <ContentControl Tag="formatting|[optional: null] [Type: object?]  The formatting which will be used to convert the object" Template="{StaticResource SettingsCard}">
+                                    <ComboBox
+                                        Width="110"
+                                        PlaceholderText="Formatting..."
+                                        SelectedIndex="{x:Bind viewModel.IConverter_formatting, Mode=TwoWay, Converter={StaticResource EnumIntConverter}}">
+                                        <ComboBoxItem Content="None" />
+                                        <ComboBoxItem Content="Indented" />
+                                    </ComboBox>
+                                </ContentControl>
+                            </StackPanel>
                         </Expander.Tag>
 
                         <Button Command="{x:Bind viewModel.IConverter_ToStringCommand}" Content="Test Method" />
@@ -627,11 +718,11 @@
                     <Expander
                         HorizontalAlignment="Stretch"
                         VerticalAlignment="Top"
-                        Header="ToObject&lt;T&gt;()|Converts any json string into an object"
+                        Header="ToObject&lt;T&gt;()|[Returns: T]  Converts a stirng into an object"
                         Template="{StaticResource CardExpander}">
                         <Expander.Tag>
-                            <ContentControl Tag="settings|[optional] [default = null] Type: object?" Template="{StaticResource SettingsCard}">
-                                <Button Content="Set Settings" IsEnabled="False" />
+                            <ContentControl Tag="input|[Type: string]  The string to convert" Template="{StaticResource SettingsCard}">
+                                <Button Content="Set Input" IsEnabled="False" />
                             </ContentControl>
                         </Expander.Tag>
 
@@ -641,10 +732,15 @@
                     <Expander
                         HorizontalAlignment="Stretch"
                         VerticalAlignment="Top"
-                        Header="TryToObject&lt;T&gt;()|Tries to convert any json string into an object and returns a boolean"
+                        Header="TryToObject&lt;T&gt;()|[Returns: bool]  Tries to convert a string into an object"
                         Template="{StaticResource CardExpander}">
                         <Expander.Tag>
-                            <ContentControl Tag="result|[out]  Type: T?" Template="{StaticResource SettingsCard}" />
+                            <StackPanel Spacing="8">
+                                <ContentControl Tag="result|[out] [Type: T?]  The converted converted object of the string" Template="{StaticResource SettingsCard}" />
+                                <ContentControl Tag="input|[Type: string]  The string to convert" Template="{StaticResource SettingsCard}">
+                                    <Button Content="Set Input" IsEnabled="False" />
+                                </ContentControl>
+                            </StackPanel>
                         </Expander.Tag>
 
                         <Button Command="{x:Bind viewModel.IConverter_TryToObjectCommand}" Content="Test Method" />
@@ -656,18 +752,22 @@
         <TabViewItem
             Header="ImagingUtility"
             IsClosable="False"
-            IsEnabled="False" />
+            IsEnabled="False"
+            ToolTipService.ToolTip="Utility to render and image advanced UI" />
 
-        <TabViewItem Header="IFileSystem" IsClosable="False">
+        <TabViewItem
+            Header="IFileSystem"
+            IsClosable="False"
+            ToolTipService.ToolTip="Service to communicate with the local file system">
             <ScrollViewer VerticalAlignment="Stretch">
-                <StackPanel Padding="8,12" Spacing="8">
+                <StackPanel Padding="0,0,0,12" Spacing="8">
                     <Expander
                         HorizontalAlignment="Stretch"
                         VerticalAlignment="Top"
-                        Header="FileExists()|Checks if a file exists"
+                        Header="FileExists()|[Returns: bool]  Checks wether a file exists"
                         Template="{StaticResource CardExpander}">
                         <Expander.Tag>
-                            <ContentControl Tag="path|Type: string" Template="{StaticResource SettingsCard}">
+                            <ContentControl Tag="path|[Type: string]  The path to the file to check" Template="{StaticResource SettingsCard}">
                                 <TextBox
                                     MinWidth="400"
                                     MaxWidth="500"
@@ -681,10 +781,10 @@
                     <Expander
                         HorizontalAlignment="Stretch"
                         VerticalAlignment="Top"
-                        Header="FileWritable()|Checks if a file exists and is writeable"
+                        Header="FileWritable()|[Returns: bool]  Checks wether a file is writeable"
                         Template="{StaticResource CardExpander}">
                         <Expander.Tag>
-                            <ContentControl Tag="path|Type: string" Template="{StaticResource SettingsCard}">
+                            <ContentControl Tag="path|[Type: string]  The path to the file to check" Template="{StaticResource SettingsCard}">
                                 <TextBox
                                     MinWidth="400"
                                     MaxWidth="500"
@@ -698,25 +798,25 @@
                     <Expander
                         HorizontalAlignment="Stretch"
                         VerticalAlignment="Top"
-                        Header="CopyFile()|[Obsolete: Use async]  Copies a file to a new destination and optionally overwrites it"
+                        Header="CopyFile()|[Obsolete: Not recommended: Use asnyc method]  Copies a file to another destination"
                         Template="{StaticResource CardExpander}">
                         <Expander.Tag>
                             <StackPanel Spacing="8">
-                                <ContentControl Tag="path|Type: string" Template="{StaticResource SettingsCard}">
+                                <ContentControl Tag="path|[Type: string]  The path to the file to copy" Template="{StaticResource SettingsCard}">
                                     <TextBox
                                         MinWidth="400"
                                         MaxWidth="500"
                                         Text="{x:Bind viewModel.IFileSystem_path, Mode=TwoWay}" />
                                 </ContentControl>
 
-                                <ContentControl Tag="destination|Type: string" Template="{StaticResource SettingsCard}">
+                                <ContentControl Tag="destination|[Type: string]  The path to the destination the file should be copied" Template="{StaticResource SettingsCard}">
                                     <TextBox
                                         MinWidth="400"
                                         MaxWidth="500"
                                         Text="{x:Bind viewModel.IFileSystem_destination, Mode=TwoWay}" />
                                 </ContentControl>
 
-                                <ContentControl Tag="overwrite|Type: bool" Template="{StaticResource SettingsCard}">
+                                <ContentControl Tag="overwrite|[Type: bool]  The boolean wether the original file should get overwritten if it exists" Template="{StaticResource SettingsCard}">
                                     <ToggleSwitch IsOn="{x:Bind viewModel.IFileSystem_overwrite, Mode=TwoWay}" />
                                 </ContentControl>
                             </StackPanel>
@@ -728,25 +828,25 @@
                     <Expander
                         HorizontalAlignment="Stretch"
                         VerticalAlignment="Top"
-                        Header="CopyFileAsync()|Copies a file to a new destination and optionally overwrites it"
+                        Header="CopyFileAsync()|Copies a file asynchronously to another destination"
                         Template="{StaticResource CardExpander}">
                         <Expander.Tag>
                             <StackPanel Spacing="8">
-                                <ContentControl Tag="path|Type: string" Template="{StaticResource SettingsCard}">
+                                <ContentControl Tag="path|[Type: string]  The path to the file to copy" Template="{StaticResource SettingsCard}">
                                     <TextBox
                                         MinWidth="400"
                                         MaxWidth="500"
                                         Text="{x:Bind viewModel.IFileSystem_path, Mode=TwoWay}" />
                                 </ContentControl>
 
-                                <ContentControl Tag="destination|Type: string" Template="{StaticResource SettingsCard}">
+                                <ContentControl Tag="destination|[Type: string]  The path to the destination the file should be copied" Template="{StaticResource SettingsCard}">
                                     <TextBox
                                         MinWidth="400"
                                         MaxWidth="500"
                                         Text="{x:Bind viewModel.IFileSystem_destination, Mode=TwoWay}" />
                                 </ContentControl>
 
-                                <ContentControl Tag="overwrite|Type: bool" Template="{StaticResource SettingsCard}">
+                                <ContentControl Tag="overwrite|[Type: bool]  The boolean wether the original file should get overwritten if it exists" Template="{StaticResource SettingsCard}">
                                     <ToggleSwitch IsOn="{x:Bind viewModel.IFileSystem_overwrite, Mode=TwoWay}" />
                                 </ContentControl>
                             </StackPanel>
@@ -754,7 +854,10 @@
 
                         <StackPanel Orientation="Horizontal" Spacing="8">
                             <Button Command="{x:Bind viewModel.IFileSystem_CopyFileACommand}" Content="Test Method" />
-                            <Button Command="{x:Bind viewModel.IFileSystem_CopyFileACancelCommand}" Content="Cancel Method" />
+                            <Button
+                                Command="{x:Bind viewModel.IFileSystem_CopyFileACancelCommand}"
+                                Content="Cancel Method"
+                                ToolTipService.ToolTip="The token to cancel the operation" />
                         </StackPanel>
                     </Expander>
 
