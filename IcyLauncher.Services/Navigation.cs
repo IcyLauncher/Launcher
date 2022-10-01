@@ -14,6 +14,9 @@ public class Navigation : INavigation
     readonly List<NavigationViewItem> items;
     bool skipEvent = false;
 
+    /// <summary>
+    /// Service for navigating in the current main window
+    /// </summary>
     public Navigation(
         ILogger<Navigation> logger,
         UIElementReciever uIElementReciever)
@@ -34,13 +37,28 @@ public class Navigation : INavigation
     }
 
 
+    /// <summary>
+    /// Gets the current navigation view item
+    /// </summary>
+    /// <returns>The current navigation view item</returns>
     public NavigationViewItem? GetCurrentNavigationViewItem() =>
         uIElementReciever.NavigationView.SelectedItem is NavigationViewItem current ? current : null;
 
+    /// <summary>
+    /// Gets the LayoutRoot grid of the current navigation view item
+    /// </summary>
+    /// <returns>The current navigation view item LayoutRoot</returns>
     public Grid? GetCurrentNavigationViewItemLayoutRoot() =>
         GetCurrentNavigationViewItem() is NavigationViewItem item ? (Grid)VisualTreeHelper.GetChild(VisualTreeHelper.GetChild(VisualTreeHelper.GetChild(item, 0), 0), 0) : null;
 
 
+    /// <summary>
+    /// Searches for a specific navigation view item in the current NavigationView
+    /// </summary>
+    /// <param name="searchFor">The string to search for</param>
+    /// <param name="searchForTag">The boolean wether to search in the element tag</param>
+    /// <param name="comparision">The string comparison mode which should be applied when searching</param>
+    /// <returns>The found navigation view item</returns>
     public NavigationViewItem? GetNavigationViewItem(
         string? searchFor,
         bool searchForTag = false,
@@ -57,6 +75,11 @@ public class Navigation : INavigation
     }
 
 
+    /// <summary>
+    /// Sets the current navigation item
+    /// </summary>
+    /// <param name="item">The navigation view item which should be set</param>
+    /// <returns>A boolean wether the navigation view item has been set successfully</returns>
     public bool SetCurrentNavigationViewItem(
         NavigationViewItem item)
     {
@@ -73,6 +96,12 @@ public class Navigation : INavigation
             return false;
         }
     }
+
+    /// <summary>
+    /// Sets the current navigation view item index
+    /// </summary>
+    /// <param name="index">The index which should be set</param>
+    /// <returns>A boolean wether the current navigation view item index has been set successfully</returns>
     public bool SetCurrentIndex(
         int index)
     {
@@ -97,6 +126,12 @@ public class Navigation : INavigation
         }
     }
 
+    /// <summary>
+    /// Sets the current navigation frame page
+    /// </summary>
+    /// <param name="type">The page which should be navigated to</param>
+    /// <param name="parameter">The parameter which should get passed to</param>
+    /// <returns>A boolean wether the page has been set successfully</returns>
     public bool SetCurrentPage(
         Type? type,
         object? parameter = null)
@@ -119,6 +154,11 @@ public class Navigation : INavigation
         }
     }
 
+    /// <summary>
+    /// Navigates to the given navigation view item 
+    /// </summary>
+    /// <param name="item">The navigation view item which should be set</param>
+    /// <returns>A boolean wether the navigation view item has been navigated to successfully</returns>
     public bool Navigate(
         NavigationViewItem? item)
     {
@@ -131,10 +171,19 @@ public class Navigation : INavigation
             return false;
     }
 
+    /// <summary>
+    /// Navigates to the given page 
+    /// </summary>
+    /// <param name="page">The page item which should be navigated to</param>
+    /// <returns>A boolean wether the page has been navigated to successfully</returns>
     public bool Navigate(string page) =>
         Navigate(GetNavigationViewItem(page));
 
 
+    /// <summary>
+    /// Navigates a page back
+    /// </summary>
+    /// <returns>A boolean wether a page back has been navigated to successfully</returns>
     public bool GoBack()
     {
         try
@@ -157,6 +206,9 @@ public class Navigation : INavigation
         }
     }
 
+    /// <summary>
+    /// Clears the GoBack backstack
+    /// </summary>
     public void ClearBackStack()
     {
         uIElementReciever.NavigationFrame.BackStack.Clear();

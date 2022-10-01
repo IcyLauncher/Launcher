@@ -2,6 +2,9 @@
 
 public class AppStartupHandler
 {
+    /// <summary>
+    /// Handler which configures the entire application on startup 
+    /// </summary>
     public AppStartupHandler(
         ILogger<AppStartupHandler> logger,
         IOptions<Configuration> configuration,

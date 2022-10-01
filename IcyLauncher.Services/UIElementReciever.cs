@@ -6,17 +6,50 @@ namespace IcyLauncher.Services;
 
 public class UIElementReciever
 {
-    public Grid MainGrid;
-    public NavigationView NavigationView;
-    public Frame NavigationFrame;
-    public Grid TitleBarContainer;
-    public StackPanel TitleBar;
-    public Grid TitleBarDragArea;
-    public Button BackButton;
-    public AnimatedIcon BackButtonIcon;
-    public GradientStopCollection TitleBarIconGradientStops;
-    public TextBlock TitleBarTitle;
+    /// <summary>
+    /// The container of the current main window
+    /// </summary>
+    public readonly Grid MainGrid;
+    /// <summary>
+    /// The navigation container of the current main window
+    /// </summary>
+    public readonly NavigationView NavigationView;
+    /// <summary>
+    /// The navigation frame of the current main window
+    /// </summary>
+    public readonly Frame NavigationFrame;
+    /// <summary>
+    /// The container of the custom title bar
+    /// </summary>
+    public readonly Grid TitleBarContainer;
+    /// <summary>
+    /// The custom title bar of the current main window
+    /// </summary>
+    public readonly StackPanel TitleBar;
+    /// <summary>
+    /// The drag area of the custom title bar
+    /// </summary>
+    public readonly Grid TitleBarDragArea;
+    /// <summary>
+    /// The navigation back button of the navigation view
+    /// </summary>
+    public readonly Button BackButton;
+    /// <summary>
+    /// The icon of the back button
+    /// </summary>
+    public readonly AnimatedIcon BackButtonIcon;
+    /// <summary>
+    /// The icon gradient stop collection of the custom title bar
+    /// </summary>
+    public readonly GradientStopCollection TitleBarIconGradientStops;
+    /// <summary>
+    /// The title of the custom title bar
+    /// </summary>
+    public readonly TextBlock TitleBarTitle;
 
+    /// <summary>
+    /// Reciever and caster of all UIElements of the current main window
+    /// </summary>
     public UIElementReciever(
         ILogger<UIElementReciever> logger,
         Window shell)

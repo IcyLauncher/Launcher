@@ -8,6 +8,9 @@ public class ConfigurationManager
     readonly Configuration configuration;
     readonly IConverter converter;
 
+    /// <summary>
+    /// Manager of the current configuration
+    /// </summary>
     public ConfigurationManager(
         ILogger<ConfigurationManager> logger,
         IOptions<Configuration> configuration,
@@ -21,9 +24,18 @@ public class ConfigurationManager
     }
 
 
+    /// <summary>
+    /// Exports the current configuration as a string
+    /// </summary>
+    /// <returns>The converted string of the current configuration</returns>
     public string Export() =>
         converter.ToString(configuration, Formatting.Indented);
 
+    /// <summary>
+    /// Loads a configuration as the current configuration
+    /// </summary>
+    /// <param name="input">The configuration which should get loaded</param>
+    /// <param name="ignoreTheme">The boolean wether the theme should be ignored while loading</param>
     public void Load(
         Configuration input,
         bool ignoreTheme = false)

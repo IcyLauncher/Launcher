@@ -10,6 +10,9 @@ public class ImagingUtility
 {
     readonly ILogger<ImagingUtility> logger;
 
+    /// <summary>
+    /// Utility to render and image advanced UI
+    /// </summary>
     public ImagingUtility(
         ILogger<ImagingUtility> logger)
     {
@@ -19,6 +22,12 @@ public class ImagingUtility
     }
 
 
+    /// <summary>
+    /// Initializes the given UIElement
+    /// </summary>
+    /// <param name="element">The UIElement which should get initialized</param>
+    /// <param name="compositor">The returned compositor of the UIElement</param>
+    /// <param name="container">The returned container visual of the UIElement</param>
     public void InitializeUIElement(
         UIElement element,
         out Compositor? compositor,
@@ -42,6 +51,14 @@ public class ImagingUtility
         }
     }
 
+    /// <summary>
+    /// Creates a new gradient brush
+    /// </summary>
+    /// <param name="compositor">The compositor which is used to create this composition object</param>
+    /// <param name="startPoint">The start point of the gradient</param>
+    /// <param name="endPoint">The end point of the gradient</param>
+    /// <param name="gradientStops">The stop collection of the gradient</param>
+    /// <returns>A new composition brush which will have the gradient applied</returns>
     public CompositionLinearGradientBrush? CreateGradientBrush(
         Compositor compositor,
         Vector2 startPoint,
@@ -67,6 +84,13 @@ public class ImagingUtility
         }
     }
 
+    /// <summary>
+    /// Creates a new opacity mask brush
+    /// </summary>
+    /// <param name="compositor">The compositor which is used to create this composition object</param>
+    /// <param name="source">The brush which will be used as the source of the new brush</param>
+    /// <param name="mask">The brush which will be uses as the mask</param>
+    /// <returns>A new compostion brush which will have the mask applied</returns>
     public CompositionMaskBrush? CreateMaskBrush(
         Compositor compositor,
         CompositionBrush? source,
@@ -88,6 +112,15 @@ public class ImagingUtility
         }
     }
 
+    /// <summary>
+    /// Creates a new surface brush with a image
+    /// </summary>
+    /// <param name="compositor">The compositor which is used to create this composition object</param>
+    /// <param name="source">The path to the image which will be used</param>
+    /// <param name="stretch">The stretch mode which will be aplied to the brush</param>
+    /// <param name="horizontalAlignmentRatio">the horizontal alignment which will be aplied to the brush</param>
+    /// <param name="verticalAlignmentRatio">The vertical alignment which will be applied to the brush</param>
+    /// <returns>A new compostion brush which will have the image applied</returns>
     public CompositionSurfaceBrush? CreateImageBrush(
         Compositor compositor,
         Uri source,
@@ -112,6 +145,12 @@ public class ImagingUtility
         }
     }
 
+    /// <summary>
+    /// Creates a new color brush
+    /// </summary>
+    /// <param name="compositor">The compositor which is used to create this composition object</param>
+    /// <param name="color">The color which will be aplied as the color brush</param>
+    /// <returns>A new compostion brush which will have the color applied</returns>
     public CompositionColorBrush? CreateColorBrush(
         Compositor compositor,
         Color color)

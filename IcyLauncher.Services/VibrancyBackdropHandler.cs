@@ -10,6 +10,9 @@ public class VibrancyBackdropHandler : IBackdropHandler
 
     readonly MicaController controller = new();
 
+    /// <summary>
+    /// Handler to confgure a vibrancy backdrop effect on the current main window (Win11+)
+    /// </summary>
     public VibrancyBackdropHandler(
         ILogger<VibrancyBackdropHandler> logger,
         Window shell)
@@ -24,6 +27,10 @@ public class VibrancyBackdropHandler : IBackdropHandler
     }
 
 
+    /// <summary>
+    /// Enables the backdrop effect
+    /// </summary>
+    /// <returns>A boolean wether the backdrop effect was enabled successfully</returns>
     public bool EnableBackdrop()
     {
         if (!MicaController.IsSupported())
@@ -52,6 +59,10 @@ public class VibrancyBackdropHandler : IBackdropHandler
         }
     }
 
+    /// <summary>
+    /// Disables the backdrop effect
+    /// </summary>
+    /// <returns>A boolean wether the backdrop effect was disabled successfully</returns>
     public bool DisableBackdrop()
     {
         try
@@ -71,7 +82,7 @@ public class VibrancyBackdropHandler : IBackdropHandler
     }
 
     /// <summary>
-    /// VibrancyBackdropHandler does not implement light/dark mode. This boolean wont affect this system backdrop.
+    /// VibrancyBackdropHandler does not implement light/dark mode. This boolean wont affect the backdrop effect
     /// </summary>
     [Obsolete("No implementation for light/dark mode")]
     public bool IsDarkModeEnabled { get; set; } = true;

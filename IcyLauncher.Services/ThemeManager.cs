@@ -16,8 +16,14 @@ public class ThemeManager
     readonly IConverter converter;
     readonly INavigation navigation;
 
+    /// <summary>
+    /// The current theme
+    /// </summary>
     public Theme Colors => configuration.Apperance.Colors;
 
+    /// <summary>
+    /// Manager of the current therme
+    /// </summary>
     public ThemeManager(
         ILogger<ConfigurationManager> logger,
         IOptions<Configuration> configuration,
@@ -45,9 +51,18 @@ public class ThemeManager
     readonly Random random = new();
 
 
+    /// <summary>
+    /// Exports the current theme as a string
+    /// </summary>
+    /// <returns>The converted string of the current theme</returns>
     public string Export() =>
         converter.ToString(configuration.Apperance.Colors, Formatting.Indented);
 
+    /// <summary>
+    /// Loads a theme as the current theme
+    /// </summary>
+    /// <param name="input">The theme which should get loaded</param>
+    /// <param name="ignoreAccent">The boolean wether the accent should be ignored while loading</param>
     public void Load(
         Theme input,
         bool ignoreAccent = false)
@@ -57,6 +72,12 @@ public class ThemeManager
         logger.Log($"Loaded theme configuration from input");
     }
 
+    /// <summary>
+    /// Copies a theme to another theme
+    /// </summary>
+    /// <param name="copyTo">The theme which should get copied to</param>
+    /// <param name="copyFrom">The theme which should get copied from</param>
+    /// <param name="ignoreAccent"></param>
     public static void CopyTheme(
         Theme copyTo,
         Theme copyFrom,
@@ -91,27 +112,27 @@ public class ThemeManager
     }
 
     /// <summary>
-    /// Use only for debugging.
+    /// Randomizes every color of the current theme. Use for debugging only
     /// </summary>
     public void RandomizeTheme() =>
         Load(new()
         {
             Accent = new()
             {
-                Primary = GetRandomColor(255),
-                Light = GetRandomColor(255),
-                Dark = GetRandomColor(255)
+                Primary = GetRandomColor(),
+                Light = GetRandomColor(),
+                Dark = GetRandomColor()
             },
             Background = new()
             {
-                Solid = GetRandomColor(255),
+                Solid = GetRandomColor(),
                 Transparent = GetRandomColor(180),
-                Gradient = GetRandomColor(255),
+                Gradient = GetRandomColor(),
                 GradientTransparent = GetRandomColor(0)
             },
             Text = new()
             {
-                Primary = GetRandomColor(255),
+                Primary = GetRandomColor(),
                 Secondary = GetRandomColor(196),
                 Tertiary = GetRandomColor(133),
                 Disabled = GetRandomColor(92),
@@ -124,19 +145,26 @@ public class ThemeManager
                 OutlineDisabled = GetRandomColor(51),
                 Solid = new()
                 {
-                    Primary = GetRandomColor(255),
-                    Outline = GetRandomColor(255),
-                    PrimaryDisabled = GetRandomColor(255),
-                    OutlineDisabled = GetRandomColor(255)
+                    Primary = GetRandomColor(),
+                    Outline = GetRandomColor(),
+                    PrimaryDisabled = GetRandomColor(),
+                    OutlineDisabled = GetRandomColor()
                 }
             }
         });
 
-    public Color GetRandomColor(byte transparency) =>
+    /// <summary>
+    /// Generates a random color
+    /// </summary>
+    /// <param name="transparency">The transparency which the color should have</param>
+    /// <returns>The generated color</returns>
+    public Color GetRandomColor(byte transparency = 255) =>
         Color.FromArgb(transparency, Convert.ToByte(random.Next(0, 255)), Convert.ToByte(random.Next(0, 255)), Convert.ToByte(random.Next(0, 255)));
 
 
-
+    /// <summary>
+    /// Sets resource colors from current theme
+    /// </summary>
     public void SetResourceColors()
     {
         if (Application.Current.Resources["Colors"] is Theme resourceColors)
@@ -150,6 +178,9 @@ public class ThemeManager
         logger.Log($"Set resource colors from current theme");
     }
 
+    /// <summary>
+    /// Binds non-bindable properties of UIElementReciever elements to their respected colors
+    /// </summary>
     public void SetUnbindableBindings()
     {
         ColorBrushConverter converter = new();

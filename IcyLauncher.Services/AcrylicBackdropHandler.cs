@@ -11,6 +11,9 @@ public class AcrylicBackdropHandler : IBackdropHandler
 
     readonly DesktopAcrylicController controller = new();
 
+    /// <summary>
+    /// Handler to confgure an acrylic backdrop effect on the current main window (Win10+)
+    /// </summary>
     public AcrylicBackdropHandler(
         ILogger<AcrylicBackdropHandler> logger,
         WindowHandler windowHandler,
@@ -27,7 +30,10 @@ public class AcrylicBackdropHandler : IBackdropHandler
         logger.Log("Registered backdrop handler and set configuration");
     }
 
-
+    /// <summary>
+    /// Enables the backdrop
+    /// </summary>
+    /// <returns>A boolean wether the backdrop effect was enabled successfully</returns>
     public bool EnableBackdrop()
     {
         if (!DesktopAcrylicController.IsSupported())
@@ -58,6 +64,10 @@ public class AcrylicBackdropHandler : IBackdropHandler
         }
     }
 
+    /// <summary>
+    /// Disables the backdrop
+    /// </summary>
+    /// <returns>A boolean wether the backdrop effect was disabled successfully</returns>
     public bool DisableBackdrop()
     {
         try
@@ -78,6 +88,9 @@ public class AcrylicBackdropHandler : IBackdropHandler
 
 
     bool isDarkModeEnabled;
+    /// <summary>
+    /// Gets and sets the dark mode of the backdrop effect
+    /// </summary>
     public bool IsDarkModeEnabled
     {
         get => isDarkModeEnabled;

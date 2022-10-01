@@ -10,6 +10,9 @@ public class MicaBackdropHandler : IBackdropHandler
 
     readonly MicaController controller = new();
 
+    /// <summary>
+    /// Handler to confgure a mica backdrop effect on the current main window (Win11+)
+    /// </summary>
     public MicaBackdropHandler(
         ILogger<MicaBackdropHandler> logger,
         Window shell)
@@ -23,6 +26,10 @@ public class MicaBackdropHandler : IBackdropHandler
     }
 
 
+    /// <summary>
+    /// Enables the backdrop effect
+    /// </summary>
+    /// <returns>A boolean wether the backdrop effect was enabled successfully</returns>
     public bool EnableBackdrop()
     {
         if (!MicaController.IsSupported())
@@ -51,6 +58,10 @@ public class MicaBackdropHandler : IBackdropHandler
         }
     }
 
+    /// <summary>
+    /// Disables the backdrop effect
+    /// </summary>
+    /// <returns>A boolean wether the backdrop effect was disabled successfully</returns>
     public bool DisableBackdrop()
     {
         try
@@ -69,6 +80,9 @@ public class MicaBackdropHandler : IBackdropHandler
     }
 
     bool isDarkModeEnabled;
+    /// <summary>
+    /// Sets and gets the dark mode of the backdrop effect
+    /// </summary>
     public bool IsDarkModeEnabled
     {
         get => isDarkModeEnabled;
