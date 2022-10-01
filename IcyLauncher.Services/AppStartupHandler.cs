@@ -23,8 +23,10 @@ public class AppStartupHandler
         {
             logger.Log("Global exception thrown", e.Exception, LogLevel.Error, "global", "?");
 
-            //e.Exception.Source != "CommunityToolkit.WinUI.UI" || e.Exception is OperationCanceledException
-            // => Show message popup
+            //if (e.Exception.Source != "CommunityToolkit.WinUI.UI" || e.Exception is OperationCanceledException)
+            //    await message.ShowAsync("Somethig went wrong :(", $"It looks like something bad just happend. An unhandled exception just threw ({e.Exception.Source}).\nWe are sorry that this just happend. You can get support on the official IcyCord-Discord Server or you can report the crash log to IcyLauncher directly.", primaryButton: "Join IcyCord", secondaryButton: "Report Crash");
+            //    Process.Start(Crash Window);
+
         };
 
         if (solidColors.Value.Container is null)
