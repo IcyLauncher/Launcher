@@ -7,17 +7,50 @@ public partial class DeveloperSettingsViewModel : ObservableObject
 
 
     [RelayCommand]
-    void MicaBackdropHandler_EnableBackdrop() =>
-        micaBackdropHandler.EnableBackdrop();
+    async Task MicaBackdropHandler_EnableBackdrop()
+    {
+        try
+        {
+            bool result = micaBackdropHandler.EnableBackdrop();
+            await message.ShowAsync("micaBackdropHandler.EnableBackdrop()", $"Method completed.\nResult: {result}", closeButton: "Ok");
+        }
+        catch (Exception ex)
+        {
+            await message.ShowAsync("micaBackdropHandler.EnableBackdrop()", $"Method completed.\nException{ex.Format()}", closeButton: "Ok");
+        }
+    }
 
     [RelayCommand]
-    void MicaBackdropHandler_DisableBackdrop() =>
-        micaBackdropHandler.DisableBackdrop();
+    async Task MicaBackdropHandler_DisableBackdrop()
+    {
+        try
+        {
+            bool result = micaBackdropHandler.DisableBackdrop();
+            await message.ShowAsync("micaBackdropHandler.DisableBackdrop()", $"Method completed.\nResult: {result}", closeButton: "Ok");
+        }
+        catch (Exception ex)
+        {
+            await message.ShowAsync("micaBackdropHandler.DisableBackdrop()", $"Method completed.\nException{ex.Format()}", closeButton: "Ok");
+        }
+    }
 
 
     [ObservableProperty]
     bool micaBackdropHandler_isDarkModeEnabled = default!;
 
-    partial void OnMicaBackdropHandler_isDarkModeEnabledChanged(bool value) =>
-        micaBackdropHandler.IsDarkModeEnabled = value;
+    async partial void OnMicaBackdropHandler_isDarkModeEnabledChanged(bool value)
+    {
+        try
+        {
+            if (micaBackdropHandler.IsDarkModeEnabled != value)
+            {
+                micaBackdropHandler.IsDarkModeEnabled = value;
+                await message.ShowAsync("micaBackdropHandler.IsDarkModeEnabled", $"Method completed.", closeButton: "Ok");
+            }
+        }
+        catch (Exception ex)
+        {
+            await message.ShowAsync("micaBackdropHandler.IsDarkModeEnabled", $"Method completed.\nException{ex.Format()}", closeButton: "Ok");
+        }
+    }
 }

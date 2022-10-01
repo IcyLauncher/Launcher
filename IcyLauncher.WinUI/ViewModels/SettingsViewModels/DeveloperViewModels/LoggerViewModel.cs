@@ -22,8 +22,18 @@ public partial class DeveloperSettingsViewModel : ObservableObject
 
 
     [RelayCommand]
-    void Logger_Test() =>
-        logger.Log(Logger_message, string.IsNullOrEmpty(Logger_exception) ? null : new(Logger_exception), Logger_logLevel, Logger_filePath, Logger_memberName);
+    async Task Logger_Test()
+    {
+        try
+        {
+            logger.Log(Logger_message, string.IsNullOrEmpty(Logger_exception) ? null : new(Logger_exception), Logger_logLevel, Logger_filePath, Logger_memberName);
+            await message.ShowAsync("logger.Log()", $"Method completed.", closeButton: "Ok");
+        }
+        catch (Exception ex)
+        {
+            await message.ShowAsync("logger.Log()", $"Method completed.\nException{ex.Format()}", closeButton: "Ok");
+        }
+    }
 
 
     [RelayCommand]

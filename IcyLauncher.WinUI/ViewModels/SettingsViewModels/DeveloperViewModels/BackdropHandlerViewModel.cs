@@ -1,6 +1,4 @@
-﻿using Windows.Graphics;
-
-namespace IcyLauncher.WinUI.ViewModels;
+﻿namespace IcyLauncher.WinUI.ViewModels;
 
 public partial class DeveloperSettingsViewModel : ObservableObject
 {
@@ -67,11 +65,30 @@ public partial class DeveloperSettingsViewModel : ObservableObject
     bool backdropHandler_useDarkModeIsNull;
 
     [RelayCommand]
-    void BackdropHandler_SetBackdrop() =>
-        backdropHandler.SetBackdrop(BackdropHandler_backdrop, BackdropHandler_enable, BackdropHandler_useDarkModeIsNull ? null : BackdropHandler_useDarkMode);
+    async Task BackdropHandler_SetBackdrop()
+    {
+        try
+        {
+            bool result = backdropHandler.SetBackdrop(BackdropHandler_backdrop, BackdropHandler_enable, BackdropHandler_useDarkModeIsNull ? null : BackdropHandler_useDarkMode);
+            await message.ShowAsync("backdropHandler.SetBackdrop()", $"Method completed.\nResult: {result}", closeButton: "Ok");
+        }
+        catch (Exception ex)
+        {
+            await message.ShowAsync("backdropHandler.SetBackdrop()", $"Method completed.\nException{ex.Format()}", closeButton: "Ok");
+        }
+    }
 
     [RelayCommand]
-    void BackdropHandler_SetDarkMode() =>
-        backdropHandler.SetDarkMode(BackdropHandler_backdrop, BackdropHandler_useDarkMode);
-
+    async Task BackdropHandler_SetDarkMode()
+    {
+        try
+        {
+            backdropHandler.SetDarkMode(BackdropHandler_backdrop, BackdropHandler_useDarkMode);
+            await message.ShowAsync("backdropHandler.SetDarkMode()", $"Method completed", closeButton: "Ok");
+        }
+        catch (Exception ex)
+        {
+            await message.ShowAsync("backdropHandler.SetDarkMode()", $"Method completed.\nException{ex.Format()}", closeButton: "Ok");
+        }
+    }
 }

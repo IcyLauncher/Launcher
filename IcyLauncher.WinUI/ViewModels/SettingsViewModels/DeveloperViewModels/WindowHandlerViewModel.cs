@@ -66,13 +66,15 @@ public partial class DeveloperSettingsViewModel : ObservableObject
     [RelayCommand]
     async Task WindowHandler_SetIcon(string path)
     {
-        if (!fileSystem.FileExists(path))
+        try
         {
-            await message.ShowAsync("Something went wrong :(", "It looks like this path is invalid. Please verify the file exists.", closeButton: "Ok");
-            return;
+            windowHandler.SetIcon(path);
+            await message.ShowAsync("windowHandler.SetIcon()", $"Method completed.", closeButton: "Ok");
         }
-
-        windowHandler.SetIcon(path);
+        catch (Exception ex)
+        {
+            await message.ShowAsync("windowHandler.SetIcon()", $"Method completed.\nException{ex.Format()}", closeButton: "Ok");
+        }
     }
 
 
@@ -83,8 +85,18 @@ public partial class DeveloperSettingsViewModel : ObservableObject
     int windowHandler_sizeHeight;
 
     [RelayCommand]
-    void WindowHandler_SetSize() =>
-        windowHandler.SetSize(WindowHandler_sizeWidth, WindowHandler_sizeHeight);
+    async Task WindowHandler_SetSize()
+    {
+        try
+        {
+            windowHandler.SetSize(WindowHandler_sizeWidth, WindowHandler_sizeHeight);
+            await message.ShowAsync("windowHandler.SetSize()", $"Method completed.", closeButton: "Ok");
+        }
+        catch (Exception ex)
+        {
+            await message.ShowAsync("windowHandler.SetSize()", $"Method completed.\nException{ex.Format()}", closeButton: "Ok");
+        }
+    }
 
 
     [ObservableProperty]
@@ -94,8 +106,18 @@ public partial class DeveloperSettingsViewModel : ObservableObject
     int windowHandler_minSizeHeight;
 
     [RelayCommand]
-    void WindowHandler_SetMinSize() =>
-        windowHandler.SetMinSize(WindowHandler_minSizeWidth, WindowHandler_minSizeHeight);
+    async Task WindowHandler_SetMinSize()
+    {
+        try
+        {
+            windowHandler.SetMinSize(WindowHandler_minSizeWidth, WindowHandler_minSizeHeight);
+            await message.ShowAsync("windowHandler.SetMinSize()", $"Method completed.", closeButton: "Ok");
+        }
+        catch (Exception ex)
+        {
+            await message.ShowAsync("windowHandler.SetMinSize()", $"Method completed.\nException{ex.Format()}", closeButton: "Ok");
+        }
+    }
 
 
     [ObservableProperty]
@@ -105,17 +127,47 @@ public partial class DeveloperSettingsViewModel : ObservableObject
     int windowHandler_positionY;
 
     [RelayCommand]
-    void WindowHandler_SetPosition() =>
-        windowHandler.SetPosition(WindowHandler_positionX, WindowHandler_positionY);
+    async Task WindowHandler_SetPosition()
+    {
+        try
+        {
+            windowHandler.SetPosition(WindowHandler_positionX, WindowHandler_positionY);
+            await message.ShowAsync("windowHandler.SetPosition()", $"Method completed.", closeButton: "Ok");
+        }
+        catch (Exception ex)
+        {
+            await message.ShowAsync("windowHandler.SetPosition()", $"Method completed.\nException{ex.Format()}", closeButton: "Ok");
+        }
+    }
 
     [RelayCommand]
-    void WindowHandler_SetPositionToCenter() =>
-        windowHandler.SetPositionToCenter();
+    async Task WindowHandler_SetPositionToCenter()
+    {
+        try
+        {
+            windowHandler.SetPositionToCenter();
+            await message.ShowAsync("windowHandler.SetPositionToCenter()", $"Method completed.", closeButton: "Ok");
+        }
+        catch (Exception ex)
+        {
+            await message.ShowAsync("windowHandler.SetPositionToCenter()", $"Method completed.\nException{ex.Format()}", closeButton: "Ok");
+        }
+    }
 
 
     [RelayCommand]
-    void WindowHandler_EnsureWindowsSystemDispatcherQueueController() =>
-        windowHandler.EnsureWindowsSystemDispatcherQueueController();
+    async Task WindowHandler_EnsureWindowsSystemDispatcherQueueController()
+    {
+        try
+        {
+            bool result = windowHandler.EnsureWindowsSystemDispatcherQueueController();
+            await message.ShowAsync("windowHandler.EnsureWindowsSystemDispatcherQueueController()", $"Method completed.\nResult: {result}", closeButton: "Ok");
+        }
+        catch (Exception ex)
+        {
+            await message.ShowAsync("windowHandler.EnsureWindowsSystemDispatcherQueueController()", $"Method completed.\nException{ex.Format()}", closeButton: "Ok");
+        }
+    }
 
 
     [ObservableProperty]
@@ -125,7 +177,34 @@ public partial class DeveloperSettingsViewModel : ObservableObject
     bool windowHandler_titleBarContainerIsNull;
 
     [RelayCommand]
-    void WindowHandler_SetTitleBar() =>
-        windowHandler.SetTitleBar(WindowHandler_titleBarIsNull ? null : uiElementReciever.TitleBarDragArea, WindowHandler_titleBarContainerIsNull ? null : uiElementReciever.TitleBarContainer);
+    async Task WindowHandler_SetTitleBar()
+    {
+        try
+        {
+            bool result = windowHandler.SetTitleBar(WindowHandler_titleBarIsNull ? null : uiElementReciever.TitleBarDragArea, WindowHandler_titleBarContainerIsNull ? null : uiElementReciever.TitleBarContainer);
+            await message.ShowAsync("windowHandler.SetTitleBar()", $"Method completed.\nResult: {result}", closeButton: "Ok");
+        }
+        catch (Exception ex)
+        {
+            await message.ShowAsync("windowHandler.SetTitleBar()", $"Method completed.\nException{ex.Format()}", closeButton: "Ok");
+        }
+    }
+    
+    
+    [ObservableProperty]
+    string windowHandler_mainBackground = "Background.Solid";
 
+    [RelayCommand]
+    async Task WindowHandler_SetMainBackground()
+    {
+        try
+        {
+            bool result = windowHandler.SetMainBackground(WindowHandler_mainBackground);
+            await message.ShowAsync("windowHandler.SetMainBackground()", $"Method completed.\nResult: {result}", closeButton: "Ok");
+        }
+        catch (Exception ex)
+        {
+            await message.ShowAsync("windowHandler.SetMainBackground()", $"Method completed.\nException{ex.Format()}", closeButton: "Ok");
+        }
+    }
 }

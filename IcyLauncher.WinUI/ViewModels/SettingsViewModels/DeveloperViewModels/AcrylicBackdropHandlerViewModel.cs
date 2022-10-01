@@ -7,17 +7,50 @@ public partial class DeveloperSettingsViewModel : ObservableObject
 
 
     [RelayCommand]
-    void AcrylicBackdropHandler_EnableBackdrop() =>
-        acrylicBackdropHandler.EnableBackdrop();
+    async Task AcrylicBackdropHandler_EnableBackdrop()
+    {
+        try
+        {
+            bool result = acrylicBackdropHandler.EnableBackdrop();
+            await message.ShowAsync("acrylicBackdropHandler.EnableBackdrop()", $"Method completed.\nResult: {result}", closeButton: "Ok");
+        }
+        catch (Exception ex)
+        {
+            await message.ShowAsync("acrylicBackdropHandler.EnableBackdrop()", $"Method completed.\nException{ex.Format()}", closeButton: "Ok");
+        }
+    }
 
     [RelayCommand]
-    void AcrylicBackdropHandler_DisableBackdrop() =>
-        acrylicBackdropHandler.DisableBackdrop();
+    async Task AcrylicBackdropHandler_DisableBackdrop()
+    {
+        try
+        {
+            bool result = acrylicBackdropHandler.DisableBackdrop();
+            await message.ShowAsync("acrylicBackdropHandler.DisableBackdrop()", $"Method completed.\nResult: {result}", closeButton: "Ok");
+        }
+        catch (Exception ex)
+        {
+            await message.ShowAsync("acrylicBackdropHandler.DisableBackdrop()", $"Method completed.\nException{ex.Format()}", closeButton: "Ok");
+        }
+    }
 
 
     [ObservableProperty]
     bool acrylicBackdropHandler_isDarkModeEnabled = default!;
 
-    partial void OnAcrylicBackdropHandler_isDarkModeEnabledChanged(bool value) =>
-        acrylicBackdropHandler.IsDarkModeEnabled = value;
+    async partial void OnAcrylicBackdropHandler_isDarkModeEnabledChanged(bool value)
+    {
+        try
+        {
+            if (acrylicBackdropHandler.IsDarkModeEnabled != value)
+            {
+                acrylicBackdropHandler.IsDarkModeEnabled = value;
+                await message.ShowAsync("acrylicBackdropHandler.IsDarkModeEnabled", $"Method completed.", closeButton: "Ok");
+            }
+        }
+        catch (Exception ex)
+        {
+            await message.ShowAsync("acrylicBackdropHandler.IsDarkModeEnabled", $"Method completed.\nException{ex.Format()}", closeButton: "Ok");
+        }
+    }
 }

@@ -3,10 +3,30 @@
 public partial class DeveloperSettingsViewModel : ObservableObject
 {
     [RelayCommand]
-    void VibrancyBackdropHandler_EnableBackdrop() =>
-        vibrancyBackdropHandler.EnableBackdrop();
+    async Task VibrancyBackdropHandler_EnableBackdrop()
+    {
+        try
+        {
+            bool result = vibrancyBackdropHandler.EnableBackdrop();
+            await message.ShowAsync("vibrancyBackdropHandler.EnableBackdrop()", $"Method completed.\nResult: {result}", closeButton: "Ok");
+        }
+        catch (Exception ex)
+        {
+            await message.ShowAsync("vibrancyBackdropHandler.EnableBackdrop()", $"Method completed.\nException{ex.Format()}", closeButton: "Ok");
+        }
+    }
 
     [RelayCommand]
-    void VibrancyBackdropHandler_DisableBackdrop() =>
-        vibrancyBackdropHandler.DisableBackdrop();
+    async Task VibrancyBackdropHandler_DisableBackdrop()
+    {
+        try
+        {
+            bool result = vibrancyBackdropHandler.DisableBackdrop();
+            await message.ShowAsync("vibrancyBackdropHandler.DisableBackdrop()", $"Method completed.\nResult: {result}", closeButton: "Ok");
+        }
+        catch (Exception ex)
+        {
+            await message.ShowAsync("vibrancyBackdropHandler.DisableBackdrop()", $"Method completed.\nException{ex.Format()}", closeButton: "Ok");
+        }
+    }
 }

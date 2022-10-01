@@ -16,19 +16,44 @@ public partial class DeveloperSettingsViewModel : ObservableObject
     Formatting iConverter_formatting = Formatting.None;
 
     [RelayCommand]
-    void IConverter_ToString() =>
-        IConverter_input = converter.ToString(IConverter_object, IConverter_formatting);
-
-    [RelayCommand]
-    async void IConverter_ToObject()
+    async Task IConverter_ToString()
     {
-        if (converter.TryToObject(out SolidColor? solidColor, IConverter_input) == true)
-            IConverter_object = solidColor!;
-        else
-            await message.ShowAsync("Something went wrong :(", "It looks like this is not a valid SolidColor.\nPlease verify the input is a proper JSON and every property is being set.", closeButton: "Ok");
+        try
+        {
+            IConverter_input = converter.ToString(IConverter_object, IConverter_formatting);
+            await message.ShowAsync("converter.ToString()", $"Method completed.", closeButton: "Ok");
+        }
+        catch (Exception ex)
+        {
+            await message.ShowAsync("converter.ToString()", $"Method completed.\nException{ex.Format()}", closeButton: "Ok");
+        }
     }
 
     [RelayCommand]
-    async void IConverter_TryToObject() =>
-            await message.ShowAsync("TryToObject - Result", $"Method testing returned: {converter.TryToObject(out SolidColor? _, IConverter_input)}", closeButton: "Ok");
+    async Task IConverter_ToObject()
+    {
+        try
+        {
+            IConverter_object = converter.ToObject<SolidColor>(IConverter_input);
+            await message.ShowAsync("converter.ToObject<T>()", $"Method completed.", closeButton: "Ok");
+        }
+        catch (Exception ex)
+        {
+            await message.ShowAsync("converter.ToObject<T>()", $"Method completed.\nException{ex.Format()}", closeButton: "Ok");
+        }
+    }
+
+    [RelayCommand]
+    async Task IConverter_TryToObject()
+    {
+        try
+        {
+            bool result = converter.TryToObject(out SolidColor? _, IConverter_input);
+            await message.ShowAsync("converter.TryToObject<T>()", $"Method completed.\nResult: {result}", closeButton: "Ok");
+        }
+        catch (Exception ex)
+        {
+            await message.ShowAsync("converter.TryToObject<T>()", $"Method completed.\nException{ex.Format()}", closeButton: "Ok");
+        }
+    }
 }

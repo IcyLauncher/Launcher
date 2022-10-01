@@ -9,15 +9,32 @@ public partial class DeveloperSettingsViewModel : ObservableObject
     bool configurationManager_ignoreTheme = false;
 
     [RelayCommand]
-    void ConfigurationManager_Export() =>
-         ConfigurationManager_currentConfig = configurationManager.Export();
+    async Task ConfigurationManager_Export()
+    {
+        try
+        {
+            ConfigurationManager_currentConfig = configurationManager.Export();
+            await message.ShowAsync("configurationManager.Export()", $"Method completed.", closeButton: "Ok");
+        }
+        catch (Exception ex)
+        {
+            await message.ShowAsync("configurationManager.Export()", $"Method completed.\nException{ex.Format()}", closeButton: "Ok");
+        }
+    }
 
     [RelayCommand]
     async Task ConfigurationManager_Load()
     {
-        if (converter.TryToObject(out Configuration? configuration, ConfigurationManager_currentConfig) == true)
+        try
+        {
+            Configuration configuration = converter.ToObject<Configuration>(ConfigurationManager_currentConfig);
             configurationManager.Load(configuration!, ConfigurationManager_ignoreTheme);
-        else
-            await message.ShowAsync("Something went wrong :(", "It looks like this is not a valid configuration.\nPlease verify the input is a proper JSON and every property is being set.", closeButton: "Ok");
+
+            await message.ShowAsync("configurationManager.Load()", $"Method completed.", closeButton: "Ok");
+        }
+        catch (Exception ex)
+        {
+            await message.ShowAsync("configurationManager.Load()", $"Method completed.\nException{ex.Format()}", closeButton: "Ok");
+        }
     }
 }
