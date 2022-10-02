@@ -39,8 +39,8 @@ public class FileSystem : IFileSystem
         try
         {
             FileStream fs = new(path, FileMode.Open, FileAccess.Write);
-            fs.Close();
             fs.Dispose();
+            fs.Close();
 
             logger.Log($"Checked if file writable: [True-{path}]");
             return true;
@@ -234,8 +234,8 @@ public class FileSystem : IFileSystem
                 return false;
             }
 
-            timeout += 1;
-            await Task.Delay(1000, cancellationToken).ConfigureAwait(false);
+            cycles += 5;
+            await Task.Delay(5000, cancellationToken).ConfigureAwait(false);
         }
 
         logger.Log($"Waited for file lock [{path}]");
@@ -321,7 +321,7 @@ public class FileSystem : IFileSystem
     /// <summary>
     /// Creates a new directory
     /// </summary>
-    /// <param name="path"></param>
+    /// <param name="path">The path to the directory to create</param>
     /// <exception cref="Exceptions.DirectoryExists">Thrown if directory already exists</exception>
     /// <exception cref="Exceptions.IOException">Thrown if the directory specified by path is a file</exception>
     /// <exception cref="UnauthorizedAccessException">Thrown if the caller does not have the required permission</exception>

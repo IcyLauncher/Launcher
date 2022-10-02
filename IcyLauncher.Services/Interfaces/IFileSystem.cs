@@ -129,7 +129,7 @@ public interface IFileSystem
     /// <summary>
     /// Creates a new directory
     /// </summary>
-    /// <param name="path"></param>
+    /// <param name="path">The path to the directory to create</param>
     /// <exception cref="Exceptions.DirectoryExists">Thrown if directory already exists</exception>
     /// <exception cref="Exceptions.IOException">Thrown if the directory specified by path is a file</exception>
     /// <exception cref="UnauthorizedAccessException">Thrown if the caller does not have the required permission</exception>
