@@ -87,7 +87,7 @@ public partial class DeveloperSettingsViewModel : ObservableObject
         new TabViewItem()
         {
             Header = "Home",
-            IconSource = new SymbolIconSource() { Symbol = Symbol.Home },
+            IconSource = new FontIconSource() { Glyph = "\uE70F", FontFamily = new("Assets/FluentSystemIcons-Regular.ttf#FluentSystemIcons-Regular") },
             IsClosable = false,
             Content = new HomeView()
         }
@@ -139,6 +139,8 @@ public partial class DeveloperSettingsViewModel : ObservableObject
         if (item is null)
             return;
 
+        FontIcon icon = (FontIcon)menuItem.Icon;
+        item.IconSource = new FontIconSource() { Glyph = icon.Glyph, FontFamily = icon.FontFamily };
         item.Header = menuItem.Text;
         ToolTipService.SetToolTip(item, ToolTipService.GetToolTip(menuItem));
         Tabs.Add(item);
