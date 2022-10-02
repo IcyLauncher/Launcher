@@ -254,6 +254,9 @@
             <SolidColorBrush x:Key="HyperlinkButtonBorderBrushDisabled" Color="Transparent" />
 
 
+            <SolidColorBrush x:Key="ProgressRingForegroundThemeBrush" Color="{Binding Color, Source={ThemeResource AccentPrimary}}" />
+
+
             <SolidColorBrush x:Key="GridViewItemBackground" Color="{Binding Color, Source={ThemeResource ControlPrimary}}" />
             <SolidColorBrush x:Key="GridViewItemBackgroundPointerOver" Color="{Binding Color, Source={ThemeResource ControlOutline}}" />
             <SolidColorBrush x:Key="GridViewItemBackgroundPressed" Color="{Binding Color, Source={ThemeResource ControlPrimaryDisabled}}" />
