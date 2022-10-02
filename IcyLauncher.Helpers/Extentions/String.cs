@@ -1,4 +1,5 @@
-﻿using Microsoft.UI.Xaml.Media.Imaging;
+﻿using Microsoft.UI.Xaml.Controls;
+using Microsoft.UI.Xaml.Media.Imaging;
 using System.Text;
 
 namespace IcyLauncher.Helpers.Extentions;
@@ -16,4 +17,7 @@ public static class StringExtentions
 
     public static byte[] AsBytes(this string input) =>
         Encoding.ASCII.GetBytes(input);
+
+    public static FontIcon AsIcon(this string input) =>
+        new() { Glyph = input, FontFamily = new("Assets/FluentSystemIcons-Regular.ttf#FluentSystemIcons-Regular") };
 }
