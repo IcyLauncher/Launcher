@@ -1,0 +1,122 @@
+﻿<Page
+    x:Class="IcyLauncher.WinUI.Views.SettingsViews.DeveloperViews.BackdropHandlerView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+    <Page.Transitions>
+        <EntranceThemeTransition />
+    </Page.Transitions>
+
+    <ScrollViewer VerticalAlignment="Stretch">
+        <StackPanel Padding="0,0,0,12" Spacing="8">
+            <ContentControl Tag="IsMicaEnabled|[Type: bool]  Boolean wether a mica backdrop effect is enabled" Template="{StaticResource SettingsCard}">
+                <StackPanel Orientation="Horizontal" Spacing="8">
+                    <ToggleSwitch IsHitTestVisible="False" IsOn="{x:Bind viewModel.IsMicaEnabled, Mode=OneWay}" />
+                    <Button Command="{x:Bind viewModel.UpdateIsMicaEnabledCommand}" Content="Update" />
+                </StackPanel>
+            </ContentControl>
+
+            <ContentControl Tag="IsAcrylicEnabled|[Type: bool]  Boolean wether an acrylic backdrop effect is enabled" Template="{StaticResource SettingsCard}">
+                <StackPanel Orientation="Horizontal" Spacing="8">
+                    <ToggleSwitch IsHitTestVisible="False" IsOn="{x:Bind viewModel.IsAcrylicEnabled, Mode=OneWay}" />
+                    <Button Command="{x:Bind viewModel.UpdateIsAcrylicEnabledCommand}" Content="Update" />
+                </StackPanel>
+            </ContentControl>
+
+            <ContentControl Tag="IsVibrancyEnabled|[Type: bool]  Boolean wether a vivrancy backdrop effect is enabled" Template="{StaticResource SettingsCard}">
+                <StackPanel Orientation="Horizontal" Spacing="8">
+                    <ToggleSwitch IsHitTestVisible="False" IsOn="{x:Bind viewModel.IsVibrancyEnabled, Mode=OneWay}" />
+                    <Button Command="{x:Bind viewModel.UpdateIsVibrancyEnabledCommand}" Content="Update" />
+                </StackPanel>
+            </ContentControl>
+
+            <ContentControl Tag="IsNoneEnabled|[Type: bool]  Boolean wether no backdrop effect is enabled" Template="{StaticResource SettingsCard}">
+                <StackPanel Orientation="Horizontal" Spacing="8">
+                    <ToggleSwitch IsHitTestVisible="False" IsOn="{x:Bind viewModel.IsNoneEnabled, Mode=OneWay}" />
+                    <Button Command="{x:Bind viewModel.UpdateIsNoneEnabledCommand}" Content="Update" />
+                </StackPanel>
+            </ContentControl>
+
+            <ContentControl Tag="Current|[Type: Backdrop?]  The currently activated backdrop effect" Template="{StaticResource SettingsCard}">
+                <StackPanel Orientation="Horizontal" Spacing="8">
+                    <ComboBox
+                        Width="110"
+                        IsHitTestVisible="False"
+                        PlaceholderText="Backdrop..."
+                        SelectedIndex="{x:Bind viewModel.Current, Mode=OneWay, Converter={StaticResource EnumIntConverter}}">
+                        <ComboBoxItem Content="Mica" />
+                        <ComboBoxItem Content="Acrylic" />
+                        <ComboBoxItem Content="Vibrancy" />
+                        <ComboBoxItem Content="None" />
+                    </ComboBox>
+                    <Button Command="{x:Bind viewModel.UpdateCurrentCommand}" Content="Update" />
+                </StackPanel>
+            </ContentControl>
+
+            <Expander
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Top"
+                Header="SetBackdrop()|[Returns: bool]  Enables/Disables a backdrop effect on the current main window and optionally updates the dark mode"
+                Template="{StaticResource CardExpander}">
+                <Expander.Tag>
+                    <StackPanel Spacing="8">
+                        <ContentControl Tag="backdrop|[Type: Backdrop]  The backdrop effect to enable/disable" Template="{StaticResource SettingsCard}">
+                            <ComboBox
+                                Width="110"
+                                PlaceholderText="Backdrop..."
+                                SelectedIndex="{x:Bind viewModel.Backdrop, Mode=TwoWay, Converter={StaticResource EnumIntConverter}}">
+                                <ComboBoxItem Content="Mica" />
+                                <ComboBoxItem Content="Acrylic" />
+                                <ComboBoxItem Content="Vibrancy" />
+                                <ComboBoxItem Content="None" />
+                            </ComboBox>
+                        </ContentControl>
+                        <ContentControl Tag="enable|[Type: bool]  The boolean wether the backdrop effect should be enabled/disabled" Template="{StaticResource SettingsCard}">
+                            <ToggleSwitch IsOn="{x:Bind viewModel.Enable, Mode=TwoWay}" />
+                        </ContentControl>
+                        <ContentControl Tag="useDarkMode|[optional: null] [Type: bool?]  The boolean wether dark mode should be actived" Template="{StaticResource SettingsCard}">
+                            <StackPanel Orientation="Horizontal" Spacing="8">
+                                <ToggleSwitch IsOn="{x:Bind viewModel.UseDarkMode, Mode=TwoWay}" />
+                                <ToggleSwitch
+                                    IsOn="{x:Bind viewModel.UseDarkModeIsNull, Mode=TwoWay}"
+                                    OffContent="Is Null"
+                                    OnContent="Is Null" />
+                            </StackPanel>
+                        </ContentControl>
+                    </StackPanel>
+                </Expander.Tag>
+
+                <Button Command="{x:Bind viewModel.SetBackdropCommand}" Content="Test Method" />
+            </Expander>
+
+            <Expander
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Top"
+                Header="SetDarkMode()|Sets wether dark mode should be actived on the given backdrop effect"
+                Template="{StaticResource CardExpander}">
+                <Expander.Tag>
+                    <StackPanel Spacing="8">
+                        <ContentControl Tag="backdrop|[Type: Backdrop]  The backdrop effect to set the dark mode" Template="{StaticResource SettingsCard}">
+                            <ComboBox
+                                Width="110"
+                                PlaceholderText="Backdrop..."
+                                SelectedIndex="{x:Bind viewModel.Backdrop, Mode=TwoWay, Converter={StaticResource EnumIntConverter}}">
+                                <ComboBoxItem Content="Mica" />
+                                <ComboBoxItem Content="Acrylic" />
+                                <ComboBoxItem Content="Vibrancy" />
+                                <ComboBoxItem Content="None" />
+                            </ComboBox>
+                        </ContentControl>
+                        <ContentControl Tag="useDarkMode|[optional: true] [Type: bool]  The boolean wether the backdrop effect should be enabled/disabled" Template="{StaticResource SettingsCard}">
+                            <ToggleSwitch IsOn="{x:Bind viewModel.UseDarkMode, Mode=TwoWay}" />
+                        </ContentControl>
+                    </StackPanel>
+                </Expander.Tag>
+
+                <Button Command="{x:Bind viewModel.SetDarkModeCommand}" Content="Test Method" />
+            </Expander>
+        </StackPanel>
+    </ScrollViewer>
+</Page>

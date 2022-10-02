@@ -1,19 +1,34 @@
 ﻿namespace IcyLauncher.WinUI.ViewModels;
 
-public partial class DeveloperSettingsViewModel : ObservableObject
+public partial class ConfigurationManagerViewModel : ObservableObject
 {
-    [ObservableProperty]
-    string configurationManager_currentConfig = "";
+    readonly ConfigurationManager configurationManager;
+    readonly IConverter converter;
+    readonly IMessage message;
+
+    public ConfigurationManagerViewModel(
+        ConfigurationManager configurationManager,
+        IConverter converter,
+        IMessage message)
+    {
+        this.configurationManager = configurationManager;
+        this.converter = converter;
+        this.message = message;
+    }
+
 
     [ObservableProperty]
-    bool configurationManager_ignoreTheme = false;
+    string currentConfig = "";
+
+    [ObservableProperty]
+    bool ignoreTheme = false;
 
     [RelayCommand]
-    async Task ConfigurationManager_Export()
+    async Task ExportAsync()
     {
         try
         {
-            ConfigurationManager_currentConfig = configurationManager.Export();
+            CurrentConfig = configurationManager.Export();
             await message.ShowAsync("configurationManager.Export()", $"Method completed.", closeButton: "Ok");
         }
         catch (Exception ex)
@@ -23,12 +38,12 @@ public partial class DeveloperSettingsViewModel : ObservableObject
     }
 
     [RelayCommand]
-    async Task ConfigurationManager_Load()
+    async Task LoadAsync()
     {
         try
         {
-            Configuration configuration = converter.ToObject<Configuration>(ConfigurationManager_currentConfig);
-            configurationManager.Load(configuration!, ConfigurationManager_ignoreTheme);
+            Configuration configuration = converter.ToObject<Configuration>(CurrentConfig);
+            configurationManager.Load(configuration!, IgnoreTheme);
 
             await message.ShowAsync("configurationManager.Load()", $"Method completed.", closeButton: "Ok");
         }

@@ -1,0 +1,115 @@
+﻿<Page
+    x:Class="IcyLauncher.WinUI.Views.SettingsViews.DeveloperViews.IMessageView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+    <Page.Transitions>
+        <EntranceThemeTransition />
+    </Page.Transitions>
+
+    <ScrollViewer VerticalAlignment="Stretch">
+        <StackPanel Padding="0,0,0,12" Spacing="8">
+            <Expander
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Top"
+                Header="ShowAsync()|[Returns: ContentDialogResult]  Queues a new dialog asynchronously and optionally waits until the previous dialog is closed"
+                Template="{StaticResource CardExpander}">
+                <Expander.Tag>
+                    <StackPanel Spacing="8">
+                        <ContentControl Tag="title|[Type: string]  The title of the dialog" Template="{StaticResource SettingsCard}">
+                            <TextBox
+                                Width="200"
+                                PlaceholderText="Title..."
+                                Text="{x:Bind viewModel.Title, Mode=TwoWay}" />
+                        </ContentControl>
+
+                        <ContentControl Tag="content|[Type: object]  The content of the dialog" Template="{StaticResource SettingsCard}">
+                            <TextBox
+                                MinWidth="200"
+                                MaxWidth="600"
+                                PlaceholderText="Content..."
+                                Text="{x:Bind viewModel.Content, Mode=TwoWay}" />
+                        </ContentControl>
+
+                        <ContentControl Tag="awaitPreviousDialog|[Type: bool]  Whether it should wait until the previous dialog is closed" Template="{StaticResource SettingsCard}">
+                            <ToggleSwitch IsOn="{x:Bind viewModel.Await_, Mode=TwoWay}" />
+                        </ContentControl>
+
+                        <ContentControl Tag="closeButton|[optional: Cancel] [Type: string?]  The content of the close button" Template="{StaticResource SettingsCard}">
+                            <TextBox
+                                Width="200"
+                                PlaceholderText="Button..."
+                                Text="{x:Bind viewModel.Close, Mode=TwoWay}" />
+                        </ContentControl>
+
+                        <ContentControl Tag="primaryButton|[optional: null] [Type: string?]  The content of the primary button" Template="{StaticResource SettingsCard}">
+                            <TextBox
+                                Width="200"
+                                PlaceholderText="Button..."
+                                Text="{x:Bind viewModel.Primary, Mode=TwoWay}" />
+                        </ContentControl>
+
+                        <ContentControl Tag="secondaryButton|[optional: null] [Type: string?]  The content of the secondary button" Template="{StaticResource SettingsCard}">
+                            <TextBox
+                                Width="200"
+                                PlaceholderText="Button..."
+                                Text="{x:Bind viewModel.Secondary, Mode=TwoWay}" />
+                        </ContentControl>
+                    </StackPanel>
+                </Expander.Tag>
+
+                <Button Command="{x:Bind viewModel.ShowACommand}" Content="Test Method" />
+            </Expander>
+
+            <Expander
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Top"
+                Header="Show()|Queues a new dialog"
+                Template="{StaticResource CardExpander}">
+                <Expander.Tag>
+                    <StackPanel Spacing="8">
+                        <ContentControl Tag="title|[Type: string]  The title of the dialog" Template="{StaticResource SettingsCard}">
+                            <TextBox
+                                Width="200"
+                                PlaceholderText="Title..."
+                                Text="{x:Bind viewModel.Title, Mode=TwoWay}" />
+                        </ContentControl>
+
+                        <ContentControl Tag="content|[Type: object]  The content of the dialog" Template="{StaticResource SettingsCard}">
+                            <TextBox
+                                MinWidth="200"
+                                MaxWidth="600"
+                                PlaceholderText="Content..."
+                                Text="{x:Bind viewModel.Content, Mode=TwoWay}" />
+                        </ContentControl>
+
+                        <ContentControl Tag="closeButton|[optional: Cancel] [Type: string?]  The content of the close button" Template="{StaticResource SettingsCard}">
+                            <TextBox
+                                Width="200"
+                                PlaceholderText="Button..."
+                                Text="{x:Bind viewModel.Close, Mode=TwoWay}" />
+                        </ContentControl>
+
+                        <ContentControl Tag="primaryButton|[optional: null] [Type: string?]  The content of the primary button" Template="{StaticResource SettingsCard}">
+                            <TextBox
+                                Width="200"
+                                PlaceholderText="Button..."
+                                Text="{x:Bind viewModel.Primary, Mode=TwoWay}" />
+                        </ContentControl>
+
+                        <ContentControl Tag="secondaryButton|[optional: null] [Type: string?]  The content of the secondary button" Template="{StaticResource SettingsCard}">
+                            <TextBox
+                                Width="200"
+                                PlaceholderText="Button..."
+                                Text="{x:Bind viewModel.Secondary, Mode=TwoWay}" />
+                        </ContentControl>
+                    </StackPanel>
+                </Expander.Tag>
+
+                <Button Command="{x:Bind viewModel.ShowCommand}" Content="Test Method" />
+            </Expander>
+        </StackPanel>
+    </ScrollViewer>
+</Page>

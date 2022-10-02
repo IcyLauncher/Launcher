@@ -1,75 +1,84 @@
 ﻿namespace IcyLauncher.WinUI.ViewModels;
 
-public partial class DeveloperSettingsViewModel : ObservableObject
+public partial class BackdropHandlerViewModel : ObservableObject
 {
-    void SetupBackdropHandlerViewModel()
+    readonly BackdropHandler backdropHandler;
+    readonly IMessage message;
+
+    public BackdropHandlerViewModel(
+        BackdropHandler backdropHandler,
+        IMessage message)
     {
-        BackdropHandler_UpdateIsMicaEnabled();
-        BackdropHandler_UpdateIsAcrylicEnabled();
-        BackdropHandler_UpdateIsVibrancyEnabled();
-        BackdropHandler_UpdateIsNoneEnabled();
-        BackdropHandler_UpdateCurrent();
+        this.backdropHandler = backdropHandler;
+        this.message = message;
+
+
+        UpdateIsMicaEnabled();
+        UpdateIsAcrylicEnabled();
+        UpdateIsVibrancyEnabled();
+        UpdateIsNoneEnabled();
+        UpdateCurrent();
     }
 
 
     [ObservableProperty]
-    bool backdropHandler_isMicaEnabled = default!;
+    bool isMicaEnabled = default!;
 
     [RelayCommand]
-    void BackdropHandler_UpdateIsMicaEnabled() =>
-        BackdropHandler_isMicaEnabled = backdropHandler.IsMicaEnabled;
+    void UpdateIsMicaEnabled() =>
+        IsMicaEnabled = backdropHandler.IsMicaEnabled;
 
 
     [ObservableProperty]
-    bool backdropHandler_isAcrylicEnabled = default!;
+    bool isAcrylicEnabled = default!;
 
     [RelayCommand]
-    void BackdropHandler_UpdateIsAcrylicEnabled() =>
-        BackdropHandler_isAcrylicEnabled = backdropHandler.IsAcrylicEnabled;
+    void UpdateIsAcrylicEnabled() =>
+        IsAcrylicEnabled = backdropHandler.IsAcrylicEnabled;
 
 
     [ObservableProperty]
-    bool backdropHandler_isVibrancyEnabled = default!;
+    bool isVibrancyEnabled = default!;
 
     [RelayCommand]
-    void BackdropHandler_UpdateIsVibrancyEnabled() =>
-        BackdropHandler_isVibrancyEnabled = backdropHandler.IsVibrancyEnabled;
+    void UpdateIsVibrancyEnabled() =>
+        IsVibrancyEnabled = backdropHandler.IsVibrancyEnabled;
 
 
     [ObservableProperty]
-    bool backdropHandler_isNoneEnabled = default!;
+    bool isNoneEnabled = default!;
 
     [RelayCommand]
-    void BackdropHandler_UpdateIsNoneEnabled() =>
-        BackdropHandler_isNoneEnabled = backdropHandler.IsNoneEnabled;
+    void UpdateIsNoneEnabled() =>
+        IsNoneEnabled = backdropHandler.IsNoneEnabled;
 
 
     [ObservableProperty]
-    Backdrop? backdropHandler_current = default!;
+    Backdrop? current = default!;
 
     [RelayCommand]
-    void BackdropHandler_UpdateCurrent() =>
-        BackdropHandler_current = backdropHandler.Current;
+    void UpdateCurrent() =>
+        Current = backdropHandler.Current;
 
     
     [ObservableProperty]
-    Backdrop backdropHandler_backdrop;
+    Backdrop backdrop;
     
     [ObservableProperty]
-    bool backdropHandler_enable = true;
+    bool enable = true;
     
     [ObservableProperty]
-    bool backdropHandler_useDarkMode = true;
+    bool useDarkMode = true;
     
     [ObservableProperty]
-    bool backdropHandler_useDarkModeIsNull;
+    bool useDarkModeIsNull;
 
     [RelayCommand]
-    async Task BackdropHandler_SetBackdrop()
+    async Task SetBackdropAsync()
     {
         try
         {
-            bool result = backdropHandler.SetBackdrop(BackdropHandler_backdrop, BackdropHandler_enable, BackdropHandler_useDarkModeIsNull ? null : BackdropHandler_useDarkMode);
+            bool result = backdropHandler.SetBackdrop(Backdrop, Enable, UseDarkModeIsNull ? null : UseDarkMode);
             await message.ShowAsync("backdropHandler.SetBackdrop()", $"Method completed.\nResult: {result}", closeButton: "Ok");
         }
         catch (Exception ex)
@@ -79,11 +88,11 @@ public partial class DeveloperSettingsViewModel : ObservableObject
     }
 
     [RelayCommand]
-    async Task BackdropHandler_SetDarkMode()
+    async Task SetDarkModeAsync()
     {
         try
         {
-            backdropHandler.SetDarkMode(BackdropHandler_backdrop, BackdropHandler_useDarkMode);
+            backdropHandler.SetDarkMode(Backdrop, UseDarkMode);
             await message.ShowAsync("backdropHandler.SetDarkMode()", $"Method completed", closeButton: "Ok");
         }
         catch (Exception ex)

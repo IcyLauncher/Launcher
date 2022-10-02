@@ -1,13 +1,24 @@
 ﻿namespace IcyLauncher.WinUI.ViewModels;
 
-public partial class DeveloperSettingsViewModel : ObservableObject
+public partial class AcrylicBackdropHandlerViewModel : ObservableObject
 {
-    void SetupAcrylicBackdropHandlerViewModel() =>
-        AcrylicBackdropHandler_isDarkModeEnabled = acrylicBackdropHandler.IsDarkModeEnabled;
+    readonly IBackdropHandler acrylicBackdropHandler;
+    readonly IMessage message;
+
+    public AcrylicBackdropHandlerViewModel(
+        IBackdropHandler acrylicBackdropHandler,
+        IMessage message)
+    {
+        this.acrylicBackdropHandler = acrylicBackdropHandler;
+        this.message = message;
+
+
+        IsDarkModeEnabled = acrylicBackdropHandler.IsDarkModeEnabled;
+    }
 
 
     [RelayCommand]
-    async Task AcrylicBackdropHandler_EnableBackdrop()
+    async Task EnableBackdropAsync()
     {
         try
         {
@@ -21,7 +32,7 @@ public partial class DeveloperSettingsViewModel : ObservableObject
     }
 
     [RelayCommand]
-    async Task AcrylicBackdropHandler_DisableBackdrop()
+    async Task DisableBackdropAsync()
     {
         try
         {
@@ -36,9 +47,9 @@ public partial class DeveloperSettingsViewModel : ObservableObject
 
 
     [ObservableProperty]
-    bool acrylicBackdropHandler_isDarkModeEnabled = default!;
+    bool isDarkModeEnabled = default!;
 
-    async partial void OnAcrylicBackdropHandler_isDarkModeEnabledChanged(bool value)
+    async partial void OnIsDarkModeEnabledChanged(bool value)
     {
         try
         {

@@ -1,0 +1,210 @@
+﻿<Page
+    x:Class="IcyLauncher.WinUI.Views.SettingsViews.DeveloperViews.WindowHandlerView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+    <Page.Transitions>
+        <EntranceThemeTransition />
+    </Page.Transitions>
+
+    <ScrollViewer VerticalAlignment="Stretch">
+        <StackPanel Padding="0,0,0,12" Spacing="8">
+            <ContentControl Tag="HWnd|[Type: IntPtr]  HWND of the current main window" Template="{StaticResource SettingsCard}">
+                <StackPanel Orientation="Horizontal" Spacing="8">
+                    <TextBox IsHitTestVisible="False" Text="{x:Bind viewModel.HWnd, Mode=OneWay}" />
+                    <Button Command="{x:Bind viewModel.UpdateHWndCommand}" Content="Update" />
+                </StackPanel>
+            </ContentControl>
+
+            <ContentControl Tag="HasCustomTitleBar|[Type: bool]  Boolean wether the current main window has a custom title bar" Template="{StaticResource SettingsCard}">
+                <StackPanel Orientation="Horizontal" Spacing="8">
+                    <ToggleSwitch IsHitTestVisible="False" IsOn="{x:Bind viewModel.HasCustomTitleBar, Mode=OneWay}" />
+                    <Button Command="{x:Bind viewModel.UpdateHasCustomTitlebarCommand}" Content="Update" />
+                </StackPanel>
+            </ContentControl>
+
+            <ContentControl Tag="Size|[Type: SizeInt32]  Size of the current main window" Template="{StaticResource SettingsCard}">
+                <StackPanel Orientation="Horizontal" Spacing="8">
+                    <TextBox IsHitTestVisible="False" Text="{x:Bind viewModel.Size, Mode=OneWay}" />
+                    <Button Command="{x:Bind viewModel.UpdateSizeCommand}" Content="Update" />
+                </StackPanel>
+            </ContentControl>
+
+            <ContentControl Tag="Position|[Type: PointInt32]  Position of the current main window" Template="{StaticResource SettingsCard}">
+                <StackPanel Orientation="Horizontal" Spacing="8">
+                    <TextBox IsHitTestVisible="False" Text="{x:Bind viewModel.Position, Mode=OneWay}" />
+                    <Button Command="{x:Bind viewModel.UpdatePositionCommand}" Content="Update" />
+                </StackPanel>
+            </ContentControl>
+
+            <ContentControl Tag="ScreenSize|[Type: RectInt32]  Size of the current main screen" Template="{StaticResource SettingsCard}">
+                <StackPanel Orientation="Horizontal" Spacing="8">
+                    <TextBox IsHitTestVisible="False" Text="{x:Bind viewModel.ScreenSize, Mode=OneWay}" />
+                    <Button Command="{x:Bind viewModel.UpdateScreenSizeCommand}" Content="Update" />
+                </StackPanel>
+            </ContentControl>
+
+            <ContentControl Tag="LoggerWindow|[Type: Window?]  Active logger window (null if none is active)" Template="{StaticResource SettingsCard}">
+                <Button Content="Show Logger" IsEnabled="False" />
+            </ContentControl>
+
+            <Expander
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Top"
+                Header="SetIcon()|Sets a custom icon on the current main window"
+                Template="{StaticResource CardExpander}">
+                <Expander.Tag>
+                    <ContentControl Tag="path|[Type: string]  The file path to the icon" Template="{StaticResource SettingsCard}">
+                        <TextBox
+                            Name="IconPath"
+                            Width="400"
+                            PlaceholderText="Path..."
+                            Text="ms-appx:///Assets/icon.ico" />
+                    </ContentControl>
+                </Expander.Tag>
+
+                <Button
+                    Command="{x:Bind viewModel.SetIconCommand}"
+                    CommandParameter="{Binding Text, ElementName=IconPath}"
+                    Content="Test Method" />
+            </Expander>
+
+            <Expander
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Top"
+                Header="SetSize()|Sets the size of the current main window"
+                Template="{StaticResource CardExpander}">
+                <Expander.Tag>
+                    <StackPanel Spacing="8">
+                        <ContentControl Tag="externalWindow|[optional: Window] [Type: Window?]  The window to set the size to" Template="{StaticResource SettingsCard}">
+                            <Button Content="Set Window" IsEnabled="False" />
+                        </ContentControl>
+
+                        <ContentControl Tag="width|[Type: int]  The width of the new size" Template="{StaticResource SettingsCard}">
+                            <NumberBox SpinButtonPlacementMode="Compact" Value="{x:Bind viewModel.SizeWidth, Mode=TwoWay}" />
+                        </ContentControl>
+
+                        <ContentControl Tag="height|[Type: int]  The height of the new size" Template="{StaticResource SettingsCard}">
+                            <NumberBox SpinButtonPlacementMode="Compact" Value="{x:Bind viewModel.SizeHeight, Mode=TwoWay}" />
+                        </ContentControl>
+                    </StackPanel>
+                </Expander.Tag>
+
+                <Button Command="{x:Bind viewModel.SetSizeCommand}" Content="Test Method" />
+            </Expander>
+
+            <Expander
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Top"
+                Header="SetMinSize()|[experimental]  Sets the minimum size of the current main window"
+                Template="{StaticResource CardExpander}">
+                <Expander.Tag>
+                    <StackPanel Spacing="8">
+                        <ContentControl Tag="width|[Type: int]  The width of the new size" Template="{StaticResource SettingsCard}">
+                            <NumberBox SpinButtonPlacementMode="Compact" Value="{x:Bind viewModel.MinSizeWidth, Mode=TwoWay}" />
+                        </ContentControl>
+
+                        <ContentControl Tag="height|[Type: int]  The height of the new size" Template="{StaticResource SettingsCard}">
+                            <NumberBox SpinButtonPlacementMode="Compact" Value="{x:Bind viewModel.MinSizeHeight, Mode=TwoWay}" />
+                        </ContentControl>
+                    </StackPanel>
+                </Expander.Tag>
+
+                <Button Command="{x:Bind viewModel.SetMinSizeCommand}" Content="Test Method" />
+            </Expander>
+
+            <Expander
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Top"
+                Header="SetPosition()|Sets the position of the current main window"
+                Template="{StaticResource CardExpander}">
+                <Expander.Tag>
+                    <StackPanel Spacing="8">
+                        <ContentControl Tag="x|[Type: int]  The x coordinate of the new size" Template="{StaticResource SettingsCard}">
+                            <NumberBox SpinButtonPlacementMode="Compact" Value="{x:Bind viewModel.PositionX, Mode=TwoWay}" />
+                        </ContentControl>
+
+                        <ContentControl Tag="y|[Type: int]  The y coordinate of the new size" Template="{StaticResource SettingsCard}">
+                            <NumberBox SpinButtonPlacementMode="Compact" Value="{x:Bind viewModel.PositionY, Mode=TwoWay}" />
+                        </ContentControl>
+                    </StackPanel>
+                </Expander.Tag>
+
+                <Button Command="{x:Bind viewModel.SetPositionCommand}" Content="Test Method" />
+            </Expander>
+
+            <ContentControl Tag="SetPositionToCenter()|Sets the position of the current main window to the center of the main screen" Template="{StaticResource SettingsCard}">
+                <Button Command="{x:Bind viewModel.SetPositionToCenterCommand}" Content="Test Method" />
+            </ContentControl>
+
+            <Expander
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Top"
+                Header="Register()|Initializes a target with the current main window"
+                Template="{StaticResource CardExpander}">
+                <Expander.Tag>
+                    <ContentControl Tag="target|[Type: object]  The target to register" Template="{StaticResource SettingsCard}">
+                        <Button Content="Set Target" IsEnabled="False" />
+                    </ContentControl>
+                </Expander.Tag>
+
+                <Button Content="Test Method" IsEnabled="False" />
+            </Expander>
+
+            <ContentControl Tag="EnsureWindowsSystemDispatcherQueueController()|[Returns: bool]  Ensures there is a windows system dispatcher queue controller" Template="{StaticResource SettingsCard}">
+                <Button Command="{x:Bind viewModel.EnsureWindowsSystemDispatcherQueueControllerCommand}" Content="Test Method" />
+            </ContentControl>
+
+            <Expander
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Top"
+                Header="SetTitleBar()|[Returns: bool]  Sets an UIElement as a custom title bar on the current main window"
+                Template="{StaticResource CardExpander}">
+                <Expander.Tag>
+                    <StackPanel Spacing="8">
+                        <ContentControl Tag="titleBar|[Type: UIElement?]  The UIElement to set as a title bar" Template="{StaticResource SettingsCard}">
+                            <StackPanel Orientation="Horizontal" Spacing="8">
+                                <Button Content="Set UIElement" IsEnabled="False" />
+                                <ToggleSwitch
+                                    IsOn="{x:Bind viewModel.TitleBarIsNull, Mode=TwoWay}"
+                                    OffContent="Is Null"
+                                    OnContent="Is Null" />
+                            </StackPanel>
+                        </ContentControl>
+
+                        <ContentControl Tag="container|[optional: null] [Type: UIElement?]  The container UIElement of the title bar to update visibilies" Template="{StaticResource SettingsCard}">
+                            <StackPanel Orientation="Horizontal" Spacing="8">
+                                <Button Content="Set UIElement" IsEnabled="False" />
+                                <ToggleSwitch
+                                    IsOn="{x:Bind viewModel.TitleBarContainerIsNull, Mode=TwoWay}"
+                                    OffContent="Is Null"
+                                    OnContent="Is Null" />
+                            </StackPanel>
+                        </ContentControl>
+                    </StackPanel>
+                </Expander.Tag>
+
+                <Button Command="{x:Bind viewModel.SetTitleBarCommand}" Content="Test Method" />
+            </Expander>
+
+            <Expander
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Top"
+                Header="SetMainBackground()|[Returns: bool]  Sets a binded color as the main background of the current main window"
+                Template="{StaticResource CardExpander}">
+                <Expander.Tag>
+                    <ContentControl Tag="backgroundColor|[Type: string]  The property path of themeManager.Colors" Template="{StaticResource SettingsCard}">
+                        <TextBox
+                            MinWidth="200"
+                            MaxWidth="300"
+                            Text="{x:Bind viewModel.MainBackground, Mode=TwoWay}" />
+                    </ContentControl>
+                </Expander.Tag>
+
+                <Button Command="{x:Bind viewModel.SetMainBackgroundCommand}" Content="Test Method" />
+            </Expander>
+        </StackPanel>
+    </ScrollViewer>
+</Page>

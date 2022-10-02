@@ -61,7 +61,7 @@ public partial class App : Application
                 services.AddSingleton<SettingsViewModel>();
                 services.AddSingleton<BannerSettingsViewModel>();
                 services.AddSingleton<ColorSettingsViewModel>();
-                services.AddSingleton<DeveloperSettingsViewModel>();
+                services.AddTransient<DeveloperSettingsViewModel>();
 
                 // Window
                 services.AddSingleton<Window>(provider => new()

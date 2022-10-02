@@ -5,6 +5,10 @@ namespace IcyLauncher.Services;
 public class Updater
 {
     /// <summary>
+    /// Service to handle and execute any new updates
+    /// </summary>
+
+    /// <summary>
     /// Current application version
     /// </summary>
     public readonly Version CurrentAppVersion = Assembly.GetExecutingAssembly().GetName().Version is Version ver ? ver.TrimZeros() : new(0, 1);

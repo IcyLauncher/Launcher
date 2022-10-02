@@ -3,30 +3,48 @@ using Microsoft.UI.Xaml.Data;
 
 namespace IcyLauncher.WinUI.ViewModels;
 
-public partial class DeveloperSettingsViewModel : ObservableObject
+public partial class ILoggerViewModel : ObservableObject
 {
-    [ObservableProperty]
-    string logger_message = "test message";
+    readonly ILogger logger;
+    readonly ThemeManager themeManager;
+    readonly WindowHandler windowHandler;
+    readonly IMessage message;
+
+    public ILoggerViewModel(
+        ILogger logger,
+        ThemeManager themeManager,
+        WindowHandler windowHandler,
+        IMessage message)
+    {
+        this.logger = logger;
+        this.themeManager = themeManager;
+        this.windowHandler = windowHandler;
+        this.message = message;
+    }
+
 
     [ObservableProperty]
-    string? logger_exception = null;
+    string message_ = "test message";
 
     [ObservableProperty]
-    LogLevel logger_logLevel = LogLevel.Information;
+    string? exception = null;
 
     [ObservableProperty]
-    string logger_filePath = "TestViewModel.cs";
+    LogLevel logLevel = LogLevel.Information;
 
     [ObservableProperty]
-    string logger_memberName = "TestMethod";
+    string filePath = "TestViewModel.cs";
+
+    [ObservableProperty]
+    string memberName = "TestMethod";
 
 
     [RelayCommand]
-    async Task Logger_Test()
+    async Task TestAsync()
     {
         try
         {
-            logger.Log(Logger_message, string.IsNullOrEmpty(Logger_exception) ? null : new(Logger_exception), Logger_logLevel, Logger_filePath, Logger_memberName);
+            logger.Log(Message_, string.IsNullOrEmpty(Exception) ? null : new(Exception), LogLevel, FilePath, MemberName);
             await message.ShowAsync("logger.Log()", $"Method completed.", closeButton: "Ok");
         }
         catch (Exception ex)
@@ -37,7 +55,7 @@ public partial class DeveloperSettingsViewModel : ObservableObject
 
 
     [RelayCommand]
-    void Logger_Show()
+    void Show()
     {
         if (windowHandler.LoggerWindow is not null)
         {

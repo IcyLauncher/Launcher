@@ -5,49 +5,62 @@ using Windows.UI;
 
 namespace IcyLauncher.WinUI.ViewModels;
 
-public partial class DeveloperSettingsViewModel : ObservableObject
+public partial class ImagingUtilityViewModel : ObservableObject
 {
-    [ObservableProperty]
-    string imagingUtility_compositorText = "[Compositor: null]\n";
+    readonly ImagingUtility imagingUtility;
+    readonly IMessage message;
 
-    [ObservableProperty]
-    string imagingUtility_containerVisualText = "[ContainerVisual: null]\n";
-
-    [ObservableProperty]
-    string imagingUtility_spriteVisualText = "[SpriteVisual: null]\n";
-
-    [ObservableProperty]
-    string imagingUtility_spriteVisualBrushText = "[SpriteVisual.Brush: null]";
-
-
-    Compositor? imagingUtility_compositor = null;
-    ContainerVisual? imagingUtility_container = null;
-    SpriteVisual? imagingUtility_spriteVisual = null;
-    CompositionBrush? _imagingUtility_spriteVisualBrush = null;
-    CompositionBrush? imagingUtility_spriteVisualBrush
+    public ImagingUtilityViewModel(
+        ImagingUtility imagingUtility,
+        IMessage message)
     {
-        get => _imagingUtility_spriteVisualBrush;
+        this.imagingUtility = imagingUtility;
+        this.message = message;
+    }
+
+
+    [ObservableProperty]
+    string compositorText = "[Compositor: null]\n";
+
+    [ObservableProperty]
+    string containerVisualText = "[ContainerVisual: null]\n";
+
+    [ObservableProperty]
+    string spriteVisualText = "[SpriteVisual: null]\n";
+
+    [ObservableProperty]
+    string spriteVisualBrushText = "[SpriteVisual.Brush: null]";
+
+
+    Compositor? compositor = null;
+    ContainerVisual? container = null;
+    SpriteVisual? spriteVisual = null;
+    CompositionBrush? _spriteVisualBrush = null;
+    CompositionBrush? spriteVisualBrush
+    {
+        get => _spriteVisualBrush;
         set
         {
-            _imagingUtility_spriteVisualBrush = value;
+            _spriteVisualBrush = value;
 
-            if (imagingUtility_spriteVisual is not null)
-                imagingUtility_spriteVisual.Brush = value;
+            if (spriteVisual is not null)
+                spriteVisual.Brush = value;
         }
     }
 
 
     [RelayCommand]
-    async Task ImagingUtility_InitializeUIElement(UIElement element)
+    async Task InitializeUIElementAsync(
+        UIElement element)
     {
         try
         {
-            imagingUtility.InitializeUIElement(element, out imagingUtility_compositor, out imagingUtility_container);
+            imagingUtility.InitializeUIElement(element, out compositor, out container);
 
-            bool result1 = imagingUtility_compositor is not null;
-            bool result2 = imagingUtility_container is not null;
-            ImagingUtility_compositorText = $"[Compositor: {(result1 ? imagingUtility_compositor!.GetHashCode() : "null")}]\n";
-            ImagingUtility_containerVisualText = $"[ContainerVisual: {(result2 ? $"(Rectangle){imagingUtility_container!.GetHashCode()}" : "null")}]\n";
+            bool result1 = compositor is not null;
+            bool result2 = container is not null;
+            compositorText = $"[Compositor: {(result1 ? compositor!.GetHashCode() : "null")}]\n";
+            containerVisualText = $"[ContainerVisual: {(result2 ? $"(Rectangle){container!.GetHashCode()}" : "null")}]\n";
 
             await message.ShowAsync("imagingUtility.InitializeUIElement()", $"Method completed.\nResult: [Compositor: {result1}], Container: [{result2}]", closeButton: "Ok");
         }
@@ -59,28 +72,28 @@ public partial class DeveloperSettingsViewModel : ObservableObject
 
 
     [ObservableProperty]
-    int imagingUtility_startPointX = 0;
+    int startPointX = 0;
     [ObservableProperty]
-    int imagingUtility_startPointY = 0;
+    int startPointY = 0;
 
     [ObservableProperty]
-    int imagingUtility_endPointX = 1;
+    int endPointX = 1;
     [ObservableProperty]
-    int imagingUtility_endPointY = 1;
+    int endPointY = 1;
 
     [RelayCommand]
-    async Task ImagingUtility_CreateGradientBrush()
+    async Task CreateGradientBrushAsync()
     {
         try
         {
-            imagingUtility_spriteVisualBrush = imagingUtility.CreateGradientBrush(
-                imagingUtility_compositor!,
-                new Vector2(ImagingUtility_startPointX, ImagingUtility_startPointY),
-                new Vector2(ImagingUtility_endPointX, ImagingUtility_endPointY),
+            spriteVisualBrush = imagingUtility.CreateGradientBrush(
+                compositor!,
+                new Vector2(StartPointX, StartPointY),
+                new Vector2(EndPointX, EndPointY),
                 new[] { (0.0f, Colors.Red), (0.5f, Colors.Green), (1.0f, Colors.Blue) });
 
-            bool result = imagingUtility_spriteVisualBrush is not null;
-            ImagingUtility_spriteVisualBrushText = $"[SpriteVisual.Brush: {(result ? $"(CompositionLinearGradientBrush){imagingUtility_spriteVisualBrush!.GetHashCode()}" : "null")}]";
+            bool result = spriteVisualBrush is not null;
+            spriteVisualBrushText = $"[SpriteVisual.Brush: {(result ? $"(CompositionLinearGradientBrush){spriteVisualBrush!.GetHashCode()}" : "null")}]";
 
             await message.ShowAsync("imagingUtility.CreateGradientBrush()", $"Method completed.\nResult: {result}", closeButton: "Ok");
         }
@@ -92,26 +105,26 @@ public partial class DeveloperSettingsViewModel : ObservableObject
 
 
     [ObservableProperty]
-    Color imagingUtility_maskColor = Colors.MediumPurple;
+    Color maskColor = Colors.MediumPurple;
 
     [RelayCommand]
-    async Task ImagingUtility_CreateMaskBrush()
+    async Task CreateMaskBrushAsync()
     {
         try
         {
-            imagingUtility_spriteVisualBrush = imagingUtility.CreateMaskBrush(
-                imagingUtility_compositor!,
+            spriteVisualBrush = imagingUtility.CreateMaskBrush(
+                compositor!,
                 imagingUtility.CreateColorBrush(
-                    imagingUtility_compositor!,
-                    ImagingUtility_maskColor),
+                    compositor!,
+                    MaskColor),
                 imagingUtility.CreateGradientBrush(
-                    imagingUtility_compositor!,
+                    compositor!,
                     new Vector2(0, 0),
                     new Vector2(0, 1),
                     new[] { (0.0f, Colors.White), (1.0f, Colors.Transparent) }));
 
-            bool result = imagingUtility_spriteVisualBrush is not null;
-            ImagingUtility_spriteVisualBrushText = $"[SpriteVisual.Brush: {(result ? $"(CompositionMaskBrush){imagingUtility_spriteVisualBrush!.GetHashCode()}" : "null")}]";
+            bool result = spriteVisualBrush is not null;
+            spriteVisualBrushText = $"[SpriteVisual.Brush: {(result ? $"(CompositionMaskBrush){spriteVisualBrush!.GetHashCode()}" : "null")}]";
 
             await message.ShowAsync("imagingUtility.CreateMaskBrush()", $"Method completed.\nResult: {result}", closeButton: "Ok");
         }
@@ -123,27 +136,28 @@ public partial class DeveloperSettingsViewModel : ObservableObject
 
 
     [ObservableProperty]
-    CompositionStretch imagingUtility_stretch = CompositionStretch.Fill;
+    CompositionStretch stretch = CompositionStretch.Fill;
 
     [ObservableProperty]
-    float imagingUtility_horizontalAlignment = 0.0f;
+    float horizontalAlignment = 0.0f;
 
     [ObservableProperty]
-    float imagingUtility_verticalAlignment = 0.5f;
+    float verticalAlignment = 0.5f;
 
     [RelayCommand]
-    async Task ImagingUtility_CreateImageBrush(string uriSource)
+    async Task CreateImageBrushAsync(
+        string uriSource)
     {
         try
         {
-            imagingUtility_spriteVisualBrush = imagingUtility.CreateImageBrush(
-                imagingUtility_compositor!,
+            spriteVisualBrush = imagingUtility.CreateImageBrush(
+                compositor!,
                 new Uri(uriSource),
-                ImagingUtility_stretch,
-                ImagingUtility_horizontalAlignment, ImagingUtility_verticalAlignment);
+                Stretch,
+                HorizontalAlignment, VerticalAlignment);
 
-            bool result = imagingUtility_spriteVisualBrush is not null;
-            ImagingUtility_spriteVisualBrushText = $"[SpriteVisual.Brush: {(result ? $"(CompositionSurfaceBrush){imagingUtility_spriteVisualBrush!.GetHashCode()}" : "null")}]";
+            bool result = spriteVisualBrush is not null;
+            spriteVisualBrushText = $"[SpriteVisual.Brush: {(result ? $"(CompositionSurfaceBrush){spriteVisualBrush!.GetHashCode()}" : "null")}]";
 
             await message.ShowAsync("imagingUtility.CreateImageBrush()", $"Method completed.\nResult: {result}", closeButton: "Ok");
         }
@@ -155,19 +169,19 @@ public partial class DeveloperSettingsViewModel : ObservableObject
 
 
     [ObservableProperty]
-    Color imagingUtility_color = Colors.MediumPurple;
+    Color color = Colors.MediumPurple;
 
     [RelayCommand]
-    async Task ImagingUtility_CreateColorBrush()
+    async Task CreateColorBrushAsync()
     {
         try
         {
-            imagingUtility_spriteVisualBrush = imagingUtility.CreateColorBrush(
-                imagingUtility_compositor!,
-                ImagingUtility_color);
+            spriteVisualBrush = imagingUtility.CreateColorBrush(
+                compositor!,
+                Color);
 
-            bool result = imagingUtility_spriteVisualBrush is not null;
-            ImagingUtility_spriteVisualBrushText = $"[SpriteVisual.Brush: {(result ? $"(CompositionColorBrush){imagingUtility_spriteVisualBrush!.GetHashCode()}" : "null")}]";
+            bool result = spriteVisualBrush is not null;
+            spriteVisualBrushText = $"[SpriteVisual.Brush: {(result ? $"(CompositionColorBrush){spriteVisualBrush!.GetHashCode()}" : "null")}]";
 
             await message.ShowAsync("imagingUtility.CreateColorBrush()", $"Method completed.\nResult: {result}", closeButton: "Ok");
         }
@@ -179,33 +193,33 @@ public partial class DeveloperSettingsViewModel : ObservableObject
 
 
     [ObservableProperty]
-    int imagingUtility_sizeWidth = 400;
+    int sizeWidth = 400;
     [ObservableProperty]
-    int imagingUtility_sizeHeight = 200;
+    int sizeHeight = 200;
 
     [ObservableProperty]
-    int imagingUtility_offsetX = 0;
+    int offsetX = 0;
     [ObservableProperty]
-    int imagingUtility_offsetY = 0;
+    int offsetY = 0;
     [ObservableProperty]
-    int imagingUtility_offsetZ = 0;
+    int offsetZ = 0;
 
     [RelayCommand]
-    async Task ImagingUtility_CreateSpriteVisual()
+    async Task CreateSpriteVisualAsync()
     {
         try
         {
-            imagingUtility_spriteVisual = imagingUtility.CreateSpriteVisual(
-                imagingUtility_compositor!,
-                new Vector2(ImagingUtility_sizeWidth, ImagingUtility_sizeHeight),
-                imagingUtility_spriteVisualBrush,
-                new Vector3(ImagingUtility_offsetX, ImagingUtility_offsetY, ImagingUtility_offsetZ));
+            spriteVisual = imagingUtility.CreateSpriteVisual(
+                compositor!,
+                new Vector2(SizeWidth, SizeHeight),
+                spriteVisualBrush,
+                new Vector3(OffsetX, OffsetY, OffsetZ));
 
-            imagingUtility_container!.Children.RemoveAll();
-            imagingUtility_container!.Children.InsertAtTop(imagingUtility_spriteVisual);
+            container!.Children.RemoveAll();
+            container!.Children.InsertAtTop(spriteVisual);
 
-            bool result = imagingUtility_spriteVisual is not null;
-            imagingUtility_spriteVisualText = $"[SpriteVisual: {(result ? imagingUtility_spriteVisual!.GetHashCode() : "null")}]\n";
+            bool result = spriteVisual is not null;
+            spriteVisualText = $"[SpriteVisual: {(result ? spriteVisual!.GetHashCode() : "null")}]\n";
 
             await message.ShowAsync("imagingUtility.CreateSpriteVisual()", $"Method completed.\nResult: {result}", closeButton: "Ok");
         }
@@ -214,5 +228,4 @@ public partial class DeveloperSettingsViewModel : ObservableObject
             await message.ShowAsync("imagingUtility.CreateSpriteVisual()", $"Method completed.\nException{ex.Format()}", closeButton: "Ok");
         }
     }
-
 }

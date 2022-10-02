@@ -1,13 +1,24 @@
 ﻿namespace IcyLauncher.WinUI.ViewModels;
 
-public partial class DeveloperSettingsViewModel : ObservableObject
+public partial class MicaBackdropHandlerViewModel : ObservableObject
 {
-    void SetupMicaBackdropHandlerViewModel() =>
-        MicaBackdropHandler_isDarkModeEnabled = micaBackdropHandler.IsDarkModeEnabled;
+    readonly IBackdropHandler micaBackdropHandler;
+    readonly IMessage message;
+
+    public MicaBackdropHandlerViewModel(
+        IBackdropHandler micaBackdropHandler,
+        IMessage message)
+    {
+        this.micaBackdropHandler = micaBackdropHandler;
+        this.message = message;
+
+
+        IsDarkModeEnabled = micaBackdropHandler.IsDarkModeEnabled;
+    }
 
 
     [RelayCommand]
-    async Task MicaBackdropHandler_EnableBackdrop()
+    async Task EnableBackdropAsync()
     {
         try
         {
@@ -21,7 +32,7 @@ public partial class DeveloperSettingsViewModel : ObservableObject
     }
 
     [RelayCommand]
-    async Task MicaBackdropHandler_DisableBackdrop()
+    async Task DisableBackdropAsync()
     {
         try
         {
@@ -36,9 +47,9 @@ public partial class DeveloperSettingsViewModel : ObservableObject
 
 
     [ObservableProperty]
-    bool micaBackdropHandler_isDarkModeEnabled = default!;
+    bool isDarkModeEnabled = default!;
 
-    async partial void OnMicaBackdropHandler_isDarkModeEnabledChanged(bool value)
+    async partial void OnIsDarkModeEnabledChanged(bool value)
     {
         try
         {

@@ -1,0 +1,46 @@
+﻿<Page
+    x:Class="IcyLauncher.WinUI.Views.SettingsViews.DeveloperViews.ConfigurationManagerView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+    <Page.Transitions>
+        <EntranceThemeTransition />
+    </Page.Transitions>
+
+    <ScrollViewer Padding="0,0,0,12" VerticalAlignment="Stretch">
+        <StackPanel Padding="0,0,0,12" Spacing="8">
+            <TextBox
+                Height="Auto"
+                MaxHeight="400"
+                AcceptsReturn="True"
+                PlaceholderText="Configuration..."
+                ScrollViewer.VerticalScrollBarVisibility="Visible"
+                Text="{x:Bind viewModel.CurrentConfig, Mode=TwoWay}" />
+
+            <ContentControl Tag="Export()|[Returns: string]  Exports the current configuration as a string" Template="{StaticResource SettingsCard}">
+                <Button Command="{x:Bind viewModel.ExportCommand}" Content="Test Method" />
+            </ContentControl>
+
+            <Expander
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Top"
+                Header="Load()|Loads a configuration as the current configuration"
+                Template="{StaticResource CardExpander}">
+                <Expander.Tag>
+                    <StackPanel Spacing="8">
+                        <ContentControl Tag="input|[Type: Configuration]  The configuration which should get loaded" Template="{StaticResource SettingsCard}">
+                            <Button Content="Set Configuration" IsEnabled="False" />
+                        </ContentControl>
+                        <ContentControl Tag="ignoreTheme|[Type: bool] The boolean wether the theme should be ignored while loading" Template="{StaticResource SettingsCard}">
+                            <ToggleSwitch IsOn="{x:Bind viewModel.IgnoreTheme, Mode=TwoWay}" />
+                        </ContentControl>
+                    </StackPanel>
+                </Expander.Tag>
+
+                <Button Command="{x:Bind viewModel.LoadCommand}" Content="Test Method" />
+            </Expander>
+        </StackPanel>
+    </ScrollViewer>
+</Page>

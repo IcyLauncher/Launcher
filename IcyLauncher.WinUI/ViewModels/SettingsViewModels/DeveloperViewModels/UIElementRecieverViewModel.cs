@@ -1,49 +1,50 @@
 ﻿namespace IcyLauncher.WinUI.ViewModels;
 
-public partial class DeveloperSettingsViewModel : ObservableObject
+public partial class UIElementRecieverViewModel : ObservableObject
 {
-    public void SetupUIElementRevieverViewModel()
+    public UIElementRecieverViewModel(
+        UIElementReciever uIElementReciever)
     {
-        UIElementReviever_mainGrid = $"Hash Code: {uiElementReciever.MainGrid.GetHashCode()}";
-        UIElementReviever_navigationView = $"Hash Code: {uiElementReciever.NavigationView.GetHashCode()}";
-        UIElementReviever_navigationFrame = $"Hash Code: {uiElementReciever.NavigationFrame.GetHashCode()}";
-        UIElementReviever_titleBarContainer = $"Hash Code: {uiElementReciever.TitleBarContainer.GetHashCode()}";
-        UIElementReviever_titleBar = $"Hash Code: {uiElementReciever.TitleBar.GetHashCode()}";
-        UIElementReviever_titleBarDragArea = $"Hash Code: {uiElementReciever.TitleBarDragArea.GetHashCode()}";
-        UIElementReviever_backButton = $"Hash Code: {uiElementReciever.BackButton.GetHashCode()}";
-        UIElementReviever_backButtonIcon = $"Hash Code: {uiElementReciever.BackButtonIcon.GetHashCode()}";
-        UIElementReviever_titleBarIconGradientStops = $"Hash Code: {uiElementReciever.TitleBarIconGradientStops.GetHashCode()}";
-        UIElementReviever_titleBarTitle = $"Hash Code: {uiElementReciever.TitleBarTitle.GetHashCode()}";
+        MainGrid = $"Hash Code: {uIElementReciever.MainGrid.GetHashCode()}";
+        NavigationView = $"Hash Code: {uIElementReciever.NavigationView.GetHashCode()}";
+        NavigationFrame = $"Hash Code: {uIElementReciever.NavigationFrame.GetHashCode()}";
+        TitleBarContainer = $"Hash Code: {uIElementReciever.TitleBarContainer.GetHashCode()}";
+        TitleBar = $"Hash Code: {uIElementReciever.TitleBar.GetHashCode()}";
+        TitleBarDragArea = $"Hash Code: {uIElementReciever.TitleBarDragArea.GetHashCode()}";
+        BackButton = $"Hash Code: {uIElementReciever.BackButton.GetHashCode()}";
+        BackButtonIcon = $"Hash Code: {uIElementReciever.BackButtonIcon.GetHashCode()}";
+        TitleBarIconGradientStops = $"Hash Code: {uIElementReciever.TitleBarIconGradientStops.GetHashCode()}";
+        TitleBarTitle = $"Hash Code: {uIElementReciever.TitleBarTitle.GetHashCode()}";
     }
 
 
     [ObservableProperty]
-    string uIElementReviever_mainGrid = default!;
+    string mainGrid = default!;
 
     [ObservableProperty]
-    string uIElementReviever_navigationView = default!;
+    string navigationView = default!;
 
     [ObservableProperty]
-    string uIElementReviever_navigationFrame = default!;
+    string navigationFrame = default!;
 
     [ObservableProperty]
-    string uIElementReviever_titleBarContainer = default!;
+    string titleBarContainer = default!;
 
     [ObservableProperty]
-    string uIElementReviever_titleBar = default!;
+    string titleBar = default!;
 
     [ObservableProperty]
-    string uIElementReviever_titleBarDragArea = default!;
+    string titleBarDragArea = default!;
 
     [ObservableProperty]
-    string uIElementReviever_backButton = default!;
+    string backButton = default!;
 
     [ObservableProperty]
-    string uIElementReviever_backButtonIcon = default!;
+    string backButtonIcon = default!;
 
     [ObservableProperty]
-    string uIElementReviever_titleBarIconGradientStops = default!;
+    string titleBarIconGradientStops = default!;
 
     [ObservableProperty]
-    string uIElementReviever_titleBarTitle = default!;
+    string titleBarTitle = default!;
 }

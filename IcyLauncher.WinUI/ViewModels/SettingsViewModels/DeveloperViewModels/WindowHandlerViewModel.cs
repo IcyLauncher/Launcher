@@ -2,69 +2,82 @@
 
 namespace IcyLauncher.WinUI.ViewModels;
 
-public partial class DeveloperSettingsViewModel : ObservableObject
+public partial class WindowHandlerViewModel : ObservableObject
 {
-    void SetupWindowHandlerViewModel()
+    readonly WindowHandler windowHandler;
+    readonly UIElementReciever uIElementReciever;
+    readonly IMessage message;
+
+    public WindowHandlerViewModel(
+        WindowHandler windowHandler,
+        UIElementReciever uIElementReciever,
+        IMessage message)
     {
-        WindowHandler_UpdateHWnd();
-        WindowHandler_UpdateHasCustomTitlebar();
-        WindowHandler_UpdateSize();
-        WindowHandler_UpdatePosition();
-        WindowHandler_UpdateScreenSize();
+        this.windowHandler = windowHandler;
+        this.uIElementReciever = uIElementReciever;
+        this.message = message;
+
+
+        UpdateHWnd();
+        UpdateHasCustomTitlebar();
+        UpdateSize();
+        UpdatePosition();
+        UpdateScreenSize();
     }
 
 
     [ObservableProperty]
-    string windowHandler_hWnd = default!;
+    string hWnd = default!;
 
     [RelayCommand]
-    void WindowHandler_UpdateHWnd() =>
-        WindowHandler_hWnd = $"0x{windowHandler.HWnd}";
+    void UpdateHWnd() =>
+        HWnd = $"0x{windowHandler.HWnd}";
 
 
     [ObservableProperty]
-    bool windowHandler_hasCustomTitleBar = default!;
+    bool hasCustomTitleBar = default!;
 
     [RelayCommand]
-    void WindowHandler_UpdateHasCustomTitlebar() =>
-        WindowHandler_hasCustomTitleBar = windowHandler.HasCustomTitleBar;
+    void UpdateHasCustomTitlebar() =>
+        HasCustomTitleBar = windowHandler.HasCustomTitleBar;
 
 
     [ObservableProperty]
-    string windowHandler_size = default!;
+    string size = default!;
 
     [RelayCommand]
-    void WindowHandler_UpdateSize()
+    void UpdateSize()
     {
         SizeInt32 size = windowHandler.Size;
-        WindowHandler_size = $"{size.Width}x{size.Height}";
+        Size = $"{size.Width}x{size.Height}";
     }
 
 
     [ObservableProperty]
-    string windowHandler_position = default!;
+    string position = default!;
 
     [RelayCommand]
-    void WindowHandler_UpdatePosition()
+    void UpdatePosition()
     {
         PointInt32 position = windowHandler.Position;
-        WindowHandler_position = $"X: {position.X}, Y: {position.Y}";
+        Position = $"X: {position.X}, Y: {position.Y}";
     }
 
 
     [ObservableProperty]
-    string windowHandler_screenSize = default!;
+    string screenSize = default!;
 
     [RelayCommand]
-    void WindowHandler_UpdateScreenSize()
+    void UpdateScreenSize()
     {
         RectInt32 rect = windowHandler.ScreenSize;
-        WindowHandler_screenSize = $"{rect.Width}x{rect.Height}";
+        ScreenSize = $"{rect.Width}x{rect.Height}";
     }
 
 
     [RelayCommand]
-    async Task WindowHandler_SetIcon(string path)
+    async Task SetIconAsync(
+        string path)
     {
         try
         {
@@ -79,17 +92,17 @@ public partial class DeveloperSettingsViewModel : ObservableObject
 
 
     [ObservableProperty]
-    int windowHandler_sizeWidth;
+    int sizeWidth;
 
     [ObservableProperty]
-    int windowHandler_sizeHeight;
+    int sizeHeight;
 
     [RelayCommand]
-    async Task WindowHandler_SetSize()
+    async Task SetSizeAsync()
     {
         try
         {
-            windowHandler.SetSize(WindowHandler_sizeWidth, WindowHandler_sizeHeight);
+            windowHandler.SetSize(SizeWidth, SizeHeight);
             await message.ShowAsync("windowHandler.SetSize()", $"Method completed.", closeButton: "Ok");
         }
         catch (Exception ex)
@@ -100,17 +113,17 @@ public partial class DeveloperSettingsViewModel : ObservableObject
 
 
     [ObservableProperty]
-    int windowHandler_minSizeWidth;
+    int minSizeWidth;
 
     [ObservableProperty]
-    int windowHandler_minSizeHeight;
+    int minSizeHeight;
 
     [RelayCommand]
-    async Task WindowHandler_SetMinSize()
+    async Task SetMinSizeAsync()
     {
         try
         {
-            windowHandler.SetMinSize(WindowHandler_minSizeWidth, WindowHandler_minSizeHeight);
+            windowHandler.SetMinSize(MinSizeWidth, MinSizeHeight);
             await message.ShowAsync("windowHandler.SetMinSize()", $"Method completed.", closeButton: "Ok");
         }
         catch (Exception ex)
@@ -121,17 +134,17 @@ public partial class DeveloperSettingsViewModel : ObservableObject
 
 
     [ObservableProperty]
-    int windowHandler_positionX;
+    int positionX;
 
     [ObservableProperty]
-    int windowHandler_positionY;
+    int positionY;
 
     [RelayCommand]
-    async Task WindowHandler_SetPosition()
+    async Task SetPositionAsync()
     {
         try
         {
-            windowHandler.SetPosition(WindowHandler_positionX, WindowHandler_positionY);
+            windowHandler.SetPosition(PositionX, PositionY);
             await message.ShowAsync("windowHandler.SetPosition()", $"Method completed.", closeButton: "Ok");
         }
         catch (Exception ex)
@@ -141,7 +154,7 @@ public partial class DeveloperSettingsViewModel : ObservableObject
     }
 
     [RelayCommand]
-    async Task WindowHandler_SetPositionToCenter()
+    async Task SetPositionToCenterAsync()
     {
         try
         {
@@ -156,7 +169,7 @@ public partial class DeveloperSettingsViewModel : ObservableObject
 
 
     [RelayCommand]
-    async Task WindowHandler_EnsureWindowsSystemDispatcherQueueController()
+    async Task EnsureWindowsSystemDispatcherQueueControllerAsync()
     {
         try
         {
@@ -171,17 +184,17 @@ public partial class DeveloperSettingsViewModel : ObservableObject
 
 
     [ObservableProperty]
-    bool windowHandler_titleBarIsNull;
+    bool titleBarIsNull;
 
     [ObservableProperty]
-    bool windowHandler_titleBarContainerIsNull;
+    bool titleBarContainerIsNull;
 
     [RelayCommand]
-    async Task WindowHandler_SetTitleBar()
+    async Task SetTitleBarAsync()
     {
         try
         {
-            bool result = windowHandler.SetTitleBar(WindowHandler_titleBarIsNull ? null : uiElementReciever.TitleBarDragArea, WindowHandler_titleBarContainerIsNull ? null : uiElementReciever.TitleBarContainer);
+            bool result = windowHandler.SetTitleBar(TitleBarIsNull ? null : uIElementReciever.TitleBarDragArea, TitleBarContainerIsNull ? null : uIElementReciever.TitleBarContainer);
             await message.ShowAsync("windowHandler.SetTitleBar()", $"Method completed.\nResult: {result}", closeButton: "Ok");
         }
         catch (Exception ex)
@@ -192,14 +205,14 @@ public partial class DeveloperSettingsViewModel : ObservableObject
     
     
     [ObservableProperty]
-    string windowHandler_mainBackground = "Background.Solid";
+    string mainBackground = "Background.Solid";
 
     [RelayCommand]
-    async Task WindowHandler_SetMainBackground()
+    async Task SetMainBackgroundAsync()
     {
         try
         {
-            bool result = windowHandler.SetMainBackground(WindowHandler_mainBackground);
+            bool result = windowHandler.SetMainBackground(MainBackground);
             await message.ShowAsync("windowHandler.SetMainBackground()", $"Method completed.\nResult: {result}", closeButton: "Ok");
         }
         catch (Exception ex)

@@ -3,24 +3,36 @@ using Newtonsoft.Json;
 
 namespace IcyLauncher.WinUI.ViewModels;
 
-public partial class DeveloperSettingsViewModel : ObservableObject
+public partial class IConverterViewModel : ObservableObject
 {
-    [ObservableProperty]
-    SolidColor iConverter_object = new(Colors.Red, "Red");
+    readonly IConverter converter;
+    readonly IMessage message;
+
+    public IConverterViewModel(
+        IConverter converter,
+        IMessage message)
+    {
+        this.converter = converter;
+        this.message = message;
+    }
+
 
     [ObservableProperty]
-    string iConverter_input = "";
+    SolidColor object_ = new(Colors.Red, "Red");
+
+    [ObservableProperty]
+    string input = "";
 
 
     [ObservableProperty]
-    Formatting iConverter_formatting = Formatting.None;
+    Formatting formatting = Formatting.None;
 
     [RelayCommand]
-    async Task IConverter_ToString()
+    async Task ToStringAsync()
     {
         try
         {
-            IConverter_input = converter.ToString(IConverter_object, IConverter_formatting);
+            input = converter.ToString(Object_, Formatting);
             await message.ShowAsync("converter.ToString()", $"Method completed.", closeButton: "Ok");
         }
         catch (Exception ex)
@@ -30,11 +42,11 @@ public partial class DeveloperSettingsViewModel : ObservableObject
     }
 
     [RelayCommand]
-    async Task IConverter_ToObject()
+    async Task ToObjectAsync()
     {
         try
         {
-            IConverter_object = converter.ToObject<SolidColor>(IConverter_input);
+            Object_ = converter.ToObject<SolidColor>(Input);
             await message.ShowAsync("converter.ToObject<T>()", $"Method completed.", closeButton: "Ok");
         }
         catch (Exception ex)
@@ -44,11 +56,11 @@ public partial class DeveloperSettingsViewModel : ObservableObject
     }
 
     [RelayCommand]
-    async Task IConverter_TryToObject()
+    async Task TryToObjectAsync()
     {
         try
         {
-            bool result = converter.TryToObject(out SolidColor? _, IConverter_input);
+            bool result = converter.TryToObject(out SolidColor? _, Input);
             await message.ShowAsync("converter.TryToObject<T>()", $"Method completed.\nResult: {result}", closeButton: "Ok");
         }
         catch (Exception ex)

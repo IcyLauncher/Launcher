@@ -443,6 +443,7 @@
             </Style>
 
             <Style TargetType="MenuFlyoutPresenter">
+                <Setter Property="MaxHeight" Value="400" />
                 <Setter Property="CornerRadius" Value="8" />
                 <Setter Property="Background">
                     <Setter.Value>

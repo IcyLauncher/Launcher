@@ -83,21 +83,19 @@ public class Message : IMessage
 
 
     /// <summary>
-    /// Queues a new dialog and optionally waits until the previous dialog is closed
+    /// Queues a new dialog
     /// </summary>
     /// <param name="title">The title of the dialog</param>
     /// <param name="content">The content of the dialog</param>
-    /// <param name="awaitPreviousDialog">Whether it should wait until the previous dialog is closed</param>
     /// <param name="closeButton">The content of the close button</param>
     /// <param name="primaryButton">The content of the primary button</param>
     /// <param name="secondaryButton">The content of the secondary button</param>
     public async void Show(
         string title,
         object content,
-        bool awaitPreviousDialog = false,
         string? closeButton = "Cancel",
         string? primaryButton = null,
         string? secondaryButton = null) =>
-        await ShowAsync(title, content, awaitPreviousDialog, closeButton, primaryButton, secondaryButton);
+        await ShowAsync(title, content, false, closeButton, primaryButton, secondaryButton);
 
 }

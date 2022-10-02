@@ -1,9 +1,21 @@
 ﻿namespace IcyLauncher.WinUI.ViewModels;
 
-public partial class DeveloperSettingsViewModel : ObservableObject
+public partial class VibrancyBackdropHandlerViewModel : ObservableObject
 {
+    readonly IBackdropHandler vibrancyBackdropHandler;
+    readonly IMessage message;
+    
+    public VibrancyBackdropHandlerViewModel(
+        IBackdropHandler vibrancyBackdropHandler,
+        IMessage message)
+    {
+        this.vibrancyBackdropHandler = vibrancyBackdropHandler;
+        this.message = message;
+    }
+
+
     [RelayCommand]
-    async Task VibrancyBackdropHandler_EnableBackdrop()
+    async Task EnableBackdropAsync()
     {
         try
         {
@@ -17,7 +29,7 @@ public partial class DeveloperSettingsViewModel : ObservableObject
     }
 
     [RelayCommand]
-    async Task VibrancyBackdropHandler_DisableBackdrop()
+    async Task DisableBackdropAsync()
     {
         try
         {

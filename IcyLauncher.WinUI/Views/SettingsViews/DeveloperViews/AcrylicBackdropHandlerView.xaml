@@ -1,0 +1,27 @@
+﻿<Page
+    x:Class="IcyLauncher.WinUI.Views.SettingsViews.DeveloperViews.AcrylicBackdropHandlerView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+    <Page.Transitions>
+        <EntranceThemeTransition />
+    </Page.Transitions>
+
+    <ScrollViewer VerticalAlignment="Stretch">
+        <StackPanel Padding="0,0,0,12" Spacing="8">
+            <ContentControl Tag="EnableBackdrop()|[Returns: bool]  Enables the backdrop" Template="{StaticResource SettingsCard}">
+                <Button Command="{x:Bind viewModel.EnableBackdropCommand}" Content="Test Method" />
+            </ContentControl>
+
+            <ContentControl Tag="DisableBackdrop()|[Returns: bool]  Disables the backdrop" Template="{StaticResource SettingsCard}">
+                <Button Command="{x:Bind viewModel.DisableBackdropCommand}" Content="Test Method" />
+            </ContentControl>
+
+            <ContentControl Tag="IsDarkModeEnabled|[Type: bool]  Gets and sets the dark mode of the backdrop effect" Template="{StaticResource SettingsCard}">
+                <ToggleSwitch IsOn="{x:Bind viewModel.IsDarkModeEnabled, Mode=TwoWay}" />
+            </ContentControl>
+        </StackPanel>
+    </ScrollViewer>
+</Page>

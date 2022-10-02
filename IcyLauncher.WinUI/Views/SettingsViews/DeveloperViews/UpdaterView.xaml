@@ -1,0 +1,43 @@
+﻿<Page
+    x:Class="IcyLauncher.WinUI.Views.SettingsViews.DeveloperViews.UpdaterView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+    <Page.Transitions>
+        <EntranceThemeTransition />
+    </Page.Transitions>
+
+    <ScrollViewer VerticalAlignment="Stretch">
+        <StackPanel Padding="0,0,0,12" Spacing="8">
+            <ContentControl Tag="CurrentAppVersion|[Type: Version]  Current application version" Template="{StaticResource SettingsCard}">
+                <StackPanel Orientation="Horizontal" Spacing="8">
+                    <TextBox IsHitTestVisible="False" Text="{x:Bind viewModel.CurrentAppVersion, Mode=OneWay}" />
+                    <Button Command="{x:Bind viewModel.UpdateCurrentAppVersionCommand}" Content="Update" />
+                </StackPanel>
+            </ContentControl>
+
+            <ContentControl Tag="CurrentApiVersion|[Type: Version]  Current connected api version" Template="{StaticResource SettingsCard}">
+                <StackPanel Orientation="Horizontal" Spacing="8">
+                    <TextBox IsHitTestVisible="False" Text="{x:Bind viewModel.CurrentApiVersion, Mode=OneWay}" />
+                    <Button Command="{x:Bind viewModel.UpdateCurrentApiVersionCommand}" Content="Update" />
+                </StackPanel>
+            </ContentControl>
+
+            <ContentControl Tag="LastChecked|[Type: DateTime]  Date and time when the application last checked for any new updates" Template="{StaticResource SettingsCard}">
+                <StackPanel Orientation="Horizontal" Spacing="8">
+                    <TextBox IsHitTestVisible="False" Text="{x:Bind viewModel.LastChecked, Mode=OneWay, Converter={StaticResource DateTimeFormatter}, ConverterParameter='MM/dd/yyyy, hh:mm tt'}" />
+                    <Button Command="{x:Bind viewModel.UpdateLastCheckedCommand}" Content="Update" />
+                </StackPanel>
+            </ContentControl>
+
+            <ContentControl Tag="IsUpdateAvailable|[Type: bool ]  Boolean whether a new update is available" Template="{StaticResource SettingsCard}">
+                <StackPanel Orientation="Horizontal" Spacing="8">
+                    <ToggleSwitch IsHitTestVisible="False" IsOn="{x:Bind viewModel.IsUpdateAvailable, Mode=OneWay}" />
+                    <Button Command="{x:Bind viewModel.UpdateIsUpdateAvailableCommand}" Content="Update" />
+                </StackPanel>
+            </ContentControl>
+        </StackPanel>
+    </ScrollViewer>
+</Page>

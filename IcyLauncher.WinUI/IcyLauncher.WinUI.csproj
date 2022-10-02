@@ -140,6 +140,22 @@
 		<None Remove="Views\ProfilesView.xaml" />
 		<None Remove="Views\SettingsView.xaml" />
 		<None Remove="Views\SettingsViews\DeveloperSettingsView.xaml" />
+		<None Remove="Views\SettingsViews\DeveloperViews\AcrylicBackdropHandlerView.xaml" />
+		<None Remove="Views\SettingsViews\DeveloperViews\BackdropHandlerView.xaml" />
+		<None Remove="Views\SettingsViews\DeveloperViews\ConfigurationManagerView.xaml" />
+		<None Remove="Views\SettingsViews\DeveloperViews\HomeView.xaml" />
+		<None Remove="Views\SettingsViews\DeveloperViews\IConverterView.xaml" />
+		<None Remove="Views\SettingsViews\DeveloperViews\IFileSystemView.xaml" />
+		<None Remove="Views\SettingsViews\DeveloperViews\ILoggerView.xaml" />
+		<None Remove="Views\SettingsViews\DeveloperViews\ImagingUtilityView.xaml" />
+		<None Remove="Views\SettingsViews\DeveloperViews\IMessageView.xaml" />
+		<None Remove="Views\SettingsViews\DeveloperViews\INavigationView.xaml" />
+		<None Remove="Views\SettingsViews\DeveloperViews\MicaBackdropHandlerView.xaml" />
+		<None Remove="Views\SettingsViews\DeveloperViews\ThemeManagerView.xaml" />
+		<None Remove="Views\SettingsViews\DeveloperViews\UIElementRecieverView.xaml" />
+		<None Remove="Views\SettingsViews\DeveloperViews\UpdaterView.xaml" />
+		<None Remove="Views\SettingsViews\DeveloperViews\VibrancyBackdropHandlerView.xaml" />
+		<None Remove="Views\SettingsViews\DeveloperViews\WindowHandlerView.xaml" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -460,6 +476,69 @@
 			<Pack>True</Pack>
 			<PackagePath>\</PackagePath>
 		</None>
+		<Page Update="Views\SettingsViews\DeveloperViews\HomeView.xaml">
+		  <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+		  <SubType>Designer</SubType>
+		</Page>
+		<Page Update="Views\SettingsViews\DeveloperViews\INavigationView.xaml">
+		  <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+		  <SubType>Designer</SubType>
+		</Page>
+		<Page Update="Views\SettingsViews\DeveloperViews\MicaBackdropHandlerView.xaml">
+		  <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+		  <SubType>Designer</SubType>
+		</Page>
+		<Page Update="Views\SettingsViews\DeveloperViews\IMessageView.xaml">
+		  <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+		  <SubType>Designer</SubType>
+		</Page>
+		<Page Update="Views\SettingsViews\DeveloperViews\ImagingUtilityView.xaml">
+		  <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+		  <SubType>Designer</SubType>
+		</Page>
+		<Page Update="Views\SettingsViews\DeveloperViews\IFileSystemView.xaml">
+		  <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+		  <SubType>Designer</SubType>
+		</Page>
+		<Page Update="Views\SettingsViews\DeveloperViews\IConverterView.xaml">
+		  <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+		  <SubType>Designer</SubType>
+		</Page>
+		<Page Update="Views\SettingsViews\DeveloperViews\BackdropHandlerView.xaml">
+		  <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+		  <SubType>Designer</SubType>
+		</Page>
+		<Page Update="Views\SettingsViews\DeveloperViews\ConfigurationManagerView.xaml">
+		  <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+		  <SubType>Designer</SubType>
+		</Page>
+		<Page Update="Views\SettingsViews\DeveloperViews\AcrylicBackdropHandlerView.xaml">
+		  <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+		  <SubType>Designer</SubType>
+		</Page>
+		<Page Update="Views\SettingsViews\DeveloperViews\WindowHandlerView.xaml">
+		  <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+		  <SubType>Designer</SubType>
+		</Page>
+		<Page Update="Views\SettingsViews\DeveloperViews\VibrancyBackdropHandlerView.xaml">
+		  <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+		  <SubType>Designer</SubType>
+		</Page>
+		<Page Update="Views\SettingsViews\DeveloperViews\UpdaterView.xaml">
+		  <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+		  <SubType>Designer</SubType>
+		</Page>
+		<Page Update="Views\SettingsViews\DeveloperViews\UIElementRecieverView.xaml">
+		  <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+		  <SubType>Designer</SubType>
+		</Page>
+		<Page Update="Views\SettingsViews\DeveloperViews\ThemeManagerView.xaml">
+		  <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+		  <SubType>Designer</SubType>
+		</Page>
+		<Page Update="Views\SettingsViews\DeveloperViews\ILoggerView.xaml">
+		  <Generator>MSBuild:Compile</Generator>
+		</Page>
 		<Content Update="Assets\Weather\0.png">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</Content>

@@ -1,29 +1,41 @@
 ﻿namespace IcyLauncher.WinUI.ViewModels;
 
-public partial class DeveloperSettingsViewModel : ObservableObject
+public partial class IFileSystemViewModel : ObservableObject
 {
-    [ObservableProperty]
-    string iFileSystem_path = "";
+    readonly IFileSystem fileSystem;
+    readonly IMessage message;
+
+    public IFileSystemViewModel(
+        IFileSystem fileSystem,
+        IMessage message)
+    {
+        this.fileSystem = fileSystem;
+        this.message = message;
+    }
+
 
     [ObservableProperty]
-    string iFileSystem_destination = "";
+    string path = "";
 
     [ObservableProperty]
-    bool iFileSystem_overwrite = false;
+    string destination = "";
 
     [ObservableProperty]
-    int iFileSystem_timeout = 60000;
+    bool overwrite = false;
 
     [ObservableProperty]
-    string iFileSystem_content = "Hello World! :)";
+    int timeout = 60000;
+
+    [ObservableProperty]
+    string content = "Hello World! :)";
 
 
     [RelayCommand]
-    async Task IFileSystem_FileExists()
+    async Task FileExistsAsync()
     {
         try
         {
-            bool result = fileSystem.FileExists(IFileSystem_path);
+            bool result = fileSystem.FileExists(Path);
             await message.ShowAsync("fileSystem.FileExists()", $"Method completed.\nResult: {result}", closeButton: "Ok");
         }
         catch (Exception ex)
@@ -33,11 +45,11 @@ public partial class DeveloperSettingsViewModel : ObservableObject
     }
 
     [RelayCommand]
-    async Task IFileSystem_FileWritable()
+    async Task FileWritableAsync()
     {
         try
         {
-            bool result = fileSystem.FileWritable(IFileSystem_path);
+            bool result = fileSystem.FileWritable(Path);
             await message.ShowAsync("fileSystem.FileWritable()", $"Method completed.\nResult: {result}", closeButton: "Ok");
         }
         catch (Exception ex)
@@ -48,11 +60,11 @@ public partial class DeveloperSettingsViewModel : ObservableObject
 
 
     [RelayCommand]
-    async Task IFileSystem_CopyFile()
+    async Task CopyFileAsync()
     {
         try
         {
-            fileSystem.CopyFile(IFileSystem_path, IFileSystem_destination, IFileSystem_overwrite);
+            fileSystem.CopyFile(Path, Destination, Overwrite);
             await message.ShowAsync("fileSystem.CopyFile()", "Method completed", closeButton: "Ok");
         }
         catch (Exception ex)
@@ -62,19 +74,19 @@ public partial class DeveloperSettingsViewModel : ObservableObject
     }
 
     [RelayCommand(AllowConcurrentExecutions = false, IncludeCancelCommand = true)]
-    async Task IFileSystem_CopyFileAAsync(CancellationToken cancellationToken)
+    async Task CopyFileAAsync(CancellationToken cancellationToken)
     {
-            await fileSystem.CopyFileAsync(IFileSystem_path, IFileSystem_destination, IFileSystem_overwrite, cancellationToken);
+            await fileSystem.CopyFileAsync(Path, Destination, Overwrite, cancellationToken);
             await message.ShowAsync("fileSystem.CopyFileAsync()", "Method completed", closeButton: "Ok");
     }
 
 
     [RelayCommand]
-    async Task IFileSystem_DeleteFile()
+    async Task DeleteFileAsync()
     {
         try
         {
-            fileSystem.DeleteFile(IFileSystem_path);
+            fileSystem.DeleteFile(Path);
             await message.ShowAsync("fileSystem.DeleteFile()", "Method completed", closeButton: "Ok");
         }
         catch (Exception ex)
@@ -84,11 +96,11 @@ public partial class DeveloperSettingsViewModel : ObservableObject
     }
 
     [RelayCommand(AllowConcurrentExecutions = false, IncludeCancelCommand = true)]
-    async Task IFileSystem_DeleteFileAAsync(CancellationToken cancellationToken)
+    async Task DeleteFileAAsync(CancellationToken cancellationToken)
     {
         try
         {
-            await fileSystem.DeleteFileAsync(IFileSystem_path, IFileSystem_timeout, cancellationToken);
+            await fileSystem.DeleteFileAsync(Path, Timeout, cancellationToken);
             await message.ShowAsync("fileSystem.DeleteFileAsync()", "Method completed", closeButton: "Ok");
         }
         catch (Exception ex)
@@ -99,11 +111,11 @@ public partial class DeveloperSettingsViewModel : ObservableObject
 
 
     [RelayCommand(AllowConcurrentExecutions = false, IncludeCancelCommand = true)]
-    async Task IFileSystem_WaitForFileLockAsync(CancellationToken cancellationToken)
+    async Task WaitForFileLockAAsync(CancellationToken cancellationToken)
     {
         try
         {
-            bool result = await fileSystem.WaitForFileLockAsync(IFileSystem_path, IFileSystem_timeout, cancellationToken);
+            bool result = await fileSystem.WaitForFileLockAsync(Path, Timeout, cancellationToken);
             await message.ShowAsync("fileSystem.WaitForFileLockAsync()", $"Method completed.\nResult: {result}", closeButton: "Ok");
         }
         catch (Exception ex)
@@ -114,11 +126,11 @@ public partial class DeveloperSettingsViewModel : ObservableObject
 
 
     [RelayCommand(AllowConcurrentExecutions = false, IncludeCancelCommand = true)]
-    async Task IFileSystem_ReadAsTextAsync(CancellationToken cancellationToken)
+    async Task ReadAsTextAAsync(CancellationToken cancellationToken)
     {
         try
         {
-            string result = await fileSystem.ReadAsTextAsync(IFileSystem_path, cancellationToken);
+            string result = await fileSystem.ReadAsTextAsync(Path, cancellationToken);
             await message.ShowAsync("fileSystem.ReadAsTextAsync()", $"Method completed.\nResult: {(result.Length > 200 ? $"{result[..200]}..." : result)}", closeButton: "Ok");
         }
         catch (Exception ex)
@@ -128,11 +140,11 @@ public partial class DeveloperSettingsViewModel : ObservableObject
     }
 
     [RelayCommand(AllowConcurrentExecutions = false, IncludeCancelCommand = true)]
-    async Task IFileSystem_SaveAsTextAsync(CancellationToken cancellationToken)
+    async Task SaveAsTextAAsync(CancellationToken cancellationToken)
     {
         try
         {
-            await fileSystem.SaveAsTextAsync(IFileSystem_path, IFileSystem_content, IFileSystem_overwrite, cancellationToken);
+            await fileSystem.SaveAsTextAsync(Path, Content, Overwrite, cancellationToken);
             await message.ShowAsync("fileSystem.SaveAsTextAsync()", "Method completed.", closeButton: "Ok");
         }
         catch (Exception ex)
@@ -143,11 +155,11 @@ public partial class DeveloperSettingsViewModel : ObservableObject
 
 
     [RelayCommand]
-    async Task IFileSystem_DirectoryExists()
+    async Task DirectoryExistsAsync()
     {
         try
         {
-            bool result = fileSystem.DirectoryExists(IFileSystem_path);
+            bool result = fileSystem.DirectoryExists(Path);
             await message.ShowAsync("fileSystem.DirectoryExists()", $"Method completed.\nResult: {result}", closeButton: "Ok");
         }
         catch (Exception ex)
@@ -157,11 +169,11 @@ public partial class DeveloperSettingsViewModel : ObservableObject
     }
 
     [RelayCommand]
-    async Task IFileSystem_DirectoryWritable()
+    async Task DirectoryWritableAsync()
     {
         try
         {
-            bool result = fileSystem.DirectoryWritable(IFileSystem_path);
+            bool result = fileSystem.DirectoryWritable(Path);
             await message.ShowAsync("fileSystem.DirectoryWritable()", $"Method completed.\nResult: {result}", closeButton: "Ok");
         }
         catch (Exception ex)
@@ -172,11 +184,11 @@ public partial class DeveloperSettingsViewModel : ObservableObject
 
 
     [RelayCommand]
-    async Task IFileSystem_CreateDirectory()
+    async Task CreateDirectoryAsync()
     {
         try
         {
-            fileSystem.CreateDirectory(IFileSystem_path);
+            fileSystem.CreateDirectory(Path);
             await message.ShowAsync("fileSystem.CreateDirectory()", "Method completed.", closeButton: "Ok");
         }
         catch (Exception ex)

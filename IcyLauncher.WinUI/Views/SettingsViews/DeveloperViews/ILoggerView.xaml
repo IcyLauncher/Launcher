@@ -1,0 +1,70 @@
+﻿<Page
+    x:Class="IcyLauncher.WinUI.Views.SettingsViews.DeveloperViews.ILoggerView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+    <Page.Transitions>
+        <EntranceThemeTransition />
+    </Page.Transitions>
+
+    <ScrollViewer Padding="0,0,0,12" VerticalAlignment="Stretch">
+        <StackPanel Spacing="8">
+            <ContentControl Tag="Show Logger|Create a new window and hook all new logger events" Template="{StaticResource SettingsCard}">
+                <Button Command="{x:Bind viewModel.ShowCommand}" Content="Show Logger" />
+            </ContentControl>
+
+            <Expander
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Top"
+                Header="Log()|Logs any message or exception to the console and writes it to a local text file"
+                Template="{StaticResource CardExpander}">
+                <Expander.Tag>
+                    <StackPanel Spacing="8">
+                        <ContentControl Tag="message|[Type: object]" Template="{StaticResource SettingsCard}">
+                            <TextBox
+                                Width="400"
+                                PlaceholderText="Message..."
+                                Text="{x:Bind viewModel.Message_, Mode=TwoWay}" />
+                        </ContentControl>
+                        <ContentControl Tag="exception|[optional: null] [Type: Exception?]" Template="{StaticResource SettingsCard}">
+                            <TextBox
+                                Width="400"
+                                PlaceholderText="Exception..."
+                                Text="{x:Bind viewModel.Exception, Mode=TwoWay}" />
+                        </ContentControl>
+                        <ContentControl Tag="logLevel|] [optional: Information] [Type: LogLevel]" Template="{StaticResource SettingsCard}">
+                            <ComboBox
+                                Width="125"
+                                PlaceholderText="Log Level..."
+                                SelectedIndex="{x:Bind viewModel.LogLevel, Mode=TwoWay, Converter={StaticResource EnumIntConverter}}">
+                                <ComboBoxItem Content="Trace" />
+                                <ComboBoxItem Content="Debug" />
+                                <ComboBoxItem Content="Information" />
+                                <ComboBoxItem Content="Warning" />
+                                <ComboBoxItem Content="Error" />
+                                <ComboBoxItem Content="Critical" />
+                            </ComboBox>
+                        </ContentControl>
+                        <ContentControl Tag="filePath|[CallerFilePath] [optional: &quot;&quot;] [Type: string]" Template="{StaticResource SettingsCard}">
+                            <TextBox
+                                Width="200"
+                                PlaceholderText="File Path..."
+                                Text="{x:Bind viewModel.FilePath, Mode=TwoWay}" />
+                        </ContentControl>
+                        <ContentControl Tag="memberName|[CallerMemberName] [optional: &quot;&quot;] [Type: string]" Template="{StaticResource SettingsCard}">
+                            <TextBox
+                                Width="200"
+                                PlaceholderText="File Path..."
+                                Text="{x:Bind viewModel.MemberName, Mode=TwoWay}" />
+                        </ContentControl>
+                    </StackPanel>
+                </Expander.Tag>
+
+                <Button Command="{x:Bind viewModel.TestCommand}" Content="Test Method" />
+            </Expander>
+
+        </StackPanel>
+    </ScrollViewer>
+</Page>

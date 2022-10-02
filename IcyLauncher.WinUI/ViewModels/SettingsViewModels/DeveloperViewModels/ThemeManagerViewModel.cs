@@ -3,10 +3,22 @@ using Windows.UI;
 
 namespace IcyLauncher.WinUI.ViewModels;
 
-public partial class DeveloperSettingsViewModel : ObservableObject
+public partial class ThemeManagerViewModel : ObservableObject
 {
+    readonly ThemeManager themeManager;
+    readonly IMessage message;
+
+    public ThemeManagerViewModel(
+        ThemeManager themeManager,
+        IMessage message)
+    {
+        this.themeManager = themeManager;
+        this.message = message;
+    }
+
+
     [RelayCommand]
-    async Task ThemeManager_RandomizeTheme()
+    async Task RandomizeThemeAsync()
     {
         try
         {
@@ -20,7 +32,7 @@ public partial class DeveloperSettingsViewModel : ObservableObject
     }
 
     [RelayCommand]
-    async Task ThemeManager_SetResourceColors()
+    async Task SetResourceColorsAsync()
     {
         try
         {
@@ -34,7 +46,7 @@ public partial class DeveloperSettingsViewModel : ObservableObject
     }
 
     [RelayCommand]
-    async Task ThemeManager_SetUnbindableBindings()
+    async Task SetUnbindableBindingsAsync()
     {
         try
         {
@@ -49,18 +61,18 @@ public partial class DeveloperSettingsViewModel : ObservableObject
 
 
     [ObservableProperty]
-    byte themeManager_transparency = 255;
+    byte transparency = 255;
 
     [ObservableProperty]
-    Color themeManager_randomColor = Colors.Black;
+    Color randomColor = Colors.Black;
 
     [RelayCommand]
-    async Task ThemeManager_GetRandomColor()
+    async Task GetRandomColorAsync()
     {
         try
         {
-            ThemeManager_randomColor = themeManager.GetRandomColor(ThemeManager_transparency);
-            await message.ShowAsync("themeManager.GetRandomColor()", $"Method completed.\nResult: {ThemeManager_randomColor}", closeButton: "Ok");
+            RandomColor = themeManager.GetRandomColor(Transparency);
+            await message.ShowAsync("themeManager.GetRandomColor()", $"Method completed.\nResult: {randomColor}", closeButton: "Ok");
         }
         catch (Exception ex)
         {

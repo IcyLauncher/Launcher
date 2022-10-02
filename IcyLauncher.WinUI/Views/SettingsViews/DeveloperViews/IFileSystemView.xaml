@@ -1,0 +1,301 @@
+﻿<Page
+    x:Class="IcyLauncher.WinUI.Views.SettingsViews.DeveloperViews.IFileSystemView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+    <Page.Transitions>
+        <EntranceThemeTransition />
+    </Page.Transitions>
+
+    <ScrollViewer VerticalAlignment="Stretch">
+        <StackPanel Padding="0,0,0,12" Spacing="8">
+            <Expander
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Top"
+                Header="FileExists()|[Returns: bool]  Checks wether a file exists"
+                Template="{StaticResource CardExpander}">
+                <Expander.Tag>
+                    <ContentControl Tag="path|[Type: string]  The path to the file to check" Template="{StaticResource SettingsCard}">
+                        <TextBox
+                            MinWidth="400"
+                            MaxWidth="500"
+                            Text="{x:Bind viewModel.Path, Mode=TwoWay}" />
+                    </ContentControl>
+                </Expander.Tag>
+
+                <Button Command="{x:Bind viewModel.FileExistsCommand}" Content="Test Method" />
+            </Expander>
+
+            <Expander
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Top"
+                Header="FileWritable()|[Returns: bool]  Checks wether a file is writeable"
+                Template="{StaticResource CardExpander}">
+                <Expander.Tag>
+                    <ContentControl Tag="path|[Type: string]  The path to the file to check" Template="{StaticResource SettingsCard}">
+                        <TextBox
+                            MinWidth="400"
+                            MaxWidth="500"
+                            Text="{x:Bind viewModel.Path, Mode=TwoWay}" />
+                    </ContentControl>
+                </Expander.Tag>
+
+                <Button Command="{x:Bind viewModel.FileWritableCommand}" Content="Test Method" />
+            </Expander>
+
+            <Expander
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Top"
+                Header="CopyFile()|[Obsolete: Not recommended: Use asnyc method]  Copies a file to another destination"
+                Template="{StaticResource CardExpander}">
+                <Expander.Tag>
+                    <StackPanel Spacing="8">
+                        <ContentControl Tag="path|[Type: string]  The path to the file to copy" Template="{StaticResource SettingsCard}">
+                            <TextBox
+                                MinWidth="400"
+                                MaxWidth="500"
+                                Text="{x:Bind viewModel.Path, Mode=TwoWay}" />
+                        </ContentControl>
+
+                        <ContentControl Tag="destination|[Type: string]  The path to the destination the file should be copied" Template="{StaticResource SettingsCard}">
+                            <TextBox
+                                MinWidth="400"
+                                MaxWidth="500"
+                                Text="{x:Bind viewModel.Destination, Mode=TwoWay}" />
+                        </ContentControl>
+
+                        <ContentControl Tag="overwrite|[Type: bool]  The boolean wether the original file should get overwritten if it exists" Template="{StaticResource SettingsCard}">
+                            <ToggleSwitch IsOn="{x:Bind viewModel.Overwrite, Mode=TwoWay}" />
+                        </ContentControl>
+                    </StackPanel>
+                </Expander.Tag>
+
+                <Button Command="{x:Bind viewModel.CopyFileCommand}" Content="Test Method" />
+            </Expander>
+
+            <Expander
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Top"
+                Header="CopyFileAsync()|Copies a file asynchronously to another destination"
+                Template="{StaticResource CardExpander}">
+                <Expander.Tag>
+                    <StackPanel Spacing="8">
+                        <ContentControl Tag="path|[Type: string]  The path to the file to copy" Template="{StaticResource SettingsCard}">
+                            <TextBox
+                                MinWidth="400"
+                                MaxWidth="500"
+                                Text="{x:Bind viewModel.Path, Mode=TwoWay}" />
+                        </ContentControl>
+
+                        <ContentControl Tag="destination|[Type: string]  The path to the destination the file should be copied" Template="{StaticResource SettingsCard}">
+                            <TextBox
+                                MinWidth="400"
+                                MaxWidth="500"
+                                Text="{x:Bind viewModel.Destination, Mode=TwoWay}" />
+                        </ContentControl>
+
+                        <ContentControl Tag="overwrite|[Type: bool]  The boolean wether the original file should get overwritten if it exists" Template="{StaticResource SettingsCard}">
+                            <ToggleSwitch IsOn="{x:Bind viewModel.Overwrite, Mode=TwoWay}" />
+                        </ContentControl>
+                    </StackPanel>
+                </Expander.Tag>
+
+                <StackPanel Orientation="Horizontal" Spacing="8">
+                    <Button Command="{x:Bind viewModel.CopyFileACommand}" Content="Test Method" />
+                    <Button
+                        Command="{x:Bind viewModel.CopyFileACancelCommand}"
+                        Content="Cancel Method"
+                        ToolTipService.ToolTip="The token to cancel the operation" />
+                </StackPanel>
+            </Expander>
+
+            <Expander
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Top"
+                Header="DeleteFile()|[Obsolete: Not recommended: Use asnyc method]  Deletes a file"
+                Template="{StaticResource CardExpander}">
+                <Expander.Tag>
+                    <ContentControl Tag="path|[Type: string]  The path to the file to delete to" Template="{StaticResource SettingsCard}">
+                        <TextBox
+                            MinWidth="400"
+                            MaxWidth="500"
+                            Text="{x:Bind viewModel.Path, Mode=TwoWay}" />
+                    </ContentControl>
+                </Expander.Tag>
+
+                <Button Command="{x:Bind viewModel.DeleteFileCommand}" Content="Test Method" />
+            </Expander>
+
+            <Expander
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Top"
+                Header="DeleteFileAsync()|Deletes a file asynchronously"
+                Template="{StaticResource CardExpander}">
+                <Expander.Tag>
+                    <StackPanel Spacing="8">
+                        <ContentControl Tag="path|[Type: string]  The path to the file to delete to" Template="{StaticResource SettingsCard}">
+                            <TextBox
+                                MinWidth="400"
+                                MaxWidth="500"
+                                Text="{x:Bind viewModel.Path, Mode=TwoWay}" />
+                        </ContentControl>
+
+                        <ContentControl Tag="timeout|[Type: int]  The time in ms until the operation times out" Template="{StaticResource SettingsCard}">
+                            <NumberBox SpinButtonPlacementMode="Compact" Value="{x:Bind viewModel.Timeout, Mode=TwoWay}" />
+                        </ContentControl>
+                    </StackPanel>
+                </Expander.Tag>
+
+                <StackPanel Orientation="Horizontal" Spacing="8">
+                    <Button Command="{x:Bind viewModel.DeleteFileACommand}" Content="Test Method" />
+                    <Button
+                        Command="{x:Bind viewModel.DeleteFileACancelCommand}"
+                        Content="Cancel Method"
+                        ToolTipService.ToolTip="The token to cancel the operation" />
+                </StackPanel>
+            </Expander>
+
+            <Expander
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Top"
+                Header="WaitForFileLockAsync()|[Returns: bool]  Waits for a file lock a asynchronously"
+                Template="{StaticResource CardExpander}">
+                <Expander.Tag>
+                    <StackPanel Spacing="8">
+                        <ContentControl Tag="path|[Type: string]  The path to the file to check" Template="{StaticResource SettingsCard}">
+                            <TextBox
+                                MinWidth="400"
+                                MaxWidth="500"
+                                Text="{x:Bind viewModel.Path, Mode=TwoWay}" />
+                        </ContentControl>
+
+                        <ContentControl Tag="timeout|[Type: int]  The time in ms until the operation times out" Template="{StaticResource SettingsCard}">
+                            <NumberBox SpinButtonPlacementMode="Compact" Value="{x:Bind viewModel.Timeout, Mode=TwoWay}" />
+                        </ContentControl>
+                    </StackPanel>
+                </Expander.Tag>
+
+                <StackPanel Orientation="Horizontal" Spacing="8">
+                    <ProgressRing IsActive="{x:Bind viewModel.WaitForFileLockACommand.IsRunning, Mode=OneWay}" />
+                    <Button Command="{x:Bind viewModel.WaitForFileLockACommand}" Content="Test Method" />
+                    <Button
+                        Command="{x:Bind viewModel.WaitForFileLockACancelCommand}"
+                        Content="Cancel Method"
+                        ToolTipService.ToolTip="The token to cancel the operation" />
+                </StackPanel>
+            </Expander>
+
+            <Expander
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Top"
+                Header="ReadAsTextAsync()|[Returns: string]  Reads a file as text asynchronously"
+                Template="{StaticResource CardExpander}">
+                <Expander.Tag>
+                    <ContentControl Tag="path|[Type: string]  The path to read as text" Template="{StaticResource SettingsCard}">
+                        <TextBox
+                            MinWidth="400"
+                            MaxWidth="500"
+                            Text="{x:Bind viewModel.Path, Mode=TwoWay}" />
+                    </ContentControl>
+                </Expander.Tag>
+
+                <StackPanel Orientation="Horizontal" Spacing="8">
+                    <Button Command="{x:Bind viewModel.ReadAsTextACommand}" Content="Test Method" />
+                    <Button
+                        Command="{x:Bind viewModel.ReadAsTextACancelCommand}"
+                        Content="Cancel Method"
+                        ToolTipService.ToolTip="The token to cancel the operation" />
+                </StackPanel>
+            </Expander>
+
+            <Expander
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Top"
+                Header="SaveAsTextAsync()|Saves a string to a file as text asynchronously"
+                Template="{StaticResource CardExpander}">
+                <Expander.Tag>
+                    <StackPanel Spacing="8">
+                        <ContentControl Tag="path|[Type: string]  The path to the file the content should get written to" Template="{StaticResource SettingsCard}">
+                            <TextBox
+                                MinWidth="400"
+                                MaxWidth="500"
+                                Text="{x:Bind viewModel.Path, Mode=TwoWay}" />
+                        </ContentControl>
+
+                        <ContentControl Tag="content|[Type: string]  The content which will be written to the file" Template="{StaticResource SettingsCard}">
+                            <TextBox
+                                MinWidth="400"
+                                MaxWidth="500"
+                                Text="{x:Bind viewModel.Content, Mode=TwoWay}" />
+                        </ContentControl>
+
+                        <ContentControl Tag="overwrite|[Type: bool]  The boolean wether the original file should get overwritten if it exists" Template="{StaticResource SettingsCard}">
+                            <ToggleSwitch IsOn="{x:Bind viewModel.Overwrite, Mode=TwoWay}" />
+                        </ContentControl>
+                    </StackPanel>
+                </Expander.Tag>
+
+                <StackPanel Orientation="Horizontal" Spacing="8">
+                    <Button Command="{x:Bind viewModel.SaveAsTextACommand}" Content="Test Method" />
+                    <Button
+                        Command="{x:Bind viewModel.SaveAsTextACancelCommand}"
+                        Content="Cancel Method"
+                        ToolTipService.ToolTip="The token to cancel the operation" />
+                </StackPanel>
+            </Expander>
+
+            <Expander
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Top"
+                Header="DirectoryExists()|[Returns: bool]  Checks wether a directory exists"
+                Template="{StaticResource CardExpander}">
+                <Expander.Tag>
+                    <ContentControl Tag="path|[Type: string]  The path to the directory to check" Template="{StaticResource SettingsCard}">
+                        <TextBox
+                            MinWidth="400"
+                            MaxWidth="500"
+                            Text="{x:Bind viewModel.Path, Mode=TwoWay}" />
+                    </ContentControl>
+                </Expander.Tag>
+
+                <Button Command="{x:Bind viewModel.DirectoryExistsCommand}" Content="Test Method" />
+            </Expander>
+
+            <Expander
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Top"
+                Header="DirectoryWritable()|[Returns: bool]  Checks wether a directory is writeable"
+                Template="{StaticResource CardExpander}">
+                <Expander.Tag>
+                    <ContentControl Tag="path|[Type: string]  The path to the directory to check" Template="{StaticResource SettingsCard}">
+                        <TextBox
+                            MinWidth="400"
+                            MaxWidth="500"
+                            Text="{x:Bind viewModel.Path, Mode=TwoWay}" />
+                    </ContentControl>
+                </Expander.Tag>
+
+                <Button Command="{x:Bind viewModel.DirectoryWritableCommand}" Content="Test Method" />
+            </Expander>
+
+            <Expander
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Top"
+                Header="CreateDirectory()|Creates a new directory"
+                Template="{StaticResource CardExpander}">
+                <Expander.Tag>
+                    <ContentControl Tag="path|[Type: string]  The path to the directory to create to" Template="{StaticResource SettingsCard}">
+                        <TextBox
+                            MinWidth="400"
+                            MaxWidth="500"
+                            Text="{x:Bind viewModel.Path, Mode=TwoWay}" />
+                    </ContentControl>
+                </Expander.Tag>
+
+                <Button Command="{x:Bind viewModel.CreateDirectoryCommand}" Content="Test Method" />
+            </Expander>
+        </StackPanel>
+    </ScrollViewer>
+</Page>
