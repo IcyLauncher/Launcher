@@ -289,7 +289,8 @@
                                 <TextBox
                                     Name="WindowHandler_IconPath"
                                     Width="400"
-                                    PlaceholderText="Path..." />
+                                    PlaceholderText="Path..."
+                                    Text="ms-appx:///Assets/icon.ico" />
                             </ContentControl>
                         </Expander.Tag>
 
@@ -753,10 +754,208 @@
         <TabViewItem
             Header="ImagingUtility"
             IsClosable="False"
-            IsEnabled="False"
             ToolTipService.ToolTip="Utility to render and image advanced UI">
             <ScrollViewer VerticalAlignment="Stretch">
-                <StackPanel Padding="0,0,0,12" Spacing="8" />
+                <StackPanel Padding="0,0,0,12" Spacing="8">
+                    <Grid>
+                        <Rectangle
+                            Name="ImagingUtility_CompositionVisual"
+                            Height="200"
+                            HorizontalAlignment="Stretch"
+                            Fill="#50000000" />
+                        <TextBlock
+                            Margin="12,0"
+                            HorizontalAlignment="Right"
+                            TextAlignment="Right">
+                            <Run Text="{x:Bind viewModel.ImagingUtility_compositorText, Mode=OneWay}" />
+                            <Run Text="{x:Bind viewModel.ImagingUtility_containerVisualText, Mode=OneWay}" />
+                            <Run Text="{x:Bind viewModel.ImagingUtility_spriteVisualText, Mode=OneWay}" />
+                            <Run Text="{x:Bind viewModel.ImagingUtility_spriteVisualBrushText, Mode=OneWay}" />
+                        </TextBlock>
+                    </Grid>
+
+                    <Expander
+                        Margin="0,12,0,0"
+                        HorizontalAlignment="Stretch"
+                        VerticalAlignment="Top"
+                        Header="InitializeUIElement()|Initializes the given UIElement"
+                        Template="{StaticResource CardExpander}">
+                        <Expander.Tag>
+                            <StackPanel Spacing="8">
+                                <ContentControl Tag="element|[Type: UIElement]  The UIElement which should get initialized" Template="{StaticResource SettingsCard}">
+                                    <Button Content="Set UIElement" IsEnabled="False" />
+                                </ContentControl>
+                                <ContentControl Tag="compositor|[out] [Type: Compositor?]  The returned compositor of the UIElement" Template="{StaticResource SettingsCard}" />
+                                <ContentControl Tag="container|[out] [Type: ContainerVisual?]  The returned container visual of the UIElement" Template="{StaticResource SettingsCard}" />
+                            </StackPanel>
+                        </Expander.Tag>
+
+                        <Button
+                            Command="{x:Bind viewModel.ImagingUtility_InitializeUIElementCommand}"
+                            CommandParameter="{Binding ElementName=ImagingUtility_CompositionVisual}"
+                            Content="Test Method" />
+                    </Expander>
+
+                    <Expander
+                        HorizontalAlignment="Stretch"
+                        VerticalAlignment="Top"
+                        Header="CreateGradientBrush()|[Returns: CompositionLinearGradientBrush?]  Creates a new gradient brush"
+                        Template="{StaticResource CardExpander}">
+                        <Expander.Tag>
+                            <StackPanel Spacing="8">
+                                <ContentControl Tag="compositor|[Type: Compositor]  The compositor which is used to create this composition object" Template="{StaticResource SettingsCard}">
+                                    <Button Content="Set Compositor" IsEnabled="False" />
+                                </ContentControl>
+                                <ContentControl Tag="startPoint|[Type: Vector2]  The start point of the gradient" Template="{StaticResource SettingsCard}">
+                                    <StackPanel Orientation="Horizontal" Spacing="8">
+                                        <NumberBox SpinButtonPlacementMode="Compact" Value="{x:Bind viewModel.ImagingUtility_startPointX, Mode=TwoWay}" />
+                                        <NumberBox SpinButtonPlacementMode="Compact" Value="{x:Bind viewModel.ImagingUtility_startPointY, Mode=TwoWay}" />
+                                    </StackPanel>
+                                </ContentControl>
+                                <ContentControl Tag="endPoint|[Type: Vector2]  The end point of the gradient" Template="{StaticResource SettingsCard}">
+                                    <StackPanel Orientation="Horizontal" Spacing="8">
+                                        <NumberBox SpinButtonPlacementMode="Compact" Value="{x:Bind viewModel.ImagingUtility_endPointX, Mode=TwoWay}" />
+                                        <NumberBox SpinButtonPlacementMode="Compact" Value="{x:Bind viewModel.ImagingUtility_endPointY, Mode=TwoWay}" />
+                                    </StackPanel>
+                                </ContentControl>
+                                <ContentControl Tag="gradientStops|[Type: (float offset, Color color)[]]  The stop collection of the gradient" Template="{StaticResource SettingsCard}">
+                                    <ComboBox PlaceholderText="GradientStops">
+                                        <ComboBoxItem Content="Offset: 0.0f, Color: #ff0000" IsEnabled="False" />
+                                        <ComboBoxItem Content="Offset: 0.5f, Color: #00ff00" IsEnabled="False" />
+                                        <ComboBoxItem Content="Offset: 1.0f, Color: #0000ff" IsEnabled="False" />
+                                    </ComboBox>
+                                </ContentControl>
+                            </StackPanel>
+                        </Expander.Tag>
+
+                        <Button Command="{x:Bind viewModel.ImagingUtility_CreateGradientBrushCommand}" Content="Test Method" />
+                    </Expander>
+
+                    <Expander
+                        HorizontalAlignment="Stretch"
+                        VerticalAlignment="Top"
+                        Header="CreateMaskBrush()|[Returns: CompositionMaskBrush?]  Creates a new opacity mask brush"
+                        Template="{StaticResource CardExpander}">
+                        <Expander.Tag>
+                            <StackPanel Spacing="8">
+                                <ContentControl Tag="compositor|[Type: Compositor]  The compositor which is used to create this composition object" Template="{StaticResource SettingsCard}">
+                                    <Button Content="Set Compositor" IsEnabled="False" />
+                                </ContentControl>
+                                <ContentControl Tag="source|[Type: CompositionBrush?]  The brush which will be used as the source of the new brush" Template="{StaticResource SettingsCard}">
+                                    <ColorPicker
+                                        Margin="0,0,-117,0"
+                                        Template="{StaticResource ColorPickerButton}"
+                                        Color="{x:Bind viewModel.ImagingUtility_maskColor, Mode=TwoWay}" />
+                                </ContentControl>
+                                <ContentControl Tag="mask|[Type: CompositionBrush?]  The brush which will be uses as the mask" Template="{StaticResource SettingsCard}">
+                                    <ComboBox PlaceholderText="GradientStops">
+                                        <ComboBoxItem Content="Offset: 0.0f, Color: #ffffffff" IsEnabled="False" />
+                                        <ComboBoxItem Content="Offset: 1.0f, Color: #00ffffff" IsEnabled="False" />
+                                    </ComboBox>
+                                </ContentControl>
+                            </StackPanel>
+                        </Expander.Tag>
+
+                        <Button Command="{x:Bind viewModel.ImagingUtility_CreateMaskBrushCommand}" Content="Test Method" />
+                    </Expander>
+
+                    <Expander
+                        HorizontalAlignment="Stretch"
+                        VerticalAlignment="Top"
+                        Header="CreateImageBrush()|[Returns: CompositionSurfaceBrush?]  Creates a new surface brush with a image"
+                        Template="{StaticResource CardExpander}">
+                        <Expander.Tag>
+                            <StackPanel Spacing="8">
+                                <ContentControl Tag="compositor|[Type: Compositor]  The compositor which is used to create this composition object" Template="{StaticResource SettingsCard}">
+                                    <Button Content="Set Compositor" IsEnabled="False" />
+                                </ContentControl>
+                                <ContentControl Tag="source|[Type: Uri]  The path to the image which will be used" Template="{StaticResource SettingsCard}">
+                                    <TextBox
+                                        Name="ImagingUtility_UriSource"
+                                        Width="400"
+                                        PlaceholderText="Path..."
+                                        Text="ms-appx:///Assets/NoImage.png" />
+                                </ContentControl>
+                                <ContentControl Tag="stretch|[Type: CompositionStretch]  The stretch mode which will be aplied to the brush" Template="{StaticResource SettingsCard}">
+                                    <ComboBox
+                                        Width="200"
+                                        PlaceholderText="Backdrop..."
+                                        SelectedIndex="{x:Bind viewModel.ImagingUtility_stretch, Mode=TwoWay, Converter={StaticResource EnumIntConverter}}">
+                                        <ComboBoxItem Content="None" />
+                                        <ComboBoxItem Content="Fill" />
+                                        <ComboBoxItem Content="Uniform" />
+                                        <ComboBoxItem Content="UniformToFill" />
+                                    </ComboBox>
+                                </ContentControl>
+                                <ContentControl Tag="horizontalAlignmentRatio|[optional: 0.0f] [Type: float]  The horizontal alignment which will be aplied to the brush" Template="{StaticResource SettingsCard}">
+                                    <NumberBox SpinButtonPlacementMode="Compact" Value="{x:Bind viewModel.ImagingUtility_horizontalAlignment, Mode=TwoWay}" />
+                                </ContentControl>
+                                <ContentControl Tag="verticalAlignmentRatio|[optional: 0.5f] [Type: float]  The vertical alignment which will be applied to the brush" Template="{StaticResource SettingsCard}">
+                                    <NumberBox SpinButtonPlacementMode="Compact" Value="{x:Bind viewModel.ImagingUtility_verticalAlignment, Mode=TwoWay}" />
+                                </ContentControl>
+                            </StackPanel>
+                        </Expander.Tag>
+
+                        <Button
+                            Command="{x:Bind viewModel.ImagingUtility_CreateImageBrushCommand}"
+                            CommandParameter="{Binding Text, ElementName=ImagingUtility_UriSource}"
+                            Content="Test Method" />
+                    </Expander>
+
+                    <Expander
+                        HorizontalAlignment="Stretch"
+                        VerticalAlignment="Top"
+                        Header="CreateColorBrush()|[Returns: CompositionColorBrush?]  Creates a new color brush"
+                        Template="{StaticResource CardExpander}">
+                        <Expander.Tag>
+                            <StackPanel Spacing="8">
+                                <ContentControl Tag="compositor|[Type: Compositor]  The compositor which is used to create this composition object" Template="{StaticResource SettingsCard}">
+                                    <Button Content="Set Compositor" IsEnabled="False" />
+                                </ContentControl>
+                                <ContentControl Tag="color|[Type: Color]  The color which will be aplied as the color brush" Template="{StaticResource SettingsCard}">
+                                    <ColorPicker
+                                        Margin="0,0,-117,0"
+                                        Template="{StaticResource ColorPickerButton}"
+                                        Color="{x:Bind viewModel.ImagingUtility_color, Mode=TwoWay}" />
+                                </ContentControl>
+                            </StackPanel>
+                        </Expander.Tag>
+
+                        <Button Command="{x:Bind viewModel.ImagingUtility_CreateColorBrushCommand}" Content="Test Method" />
+                    </Expander>
+
+                    <Expander
+                        HorizontalAlignment="Stretch"
+                        VerticalAlignment="Top"
+                        Header="CreateSpriteVisual()|[Returns: SpriteVisual?]  Creates a new sprite visul"
+                        Template="{StaticResource CardExpander}">
+                        <Expander.Tag>
+                            <StackPanel Spacing="8">
+                                <ContentControl Tag="compositor|[Type: Compositor]  The compositor which is used to create this sprite visual" Template="{StaticResource SettingsCard}">
+                                    <Button Content="Set Compositor" IsEnabled="False" />
+                                </ContentControl>
+                                <ContentControl Tag="size|[Type: Vector2]  The size which the visual should have" Template="{StaticResource SettingsCard}">
+                                    <StackPanel Orientation="Horizontal" Spacing="8">
+                                        <NumberBox SpinButtonPlacementMode="Compact" Value="{x:Bind viewModel.ImagingUtility_sizeWidth, Mode=TwoWay}" />
+                                        <NumberBox SpinButtonPlacementMode="Compact" Value="{x:Bind viewModel.ImagingUtility_sizeHeight, Mode=TwoWay}" />
+                                    </StackPanel>
+                                </ContentControl>
+                                <ContentControl Tag="brush|[Type: CompositionBrush?]  The brush which will be aplied as the visual brush" Template="{StaticResource SettingsCard}">
+                                    <Button Content="Set CompositonBrush" IsEnabled="False" />
+                                </ContentControl>
+                                <ContentControl Tag="offset|[optional: default] [Type: Vector2]  The offset which the visual should have" Template="{StaticResource SettingsCard}">
+                                    <StackPanel Orientation="Horizontal" Spacing="8">
+                                        <NumberBox SpinButtonPlacementMode="Compact" Value="{x:Bind viewModel.ImagingUtility_offsetX, Mode=TwoWay}" />
+                                        <NumberBox SpinButtonPlacementMode="Compact" Value="{x:Bind viewModel.ImagingUtility_offsetY, Mode=TwoWay}" />
+                                        <NumberBox SpinButtonPlacementMode="Compact" Value="{x:Bind viewModel.ImagingUtility_offsetZ, Mode=TwoWay}" />
+                                    </StackPanel>
+                                </ContentControl>
+                            </StackPanel>
+                        </Expander.Tag>
+
+                        <Button Command="{x:Bind viewModel.ImagingUtility_CreateSpriteVisualCommand}" Content="Test Method" />
+                    </Expander>
+                </StackPanel>
             </ScrollViewer>
         </TabViewItem>
 

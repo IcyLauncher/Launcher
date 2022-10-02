@@ -12,6 +12,7 @@ public partial class DeveloperSettingsViewModel : ObservableObject
     readonly IBackdropHandler vibrancyBackdropHandler;
     readonly BackdropHandler backdropHandler;
     readonly IConverter converter;
+    readonly ImagingUtility imagingUtility;
     readonly IFileSystem fileSystem;
     readonly INavigation navigation;
     readonly IMessage message;
@@ -30,6 +31,7 @@ public partial class DeveloperSettingsViewModel : ObservableObject
         VibrancyBackdropHandler vibrancyBackdropHandler,
         BackdropHandler backdropHandler,
         IConverter converter,
+        ImagingUtility imagingUtility,
         IFileSystem fileSystem,
         INavigation navigation,
         IMessage message)
@@ -44,6 +46,7 @@ public partial class DeveloperSettingsViewModel : ObservableObject
         this.vibrancyBackdropHandler = vibrancyBackdropHandler;
         this.backdropHandler = backdropHandler;
         this.converter = converter;
+        this.imagingUtility = imagingUtility;
         this.fileSystem = fileSystem;
         this.navigation = navigation;
         this.message = message;

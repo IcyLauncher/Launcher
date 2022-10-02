@@ -118,7 +118,7 @@ public class ImagingUtility
     /// <param name="compositor">The compositor which is used to create this composition object</param>
     /// <param name="source">The path to the image which will be used</param>
     /// <param name="stretch">The stretch mode which will be aplied to the brush</param>
-    /// <param name="horizontalAlignmentRatio">the horizontal alignment which will be aplied to the brush</param>
+    /// <param name="horizontalAlignmentRatio">The horizontal alignment which will be aplied to the brush</param>
     /// <param name="verticalAlignmentRatio">The vertical alignment which will be applied to the brush</param>
     /// <returns>A new compostion brush which will have the image applied</returns>
     public CompositionSurfaceBrush? CreateImageBrush(
@@ -169,6 +169,14 @@ public class ImagingUtility
         }
     }
 
+    /// <summary>
+    /// Creates a new sprite visul
+    /// </summary>
+    /// <param name="compositor">The compositor which is used to create this sprite visual</param>
+    /// <param name="size">The size which the visual should have</param>
+    /// <param name="brush">The brush which will be aplied as the visual brush</param>
+    /// <param name="offset">The offset which the visual should have</param>
+    /// <returns>A new sprite visual which will have the size, brush and offset applied</returns>
     public SpriteVisual? CreateSpriteVisual(
         Compositor compositor,
         Vector2 size,
