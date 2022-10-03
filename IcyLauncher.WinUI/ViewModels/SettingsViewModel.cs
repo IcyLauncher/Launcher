@@ -83,11 +83,6 @@ public partial class SettingsViewModel : ObservableObject
     }
 
 
-    public void OnPageLoaded(object _, RoutedEventArgs _1)
-    {
-    }
-
-
     int presses = 0;
 
     [RelayCommand(AllowConcurrentExecutions = true)]

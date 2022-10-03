@@ -69,7 +69,7 @@ public partial class DeveloperSettingsViewModel : ObservableObject
                 Header = "Home",
                 IconSource = new FontIconSource() { Glyph = "\uE70F", FontFamily = new("Assets/FluentSystemIcons-Regular.ttf#FluentSystemIcons-Regular") },
                 IsClosable = false,
-                Content = new HomeView(new(Configuration, logger, message))
+                Content = new HomeView(new(Configuration, logger, message, ShowAddButtonFlyoutCommand))
             }
         };
     }
@@ -109,6 +109,7 @@ public partial class DeveloperSettingsViewModel : ObservableObject
         if (flyout is not null)
             flyout.ShowAt(addButton);
     }
+
 
     [RelayCommand]
     void AddTabViewItem(MenuFlyoutItem menuItem)

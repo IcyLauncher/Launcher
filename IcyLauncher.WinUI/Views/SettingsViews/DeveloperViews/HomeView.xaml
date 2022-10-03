@@ -9,7 +9,50 @@
         <EntranceThemeTransition />
     </Page.Transitions>
 
-    <Grid>
-        <TextBlock Text="Sex" />
-    </Grid>
+    <ScrollViewer>
+        <StackPanel Spacing="12">
+            <TextBlock Style="{StaticResource Header}" Text="Welcome to the IcyLauncher Developer-Portal." />
+
+            <TextBlock Style="{StaticResource Subpoint}" TextWrapping="WrapWholeWords">
+                This is a place to debug all services and functions of IcyLauncher.<LineBreak />
+                If you are not a developer you probably shouldnt be here! Playing around here can be dangerous and ruin your experience with IcyLauncher.<LineBreak />
+                Most of the stuff here wont break your program and everything 'should' be back to normal after restarting.<LineBreak />
+                But remember, dont press any buttons you dont know what they do.<LineBreak />
+                <LineBreak />
+                You can create a new test service by pressing the '+' in the tab bar or the 'Create Test Service' button bellow this text.<LineBreak />
+                You can always close a test service if you are done debugging. Just press the 'X' next to the name in the tab header.</TextBlock>
+
+            <StackPanel
+                Margin="0,8,0,0"
+                Padding="12"
+                HorizontalAlignment="Left"
+                Background="{ThemeResource ControlPrimary}"
+                CornerRadius="8"
+                Orientation="Horizontal"
+                Spacing="8">
+                <Button
+                    Command="{x:Bind viewModel.ShowAddButtonFlyoutCommand}"
+                    Content="Create Test Service"
+                    ToolTipService.ToolTip="Create a new test service" />
+                <Button
+                    Command="{x:Bind viewModel.OpenGitHubCommand}"
+                    Content="Open GitHub"
+                    ToolTipService.ToolTip="Opens the GitHub repo in the default browser" />
+                <Button
+                    Command="{x:Bind viewModel.ForceGCCommand}"
+                    Content="Force GC"
+                    ToolTipService.ToolTip="Force the Garbage Collecter to run and clean the entire application memory" />
+                <Button
+                    Command="{x:Bind viewModel.GenerateRandomCatCommand}"
+                    CommandParameter="{Binding ElementName=CatImage}"
+                    Content="cat (meow)"
+                    ToolTipService.ToolTip="Generates a new random cat image" />
+            </StackPanel>
+
+            <Image
+                Name="CatImage"
+                Margin="0,0,0,12"
+                Source="https://cataas.com/cat/says/IcyLauncher" />
+        </StackPanel>
+    </ScrollViewer>
 </Page>
