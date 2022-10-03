@@ -1,6 +1,6 @@
 ﻿using Windows.Graphics;
 
-namespace IcyLauncher.WinUI.ViewModels;
+namespace IcyLauncher.WinUI.ViewModels.SettingsViewModels.DeveloperViewModels;
 
 public partial class WindowHandlerViewModel : ObservableObject
 {

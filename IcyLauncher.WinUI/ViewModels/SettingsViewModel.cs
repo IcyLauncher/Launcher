@@ -98,7 +98,7 @@ public partial class SettingsViewModel : ObservableObject
             presses = 0;
 
             if (!Configuration.Developer.IsWarningEnabled || await message.ShowAsync("This might be dangerous!", "Playing around here can be dangerous and ruin your experience with IcyLauncher. It is not recommended to go here.\nDo you really want to continue?", closeButton: "Cancel", primaryButton: "Yes, im a pro") == ContentDialogResult.Primary)
-                navigation.SetCurrentPage("Views.DeveloperSettingsView".AsType());
+                navigation.SetCurrentPage("Views.SettingsViews.DeveloperSettingsView".AsType());
 
             return;
         }

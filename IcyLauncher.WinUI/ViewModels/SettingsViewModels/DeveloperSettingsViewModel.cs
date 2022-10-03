@@ -3,7 +3,7 @@ using Microsoft.UI.Xaml.Controls.Primitives;
 using Microsoft.UI.Xaml.Media;
 using System.Collections.ObjectModel;
 
-namespace IcyLauncher.WinUI.ViewModels;
+namespace IcyLauncher.WinUI.ViewModels.SettingsViewModels;
 
 public partial class DeveloperSettingsViewModel : ObservableObject
 {
@@ -60,6 +60,18 @@ public partial class DeveloperSettingsViewModel : ObservableObject
         this.message = message;
 
         Configuration = configuration.Value;
+
+
+        Tabs = new()
+        {
+            new TabViewItem()
+            {
+                Header = "Home",
+                IconSource = new FontIconSource() { Glyph = "\uE70F", FontFamily = new("Assets/FluentSystemIcons-Regular.ttf#FluentSystemIcons-Regular") },
+                IsClosable = false,
+                Content = new HomeView(new(Configuration, logger, message))
+            }
+        };
     }
 
 
@@ -82,16 +94,7 @@ public partial class DeveloperSettingsViewModel : ObservableObject
     }
 
 
-    public ObservableCollection<TabViewItem> Tabs = new()
-    {
-        new TabViewItem()
-        {
-            Header = "Home",
-            IconSource = new FontIconSource() { Glyph = "\uE70F", FontFamily = new("Assets/FluentSystemIcons-Regular.ttf#FluentSystemIcons-Regular") },
-            IsClosable = false,
-            Content = new HomeView()
-        }
-    };
+    public ObservableCollection<TabViewItem> Tabs;
 
     [ObservableProperty]
     int selectedIndex;

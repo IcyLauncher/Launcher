@@ -1,7 +1,7 @@
 ﻿using Microsoft.UI;
 using Newtonsoft.Json;
 
-namespace IcyLauncher.WinUI.ViewModels;
+namespace IcyLauncher.WinUI.ViewModels.SettingsViewModels.DeveloperViewModels;
 
 public partial class IConverterViewModel : ObservableObject
 {

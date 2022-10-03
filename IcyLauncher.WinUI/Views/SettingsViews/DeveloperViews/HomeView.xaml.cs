@@ -2,11 +2,11 @@
 
 public sealed partial class HomeView : Page
 {
-    //public readonly AcrylicBackdropHandlerViewModel viewModel;
+    public readonly ViewModels.SettingsViewModels.DeveloperViewModels.HomeViewModel viewModel;
 
-    public HomeView()
+    public HomeView(ViewModels.SettingsViewModels.DeveloperViewModels.HomeViewModel viewModel)
     {
-        //this.viewModel = viewModel;
+        this.viewModel = viewModel;
 
         InitializeComponent();
     }

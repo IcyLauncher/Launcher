@@ -1,7 +1,7 @@
 ﻿using IcyLauncher.Xaml.Converters;
 using Microsoft.UI.Xaml.Data;
 
-namespace IcyLauncher.WinUI.ViewModels;
+namespace IcyLauncher.WinUI.ViewModels.SettingsViewModels.DeveloperViewModels;
 
 public partial class ILoggerViewModel : ObservableObject
 {

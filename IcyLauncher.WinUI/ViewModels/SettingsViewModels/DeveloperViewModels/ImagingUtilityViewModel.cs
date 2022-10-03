@@ -3,7 +3,7 @@ using Microsoft.UI.Composition;
 using System.Numerics;
 using Windows.UI;
 
-namespace IcyLauncher.WinUI.ViewModels;
+namespace IcyLauncher.WinUI.ViewModels.SettingsViewModels.DeveloperViewModels;
 
 public partial class ImagingUtilityViewModel : ObservableObject
 {

@@ -1,4 +1,6 @@
-﻿namespace IcyLauncher.WinUI.Views;
+﻿using IcyLauncher.WinUI.ViewModels.SettingsViewModels;
+
+namespace IcyLauncher.WinUI.Views.SettingsViews;
 
 public sealed partial class DeveloperSettingsView : Page
 {

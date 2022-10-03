@@ -1,4 +1,5 @@
-﻿using Microsoft.UI.Xaml.Media;
+﻿using IcyLauncher.WinUI.ViewModels.SettingsViewModels;
+using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Shapes;
 
 namespace IcyLauncher.WinUI.DataTemplates;

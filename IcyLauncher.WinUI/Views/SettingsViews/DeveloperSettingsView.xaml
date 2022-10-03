@@ -1,16 +1,16 @@
 ﻿<Page
-    x:Class="IcyLauncher.WinUI.Views.DeveloperSettingsView"
+    x:Class="IcyLauncher.WinUI.Views.SettingsViews.DeveloperSettingsView"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:ex="using:CommunityToolkit.WinUI.UI"
-    xmlns:ext="using:IcyLauncher.Helpers.Extentions"
     xmlns:hlprs="using:IcyLauncher.Helpers"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:md="using:CommunityToolkit.WinUI.UI.Media"
     xmlns:mdls="using:IcyLauncher.Data.Models"
     xmlns:media="using:CommunityToolkit.WinUI.UI.Media"
     xmlns:xmle="using:IcyLauncher.Xaml.Elements"
+    xmlns:xtntns="using:IcyLauncher.Helpers.Extentions"
     Background="Transparent"
     Loaded="{x:Bind viewModel.OnPageLoaded}"
     NavigationCacheMode="Disabled"
@@ -41,98 +41,98 @@
                 <MenuFlyoutItem
                     Command="{x:Bind viewModel.AddTabViewItemCommand}"
                     CommandParameter="{Binding RelativeSource={RelativeSource Self}}"
-                    Icon="{x:Bind ext:StringExtentions.AsIcon('&#xEE6F;')}"
-                    Text="ILogger&lt;T&gt;"
-                    ToolTipService.ToolTip="Service to log everything" />
+                    Icon="{x:Bind xtntns:StringExtentions.AsIcon('&#xEE6F;')}"
+                    ToolTipService.ToolTip="Service to log everything"
+                    Text="ILogger&lt;T&gt;" />
                 <MenuFlyoutItem
                     Command="{x:Bind viewModel.AddTabViewItemCommand}"
                     CommandParameter="{Binding RelativeSource={RelativeSource Self}}"
-                    Icon="{x:Bind ext:StringExtentions.AsIcon('&#xEA44;')}"
-                    Text="ConfigurationManager"
-                    ToolTipService.ToolTip="Manager of the current configuration" />
+                    Icon="{x:Bind xtntns:StringExtentions.AsIcon('&#xEA44;')}"
+                    ToolTipService.ToolTip="Manager of the current configuration"
+                    Text="ConfigurationManager" />
                 <MenuFlyoutItem
                     Command="{x:Bind viewModel.AddTabViewItemCommand}"
                     CommandParameter="{Binding RelativeSource={RelativeSource Self}}"
-                    Icon="{x:Bind ext:StringExtentions.AsIcon('&#xF2F5;')}"
-                    Text="ThemeManager"
-                    ToolTipService.ToolTip="Manager of the current therme" />
+                    Icon="{x:Bind xtntns:StringExtentions.AsIcon('&#xF2F5;')}"
+                    ToolTipService.ToolTip="Manager of the current therme"
+                    Text="ThemeManager" />
                 <MenuFlyoutItem
-                    Icon="{x:Bind ext:StringExtentions.AsIcon('&#xEE7D;')}"
+                    Icon="{x:Bind xtntns:StringExtentions.AsIcon('&#xEE7D;')}"
                     IsEnabled="False"
-                    Text="AppStartupHandler"
-                    ToolTipService.ToolTip="Handler which configures the entire application on startup" />
+                    ToolTipService.ToolTip="Handler which configures the entire application on startup"
+                    Text="AppStartupHandler" />
                 <MenuFlyoutItem
                     Command="{x:Bind viewModel.AddTabViewItemCommand}"
                     CommandParameter="{Binding RelativeSource={RelativeSource Self}}"
-                    Icon="{x:Bind ext:StringExtentions.AsIcon('&#xE8C5;')}"
-                    Text="WindowHandler"
-                    ToolTipService.ToolTip="Handler to configure the current main window" />
+                    Icon="{x:Bind xtntns:StringExtentions.AsIcon('&#xE8C5;')}"
+                    ToolTipService.ToolTip="Handler to configure the current main window"
+                    Text="WindowHandler" />
                 <MenuFlyoutItem
                     Command="{x:Bind viewModel.AddTabViewItemCommand}"
                     CommandParameter="{Binding RelativeSource={RelativeSource Self}}"
-                    Icon="{x:Bind ext:StringExtentions.AsIcon('&#xEA3B;')}"
-                    Text="UIElementReciever"
-                    ToolTipService.ToolTip="Reciever and caster of all UIElements of the current main window" />
+                    Icon="{x:Bind xtntns:StringExtentions.AsIcon('&#xEA3B;')}"
+                    ToolTipService.ToolTip="Reciever and caster of all UIElements of the current main window"
+                    Text="UIElementReciever" />
                 <MenuFlyoutItem
                     Command="{x:Bind viewModel.AddTabViewItemCommand}"
                     CommandParameter="{Binding RelativeSource={RelativeSource Self}}"
-                    Icon="{x:Bind ext:StringExtentions.AsIcon('&#xF8F9;')}"
-                    Text="MicaBackdropHandler"
-                    ToolTipService.ToolTip="Handler to confgure a mica backdrop effect on the current main window (Win11+)" />
+                    Icon="{x:Bind xtntns:StringExtentions.AsIcon('&#xF8F9;')}"
+                    ToolTipService.ToolTip="Handler to confgure a mica backdrop effect on the current main window (Win11+)"
+                    Text="MicaBackdropHandler" />
                 <MenuFlyoutItem
                     Command="{x:Bind viewModel.AddTabViewItemCommand}"
                     CommandParameter="{Binding RelativeSource={RelativeSource Self}}"
-                    Icon="{x:Bind ext:StringExtentions.AsIcon('&#xF8FA;')}"
-                    Text="AcrylicBackdropHandler"
-                    ToolTipService.ToolTip="Handler to confgure an acrylic backdrop effect on the current main window (Win10+)" />
+                    Icon="{x:Bind xtntns:StringExtentions.AsIcon('&#xF8FA;')}"
+                    ToolTipService.ToolTip="Handler to confgure an acrylic backdrop effect on the current main window (Win10+)"
+                    Text="AcrylicBackdropHandler" />
                 <MenuFlyoutItem
                     Command="{x:Bind viewModel.AddTabViewItemCommand}"
                     CommandParameter="{Binding RelativeSource={RelativeSource Self}}"
-                    Icon="{x:Bind ext:StringExtentions.AsIcon('&#xF8FB;')}"
-                    Text="VibrancyBackdropHandler"
-                    ToolTipService.ToolTip="Handler to confgure a vibrancy backdrop effect on the current main window (Win11+)" />
+                    Icon="{x:Bind xtntns:StringExtentions.AsIcon('&#xF8FB;')}"
+                    ToolTipService.ToolTip="Handler to confgure a vibrancy backdrop effect on the current main window (Win11+)"
+                    Text="VibrancyBackdropHandler" />
                 <MenuFlyoutItem
                     Command="{x:Bind viewModel.AddTabViewItemCommand}"
                     CommandParameter="{Binding RelativeSource={RelativeSource Self}}"
-                    Icon="{x:Bind ext:StringExtentions.AsIcon('&#xF2F7;')}"
-                    Text="BackdropHandler"
-                    ToolTipService.ToolTip="Handler to configure all backdrop effects on the current main window" />
+                    Icon="{x:Bind xtntns:StringExtentions.AsIcon('&#xF2F7;')}"
+                    ToolTipService.ToolTip="Handler to configure all backdrop effects on the current main window"
+                    Text="BackdropHandler" />
                 <MenuFlyoutItem
                     Command="{x:Bind viewModel.AddTabViewItemCommand}"
                     CommandParameter="{Binding RelativeSource={RelativeSource Self}}"
-                    Icon="{x:Bind ext:StringExtentions.AsIcon('&#xE41D;')}"
-                    Text="IConverter"
-                    ToolTipService.ToolTip="Converter which converts strings and objects" />
+                    Icon="{x:Bind xtntns:StringExtentions.AsIcon('&#xE41D;')}"
+                    ToolTipService.ToolTip="Converter which converts strings and objects"
+                    Text="IConverter" />
                 <MenuFlyoutItem
                     Command="{x:Bind viewModel.AddTabViewItemCommand}"
                     CommandParameter="{Binding RelativeSource={RelativeSource Self}}"
-                    Icon="{x:Bind ext:StringExtentions.AsIcon('&#xE727;')}"
-                    Text="ImagingUtility"
-                    ToolTipService.ToolTip="Utility to render and image advanced UI" />
+                    Icon="{x:Bind xtntns:StringExtentions.AsIcon('&#xE727;')}"
+                    ToolTipService.ToolTip="Utility to render and image advanced UI"
+                    Text="ImagingUtility" />
                 <MenuFlyoutItem
                     Command="{x:Bind viewModel.AddTabViewItemCommand}"
                     CommandParameter="{Binding RelativeSource={RelativeSource Self}}"
-                    Icon="{x:Bind ext:StringExtentions.AsIcon('&#xE6E3;')}"
-                    Text="IFileSystem"
-                    ToolTipService.ToolTip="Service to communicate with the local file system" />
+                    Icon="{x:Bind xtntns:StringExtentions.AsIcon('&#xE6E3;')}"
+                    ToolTipService.ToolTip="Service to communicate with the local file system"
+                    Text="IFileSystem" />
                 <MenuFlyoutItem
                     Command="{x:Bind viewModel.AddTabViewItemCommand}"
                     CommandParameter="{Binding RelativeSource={RelativeSource Self}}"
-                    Icon="{x:Bind ext:StringExtentions.AsIcon('&#xE371;')}"
-                    Text="Updater"
-                    ToolTipService.ToolTip="Service to handle and execute any new updates" />
+                    Icon="{x:Bind xtntns:StringExtentions.AsIcon('&#xE371;')}"
+                    ToolTipService.ToolTip="Service to handle and execute any new updates"
+                    Text="Updater" />
                 <MenuFlyoutItem
                     Command="{x:Bind viewModel.AddTabViewItemCommand}"
                     CommandParameter="{Binding RelativeSource={RelativeSource Self}}"
-                    Icon="{x:Bind ext:StringExtentions.AsIcon('&#xE85F;')}"
-                    Text="INavigation"
-                    ToolTipService.ToolTip="Service for navigating in the current main window" />
+                    Icon="{x:Bind xtntns:StringExtentions.AsIcon('&#xE85F;')}"
+                    ToolTipService.ToolTip="Service for navigating in the current main window"
+                    Text="INavigation" />
                 <MenuFlyoutItem
                     Command="{x:Bind viewModel.AddTabViewItemCommand}"
                     CommandParameter="{Binding RelativeSource={RelativeSource Self}}"
-                    Icon="{x:Bind ext:StringExtentions.AsIcon('&#xF286;')}"
-                    Text="IMessage"
-                    ToolTipService.ToolTip="Service to queue dialogs and notifications on the current main window" />
+                    Icon="{x:Bind xtntns:StringExtentions.AsIcon('&#xF286;')}"
+                    ToolTipService.ToolTip="Service to queue dialogs and notifications on the current main window"
+                    Text="IMessage" />
             </MenuFlyout>
         </FlyoutBase.AttachedFlyout>
     </TabView>

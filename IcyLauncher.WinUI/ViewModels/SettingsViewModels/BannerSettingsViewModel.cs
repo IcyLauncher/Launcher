@@ -6,7 +6,7 @@ using Windows.Storage;
 using Windows.Storage.Pickers;
 using Windows.UI;
 
-namespace IcyLauncher.WinUI.ViewModels;
+namespace IcyLauncher.WinUI.ViewModels.SettingsViewModels;
 
 public partial class BannerSettingsViewModel : ObservableObject
 {

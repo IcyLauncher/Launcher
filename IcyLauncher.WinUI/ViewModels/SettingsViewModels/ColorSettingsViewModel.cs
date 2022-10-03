@@ -1,4 +1,4 @@
-﻿namespace IcyLauncher.WinUI.ViewModels;
+﻿namespace IcyLauncher.WinUI.ViewModels.SettingsViewModels;
 
 public partial class ColorSettingsViewModel : ObservableObject
 {
