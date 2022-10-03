@@ -59,6 +59,9 @@ public class Win32
     [DllImport("winbrand.dll", CharSet = CharSet.Unicode)]
     public static extern string BrandingFormatString(string format);
 
+    [DllImport("kernel32.dll", EntryPoint = "SetProcessWorkingSetSize", ExactSpelling = true, CharSet = CharSet.Ansi, SetLastError = true)]
+    public static extern bool SetProcessWorkingSetSize(IntPtr hWnd, int minimumWorkingSetSize, int maximumWorkingSetSize);
+
 
     public static IntPtr NewWindowProc(IntPtr hWnd, int msg, IntPtr wParam, IntPtr lParam)
     {
