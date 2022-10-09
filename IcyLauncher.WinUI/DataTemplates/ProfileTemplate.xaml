@@ -5,7 +5,6 @@
     xmlns:ex="using:CommunityToolkit.WinUI.UI"
     xmlns:md="using:CommunityToolkit.WinUI.UI.Media"
     xmlns:mdls="using:IcyLauncher.Data.Models">
-
     <DataTemplate x:Key="ProfileTemplate" x:DataType="mdls:Profile">
         <Grid CornerRadius="8" Loaded="OnRootLayoutLoaded">
             <Rectangle Fill="{x:Bind Color, Converter={StaticResource ColorBrushConverter}}" Opacity="0.2" />

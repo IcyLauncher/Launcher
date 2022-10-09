@@ -3,7 +3,6 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mdls="using:IcyLauncher.Data.Models">
-
     <DataTemplate x:Key="SolidColorTemplate" x:DataType="mdls:SolidColor">
         <Grid
             Width="86"

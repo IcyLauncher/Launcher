@@ -45,7 +45,7 @@ public partial class IMessageViewModel : ObservableObject
         }
         catch (Exception ex)
         {
-            await message.ShowAsync("logger.Log()", $"Method completed.\nException{ex.Format()}", closeButton: "Ok");
+            await message.ShowAsync("logger.Log()", $"Method completed.\nException{ex.Format()}");
         }
     }
 
@@ -63,7 +63,7 @@ public partial class IMessageViewModel : ObservableObject
         }
         catch (Exception ex)
         {
-            await message.ShowAsync("logger.Log()", $"Method completed.\nException{ex.Format()}", closeButton: "Ok");
+            await message.ShowAsync("logger.Log()", $"Method completed.\nException{ex.Format()}");
         }
     }
 }

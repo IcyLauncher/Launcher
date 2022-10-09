@@ -20,11 +20,11 @@ public partial class VibrancyBackdropHandlerViewModel : ObservableObject
         try
         {
             bool result = vibrancyBackdropHandler.EnableBackdrop();
-            await message.ShowAsync("vibrancyBackdropHandler.EnableBackdrop()", $"Method completed.\nResult: {result}", closeButton: "Ok");
+            await message.ShowAsync("vibrancyBackdropHandler.EnableBackdrop()", $"Method completed.\nResult: {result}");
         }
         catch (Exception ex)
         {
-            await message.ShowAsync("vibrancyBackdropHandler.EnableBackdrop()", $"Method completed.\nException{ex.Format()}", closeButton: "Ok");
+            await message.ShowAsync("vibrancyBackdropHandler.EnableBackdrop()", $"Method completed.\nException{ex.Format()}");
         }
     }
 
@@ -34,11 +34,11 @@ public partial class VibrancyBackdropHandlerViewModel : ObservableObject
         try
         {
             bool result = vibrancyBackdropHandler.DisableBackdrop();
-            await message.ShowAsync("vibrancyBackdropHandler.DisableBackdrop()", $"Method completed.\nResult: {result}", closeButton: "Ok");
+            await message.ShowAsync("vibrancyBackdropHandler.DisableBackdrop()", $"Method completed.\nResult: {result}");
         }
         catch (Exception ex)
         {
-            await message.ShowAsync("vibrancyBackdropHandler.DisableBackdrop()", $"Method completed.\nException{ex.Format()}", closeButton: "Ok");
+            await message.ShowAsync("vibrancyBackdropHandler.DisableBackdrop()", $"Method completed.\nException{ex.Format()}");
         }
     }
 }

@@ -1,5 +1,4 @@
-﻿using IcyLauncher.WinUI.DataTemplates;
-using Microsoft.UI;
+﻿using Microsoft.UI;
 using Microsoft.UI.Composition;
 using Microsoft.UI.Xaml.Media.Animation;
 using Microsoft.UI.Xaml.Shapes;
@@ -11,6 +10,7 @@ namespace IcyLauncher.WinUI.ViewModels;
 
 public partial class HomeViewModel : ObservableObject
 {
+    #region Setup
     readonly ILogger<HomeViewModel> logger;
     readonly SolidColorCollection solidColors;
     readonly ThemeManager themeManager;
@@ -35,6 +35,11 @@ public partial class HomeViewModel : ObservableObject
         Configuration = configuration.Value;
         Updater = updater;
 
+        SetupViewModel();
+    }
+
+    void SetupViewModel()
+    {
         themeManager.Colors.Background.PropertyChanged += (s, e) =>
         {
             switch (e.PropertyName)
@@ -52,24 +57,107 @@ public partial class HomeViewModel : ObservableObject
         };
     }
 
+    [RelayCommand]
+    void SetupPage(Grid bannerContainer)
+    {
+        SetupBannerComposition((Rectangle)bannerContainer.Children[0]);
+        SetupProfile((Grid)bannerContainer.Children[2]);
+        LoadBannerImage();
+    }
+    #endregion
 
+
+    #region Banner Composition
+    Compositor? bannerCompositor;
+    CompositionLinearGradientBrush? maskOverlayBrush;
+    CompositionMaskBrush? bannerMaskBrush;
+    SpriteVisual? bannerMaskVisual;
+    CompositionMaskBrush? bannerOverlayBrush;
+
+    Uri? bannerSource;
+    public Uri? BannerSource
+    {
+        get => bannerSource;
+        set
+        {
+            if (value == BannerSource)
+                return;
+            if (bannerMaskBrush is null || bannerCompositor is null)
+            {
+                logger.Log("Failed to update banner image composition", Exceptions.IsNull);
+                return;
+            }
+
+            SetProperty(ref bannerSource, value);
+
+            bannerMaskBrush.Source = value is null ? null : imagingUtility.CreateImageBrush(bannerCompositor, value, CompositionStretch.UniformToFill, 0.5f);
+            logger.Log("Updated banner image composition");
+        }
+    }
+
+    Color? bannerColor;
+    public Color? BannerColor
+    {
+        get => bannerColor;
+        set
+        {
+            if (BannerColor == value)
+                return;
+            if (bannerMaskBrush is null || bannerCompositor is null)
+            {
+                logger.Log("Failed to update banner color composition", Exceptions.IsNull);
+                return;
+            }
+
+            SetProperty(ref bannerColor, value);
+
+            bannerMaskBrush.Source = value is null ? null : imagingUtility.CreateColorBrush(bannerCompositor, value.Value);
+            logger.Log("Updated banner color composition");
+        }
+    }
+
+    void SetupBannerComposition(Rectangle container)
+    {
+        container.SizeChanged += (s, e) =>
+        {
+            if (bannerMaskVisual is not null)
+                bannerMaskVisual.Size = new(e.NewSize._width, e.NewSize._height);
+        };
+
+
+        imagingUtility.InitializeUIElement(container, out bannerCompositor, out ContainerVisual? banner);
+
+        if (bannerCompositor is null || banner is null)
+            return;
+
+        maskOverlayBrush = imagingUtility.CreateGradientBrush(
+                bannerCompositor,
+                new(0, 0), new(0, 1),
+                new[] { (0.5f, Colors.Gray), (1.0f, Colors.Transparent) });
+
+        bannerMaskBrush = imagingUtility.CreateMaskBrush(bannerCompositor, null, maskOverlayBrush);
+        bannerMaskVisual = imagingUtility.CreateSpriteVisual(bannerCompositor, new((float)container.ActualWidth, (float)container.ActualHeight), bannerMaskBrush);
+
+        bannerOverlayBrush = imagingUtility.CreateMaskBrush(bannerCompositor, imagingUtility.CreateGradientBrush(bannerCompositor,
+                new(0, 0), new(1, 0),
+                new[] { (-0.2f, themeManager.Colors.Background.Gradient), (1f, themeManager.Colors.Background.GradientTransparent) }), maskOverlayBrush);
+        SpriteVisual? bannerOverlayVisual = imagingUtility.CreateSpriteVisual(bannerCompositor, new(500, 330), bannerOverlayBrush);
+
+
+        banner.Children.InsertAtTop(bannerMaskVisual);
+        banner.Children.InsertAtTop(bannerOverlayVisual);
+
+        logger.Log("Initialized banner image composition");
+    }
+    #endregion
+
+
+    #region Banner Image
     readonly List<string> bannerCustomPictures = new();
     readonly List<BannerTimeDependentItem> bannerTimeDependentItems = new();
 
-    public void OnPageLoaded(object sender, RoutedEventArgs? _)
+    public void LoadBannerImage()
     {
-        if (bannerProfileGrid is null)
-            bannerProfileGrid = (Grid)((Grid)((Grid)((Page)sender).Content).Children[0]).Children[2];
-
-        if (bannerProfileInBoard is null)
-        {
-            bannerProfileInBoard = new();
-            bannerProfileInBoard.Children.Add(UIElementProvider.Animate(bannerProfileGrid, "Opacity", null, 1, 100));
-        }
-
-        if (SelectedProfile is null)
-            SelectedProfile = Profiles.First();
-
         switch (Configuration.Apperance.HomeBanner)
         {
             case BannerType.TimeDependent:
@@ -150,101 +238,17 @@ public partial class HomeViewModel : ObservableObject
                 break;
         };
     }
-
-    Compositor? bannerCompositor;
-    CompositionLinearGradientBrush? maskOverlayBrush;
-    CompositionMaskBrush? bannerMaskBrush;
-    SpriteVisual? bannerMaskVisual;
-    CompositionMaskBrush? bannerOverlayBrush;
-
-    public void OnBannerLoaded(object sender, RoutedEventArgs? _)
-    {
-        if (bannerMaskVisual is not null)
-            return;
-
-        Rectangle grid = (Rectangle)sender;
-        grid.SizeChanged += (s, e) =>
-        {
-            if (bannerMaskVisual is not null)
-                bannerMaskVisual.Size = new(e.NewSize._width, e.NewSize._height);
-        };
+    #endregion
 
 
-        imagingUtility.InitializeUIElement(grid, out bannerCompositor, out ContainerVisual? banner);
-
-        if (bannerCompositor is null || banner is null)
-            return;
-
-        maskOverlayBrush = imagingUtility.CreateGradientBrush(
-                bannerCompositor,
-                new(0, 0), new(0, 1),
-                new[] { (0.5f, Colors.Gray), (1.0f, Colors.Transparent) });
-
-        bannerMaskBrush = imagingUtility.CreateMaskBrush(bannerCompositor, null, maskOverlayBrush);
-        bannerMaskVisual = imagingUtility.CreateSpriteVisual(bannerCompositor, new((float)grid.ActualWidth, (float)grid.ActualHeight), bannerMaskBrush);
-
-        bannerOverlayBrush = imagingUtility.CreateMaskBrush(bannerCompositor, imagingUtility.CreateGradientBrush(bannerCompositor,
-                new(0, 0), new(1, 0),
-                new[] { (-0.2f, themeManager.Colors.Background.Gradient), (1f, themeManager.Colors.Background.GradientTransparent) }), maskOverlayBrush);
-        SpriteVisual? bannerOverlayVisual = imagingUtility.CreateSpriteVisual(bannerCompositor, new(500, 330), bannerOverlayBrush);
-
-
-        banner.Children.InsertAtTop(bannerMaskVisual);
-        banner.Children.InsertAtTop(bannerOverlayVisual);
-
-        logger.Log("Initialized banner image composition");
-    }
-
-    Uri? bannerSource;
-    public Uri? BannerSource
-    {
-        get => bannerSource;
-        set
-        {
-            if (value == BannerSource)
-                return;
-            if (bannerMaskBrush is null || bannerCompositor is null)
-            {
-                logger.Log("Failed to update banner image composition", Exceptions.IsNull);
-                return;
-            }
-
-            SetProperty(ref bannerSource, value);
-
-            bannerMaskBrush.Source = value is null ? null : imagingUtility.CreateImageBrush(bannerCompositor, value, CompositionStretch.UniformToFill, 0.5f);
-            logger.Log("Updated banner image composition");
-        }
-    }
-
-    Color? bannerColor;
-    public Color? BannerColor
-    {
-        get => bannerColor;
-        set
-        {
-            if (BannerColor == value)
-                return;
-            if (bannerMaskBrush is null || bannerCompositor is null)
-            {
-                logger.Log("Failed to update banner color composition", Exceptions.IsNull);
-                return;
-            }
-
-            SetProperty(ref bannerColor, value);
-
-            bannerMaskBrush.Source = value is null ? null : imagingUtility.CreateColorBrush(bannerCompositor, value.Value);
-            logger.Log("Updated banner color composition");
-        }
-    }
-
-
+    #region Launch
     [ObservableProperty]
     int launchProgress;
 
     [ObservableProperty]
     string launchProgressDetails = "Launch";
 
-    [RelayCommand(AllowConcurrentExecutions = false, CanExecute = nameof(LaunchCanExecute), FlowExceptionsToTaskScheduler = true, IncludeCancelCommand = true)]
+    [RelayCommand(CanExecute = nameof(LaunchCanExecute), FlowExceptionsToTaskScheduler = true, IncludeCancelCommand = true)]
     async Task Launch(CancellationToken cancellationToken)
     {
         cancellationToken.Register(async () =>
@@ -280,8 +284,10 @@ public partial class HomeViewModel : ObservableObject
     {
         return SelectedProfile is not null && LaunchProgressDetails == "Launch";
     }
+    #endregion
 
 
+    #region Profile
     Grid bannerProfileGrid = default!;
     Storyboard bannerProfileInBoard = default!;
 
@@ -299,10 +305,7 @@ public partial class HomeViewModel : ObservableObject
     Profile? selectedProfile;
     public Profile? SelectedProfile
     {
-        get
-        {
-            return selectedProfile;
-        }
+        get => selectedProfile;
         set
         {
             Storyboard outBoard = new();
@@ -326,15 +329,19 @@ public partial class HomeViewModel : ObservableObject
     [ObservableProperty]
     string bannerProfileDetails = "Select a profile to start playing!";
 
-    public void OnProfileSelectionChanged(object sender, SelectionChangedEventArgs e)
+    void SetupProfile(Grid container)
     {
-        if (e.AddedItems.Count != 0)
-            ProfileTemplate.UpdateProperties((GridView)sender, e.AddedItems[0], 1, new(0, 0, 0), "inBoard");
-        if (e.RemovedItems.Count != 0)
-            ProfileTemplate.UpdateProperties((GridView)sender, e.RemovedItems[0], 0, new(-10, 0, 0), "outBoard");
+        bannerProfileGrid = container;
+
+        bannerProfileInBoard = new();
+        bannerProfileInBoard.Children.Add(UIElementProvider.Animate(bannerProfileGrid, "Opacity", null, 1, 100));
+        
+        SelectedProfile = Profiles.First();
     }
+    #endregion
 
 
+    #region News
     [ObservableProperty]
     string[] news = new[]
     {
@@ -343,8 +350,10 @@ public partial class HomeViewModel : ObservableObject
         "And again, a fucking example news [3]",
         "End my suffer. Please. I cant do this anymore"
     };
+    #endregion
 
 
+    #region Weather
     [ObservableProperty]
     WeatherModel weatherData = new();
 
@@ -365,4 +374,5 @@ public partial class HomeViewModel : ObservableObject
             Description = "mostly sunny"
         };
     }
+    #endregion
 }

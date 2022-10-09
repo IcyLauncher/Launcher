@@ -52,7 +52,7 @@
             <Image
                 Name="CatImage"
                 Margin="0,0,0,12"
-                Source="https://cataas.com/cat/says/IcyLauncher" />
+                Source="https://thecatapi.com/api/images/get" />
         </StackPanel>
     </ScrollViewer>
 </Page>

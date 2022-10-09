@@ -82,11 +82,11 @@ public partial class WindowHandlerViewModel : ObservableObject
         try
         {
             windowHandler.SetIcon(path);
-            await message.ShowAsync("windowHandler.SetIcon()", $"Method completed.", closeButton: "Ok");
+            await message.ShowAsync("windowHandler.SetIcon()", $"Method completed.");
         }
         catch (Exception ex)
         {
-            await message.ShowAsync("windowHandler.SetIcon()", $"Method completed.\nException{ex.Format()}", closeButton: "Ok");
+            await message.ShowAsync("windowHandler.SetIcon()", $"Method completed.\nException{ex.Format()}");
         }
     }
 
@@ -103,11 +103,11 @@ public partial class WindowHandlerViewModel : ObservableObject
         try
         {
             windowHandler.SetSize(SizeWidth, SizeHeight);
-            await message.ShowAsync("windowHandler.SetSize()", $"Method completed.", closeButton: "Ok");
+            await message.ShowAsync("windowHandler.SetSize()", $"Method completed.");
         }
         catch (Exception ex)
         {
-            await message.ShowAsync("windowHandler.SetSize()", $"Method completed.\nException{ex.Format()}", closeButton: "Ok");
+            await message.ShowAsync("windowHandler.SetSize()", $"Method completed.\nException{ex.Format()}");
         }
     }
 
@@ -124,11 +124,11 @@ public partial class WindowHandlerViewModel : ObservableObject
         try
         {
             windowHandler.SetMinSize(MinSizeWidth, MinSizeHeight);
-            await message.ShowAsync("windowHandler.SetMinSize()", $"Method completed.", closeButton: "Ok");
+            await message.ShowAsync("windowHandler.SetMinSize()", $"Method completed.");
         }
         catch (Exception ex)
         {
-            await message.ShowAsync("windowHandler.SetMinSize()", $"Method completed.\nException{ex.Format()}", closeButton: "Ok");
+            await message.ShowAsync("windowHandler.SetMinSize()", $"Method completed.\nException{ex.Format()}");
         }
     }
 
@@ -145,11 +145,11 @@ public partial class WindowHandlerViewModel : ObservableObject
         try
         {
             windowHandler.SetPosition(PositionX, PositionY);
-            await message.ShowAsync("windowHandler.SetPosition()", $"Method completed.", closeButton: "Ok");
+            await message.ShowAsync("windowHandler.SetPosition()", $"Method completed.");
         }
         catch (Exception ex)
         {
-            await message.ShowAsync("windowHandler.SetPosition()", $"Method completed.\nException{ex.Format()}", closeButton: "Ok");
+            await message.ShowAsync("windowHandler.SetPosition()", $"Method completed.\nException{ex.Format()}");
         }
     }
 
@@ -159,11 +159,11 @@ public partial class WindowHandlerViewModel : ObservableObject
         try
         {
             windowHandler.SetPositionToCenter();
-            await message.ShowAsync("windowHandler.SetPositionToCenter()", $"Method completed.", closeButton: "Ok");
+            await message.ShowAsync("windowHandler.SetPositionToCenter()", $"Method completed.");
         }
         catch (Exception ex)
         {
-            await message.ShowAsync("windowHandler.SetPositionToCenter()", $"Method completed.\nException{ex.Format()}", closeButton: "Ok");
+            await message.ShowAsync("windowHandler.SetPositionToCenter()", $"Method completed.\nException{ex.Format()}");
         }
     }
 
@@ -174,11 +174,11 @@ public partial class WindowHandlerViewModel : ObservableObject
         try
         {
             bool result = windowHandler.EnsureWindowsSystemDispatcherQueueController();
-            await message.ShowAsync("windowHandler.EnsureWindowsSystemDispatcherQueueController()", $"Method completed.\nResult: {result}", closeButton: "Ok");
+            await message.ShowAsync("windowHandler.EnsureWindowsSystemDispatcherQueueController()", $"Method completed.\nResult: {result}");
         }
         catch (Exception ex)
         {
-            await message.ShowAsync("windowHandler.EnsureWindowsSystemDispatcherQueueController()", $"Method completed.\nException{ex.Format()}", closeButton: "Ok");
+            await message.ShowAsync("windowHandler.EnsureWindowsSystemDispatcherQueueController()", $"Method completed.\nException{ex.Format()}");
         }
     }
 
@@ -195,11 +195,11 @@ public partial class WindowHandlerViewModel : ObservableObject
         try
         {
             bool result = windowHandler.SetTitleBar(TitleBarIsNull ? null : uIElementReciever.TitleBarDragArea, TitleBarContainerIsNull ? null : uIElementReciever.TitleBarContainer);
-            await message.ShowAsync("windowHandler.SetTitleBar()", $"Method completed.\nResult: {result}", closeButton: "Ok");
+            await message.ShowAsync("windowHandler.SetTitleBar()", $"Method completed.\nResult: {result}");
         }
         catch (Exception ex)
         {
-            await message.ShowAsync("windowHandler.SetTitleBar()", $"Method completed.\nException{ex.Format()}", closeButton: "Ok");
+            await message.ShowAsync("windowHandler.SetTitleBar()", $"Method completed.\nException{ex.Format()}");
         }
     }
     
@@ -213,11 +213,11 @@ public partial class WindowHandlerViewModel : ObservableObject
         try
         {
             bool result = windowHandler.SetMainBackground(MainBackground);
-            await message.ShowAsync("windowHandler.SetMainBackground()", $"Method completed.\nResult: {result}", closeButton: "Ok");
+            await message.ShowAsync("windowHandler.SetMainBackground()", $"Method completed.\nResult: {result}");
         }
         catch (Exception ex)
         {
-            await message.ShowAsync("windowHandler.SetMainBackground()", $"Method completed.\nException{ex.Format()}", closeButton: "Ok");
+            await message.ShowAsync("windowHandler.SetMainBackground()", $"Method completed.\nException{ex.Format()}");
         }
     }
 }

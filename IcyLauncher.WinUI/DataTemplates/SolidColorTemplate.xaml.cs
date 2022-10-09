@@ -22,5 +22,5 @@ public partial class SolidColorTemplate : ResourceDictionary
     }
 
     void OnDeleteClick(object sender, RoutedEventArgs _) =>
-            SolidColors.Container.Remove((SolidColor)((MenuFlyoutItem)sender).Tag);
+        SolidColors.Container.Remove((SolidColor)((MenuFlyoutItem)sender).Tag);
 }

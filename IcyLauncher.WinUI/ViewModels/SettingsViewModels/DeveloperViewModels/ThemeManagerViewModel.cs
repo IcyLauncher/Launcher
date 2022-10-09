@@ -23,11 +23,11 @@ public partial class ThemeManagerViewModel : ObservableObject
         try
         {
             themeManager.RandomizeTheme();
-            await message.ShowAsync("themeManager.RandomizeTheme()", $"Method completed.", closeButton: "Ok");
+            await message.ShowAsync("themeManager.RandomizeTheme()", $"Method completed.");
         }
         catch (Exception ex)
         {
-            await message.ShowAsync("themeManager.RandomizeTheme()", $"Method completed.\nException{ex.Format()}", closeButton: "Ok");
+            await message.ShowAsync("themeManager.RandomizeTheme()", $"Method completed.\nException{ex.Format()}");
         }
     }
 
@@ -37,11 +37,11 @@ public partial class ThemeManagerViewModel : ObservableObject
         try
         {
             themeManager.SetResourceColors();
-            await message.ShowAsync("themeManager.SetResourceColors()", $"Method completed.", closeButton: "Ok");
+            await message.ShowAsync("themeManager.SetResourceColors()", $"Method completed.");
         }
         catch (Exception ex)
         {
-            await message.ShowAsync("themeManager.SetResourceColors()", $"Method completed.\nException{ex.Format()}", closeButton: "Ok");
+            await message.ShowAsync("themeManager.SetResourceColors()", $"Method completed.\nException{ex.Format()}");
         }
     }
 
@@ -51,11 +51,11 @@ public partial class ThemeManagerViewModel : ObservableObject
         try
         {
             themeManager.SetUnbindableBindings();
-            await message.ShowAsync("themeManager.SetUnbindableBindings()", $"Method completed.", closeButton: "Ok");
+            await message.ShowAsync("themeManager.SetUnbindableBindings()", $"Method completed.");
         }
         catch (Exception ex)
         {
-            await message.ShowAsync("themeManager.SetUnbindableBindings()", $"Method completed.\nException{ex.Format()}", closeButton: "Ok");
+            await message.ShowAsync("themeManager.SetUnbindableBindings()", $"Method completed.\nException{ex.Format()}");
         }
     }
 
@@ -72,11 +72,11 @@ public partial class ThemeManagerViewModel : ObservableObject
         try
         {
             RandomColor = themeManager.GetRandomColor(Transparency);
-            await message.ShowAsync("themeManager.GetRandomColor()", $"Method completed.\nResult: {randomColor}", closeButton: "Ok");
+            await message.ShowAsync("themeManager.GetRandomColor()", $"Method completed.\nResult: {randomColor}");
         }
         catch (Exception ex)
         {
-            await message.ShowAsync("themeManager.GetRandomColor()", $"Method completed.\nException{ex.Format()}", closeButton: "Ok");
+            await message.ShowAsync("themeManager.GetRandomColor()", $"Method completed.\nException{ex.Format()}");
         }
     }
 }

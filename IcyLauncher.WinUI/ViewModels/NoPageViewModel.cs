@@ -2,6 +2,7 @@
 
 public partial class NoPageViewModel : ObservableObject
 {
+    #region Setup
     readonly INavigation navigation;
 
     public NoPageViewModel(
@@ -9,8 +10,10 @@ public partial class NoPageViewModel : ObservableObject
     {
         this.navigation = navigation;
     }
+    #endregion
 
 
+    #region Actions
     [RelayCommand]
     void NavigateHome()
     {
@@ -21,4 +24,5 @@ public partial class NoPageViewModel : ObservableObject
     [RelayCommand]
     void ReportBug() =>
         navigation.Navigate("Help");
+    #endregion
 }

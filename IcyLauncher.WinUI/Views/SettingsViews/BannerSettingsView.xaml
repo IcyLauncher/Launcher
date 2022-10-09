@@ -2,17 +2,13 @@
     x:Class="IcyLauncher.WinUI.Views.SettingsViews.BannerSettingsView"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:core="using:Microsoft.Xaml.Interactions.Core"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:ex="using:CommunityToolkit.WinUI.UI"
-    xmlns:hlprs="using:IcyLauncher.Helpers"
+    xmlns:i="using:Microsoft.Xaml.Interactivity"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:md="using:CommunityToolkit.WinUI.UI.Media"
-    xmlns:mdls="using:IcyLauncher.Data.Models"
-    xmlns:media="using:CommunityToolkit.WinUI.UI.Media"
     xmlns:xmle="using:IcyLauncher.Xaml.Elements"
-    Name="RootPage"
-    Background="Transparent"
-    Loaded="{x:Bind viewModel.OnPageLoaded}"
     NavigationCacheMode="Enabled"
     mc:Ignorable="d">
     <Page.Resources>
@@ -23,12 +19,16 @@
             Opacity="0.3"
             Offset="0,10,0" />
     </Page.Resources>
+    <i:Interaction.Behaviors>
+        <core:EventTriggerBehavior EventName="Loaded">
+            <core:InvokeCommandAction Command="{x:Bind viewModel.SetNavigationIndexCommand}" />
+        </core:EventTriggerBehavior>
+    </i:Interaction.Behaviors>
 
     <xmle:HCont
         Title="Settings  |  Home Banner"
         Style="{StaticResource Page}"
         VerticalScrollBar="{x:Bind viewModel.Configuration.Launcher.IsScrollbarsEnabled, Mode=OneWay, Converter={StaticResource BoolScrollbarVisibilityConverter}}">
-
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
@@ -145,16 +145,7 @@
                                     HorizontalAlignment="Stretch"
                                     Command="{x:Bind viewModel.ResetCustomPicturesCommand}"
                                     Content="Reset custom pictures"
-                                    ToolTipService.ToolTip="Reset custom pictures"
-                                    Visibility="{x:Bind viewModel.ResetCustomPicturesCommand.IsRunning, Mode=OneWay, Converter={StaticResource BoolVisibilityConverter}, ConverterParameter=0}" />
-                                <Button
-                                    Grid.Column="2"
-                                    HorizontalAlignment="Stretch"
-                                    Command="{x:Bind viewModel.ResetCustomPicturesCancelCommand}"
-                                    Content="Cancel"
-                                    ToolTipService.ToolTip="Cancell resetting custom pictures"
-                                    Visibility="{x:Bind viewModel.ResetCustomPicturesCommand.IsRunning, Mode=OneWay, Converter={StaticResource BoolVisibilityConverter}, ConverterParameter=1}" />
-
+                                    ToolTipService.ToolTip="Reset custom pictures" />
                             </Grid>
                         </ContentControl>
 
@@ -249,7 +240,6 @@
                         </Grid>
                     </Grid>
                 </Grid>
-
             </Grid>
         </Grid>
     </xmle:HCont>

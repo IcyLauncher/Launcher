@@ -5,11 +5,8 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:hlprs="using:IcyLauncher.Helpers"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:media="using:CommunityToolkit.WinUI.UI.Media"
-    xmlns:typs="using:IcyLauncher.Data.Types"
     xmlns:vwmdls="using:IcyLauncher.WinUI.ViewModels"
     xmlns:xmle="using:IcyLauncher.Xaml.Elements"
-    xmlns:xtntns="using:IcyLauncher.Helpers.Extentions"
     Background="Transparent"
     NavigationCacheMode="Enabled"
     mc:Ignorable="d">
@@ -228,7 +225,7 @@
                         <ContentControl Tag="Home Banner|Image/Color which is showed on the home page" Template="{StaticResource SettingsCard}">
                             <Button
                                 Command="{x:Bind viewModel.NavigateToCommand}"
-                                CommandParameter="Views.BannerSettingsView"
+                                CommandParameter="Views.SettingsViews.BannerSettingsView"
                                 Content="Open banner settings"
                                 ToolTipService.ToolTip="Open banner settings" />
                         </ContentControl>
@@ -243,7 +240,7 @@
 
                                 <Button
                                     Command="{x:Bind viewModel.NavigateToCommand}"
-                                    CommandParameter="Views.ColorSettingsView"
+                                    CommandParameter="Views.SettingsViews.ColorSettingsView"
                                     Content="Open color settings"
                                     ToolTipService.ToolTip="Open color settings" />
 

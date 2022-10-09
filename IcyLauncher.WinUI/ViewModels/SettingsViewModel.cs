@@ -8,9 +8,13 @@ namespace IcyLauncher.WinUI.ViewModels;
 
 public partial class SettingsViewModel : ObservableObject
 {
+    #region Setup
     readonly ILogger<ProfilesViewModel> logger;
     readonly ConfigurationManager configurationManager;
     readonly ThemeManager themeManager;
+    readonly WindowHandler windowHandler;
+    readonly BackdropHandler backdropHandler;
+    readonly UIElementReciever uIElementReciever;
     readonly IConverter converter;
     readonly IFileSystem fileSystem;
     readonly INavigation navigation;
@@ -36,6 +40,9 @@ public partial class SettingsViewModel : ObservableObject
         this.logger = logger;
         this.configurationManager = configurationManager;
         this.themeManager = themeManager;
+        this.windowHandler = windowHandler;
+        this.backdropHandler = backdropHandler;
+        this.uIElementReciever = uIElementReciever;
         this.converter = converter;
         this.fileSystem = fileSystem;
         this.navigation = navigation;
@@ -44,7 +51,11 @@ public partial class SettingsViewModel : ObservableObject
         Configuration = configuration.Value;
         Updater = updater;
 
+        SetupViewModel();
+    }
 
+    void SetupViewModel()
+    {
         windowHandler.Register(folderPicker);
 
         windowHandler.Register(savePicker);
@@ -81,8 +92,10 @@ public partial class SettingsViewModel : ObservableObject
             }
         };
     }
+    #endregion
 
 
+    #region Debug
     int presses = 0;
 
     [RelayCommand(AllowConcurrentExecutions = true)]
@@ -104,8 +117,10 @@ public partial class SettingsViewModel : ObservableObject
         if (presses > 0)
             presses--;
     }
+    #endregion
 
 
+    #region Update
     [ObservableProperty]
     string updateStatus = "Last checked: 0 min";
 
@@ -149,11 +164,13 @@ public partial class SettingsViewModel : ObservableObject
     {
         IsUpdateVisible = !IsUpdateVisible;
     }
+    #endregion
 
 
+    #region Directories
     readonly FolderPicker folderPicker = new() { SuggestedStartLocation = PickerLocationId.DocumentsLibrary };
 
-    [RelayCommand(AllowConcurrentExecutions = false)]
+    [RelayCommand]
     async Task SelectDirectoryAsync(bool texturepackDirectory)
     {
         StorageFolder folder = await folderPicker.PickSingleFolderAsync();
@@ -167,7 +184,7 @@ public partial class SettingsViewModel : ObservableObject
             else
                 Configuration.Launcher.VersionsDirectory = folder.Path;
         else
-            await message.ShowAsync("Something went wrong :(", "It looks like IcyLauncher cant write to this directory or it does not exist. Please verify that you have given permissions to IcyLauncher and this directory still exists.", closeButton: "Ok");
+            await message.ShowAsync("Something went wrong :(", "It looks like IcyLauncher cant write to this directory or it does not exist. Please verify that you have given permissions to IcyLauncher and this directory still exists.");
     }
 
     [RelayCommand]
@@ -178,14 +195,18 @@ public partial class SettingsViewModel : ObservableObject
         else
             Configuration.Launcher.VersionsDirectory = $"{Computer.CurrentDirectory}\\Versions";
     }
+    #endregion
 
 
+    #region Navigation
     [RelayCommand]
     void NavigateTo(string page) =>
         navigation.SetCurrentPage(page.AsType());
+    #endregion
 
 
-    [RelayCommand(AllowConcurrentExecutions = false)]
+    #region Theme
+    [RelayCommand]
     async Task ResetColorsAsync(bool darkMode)
     {
         if (await message.ShowAsync("Are you sure?", $"If you click Ok your current color settings will be overwritten by the default {(darkMode ? "dark" : "light")} mode colors.\nThis will not effect your current accent colors.\nThis will also effect the blur color mode.", primaryButton: "Ok") != ContentDialogResult.Primary)
@@ -198,11 +219,13 @@ public partial class SettingsViewModel : ObservableObject
 
     public static bool IsDarkModeBackdropEnabled(int selectedIndex) =>
         selectedIndex == 0 || selectedIndex == 1;
+    #endregion
 
 
+    #region Configuration
     readonly FileSavePicker savePicker = new() { SuggestedStartLocation = PickerLocationId.Desktop };
 
-    [RelayCommand(AllowConcurrentExecutions = false)]
+    [RelayCommand]
     async Task ExportAsync(bool saveConfig)
     {
         savePicker.SuggestedFileName = saveConfig ? "Config" : "Theme";
@@ -211,15 +234,18 @@ public partial class SettingsViewModel : ObservableObject
         if (save is null || string.IsNullOrWhiteSpace(save.Path))
             return;
 
-        if (fileSystem.FileWritable(save.Path))
-            await fileSystem.SaveAsTextAsync(save.Path, saveConfig ? configurationManager.Export() : themeManager.Export(), true).ConfigureAwait(false);
-        else
-            await message.ShowAsync("Something went wrong :(", "It looks like IcyLauncher cant write to this file. Please verify that you have given permissions to IcyLauncher.", closeButton: "Ok");
+        if (!fileSystem.FileWritable(save.Path))
+        {
+            await message.ShowAsync("Something went wrong :(", "It looks like IcyLauncher cant write to this file. Please verify that you have given permissions to IcyLauncher.");
+            return;
+        }
+
+        await fileSystem.SaveAsTextAsync(save.Path, saveConfig ? configurationManager.Export() : themeManager.Export(), true).ConfigureAwait(false);
     }
 
     readonly FileOpenPicker filePicker = new() { SuggestedStartLocation = PickerLocationId.Desktop };
 
-    [RelayCommand(AllowConcurrentExecutions = false)]
+    [RelayCommand]
     async Task LoadAsync(bool loadConfig)
     {
         StorageFile file = await filePicker.PickSingleFileAsync();
@@ -229,7 +255,7 @@ public partial class SettingsViewModel : ObservableObject
 
         if (!fileSystem.FileExists(file.Path))
         {
-            await message.ShowAsync("Something went wrong :(", "It looks like this file does no longer exist. Please verify the file still exists.", true, "Ok");
+            await message.ShowAsync("Something went wrong :(", "It looks like this file does no longer exist. Please verify the file still exists.", true);
             return;
         }
 
@@ -239,17 +265,25 @@ public partial class SettingsViewModel : ObservableObject
 
         if (loadConfig)
         {
-            if (converter.TryToObject(out Configuration? configuration, await fileSystem.ReadAsTextAsync(file.Path).ConfigureAwait(false)) == true)
-                configurationManager.Load(configuration!, true);
-            else
-                await message.ShowAsync("Something went wrong :(", "It looks like this is not a valid configuration.\nPlease verify the file is a proper JSON and every property is being set.", closeButton: "Ok");
+            if (!converter.TryToObject(out Configuration? configuration, await fileSystem.ReadAsTextAsync(file.Path).ConfigureAwait(false)))
+            {
+                await message.ShowAsync("Something went wrong :(", "It looks like this is not a valid configuration.\nPlease verify the file is a proper JSON and every property is being set.");
+                return;
+            }
+
+            configurationManager.Load(configuration!, true);
+            return;
         }
         else
         {
-            if (converter.TryToObject(out Theme? configuration, await fileSystem.ReadAsTextAsync(file.Path).ConfigureAwait(false)) == true)
-                themeManager.Load(configuration!);
-            else
-                await message.ShowAsync("Something went wrong :(", "It looks like this is not a valid configuration.\nPlease verify the file is a proper JSON and every property is being set.", closeButton: "Ok");
+            if (!converter.TryToObject(out Theme? configuration, await fileSystem.ReadAsTextAsync(file.Path).ConfigureAwait(false)))
+            {
+                await message.ShowAsync("Something went wrong :(", "It looks like this is not a valid theme.\nPlease verify the file is a proper JSON and every property is being set.");
+                return;
+            }
+
+            themeManager.Load(configuration!);
         }
     }
+    #endregion
 }

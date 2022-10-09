@@ -62,11 +62,11 @@ public partial class ImagingUtilityViewModel : ObservableObject
             compositorText = $"[Compositor: {(result1 ? compositor!.GetHashCode() : "null")}]\n";
             containerVisualText = $"[ContainerVisual: {(result2 ? $"(Rectangle){container!.GetHashCode()}" : "null")}]\n";
 
-            await message.ShowAsync("imagingUtility.InitializeUIElement()", $"Method completed.\nResult: [Compositor: {result1}], Container: [{result2}]", closeButton: "Ok");
+            await message.ShowAsync("imagingUtility.InitializeUIElement()", $"Method completed.\nResult: [Compositor: {result1}], Container: [{result2}]");
         }
         catch (Exception ex)
         {
-            await message.ShowAsync("imagingUtility.InitializeUIElement()", $"Method completed.\nException{ex.Format()}", closeButton: "Ok");
+            await message.ShowAsync("imagingUtility.InitializeUIElement()", $"Method completed.\nException{ex.Format()}");
         }
     }
 
@@ -95,11 +95,11 @@ public partial class ImagingUtilityViewModel : ObservableObject
             bool result = spriteVisualBrush is not null;
             spriteVisualBrushText = $"[SpriteVisual.Brush: {(result ? $"(CompositionLinearGradientBrush){spriteVisualBrush!.GetHashCode()}" : "null")}]";
 
-            await message.ShowAsync("imagingUtility.CreateGradientBrush()", $"Method completed.\nResult: {result}", closeButton: "Ok");
+            await message.ShowAsync("imagingUtility.CreateGradientBrush()", $"Method completed.\nResult: {result}");
         }
         catch (Exception ex)
         {
-            await message.ShowAsync("imagingUtility.CreateGradientBrush()", $"Method completed.\nException{ex.Format()}", closeButton: "Ok");
+            await message.ShowAsync("imagingUtility.CreateGradientBrush()", $"Method completed.\nException{ex.Format()}");
         }
     }
 
@@ -126,11 +126,11 @@ public partial class ImagingUtilityViewModel : ObservableObject
             bool result = spriteVisualBrush is not null;
             spriteVisualBrushText = $"[SpriteVisual.Brush: {(result ? $"(CompositionMaskBrush){spriteVisualBrush!.GetHashCode()}" : "null")}]";
 
-            await message.ShowAsync("imagingUtility.CreateMaskBrush()", $"Method completed.\nResult: {result}", closeButton: "Ok");
+            await message.ShowAsync("imagingUtility.CreateMaskBrush()", $"Method completed.\nResult: {result}");
         }
         catch (Exception ex)
         {
-            await message.ShowAsync("imagingUtility.CreateMaskBrush()", $"Method completed.\nException{ex.Format()}", closeButton: "Ok");
+            await message.ShowAsync("imagingUtility.CreateMaskBrush()", $"Method completed.\nException{ex.Format()}");
         }
     }
 
@@ -159,11 +159,11 @@ public partial class ImagingUtilityViewModel : ObservableObject
             bool result = spriteVisualBrush is not null;
             spriteVisualBrushText = $"[SpriteVisual.Brush: {(result ? $"(CompositionSurfaceBrush){spriteVisualBrush!.GetHashCode()}" : "null")}]";
 
-            await message.ShowAsync("imagingUtility.CreateImageBrush()", $"Method completed.\nResult: {result}", closeButton: "Ok");
+            await message.ShowAsync("imagingUtility.CreateImageBrush()", $"Method completed.\nResult: {result}");
         }
         catch (Exception ex)
         {
-            await message.ShowAsync("imagingUtility.CreateImageBrush()", $"Method completed.\nException{ex.Format()}", closeButton: "Ok");
+            await message.ShowAsync("imagingUtility.CreateImageBrush()", $"Method completed.\nException{ex.Format()}");
         }
     }
 
@@ -183,11 +183,11 @@ public partial class ImagingUtilityViewModel : ObservableObject
             bool result = spriteVisualBrush is not null;
             spriteVisualBrushText = $"[SpriteVisual.Brush: {(result ? $"(CompositionColorBrush){spriteVisualBrush!.GetHashCode()}" : "null")}]";
 
-            await message.ShowAsync("imagingUtility.CreateColorBrush()", $"Method completed.\nResult: {result}", closeButton: "Ok");
+            await message.ShowAsync("imagingUtility.CreateColorBrush()", $"Method completed.\nResult: {result}");
         }
         catch (Exception ex)
         {
-            await message.ShowAsync("imagingUtility.CreateColorBrush()", $"Method completed.\nException{ex.Format()}", closeButton: "Ok");
+            await message.ShowAsync("imagingUtility.CreateColorBrush()", $"Method completed.\nException{ex.Format()}");
         }
     }
 
@@ -221,11 +221,11 @@ public partial class ImagingUtilityViewModel : ObservableObject
             bool result = spriteVisual is not null;
             spriteVisualText = $"[SpriteVisual: {(result ? spriteVisual!.GetHashCode() : "null")}]\n";
 
-            await message.ShowAsync("imagingUtility.CreateSpriteVisual()", $"Method completed.\nResult: {result}", closeButton: "Ok");
+            await message.ShowAsync("imagingUtility.CreateSpriteVisual()", $"Method completed.\nResult: {result}");
         }
         catch (Exception ex)
         {
-            await message.ShowAsync("imagingUtility.CreateSpriteVisual()", $"Method completed.\nException{ex.Format()}", closeButton: "Ok");
+            await message.ShowAsync("imagingUtility.CreateSpriteVisual()", $"Method completed.\nException{ex.Format()}");
         }
     }
 }

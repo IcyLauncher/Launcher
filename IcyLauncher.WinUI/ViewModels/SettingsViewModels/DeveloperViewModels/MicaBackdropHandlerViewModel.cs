@@ -23,11 +23,11 @@ public partial class MicaBackdropHandlerViewModel : ObservableObject
         try
         {
             bool result = micaBackdropHandler.EnableBackdrop();
-            await message.ShowAsync("micaBackdropHandler.EnableBackdrop()", $"Method completed.\nResult: {result}", closeButton: "Ok");
+            await message.ShowAsync("micaBackdropHandler.EnableBackdrop()", $"Method completed.\nResult: {result}");
         }
         catch (Exception ex)
         {
-            await message.ShowAsync("micaBackdropHandler.EnableBackdrop()", $"Method completed.\nException{ex.Format()}", closeButton: "Ok");
+            await message.ShowAsync("micaBackdropHandler.EnableBackdrop()", $"Method completed.\nException{ex.Format()}");
         }
     }
 
@@ -37,11 +37,11 @@ public partial class MicaBackdropHandlerViewModel : ObservableObject
         try
         {
             bool result = micaBackdropHandler.DisableBackdrop();
-            await message.ShowAsync("micaBackdropHandler.DisableBackdrop()", $"Method completed.\nResult: {result}", closeButton: "Ok");
+            await message.ShowAsync("micaBackdropHandler.DisableBackdrop()", $"Method completed.\nResult: {result}");
         }
         catch (Exception ex)
         {
-            await message.ShowAsync("micaBackdropHandler.DisableBackdrop()", $"Method completed.\nException{ex.Format()}", closeButton: "Ok");
+            await message.ShowAsync("micaBackdropHandler.DisableBackdrop()", $"Method completed.\nException{ex.Format()}");
         }
     }
 
@@ -56,12 +56,12 @@ public partial class MicaBackdropHandlerViewModel : ObservableObject
             if (micaBackdropHandler.IsDarkModeEnabled != value)
             {
                 micaBackdropHandler.IsDarkModeEnabled = value;
-                await message.ShowAsync("micaBackdropHandler.IsDarkModeEnabled", $"Method completed.", closeButton: "Ok");
+                await message.ShowAsync("micaBackdropHandler.IsDarkModeEnabled", $"Method completed.");
             }
         }
         catch (Exception ex)
         {
-            await message.ShowAsync("micaBackdropHandler.IsDarkModeEnabled", $"Method completed.\nException{ex.Format()}", closeButton: "Ok");
+            await message.ShowAsync("micaBackdropHandler.IsDarkModeEnabled", $"Method completed.\nException{ex.Format()}");
         }
     }
 }

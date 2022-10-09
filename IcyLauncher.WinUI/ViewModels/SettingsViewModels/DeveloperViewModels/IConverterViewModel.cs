@@ -33,11 +33,11 @@ public partial class IConverterViewModel : ObservableObject
         try
         {
             input = converter.ToString(Object_, Formatting);
-            await message.ShowAsync("converter.ToString()", $"Method completed.", closeButton: "Ok");
+            await message.ShowAsync("converter.ToString()", $"Method completed.");
         }
         catch (Exception ex)
         {
-            await message.ShowAsync("converter.ToString()", $"Method completed.\nException{ex.Format()}", closeButton: "Ok");
+            await message.ShowAsync("converter.ToString()", $"Method completed.\nException{ex.Format()}");
         }
     }
 
@@ -47,11 +47,11 @@ public partial class IConverterViewModel : ObservableObject
         try
         {
             Object_ = converter.ToObject<SolidColor>(Input);
-            await message.ShowAsync("converter.ToObject<T>()", $"Method completed.", closeButton: "Ok");
+            await message.ShowAsync("converter.ToObject<T>()", $"Method completed.");
         }
         catch (Exception ex)
         {
-            await message.ShowAsync("converter.ToObject<T>()", $"Method completed.\nException{ex.Format()}", closeButton: "Ok");
+            await message.ShowAsync("converter.ToObject<T>()", $"Method completed.\nException{ex.Format()}");
         }
     }
 
@@ -61,11 +61,11 @@ public partial class IConverterViewModel : ObservableObject
         try
         {
             bool result = converter.TryToObject(out SolidColor? _, Input);
-            await message.ShowAsync("converter.TryToObject<T>()", $"Method completed.\nResult: {result}", closeButton: "Ok");
+            await message.ShowAsync("converter.TryToObject<T>()", $"Method completed.\nResult: {result}");
         }
         catch (Exception ex)
         {
-            await message.ShowAsync("converter.TryToObject<T>()", $"Method completed.\nException{ex.Format()}", closeButton: "Ok");
+            await message.ShowAsync("converter.TryToObject<T>()", $"Method completed.\nException{ex.Format()}");
         }
     }
 }

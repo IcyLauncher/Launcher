@@ -48,7 +48,7 @@ public class Message : IMessage
         string title,
         object content,
         bool awaitPreviousDialog = false,
-        string? closeButton = "Cancel",
+        string? closeButton = "Ok",
         string? primaryButton = null,
         string? secondaryButton = null)
     {
@@ -93,7 +93,7 @@ public class Message : IMessage
     public async void Show(
         string title,
         object content,
-        string? closeButton = "Cancel",
+        string? closeButton = "Ok",
         string? primaryButton = null,
         string? secondaryButton = null) =>
         await ShowAsync(title, content, false, closeButton, primaryButton, secondaryButton);

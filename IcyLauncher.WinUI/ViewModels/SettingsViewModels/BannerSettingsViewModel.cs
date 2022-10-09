@@ -10,7 +10,9 @@ namespace IcyLauncher.WinUI.ViewModels.SettingsViewModels;
 
 public partial class BannerSettingsViewModel : ObservableObject
 {
+    #region Setup
     readonly ILogger<ProfilesViewModel> logger;
+    readonly WindowHandler windowHandler;
     readonly IFileSystem fileSystem;
     readonly INavigation navigation;
     readonly IMessage message;
@@ -28,6 +30,7 @@ public partial class BannerSettingsViewModel : ObservableObject
         IMessage message)
     {
         this.logger = logger;
+        this.windowHandler = windowHandler;
         this.fileSystem = fileSystem;
         this.navigation = navigation;
         this.message = message;
@@ -35,33 +38,20 @@ public partial class BannerSettingsViewModel : ObservableObject
         Configuration = configuration.Value;
         SolidColors = solidColors.Value;
 
+        SetupViewModel();
+    }
 
+    void SetupViewModel()
+    {
         windowHandler.Register(filePicker);
         filePicker.FileTypeFilter.Add(".jpg");
         filePicker.FileTypeFilter.Add(".jpeg");
         filePicker.FileTypeFilter.Add(".png");
 
-        SetupBannerSettingsViewModel();
-    }
 
-    [ObservableProperty]
-    Visibility timeDependentVisibility = Visibility.Visible;
-
-    [ObservableProperty]
-    Visibility galleryVisibility = Visibility.Collapsed;
-
-    [ObservableProperty]
-    Visibility customPictureVisibility = Visibility.Collapsed;
-
-    [ObservableProperty]
-    Visibility solidColorVisibility = Visibility.Collapsed;
-
-
-    public void SetupBannerSettingsViewModel()
-    {
         LoadTimeDependent();
         LoadGallery();
-        LoadCustomPictures();
+        LoadCustomPicture();
 
         switch (Configuration.Apperance.HomeBanner)
         {
@@ -80,19 +70,26 @@ public partial class BannerSettingsViewModel : ObservableObject
         };
         SelectedBannerType = Configuration.Apperance.HomeBanner;
     }
+    #endregion
 
-    public void OnPageLoaded(object _, RoutedEventArgs _1) =>
+
+    #region Navigation
+    [RelayCommand]
+    void SetNavigationIndex() =>
         navigation.SetCurrentIndex(5);
 
 
     [ObservableProperty]
-    Brush bannerBrush = default!;
+    Visibility timeDependentVisibility = Visibility.Visible;
 
-    void ResetBannerBrush()
-    {
-        BannerBrush = new ImageBrush() { ImageSource = "Banners/NoBanner.png".AsImage(), Stretch = Stretch.UniformToFill };
-        logger.Log("Reset banner brush");
-    }
+    [ObservableProperty]
+    Visibility galleryVisibility = Visibility.Collapsed;
+
+    [ObservableProperty]
+    Visibility customPictureVisibility = Visibility.Collapsed;
+
+    [ObservableProperty]
+    Visibility solidColorVisibility = Visibility.Collapsed;
 
 
     [ObservableProperty]
@@ -137,8 +134,22 @@ public partial class BannerSettingsViewModel : ObservableObject
         Configuration.Apperance.HomeBanner = value;
         logger.Log("Selected BannerType changed");
     }
+    #endregion
 
 
+    #region Banner Image
+    [ObservableProperty]
+    Brush bannerBrush = default!;
+
+    void ResetBannerBrush()
+    {
+        BannerBrush = new ImageBrush() { ImageSource = "Banners/NoBanner.png".AsImage(), Stretch = Stretch.UniformToFill };
+        logger.Log("Reset banner brush");
+    }
+    #endregion
+
+
+    #region TimeDependent
     void LoadTimeDependent()
     {
         TimeDependentItems.Clear();
@@ -199,8 +210,10 @@ public partial class BannerSettingsViewModel : ObservableObject
         };
         logger.Log("Set home banner: TimeDependent" + DateTime.Now.Hour.RoundDown(new[] { 0, 3, 6, 9, 12, 15, 18, 21 }));
     }
+    #endregion
 
 
+    #region Gallery
     void LoadGallery()
     {
         GalleryItems.Clear();
@@ -243,7 +256,11 @@ public partial class BannerSettingsViewModel : ObservableObject
 
     public async Task OpenBannerGalleryItem(BannerGalleryItem item)
     {
-        ScrollLane element = new() { ItemsSource = item.Collection, ItemTemplate = (DataTemplate)Application.Current.Resources["BannerGalleryItemTemplate"] };
+        ScrollLane element = new()
+        {
+            ItemsSource = item.Collection,
+            ItemTemplate = (DataTemplate)Application.Current.Resources["BannerGalleryItemTemplate"]
+        };
 
         if (await message.ShowAsync($"{item.Title} - Count: {item.Collection.Count}", element, primaryButton: "Ok") != ContentDialogResult.Primary)
             return;
@@ -259,9 +276,11 @@ public partial class BannerSettingsViewModel : ObservableObject
         BannerBrush = new ImageBrush() { ImageSource = Uri.IsWellFormedUriString((string)element.SelectedItem, UriKind.Absolute) ? ((string)element.SelectedItem).AsImage(false) : "Banners/NoBanner.png".AsImage(), Stretch = Stretch.UniformToFill };
         logger.Log("Set home banner: Gallery");
     }
+    #endregion
 
 
-    void LoadCustomPictures()
+    #region Custom Picture
+    void LoadCustomPicture()
     {
         CustomPictures.Clear();
 
@@ -296,7 +315,7 @@ public partial class BannerSettingsViewModel : ObservableObject
 
     readonly FileOpenPicker filePicker = new() { SuggestedStartLocation = PickerLocationId.PicturesLibrary };
 
-    [RelayCommand(AllowConcurrentExecutions = false)]
+    [RelayCommand]
     async Task AddCustomPicture()
     {
         StorageFile file = await filePicker.PickSingleFileAsync();
@@ -313,36 +332,33 @@ public partial class BannerSettingsViewModel : ObservableObject
 
             await fileSystem.CopyFileAsync(file.Path, requestedPath, true);
 
-            LoadCustomPictures();
+            LoadCustomPicture();
         }
         catch (Exception ex)
         {
-            await message.ShowAsync("Something went wrong :(", $"It looks like IcyLauncher cant copy this file. Please verify that the file still exists ({file.DisplayName}).\n\nError: {ex.Message}", closeButton: "Ok");
+            await message.ShowAsync("Something went wrong :(", $"It looks like IcyLauncher cant copy this file. Please verify that the file still exists ({file.DisplayName}).\n\nError: {ex.Message}");
         }
 
         logger.Log("Added new CustomPicture");
     }
 
-    [RelayCommand(AllowConcurrentExecutions = false, FlowExceptionsToTaskScheduler = true, IncludeCancelCommand = true)]
-    async Task ResetCustomPicturesAsync(CancellationToken cancellationToken)
+    [RelayCommand(FlowExceptionsToTaskScheduler = true)]
+    async Task ResetCustomPicturesAsync()
     {
         foreach (string file in CustomPictures)
         {
-            if (cancellationToken.IsCancellationRequested)
-                break;
-
             try
             {
-                await fileSystem.DeleteFileAsync(file, 1000, cancellationToken);
+                fileSystem.DeleteFile(file);
             }
             catch (Exception ex)
             {
                 if (ex is not OperationCanceledException)
-                    await message.ShowAsync("Somethig went wrong :(", $"It looks like IcyLauncher cant delete this file ({file}).\n\nError: {ex.Message}", closeButton: "Ok");
+                    await message.ShowAsync("Somethig went wrong :(", $"It looks like IcyLauncher cant delete this file ({file}).\n\nError: {ex.Message}");
             }
         }
 
-        LoadCustomPictures();
+        LoadCustomPicture();
         logger.Log("Reset CustomPictures");
     }
 
@@ -352,17 +368,19 @@ public partial class BannerSettingsViewModel : ObservableObject
 
         try
         {
-            await fileSystem.DeleteFileAsync(file, 100000, CancellationToken.None);
+            fileSystem.DeleteFile(file);
         }
         catch (Exception ex)
         {
-            await message.ShowAsync("Something went wrong :(", $"It looks like IcyLauncher cant delete this file. Please verify that you have given permissions to IcyLauncher and the file is not locked.\n\nError: {ex.Message}", closeButton: "Ok");
+            await message.ShowAsync("Something went wrong :(", $"It looks like IcyLauncher cant delete this file. Please verify that you have given permissions to IcyLauncher and the file is not locked.\n\nError: {ex.Message}");
         }
 
-        LoadCustomPictures();
+        LoadCustomPicture();
     }
+    #endregion
 
 
+    #region SolidColor
     [ObservableProperty]
     int selectedSolidColor = -1;
 
@@ -403,4 +421,5 @@ public partial class BannerSettingsViewModel : ObservableObject
 
         logger.Log("Reset SolidColors");
     }
+    #endregion
 }

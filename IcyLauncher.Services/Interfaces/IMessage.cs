@@ -15,7 +15,7 @@ public interface IMessage
     /// <param name="primaryButton">The content of the primary button</param>
     /// <param name="secondaryButton">The content of the secondary button</param>
     /// <returns>The result of the dialog (ContentDialogResult)</returns>
-    Task<ContentDialogResult> ShowAsync(string title, object content, bool awaitPreviousDialog = false, string? closeButton = "Cancel", string? primaryButton = null, string? secondaryButton = null);
+    Task<ContentDialogResult> ShowAsync(string title, object content, bool awaitPreviousDialog = false, string? closeButton = "Ok", string? primaryButton = null, string? secondaryButton = null);
 
     /// <summary>
     /// Queues a new dialog
@@ -25,5 +25,5 @@ public interface IMessage
     /// <param name="closeButton">The content of the close button</param>
     /// <param name="primaryButton">The content of the primary button</param>
     /// <param name="secondaryButton">The content of the secondary button</param>
-    void Show(string title, object content, string? closeButton = "Cancel", string? primaryButton = null, string? secondaryButton = null);
+    void Show(string title, object content, string? closeButton = "Ok", string? primaryButton = null, string? secondaryButton = null);
 }

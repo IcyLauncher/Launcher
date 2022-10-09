@@ -3,7 +3,6 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mdls="using:IcyLauncher.Data.Models">
-
     <DataTemplate x:Key="BannerGalleryTemplate" x:DataType="mdls:BannerGalleryItem">
         <Grid
             Width="132"
@@ -55,7 +54,6 @@
                 BorderBrush="Transparent"
                 Click="OnOpenItemClicked"
                 Style="{StaticResource NoAnimationButton}" />
-
         </Grid>
     </DataTemplate>
 </ResourceDictionary>

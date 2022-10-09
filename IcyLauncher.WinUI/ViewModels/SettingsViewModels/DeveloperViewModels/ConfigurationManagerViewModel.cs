@@ -29,11 +29,11 @@ public partial class ConfigurationManagerViewModel : ObservableObject
         try
         {
             CurrentConfig = configurationManager.Export();
-            await message.ShowAsync("configurationManager.Export()", $"Method completed.", closeButton: "Ok");
+            await message.ShowAsync("configurationManager.Export()", $"Method completed.");
         }
         catch (Exception ex)
         {
-            await message.ShowAsync("configurationManager.Export()", $"Method completed.\nException{ex.Format()}", closeButton: "Ok");
+            await message.ShowAsync("configurationManager.Export()", $"Method completed.\nException{ex.Format()}");
         }
     }
 
@@ -45,11 +45,11 @@ public partial class ConfigurationManagerViewModel : ObservableObject
             Configuration configuration = converter.ToObject<Configuration>(CurrentConfig);
             configurationManager.Load(configuration!, IgnoreTheme);
 
-            await message.ShowAsync("configurationManager.Load()", $"Method completed.", closeButton: "Ok");
+            await message.ShowAsync("configurationManager.Load()", $"Method completed.");
         }
         catch (Exception ex)
         {
-            await message.ShowAsync("configurationManager.Load()", $"Method completed.\nException{ex.Format()}", closeButton: "Ok");
+            await message.ShowAsync("configurationManager.Load()", $"Method completed.\nException{ex.Format()}");
         }
     }
 }

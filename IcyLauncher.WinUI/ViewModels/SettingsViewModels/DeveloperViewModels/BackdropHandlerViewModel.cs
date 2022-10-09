@@ -79,11 +79,11 @@ public partial class BackdropHandlerViewModel : ObservableObject
         try
         {
             bool result = backdropHandler.SetBackdrop(Backdrop, Enable, UseDarkModeIsNull ? null : UseDarkMode);
-            await message.ShowAsync("backdropHandler.SetBackdrop()", $"Method completed.\nResult: {result}", closeButton: "Ok");
+            await message.ShowAsync("backdropHandler.SetBackdrop()", $"Method completed.\nResult: {result}");
         }
         catch (Exception ex)
         {
-            await message.ShowAsync("backdropHandler.SetBackdrop()", $"Method completed.\nException{ex.Format()}", closeButton: "Ok");
+            await message.ShowAsync("backdropHandler.SetBackdrop()", $"Method completed.\nException{ex.Format()}");
         }
     }
 
@@ -93,11 +93,11 @@ public partial class BackdropHandlerViewModel : ObservableObject
         try
         {
             backdropHandler.SetDarkMode(Backdrop, UseDarkMode);
-            await message.ShowAsync("backdropHandler.SetDarkMode()", $"Method completed", closeButton: "Ok");
+            await message.ShowAsync("backdropHandler.SetDarkMode()", $"Method completed");
         }
         catch (Exception ex)
         {
-            await message.ShowAsync("backdropHandler.SetDarkMode()", $"Method completed.\nException{ex.Format()}", closeButton: "Ok");
+            await message.ShowAsync("backdropHandler.SetDarkMode()", $"Method completed.\nException{ex.Format()}");
         }
     }
 }

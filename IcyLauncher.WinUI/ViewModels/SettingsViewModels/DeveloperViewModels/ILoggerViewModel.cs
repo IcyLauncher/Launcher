@@ -45,11 +45,11 @@ public partial class ILoggerViewModel : ObservableObject
         try
         {
             logger.Log(Message_, string.IsNullOrEmpty(Exception) ? null : new(Exception), LogLevel, FilePath, MemberName);
-            await message.ShowAsync("logger.Log()", $"Method completed.", closeButton: "Ok");
+            await message.ShowAsync("logger.Log()", $"Method completed.");
         }
         catch (Exception ex)
         {
-            await message.ShowAsync("logger.Log()", $"Method completed.\nException{ex.Format()}", closeButton: "Ok");
+            await message.ShowAsync("logger.Log()", $"Method completed.\nException{ex.Format()}");
         }
     }
 

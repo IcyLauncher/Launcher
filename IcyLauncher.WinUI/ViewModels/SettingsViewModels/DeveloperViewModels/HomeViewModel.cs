@@ -47,5 +47,6 @@ public partial class HomeViewModel : ObservableObject
 
     [RelayCommand]
     void GenerateRandomCat(Image sender) =>
-        sender.Source = "https://cataas.com/cat/says/IcyLauncher".AsImage(false, BitmapCreateOptions.IgnoreImageCache);
+        sender.Source = "https://thecatapi.com/api/images/get".AsImage(false, BitmapCreateOptions.IgnoreImageCache);
+        // other cat api: https://cataas.com/cat/says/IcyLauncher
 }

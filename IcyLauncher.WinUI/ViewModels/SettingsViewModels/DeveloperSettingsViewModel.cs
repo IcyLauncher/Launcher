@@ -7,6 +7,7 @@ namespace IcyLauncher.WinUI.ViewModels.SettingsViewModels;
 
 public partial class DeveloperSettingsViewModel : ObservableObject
 {
+    #region Setup
     readonly ILogger<ProfilesViewModel> logger;
     readonly ConfigurationManager configurationManager;
     readonly ThemeManager themeManager;
@@ -61,7 +62,11 @@ public partial class DeveloperSettingsViewModel : ObservableObject
 
         Configuration = configuration.Value;
 
+        SetupViewModel();
+    }
 
+    void SetupViewModel()
+    {
         Tabs = new()
         {
             new TabViewItem()
@@ -74,34 +79,28 @@ public partial class DeveloperSettingsViewModel : ObservableObject
         };
     }
 
-
-    public void OnPageLoaded(object sender, RoutedEventArgs _1)
+    [RelayCommand]
+    void SetupPage(TabView tabContainer)
     {
         navigation.SetCurrentIndex(5);
 
 
-        TabView tabView = (TabView)((Page)sender).Content;
-
         if (flyout is null || addButton is null)
         {
-            Grid mainGrid = (Grid)VisualTreeHelper.GetChild(tabView, 0);
+            Grid mainGrid = (Grid)VisualTreeHelper.GetChild(tabContainer, 0);
             Grid tabGrid = (Grid)mainGrid.Children[0];
             Border buttonContainer = (Border)tabGrid.Children[3];
 
             addButton = (Button)buttonContainer.Child;
-            flyout = FlyoutBase.GetAttachedFlyout(tabView);
+            flyout = FlyoutBase.GetAttachedFlyout(tabContainer);
         }
     }
+    #endregion
 
 
-    public ObservableCollection<TabViewItem> Tabs;
-
-    [ObservableProperty]
-    int selectedIndex;
-
-
-    Button? addButton = null;
-    FlyoutBase? flyout = null;
+    #region Flyout
+    Button? addButton;
+    FlyoutBase? flyout;
 
     [RelayCommand]
     void ShowAddButtonFlyout()
@@ -109,6 +108,14 @@ public partial class DeveloperSettingsViewModel : ObservableObject
         if (flyout is not null)
             flyout.ShowAt(addButton);
     }
+    #endregion
+
+
+    #region TabContainer
+    public ObservableCollection<TabViewItem> Tabs = default!;
+
+    [ObservableProperty]
+    int selectedIndex;
 
 
     [RelayCommand]
@@ -151,8 +158,8 @@ public partial class DeveloperSettingsViewModel : ObservableObject
         SelectedIndex = Tabs.Count - 1;
     }
 
-    public void OnTabCloseRequested(TabView _, TabViewTabCloseRequestedEventArgs args)
-    {
+    [RelayCommand]
+    void RemoveTabViewItem(TabViewTabCloseRequestedEventArgs args) =>
         Tabs.Remove(args.Tab);
-    }
+    #endregion
 }

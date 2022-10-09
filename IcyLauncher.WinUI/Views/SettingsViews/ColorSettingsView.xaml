@@ -2,16 +2,13 @@
     x:Class="IcyLauncher.WinUI.Views.SettingsViews.ColorSettingsView"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:core="using:Microsoft.Xaml.Interactions.Core"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:ex="using:CommunityToolkit.WinUI.UI"
-    xmlns:hlprs="using:IcyLauncher.Helpers"
+    xmlns:i="using:Microsoft.Xaml.Interactivity"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:md="using:CommunityToolkit.WinUI.UI.Media"
-    xmlns:mdls="using:IcyLauncher.Data.Models"
-    xmlns:media="using:CommunityToolkit.WinUI.UI.Media"
     xmlns:xmle="using:IcyLauncher.Xaml.Elements"
-    Background="Transparent"
-    Loaded="{x:Bind viewModel.OnPageLoaded}"
     NavigationCacheMode="Enabled"
     mc:Ignorable="d">
     <Page.Resources>
@@ -25,12 +22,16 @@
         <x:Boolean x:Key="par0">False</x:Boolean>
         <x:Boolean x:Key="par1">True</x:Boolean>
     </Page.Resources>
+    <i:Interaction.Behaviors>
+        <core:EventTriggerBehavior EventName="Loaded">
+            <core:InvokeCommandAction Command="{x:Bind viewModel.SetNavigationIndexCommand}" />
+        </core:EventTriggerBehavior>
+    </i:Interaction.Behaviors>
 
     <xmle:HCont
         Title="Settings  |  Home Banner"
         Style="{StaticResource Page}"
         VerticalScrollBar="{x:Bind viewModel.Configuration.Launcher.IsScrollbarsEnabled, Mode=OneWay, Converter={StaticResource BoolScrollbarVisibilityConverter}}">
-
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
@@ -58,22 +59,17 @@
                 </xmle:MiniLauncher>
             </Viewbox>
 
-            <Grid Grid.Row="2" HorizontalAlignment="Center">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto" />
-                    <ColumnDefinition Width="8" />
-                    <ColumnDefinition Width="Auto" />
-                </Grid.ColumnDefinitions>
-
+            <StackPanel
+                Grid.Row="2"
+                HorizontalAlignment="Center"
+                Orientation="Horizontal"
+                Spacing="8">
                 <Button
                     Command="{x:Bind viewModel.SaveColorsCommand}"
                     Content="Save Colors"
                     ToolTipService.ToolTip="Save current colors" />
 
-                <Button
-                    Grid.Column="2"
-                    Content="Reset Colors"
-                    ToolTipService.ToolTip="Reset colors to default">
+                <Button Content="Reset Colors" ToolTipService.ToolTip="Reset colors to default">
                     <Button.Flyout>
                         <MenuFlyout>
                             <MenuFlyoutItem
@@ -87,7 +83,7 @@
                         </MenuFlyout>
                     </Button.Flyout>
                 </Button>
-            </Grid>
+            </StackPanel>
 
             <StackPanel Grid.Row="4" Spacing="8">
                 <Expander

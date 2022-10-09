@@ -2,40 +2,33 @@
     x:Class="IcyLauncher.WinUI.Views.SettingsViews.DeveloperSettingsView"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:core="using:Microsoft.Xaml.Interactions.Core"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:ex="using:CommunityToolkit.WinUI.UI"
-    xmlns:hlprs="using:IcyLauncher.Helpers"
+    xmlns:i="using:Microsoft.Xaml.Interactivity"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:md="using:CommunityToolkit.WinUI.UI.Media"
-    xmlns:mdls="using:IcyLauncher.Data.Models"
-    xmlns:media="using:CommunityToolkit.WinUI.UI.Media"
-    xmlns:xmle="using:IcyLauncher.Xaml.Elements"
     xmlns:xtntns="using:IcyLauncher.Helpers.Extentions"
-    Background="Transparent"
-    Loaded="{x:Bind viewModel.OnPageLoaded}"
     NavigationCacheMode="Disabled"
     mc:Ignorable="d">
-    <Page.Resources>
-        <md:AttachedCardShadow
-            x:Key="CardShadow"
-            BlurRadius="40"
-            CornerRadius="8"
-            Opacity="0.3"
-            Offset="0,10,0" />
-
-        <x:Boolean x:Key="par0">False</x:Boolean>
-        <x:Boolean x:Key="par1">True</x:Boolean>
-    </Page.Resources>
+    <i:Interaction.Behaviors>
+        <core:EventTriggerBehavior EventName="Loaded">
+            <core:InvokeCommandAction Command="{x:Bind viewModel.SetupPageCommand}" CommandParameter="{x:Bind TabContainer}" />
+        </core:EventTriggerBehavior>
+    </i:Interaction.Behaviors>
 
     <TabView
+        Name="TabContainer"
         Margin="12,0"
         VerticalAlignment="Stretch"
         AddTabButtonCommand="{x:Bind viewModel.ShowAddButtonFlyoutCommand}"
         CanDragTabs="False"
         CanReorderTabs="False"
         SelectedIndex="{x:Bind viewModel.SelectedIndex, Mode=TwoWay}"
-        TabCloseRequested="{x:Bind viewModel.OnTabCloseRequested}"
         TabItemsSource="{x:Bind viewModel.Tabs}">
+        <i:Interaction.Behaviors>
+            <core:EventTriggerBehavior EventName="TabCloseRequested">
+                <core:InvokeCommandAction Command="{x:Bind viewModel.RemoveTabViewItemCommand}" />
+            </core:EventTriggerBehavior>
+        </i:Interaction.Behaviors>
         <FlyoutBase.AttachedFlyout>
             <MenuFlyout Placement="Bottom">
                 <MenuFlyoutItem
