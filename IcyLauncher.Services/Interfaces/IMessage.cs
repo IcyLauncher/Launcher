@@ -6,6 +6,14 @@ namespace IcyLauncher.Services.Interfaces;
 public interface IMessage
 {
     /// <summary>
+    /// Queues a given dialog asynchronously and optionally waits until the previous dialog is closed
+    /// </summary>
+    /// <param name="dialog">The dialog which should be shown</param>
+    /// <param name="awaitPreviousDialog">Whether it should wait until the previous dialog is closed</param>
+    /// <returns>The result of the dialog (ContentDialogResult)</returns>
+    Task<ContentDialogResult> ShowAsync(ContentDialog dialog, bool awaitPreviousDialog = false);
+
+    /// <summary>
     /// Queues a new dialog asynchronously and optionally waits until the previous dialog is closed
     /// </summary>
     /// <param name="title">The title of the dialog</param>
