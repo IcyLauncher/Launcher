@@ -49,6 +49,7 @@ public partial class App : Application
                 // Utilities
                 services.AddScoped<IConverter, JsonConverter>();
                 services.AddScoped<ImagingUtility>();
+                services.AddScoped<FeedbackRequest>();
                 // Local
                 services.AddScoped<IFileSystem, FileSystem>();
                 services.AddScoped<Updater>();

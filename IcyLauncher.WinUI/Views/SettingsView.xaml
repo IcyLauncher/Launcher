@@ -212,6 +212,10 @@
                                     ToolTipService.ToolTip="Reset versions directory" />
                             </Grid>
                         </ContentControl>
+
+                        <ContentControl Tag="Ask For Feedback|Randomly ask for feedback which helps us a lot" Template="{StaticResource SettingsCard}">
+                            <ToggleSwitch IsOn="{x:Bind viewModel.Configuration.Launcher.AskForFeedback, Mode=TwoWay}" ToolTipService.ToolTip="Enable/Disable ask for feedback" />
+                        </ContentControl>
                     </StackPanel>
                 </Expander.Tag>
             </Expander>

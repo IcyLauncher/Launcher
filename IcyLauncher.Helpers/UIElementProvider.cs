@@ -163,7 +163,9 @@ public class UIElementProvider
     }
 
 
-    public static Window LoggerWindow(out TextBlock content, out ScrollViewer container)
+    public static Window LoggerWindow(
+        out TextBlock content,
+        out ScrollViewer container)
     {
         content = new()
         {
@@ -184,5 +186,55 @@ public class UIElementProvider
             Content = container,
             Title = "IcyLauncher - Logger"
         };
+    }
+
+
+    public static StackPanel FeedbackContainer(
+        out TextBlock title,
+        out TextBlock description,
+        out RatingControl rating,
+        out TextBox content)
+    {
+        title = new()
+        {
+            Text = "Do you like IcyLauncher?❄️",
+            FontSize = 22,
+            HorizontalAlignment = HorizontalAlignment.Center
+        };
+        description = new()
+        {
+            Text = "Feedback helps us to make your IcyLauncher experience better.\nPlease tell us what you like and what we still can improve.",
+            FontSize = 16,
+            HorizontalAlignment = HorizontalAlignment.Center,
+            HorizontalTextAlignment = TextAlignment.Center
+        };
+
+        RatingControl rating_ = new();
+        TextBox content_ = new()
+        {
+            MaxWidth = 400,
+            MaxHeight = 200,
+            HorizontalAlignment = HorizontalAlignment.Center,
+            Height = double.NaN,
+            AcceptsReturn = true,
+            IsSpellCheckEnabled = true,
+            MaxLength = 200,
+            Visibility = Visibility.Collapsed,
+            PlaceholderText = "Your Feedback...",
+            TextWrapping = TextWrapping.Wrap
+        };
+
+        rating_.ValueChanged += (s, e) => content_.Visibility = rating_.Value == -1 ? Visibility.Collapsed : Visibility.Visible;
+        ScrollViewer.SetVerticalScrollBarVisibility(content_, ScrollBarVisibility.Auto);
+
+        rating = rating_;
+        content = content_;
+
+        StackPanel container = new();
+        container.Children.Add(title);
+        container.Children.Add(description);
+        container.Children.Add(new Viewbox() { Child = rating, Height = 50, Margin = new(0, 12, 0, 0) });
+        container.Children.Add(content);
+        return container;
     }
 }

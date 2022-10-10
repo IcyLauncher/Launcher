@@ -31,6 +31,9 @@ public partial class ConfigurationLauncher : ObservableObject
 
     [ObservableProperty]
     string versionsDirectory = $"{Computer.CurrentDirectory}\\Versions";
+
+    [ObservableProperty]
+    bool askForFeedback = true;
 }
 
 public partial class ConfigurationApperance : ObservableObject
