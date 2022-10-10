@@ -19,6 +19,7 @@ public partial class DeveloperSettingsViewModel : ObservableObject
     readonly BackdropHandler backdropHandler;
     readonly IConverter converter;
     readonly ImagingUtility imagingUtility;
+    readonly FeedbackRequest feedbackRequest;
     readonly IFileSystem fileSystem;
     readonly Updater updater;
     readonly INavigation navigation;
@@ -39,6 +40,7 @@ public partial class DeveloperSettingsViewModel : ObservableObject
         BackdropHandler backdropHandler,
         IConverter converter,
         ImagingUtility imagingUtility,
+        FeedbackRequest feedbackRequest,
         IFileSystem fileSystem,
         Updater updater,
         INavigation navigation,
@@ -55,6 +57,7 @@ public partial class DeveloperSettingsViewModel : ObservableObject
         this.backdropHandler = backdropHandler;
         this.converter = converter;
         this.imagingUtility = imagingUtility;
+        this.feedbackRequest = feedbackRequest;
         this.fileSystem = fileSystem;
         this.updater = updater;
         this.navigation = navigation;
@@ -140,6 +143,7 @@ public partial class DeveloperSettingsViewModel : ObservableObject
             "BackdropHandler" => new() { Content = new BackdropHandlerView(new(backdropHandler, message)) },
             "IConverter" => new() { Content = new IConverterView(new(converter, message)) },
             "ImagingUtility" => new() { Content = new ImagingUtilityView(new(imagingUtility, message)) },
+            "FeedbackRequest" => new() { Content = new FeedbackRequestView(new(feedbackRequest, message)) },
             "IFileSystem" => new() { Content = new IFileSystemView(new(fileSystem, message)) },
             "Updater" => new() { Content = new UpdaterView(new(updater)) },
             "INavigation" => new() { Content = new INavigationView(new(navigation, message)) },

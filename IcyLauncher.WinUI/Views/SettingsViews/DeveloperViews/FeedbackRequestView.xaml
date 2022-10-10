@@ -1,0 +1,64 @@
+﻿<Page
+    x:Class="IcyLauncher.WinUI.Views.SettingsViews.DeveloperViews.FeedbackRequestView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+    <Page.Transitions>
+        <EntranceThemeTransition />
+    </Page.Transitions>
+
+    <ScrollViewer VerticalAlignment="Stretch">
+        <StackPanel Padding="0,0,0,12" Spacing="8">
+            <ContentControl Tag="RandomShouldShow|[Type: bool]  Returns a boolean with the chance of 1/20 to be true" Template="{StaticResource SettingsCard}">
+                <StackPanel Orientation="Horizontal" Spacing="8">
+                    <TextBox IsHitTestVisible="False" Text="{x:Bind viewModel.RandomShouldShow, Mode=OneWay}" />
+                    <Button Command="{x:Bind viewModel.UpdateRandomShouldShowCommand}" Content="Update" />
+                </StackPanel>
+            </ContentControl>
+
+            <ContentControl Tag="ShowAsync()|[Returns: Feedback]  Requests a new user feedback popup" Template="{StaticResource SettingsCard}">
+                <Button Command="{x:Bind viewModel.ShowCommand}" Content="Test Method" />
+            </ContentControl>
+
+            <Expander
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Top"
+                Header="SubmitAsync()|[Returns: bool]  Submits a given feedback to the connected API"
+                Template="{StaticResource CardExpander}">
+                <Expander.Tag>
+                    <StackPanel Spacing="8">
+                        <ContentControl Tag="feedback.Result|[optional: FeedbackResult.Cancel] [Type: FeedbackResult]" Template="{StaticResource SettingsCard}">
+                            <ComboBox
+                                Width="200"
+                                PlaceholderText="Backdrop..."
+                                SelectedIndex="{x:Bind viewModel.FeedbackResult, Mode=TwoWay, Converter={StaticResource EnumIntConverter}}">
+                                <ComboBoxItem Content="Cancel" />
+                                <ComboBoxItem Content="Submit" />
+                                <ComboBoxItem Content="NeverShowAgain" />
+                            </ComboBox>
+                        </ContentControl>
+                        <ContentControl Tag="feedback.Stars|[optional: null] [Type: double?]" Template="{StaticResource SettingsCard}">
+                            <RatingControl Value="{x:Bind viewModel.FeedbackStars, Mode=TwoWay}" />
+                        </ContentControl>
+                        <ContentControl Tag="feedback.Content|[optional: null] [Type: string?]" Template="{StaticResource SettingsCard}">
+                            <TextBox
+                                Width="200"
+                                PlaceholderText="Content..."
+                                Text="{x:Bind viewModel.FeedbackContent, Mode=TwoWay}" />
+                        </ContentControl>
+                        <ContentControl Tag="feedback.Account|[optional: null] [Type: string?]" Template="{StaticResource SettingsCard}">
+                            <TextBox
+                                Width="200"
+                                PlaceholderText="Account..."
+                                Text="{x:Bind viewModel.FeedbackAccount, Mode=TwoWay}" />
+                        </ContentControl>
+                    </StackPanel>
+                </Expander.Tag>
+
+                <Button Command="{x:Bind viewModel.SubmitCommand}" Content="Test Method" />
+            </Expander>
+        </StackPanel>
+    </ScrollViewer>
+</Page>

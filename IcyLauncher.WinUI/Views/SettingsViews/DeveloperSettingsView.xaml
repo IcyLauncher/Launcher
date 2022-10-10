@@ -105,6 +105,12 @@
                 <MenuFlyoutItem
                     Command="{x:Bind viewModel.AddTabViewItemCommand}"
                     CommandParameter="{Binding RelativeSource={RelativeSource Self}}"
+                    Icon="{x:Bind xtntns:StringExtentions.AsIcon('&#xE930;')}"
+                    Text="FeedbackRequest"
+                    ToolTipService.ToolTip="Service to request user feedback and submit it to the connected API" />
+                <MenuFlyoutItem
+                    Command="{x:Bind viewModel.AddTabViewItemCommand}"
+                    CommandParameter="{Binding RelativeSource={RelativeSource Self}}"
                     Icon="{x:Bind xtntns:StringExtentions.AsIcon('&#xE6E3;')}"
                     Text="IFileSystem"
                     ToolTipService.ToolTip="Service to communicate with the local file system" />

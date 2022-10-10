@@ -143,6 +143,7 @@
 		<None Remove="Views\SettingsViews\DeveloperViews\AcrylicBackdropHandlerView.xaml" />
 		<None Remove="Views\SettingsViews\DeveloperViews\BackdropHandlerView.xaml" />
 		<None Remove="Views\SettingsViews\DeveloperViews\ConfigurationManagerView.xaml" />
+		<None Remove="Views\SettingsViews\DeveloperViews\FeedbackRequestView.xaml" />
 		<None Remove="Views\SettingsViews\DeveloperViews\HomeView.xaml" />
 		<None Remove="Views\SettingsViews\DeveloperViews\IConverterView.xaml" />
 		<None Remove="Views\SettingsViews\DeveloperViews\IFileSystemView.xaml" />
@@ -514,6 +515,10 @@
 		  <SubType>Designer</SubType>
 		</Page>
 		<Page Update="Views\SettingsViews\DeveloperViews\AcrylicBackdropHandlerView.xaml">
+		  <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+		  <SubType>Designer</SubType>
+		</Page>
+		<Page Update="Views\SettingsViews\DeveloperViews\FeedbackRequestView.xaml">
 		  <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
 		  <SubType>Designer</SubType>
 		</Page>
