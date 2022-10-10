@@ -345,6 +345,18 @@
             <SolidColorBrush x:Key="TabViewScrollButtonForegroundDisabled" Color="{Binding Color, Source={ThemeResource TextDisabled}}" />
 
 
+            <SolidColorBrush x:Key="RatingControlUnselectedForeground" Color="{Binding Color, Source={ThemeResource TextSecondary}}" />
+            <SolidColorBrush x:Key="RatingControlPointerOverUnselectedForeground" Color="{Binding Color, Source={ThemeResource TextSecondary}}" />
+
+            <SolidColorBrush x:Key="RatingControlPlaceholderForeground" Color="{Binding Color, Source={ThemeResource ControlOutline}}" />
+            <SolidColorBrush x:Key="RatingControlPointerOverPlaceholderForeground" Color="{Binding Color, Source={ThemeResource AccentLight}}" />
+
+            <SolidColorBrush x:Key="RatingControlSelectedForeground" Color="{Binding Color, Source={ThemeResource AccentPrimary}}" />
+            <SolidColorBrush x:Key="RatingControlDisabledSelectedForeground" Color="{Binding Color, Source={ThemeResource AccentLight}}" />
+
+            <SolidColorBrush x:Key="RatingControlCaptionForeground" Color="{Binding Color, Source={ThemeResource TextSecondary}}" />
+
+
             <SolidColorBrush x:Key="ExpanderHeaderBackground" Color="{Binding Color, Source={ThemeResource ControlPrimary}}" />
 
             <SolidColorBrush x:Key="ExpanderHeaderBorderBrush" Color="{Binding Color, Source={ThemeResource ControlOutline}}" />
