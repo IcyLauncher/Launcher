@@ -11,10 +11,11 @@ public sealed partial class HomeView : Page
         InitializeComponent();
 
 
-    protected override void OnNavigatedTo(NavigationEventArgs e)
+    protected override async void OnNavigatedTo(NavigationEventArgs e)
     {
         base.OnNavigatedTo(e);
         viewModel.LoadBannerImage();
+        await viewModel.AskForFeedback();
     }
 
     private void OnProfileContainerItemSelectionChanged(object sender, SelectionChangedEventArgs e)

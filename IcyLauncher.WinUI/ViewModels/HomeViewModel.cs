@@ -15,6 +15,8 @@ public partial class HomeViewModel : ObservableObject
     readonly SolidColorCollection solidColors;
     readonly ThemeManager themeManager;
     readonly ImagingUtility imagingUtility;
+    readonly FeedbackRequest feedbackRequest;
+    readonly IMessage message;
 
     public readonly Configuration Configuration;
     public readonly Updater Updater;
@@ -25,12 +27,16 @@ public partial class HomeViewModel : ObservableObject
         IOptions<SolidColorCollection> solidColors,
         ThemeManager themeManager,
         ImagingUtility imagingUtility,
-        Updater updater)
+        FeedbackRequest feedbackRequest,
+        Updater updater,
+        IMessage message)
     {
         this.logger = logger;
         this.solidColors = solidColors.Value;
         this.themeManager = themeManager;
         this.imagingUtility = imagingUtility;
+        this.feedbackRequest = feedbackRequest;
+        this.message = message;
 
         Configuration = configuration.Value;
         Updater = updater;
@@ -63,6 +69,21 @@ public partial class HomeViewModel : ObservableObject
         SetupBannerComposition((Rectangle)bannerContainer.Children[0]);
         SetupProfile((Grid)bannerContainer.Children[2]);
         LoadBannerImage();
+    }
+    #endregion
+
+
+    #region Feedback
+    public async Task AskForFeedback()
+    {
+        if (!feedbackRequest.RandomShouldShow)
+            return;
+
+        await Task.Delay(2000);
+        Feedback result = await feedbackRequest.ShowAsync();
+
+        if (result.Result == FeedbackResult.Submit)
+            await feedbackRequest.SubmitAsync(result);
     }
     #endregion
 
