@@ -209,7 +209,7 @@ public partial class SettingsViewModel : ObservableObject
     [RelayCommand]
     async Task ResetColorsAsync(bool darkMode)
     {
-        if (await message.ShowAsync("Are you sure?", $"If you click Ok your current color settings will be overwritten by the default {(darkMode ? "dark" : "light")} mode colors.\nThis will not effect your current accent colors.\nThis will also effect the blur color mode.", primaryButton: "Ok") != ContentDialogResult.Primary)
+        if (await message.ShowAsync("Are you sure?", $"If you click Ok your current color settings will be overwritten by the default {(darkMode ? "dark" : "light")} mode colors.\nThis will not effect your current accent colors.\nThis will also effect the blur color mode.", closeButton: "Cancel", primaryButton: "Ok") != ContentDialogResult.Primary)
             return;
 
         themeManager.Load(darkMode ? Theme.Dark : Theme.Light, true);
