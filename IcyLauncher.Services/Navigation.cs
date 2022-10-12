@@ -42,7 +42,7 @@ public class Navigation : INavigation
     /// </summary>
     /// <returns>The current navigation view item</returns>
     public NavigationViewItem? GetCurrentNavigationViewItem() =>
-        uIElementReciever.NavigationView.SelectedItem is NavigationViewItem current ? current : null;
+        uIElementReciever.NavigationView is NavigationView container ? container.SelectedItem is NavigationViewItem current ? current : null : null;
 
     /// <summary>
     /// Gets the LayoutRoot grid of the current navigation view item
