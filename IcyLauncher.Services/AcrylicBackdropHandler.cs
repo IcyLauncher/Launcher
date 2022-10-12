@@ -1,12 +1,13 @@
-﻿using Microsoft.UI.Composition;
+﻿using Microsoft.UI;
+using Microsoft.UI.Composition;
 using Microsoft.UI.Composition.SystemBackdrops;
+using Windows.UI;
 
 namespace IcyLauncher.Services;
 
 public class AcrylicBackdropHandler : IBackdropHandler
 {
     readonly ILogger logger;
-    readonly WindowHandler windowHandler;
     readonly ICompositionSupportsSystemBackdrop shell;
 
     readonly DesktopAcrylicController controller = new();
@@ -16,14 +17,14 @@ public class AcrylicBackdropHandler : IBackdropHandler
     /// </summary>
     public AcrylicBackdropHandler(
         ILogger<AcrylicBackdropHandler> logger,
-        WindowHandler windowHandler,
         Window shell)
     {
         this.logger = logger;
-        this.windowHandler = windowHandler;
         this.shell = (ICompositionSupportsSystemBackdrop)shell;
 
         controller.SetSystemBackdropConfiguration(new() { Theme = SystemBackdropTheme.Dark });
+        controller.LuminosityOpacity = 0.8f;
+        controller.TintOpacity = 0.8f;
 
         IsDarkModeEnabled = true;
 
@@ -50,8 +51,7 @@ public class AcrylicBackdropHandler : IBackdropHandler
                 return false;
             }
 
-            controller.LuminosityOpacity = IsDarkModeEnabled ? 0 : 1;
-            windowHandler.SetMainBackground("Background.Transparent");
+            controller.TintColor = IsDarkModeEnabled ? Color.FromArgb(255, 50, 50, 50) : Color.FromArgb(230, 255, 255, 255);
             controller.AddSystemBackdropTarget(shell);
 
             logger.Log("Set system backdrop");
@@ -73,7 +73,6 @@ public class AcrylicBackdropHandler : IBackdropHandler
         try
         {
             controller.ResetProperties();
-            windowHandler.SetMainBackground("Transparent");
             controller.RemoveSystemBackdropTarget(shell);
 
             logger.Log("Disabled system backdrop and reset controller");
@@ -96,7 +95,7 @@ public class AcrylicBackdropHandler : IBackdropHandler
         get => isDarkModeEnabled;
         set
         {
-            controller.LuminosityOpacity = value ? 0 : 1;
+            controller.TintColor = value ? Color.FromArgb(255, 50, 50, 50) : Color.FromArgb(230, 255, 255, 255);
 
             isDarkModeEnabled = value;
             logger.Log($"Updated system backdrop dark mode ({value})");
