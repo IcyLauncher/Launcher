@@ -11,6 +11,32 @@
 
     <ScrollViewer Padding="0,0,0,12" VerticalAlignment="Stretch">
         <StackPanel Spacing="8">
+            <ContentControl Tag="IsSubscribedToUISettings|[Type: bool]  A boolean wether the app is subscribed to the UISettings" Template="{StaticResource SettingsCard}">
+                <StackPanel Orientation="Horizontal" Spacing="8">
+                    <TextBox IsHitTestVisible="False" Text="{x:Bind viewModel.IsSubscribedToUISettings, Mode=OneWay}" />
+                    <Button Command="{x:Bind viewModel.UpdateIsSubscribedToUISettingsCommand}" Content="Update" />
+                </StackPanel>
+            </ContentControl>
+
+            <Expander
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Top"
+                Header="SubscribeToUISettings()|Subscribes the app to all UISettings changes"
+                Template="{StaticResource CardExpander}">
+                <Expander.Tag>
+                    <StackPanel Spacing="8">
+                        <ContentControl Tag="subscribe|[Type: bool]  The boolean wether to subscribe or unsubscribe" Template="{StaticResource SettingsCard}">
+                            <ToggleSwitch Name="SubscribeToUISettings" />
+                        </ContentControl>
+                    </StackPanel>
+                </Expander.Tag>
+
+                <Button
+                    Command="{x:Bind viewModel.SubscribeToUISettingsCommand}"
+                    CommandParameter="{x:Bind SubscribeToUISettings.IsOn}"
+                    Content="Test Method" />
+            </Expander>
+
             <ContentControl Tag="Colors|The current theme" Template="{StaticResource SettingsCard}">
                 <Button Content="configuration.Apperance.Colors" IsEnabled="False" />
             </ContentControl>

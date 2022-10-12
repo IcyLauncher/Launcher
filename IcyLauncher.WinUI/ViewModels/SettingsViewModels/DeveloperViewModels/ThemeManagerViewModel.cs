@@ -17,6 +17,29 @@ public partial class ThemeManagerViewModel : ObservableObject
     }
 
 
+    [ObservableProperty]
+    bool isSubscribedToUISettings;
+
+    [RelayCommand]
+    void UpdateIsSubscribedToUISettings() =>
+        IsSubscribedToUISettings = themeManager.IsSubscribedToUISettings;
+
+
+    [RelayCommand]
+    async Task SubscribeToUISettingsAsync(bool subscribe)
+    {
+        try
+        {
+            themeManager.SubscribeToUISettings(subscribe);
+            await message.ShowAsync("themeManager.SubscribeToUISettings()", $"Method completed.");
+        }
+        catch (Exception ex)
+        {
+            await message.ShowAsync("themeManager.SubscribeToUISettings()", $"Method completed.\nException{ex.Format()}");
+        }
+    }
+
+
     [RelayCommand]
     async Task RandomizeThemeAsync()
     {

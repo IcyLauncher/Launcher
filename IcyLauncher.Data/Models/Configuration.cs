@@ -47,6 +47,12 @@ public partial class ConfigurationApperance : ObservableObject
     [ObservableProperty]
     string homeBannerUri = "ms-appx:///Assets/Banners/NoBanner.png";
 
+    [ObservableProperty]
+    bool useSystemTheme = false;
+
+    [ObservableProperty]
+    bool useSystemAccent = false;
+
     public Theme Colors { get; set; } = new();
 
     [ObservableProperty]

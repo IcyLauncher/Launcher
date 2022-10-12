@@ -67,30 +67,10 @@ public partial class SettingsViewModel : ObservableObject
 
         IsUpdateVisible = Updater.IsUpdateAvailable;
 
-        Configuration.Apperance.PropertyChanged += (s, e) =>
-        {
-            switch (e.PropertyName)
-            {
-                case "Backdrop":
-                    if (backdropHandler.Current != Configuration.Apperance.Backdrop)
-                        backdropHandler.SetBackdrop(Configuration.Apperance.Backdrop, true, Configuration.Apperance.IsDarkModeBackdropEnabled);
-                    break;
-                case "IsDarkModeBackdropEnabled":
-                    backdropHandler.SetDarkMode(Configuration.Apperance.Backdrop, Configuration.Apperance.IsDarkModeBackdropEnabled);
-                    break;
-            }
-        };
+        UseCustomTitleBar = Configuration.Developer.UseCustomTitleBar;
+        UseSystemTheme = Configuration.Apperance.UseSystemTheme;
+        IsVibrancyEnabled = Computer.IsWindows11 && !Configuration.Apperance.UseSystemTheme;
 
-        Configuration.Developer.PropertyChanged += (s, e) =>
-        {
-            switch (e.PropertyName)
-            {
-                case "UseCustomTitleBar":
-                    if (windowHandler.HasCustomTitleBar != Configuration.Developer.UseCustomTitleBar)
-                        windowHandler.SetTitleBar(Configuration.Developer.UseCustomTitleBar ? uIElementReciever.TitleBarDragArea : null, uIElementReciever.TitleBarContainer);
-                    break;
-            }
-        };
     }
     #endregion
 
@@ -116,6 +96,19 @@ public partial class SettingsViewModel : ObservableObject
 
         if (presses > 0)
             presses--;
+    }
+
+
+    [ObservableProperty]
+    bool useCustomTitleBar;
+
+    partial void OnUseCustomTitleBarChanged(bool value)
+    {
+        if (value != windowHandler.HasCustomTitleBar)
+            windowHandler.SetTitleBar(value ? uIElementReciever.TitleBarDragArea : null, uIElementReciever.TitleBarContainer);
+
+        Configuration.Developer.UseCustomTitleBar = value;
+
     }
     #endregion
 
@@ -219,6 +212,24 @@ public partial class SettingsViewModel : ObservableObject
 
     public static bool IsDarkModeBackdropEnabled(int selectedIndex) =>
         selectedIndex == 0 || selectedIndex == 1;
+
+
+    [ObservableProperty]
+    bool useSystemTheme;
+
+    partial void OnUseSystemThemeChanged(bool value)
+    {
+        if (Configuration.Apperance.Backdrop == Backdrop.Vibrancy)
+            Configuration.Apperance.Backdrop = Backdrop.None;
+
+        Configuration.Apperance.UseSystemTheme = value;
+
+        IsVibrancyEnabled = Computer.IsWindows11 && !Configuration.Apperance.UseSystemTheme;
+    }
+
+
+    [ObservableProperty]
+    bool isVibrancyEnabled;
     #endregion
 
 

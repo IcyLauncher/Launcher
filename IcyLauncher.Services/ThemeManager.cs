@@ -1,4 +1,5 @@
 ﻿using IcyLauncher.Xaml.Converters;
+using Microsoft.UI.Dispatching;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Data;
 using Newtonsoft.Json;
@@ -13,6 +14,7 @@ public class ThemeManager
     readonly ILogger logger;
     readonly Configuration configuration;
     readonly UIElementReciever uiElementReciever;
+    readonly BackdropHandler backdropHandler;
     readonly IConverter converter;
     readonly INavigation navigation;
 
@@ -28,27 +30,74 @@ public class ThemeManager
         ILogger<ConfigurationManager> logger,
         IOptions<Configuration> configuration,
         UIElementReciever uiElementReciever,
+        BackdropHandler backdropHandler,
         IConverter converter,
         INavigation navigation)
     {
         this.logger = logger;
         this.configuration = configuration.Value;
         this.uiElementReciever = uiElementReciever;
+        this.backdropHandler = backdropHandler;
         this.converter = converter;
         this.navigation = navigation;
 
         this.configuration.Apperance.Colors.Accent.PropertyChanged += AccentColorsValuesChanged;
-        //this.configuration.Apperance.Colors.Background.PropertyChanged += BackgroundColorsValuesChanged;
-        //this.configuration.Apperance.Colors.Text.PropertyChanged += TextColorsValuesChanged;
         this.configuration.Apperance.Colors.Control.PropertyChanged += ControlColorsValuesChanged;
-        //this.configuration.Apperance.Colors.Control.Solid.PropertyChanged += ControlSolidColorsValuesChanged;
-        new UISettings().ColorValuesChanged += SystemColorsValuesChanged;
+
+        this.configuration.Apperance.PropertyChanged += ValuesChanged;
+
+        SubscribeToUISettings(this.configuration.Apperance.UseSystemTheme || this.configuration.Apperance.UseSystemAccent);
 
         logger.Log("Registered theme manager and hooked all ColorValueChanged events");
     }
 
 
-    readonly Random random = new();
+    DispatcherQueue? dispatcher;
+
+    readonly UISettings systemUI = new();
+
+    /// <summary>
+    /// A boolean wether the app is subscribed to the UISettings
+    /// </summary>
+    public bool IsSubscribedToUISettings = false;
+
+    /// <summary>
+    /// Subscribes the app to all UISettings changes
+    /// </summary>
+    /// <param name="subscribe">The boolean wether to subscribe or unsubscribe</param>
+    public void SubscribeToUISettings(
+        bool subscribe)
+    {
+        if (subscribe == IsSubscribedToUISettings)
+            return;
+
+        if (subscribe)
+        {
+            systemUI.ColorValuesChanged += SystemColorsValuesChanged;
+            IsSubscribedToUISettings = true;
+            dispatcher = DispatcherQueue.GetForCurrentThread();
+
+            ValidateTheme();
+        }
+        else
+        {
+            systemUI.ColorValuesChanged -= SystemColorsValuesChanged;
+            IsSubscribedToUISettings = false;
+            dispatcher = null;
+        }
+    }
+
+    bool isDark = true;
+
+    void ValidateTheme()
+    {
+        var isDarkModeEnabled = systemUI.GetColorValue(UIColorType.Background) == Microsoft.UI.Colors.Black;
+
+        Load(isDarkModeEnabled ? Theme.Dark : Theme.Light);
+        configuration.Apperance.IsDarkModeBackdropEnabled = isDarkModeEnabled;
+
+        isDark = isDarkModeEnabled;
+    }
 
 
     /// <summary>
@@ -71,6 +120,7 @@ public class ThemeManager
 
         logger.Log($"Loaded theme configuration from input");
     }
+
 
     /// <summary>
     /// Copies a theme to another theme
@@ -110,6 +160,9 @@ public class ThemeManager
         copyTo.Control.Solid.PrimaryDisabled = copyFrom.Control.Solid.Outline;
         copyTo.Control.Solid.OutlineDisabled = copyFrom.Control.Solid.Outline;
     }
+
+
+    readonly Random random = new();
 
     /// <summary>
     /// Randomizes every color of the current theme. Use for debugging only
@@ -235,8 +288,42 @@ public class ThemeManager
         }
     }
 
+    void ValuesChanged(object? _, PropertyChangedEventArgs e)
+    {
+        switch (e.PropertyName)
+        {
+            case "Backdrop":
+                if (backdropHandler.Current != configuration.Apperance.Backdrop)
+                    backdropHandler.SetBackdrop(configuration.Apperance.Backdrop, true, configuration.Apperance.IsDarkModeBackdropEnabled);
+                break;
+            case "IsDarkModeBackdropEnabled":
+                backdropHandler.SetDarkMode(configuration.Apperance.Backdrop, configuration.Apperance.IsDarkModeBackdropEnabled);
+                break;
+            case "UseSystemTheme":
+            case "UseSystemAccent":
+                SubscribeToUISettings(configuration.Apperance.UseSystemTheme || configuration.Apperance.UseSystemAccent);
+                break;
+        }
+    }
+
     void SystemColorsValuesChanged(UISettings _, object _1)
     {
-        logger.Log("System color value changed");
+        if (configuration.Apperance.UseSystemTheme)
+        {
+            var isDarkModeEnabled = systemUI.GetColorValue(UIColorType.Background) == Microsoft.UI.Colors.Black;
+            if (isDarkModeEnabled == isDark)
+                return;
+
+            if (dispatcher is not null)
+                dispatcher.TryEnqueue(() =>
+                {
+                    Load(isDarkModeEnabled ? Theme.Dark : Theme.Light);
+                    configuration.Apperance.IsDarkModeBackdropEnabled = isDarkModeEnabled;
+                });
+
+            isDark = isDarkModeEnabled;
+
+            logger.Log($"System color value changed: Theme [{isDarkModeEnabled}]");
+        }
     }
 }
