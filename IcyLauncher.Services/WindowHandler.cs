@@ -13,7 +13,7 @@ namespace IcyLauncher.Services;
 public class WindowHandler
 {
     readonly ILogger logger;
-    readonly ThemeManager themeManager;
+    readonly Configuration configuration;
     readonly UIElementReciever uiElementReciever;
     readonly Window shell;
 
@@ -22,12 +22,12 @@ public class WindowHandler
     /// </summary>
     public WindowHandler(
         ILogger<Window> logger,
-        ThemeManager themeManager,
+        IOptions<Configuration> configuration,
         UIElementReciever uiElementReciever,
         Window shell)
     {
         this.logger = logger;
-        this.themeManager = themeManager;
+        this.configuration = configuration.Value;
         this.uiElementReciever = uiElementReciever;
         this.shell = shell;
 
@@ -230,7 +230,7 @@ public class WindowHandler
     /// <summary>
     /// Sets a binded color as the main background of the current main window
     /// </summary>
-    /// <param name="backgroundColor">The property path of themeManager.Colors</param>
+    /// <param name="backgroundColor">The property path of configuration.Apperance.Colors</param>
     /// <returns>A boolean wether the main background was set successfully</returns>
     public bool SetMainBackground(
         string backgroundColor)
@@ -245,7 +245,7 @@ public class WindowHandler
                 default:
                     uiElementReciever.MainGrid.SetBinding(Panel.BackgroundProperty, new Binding()
                     {
-                        Source = themeManager.Colors,
+                        Source = configuration.Apperance.Colors,
                         Converter = new ColorBrushConverter(),
                         Path = new PropertyPath(backgroundColor),
                         Mode = BindingMode.OneWay
