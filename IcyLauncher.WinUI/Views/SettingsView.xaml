@@ -238,7 +238,7 @@
                             <ToggleSwitch IsOn="{x:Bind viewModel.UseSystemTheme, Mode=TwoWay}" ToolTipService.ToolTip="Enable/Disable use system theme" />
                         </ContentControl>
 
-                        <ContentControl Tag="Use System Accent|Uses the default system accent color" Template="{StaticResource SettingsCard}">
+                        <ContentControl Tag="Use System Accent|Uses the default system accent color (This will disable custom accent theming)" Template="{StaticResource SettingsCard}">
                             <ToggleSwitch IsOn="{x:Bind viewModel.Configuration.Apperance.UseSystemAccent, Mode=TwoWay}" ToolTipService.ToolTip="Enable/Disable use system accent" />
                         </ContentControl>
 

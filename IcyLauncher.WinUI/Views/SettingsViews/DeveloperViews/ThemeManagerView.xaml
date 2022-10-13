@@ -105,6 +105,32 @@
             <ContentControl Tag="SetUnbindableBindings()|Binds non-bindable properties of UIElementReciever elements to their respected colors" Template="{StaticResource SettingsCard}">
                 <Button Command="{x:Bind viewModel.SetUnbindableBindingsCommand}" Content="Test Method" />
             </ContentControl>
+
+            <Expander
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Top"
+                Header="ModifyColor()|[Returns: Color]  Darkens/Lightens a color by the given percentage"
+                Template="{StaticResource CardExpander}">
+                <Expander.Tag>
+                    <StackPanel Spacing="8">
+                        <ContentControl Tag="color|[Type: Color]  The source of the new color" Template="{StaticResource SettingsCard}">
+                            <ColorPicker
+                                Margin="0,0,-117,0"
+                                Template="{StaticResource ColorPickerButton}"
+                                Color="{x:Bind viewModel.SourceColor, Mode=TwoWay}" />
+                        </ContentControl>
+                        <ContentControl Tag="percentage|[Type: double]  The percentage of the color values that should be darkened/lightened" Template="{StaticResource SettingsCard}">
+                            <NumberBox
+                                Maximum="200"
+                                Minimum="0"
+                                SpinButtonPlacementMode="Compact"
+                                Value="{x:Bind viewModel.Percentage, Mode=TwoWay}" />
+                        </ContentControl>
+                    </StackPanel>
+                </Expander.Tag>
+
+                <Button Command="{x:Bind viewModel.ModifyColorCommand}" Content="Test Method" />
+            </Expander>
         </StackPanel>
     </ScrollViewer>
 </Page>
