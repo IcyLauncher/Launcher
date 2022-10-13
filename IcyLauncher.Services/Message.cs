@@ -5,6 +5,7 @@ namespace IcyLauncher.Services;
 
 public class Message : IMessage
 {
+    #region Setup
     readonly ILogger logger;
     readonly UIElementReciever uIElementReciever;
 
@@ -20,8 +21,10 @@ public class Message : IMessage
 
         logger.Log("Registered message");
     }
+    #endregion
 
 
+    #region Active Dialog
     ContentDialog? activeDialog = null;
     TaskCompletionSource<bool> dialogAwaiter = new();
 
@@ -32,8 +35,10 @@ public class Message : IMessage
         if (activeDialog is not null)
             activeDialog.Closed -= OnActiveDialogClosed;
     }
+    #endregion
 
 
+    #region Actions Async
     /// <summary>
     /// Queues a given dialog asynchronously and optionally waits until the previous dialog is closed
     /// </summary>
@@ -66,8 +71,6 @@ public class Message : IMessage
         return await activeDialog.ShowAsync();
     }
 
-
-
     /// <summary>
     /// Queues a new dialog asynchronously and optionally waits until the previous dialog is closed
     /// </summary>
@@ -95,8 +98,9 @@ public class Message : IMessage
                 PrimaryButtonText = primaryButton,
                 SecondaryButtonText = secondaryButton
             }, awaitPreviousDialog);
-        
+    #endregion
 
+    #region Actions
     /// <summary>
     /// Queues a new dialog
     /// </summary>
@@ -112,4 +116,5 @@ public class Message : IMessage
         string? primaryButton = null,
         string? secondaryButton = null) =>
         await ShowAsync(title, content, false, closeButton, primaryButton, secondaryButton);
+    #endregion
 }

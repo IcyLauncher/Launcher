@@ -6,13 +6,16 @@ namespace IcyLauncher.WinUI.DataTemplates;
 
 public partial class BannerTimeDependentTemplate : ResourceDictionary
 {
+    #region Setup
     public BannerTimeDependentTemplate() =>
         InitializeComponent();
 
 
     ImagingUtility imagingUtility = default!;
+    #endregion
 
 
+    #region Handlers
     void OnImageLoaded(object sender, RoutedEventArgs _)
     {
         if (imagingUtility is null)
@@ -39,8 +42,14 @@ public partial class BannerTimeDependentTemplate : ResourceDictionary
 
         banner.Children.InsertAtBottom(backgroundVisual);
     }
+    #endregion
 
-    void AddImagePart(ContainerVisual container, Compositor compositor, string image, int index) =>
+    #region Compostion
+    void AddImagePart(
+        ContainerVisual container,
+        Compositor compositor,
+        string image,
+        int index) =>
         container.Children.InsertAtTop(
             imagingUtility.CreateSpriteVisual(
                 compositor,
@@ -61,4 +70,5 @@ public partial class BannerTimeDependentTemplate : ResourceDictionary
                         (10f * index / 100, Colors.White)
                     })),
             new((33.75f * index) - 16.875f, 0f, 0f)));
+    #endregion
 }

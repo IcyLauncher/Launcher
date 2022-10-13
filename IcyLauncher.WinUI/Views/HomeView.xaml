@@ -200,7 +200,7 @@
 
                     <TextBlock Style="{StaticResource Content}">
                         <Run Text="{x:Bind viewModel.Updater.CurrentAppVersion, TargetNullValue='N/A', FallbackValue='N/A'}" /><LineBreak />
-                        <Run Text="{x:Bind hlprs:Computer.CurrentMinecraftVersion, TargetNullValue='N/A', FallbackValue='N/A'}" /><LineBreak />
+                        <Run Text="N/A" /><LineBreak />
                         <Run Text="{x:Bind hlprs:Computer.CurrentCPU, TargetNullValue='N/A', FallbackValue='N/A'}" /><LineBreak />
                         <Run Text="{x:Bind hlprs:Computer.CurrentGPU, TargetNullValue='N/A', FallbackValue='N/A'}" /><LineBreak />
                         <Run Text="{x:Bind hlprs:Computer.CurrentRAM, TargetNullValue='N/A', FallbackValue='N/A'}" /><Run Text=" GB" /><LineBreak />

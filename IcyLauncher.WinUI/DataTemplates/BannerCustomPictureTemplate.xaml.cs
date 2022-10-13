@@ -6,13 +6,16 @@ namespace IcyLauncher.WinUI.DataTemplates;
 
 public partial class BannerCustomPictureTemplate : ResourceDictionary
 {
+    #region Setup
     public BannerCustomPictureTemplate() =>
         InitializeComponent();
 
 
     BannerSettingsViewModel viewModel = default!;
+    #endregion
 
 
+    #region Handlers
     void OnRootLayoutPointerPressed(object sender, PointerRoutedEventArgs e)
     {
         if (!e.GetCurrentPoint((UIElement)sender).Properties.IsRightButtonPressed)
@@ -27,4 +30,5 @@ public partial class BannerCustomPictureTemplate : ResourceDictionary
 
     async void OnDeleteClick(object sender, RoutedEventArgs _) =>
         await viewModel.RemoveCustomPicture((string)((MenuFlyoutItem)sender).Tag).ConfigureAwait(false);
+    #endregion
 }

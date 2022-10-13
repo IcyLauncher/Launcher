@@ -5,21 +5,26 @@ namespace IcyLauncher.Services.Interfaces;
 
 public interface IFileSystem
 {
+    #region File Information
     /// <summary>
     /// Checks wether a file exists
     /// </summary>
     /// <param name="path">The path to the file to check</param>
     /// <returns>A boolean wether the file exists</returns>
-    bool FileExists(string path);
+    bool FileExists(
+        string path);
 
     /// <summary>
     /// Checks wether a file is writeable
     /// </summary>
     /// <param name="path">The path to the file to check</param>
     /// <returns>A boolean wether the file is writable</returns>
-    bool FileWritable(string path);
+    bool FileWritable(
+        string path);
+    #endregion
 
 
+    #region File Copy
     /// <summary>
     /// Copies a file to another destination
     /// </summary>
@@ -33,7 +38,10 @@ public interface IFileSystem
     /// <exception cref="PathTooLongException">Thrown if the specified path, file name, or both exceeded the system-defined maximum length</exception>
     /// <exception cref="IOException">Thrown if an I/O error has occurres</exception>
     /// <exception cref="NotSupportedException">Thrown if path or destination is in an invalid format</exception>
-    void CopyFile(string path, string destination, bool overwrite);
+    void CopyFile(
+        string path,
+        string destination,
+        bool overwrite);
 
     /// <summary>
     /// Copies a file asynchronously to another destination
@@ -50,9 +58,15 @@ public interface IFileSystem
     /// <exception cref="PathTooLongException">Thrown if the specified path, file name, or both exceeded the system-defined maximum length</exception>
     /// <exception cref="IOException">Thrown if an I/O error has occurres</exception>
     /// <exception cref="NotSupportedException">Thrown if path or destination is in an invalid format</exception>
-    Task CopyFileAsync(string path, string destination, bool overwrite, CancellationToken cancellationToken = default);
+    Task CopyFileAsync(
+        string path,
+        string destination,
+        bool overwrite,
+        CancellationToken cancellationToken = default);
+    #endregion
 
 
+    #region File Delete
     /// <summary>
     /// Deletes a file
     /// </summary>
@@ -63,7 +77,8 @@ public interface IFileSystem
     /// <exception cref="NotSupportedException">Thrown if path is in an invalid format</exception>
     /// <exception cref="PathTooLongException">Thrown if the specified path, file name, or both exceed the system-defined maximum length</exception>
     /// <exception cref="UnauthorizedAccessException">Thrown if the caller does not have the required permission</exception>
-    void DeleteFile(string path);
+    void DeleteFile(
+        string path);
 
     /// <summary>
     /// Deletes a file asynchronously
@@ -79,9 +94,14 @@ public interface IFileSystem
     /// <exception cref="NotSupportedException">Thrown if path is in an invalid format</exception>
     /// <exception cref="PathTooLongException">Thrown if the specified path, file name, or both exceed the system-defined maximum length</exception>
     /// <exception cref="UnauthorizedAccessException">Thrown if the caller does not have the required permission</exception>
-    Task DeleteFileAsync(string path, int timeout = 60000, CancellationToken cancellationToken = default);
+    Task DeleteFileAsync(
+        string path,
+        int timeout = 60000,
+        CancellationToken cancellationToken = default);
+    #endregion
 
 
+    #region File Lock
     /// <summary>
     /// Waits for a file lock a asynchronously
     /// </summary>
@@ -90,16 +110,23 @@ public interface IFileSystem
     /// <param name="cancellationToken">The token to cancel the operation</param>
     /// <returns>A boolean wether the system waited for the file lock successfully</returns>
     /// <exception cref="Exceptions.FileNotExistsOrLocked">Thrown if the file to check does not exist</exception>
-    Task<bool> WaitForFileLockAsync(string path, int timeout = 60000, CancellationToken cancellationToken = default);
+    Task<bool> WaitForFileLockAsync(
+        string path,
+        int timeout = 60000,
+        CancellationToken cancellationToken = default);
+    #endregion
 
 
+    #region File Text
     /// <summary>
     /// Reads a file as text asynchronously
     /// </summary>
     /// <param name="path">The path to read as text</param>
     /// <param name="cancellationToken">The token to cancel the operation</param>
     /// <returns>The content as string of the file</returns>
-    Task<string> ReadAsTextAsync(string path, CancellationToken cancellationToken = default);
+    Task<string> ReadAsTextAsync(
+        string path,
+        CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Saves a string to a file as text asynchronously
@@ -109,23 +136,34 @@ public interface IFileSystem
     /// <param name="overwrite">The boolean wether the original file should get overwritten if it exists</param>
     /// <param name="cancellationToken">The token to cancel the operation</param>
     /// <exception cref="Exceptions.FileExits">Thown if a original file already exists and 'overwrite' is false</exception>
-    Task SaveAsTextAsync(string path, string content, bool overwrite, CancellationToken cancellationToken = default);
+    Task SaveAsTextAsync(
+        string path,
+        string content,
+        bool overwrite,
+        CancellationToken cancellationToken = default);
+    #endregion
 
 
+    #region Directory Information
     /// <summary>
     /// Checks wether a directory exists
     /// </summary>
     /// <param name="path">The path to the directory to check</param>
     /// <returns>A boolean wether the directory exists</returns>
-    bool DirectoryExists(string path);
+    bool DirectoryExists(
+        string path);
 
     /// <summary>
     /// Checks wether a directory is writeable
     /// </summary>
     /// <param name="path">The path to the directory to check</param>
     /// <returns>A boolean wether the directory is writable</returns>
-    bool DirectoryWritable(string path);
+    bool DirectoryWritable(
+        string path);
+    #endregion
 
+
+    #region Directory Create
     /// <summary>
     /// Creates a new directory
     /// </summary>
@@ -137,5 +175,7 @@ public interface IFileSystem
     /// <exception cref="PathTooLongException">Thrown if the specified path, file name, or both exceeded the system-defined maximum length</exception>
     /// <exception cref="DirectoryNotFoundException">Thrown if the container path is invalid</exception>
     /// <exception cref="NotSupportedException">Thrown if the path contains a colon character (:) that is not part of a drive label ("C:\")</exception>
-    void CreateDirectory(string path);
+    void CreateDirectory(
+        string path);
+    #endregion
 }

@@ -5,6 +5,7 @@ namespace IcyLauncher.Services;
 
 public class VibrancyBackdropHandler : IBackdropHandler
 {
+    #region Setup
     readonly ILogger logger;
     readonly ICompositionSupportsSystemBackdrop shell;
 
@@ -25,8 +26,10 @@ public class VibrancyBackdropHandler : IBackdropHandler
 
         logger.Log("Registered backdrop handler, set configuration and set controller kind");
     }
+    #endregion
 
 
+    #region Actions
     /// <summary>
     /// Enables the backdrop effect
     /// </summary>
@@ -80,10 +83,13 @@ public class VibrancyBackdropHandler : IBackdropHandler
             return false;
         }
     }
+    #endregion
 
+    #region Theme
     /// <summary>
     /// VibrancyBackdropHandler does not implement light/dark mode. This boolean wont affect the backdrop effect
     /// </summary>
     [Obsolete("No implementation for light/dark mode")]
     public bool IsDarkModeEnabled { get; set; } = true;
+    #endregion
 }

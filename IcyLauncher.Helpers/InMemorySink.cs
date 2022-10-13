@@ -12,7 +12,8 @@ public class InMemorySink : ILogEventSink
 
     public event EventHandler<string>? OnNewLog;
 
-    public void Emit(LogEvent logEvent)
+    public void Emit(
+        LogEvent logEvent)
     {
         var renderSpace = new StringWriter();
         textFormatter.Format(logEvent, renderSpace);

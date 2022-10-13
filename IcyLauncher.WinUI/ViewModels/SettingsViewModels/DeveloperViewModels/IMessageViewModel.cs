@@ -2,6 +2,7 @@
 
 public partial class IMessageViewModel : ObservableObject
 {
+    #region Setup
     readonly IMessage message;
 
     public IMessageViewModel(
@@ -9,8 +10,10 @@ public partial class IMessageViewModel : ObservableObject
     {
         this.message = message;
     }
+    #endregion
 
 
+    #region Example
     [ObservableProperty]
     string title = "Dialog Title";
 
@@ -28,8 +31,10 @@ public partial class IMessageViewModel : ObservableObject
 
     [ObservableProperty]
     string secondary = "";
+    #endregion
 
 
+    #region ShowAsync
     [RelayCommand(AllowConcurrentExecutions = true)]
     async Task ShowAAsync()
     {
@@ -45,10 +50,13 @@ public partial class IMessageViewModel : ObservableObject
         }
         catch (Exception ex)
         {
-            await message.ShowAsync("logger.Log()", $"Method completed.\nException{ex.Format()}");
+            await message.ShowAsync("message.ShowAsync()", $"Method completed.\nException{ex.Format()}");
         }
     }
+    #endregion
 
+
+    #region Show
     [RelayCommand(AllowConcurrentExecutions = true)]
     async Task ShowAsync()
     {
@@ -63,7 +71,8 @@ public partial class IMessageViewModel : ObservableObject
         }
         catch (Exception ex)
         {
-            await message.ShowAsync("logger.Log()", $"Method completed.\nException{ex.Format()}");
+            await message.ShowAsync("message.Show()", $"Method completed.\nException{ex.Format()}");
         }
     }
+#endregion
 }

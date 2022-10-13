@@ -5,6 +5,7 @@ namespace IcyLauncher.WinUI.ViewModels.SettingsViewModels.DeveloperViewModels;
 
 public partial class IConverterViewModel : ObservableObject
 {
+    #region Setup
     readonly IConverter converter;
     readonly IMessage message;
 
@@ -15,15 +16,19 @@ public partial class IConverterViewModel : ObservableObject
         this.converter = converter;
         this.message = message;
     }
+    #endregion
 
 
+    #region Example
     [ObservableProperty]
     SolidColor object_ = new(Colors.Red, "Red");
 
     [ObservableProperty]
     string input = "";
+    #endregion
 
 
+    #region ToString
     [ObservableProperty]
     Formatting formatting = Formatting.None;
 
@@ -40,7 +45,9 @@ public partial class IConverterViewModel : ObservableObject
             await message.ShowAsync("converter.ToString()", $"Method completed.\nException{ex.Format()}");
         }
     }
+    #endregion
 
+    #region ToObject
     [RelayCommand]
     async Task ToObjectAsync()
     {
@@ -54,7 +61,9 @@ public partial class IConverterViewModel : ObservableObject
             await message.ShowAsync("converter.ToObject<T>()", $"Method completed.\nException{ex.Format()}");
         }
     }
+    #endregion
 
+    #region TryToObject
     [RelayCommand]
     async Task TryToObjectAsync()
     {
@@ -68,4 +77,5 @@ public partial class IConverterViewModel : ObservableObject
             await message.ShowAsync("converter.TryToObject<T>()", $"Method completed.\nException{ex.Format()}");
         }
     }
+    #endregion
 }

@@ -12,6 +12,7 @@ namespace IcyLauncher.Services;
 
 public class WindowHandler
 {
+    #region Setup
     readonly ILogger logger;
     readonly Configuration configuration;
     readonly UIElementReciever uiElementReciever;
@@ -33,8 +34,10 @@ public class WindowHandler
 
         logger.Log("Registered window handler");
     }
+    #endregion
 
 
+    #region Information
     AppWindow Window => AppWindow.GetFromWindowId(Win32Interop.GetWindowIdFromWindow(HWnd));
     object? dispatcherQueueController;
 
@@ -43,29 +46,36 @@ public class WindowHandler
     /// </summary>
     public IntPtr HWnd => WindowNative.GetWindowHandle(shell);
 
+
     /// <summary>
     /// Boolean wether the current main window has a custom title bar
     /// </summary>
     public bool HasCustomTitleBar { get; private set; }
+
     /// <summary>
     /// Size of the current main window
     /// </summary>
     public SizeInt32 Size => Window.Size;
+
     /// <summary>
     /// Position of the current main window
     /// </summary>
     public PointInt32 Position => Window.Position;
+
     /// <summary>
     /// Size of the current main screen
     /// </summary>
     public RectInt32 ScreenSize => DisplayArea.GetFromWindowId(Win32Interop.GetWindowIdFromWindow(HWnd), DisplayAreaFallback.Nearest).WorkArea;
 
+
     /// <summary>
     /// Active logger window (null if none is active)
     /// </summary>
     public Window? LoggerWindow = null;
+    #endregion
 
 
+    #region Icon
     /// <summary>
     /// Sets a custom icon on the current main window
     /// </summary>
@@ -77,7 +87,9 @@ public class WindowHandler
 
         logger.Log($"Set app icon [{path}]");
     }
+    #endregion
 
+    #region Size
     /// <summary>
     /// Sets the size of the current main window
     /// </summary>
@@ -129,7 +141,9 @@ public class WindowHandler
 
         logger.Log($"Set window minimum size [{width}x{height}]");
     }
+    #endregion
 
+    #region Position
     /// <summary>
     /// Sets the position of the current main window
     /// </summary>
@@ -148,8 +162,10 @@ public class WindowHandler
     /// </summary>
     public void SetPositionToCenter() =>
         SetPosition((ScreenSize.Width - Window.Size.Width) / 2, (ScreenSize.Height - Window.Size.Height) / 2);
+    #endregion
 
 
+    #region System
     /// <summary>
     /// Initializes a target with the current main window
     /// </summary>
@@ -180,8 +196,10 @@ public class WindowHandler
         logger.Log("Ensured DispatcherQueueController");
         return true;
     }
+    #endregion
 
 
+    #region Customization
     /// <summary>
     /// Sets an UIElement as a custom title bar on the current main window
     /// </summary>
@@ -262,4 +280,5 @@ public class WindowHandler
             return false;
         }
     }
+    #endregion
 }

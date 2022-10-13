@@ -122,7 +122,8 @@ public partial class DeveloperSettingsViewModel : ObservableObject
 
 
     [RelayCommand]
-    void AddTabViewItem(MenuFlyoutItem menuItem)
+    void AddTabViewItem(
+        MenuFlyoutItem menuItem)
     {
         if (Tabs.Any(t => t.Header.Equals(menuItem.Text)))
         {
@@ -163,7 +164,8 @@ public partial class DeveloperSettingsViewModel : ObservableObject
     }
 
     [RelayCommand]
-    void RemoveTabViewItem(TabViewTabCloseRequestedEventArgs args) =>
+    void RemoveTabViewItem(
+        TabViewTabCloseRequestedEventArgs args) =>
         Tabs.Remove(args.Tab);
     #endregion
 }

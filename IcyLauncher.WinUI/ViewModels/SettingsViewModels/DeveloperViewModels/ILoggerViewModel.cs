@@ -5,6 +5,7 @@ namespace IcyLauncher.WinUI.ViewModels.SettingsViewModels.DeveloperViewModels;
 
 public partial class ILoggerViewModel : ObservableObject
 {
+    #region Setup
     readonly ILogger logger;
     readonly ThemeManager themeManager;
     readonly WindowHandler windowHandler;
@@ -21,8 +22,10 @@ public partial class ILoggerViewModel : ObservableObject
         this.windowHandler = windowHandler;
         this.message = message;
     }
+    #endregion
 
 
+    #region Example
     [ObservableProperty]
     string message_ = "test message";
 
@@ -37,10 +40,12 @@ public partial class ILoggerViewModel : ObservableObject
 
     [ObservableProperty]
     string memberName = "TestMethod";
+    #endregion
 
 
+    #region Log
     [RelayCommand]
-    async Task TestAsync()
+    async Task LogAsync()
     {
         try
         {
@@ -52,8 +57,10 @@ public partial class ILoggerViewModel : ObservableObject
             await message.ShowAsync("logger.Log()", $"Method completed.\nException{ex.Format()}");
         }
     }
+    #endregion
 
 
+    #region Show Window
     [RelayCommand]
     void Show()
     {
@@ -96,4 +103,5 @@ public partial class ILoggerViewModel : ObservableObject
 
         logger.Log("Created new window and hooked all logger events");
     }
+    #endregion
 }

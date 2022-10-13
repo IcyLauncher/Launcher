@@ -8,6 +8,7 @@ namespace IcyLauncher.Services;
 
 public class ImagingUtility
 {
+    #region Setup
     readonly ILogger<ImagingUtility> logger;
 
     /// <summary>
@@ -20,8 +21,10 @@ public class ImagingUtility
 
         logger.Log("Registered imaging utility");
     }
+    #endregion
 
 
+    #region General
     /// <summary>
     /// Initializes the given UIElement
     /// </summary>
@@ -51,6 +54,41 @@ public class ImagingUtility
         }
     }
 
+
+    /// <summary>
+    /// Creates a new sprite visul
+    /// </summary>
+    /// <param name="compositor">The compositor which is used to create this sprite visual</param>
+    /// <param name="size">The size which the visual should have</param>
+    /// <param name="brush">The brush which will be aplied as the visual brush</param>
+    /// <param name="offset">The offset which the visual should have</param>
+    /// <returns>A new sprite visual which will have the size, brush and offset applied</returns>
+    public SpriteVisual? CreateSpriteVisual(
+        Compositor compositor,
+        Vector2 size,
+        CompositionBrush? brush,
+        Vector3 offset = default)
+    {
+        try
+        {
+            SpriteVisual visual = compositor.CreateSpriteVisual();
+            visual.Brush = brush;
+            visual.Size = size;
+            visual.Offset = offset;
+
+            logger.Log("Created sprite visual");
+            return visual;
+        }
+        catch (Exception ex)
+        {
+            logger.Log("Failed to create sprite visual", ex);
+            return null;
+        }
+    }
+    #endregion
+
+
+    #region Brushes
     /// <summary>
     /// Creates a new gradient brush
     /// </summary>
@@ -168,35 +206,5 @@ public class ImagingUtility
             return null;
         }
     }
-
-    /// <summary>
-    /// Creates a new sprite visul
-    /// </summary>
-    /// <param name="compositor">The compositor which is used to create this sprite visual</param>
-    /// <param name="size">The size which the visual should have</param>
-    /// <param name="brush">The brush which will be aplied as the visual brush</param>
-    /// <param name="offset">The offset which the visual should have</param>
-    /// <returns>A new sprite visual which will have the size, brush and offset applied</returns>
-    public SpriteVisual? CreateSpriteVisual(
-        Compositor compositor,
-        Vector2 size,
-        CompositionBrush? brush,
-        Vector3 offset = default)
-    {
-        try
-        {
-            SpriteVisual visual = compositor.CreateSpriteVisual();
-            visual.Brush = brush;
-            visual.Size = size;
-            visual.Offset = offset;
-
-            logger.Log("Created sprite visual");
-            return visual;
-        }
-        catch (Exception ex)
-        {
-            logger.Log("Failed to create sprite visual", ex);
-            return null;
-        }
-    }
+    #endregion
 }

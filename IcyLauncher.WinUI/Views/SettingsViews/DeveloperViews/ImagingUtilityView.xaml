@@ -53,6 +53,38 @@
             <Expander
                 HorizontalAlignment="Stretch"
                 VerticalAlignment="Top"
+                Header="CreateSpriteVisual()|[Returns: SpriteVisual?]  Creates a new sprite visul"
+                Template="{StaticResource CardExpander}">
+                <Expander.Tag>
+                    <StackPanel Spacing="8">
+                        <ContentControl Tag="compositor|[Type: Compositor]  The compositor which is used to create this sprite visual" Template="{StaticResource SettingsCard}">
+                            <Button Content="Set Compositor" IsEnabled="False" />
+                        </ContentControl>
+                        <ContentControl Tag="size|[Type: Vector2]  The size which the visual should have" Template="{StaticResource SettingsCard}">
+                            <StackPanel Orientation="Horizontal" Spacing="8">
+                                <NumberBox SpinButtonPlacementMode="Compact" Value="{x:Bind viewModel.SizeWidth, Mode=TwoWay}" />
+                                <NumberBox SpinButtonPlacementMode="Compact" Value="{x:Bind viewModel.SizeHeight, Mode=TwoWay}" />
+                            </StackPanel>
+                        </ContentControl>
+                        <ContentControl Tag="brush|[Type: CompositionBrush?]  The brush which will be aplied as the visual brush" Template="{StaticResource SettingsCard}">
+                            <Button Content="Set CompositonBrush" IsEnabled="False" />
+                        </ContentControl>
+                        <ContentControl Tag="offset|[optional: default] [Type: Vector2]  The offset which the visual should have" Template="{StaticResource SettingsCard}">
+                            <StackPanel Orientation="Horizontal" Spacing="8">
+                                <NumberBox SpinButtonPlacementMode="Compact" Value="{x:Bind viewModel.OffsetX, Mode=TwoWay}" />
+                                <NumberBox SpinButtonPlacementMode="Compact" Value="{x:Bind viewModel.OffsetY, Mode=TwoWay}" />
+                                <NumberBox SpinButtonPlacementMode="Compact" Value="{x:Bind viewModel.OffsetZ, Mode=TwoWay}" />
+                            </StackPanel>
+                        </ContentControl>
+                    </StackPanel>
+                </Expander.Tag>
+
+                <Button Command="{x:Bind viewModel.CreateSpriteVisualCommand}" Content="Test Method" />
+            </Expander>
+
+            <Expander
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Top"
                 Header="CreateGradientBrush()|[Returns: CompositionLinearGradientBrush?]  Creates a new gradient brush"
                 Template="{StaticResource CardExpander}">
                 <Expander.Tag>
@@ -176,38 +208,6 @@
                 </Expander.Tag>
 
                 <Button Command="{x:Bind viewModel.CreateColorBrushCommand}" Content="Test Method" />
-            </Expander>
-
-            <Expander
-                HorizontalAlignment="Stretch"
-                VerticalAlignment="Top"
-                Header="CreateSpriteVisual()|[Returns: SpriteVisual?]  Creates a new sprite visul"
-                Template="{StaticResource CardExpander}">
-                <Expander.Tag>
-                    <StackPanel Spacing="8">
-                        <ContentControl Tag="compositor|[Type: Compositor]  The compositor which is used to create this sprite visual" Template="{StaticResource SettingsCard}">
-                            <Button Content="Set Compositor" IsEnabled="False" />
-                        </ContentControl>
-                        <ContentControl Tag="size|[Type: Vector2]  The size which the visual should have" Template="{StaticResource SettingsCard}">
-                            <StackPanel Orientation="Horizontal" Spacing="8">
-                                <NumberBox SpinButtonPlacementMode="Compact" Value="{x:Bind viewModel.SizeWidth, Mode=TwoWay}" />
-                                <NumberBox SpinButtonPlacementMode="Compact" Value="{x:Bind viewModel.SizeHeight, Mode=TwoWay}" />
-                            </StackPanel>
-                        </ContentControl>
-                        <ContentControl Tag="brush|[Type: CompositionBrush?]  The brush which will be aplied as the visual brush" Template="{StaticResource SettingsCard}">
-                            <Button Content="Set CompositonBrush" IsEnabled="False" />
-                        </ContentControl>
-                        <ContentControl Tag="offset|[optional: default] [Type: Vector2]  The offset which the visual should have" Template="{StaticResource SettingsCard}">
-                            <StackPanel Orientation="Horizontal" Spacing="8">
-                                <NumberBox SpinButtonPlacementMode="Compact" Value="{x:Bind viewModel.OffsetX, Mode=TwoWay}" />
-                                <NumberBox SpinButtonPlacementMode="Compact" Value="{x:Bind viewModel.OffsetY, Mode=TwoWay}" />
-                                <NumberBox SpinButtonPlacementMode="Compact" Value="{x:Bind viewModel.OffsetZ, Mode=TwoWay}" />
-                            </StackPanel>
-                        </ContentControl>
-                    </StackPanel>
-                </Expander.Tag>
-
-                <Button Command="{x:Bind viewModel.CreateSpriteVisualCommand}" Content="Test Method" />
             </Expander>
         </StackPanel>
     </ScrollViewer>

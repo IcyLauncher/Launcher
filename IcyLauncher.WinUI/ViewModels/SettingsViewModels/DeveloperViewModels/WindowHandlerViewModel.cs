@@ -4,6 +4,7 @@ namespace IcyLauncher.WinUI.ViewModels.SettingsViewModels.DeveloperViewModels;
 
 public partial class WindowHandlerViewModel : ObservableObject
 {
+    #region Setup
     readonly WindowHandler windowHandler;
     readonly UIElementReciever uIElementReciever;
     readonly IMessage message;
@@ -24,24 +25,29 @@ public partial class WindowHandlerViewModel : ObservableObject
         UpdatePosition();
         UpdateScreenSize();
     }
+    #endregion
 
 
+    #region HWND
     [ObservableProperty]
     string hWnd = default!;
 
     [RelayCommand]
     void UpdateHWnd() =>
         HWnd = $"0x{windowHandler.HWnd}";
+    #endregion
 
 
+    #region HasCustomTitleBar
     [ObservableProperty]
     bool hasCustomTitleBar = default!;
 
     [RelayCommand]
     void UpdateHasCustomTitlebar() =>
         HasCustomTitleBar = windowHandler.HasCustomTitleBar;
+    #endregion
 
-
+    #region Size
     [ObservableProperty]
     string size = default!;
 
@@ -51,8 +57,9 @@ public partial class WindowHandlerViewModel : ObservableObject
         SizeInt32 size = windowHandler.Size;
         Size = $"{size.Width}x{size.Height}";
     }
+    #endregion
 
-
+    #region Position
     [ObservableProperty]
     string position = default!;
 
@@ -62,8 +69,10 @@ public partial class WindowHandlerViewModel : ObservableObject
         PointInt32 position = windowHandler.Position;
         Position = $"X: {position.X}, Y: {position.Y}";
     }
+    #endregion
 
 
+    #region ScreenSize
     [ObservableProperty]
     string screenSize = default!;
 
@@ -73,8 +82,10 @@ public partial class WindowHandlerViewModel : ObservableObject
         RectInt32 rect = windowHandler.ScreenSize;
         ScreenSize = $"{rect.Width}x{rect.Height}";
     }
+    #endregion
 
 
+    #region SetIcon
     [RelayCommand]
     async Task SetIconAsync(
         string path)
@@ -89,8 +100,10 @@ public partial class WindowHandlerViewModel : ObservableObject
             await message.ShowAsync("windowHandler.SetIcon()", $"Method completed.\nException{ex.Format()}");
         }
     }
+    #endregion
 
 
+    #region SetSize
     [ObservableProperty]
     int sizeWidth;
 
@@ -110,8 +123,9 @@ public partial class WindowHandlerViewModel : ObservableObject
             await message.ShowAsync("windowHandler.SetSize()", $"Method completed.\nException{ex.Format()}");
         }
     }
+    #endregion
 
-
+    #region SetMinSize
     [ObservableProperty]
     int minSizeWidth;
 
@@ -131,8 +145,10 @@ public partial class WindowHandlerViewModel : ObservableObject
             await message.ShowAsync("windowHandler.SetMinSize()", $"Method completed.\nException{ex.Format()}");
         }
     }
+    #endregion
 
 
+    #region SetPosition
     [ObservableProperty]
     int positionX;
 
@@ -152,7 +168,9 @@ public partial class WindowHandlerViewModel : ObservableObject
             await message.ShowAsync("windowHandler.SetPosition()", $"Method completed.\nException{ex.Format()}");
         }
     }
+    #endregion
 
+    #region SetPostionToCenter
     [RelayCommand]
     async Task SetPositionToCenterAsync()
     {
@@ -166,8 +184,10 @@ public partial class WindowHandlerViewModel : ObservableObject
             await message.ShowAsync("windowHandler.SetPositionToCenter()", $"Method completed.\nException{ex.Format()}");
         }
     }
+    #endregion
 
 
+    #region EnsureWindowsSystemDispatcherQueueController
     [RelayCommand]
     async Task EnsureWindowsSystemDispatcherQueueControllerAsync()
     {
@@ -181,8 +201,10 @@ public partial class WindowHandlerViewModel : ObservableObject
             await message.ShowAsync("windowHandler.EnsureWindowsSystemDispatcherQueueController()", $"Method completed.\nException{ex.Format()}");
         }
     }
+    #endregion
 
 
+    #region SetTitleBar
     [ObservableProperty]
     bool titleBarIsNull;
 
@@ -202,8 +224,9 @@ public partial class WindowHandlerViewModel : ObservableObject
             await message.ShowAsync("windowHandler.SetTitleBar()", $"Method completed.\nException{ex.Format()}");
         }
     }
-    
-    
+    #endregion
+
+    #region SetMainBackground
     [ObservableProperty]
     string mainBackground = "Background.Solid";
 
@@ -220,4 +243,5 @@ public partial class WindowHandlerViewModel : ObservableObject
             await message.ShowAsync("windowHandler.SetMainBackground()", $"Method completed.\nException{ex.Format()}");
         }
     }
+    #endregion
 }

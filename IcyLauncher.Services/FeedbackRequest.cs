@@ -1,11 +1,11 @@
-﻿
-using Microsoft.UI.Xaml.Controls;
+﻿using Microsoft.UI.Xaml.Controls;
 using System.Threading.Tasks;
 
 namespace IcyLauncher.Services;
 
 public class FeedbackRequest
 {
+    #region Setup
     readonly Configuration configuration;
     readonly ILogger logger;
     readonly IMessage message;
@@ -22,14 +22,18 @@ public class FeedbackRequest
         this.logger = logger;
         this.message = message;
     }
+    #endregion
 
 
+    #region Randomization
     readonly Random random = new();
 
     /// <returns>A boolean with the chance of 1/20 to be true</returns>
     public bool RandomShouldShow => random.Next(20) == 0;
+    #endregion
 
 
+    #region Actions
     /// <summary>
     /// Requests a new user feedback popup
     /// </summary>
@@ -105,4 +109,5 @@ public class FeedbackRequest
             return false;
         }
     }
+    #endregion
 }

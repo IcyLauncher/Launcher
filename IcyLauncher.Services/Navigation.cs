@@ -8,6 +8,7 @@ namespace IcyLauncher.Services;
 
 public class Navigation : INavigation
 {
+    #region Setup
     readonly ILogger logger;
     readonly UIElementReciever uIElementReciever;
 
@@ -24,25 +25,30 @@ public class Navigation : INavigation
         this.logger = logger;
         this.uIElementReciever = uIElementReciever;
 
-        items = uIElementReciever.NavigationView.MenuItems.Concat(uIElementReciever.NavigationView.FooterMenuItems).Select(item => (NavigationViewItem)item).ToList();
+        items = uIElementReciever.NavigationView.MenuItems
+            .Concat(uIElementReciever.NavigationView.FooterMenuItems)
+            .Select(item => (NavigationViewItem)item)
+            .ToList();
 
         uIElementReciever.NavigationView.SelectionChanged += (s, e) =>
         {
             if (!skipEvent && e.SelectedItemContainer is NavigationViewItem item)
-                SetCurrentPage($"Views.{item.Tag}View".AsType() is Type type ? type : "Views.NoPageView".AsType());
+                SetCurrentPage($"Views.{item.Tag}View".AsType() ?? "Views.NoPageView".AsType());
         };
         uIElementReciever.NavigationView.BackRequested += (s, e) => GoBack();
 
         logger.Log("Registered navigation");
     }
+    #endregion
 
 
+    #region NavigationViewItem
     /// <summary>
     /// Gets the current navigation view item
     /// </summary>
     /// <returns>The current navigation view item</returns>
     public NavigationViewItem? GetCurrentNavigationViewItem() =>
-        uIElementReciever.NavigationView is NavigationView container ? container.SelectedItem is NavigationViewItem current ? current : null : null;
+        uIElementReciever.NavigationView?.SelectedItem is NavigationViewItem current ? current : null;
 
     /// <summary>
     /// Gets the LayoutRoot grid of the current navigation view item
@@ -73,8 +79,10 @@ public class Navigation : INavigation
         }
         catch { return null; }
     }
+    #endregion
 
 
+    #region Set
     /// <summary>
     /// Sets the current navigation item
     /// </summary>
@@ -153,7 +161,10 @@ public class Navigation : INavigation
             return false;
         }
     }
+    #endregion
 
+
+    #region Navigation
     /// <summary>
     /// Navigates to the given navigation view item 
     /// </summary>
@@ -178,8 +189,10 @@ public class Navigation : INavigation
     /// <returns>A boolean wether the page has been navigated to successfully</returns>
     public bool Navigate(string page) =>
         Navigate(GetNavigationViewItem(page));
+    #endregion
 
 
+    #region BackStack
     /// <summary>
     /// Navigates a page back
     /// </summary>
@@ -236,4 +249,5 @@ public class Navigation : INavigation
             board.Begin();
         }
     }
+    #endregion
 }

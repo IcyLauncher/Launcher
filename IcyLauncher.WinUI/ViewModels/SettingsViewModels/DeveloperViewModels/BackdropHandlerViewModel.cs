@@ -2,6 +2,7 @@
 
 public partial class BackdropHandlerViewModel : ObservableObject
 {
+    #region Setup
     readonly BackdropHandler backdropHandler;
     readonly IMessage message;
 
@@ -19,48 +20,56 @@ public partial class BackdropHandlerViewModel : ObservableObject
         UpdateIsNoneEnabled();
         UpdateCurrent();
     }
+    #endregion
 
 
+    #region IsMicaEnabled
     [ObservableProperty]
     bool isMicaEnabled = default!;
 
     [RelayCommand]
     void UpdateIsMicaEnabled() =>
         IsMicaEnabled = backdropHandler.IsMicaEnabled;
+    #endregion
 
-
+    #region IsAcrylicEnabled
     [ObservableProperty]
     bool isAcrylicEnabled = default!;
 
     [RelayCommand]
     void UpdateIsAcrylicEnabled() =>
         IsAcrylicEnabled = backdropHandler.IsAcrylicEnabled;
+    #endregion
 
-
+    #region IsVibrancyEnabled
     [ObservableProperty]
     bool isVibrancyEnabled = default!;
 
     [RelayCommand]
     void UpdateIsVibrancyEnabled() =>
         IsVibrancyEnabled = backdropHandler.IsVibrancyEnabled;
+    #endregion
 
-
+    #region IsNoneEnabled
     [ObservableProperty]
     bool isNoneEnabled = default!;
 
     [RelayCommand]
     void UpdateIsNoneEnabled() =>
         IsNoneEnabled = backdropHandler.IsNoneEnabled;
+    #endregion
 
-
+    #region Current
     [ObservableProperty]
     Backdrop? current = default!;
 
     [RelayCommand]
     void UpdateCurrent() =>
         Current = backdropHandler.Current;
+    #endregion
 
-    
+
+    #region SetBackdrop
     [ObservableProperty]
     Backdrop backdrop;
     
@@ -86,7 +95,9 @@ public partial class BackdropHandlerViewModel : ObservableObject
             await message.ShowAsync("backdropHandler.SetBackdrop()", $"Method completed.\nException{ex.Format()}");
         }
     }
+    #endregion
 
+    #region SetDarkMode
     [RelayCommand]
     async Task SetDarkModeAsync()
     {
@@ -100,4 +111,5 @@ public partial class BackdropHandlerViewModel : ObservableObject
             await message.ShowAsync("backdropHandler.SetDarkMode()", $"Method completed.\nException{ex.Format()}");
         }
     }
+    #endregion
 }

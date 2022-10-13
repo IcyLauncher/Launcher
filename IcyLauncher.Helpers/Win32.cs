@@ -7,9 +7,19 @@ namespace IcyLauncher.Helpers;
 
 public class Win32
 {
-    public delegate IntPtr WinProc(IntPtr hWnd, int msg, IntPtr wParam, IntPtr lParam);
+    public delegate IntPtr WinProc(
+        IntPtr hWnd,
+        int msg,
+        IntPtr wParam,
+        IntPtr lParam);
 
-    public delegate int SUBCLASSPROC(IntPtr hWnd, uint uMsg, IntPtr wParam, IntPtr lParam, IntPtr uIdSubclass, uint dwRefData);
+    public delegate int SUBCLASSPROC(
+        IntPtr hWnd,
+        uint uMsg,
+        IntPtr wParam,
+        IntPtr lParam,
+        IntPtr uIdSubclass,
+        uint dwRefData);
 
     public static WinProc? NewWndProc { get; set; }
     public static IntPtr OldWndProc { get; set; } = IntPtr.Zero;
@@ -45,25 +55,44 @@ public class Win32
 
 
     [DllImport("user32.dll")]
-    public static extern IntPtr GetDpiForWindow(IntPtr hwnd);
+    public static extern IntPtr GetDpiForWindow(
+        IntPtr hwnd);
 
     [DllImport("user32")]
-    public static extern IntPtr SetWindowLong(IntPtr hWnd, int nIndex, WinProc newProc);
+    public static extern IntPtr SetWindowLong(
+        IntPtr hWnd,
+        int nIndex,
+        WinProc newProc);
 
     [DllImport("user32.dll")]
-    public static extern IntPtr CallWindowProc(IntPtr lpPrevWndFunc, IntPtr hWnd, int msg, IntPtr wParam, IntPtr lParam);
+    public static extern IntPtr CallWindowProc(
+        IntPtr lpPrevWndFunc,
+        IntPtr hWnd,
+        int msg,
+        IntPtr wParam,
+        IntPtr lParam);
 
     [DllImport("CoreMessaging.dll")]
-    public static extern IntPtr CreateDispatcherQueueController([In] DISPATCHERQUEUEOPTIONS options, [In, Out, MarshalAs(UnmanagedType.IUnknown)] ref object? dispatcherQueueController);
+    public static extern IntPtr CreateDispatcherQueueController(
+        [In] DISPATCHERQUEUEOPTIONS options,
+        [In, Out, MarshalAs(UnmanagedType.IUnknown)] ref object? dispatcherQueueController);
 
     [DllImport("winbrand.dll", CharSet = CharSet.Unicode)]
-    public static extern string BrandingFormatString(string format);
+    public static extern string BrandingFormatString(
+        string format);
 
     [DllImport("kernel32.dll", EntryPoint = "SetProcessWorkingSetSize", ExactSpelling = true, CharSet = CharSet.Ansi, SetLastError = true)]
-    public static extern bool SetProcessWorkingSetSize(IntPtr hWnd, int minimumWorkingSetSize, int maximumWorkingSetSize);
+    public static extern bool SetProcessWorkingSetSize(
+        IntPtr hWnd,
+        int minimumWorkingSetSize,
+        int maximumWorkingSetSize);
 
 
-    public static IntPtr NewWindowProc(IntPtr hWnd, int msg, IntPtr wParam, IntPtr lParam)
+    public static IntPtr NewWindowProc(
+        IntPtr hWnd,
+        int msg,
+        IntPtr wParam,
+        IntPtr lParam)
     {
         if (msg == 36)
         {

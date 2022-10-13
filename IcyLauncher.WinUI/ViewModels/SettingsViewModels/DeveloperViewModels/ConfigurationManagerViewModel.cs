@@ -2,6 +2,7 @@
 
 public partial class ConfigurationManagerViewModel : ObservableObject
 {
+    #region Setup
     readonly ConfigurationManager configurationManager;
     readonly IConverter converter;
     readonly IMessage message;
@@ -15,8 +16,10 @@ public partial class ConfigurationManagerViewModel : ObservableObject
         this.converter = converter;
         this.message = message;
     }
+    #endregion
 
 
+    #region Export
     [ObservableProperty]
     string currentConfig = "";
 
@@ -36,7 +39,9 @@ public partial class ConfigurationManagerViewModel : ObservableObject
             await message.ShowAsync("configurationManager.Export()", $"Method completed.\nException{ex.Format()}");
         }
     }
+    #endregion
 
+    #region Load
     [RelayCommand]
     async Task LoadAsync()
     {
@@ -52,4 +57,5 @@ public partial class ConfigurationManagerViewModel : ObservableObject
             await message.ShowAsync("configurationManager.Load()", $"Method completed.\nException{ex.Format()}");
         }
     }
+    #endregion
 }

@@ -13,7 +13,6 @@ public partial class SettingsViewModel : ObservableObject
     readonly ConfigurationManager configurationManager;
     readonly ThemeManager themeManager;
     readonly WindowHandler windowHandler;
-    readonly BackdropHandler backdropHandler;
     readonly UIElementReciever uIElementReciever;
     readonly IConverter converter;
     readonly IFileSystem fileSystem;
@@ -29,7 +28,6 @@ public partial class SettingsViewModel : ObservableObject
         ConfigurationManager configurationManager,
         ThemeManager themeManager,
         WindowHandler windowHandler,
-        BackdropHandler backdropHandler,
         UIElementReciever uIElementReciever,
         IConverter converter,
         IFileSystem fileSystem,
@@ -41,7 +39,6 @@ public partial class SettingsViewModel : ObservableObject
         this.configurationManager = configurationManager;
         this.themeManager = themeManager;
         this.windowHandler = windowHandler;
-        this.backdropHandler = backdropHandler;
         this.uIElementReciever = uIElementReciever;
         this.converter = converter;
         this.fileSystem = fileSystem;
@@ -102,7 +99,8 @@ public partial class SettingsViewModel : ObservableObject
     [ObservableProperty]
     bool useCustomTitleBar;
 
-    partial void OnUseCustomTitleBarChanged(bool value)
+    partial void OnUseCustomTitleBarChanged(
+        bool value)
     {
         if (value != windowHandler.HasCustomTitleBar)
             windowHandler.SetTitleBar(value ? uIElementReciever.TitleBarDragArea : null, uIElementReciever.TitleBarContainer);
@@ -164,7 +162,8 @@ public partial class SettingsViewModel : ObservableObject
     readonly FolderPicker folderPicker = new() { SuggestedStartLocation = PickerLocationId.DocumentsLibrary };
 
     [RelayCommand]
-    async Task SelectDirectoryAsync(bool texturepackDirectory)
+    async Task SelectDirectoryAsync(
+        bool texturepackDirectory)
     {
         StorageFolder folder = await folderPicker.PickSingleFolderAsync();
 
@@ -181,7 +180,8 @@ public partial class SettingsViewModel : ObservableObject
     }
 
     [RelayCommand]
-    void ResetDirectory(bool texturepackDirectory)
+    void ResetDirectory(
+        bool texturepackDirectory)
     {
         if (texturepackDirectory)
             Configuration.Launcher.TexturepackDirectory = $"{Computer.MinecraftDirectory}\\games\\com.mojang\\resource_packs";
@@ -193,14 +193,16 @@ public partial class SettingsViewModel : ObservableObject
 
     #region Navigation
     [RelayCommand]
-    void NavigateTo(string page) =>
+    void NavigateTo(
+        string page) =>
         navigation.SetCurrentPage(page.AsType());
     #endregion
 
 
     #region Theme
     [RelayCommand]
-    async Task ResetColorsAsync(bool darkMode)
+    async Task ResetColorsAsync(
+        bool darkMode)
     {
         if (await message.ShowAsync("Are you sure?", $"If you click Ok your current color settings will be overwritten by the default {(darkMode ? "dark" : "light")} mode colors.\nThis will not effect your current accent colors.\nThis will also effect the blur color mode.", closeButton: "Cancel", primaryButton: "Ok") != ContentDialogResult.Primary)
             return;
@@ -210,14 +212,16 @@ public partial class SettingsViewModel : ObservableObject
     }
 
 
-    public static bool IsDarkModeBackdropEnabled(int selectedIndex) =>
+    public static bool IsDarkModeBackdropEnabled(
+        int selectedIndex) =>
         selectedIndex == 0 || selectedIndex == 1;
 
 
     [ObservableProperty]
     bool useSystemTheme;
 
-    partial void OnUseSystemThemeChanged(bool value)
+    partial void OnUseSystemThemeChanged(
+        bool value)
     {
         if (Configuration.Apperance.Backdrop == Backdrop.Vibrancy)
             Configuration.Apperance.Backdrop = Backdrop.None;
@@ -237,7 +241,8 @@ public partial class SettingsViewModel : ObservableObject
     readonly FileSavePicker savePicker = new() { SuggestedStartLocation = PickerLocationId.Desktop };
 
     [RelayCommand]
-    async Task ExportAsync(bool saveConfig)
+    async Task ExportAsync(
+        bool saveConfig)
     {
         savePicker.SuggestedFileName = saveConfig ? "Config" : "Theme";
         StorageFile save = await savePicker.PickSaveFileAsync();
@@ -257,7 +262,8 @@ public partial class SettingsViewModel : ObservableObject
     readonly FileOpenPicker filePicker = new() { SuggestedStartLocation = PickerLocationId.Desktop };
 
     [RelayCommand]
-    async Task LoadAsync(bool loadConfig)
+    async Task LoadAsync(
+        bool loadConfig)
     {
         StorageFile file = await filePicker.PickSingleFileAsync();
 

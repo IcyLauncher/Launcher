@@ -64,7 +64,8 @@ public partial class HomeViewModel : ObservableObject
     }
 
     [RelayCommand]
-    void SetupPage(Grid bannerContainer)
+    void SetupPage(
+        Grid bannerContainer)
     {
         SetupBannerComposition((Rectangle)bannerContainer.Children[0]);
         SetupProfile((Grid)bannerContainer.Children[2]);
@@ -137,7 +138,8 @@ public partial class HomeViewModel : ObservableObject
         }
     }
 
-    void SetupBannerComposition(Rectangle container)
+    void SetupBannerComposition(
+        Rectangle container)
     {
         container.SizeChanged += (s, e) =>
         {
@@ -270,7 +272,8 @@ public partial class HomeViewModel : ObservableObject
     string launchProgressDetails = "Launch";
 
     [RelayCommand(CanExecute = nameof(LaunchCanExecute), FlowExceptionsToTaskScheduler = true, IncludeCancelCommand = true)]
-    async Task Launch(CancellationToken cancellationToken)
+    async Task Launch(
+        CancellationToken cancellationToken)
     {
         cancellationToken.Register(async () =>
         {
@@ -350,7 +353,8 @@ public partial class HomeViewModel : ObservableObject
     [ObservableProperty]
     string bannerProfileDetails = "Select a profile to start playing!";
 
-    void SetupProfile(Grid container)
+    void SetupProfile(
+        Grid container)
     {
         bannerProfileGrid = container;
 
@@ -378,7 +382,8 @@ public partial class HomeViewModel : ObservableObject
     [ObservableProperty]
     WeatherModel weatherData = new();
 
-    public string FormatDegree(double degree) =>
+    public string FormatDegree(
+        double degree) =>
         Configuration.Weather.Unit == WeatherUnit.Celsius ? $"{degree} °C" : $"{degree * 1.8 + 32} °F";
 
     [RelayCommand]

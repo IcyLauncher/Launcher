@@ -6,13 +6,16 @@ namespace IcyLauncher.WinUI.DataTemplates;
 
 public partial class BannerGalleryTemplate : ResourceDictionary
 {
+    #region Setup
     public BannerGalleryTemplate() =>
         InitializeComponent();
 
 
     BannerSettingsViewModel viewModel = default!;
+    #endregion
 
 
+    #region Handlers
     void OnRootLayoutLoaded(object sender, RoutedEventArgs _)
     {
         Grid layoutRoot = (Grid)sender;
@@ -42,4 +45,5 @@ public partial class BannerGalleryTemplate : ResourceDictionary
 
         await viewModel.OpenBannerGalleryItem((BannerGalleryItem)((Grid)((Button)sender).Parent).DataContext).ConfigureAwait(false);
     }
+    #endregion
 }

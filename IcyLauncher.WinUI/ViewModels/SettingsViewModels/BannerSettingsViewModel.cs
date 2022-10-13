@@ -95,7 +95,8 @@ public partial class BannerSettingsViewModel : ObservableObject
     [ObservableProperty]
     BannerType selectedBannerType = default!;
 
-    partial void OnSelectedBannerTypeChanged(BannerType value)
+    partial void OnSelectedBannerTypeChanged(
+        BannerType value)
     {
         switch (value)
         {
@@ -182,7 +183,8 @@ public partial class BannerSettingsViewModel : ObservableObject
     [ObservableProperty]
     int selectedTimeDependentItem = -1;
 
-    partial void OnSelectedTimeDependentItemChanged(int value)
+    partial void OnSelectedTimeDependentItemChanged(
+        int value)
     {
         Configuration.Apperance.SelectedHomeBanner = value;
 
@@ -254,7 +256,8 @@ public partial class BannerSettingsViewModel : ObservableObject
 
     public ObservableCollection<BannerGalleryItem> GalleryItems = new();
 
-    public async Task OpenBannerGalleryItem(BannerGalleryItem item)
+    public async Task OpenBannerGalleryItem(
+        BannerGalleryItem item)
     {
         ScrollLane element = new()
         {
@@ -299,7 +302,8 @@ public partial class BannerSettingsViewModel : ObservableObject
     [ObservableProperty]
     int selectedCustomPicture = -1;
 
-    partial void OnSelectedCustomPictureChanged(int value)
+    partial void OnSelectedCustomPictureChanged(
+        int value)
     {
         Configuration.Apperance.SelectedHomeBanner = value;
 
@@ -362,7 +366,8 @@ public partial class BannerSettingsViewModel : ObservableObject
         logger.Log("Reset CustomPictures");
     }
 
-    public async Task RemoveCustomPicture(string banner)
+    public async Task RemoveCustomPicture(
+        string banner)
     {
         string file = Path.Combine(Computer.CurrentDirectory, banner);
 
@@ -384,7 +389,8 @@ public partial class BannerSettingsViewModel : ObservableObject
     [ObservableProperty]
     int selectedSolidColor = -1;
 
-    partial void OnSelectedSolidColorChanged(int value)
+    partial void OnSelectedSolidColorChanged(
+        int value)
     {
         Configuration.Apperance.SelectedHomeBanner = value;
 
@@ -405,7 +411,8 @@ public partial class BannerSettingsViewModel : ObservableObject
     string customColorName = "CustomColor";
 
     [RelayCommand]
-    void AddSolidColor(Flyout sender)
+    void AddSolidColor(
+        Flyout sender)
     {
         SolidColors.Container.Add(new(CustomColorValue, CustomColorName));
         sender.Hide();

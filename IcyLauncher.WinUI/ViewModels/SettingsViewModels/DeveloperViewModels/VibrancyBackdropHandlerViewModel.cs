@@ -2,6 +2,7 @@
 
 public partial class VibrancyBackdropHandlerViewModel : ObservableObject
 {
+    #region Setup
     readonly IBackdropHandler vibrancyBackdropHandler;
     readonly IMessage message;
     
@@ -12,8 +13,10 @@ public partial class VibrancyBackdropHandlerViewModel : ObservableObject
         this.vibrancyBackdropHandler = vibrancyBackdropHandler;
         this.message = message;
     }
+    #endregion
 
 
+    #region EnableBackdrop
     [RelayCommand]
     async Task EnableBackdropAsync()
     {
@@ -27,7 +30,9 @@ public partial class VibrancyBackdropHandlerViewModel : ObservableObject
             await message.ShowAsync("vibrancyBackdropHandler.EnableBackdrop()", $"Method completed.\nException{ex.Format()}");
         }
     }
+    #endregion
 
+    #region DisableBackdrop
     [RelayCommand]
     async Task DisableBackdropAsync()
     {
@@ -41,4 +46,5 @@ public partial class VibrancyBackdropHandlerViewModel : ObservableObject
             await message.ShowAsync("vibrancyBackdropHandler.DisableBackdrop()", $"Method completed.\nException{ex.Format()}");
         }
     }
+    #endregion
 }

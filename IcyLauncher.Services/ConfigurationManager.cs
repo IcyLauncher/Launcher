@@ -4,6 +4,7 @@ namespace IcyLauncher.Services;
 
 public class ConfigurationManager
 {
+    #region Setup
     readonly ILogger logger;
     readonly Configuration configuration;
     readonly IConverter converter;
@@ -22,8 +23,10 @@ public class ConfigurationManager
 
         logger.Log("Registered configuration manager");
     }
+    #endregion
 
 
+    #region Actions
     /// <summary>
     /// Exports the current configuration as a string
     /// </summary>
@@ -68,4 +71,5 @@ public class ConfigurationManager
 
         logger.Log($"Loaded app configuration from input");
     }
+    #endregion
 }

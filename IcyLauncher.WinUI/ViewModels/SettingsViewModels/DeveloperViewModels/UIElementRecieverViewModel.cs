@@ -2,6 +2,7 @@
 
 public partial class UIElementRecieverViewModel : ObservableObject
 {
+    #region Setup
     public UIElementRecieverViewModel(
         UIElementReciever uIElementReciever)
     {
@@ -16,8 +17,10 @@ public partial class UIElementRecieverViewModel : ObservableObject
         TitleBarIconGradientStops = $"Hash Code: {uIElementReciever.TitleBarIconGradientStops.GetHashCode()}";
         TitleBarTitle = $"Hash Code: {uIElementReciever.TitleBarTitle.GetHashCode()}";
     }
+    #endregion
 
 
+    #region UIElements
     [ObservableProperty]
     string mainGrid = default!;
 
@@ -47,4 +50,5 @@ public partial class UIElementRecieverViewModel : ObservableObject
 
     [ObservableProperty]
     string titleBarTitle = default!;
+    #endregion
 }

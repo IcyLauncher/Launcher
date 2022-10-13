@@ -114,7 +114,7 @@
             <Expander
                 HorizontalAlignment="Stretch"
                 VerticalAlignment="Top"
-                Header="DeleteFile()|[Obsolete: Not recommended: Use asnyc method]  Deletes a file"
+                Header="DeleteFile()|Deletes a file"
                 Template="{StaticResource CardExpander}">
                 <Expander.Tag>
                     <ContentControl Tag="path|[Type: string]  The path to the file to delete to" Template="{StaticResource SettingsCard}">
@@ -131,7 +131,7 @@
             <Expander
                 HorizontalAlignment="Stretch"
                 VerticalAlignment="Top"
-                Header="DeleteFileAsync()|Deletes a file asynchronously"
+                Header="DeleteFileAsync()|[Obsolete: Not recommended: Too performance intense]  Deletes a file asynchronously"
                 Template="{StaticResource CardExpander}">
                 <Expander.Tag>
                     <StackPanel Spacing="8">

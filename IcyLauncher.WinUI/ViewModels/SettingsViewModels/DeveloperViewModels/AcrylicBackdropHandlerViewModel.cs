@@ -2,6 +2,7 @@
 
 public partial class AcrylicBackdropHandlerViewModel : ObservableObject
 {
+    #region Setup
     readonly IBackdropHandler acrylicBackdropHandler;
     readonly IMessage message;
 
@@ -15,8 +16,10 @@ public partial class AcrylicBackdropHandlerViewModel : ObservableObject
 
         IsDarkModeEnabled = acrylicBackdropHandler.IsDarkModeEnabled;
     }
+    #endregion
 
 
+    #region EnableBackdrop
     [RelayCommand]
     async Task EnableBackdropAsync()
     {
@@ -30,7 +33,9 @@ public partial class AcrylicBackdropHandlerViewModel : ObservableObject
             await message.ShowAsync("acrylicBackdropHandler.EnableBackdrop()", $"Method completed.\nException{ex.Format()}");
         }
     }
+    #endregion
 
+    #region DisableBackdrop
     [RelayCommand]
     async Task DisableBackdropAsync()
     {
@@ -44,12 +49,15 @@ public partial class AcrylicBackdropHandlerViewModel : ObservableObject
             await message.ShowAsync("acrylicBackdropHandler.DisableBackdrop()", $"Method completed.\nException{ex.Format()}");
         }
     }
+    #endregion
 
 
+    #region IsDarkModeEnabled
     [ObservableProperty]
     bool isDarkModeEnabled = default!;
 
-    async partial void OnIsDarkModeEnabledChanged(bool value)
+    async partial void OnIsDarkModeEnabledChanged(
+        bool value)
     {
         try
         {
@@ -64,4 +72,5 @@ public partial class AcrylicBackdropHandlerViewModel : ObservableObject
             await message.ShowAsync("acrylicBackdropHandler.IsDarkModeEnabled", $"Method completed.\nException{ex.Format()}");
         }
     }
+    #endregion
 }

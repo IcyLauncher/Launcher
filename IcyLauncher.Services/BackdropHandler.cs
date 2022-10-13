@@ -2,6 +2,7 @@
 
 public class BackdropHandler
 {
+    #region Setup
     readonly WindowHandler windowHandler;
     readonly IBackdropHandler micaBackdropHandler;
     readonly IBackdropHandler acrylicBackdropHandler;
@@ -26,30 +27,37 @@ public class BackdropHandler
 
         logger.Log("Registered general backdrop handler");
     }
+    #endregion
 
 
+    #region States
     /// <summary>
     /// Boolean wether a mica backdrop effect is enabled
     /// </summary>
     public bool IsMicaEnabled { get; private set; }
+
     /// <summary>
     /// Boolean wether an acrylic backdrop effect is enabled
     /// </summary>
     public bool IsAcrylicEnabled { get; private set; }
+
     /// <summary>
     /// Boolean wether a vivrancy backdrop effect is enabled
     /// </summary>
     public bool IsVibrancyEnabled { get; private set; }
+
     /// <summary>
     /// Boolean wether no backdrop effect is enabled
     /// </summary>
     public bool IsNoneEnabled { get; private set; }
+
     /// <summary>
     /// The currently activated backdrop effect
     /// </summary>
     public Backdrop? Current { get; private set; }
+    #endregion
 
-
+    #region General
     /// <summary>
     /// Enables/Disables a backdrop effect on the current main window and optionally updates the dark mode
     /// </summary>
@@ -110,8 +118,10 @@ public class BackdropHandler
         if (IsNoneEnabled)
             SetNoneBackdrop(false);
     }
+    #endregion
 
 
+    #region Mica
     /// <summary>
     /// Enables/Disable a mica backdrop effect
     /// </summary>
@@ -142,8 +152,9 @@ public class BackdropHandler
         get => micaBackdropHandler.IsDarkModeEnabled;
         set => micaBackdropHandler.IsDarkModeEnabled = value;
     }
+    #endregion
 
-
+    #region Acrylic
     /// <summary>
     /// Enables/Disable an acrylic backdrop effect
     /// </summary>
@@ -174,8 +185,9 @@ public class BackdropHandler
         get => acrylicBackdropHandler.IsDarkModeEnabled;
         set => acrylicBackdropHandler.IsDarkModeEnabled = value;
     }
+    #endregion
 
-
+    #region Vibrancy
     /// <summary>
     /// Enables/Disable a vibrancy backdrop effect
     /// </summary>
@@ -193,8 +205,9 @@ public class BackdropHandler
         }
         return setVibrancy;
     }
+    #endregion
 
-
+    #region None
     /// <summary>
     /// Enables/Disable no backdrop effect
     /// </summary>
@@ -212,4 +225,5 @@ public class BackdropHandler
         }
         return setMainBackground;
     }
+    #endregion
 }

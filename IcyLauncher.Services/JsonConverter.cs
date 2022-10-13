@@ -4,6 +4,7 @@ namespace IcyLauncher.Services;
 
 public class JsonConverter : IConverter
 {
+    #region Setup
     readonly ILogger<JsonConverter> logger;
 
     /// <summary>
@@ -16,8 +17,10 @@ public class JsonConverter : IConverter
 
         logger.Log("Registered converter");
     }
+    #endregion
 
 
+    #region Serialization
     /// <summary>
     /// Converts an object into a json string
     /// </summary>
@@ -33,7 +36,9 @@ public class JsonConverter : IConverter
 
         return JsonConvert.SerializeObject(input, formatting is Formatting format ? format : Formatting.None);
     }
+    #endregion
 
+    #region Deserialization
     /// <summary>
     /// Converts a json stirng into an object
     /// </summary>
@@ -76,4 +81,5 @@ public class JsonConverter : IConverter
         logger.Log($"Tried to deserialize string to object [{success}]");
         return success;
     }
+    #endregion
 }

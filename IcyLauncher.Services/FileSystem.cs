@@ -6,6 +6,7 @@ namespace IcyLauncher.Services;
 
 public class FileSystem : IFileSystem
 {
+    #region Setup
     readonly ILogger<FileSystem> logger;
 
     /// <summary>
@@ -18,14 +19,17 @@ public class FileSystem : IFileSystem
 
         logger.Log("Registered file system");
     }
+    #endregion
 
 
+    #region File Information
     /// <summary>
     /// Checks wether a file exists
     /// </summary>
     /// <param name="path">The path to the file to check</param>
     /// <returns>A boolean wether the file exists</returns>
-    public bool FileExists(string path) =>
+    public bool FileExists(
+        string path) =>
         File.Exists(path);
 
     /// <summary>
@@ -51,8 +55,10 @@ public class FileSystem : IFileSystem
             return false;
         }
     }
+    #endregion
 
 
+    #region File Copy
     /// <summary>
     /// Copies a file to another destination
     /// </summary>
@@ -66,7 +72,7 @@ public class FileSystem : IFileSystem
     /// <exception cref="PathTooLongException">Thrown if the specified path, file name, or both exceeded the system-defined maximum length</exception>
     /// <exception cref="IOException">Thrown if an I/O error has occurres</exception>
     /// <exception cref="NotSupportedException">Thrown if path or destination is in an invalid format</exception>
-    [Obsolete("Not recommended: Use asnyc method")]
+    [Obsolete("Not recommended: Use async method")]
     public void CopyFile(
         string path,
         string destination,
@@ -126,8 +132,10 @@ public class FileSystem : IFileSystem
 
         logger.Log($"Copied file asynchronous [{path}]");
     }
+    #endregion
 
 
+    #region File Delete
     /// <summary>
     /// Deletes a file
     /// </summary>
@@ -138,7 +146,6 @@ public class FileSystem : IFileSystem
     /// <exception cref="NotSupportedException">Thrown if path is in an invalid format</exception>
     /// <exception cref="PathTooLongException">Thrown if the specified path, file name, or both exceed the system-defined maximum length</exception>
     /// <exception cref="UnauthorizedAccessException">Thrown if the caller does not have the required permission</exception>
-    [Obsolete("Not recommended: Use asnyc method")]
     public void DeleteFile(
         string path)
     {
@@ -164,6 +171,7 @@ public class FileSystem : IFileSystem
     /// <exception cref="NotSupportedException">Thrown if path is in an invalid format</exception>
     /// <exception cref="PathTooLongException">Thrown if the specified path, file name, or both exceed the system-defined maximum length</exception>
     /// <exception cref="UnauthorizedAccessException">Thrown if the caller does not have the required permission</exception>
+    [Obsolete("Not recommended: Too performance intense")]
     public async Task DeleteFileAsync(
         string path,
         int timeout = 60000,
@@ -200,8 +208,10 @@ public class FileSystem : IFileSystem
 
         logger.Log($"Deleted file asynchronous [{path}]");
     }
+    #endregion
 
 
+    #region File Lock
     /// <summary>
     /// Waits for a file lock a asynchronously
     /// </summary>
@@ -241,8 +251,10 @@ public class FileSystem : IFileSystem
         logger.Log($"Waited for file lock [{path}]");
         return true;
     }
+    #endregion
 
 
+    #region File Text
     /// <summary>
     /// Reads a file as text asynchronously
     /// </summary>
@@ -279,8 +291,10 @@ public class FileSystem : IFileSystem
         else
             throw Exceptions.FileExits;
     }
+    #endregion
 
 
+    #region Directory Information
     /// <summary>
     /// Checks wether a directory exists
     /// </summary>
@@ -316,8 +330,10 @@ public class FileSystem : IFileSystem
             return false;
         }
     }
+    #endregion
 
 
+    #region Directory Create
     /// <summary>
     /// Creates a new directory
     /// </summary>
@@ -339,4 +355,5 @@ public class FileSystem : IFileSystem
 
         logger.Log($"Created directory [{path}]");
     }
+    #endregion
 }

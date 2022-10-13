@@ -11,6 +11,7 @@ namespace IcyLauncher.Services;
 
 public class ThemeManager
 {
+    #region Setup
     readonly ILogger logger;
     readonly Configuration configuration;
     readonly UIElementReciever uiElementReciever;
@@ -50,8 +51,10 @@ public class ThemeManager
 
         logger.Log("Registered theme manager and hooked all ColorValueChanged events");
     }
+    #endregion
 
 
+    #region System
     DispatcherQueue? dispatcher;
 
     readonly UISettings systemUI = new();
@@ -90,6 +93,7 @@ public class ThemeManager
         }
     }
 
+
     bool isDark = true;
 
     void ValidateTheme()
@@ -101,6 +105,7 @@ public class ThemeManager
 
         isDark = isDarkModeEnabled;
     }
+
 
     Color accent;
 
@@ -114,8 +119,10 @@ public class ThemeManager
 
         accent = currentAccent;
     }
+    #endregion
 
 
+    #region Actions
     /// <summary>
     /// Exports the current theme as a string
     /// </summary>
@@ -136,8 +143,10 @@ public class ThemeManager
 
         logger.Log($"Loaded theme configuration from input");
     }
+    #endregion
 
 
+    #region Static
     /// <summary>
     /// Copies a theme to another theme
     /// </summary>
@@ -178,6 +187,30 @@ public class ThemeManager
     }
 
 
+    /// <summary>
+    /// Darkens/Lightens a color by the given percentage
+    /// </summary>
+    /// <param name="color">The source of the new color</param>
+    /// <param name="darken">Wether the color should be darken or lighten</param>
+    /// <param name="percentage">The percentage of the color values that should be darkened/lightened</param>
+    /// <returns>The modified Color</returns>
+    public static Color ModifyColor(Color color, double percentage)
+    {
+        byte Calculate(byte source)
+        {
+            if (source == 0 && percentage != 1) source = 10;
+            var res = source * percentage;
+            if (res < 0) res = 0;
+            if (res > 255) res = 255;
+            return Convert.ToByte(res);
+        }
+
+        return Color.FromArgb(color.A, Calculate(color.R), Calculate(color.G), Calculate(color.B));
+    }
+    #endregion
+
+
+    #region Randomization
     readonly Random random = new();
 
     /// <summary>
@@ -227,10 +260,13 @@ public class ThemeManager
     /// </summary>
     /// <param name="transparency">The transparency which the color should have</param>
     /// <returns>The generated color</returns>
-    public Color GetRandomColor(byte transparency = 255) =>
+    public Color GetRandomColor(
+        byte transparency = 255) =>
         Color.FromArgb(transparency, Convert.ToByte(random.Next(0, 255)), Convert.ToByte(random.Next(0, 255)), Convert.ToByte(random.Next(0, 255)));
+    #endregion
 
 
+    #region Set
     /// <summary>
     /// Sets resource colors from current theme
     /// </summary>
@@ -272,30 +308,10 @@ public class ThemeManager
 
         logger.Log($"Binded unbindable bindings");
     }
+    #endregion
 
 
-    /// <summary>
-    /// Darkens/Lightens a color by the given percentage
-    /// </summary>
-    /// <param name="color">The source of the new color</param>
-    /// <param name="darken">Wether the color should be darken or lighten</param>
-    /// <param name="percentage">The percentage of the color values that should be darkened/lightened</param>
-    /// <returns>The modified Color</returns>
-    public static Color ModifyColor(Color color, double percentage)
-    {
-        byte Calculate(byte source)
-        {
-            if (source == 0 && percentage != 1) source = 10;
-            var res = source * percentage;
-            if (res < 0) res = 0;
-            if (res > 255) res = 255;
-            return Convert.ToByte(res);
-        }
-
-        return Color.FromArgb(color.A, Calculate(color.R), Calculate(color.G), Calculate(color.B));
-    }
-
-
+    #region Handlers
     void AccentColorsValuesChanged(object? _, PropertyChangedEventArgs e)
     {
         switch (e.PropertyName)
@@ -377,4 +393,5 @@ public class ThemeManager
             logger.Log($"System color value changed: Accent [{currentAccent}]");
         }
     }
+    #endregion
 }

@@ -5,6 +5,7 @@ namespace IcyLauncher.Services;
 
 public class MicaBackdropHandler : IBackdropHandler
 {
+    #region Setup
     readonly ILogger logger;
     readonly ICompositionSupportsSystemBackdrop shell;
 
@@ -24,8 +25,10 @@ public class MicaBackdropHandler : IBackdropHandler
 
         logger.Log("Registered backdrop handler");
     }
+    #endregion
 
 
+    #region Actions
     /// <summary>
     /// Enables the backdrop effect
     /// </summary>
@@ -78,7 +81,9 @@ public class MicaBackdropHandler : IBackdropHandler
             return false;
         }
     }
+    #endregion
 
+    #region Theme
     bool isDarkModeEnabled;
     /// <summary>
     /// Sets and gets the dark mode of the backdrop effect
@@ -94,4 +99,5 @@ public class MicaBackdropHandler : IBackdropHandler
             logger.Log($"Updated system backdrop dark mode ({value})");
         }
     }
+    #endregion
 }

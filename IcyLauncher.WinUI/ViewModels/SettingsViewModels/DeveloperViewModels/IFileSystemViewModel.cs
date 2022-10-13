@@ -2,6 +2,7 @@
 
 public partial class IFileSystemViewModel : ObservableObject
 {
+    #region Setup
     readonly IFileSystem fileSystem;
     readonly IMessage message;
 
@@ -12,8 +13,10 @@ public partial class IFileSystemViewModel : ObservableObject
         this.fileSystem = fileSystem;
         this.message = message;
     }
+    #endregion
 
 
+    #region Example
     [ObservableProperty]
     string path = "";
 
@@ -28,8 +31,10 @@ public partial class IFileSystemViewModel : ObservableObject
 
     [ObservableProperty]
     string content = "Hello World! :)";
+    #endregion
 
 
+    #region FileExists
     [RelayCommand]
     async Task FileExistsAsync()
     {
@@ -43,7 +48,9 @@ public partial class IFileSystemViewModel : ObservableObject
             await message.ShowAsync("fileSystem.FileExists()", $"Method completed.\nException{ex.Format()}");
         }
     }
+    #endregion
 
+    #region FileWritable
     [RelayCommand]
     async Task FileWritableAsync()
     {
@@ -57,8 +64,10 @@ public partial class IFileSystemViewModel : ObservableObject
             await message.ShowAsync("fileSystem.FileWritable()", $"Method completed.\nException{ex.Format()}");
         }
     }
+    #endregion
 
 
+    #region CopyFIle
     [RelayCommand]
     async Task CopyFileAsync()
     {
@@ -72,15 +81,20 @@ public partial class IFileSystemViewModel : ObservableObject
             await message.ShowAsync("fileSystem.CopyFile()", $"Method completed.\nException{ex.Format()}");
         }
     }
+    #endregion
 
+    #region CopyFileAsync
     [RelayCommand(IncludeCancelCommand = true)]
-    async Task CopyFileAAsync(CancellationToken cancellationToken)
+    async Task CopyFileAAsync(
+        CancellationToken cancellationToken)
     {
             await fileSystem.CopyFileAsync(Path, Destination, Overwrite, cancellationToken);
             await message.ShowAsync("fileSystem.CopyFileAsync()", "Method completed");
     }
+    #endregion
 
 
+    #region DeleteFile
     [RelayCommand]
     async Task DeleteFileAsync()
     {
@@ -94,9 +108,12 @@ public partial class IFileSystemViewModel : ObservableObject
             await message.ShowAsync("fileSystem.DeleteFile()", $"Method completed.\nException{ex.Format()}");
         }
     }
+    #endregion
 
+    #region DeleteFileAsync
     [RelayCommand(IncludeCancelCommand = true)]
-    async Task DeleteFileAAsync(CancellationToken cancellationToken)
+    async Task DeleteFileAAsync(
+        CancellationToken cancellationToken)
     {
         try
         {
@@ -108,10 +125,13 @@ public partial class IFileSystemViewModel : ObservableObject
             await message.ShowAsync("fileSystem.DeleteFileAsync()", $"Method completed.\nException{ex.Format()}");
         }
     }
+    #endregion
 
 
+    #region WaitForFileLockAsync
     [RelayCommand(IncludeCancelCommand = true)]
-    async Task WaitForFileLockAAsync(CancellationToken cancellationToken)
+    async Task WaitForFileLockAAsync(
+        CancellationToken cancellationToken)
     {
         try
         {
@@ -123,10 +143,13 @@ public partial class IFileSystemViewModel : ObservableObject
             await message.ShowAsync("fileSystem.WaitForFileLockAsync()", $"Method completed.\nException{ex.Format()}");
         }
     }
+    #endregion
 
 
+    #region ReadAsTextAsync
     [RelayCommand(IncludeCancelCommand = true)]
-    async Task ReadAsTextAAsync(CancellationToken cancellationToken)
+    async Task ReadAsTextAAsync(
+        CancellationToken cancellationToken)
     {
         try
         {
@@ -138,9 +161,12 @@ public partial class IFileSystemViewModel : ObservableObject
             await message.ShowAsync("fileSystem.ReadAsTextAsync()", $"Method completed.\nException{ex.Format()}");
         }
     }
+    #endregion
 
+    #region SaveAsTextAsync
     [RelayCommand(IncludeCancelCommand = true)]
-    async Task SaveAsTextAAsync(CancellationToken cancellationToken)
+    async Task SaveAsTextAAsync(
+        CancellationToken cancellationToken)
     {
         try
         {
@@ -152,8 +178,10 @@ public partial class IFileSystemViewModel : ObservableObject
             await message.ShowAsync("fileSystem.SaveAsTextAsync()", $"Method completed.\nException{ex.Format()}");
         }
     }
+    #endregion
 
 
+    #region DirectoryExists
     [RelayCommand]
     async Task DirectoryExistsAsync()
     {
@@ -167,7 +195,9 @@ public partial class IFileSystemViewModel : ObservableObject
             await message.ShowAsync("fileSystem.DirectoryExists()", $"Method completed.\nException{ex.Format()}");
         }
     }
+    #endregion
 
+    #region DirectoryWritable
     [RelayCommand]
     async Task DirectoryWritableAsync()
     {
@@ -181,8 +211,10 @@ public partial class IFileSystemViewModel : ObservableObject
             await message.ShowAsync("fileSystem.DirectoryWritable()", $"Method completed.\nException{ex.Format()}");
         }
     }
+    #endregion
 
 
+    #region CreateDirectory
     [RelayCommand]
     async Task CreateDirectoryAsync()
     {
@@ -196,4 +228,5 @@ public partial class IFileSystemViewModel : ObservableObject
             await message.ShowAsync("fileSystem.CreateDirectory()", $"Method completed.\nException{ex.Format()}");
         }
     }
+    #endregion
 }

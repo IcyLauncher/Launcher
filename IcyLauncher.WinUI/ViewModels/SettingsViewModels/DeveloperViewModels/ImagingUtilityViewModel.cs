@@ -7,6 +7,7 @@ namespace IcyLauncher.WinUI.ViewModels.SettingsViewModels.DeveloperViewModels;
 
 public partial class ImagingUtilityViewModel : ObservableObject
 {
+    #region Setup
     readonly ImagingUtility imagingUtility;
     readonly IMessage message;
 
@@ -17,8 +18,10 @@ public partial class ImagingUtilityViewModel : ObservableObject
         this.imagingUtility = imagingUtility;
         this.message = message;
     }
+    #endregion
 
 
+    #region Example
     [ObservableProperty]
     string compositorText = "[Compositor: null]\n";
 
@@ -30,8 +33,9 @@ public partial class ImagingUtilityViewModel : ObservableObject
 
     [ObservableProperty]
     string spriteVisualBrushText = "[SpriteVisual.Brush: null]";
+    #endregion
 
-
+    #region General
     Compositor? compositor = null;
     ContainerVisual? container = null;
     SpriteVisual? spriteVisual = null;
@@ -47,8 +51,10 @@ public partial class ImagingUtilityViewModel : ObservableObject
                 spriteVisual.Brush = value;
         }
     }
+    #endregion
 
 
+    #region InitializeUIElement
     [RelayCommand]
     async Task InitializeUIElementAsync(
         UIElement element)
@@ -69,129 +75,9 @@ public partial class ImagingUtilityViewModel : ObservableObject
             await message.ShowAsync("imagingUtility.InitializeUIElement()", $"Method completed.\nException{ex.Format()}");
         }
     }
+    #endregion
 
-
-    [ObservableProperty]
-    int startPointX = 0;
-    [ObservableProperty]
-    int startPointY = 0;
-
-    [ObservableProperty]
-    int endPointX = 1;
-    [ObservableProperty]
-    int endPointY = 1;
-
-    [RelayCommand]
-    async Task CreateGradientBrushAsync()
-    {
-        try
-        {
-            spriteVisualBrush = imagingUtility.CreateGradientBrush(
-                compositor!,
-                new Vector2(StartPointX, StartPointY),
-                new Vector2(EndPointX, EndPointY),
-                new[] { (0.0f, Colors.Red), (0.5f, Colors.Green), (1.0f, Colors.Blue) });
-
-            bool result = spriteVisualBrush is not null;
-            spriteVisualBrushText = $"[SpriteVisual.Brush: {(result ? $"(CompositionLinearGradientBrush){spriteVisualBrush!.GetHashCode()}" : "null")}]";
-
-            await message.ShowAsync("imagingUtility.CreateGradientBrush()", $"Method completed.\nResult: {result}");
-        }
-        catch (Exception ex)
-        {
-            await message.ShowAsync("imagingUtility.CreateGradientBrush()", $"Method completed.\nException{ex.Format()}");
-        }
-    }
-
-
-    [ObservableProperty]
-    Color maskColor = Colors.MediumPurple;
-
-    [RelayCommand]
-    async Task CreateMaskBrushAsync()
-    {
-        try
-        {
-            spriteVisualBrush = imagingUtility.CreateMaskBrush(
-                compositor!,
-                imagingUtility.CreateColorBrush(
-                    compositor!,
-                    MaskColor),
-                imagingUtility.CreateGradientBrush(
-                    compositor!,
-                    new Vector2(0, 0),
-                    new Vector2(0, 1),
-                    new[] { (0.0f, Colors.White), (1.0f, Colors.Transparent) }));
-
-            bool result = spriteVisualBrush is not null;
-            spriteVisualBrushText = $"[SpriteVisual.Brush: {(result ? $"(CompositionMaskBrush){spriteVisualBrush!.GetHashCode()}" : "null")}]";
-
-            await message.ShowAsync("imagingUtility.CreateMaskBrush()", $"Method completed.\nResult: {result}");
-        }
-        catch (Exception ex)
-        {
-            await message.ShowAsync("imagingUtility.CreateMaskBrush()", $"Method completed.\nException{ex.Format()}");
-        }
-    }
-
-
-    [ObservableProperty]
-    CompositionStretch stretch = CompositionStretch.Fill;
-
-    [ObservableProperty]
-    float horizontalAlignment = 0.0f;
-
-    [ObservableProperty]
-    float verticalAlignment = 0.5f;
-
-    [RelayCommand]
-    async Task CreateImageBrushAsync(
-        string uriSource)
-    {
-        try
-        {
-            spriteVisualBrush = imagingUtility.CreateImageBrush(
-                compositor!,
-                new Uri(uriSource),
-                Stretch,
-                HorizontalAlignment, VerticalAlignment);
-
-            bool result = spriteVisualBrush is not null;
-            spriteVisualBrushText = $"[SpriteVisual.Brush: {(result ? $"(CompositionSurfaceBrush){spriteVisualBrush!.GetHashCode()}" : "null")}]";
-
-            await message.ShowAsync("imagingUtility.CreateImageBrush()", $"Method completed.\nResult: {result}");
-        }
-        catch (Exception ex)
-        {
-            await message.ShowAsync("imagingUtility.CreateImageBrush()", $"Method completed.\nException{ex.Format()}");
-        }
-    }
-
-
-    [ObservableProperty]
-    Color color = Colors.MediumPurple;
-
-    [RelayCommand]
-    async Task CreateColorBrushAsync()
-    {
-        try
-        {
-            spriteVisualBrush = imagingUtility.CreateColorBrush(
-                compositor!,
-                Color);
-
-            bool result = spriteVisualBrush is not null;
-            spriteVisualBrushText = $"[SpriteVisual.Brush: {(result ? $"(CompositionColorBrush){spriteVisualBrush!.GetHashCode()}" : "null")}]";
-
-            await message.ShowAsync("imagingUtility.CreateColorBrush()", $"Method completed.\nResult: {result}");
-        }
-        catch (Exception ex)
-        {
-            await message.ShowAsync("imagingUtility.CreateColorBrush()", $"Method completed.\nException{ex.Format()}");
-        }
-    }
-
-
+    #region CreatespriteVisual
     [ObservableProperty]
     int sizeWidth = 400;
     [ObservableProperty]
@@ -228,4 +114,131 @@ public partial class ImagingUtilityViewModel : ObservableObject
             await message.ShowAsync("imagingUtility.CreateSpriteVisual()", $"Method completed.\nException{ex.Format()}");
         }
     }
+    #endregion
+
+
+    #region CreateGradientBrush
+    [ObservableProperty]
+    int startPointX = 0;
+    [ObservableProperty]
+    int startPointY = 0;
+
+    [ObservableProperty]
+    int endPointX = 1;
+    [ObservableProperty]
+    int endPointY = 1;
+
+    [RelayCommand]
+    async Task CreateGradientBrushAsync()
+    {
+        try
+        {
+            spriteVisualBrush = imagingUtility.CreateGradientBrush(
+                compositor!,
+                new Vector2(StartPointX, StartPointY),
+                new Vector2(EndPointX, EndPointY),
+                new[] { (0.0f, Colors.Red), (0.5f, Colors.Green), (1.0f, Colors.Blue) });
+
+            bool result = spriteVisualBrush is not null;
+            spriteVisualBrushText = $"[SpriteVisual.Brush: {(result ? $"(CompositionLinearGradientBrush){spriteVisualBrush!.GetHashCode()}" : "null")}]";
+
+            await message.ShowAsync("imagingUtility.CreateGradientBrush()", $"Method completed.\nResult: {result}");
+        }
+        catch (Exception ex)
+        {
+            await message.ShowAsync("imagingUtility.CreateGradientBrush()", $"Method completed.\nException{ex.Format()}");
+        }
+    }
+    #endregion
+
+    #region CreateMaskBrush
+    [ObservableProperty]
+    Color maskColor = Colors.MediumPurple;
+
+    [RelayCommand]
+    async Task CreateMaskBrushAsync()
+    {
+        try
+        {
+            spriteVisualBrush = imagingUtility.CreateMaskBrush(
+                compositor!,
+                imagingUtility.CreateColorBrush(
+                    compositor!,
+                    MaskColor),
+                imagingUtility.CreateGradientBrush(
+                    compositor!,
+                    new Vector2(0, 0),
+                    new Vector2(0, 1),
+                    new[] { (0.0f, Colors.White), (1.0f, Colors.Transparent) }));
+
+            bool result = spriteVisualBrush is not null;
+            spriteVisualBrushText = $"[SpriteVisual.Brush: {(result ? $"(CompositionMaskBrush){spriteVisualBrush!.GetHashCode()}" : "null")}]";
+
+            await message.ShowAsync("imagingUtility.CreateMaskBrush()", $"Method completed.\nResult: {result}");
+        }
+        catch (Exception ex)
+        {
+            await message.ShowAsync("imagingUtility.CreateMaskBrush()", $"Method completed.\nException{ex.Format()}");
+        }
+    }
+    #endregion
+
+    #region CreateImageBrush
+    [ObservableProperty]
+    CompositionStretch stretch = CompositionStretch.Fill;
+
+    [ObservableProperty]
+    float horizontalAlignment = 0.0f;
+
+    [ObservableProperty]
+    float verticalAlignment = 0.5f;
+
+    [RelayCommand]
+    async Task CreateImageBrushAsync(
+        string uriSource)
+    {
+        try
+        {
+            spriteVisualBrush = imagingUtility.CreateImageBrush(
+                compositor!,
+                new Uri(uriSource),
+                Stretch,
+                HorizontalAlignment, VerticalAlignment);
+
+            bool result = spriteVisualBrush is not null;
+            spriteVisualBrushText = $"[SpriteVisual.Brush: {(result ? $"(CompositionSurfaceBrush){spriteVisualBrush!.GetHashCode()}" : "null")}]";
+
+            await message.ShowAsync("imagingUtility.CreateImageBrush()", $"Method completed.\nResult: {result}");
+        }
+        catch (Exception ex)
+        {
+            await message.ShowAsync("imagingUtility.CreateImageBrush()", $"Method completed.\nException{ex.Format()}");
+        }
+    }
+    #endregion
+
+    #region CreateColorBrush
+    [ObservableProperty]
+    Color color = Colors.MediumPurple;
+
+    [RelayCommand]
+    async Task CreateColorBrushAsync()
+    {
+        try
+        {
+            spriteVisualBrush = imagingUtility.CreateColorBrush(
+                compositor!,
+                Color);
+
+            bool result = spriteVisualBrush is not null;
+            spriteVisualBrushText = $"[SpriteVisual.Brush: {(result ? $"(CompositionColorBrush){spriteVisualBrush!.GetHashCode()}" : "null")}]";
+
+            await message.ShowAsync("imagingUtility.CreateColorBrush()", $"Method completed.\nResult: {result}");
+        }
+        catch (Exception ex)
+        {
+            await message.ShowAsync("imagingUtility.CreateColorBrush()", $"Method completed.\nException{ex.Format()}");
+        }
+    }
+    #endregion
 }

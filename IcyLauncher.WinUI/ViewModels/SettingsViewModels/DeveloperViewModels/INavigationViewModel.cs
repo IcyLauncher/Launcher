@@ -2,6 +2,7 @@
 
 public partial class INavigationViewModel : ObservableObject
 {
+    #region Setup
     readonly INavigation navigation;
     readonly IMessage message;
     
@@ -12,8 +13,10 @@ public partial class INavigationViewModel : ObservableObject
         this.navigation = navigation;
         this.message = message;
     }
+    #endregion
 
 
+    #region GetCurrentNavigationViewItem
     [RelayCommand]
     async Task GetCurrentNavigationViewItemAsync()
     {
@@ -29,7 +32,9 @@ public partial class INavigationViewModel : ObservableObject
             await message.ShowAsync("navigation.GetCurrentNavigationViewItem()", $"Method completed.\nException{ex.Format()}");
         }
     }
+    #endregion
 
+    #region GetCurrentNavigationViewItemLayoutRoot
     [RelayCommand]
     async Task GetCurrentNavigationViewItemLayoutRootAsync()
     {
@@ -45,8 +50,10 @@ public partial class INavigationViewModel : ObservableObject
             await message.ShowAsync("navigation.GetCurrentNavigationViewItemLayoutRoot()", $"Method completed.\nException{ex.Format()}");
         }
     }
+    #endregion
 
 
+    #region GetNavigationViewItem
     [ObservableProperty]
     string searchFor = "Home";
 
@@ -71,8 +78,10 @@ public partial class INavigationViewModel : ObservableObject
             await message.ShowAsync("navigation.GetNavigationViewItem()", $"Method completed.\nException{ex.Format()}");
         }
     }
+    #endregion
 
 
+    #region SetCurrentIndex
     [RelayCommand]
     async Task SetCurrentIndexAsync(
         double index)
@@ -87,8 +96,9 @@ public partial class INavigationViewModel : ObservableObject
             await message.ShowAsync("navigation.SetCurrentIndex()", $"Method completed.\nException{ex.Format()}");
         }
     }
+    #endregion
 
-
+    #region SetCurrentPage
     [ObservableProperty]
     string pageType = "Views.HomeView";
 
@@ -108,8 +118,10 @@ public partial class INavigationViewModel : ObservableObject
             await message.ShowAsync("navigation.SetCurrentPage()", $"Method completed.\nException{ex.Format()}");
         }
     }
+    #endregion
 
 
+    #region Navigation
     [RelayCommand]
     async Task NavigateAsync(
         string page)
@@ -124,8 +136,10 @@ public partial class INavigationViewModel : ObservableObject
             await message.ShowAsync("navigation.Navigate()", $"Method completed.\nException{ex.Format()}");
         }
     }
+    #endregion
 
 
+    #region GoBack
     [RelayCommand]
     async Task GoBackAsync()
     {
@@ -139,7 +153,9 @@ public partial class INavigationViewModel : ObservableObject
             await message.ShowAsync("navigation.GoBack()", $"Method completed.\nException{ex.Format()}");
         }
     }
+    #endregion
 
+    #region ClearBackStack
     [RelayCommand]
     async Task ClearBackStackAsync()
     {
@@ -153,4 +169,5 @@ public partial class INavigationViewModel : ObservableObject
             await message.ShowAsync("navigation.ClearBackStack()", $"Method completed.\nException{ex.Format()}");
         }
     }
+    #endregion
 }

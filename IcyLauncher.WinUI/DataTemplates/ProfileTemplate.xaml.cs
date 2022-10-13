@@ -6,9 +6,13 @@ namespace IcyLauncher.WinUI.DataTemplates;
 
 public partial class ProfileTemplate : ResourceDictionary
 {
+    #region Setup
     public ProfileTemplate() =>
         InitializeComponent();
+    #endregion
 
+
+    #region Handlers
     void OnRootLayoutLoaded(object sender, RoutedEventArgs _)
     {
         Grid rootLayout = (Grid)sender;
@@ -40,8 +44,10 @@ public partial class ProfileTemplate : ResourceDictionary
 
         rootLayout.Loaded -= OnRootLayoutLoaded;
     }
+    #endregion
 
 
+    #region Static
     public static void UpdateProperties(
         GridView container,
         object item,
@@ -60,4 +66,5 @@ public partial class ProfileTemplate : ResourceDictionary
         details.Translation = detailsTranslation;
         ((Storyboard)icon.Resources[iconAnimation]).Begin();
     }
+    #endregion
 }

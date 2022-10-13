@@ -1,5 +1,4 @@
-﻿using Microsoft.UI;
-using Microsoft.UI.Composition;
+﻿using Microsoft.UI.Composition;
 using Microsoft.UI.Composition.SystemBackdrops;
 using Windows.UI;
 
@@ -7,6 +6,7 @@ namespace IcyLauncher.Services;
 
 public class AcrylicBackdropHandler : IBackdropHandler
 {
+    #region Setup
     readonly ILogger logger;
     readonly ICompositionSupportsSystemBackdrop shell;
 
@@ -30,7 +30,10 @@ public class AcrylicBackdropHandler : IBackdropHandler
 
         logger.Log("Registered backdrop handler and set configuration");
     }
+    #endregion
 
+
+    #region Actions
     /// <summary>
     /// Enables the backdrop
     /// </summary>
@@ -84,8 +87,9 @@ public class AcrylicBackdropHandler : IBackdropHandler
             return false;
         }
     }
+    #endregion
 
-
+    #region Theme
     bool isDarkModeEnabled;
     /// <summary>
     /// Gets and sets the dark mode of the backdrop effect
@@ -101,4 +105,5 @@ public class AcrylicBackdropHandler : IBackdropHandler
             logger.Log($"Updated system backdrop dark mode ({value})");
         }
     }
+    #endregion
 }

@@ -62,7 +62,7 @@
                     </StackPanel>
                 </Expander.Tag>
 
-                <Button Command="{x:Bind viewModel.TestCommand}" Content="Test Method" />
+                <Button Command="{x:Bind viewModel.LogCommand}" Content="Test Method" />
             </Expander>
 
         </StackPanel>

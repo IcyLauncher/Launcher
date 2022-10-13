@@ -2,6 +2,7 @@
 
 public partial class MicaBackdropHandlerViewModel : ObservableObject
 {
+    #region Setup
     readonly IBackdropHandler micaBackdropHandler;
     readonly IMessage message;
 
@@ -15,8 +16,10 @@ public partial class MicaBackdropHandlerViewModel : ObservableObject
 
         IsDarkModeEnabled = micaBackdropHandler.IsDarkModeEnabled;
     }
+    #endregion
 
 
+    #region EnableBackdrop
     [RelayCommand]
     async Task EnableBackdropAsync()
     {
@@ -30,7 +33,9 @@ public partial class MicaBackdropHandlerViewModel : ObservableObject
             await message.ShowAsync("micaBackdropHandler.EnableBackdrop()", $"Method completed.\nException{ex.Format()}");
         }
     }
+    #endregion
 
+    #region DisableBackdrop
     [RelayCommand]
     async Task DisableBackdropAsync()
     {
@@ -44,8 +49,10 @@ public partial class MicaBackdropHandlerViewModel : ObservableObject
             await message.ShowAsync("micaBackdropHandler.DisableBackdrop()", $"Method completed.\nException{ex.Format()}");
         }
     }
+    #endregion
 
 
+    #region IsDarkModeenabled
     [ObservableProperty]
     bool isDarkModeEnabled = default!;
 
@@ -64,4 +71,5 @@ public partial class MicaBackdropHandlerViewModel : ObservableObject
             await message.ShowAsync("micaBackdropHandler.IsDarkModeEnabled", $"Method completed.\nException{ex.Format()}");
         }
     }
+    #endregion
 }
