@@ -102,4 +102,25 @@ public partial class ThemeManagerViewModel : ObservableObject
             await message.ShowAsync("themeManager.GetRandomColor()", $"Method completed.\nException{ex.Format()}");
         }
     }
+
+
+    [ObservableProperty]
+    double percentage = 50;
+
+    [ObservableProperty]
+    Color sourceColor = Colors.Blue;
+
+    [RelayCommand]
+    async Task ModifyColorAsync()
+    {
+        try
+        {
+            SourceColor = ThemeManager.ModifyColor(SourceColor, Percentage / 100);
+            await message.ShowAsync("ThemeManager.ModifyColor()", $"Method completed.\nResult: {SourceColor}");
+        }
+        catch (Exception ex)
+        {
+            await message.ShowAsync("ThemeManager.ModifyColor()", $"Method completed.\nException{ex.Format()}");
+        }
+    }
 }

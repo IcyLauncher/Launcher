@@ -77,7 +77,10 @@ public class ThemeManager
             IsSubscribedToUISettings = true;
             dispatcher = DispatcherQueue.GetForCurrentThread();
 
-            ValidateTheme();
+            if (configuration.Apperance.UseSystemTheme)
+                ValidateTheme();
+            if (configuration.Apperance.UseSystemAccent)
+                ValidateAccent();
         }
         else
         {
@@ -91,12 +94,25 @@ public class ThemeManager
 
     void ValidateTheme()
     {
-        var isDarkModeEnabled = systemUI.GetColorValue(UIColorType.Background) == Microsoft.UI.Colors.Black;
+        bool isDarkModeEnabled = systemUI.GetColorValue(UIColorType.Background) == Microsoft.UI.Colors.Black;
 
-        Load(isDarkModeEnabled ? Theme.Dark : Theme.Light);
+        Load(isDarkModeEnabled ? Theme.Dark : Theme.Light, true);
         configuration.Apperance.IsDarkModeBackdropEnabled = isDarkModeEnabled;
 
         isDark = isDarkModeEnabled;
+    }
+
+    Color accent;
+
+    void ValidateAccent()
+    {
+        Color currentAccent = systemUI.GetColorValue(UIColorType.Accent);
+
+        Colors.Accent.Primary = currentAccent;
+        Colors.Accent.Light = ModifyColor(currentAccent, 1.25);
+        Colors.Accent.Dark = ModifyColor(currentAccent, 0.75);
+
+        accent = currentAccent;
     }
 
 
@@ -258,6 +274,28 @@ public class ThemeManager
     }
 
 
+    /// <summary>
+    /// Darkens/Lightens a color by the given percentage
+    /// </summary>
+    /// <param name="color">The source of the new color</param>
+    /// <param name="darken">Wether the color should be darken or lighten</param>
+    /// <param name="percentage">The percentage of the color values that should be darkened/lightened</param>
+    /// <returns>The modified Color</returns>
+    public static Color ModifyColor(Color color, double percentage)
+    {
+        byte Calculate(byte source)
+        {
+            if (source == 0 && percentage != 1) source = 10;
+            var res = source * percentage;
+            if (res < 0) res = 0;
+            if (res > 255) res = 255;
+            return Convert.ToByte(res);
+        }
+
+        return Color.FromArgb(color.A, Calculate(color.R), Calculate(color.G), Calculate(color.B));
+    }
+
+
     void AccentColorsValuesChanged(object? _, PropertyChangedEventArgs e)
     {
         switch (e.PropertyName)
@@ -308,22 +346,35 @@ public class ThemeManager
 
     void SystemColorsValuesChanged(UISettings _, object _1)
     {
-        if (configuration.Apperance.UseSystemTheme)
+        bool isDarkModeEnabled = systemUI.GetColorValue(UIColorType.Background) == Microsoft.UI.Colors.Black;
+        if (configuration.Apperance.UseSystemTheme && isDarkModeEnabled != isDark)
         {
-            var isDarkModeEnabled = systemUI.GetColorValue(UIColorType.Background) == Microsoft.UI.Colors.Black;
-            if (isDarkModeEnabled == isDark)
-                return;
-
             if (dispatcher is not null)
                 dispatcher.TryEnqueue(() =>
                 {
-                    Load(isDarkModeEnabled ? Theme.Dark : Theme.Light);
+                    Load(isDarkModeEnabled ? Theme.Dark : Theme.Light, true);
                     configuration.Apperance.IsDarkModeBackdropEnabled = isDarkModeEnabled;
                 });
 
             isDark = isDarkModeEnabled;
 
             logger.Log($"System color value changed: Theme [{isDarkModeEnabled}]");
+        }
+
+        Color currentAccent = systemUI.GetColorValue(UIColorType.Accent);
+        if (configuration.Apperance.UseSystemAccent && currentAccent != accent)
+        {
+            if (dispatcher is not null)
+                dispatcher.TryEnqueue(() =>
+                {
+                    Colors.Accent.Primary = currentAccent;
+                    Colors.Accent.Light = ModifyColor(currentAccent, 1.25);
+                    Colors.Accent.Dark = ModifyColor(currentAccent, 0.75);
+                });
+
+            accent = currentAccent;
+
+            logger.Log($"System color value changed: Accent [{currentAccent}]");
         }
     }
 }
