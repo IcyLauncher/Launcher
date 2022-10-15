@@ -16,7 +16,7 @@
                     <TextBox
                         MinWidth="100"
                         MaxWidth="200"
-                        Text="{x:Bind viewModel.Object_.Name, Mode=TwoWay}" />
+                        Text="{x:Bind viewModel.Object_.Title, Mode=TwoWay}" />
                     <ColorPicker
                         Margin="0,0,-117,0"
                         Template="{StaticResource ColorPickerButton}"

@@ -21,23 +21,19 @@ public partial class BannerTimeDependentTemplate : ResourceDictionary
         if (imagingUtility is null)
             imagingUtility = App.Provider.GetRequiredService<ImagingUtility>();
 
-        Rectangle grid = (Rectangle)sender;
-        BannerTimeDependentItem timeDependent = (BannerTimeDependentItem)grid.DataContext;
+        Rectangle image = (Rectangle)sender;
+        BannerTimeDependentPack pack = (BannerTimeDependentPack)image.DataContext;
 
 
-        imagingUtility.InitializeUIElement(grid, out Compositor? bannerCompositor, out ContainerVisual? banner);
+        imagingUtility.InitializeUIElement(image, out Compositor? bannerCompositor, out ContainerVisual? banner);
 
         if (bannerCompositor is null || banner is null)
             return;
 
-        AddImagePart(banner, bannerCompositor, timeDependent.I_3, 1);
-        AddImagePart(banner, bannerCompositor, timeDependent.I_6, 2);
-        AddImagePart(banner, bannerCompositor, timeDependent.I_9, 3);
-        AddImagePart(banner, bannerCompositor, timeDependent.I_12, 4);
-        AddImagePart(banner, bannerCompositor, timeDependent.I_15, 5);
-        AddImagePart(banner, bannerCompositor, timeDependent.I_21, 7);
+        for (int i = 1; i < pack.Collection.Count; i++)
+            AddImagePart(banner, bannerCompositor, pack.Collection[i].Image, i, pack.Collection.Count);
 
-        CompositionSurfaceBrush? backgroundBrush = imagingUtility.CreateImageBrush(bannerCompositor, new(timeDependent.I_0), CompositionStretch.UniformToFill);
+        CompositionSurfaceBrush? backgroundBrush = imagingUtility.CreateImageBrush(bannerCompositor, new(pack.Collection[0].Image), CompositionStretch.UniformToFill);
         SpriteVisual? backgroundVisual = imagingUtility.CreateSpriteVisual(bannerCompositor, new(270f, 66f), backgroundBrush);
 
         banner.Children.InsertAtBottom(backgroundVisual);
@@ -49,26 +45,26 @@ public partial class BannerTimeDependentTemplate : ResourceDictionary
         ContainerVisual container,
         Compositor compositor,
         string image,
-        int index) =>
-        container.Children.InsertAtTop(
-            imagingUtility.CreateSpriteVisual(
-                compositor,
-                new(286.875f - (33.75f * index), 66f),
-                imagingUtility.CreateMaskBrush(
-                    compositor,
-                    imagingUtility.CreateImageBrush(
-                        compositor,
-                        new(image),
-                        CompositionStretch.UniformToFill,
-                        1f),
-                imagingUtility.CreateGradientBrush(
-                    compositor,
-                    new(0f, 0f),
-                    new(1f, 0f),
-                    new[] {
-                        (0f, Colors.Transparent),
-                        (10f * index / 100, Colors.White)
-                    })),
-            new((33.75f * index) - 16.875f, 0f, 0f)));
+        int index,
+        int max)
+    {
+        CompositionBrush? mask = imagingUtility.CreateGradientBrush(
+            compositor, new(0f, 0f), new(1f, 0f), new[] { (0f, Colors.Transparent), (0.15f * index, Colors.White) });
+
+        CompositionBrush? imageBrush = imagingUtility.CreateImageBrush(
+            compositor, new(image), CompositionStretch.UniformToFill, 1f);
+
+        CompositionBrush? maskBrush = imagingUtility.CreateMaskBrush(
+            compositor, imageBrush, mask);
+
+
+        float onePart = 270f / max;
+        float currentPart = onePart * index - 20f;
+
+        SpriteVisual? visual = imagingUtility.CreateSpriteVisual(
+            compositor, new(270f - currentPart, 66f), maskBrush, new(currentPart, 0f, 0f));
+
+        container.Children.InsertAtTop(visual);
+    }
     #endregion
 }

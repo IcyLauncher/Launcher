@@ -177,55 +177,51 @@ public partial class HomeViewModel : ObservableObject
 
     #region Banner Image
     readonly List<string> bannerCustomPictures = new();
-    readonly List<BannerTimeDependentItem> bannerTimeDependentItems = new();
+    readonly List<BannerTimeDependentPack> bannerTimeDependentPacks = new();
 
     public void LoadBannerImage()
     {
         switch (Configuration.Apperance.HomeBanner)
         {
             case BannerType.TimeDependent:
-                bannerTimeDependentItems.Clear();
+                bannerTimeDependentPacks.Clear();
 
                 // API STUFF => API NOT DONE: LOCAL TIME DEPENDENT ITEMS
-                bannerTimeDependentItems.Add(new("Icy Village",
-                    "ms-appx:///Assets/Banners/TimeDependent/Icy Village/0.png",
-                    "ms-appx:///Assets/Banners/TimeDependent/Icy Village/3.png",
-                    "ms-appx:///Assets/Banners/TimeDependent/Icy Village/6.png",
-                    "ms-appx:///Assets/Banners/TimeDependent/Icy Village/9.png",
-                    "ms-appx:///Assets/Banners/TimeDependent/Icy Village/12.png",
-                    "ms-appx:///Assets/Banners/TimeDependent/Icy Village/15.png",
-                    "ms-appx:///Assets/Banners/TimeDependent/Icy Village/18.png",
-                    "ms-appx:///Assets/Banners/TimeDependent/Icy Village/21.png"));
-                bannerTimeDependentItems.Add(new("Showy Forest",
-                    "ms-appx:///Assets/Banners/TimeDependent/Snowy Forest/0.png",
-                    "ms-appx:///Assets/Banners/TimeDependent/Snowy Forest/3.png",
-                    "ms-appx:///Assets/Banners/TimeDependent/Snowy Forest/6.png",
-                    "ms-appx:///Assets/Banners/TimeDependent/Snowy Forest/9.png",
-                    "ms-appx:///Assets/Banners/TimeDependent/Snowy Forest/12.png",
-                    "ms-appx:///Assets/Banners/TimeDependent/Snowy Forest/15.png",
-                    "ms-appx:///Assets/Banners/TimeDependent/Snowy Forest/18.png",
-                    "ms-appx:///Assets/Banners/TimeDependent/Snowy Forest/21.png"));
+                bannerTimeDependentPacks.Add(new("Icy Village", new()
+                {
+                    new(0, "ms-appx:///Assets/Banners/TimeDependent/Icy Village/0.png"),
+                    new(3, "ms-appx:///Assets/Banners/TimeDependent/Icy Village/3.png"),
+                    new(6, "ms-appx:///Assets/Banners/TimeDependent/Icy Village/6.png"),
+                    new(9, "ms-appx:///Assets/Banners/TimeDependent/Icy Village/9.png"),
+                    new(12, "ms-appx:///Assets/Banners/TimeDependent/Icy Village/12.png"),
+                    new(15, "ms-appx:///Assets/Banners/TimeDependent/Icy Village/15.png"),
+                    new(18, "ms-appx:///Assets/Banners/TimeDependent/Icy Village/18.png"),
+                    new(21, "ms-appx:///Assets/Banners/TimeDependent/Icy Village/21.png")
+                }));
+                bannerTimeDependentPacks.Add(new("Snowy Forest", new()
+                {
+                    new(0, "ms-appx:///Assets/Banners/TimeDependent/Snowy Forest/0.png"),
+                    new(3, "ms-appx:///Assets/Banners/TimeDependent/Snowy Forest/3.png"),
+                    new(6, "ms-appx:///Assets/Banners/TimeDependent/Snowy Forest/6.png"),
+                    new(9, "ms-appx:///Assets/Banners/TimeDependent/Snowy Forest/9.png"),
+                    new(12, "ms-appx:///Assets/Banners/TimeDependent/Snowy Forest/12.png"),
+                    new(15, "ms-appx:///Assets/Banners/TimeDependent/Snowy Forest/15.png"),
+                    new(18, "ms-appx:///Assets/Banners/TimeDependent/Snowy Forest/18.png"),
+                    new(21, "ms-appx:///Assets/Banners/TimeDependent/Snowy Forest/21.png")
+                }));
 
                 logger.Log("Reloaded TimeDependentItems");
 
-                if (Configuration.Apperance.SelectedHomeBanner < 0 || Configuration.Apperance.SelectedHomeBanner >= bannerTimeDependentItems.Count)
+                if (Configuration.Apperance.SelectedHomeBanner < 0 || Configuration.Apperance.SelectedHomeBanner >= bannerTimeDependentPacks.Count)
                 {
                     BannerSource = "Banners/NoBanner.png".FromAssets();
                     return;
                 }
 
-                BannerSource = new(DateTime.Now.Hour.RoundDown(new[] { 0, 3, 6, 9, 12, 15, 18, 21 }) switch
-                {
-                    0 => bannerTimeDependentItems[Configuration.Apperance.SelectedHomeBanner].I_0,
-                    3 => bannerTimeDependentItems[Configuration.Apperance.SelectedHomeBanner].I_3,
-                    6 => bannerTimeDependentItems[Configuration.Apperance.SelectedHomeBanner].I_6,
-                    9 => bannerTimeDependentItems[Configuration.Apperance.SelectedHomeBanner].I_9,
-                    12 => bannerTimeDependentItems[Configuration.Apperance.SelectedHomeBanner].I_12,
-                    15 => bannerTimeDependentItems[Configuration.Apperance.SelectedHomeBanner].I_15,
-                    18 => bannerTimeDependentItems[Configuration.Apperance.SelectedHomeBanner].I_18,
-                    21 => bannerTimeDependentItems[Configuration.Apperance.SelectedHomeBanner].I_21,
-                    _ => "ms-appx:///Assets/Banners/NoBanner.png"
-                });
+                IEnumerable<int> all = bannerTimeDependentPacks[Configuration.Apperance.SelectedHomeBanner].Collection.Select(item => item.Hour);
+                int searchFor = DateTime.Now.Hour.RoundDown(all);
+                var item = bannerTimeDependentPacks[Configuration.Apperance.SelectedHomeBanner].Collection.Find(item => item.Hour == searchFor);
+                BannerSource = new(item?.Image ?? "ms-appx:///Assets/Banners/NoBanner.png");
                 break;
             case BannerType.Gallery:
                 BannerSource = Uri.IsWellFormedUriString(Configuration.Apperance.HomeBannerUri, UriKind.Absolute) ? new(Configuration.Apperance.HomeBannerUri) : "Banners/NoBanner.png".FromAssets();

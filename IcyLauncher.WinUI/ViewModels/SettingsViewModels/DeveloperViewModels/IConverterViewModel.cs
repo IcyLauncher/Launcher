@@ -21,7 +21,7 @@ public partial class IConverterViewModel : ObservableObject
 
     #region Example
     [ObservableProperty]
-    SolidColor object_ = new(Colors.Red, "Red");
+    SolidColor object_ = new("Red", Colors.Red);
 
     [ObservableProperty]
     string input = "";

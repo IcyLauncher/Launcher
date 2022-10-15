@@ -56,7 +56,7 @@ public partial class BannerSettingsViewModel : ObservableObject
         switch (Configuration.Apperance.HomeBanner)
         {
             case BannerType.TimeDependent:
-                SelectedTimeDependentItem = Configuration.Apperance.SelectedHomeBanner;
+                SelectedTimeDependentPack = Configuration.Apperance.SelectedHomeBanner;
                 break;
             case BannerType.Gallery:
                 BannerBrush = new ImageBrush() { ImageSource = Uri.IsWellFormedUriString(Configuration.Apperance.HomeBannerUri, UriKind.Absolute) ? Configuration.Apperance.HomeBannerUri.AsImage(false) : "Banners/NoBanner.png".AsImage(), Stretch = Stretch.UniformToFill };
@@ -106,7 +106,7 @@ public partial class BannerSettingsViewModel : ObservableObject
                 CustomPictureVisibility = Visibility.Collapsed;
                 SolidColorVisibility = Visibility.Collapsed;
 
-                OnSelectedTimeDependentItemChanged(SelectedTimeDependentItem);
+                OnSelectedTimeDependentPackChanged(SelectedTimeDependentPack);
                 break;
             case BannerType.Gallery:
                 TimeDependentVisibility = Visibility.Collapsed;
@@ -153,64 +153,62 @@ public partial class BannerSettingsViewModel : ObservableObject
     #region TimeDependent
     void LoadTimeDependent()
     {
-        TimeDependentItems.Clear();
+        TimeDependentPacks.Clear();
 
         // API STUFF => API NOT DONE: LOCAL TIME DEPENDENT ITEMS
-        TimeDependentItems.Add(new("Icy Village",
-            "ms-appx:///Assets/Banners/TimeDependent/Icy Village/0.png",
-            "ms-appx:///Assets/Banners/TimeDependent/Icy Village/3.png",
-            "ms-appx:///Assets/Banners/TimeDependent/Icy Village/6.png",
-            "ms-appx:///Assets/Banners/TimeDependent/Icy Village/9.png",
-            "ms-appx:///Assets/Banners/TimeDependent/Icy Village/12.png",
-            "ms-appx:///Assets/Banners/TimeDependent/Icy Village/15.png",
-            "ms-appx:///Assets/Banners/TimeDependent/Icy Village/18.png",
-            "ms-appx:///Assets/Banners/TimeDependent/Icy Village/21.png"));
-        TimeDependentItems.Add(new("Showy Forest",
-            "ms-appx:///Assets/Banners/TimeDependent/Snowy Forest/0.png",
-            "ms-appx:///Assets/Banners/TimeDependent/Snowy Forest/3.png",
-            "ms-appx:///Assets/Banners/TimeDependent/Snowy Forest/6.png",
-            "ms-appx:///Assets/Banners/TimeDependent/Snowy Forest/9.png",
-            "ms-appx:///Assets/Banners/TimeDependent/Snowy Forest/12.png",
-            "ms-appx:///Assets/Banners/TimeDependent/Snowy Forest/15.png",
-            "ms-appx:///Assets/Banners/TimeDependent/Snowy Forest/18.png",
-            "ms-appx:///Assets/Banners/TimeDependent/Snowy Forest/21.png"));
+        TimeDependentPacks.Add(new("Icy Village", new()
+        {
+            new(0, "ms-appx:///Assets/Banners/TimeDependent/Icy Village/0.png"),
+            new(3, "ms-appx:///Assets/Banners/TimeDependent/Icy Village/3.png"),
+            new(6, "ms-appx:///Assets/Banners/TimeDependent/Icy Village/6.png"),
+            new(9, "ms-appx:///Assets/Banners/TimeDependent/Icy Village/9.png"),
+            new(12, "ms-appx:///Assets/Banners/TimeDependent/Icy Village/12.png"),
+            new(15, "ms-appx:///Assets/Banners/TimeDependent/Icy Village/15.png"),
+            new(18, "ms-appx:///Assets/Banners/TimeDependent/Icy Village/18.png"),
+            new(21, "ms-appx:///Assets/Banners/TimeDependent/Icy Village/21.png")
+        }));
+        TimeDependentPacks.Add(new("Snowy Forest", new()
+        {
+            new(0, "ms-appx:///Assets/Banners/TimeDependent/Snowy Forest/0.png"),
+            new(3, "ms-appx:///Assets/Banners/TimeDependent/Snowy Forest/3.png"),
+            new(6, "ms-appx:///Assets/Banners/TimeDependent/Snowy Forest/6.png"),
+            new(9, "ms-appx:///Assets/Banners/TimeDependent/Snowy Forest/9.png"),
+            new(12, "ms-appx:///Assets/Banners/TimeDependent/Snowy Forest/12.png"),
+            new(15, "ms-appx:///Assets/Banners/TimeDependent/Snowy Forest/15.png"),
+            new(18, "ms-appx:///Assets/Banners/TimeDependent/Snowy Forest/18.png"),
+            new(21, "ms-appx:///Assets/Banners/TimeDependent/Snowy Forest/21.png")
+        }));
 
         logger.Log("Reloaded TimeDependentItems");
     }
 
-    public ObservableCollection<BannerTimeDependentItem> TimeDependentItems = new();
+    public ObservableCollection<BannerTimeDependentPack> TimeDependentPacks = new();
 
     [ObservableProperty]
-    int selectedTimeDependentItem = -1;
+    int selectedTimeDependentPack = -1;
 
-    partial void OnSelectedTimeDependentItemChanged(
+    partial void OnSelectedTimeDependentPackChanged(
         int value)
     {
         Configuration.Apperance.SelectedHomeBanner = value;
 
-        if (value < 0 || value >= TimeDependentItems.Count)
+        if (value < 0 || value >= TimeDependentPacks.Count)
         {
             ResetBannerBrush();
             return;
         }
 
+        IEnumerable<int> all = TimeDependentPacks[SelectedTimeDependentPack].Collection.Select(item => item.Hour);
+        int searchFor = DateTime.Now.Hour.RoundDown(all);
+        var item = TimeDependentPacks[SelectedTimeDependentPack].Collection.Find(item => item.Hour == searchFor);
+
         BannerBrush = new ImageBrush()
         {
-            ImageSource = (DateTime.Now.Hour.RoundDown(new[] { 0, 3, 6, 9, 12, 15, 18, 21 }) switch
-            {
-                0 => TimeDependentItems[SelectedTimeDependentItem].I_0,
-                3 => TimeDependentItems[SelectedTimeDependentItem].I_3,
-                6 => TimeDependentItems[SelectedTimeDependentItem].I_6,
-                9 => TimeDependentItems[SelectedTimeDependentItem].I_9,
-                12 => TimeDependentItems[SelectedTimeDependentItem].I_12,
-                15 => TimeDependentItems[SelectedTimeDependentItem].I_15,
-                18 => TimeDependentItems[SelectedTimeDependentItem].I_18,
-                21 => TimeDependentItems[SelectedTimeDependentItem].I_21,
-                _ => "ms-appx:///Assets/Banners/NoBanner.png"
-            }).AsImage(false),
+            ImageSource = (item?.Image ?? "ms-appx:///Assets/Banners/NoBanner.png").AsImage(false),
             Stretch = Stretch.UniformToFill
-        };
-        logger.Log("Set home banner: TimeDependent" + DateTime.Now.Hour.RoundDown(new[] { 0, 3, 6, 9, 12, 15, 18, 21 }));
+        }; 
+
+        logger.Log($"Set home banner: TimeDependent [{SelectedTimeDependentPack}-{searchFor}]");
     }
     #endregion
 
@@ -265,7 +263,7 @@ public partial class BannerSettingsViewModel : ObservableObject
             ItemTemplate = (DataTemplate)Application.Current.Resources["BannerGalleryItemTemplate"]
         };
 
-        if (await message.ShowAsync($"{item.Title} - Count: {item.Collection.Count}", element, primaryButton: "Ok") != ContentDialogResult.Primary)
+        if (await message.ShowAsync($"{item.Title} - Count: {item.Collection.Count}", element, closeButton: "Cancel", primaryButton: "Ok") != ContentDialogResult.Primary)
             return;
 
         if (string.IsNullOrEmpty((string)element.SelectedItem))
@@ -408,13 +406,13 @@ public partial class BannerSettingsViewModel : ObservableObject
     Color customColorValue = Colors.White;
 
     [ObservableProperty]
-    string customColorName = "CustomColor";
+    string customColorTitle = "CustomColor";
 
     [RelayCommand]
     void AddSolidColor(
         Flyout sender)
     {
-        SolidColors.Container.Add(new(CustomColorValue, CustomColorName));
+        SolidColors.Container.Add(new(CustomColorTitle, CustomColorValue));
         sender.Hide();
 
         logger.Log("Added new SolidColor");

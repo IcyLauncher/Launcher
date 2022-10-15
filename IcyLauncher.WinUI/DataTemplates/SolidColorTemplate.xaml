@@ -33,7 +33,7 @@
                 HorizontalAlignment="Left"
                 FontSize="15"
                 Style="{StaticResource TitleSecondary}"
-                Text="{x:Bind Name}"
+                Text="{x:Bind Title}"
                 TextTrimming="CharacterEllipsis" />
             <TextBlock
                 Margin="8,99,0,0"

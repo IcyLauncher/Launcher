@@ -2,6 +2,9 @@
 
 public static class IntExtentions
 {
-    public static int RoundDown(this int input, int[] list) =>
-        list.Where(x => x <= input) is IEnumerable<int> res && res.Any() ? res.Last() : 0;
+    public static int RoundDown(this int input, IEnumerable<int> list)
+    {
+        IEnumerable<int> filtered = list.Where(x => x <= input);
+        return filtered.Any() ? filtered.Last() : list.Min();
+    }
 }

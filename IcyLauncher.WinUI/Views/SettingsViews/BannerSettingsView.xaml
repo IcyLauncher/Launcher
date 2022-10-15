@@ -94,8 +94,8 @@
                                 Padding="12,12,8,12"
                                 HorizontalAlignment="Center"
                                 ItemTemplate="{StaticResource BannerTimeDependentTemplate}"
-                                ItemsSource="{x:Bind viewModel.TimeDependentItems}"
-                                SelectedIndex="{x:Bind viewModel.SelectedTimeDependentItem, Mode=TwoWay}" />
+                                ItemsSource="{x:Bind viewModel.TimeDependentPacks}"
+                                SelectedIndex="{x:Bind viewModel.SelectedTimeDependentPack, Mode=TwoWay}" />
                         </Grid>
                     </Grid>
 
@@ -202,9 +202,9 @@
                                                     </Grid.ColumnDefinitions>
 
                                                     <TextBox
-                                                        PlaceholderText="Name..."
-                                                        Text="{x:Bind viewModel.CustomColorName, Mode=TwoWay}"
-                                                        ToolTipService.ToolTip="Custom color name" />
+                                                        PlaceholderText="Title..."
+                                                        Text="{x:Bind viewModel.CustomColorTitle, Mode=TwoWay}"
+                                                        ToolTipService.ToolTip="Custom color title" />
                                                     <Button
                                                         Grid.Column="2"
                                                         Command="{x:Bind viewModel.AddSolidColorCommand}"
