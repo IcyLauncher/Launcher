@@ -2,10 +2,8 @@
     x:Class="IcyLauncher.WinUI.Views.SettingsViews.ColorSettingsView"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:core="using:Microsoft.Xaml.Interactions.Core"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:ex="using:CommunityToolkit.WinUI.UI"
-    xmlns:i="using:Microsoft.Xaml.Interactivity"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:md="using:CommunityToolkit.WinUI.UI.Media"
     xmlns:xmle="using:IcyLauncher.Xaml.Elements"
@@ -22,14 +20,9 @@
         <x:Boolean x:Key="par0">False</x:Boolean>
         <x:Boolean x:Key="par1">True</x:Boolean>
     </Page.Resources>
-    <i:Interaction.Behaviors>
-        <core:EventTriggerBehavior EventName="Loaded">
-            <core:InvokeCommandAction Command="{x:Bind viewModel.SetNavigationIndexCommand}" />
-        </core:EventTriggerBehavior>
-    </i:Interaction.Behaviors>
 
     <xmle:HCont
-        Title="Settings  |  Home Banner"
+        Title="Settings  |  Colors"
         Style="{StaticResource Page}"
         VerticalScrollBar="{x:Bind viewModel.Configuration.Launcher.IsScrollbarsEnabled, Mode=OneWay, Converter={StaticResource BoolScrollbarVisibilityConverter}}">
         <Grid>
@@ -98,12 +91,14 @@
                                     Template="{StaticResource ColorPickerButton}"
                                     Color="{x:Bind viewModel.LocalColors.Accent.Primary, Mode=TwoWay}" />
                             </ContentControl>
+
                             <ContentControl Tag="Light|Lighter color used for highlights" Template="{StaticResource SettingsCard}">
                                 <ColorPicker
                                     Margin="0,0,-113,0"
                                     Template="{StaticResource ColorPickerButton}"
                                     Color="{x:Bind viewModel.LocalColors.Accent.Light, Mode=TwoWay}" />
                             </ContentControl>
+
                             <ContentControl Tag="Dark|Darker color used for highlights" Template="{StaticResource SettingsCard}">
                                 <ColorPicker
                                     Margin="0,0,-113,0"
@@ -126,18 +121,21 @@
                                     Template="{StaticResource ColorPickerButton}"
                                     Color="{x:Bind viewModel.LocalColors.Background.Solid, Mode=TwoWay}" />
                             </ContentControl>
+
                             <ContentControl Tag="Transparent|Transparent color used for application background" Template="{StaticResource SettingsCard}">
                                 <ColorPicker
                                     Margin="0,0,-113,0"
                                     Template="{StaticResource ColorPickerButton}"
                                     Color="{x:Bind viewModel.LocalColors.Background.Transparent, Mode=TwoWay}" />
                             </ContentControl>
+
                             <ContentControl Tag="Gradient|Solid color used for opacity masks on gradients" Template="{StaticResource SettingsCard}">
                                 <ColorPicker
                                     Margin="0,0,-113,0"
                                     Template="{StaticResource ColorPickerButton}"
                                     Color="{x:Bind viewModel.LocalColors.Background.Gradient, Mode=TwoWay}" />
                             </ContentControl>
+
                             <ContentControl Tag="Gradient Transparent|Transparent color used for opacity masks on gradients" Template="{StaticResource SettingsCard}">
                                 <ColorPicker
                                     Margin="0,0,-113,0"
@@ -160,18 +158,21 @@
                                     Template="{StaticResource ColorPickerButton}"
                                     Color="{x:Bind viewModel.LocalColors.Text.Primary, Mode=TwoWay}" />
                             </ContentControl>
+
                             <ContentControl Tag="Secondary|Main color used for content and subpoints" Template="{StaticResource SettingsCard}">
                                 <ColorPicker
                                     Margin="0,0,-113,0"
                                     Template="{StaticResource ColorPickerButton}"
                                     Color="{x:Bind viewModel.LocalColors.Text.Secondary, Mode=TwoWay}" />
                             </ContentControl>
+
                             <ContentControl Tag="Tertiary|Darkest color mostly used for headers, secondary content and secondary subpoints" Template="{StaticResource SettingsCard}">
                                 <ColorPicker
                                     Margin="0,0,-113,0"
                                     Template="{StaticResource ColorPickerButton}"
                                     Color="{x:Bind viewModel.LocalColors.Text.Tertiary, Mode=TwoWay}" />
                             </ContentControl>
+
                             <ContentControl Tag="Disabled|Disabled color for disabled text" Template="{StaticResource SettingsCard}">
                                 <ColorPicker
                                     Margin="0,0,-113,0"
@@ -194,18 +195,21 @@
                                     Template="{StaticResource ColorPickerButton}"
                                     Color="{x:Bind viewModel.LocalColors.Control.Primary, Mode=TwoWay}" />
                             </ContentControl>
+
                             <ContentControl Tag="Outline|Border color used for almost all controls" Template="{StaticResource SettingsCard}">
                                 <ColorPicker
                                     Margin="0,0,-113,0"
                                     Template="{StaticResource ColorPickerButton}"
                                     Color="{x:Bind viewModel.LocalColors.Control.Outline, Mode=TwoWay}" />
                             </ContentControl>
+
                             <ContentControl Tag="Primary Disabled|Disabled background color for disabled controls" Template="{StaticResource SettingsCard}">
                                 <ColorPicker
                                     Margin="0,0,-113,0"
                                     Template="{StaticResource ColorPickerButton}"
                                     Color="{x:Bind viewModel.LocalColors.Control.PrimaryDisabled, Mode=TwoWay}" />
                             </ContentControl>
+
                             <ContentControl Tag="Outline|Disabled border color for disabled controls" Template="{StaticResource SettingsCard}">
                                 <ColorPicker
                                     Margin="0,0,-113,0"
@@ -225,18 +229,21 @@
                                                 Template="{StaticResource ColorPickerButton}"
                                                 Color="{x:Bind viewModel.LocalColors.Control.Solid.Primary, Mode=TwoWay}" />
                                         </ContentControl>
+
                                         <ContentControl Tag="Outline|Solid border color used for almost all controls" Template="{StaticResource SettingsCard}">
                                             <ColorPicker
                                                 Margin="0,0,-113,0"
                                                 Template="{StaticResource ColorPickerButton}"
                                                 Color="{x:Bind viewModel.LocalColors.Control.Solid.Outline, Mode=TwoWay}" />
                                         </ContentControl>
+
                                         <ContentControl Tag="Primary Disabled|Disabled solid background color for disabled controls" Template="{StaticResource SettingsCard}">
                                             <ColorPicker
                                                 Margin="0,0,-113,0"
                                                 Template="{StaticResource ColorPickerButton}"
                                                 Color="{x:Bind viewModel.LocalColors.Control.Solid.PrimaryDisabled, Mode=TwoWay}" />
                                         </ContentControl>
+
                                         <ContentControl Tag="Outline|Disabled solid border color for disabled controls" Template="{StaticResource SettingsCard}">
                                             <ColorPicker
                                                 Margin="0,0,-113,0"

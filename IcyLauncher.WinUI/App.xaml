@@ -24,6 +24,7 @@
                 <tmplts:BannerTimeDependentTemplate />
             </ResourceDictionary.MergedDictionaries>
 
+            <!--#region Helpers-->
             <xmlh:ArrayHelper x:Key="ArrayHelper" />
             <xmlh:ValidateNo255 x:Key="ValidateNo255" />
             <xmlh:InvertBool x:Key="InvertBool" />
@@ -31,15 +32,19 @@
             <xmlh:DateTimeFormatter x:Key="DateTimeFormatter" />
             <xmlh:AsImage x:Key="AsImage" />
             <xmlh:ReplaceString x:Key="ReplaceString" />
+            <!--#endregion-->
 
+            <!--#region Converters-->
             <xmlc:ColorBrushConverter x:Key="ColorBrushConverter" />
             <xmlc:BoolDoubleConverter x:Key="BoolDoubleConverter" />
             <xmlc:BoolScrollbarVisibilityConverter x:Key="BoolScrollbarVisibilityConverter" />
             <xmlc:EnumIntConverter x:Key="EnumIntConverter" />
             <xmlc:BoolVisibilityConverter x:Key="BoolVisibilityConverter" />
             <xmlc:ColorStringConverter x:Key="ColorStringConverter" />
+            <!--#endregion-->
 
 
+            <!--#region Colors-->
             <mdls:Theme x:Key="Colors" />
 
             <SolidColorBrush x:Key="AccentPrimary" Color="{Binding Accent.Primary, Source={ThemeResource Colors}, Mode=OneWay}" />
@@ -65,9 +70,12 @@
             <SolidColorBrush x:Key="ControlSolidOutline" Color="{Binding Control.Solid.Outline, Source={ThemeResource Colors}, Mode=OneWay}" />
             <SolidColorBrush x:Key="ControlSolidPrimaryDisabled" Color="{Binding Control.Solid.PrimaryDisabled, Source={ThemeResource Colors}, Mode=OneWay}" />
             <SolidColorBrush x:Key="ControlSolidOutlineDisabled" Color="{Binding Control.Solid.OutlineDisabled, Source={ThemeResource Colors}, Mode=OneWay}" />
+            <!--#endregion-->
 
 
+            <!--#region Resources-->
 
+            <!--#region Window-->
             <SolidColorBrush x:Key="WindowCaptionBackground" Color="Transparent" />
             <SolidColorBrush x:Key="WindowCaptionBackgroundDisabled" Color="Transparent" />
 
@@ -75,8 +83,10 @@
             <SolidColorBrush x:Key="WindowCaptionForegroundDisabled" Color="Gray" />
 
             <SolidColorBrush x:Key="SystemControlPageBackgroundMediumAltMediumBrush" Color="Transparent" />
+            <!--#endregion-->
 
 
+            <!--#region Button-->
             <SolidColorBrush x:Key="ButtonBackground" Color="{Binding Color, Source={ThemeResource ControlPrimary}}" />
             <SolidColorBrush x:Key="ButtonBackgroundPointerOver" Color="{Binding Color, Source={ThemeResource ControlOutline}}" />
             <SolidColorBrush x:Key="ButtonBackgroundPressed" Color="{Binding Color, Source={ThemeResource ControlPrimaryDisabled}}" />
@@ -91,8 +101,10 @@
             <SolidColorBrush x:Key="ButtonForegroundPointerOver" Color="{Binding Color, Source={ThemeResource TextPrimary}}" />
             <SolidColorBrush x:Key="ButtonForegroundPressed" Color="{Binding Color, Source={ThemeResource TextTertiary}}" />
             <SolidColorBrush x:Key="ButtonForegroundDisabled" Color="{Binding Color, Source={ThemeResource TextDisabled}}" />
+            <!--#endregion-->
 
 
+            <!--#region AccentButton-->
             <SolidColorBrush x:Key="AccentButtonBackground" Color="{Binding Color, Source={ThemeResource AccentPrimary}}" />
             <SolidColorBrush x:Key="AccentButtonBackgroundPointerOver" Color="{Binding Color, Source={ThemeResource AccentLight}}" />
             <SolidColorBrush x:Key="AccentButtonBackgroundPressed" Color="{Binding Color, Source={ThemeResource AccentDark}}" />
@@ -107,8 +119,10 @@
             <SolidColorBrush x:Key="AccentButtonForegroundPointerOver" Color="{Binding Color, Source={ThemeResource TextSecondary}}" />
             <SolidColorBrush x:Key="AccentButtonForegroundPressed" Color="{Binding Color, Source={ThemeResource TextTertiary}}" />
             <SolidColorBrush x:Key="AccentButtonForegroundDisabled" Color="{Binding Color, Source={ThemeResource TextDisabled}}" />
+            <!--#endregion-->
 
 
+            <!--#region CheckBox-->
             <SolidColorBrush x:Key="CheckBoxCheckBackgroundFillUnchecked" Color="{Binding Color, Source={ThemeResource ControlPrimary}}" />
             <SolidColorBrush x:Key="CheckBoxCheckBackgroundFillUncheckedPointerOver" Color="{Binding Color, Source={ThemeResource ControlOutline}}" />
             <SolidColorBrush x:Key="CheckBoxCheckBackgroundFillUncheckedPressed" Color="{Binding Color, Source={ThemeResource ControlPrimaryDisabled}}" />
@@ -143,8 +157,10 @@
             <SolidColorBrush x:Key="CheckBoxCheckGlyphForegroundCheckedPointerOver" Color="{Binding Color, Source={ThemeResource ControlSolidOutline}}" />
             <SolidColorBrush x:Key="CheckBoxCheckGlyphForegroundCheckedPressed" Color="{Binding Color, Source={ThemeResource ControlSolidPrimaryDisabled}}" />
             <SolidColorBrush x:Key="CheckBoxCheckGlyphForegroundCheckedDisabled" Color="{Binding Color, Source={ThemeResource ControlOutlineDisabled}}" />
+            <!--#endregion-->
 
 
+            <!--#region ComboBoxItem-->
             <SolidColorBrush x:Key="ComboBoxItemBackgroundPointerOver" Color="{Binding Color, Source={ThemeResource ControlPrimary}}" />
             <SolidColorBrush x:Key="ComboBoxItemBackgroundPressed" Color="{Binding Color, Source={ThemeResource ControlOutline}}" />
 
@@ -170,8 +186,10 @@
             <SolidColorBrush x:Key="ComboBoxItemForegroundSelectedPointerOver" Color="{Binding Color, Source={ThemeResource TextSecondary}}" />
             <SolidColorBrush x:Key="ComboBoxItemForegroundSelectedPressed" Color="{Binding Color, Source={ThemeResource TextTertiary}}" />
             <SolidColorBrush x:Key="ComboBoxItemForegroundSelectedDisabled" Color="{Binding Color, Source={ThemeResource TextDisabled}}" />
+            <!--#endregion-->
 
 
+            <!--#region ComboBoxDropDown-->
             <AcrylicBrush
                 x:Key="ComboBoxDropDownBackground"
                 TintColor="{Binding Color, Source={ThemeResource ControlSolidPrimary}}"
@@ -180,8 +198,10 @@
                 x:Key="ComboBoxDropDownBorderBrush"
                 TintColor="{Binding Color, Source={ThemeResource ControlSolidOutline}}"
                 TintOpacity="0.75" />
+            <!--#endregion-->
 
 
+            <!--#region ComboBox-->
             <SolidColorBrush x:Key="ComboBoxBackground" Color="{Binding Color, Source={ThemeResource ControlPrimary}}" />
             <SolidColorBrush x:Key="ComboBoxBackgroundUnfocused" Color="{Binding Color, Source={ThemeResource ControlPrimary}}" />
             <SolidColorBrush x:Key="ComboBoxBackgroundPointerOver" Color="{Binding Color, Source={ThemeResource ControlOutline}}" />
@@ -215,8 +235,10 @@
 
             <SolidColorBrush x:Key="ComboBoxHeaderForeground" Color="{Binding Color, Source={ThemeResource TextPrimary}}" />
             <SolidColorBrush x:Key="ComboBoxHeaderForegroundDisabled" Color="{Binding Color, Source={ThemeResource TextDisabled}}" />
+            <!--#endregion-->
 
 
+            <!--#region ScrollBar-->
             <SolidColorBrush x:Key="ScrollBarButtonArrowForeground" Color="{Binding Color, Source={ThemeResource TextSecondary}}" />
             <SolidColorBrush x:Key="ScrollBarButtonArrowForegroundPointerOver" Color="{Binding Color, Source={ThemeResource TextPrimary}}" />
             <SolidColorBrush x:Key="ScrollBarButtonArrowForegroundPressed" Color="{Binding Color, Source={ThemeResource TextTertiary}}" />
@@ -225,8 +247,10 @@
             <SolidColorBrush x:Key="ScrollBarTrackFill" Color="{Binding Color, Source={ThemeResource ControlPrimary}}" />
             <SolidColorBrush x:Key="ScrollBarTrackFillPointerOver" Color="{Binding Color, Source={ThemeResource ControlOutline}}" />
             <SolidColorBrush x:Key="ScrollBarTrackFillDisabled" Color="{Binding Color, Source={ThemeResource ControlPrimaryDisabled}}" />
+            <!--#endregion-->
 
 
+            <!--#region MenuFlyoutItem-->
             <SolidColorBrush x:Key="MenuFlyoutItemBackground" Color="Transparent" />
             <SolidColorBrush x:Key="MenuFlyoutItemBackgroundPointerOver" Color="{Binding Color, Source={ThemeResource ControlOutline}}" />
             <SolidColorBrush x:Key="MenuFlyoutItemBackgroundPressed" Color="{Binding Color, Source={ThemeResource ControlPrimaryDisabled}}" />
@@ -236,8 +260,10 @@
             <SolidColorBrush x:Key="MenuFlyoutItemForegroundPointerOver" Color="{Binding Color, Source={ThemeResource TextPrimary}}" />
             <SolidColorBrush x:Key="MenuFlyoutItemForegroundPressed" Color="{Binding Color, Source={ThemeResource TextTertiary}}" />
             <SolidColorBrush x:Key="MenuFlyoutItemForegroundDisabled" Color="{Binding Color, Source={ThemeResource TextDisabled}}" />
+            <!--#endregion-->
 
 
+            <!--#region HyperLinkButton-->
             <SolidColorBrush x:Key="HyperlinkButtonForeground" Color="{Binding Color, Source={ThemeResource AccentPrimary}}" />
             <SolidColorBrush x:Key="HyperlinkButtonForegroundPointerOver" Color="{Binding Color, Source={ThemeResource AccentLight}}" />
             <SolidColorBrush x:Key="HyperlinkButtonForegroundPressed" Color="{Binding Color, Source={ThemeResource AccentDark}}" />
@@ -252,11 +278,15 @@
             <SolidColorBrush x:Key="HyperlinkButtonBorderBrushPointerOver" Color="Transparent" />
             <SolidColorBrush x:Key="HyperlinkButtonBorderBrushPressed" Color="Transparent" />
             <SolidColorBrush x:Key="HyperlinkButtonBorderBrushDisabled" Color="Transparent" />
+            <!--#endregion-->
 
 
+            <!--#region ProgressRing-->
             <SolidColorBrush x:Key="ProgressRingForegroundThemeBrush" Color="{Binding Color, Source={ThemeResource AccentPrimary}}" />
+            <!--#endregion-->
 
 
+            <!--#region GridViewItem-->
             <SolidColorBrush x:Key="GridViewItemBackground" Color="{Binding Color, Source={ThemeResource ControlPrimary}}" />
             <SolidColorBrush x:Key="GridViewItemBackgroundPointerOver" Color="{Binding Color, Source={ThemeResource ControlOutline}}" />
             <SolidColorBrush x:Key="GridViewItemBackgroundPressed" Color="{Binding Color, Source={ThemeResource ControlPrimaryDisabled}}" />
@@ -268,8 +298,10 @@
             <SolidColorBrush x:Key="GridViewItemSelectedPointerOverBorderBrush" Color="{Binding Color, Source={ThemeResource AccentPrimary}}" />
             <SolidColorBrush x:Key="GridViewItemSelectedPressedBorderBrush" Color="{Binding Color, Source={ThemeResource AccentPrimary}}" />
             <SolidColorBrush x:Key="GridViewItemSelectedDisabledBorderBrush" Color="{Binding Color, Source={ThemeResource AccentPrimary}}" />
+            <!--#endregion-->
 
 
+            <!--#region SplitButton-->
             <SolidColorBrush x:Key="SplitButtonBackground" Color="{Binding Color, Source={ThemeResource ControlPrimary}}" />
             <SolidColorBrush x:Key="SplitButtonBackgroundPointerOver" Color="{Binding Color, Source={ThemeResource ControlOutline}}" />
             <SolidColorBrush x:Key="SplitButtonBackgroundPressed" Color="{Binding Color, Source={ThemeResource ControlPrimaryDisabled}}" />
@@ -305,8 +337,10 @@
 
             <SolidColorBrush x:Key="SplitButtonBorderBrushDivider" Color="{Binding Color, Source={ThemeResource ControlOutline}}" />
             <SolidColorBrush x:Key="SplitButtonBorderBrushCheckedDivider" Color="{Binding Color, Source={ThemeResource ControlOutline}}" />
+            <!--#endregion-->
 
 
+            <!--#region TabViewItem-->
             <SolidColorBrush x:Key="TabViewItemHeaderBackgroundSelected" Color="{Binding Color, Source={ThemeResource ControlOutline}}" />
             <SolidColorBrush x:Key="TabViewItemHeaderBackgroundPointerOver" Color="{Binding Color, Source={ThemeResource ControlOutline}}" />
             <SolidColorBrush x:Key="TabViewItemHeaderBackgroundPressed" Color="{Binding Color, Source={ThemeResource ControlPrimaryDisabled}}" />
@@ -343,8 +377,10 @@
             <SolidColorBrush x:Key="TabViewScrollButtonForegroundPointerOver" Color="{Binding Color, Source={ThemeResource TextPrimary}}" />
             <SolidColorBrush x:Key="TabViewScrollButtonForegroundPressed" Color="{Binding Color, Source={ThemeResource TextTertiary}}" />
             <SolidColorBrush x:Key="TabViewScrollButtonForegroundDisabled" Color="{Binding Color, Source={ThemeResource TextDisabled}}" />
+            <!--#endregion-->
 
 
+            <!--#region RatingControl-->
             <SolidColorBrush x:Key="RatingControlUnselectedForeground" Color="{Binding Color, Source={ThemeResource TextSecondary}}" />
             <SolidColorBrush x:Key="RatingControlPointerOverUnselectedForeground" Color="{Binding Color, Source={ThemeResource TextSecondary}}" />
 
@@ -355,8 +391,10 @@
             <SolidColorBrush x:Key="RatingControlDisabledSelectedForeground" Color="{Binding Color, Source={ThemeResource AccentLight}}" />
 
             <SolidColorBrush x:Key="RatingControlCaptionForeground" Color="{Binding Color, Source={ThemeResource TextSecondary}}" />
+            <!--#endregion-->
 
 
+            <!--#region Expander-->
             <SolidColorBrush x:Key="ExpanderHeaderBackground" Color="{Binding Color, Source={ThemeResource ControlPrimary}}" />
 
             <SolidColorBrush x:Key="ExpanderHeaderBorderBrush" Color="{Binding Color, Source={ThemeResource ControlOutline}}" />
@@ -382,13 +420,27 @@
                 Opacity="0.5"
                 Color="{Binding Color, Source={ThemeResource ControlPrimary}}" />
             <SolidColorBrush x:Key="ExpanderContentBorderBrush" Color="{Binding Color, Source={ThemeResource ControlOutline}}" />
+            <!--#endregion-->
 
 
+            <!--#region NavigationView-->
+            <SolidColorBrush x:Key="NavigationViewContentBackground" Color="{Binding Color, Source={ThemeResource ControlPrimary}}" />
+            <SolidColorBrush x:Key="NavigationViewContentGridBorderBrush" Color="{Binding Color, Source={ThemeResource ControlOutline}}" />
+            <!--#endregion-->
+
+            <!--#endregion-->
+
+
+            <!--#region Styles-->
+
+            <!--#region ProgressBar-->
             <Style TargetType="ProgressBar">
                 <Setter Property="Foreground" Value="{ThemeResource AccentPrimary}" />
             </Style>
+            <!--#endregion-->
 
 
+            <!--#region TextBlocks-->
             <Style x:Key="Header" TargetType="TextBlock">
                 <Setter Property="FontFamily" Value="Segoe UI" />
                 <Setter Property="FontSize" Value="24" />
@@ -438,8 +490,10 @@
                 <Setter Property="FontWeight" Value="SemiLight" />
                 <Setter Property="Foreground" Value="{ThemeResource TextTertiary}" />
             </Style>
+            <!--#endregion-->
 
 
+            <!--#region FlyoutPresenter-->
             <Style TargetType="FlyoutPresenter">
                 <Setter Property="CornerRadius" Value="8" />
                 <Setter Property="Background">
@@ -453,7 +507,9 @@
                     </Setter.Value>
                 </Setter>
             </Style>
+            <!--#endregion-->
 
+            <!--#region MenuFlyoutPresenter-->
             <Style TargetType="MenuFlyoutPresenter">
                 <Setter Property="MaxHeight" Value="400" />
                 <Setter Property="CornerRadius" Value="8" />
@@ -468,8 +524,10 @@
                     </Setter.Value>
                 </Setter>
             </Style>
+            <!--#endregion-->
 
 
+            <!--#region Card-->
             <Style x:Key="Card" TargetType="xmle:HCont">
                 <Setter Property="Background" Value="{ThemeResource ControlPrimary}" />
                 <Setter Property="VerticalAlignment" Value="Top" />
@@ -538,7 +596,9 @@
                     </Setter.Value>
                 </Setter>
             </Style>
+            <!--#endregion-->
 
+            <!--#region Page-->
             <Style x:Key="Page" TargetType="xmle:HCont">
                 <Setter Property="Background" Value="Transparent" />
                 <Setter Property="VerticalAlignment" Value="Top" />
@@ -608,8 +668,10 @@
                     </Setter.Value>
                 </Setter>
             </Style>
+            <!--#endregion-->
 
 
+            <!--#region NoAnimationButton-->
             <Style x:Name="NoAnimationButton" TargetType="Button">
                 <Setter Property="Template">
                     <Setter.Value>
@@ -676,8 +738,10 @@
                     </Setter.Value>
                 </Setter>
             </Style>
+            <!--#endregion-->
 
 
+            <!--#region LaunchButton-->
             <Style x:Key="LaunchButton" TargetType="Button">
                 <Style.Setters>
                     <Setter Property="Width" Value="130" />
@@ -799,7 +863,6 @@
                                                         Duration="0:0:0.2" />
                                                 </Storyboard>
                                             </VisualState>
-
                                         </VisualStateGroup>
                                     </VisualStateManager.VisualStateGroups>
                                 </Grid>
@@ -808,8 +871,10 @@
                     </Setter>
                 </Style.Setters>
             </Style>
+            <!--#endregion-->
 
 
+            <!--#region TextBox-->
             <Style TargetType="TextBox">
                 <Setter Property="Background" Value="{ThemeResource TextSecondary}" />
                 <Setter Property="Background" Value="{ThemeResource ControlPrimary}" />
@@ -1046,11 +1111,10 @@
                     </Setter.Value>
                 </Setter>
             </Style>
+            <!--#endregion-->
 
 
-            <SolidColorBrush x:Key="NavigationViewContentBackground" Color="{Binding Color, Source={ThemeResource ControlPrimary}}" />
-            <SolidColorBrush x:Key="NavigationViewContentGridBorderBrush" Color="{Binding Color, Source={ThemeResource ControlOutline}}" />
-
+            <!--#region NavigationView-->
             <Style TargetType="NavigationView">
                 <Setter Property="IsSettingsVisible" Value="False" />
                 <Setter Property="IsPaneOpen" Value="True" />
@@ -1059,7 +1123,9 @@
                 <Setter Property="OpenPaneLength" Value="72" />
                 <Setter Property="PaneDisplayMode" Value="Left" />
             </Style>
+            <!--#endregion-->
 
+            <!--#region NavigationViewItemPresenter-->
             <Style x:Key="MUX_NavigationViewItemPresenterStyleWhenOnLeftPane" TargetType="NavigationViewItemPresenter">
                 <Setter Property="UseSystemFocusVisuals" Value="True" />
                 <Setter Property="Template">
@@ -1302,8 +1368,10 @@
                     </Setter.Value>
                 </Setter>
             </Style>
+            <!--#endregion-->
 
 
+            <!--#region TogleSwitch-->
             <Style TargetType="ToggleSwitch">
                 <Setter Property="Template">
                     <Setter.Value>
@@ -1897,8 +1965,10 @@
                     </Setter.Value>
                 </Setter>
             </Style>
+            <!--#endregion-->
 
 
+            <!--#region ScrollBar-->
             <Style TargetType="ScrollBar">
                 <Setter Property="MinWidth" Value="{StaticResource ScrollBarSize}" />
                 <Setter Property="MinHeight" Value="{StaticResource ScrollBarSize}" />
@@ -2321,7 +2391,6 @@
                                         HorizontalAlignment="Left"
                                         VerticalAlignment="Bottom"
                                         BorderThickness="0" />
-
                                 </Grid>
 
                                 <Grid
@@ -2422,7 +2491,6 @@
                                         HorizontalAlignment="Right"
                                         VerticalAlignment="Top"
                                         BorderThickness="0" />
-
                                 </Grid>
 
                                 <VisualStateManager.VisualStateGroups>
@@ -2460,6 +2528,7 @@
                                             </VisualState.Setters>
 
                                         </VisualState>
+
                                         <VisualState x:Name="NoIndicator">
                                             <Storyboard>
                                                 <DoubleAnimation
@@ -3105,8 +3174,10 @@
                     </Setter.Value>
                 </Setter>
             </Style>
+            <!--#endregion-->
 
 
+            <!--#region ProfileGridViewItem-->
             <Style x:Key="ProfileGridViewItem" TargetType="GridViewItem">
                 <Setter Property="Width" Value="173" />
                 <Setter Property="Height" Value="94" />
@@ -3211,8 +3282,10 @@
                     </Setter.Value>
                 </Setter>
             </Style>
+            <!--#endregion-->
 
 
+            <!--#region ScrollLane-->
             <Style TargetType="xmle:ScrollLane">
                 <Setter Property="Template">
                     <Setter.Value>
@@ -3296,104 +3369,10 @@
                     </Setter.Value>
                 </Setter>
             </Style>
+            <!--#endregion-->
 
-            <ControlTemplate x:Key="SettingsExpander">
-                <Expander
-                    MinHeight="70"
-                    Padding="48,24"
-                    HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
-                    HorizontalContentAlignment="Stretch"
-                    Content="{TemplateBinding Tag}"
-                    CornerRadius="8">
-                    <Expander.Header>
-                        <Grid Margin="-2,0,0,0">
-                            <FontIcon
-                                Margin="0,4,0,0"
-                                HorizontalAlignment="Left"
-                                FontFamily="Assets/FluentSystemIcons-Regular.ttf#FluentSystemIcons-Regular"
-                                FontSize="40"
-                                Foreground="{ThemeResource TextSecondary}"
-                                Glyph="{Binding Header, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource ArrayHelper}, ConverterParameter=0}" />
 
-                            <Grid Margin="53,0,0,3" VerticalAlignment="Center">
-                                <TextBlock Style="{StaticResource Content}" Text="{Binding Header, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource ArrayHelper}, ConverterParameter=1}" />
-                                <TextBlock
-                                    Margin="0,20,0,0"
-                                    Style="{StaticResource Subpoint}"
-                                    Text="{Binding Header, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource ArrayHelper}, ConverterParameter=2}"
-                                    TextTrimming="CharacterEllipsis" />
-                            </Grid>
-                        </Grid>
-                    </Expander.Header>
-                </Expander>
-            </ControlTemplate>
-
-            <ControlTemplate x:Key="CardExpander">
-                <Expander
-                    MinHeight="60"
-                    Padding="48,24"
-                    HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
-                    HorizontalContentAlignment="Stretch"
-                    Content="{TemplateBinding Tag}"
-                    CornerRadius="8">
-                    <Expander.Header>
-                        <Grid VerticalAlignment="Center" CornerRadius="8">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="12" />
-                                <ColumnDefinition Width="Auto" />
-                            </Grid.ColumnDefinitions>
-                            <TextBlock
-                                Margin="0,0,0,14"
-                                VerticalAlignment="Center"
-                                FontSize="15"
-                                Style="{StaticResource Subpoint}"
-                                Text="{Binding Header, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource ArrayHelper}, ConverterParameter=0}"
-                                TextTrimming="CharacterEllipsis" />
-                            <TextBlock
-                                Margin="0,12,0,0"
-                                VerticalAlignment="Center"
-                                Style="{StaticResource SubpointSecondary}"
-                                Text="{Binding Header, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource ArrayHelper}, ConverterParameter=1}"
-                                TextTrimming="CharacterEllipsis" />
-                            <ContentPresenter Grid.Column="2" HorizontalAlignment="Right" />
-                        </Grid>
-                    </Expander.Header>
-                </Expander>
-            </ControlTemplate>
-
-            <ControlTemplate x:Key="SettingsCard">
-                <Grid
-                    Padding="12,12,8,12"
-                    HorizontalAlignment="Stretch"
-                    VerticalAlignment="Center"
-                    Background="{ThemeResource ControlPrimary}"
-                    CornerRadius="8">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="12" />
-                        <ColumnDefinition Width="Auto" />
-                    </Grid.ColumnDefinitions>
-                    <TextBlock
-                        Margin="0,0,0,14"
-                        VerticalAlignment="Center"
-                        FontSize="15"
-                        Style="{StaticResource Subpoint}"
-                        Text="{Binding Tag, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource ArrayHelper}, ConverterParameter=0}"
-                        TextTrimming="CharacterEllipsis" />
-                    <TextBlock
-                        Margin="0,18,0,0"
-                        VerticalAlignment="Center"
-                        Style="{StaticResource SubpointSecondary}"
-                        Text="{Binding Tag, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource ArrayHelper}, ConverterParameter=1}"
-                        TextTrimming="CharacterEllipsis" />
-                    <ContentPresenter
-                        Grid.Column="2"
-                        Margin="0,0,4,0"
-                        HorizontalAlignment="Right" />
-                </Grid>
-            </ControlTemplate>
-
+            <!--#region ContentDialog-->
             <Style TargetType="ContentDialog">
                 <Setter Property="IsTabStop" Value="False" />
                 <Setter Property="Template">
@@ -3709,8 +3688,10 @@
                     </Setter.Value>
                 </Setter>
             </Style>
+            <!--#endregion-->
 
 
+            <!--#region MiniLauncher-->
             <Style TargetType="xmle:MiniLauncher">
                 <Setter Property="Template">
                     <Setter.Value>
@@ -3737,10 +3718,12 @@
                                             Grid.Column="0"
                                             FontSize="10"
                                             Glyph="&#xE921;" />
+
                                         <FontIcon
                                             Grid.Column="1"
                                             FontSize="10"
                                             Glyph="&#xE922;" />
+
                                         <FontIcon
                                             Grid.Column="2"
                                             FontSize="10"
@@ -3773,6 +3756,7 @@
                                             FontFamily="Assets/FluentSystemIcons-Filled.ttf#FluentSystemIcons-Filled"
                                             Foreground="{TemplateBinding AccentPrimary}"
                                             Glyph="&#xE71E;" />
+
                                         <TextBlock
                                             Margin="0,0,0,4"
                                             HorizontalAlignment="Center"
@@ -3781,6 +3765,7 @@
                                             Foreground="{TemplateBinding AccentPrimary}"
                                             Text="Home" />
                                     </Grid>
+
                                     <Grid
                                         Height="58"
                                         Margin="4"
@@ -3793,6 +3778,7 @@
                                             Foreground="{TemplateBinding TextSecondary}"
                                             Glyph="&#xE065;" />
                                     </Grid>
+
                                     <Grid
                                         Height="58"
                                         Margin="4"
@@ -3805,6 +3791,7 @@
                                             Foreground="{TemplateBinding TextSecondary}"
                                             Glyph="&#xF593;" />
                                     </Grid>
+
                                     <Grid
                                         Height="58"
                                         Margin="4"
@@ -3817,6 +3804,7 @@
                                             Foreground="{TemplateBinding TextSecondary}"
                                             Glyph="&#xF135;" />
                                     </Grid>
+
                                     <Grid
                                         Height="58"
                                         Margin="4,60,4,4"
@@ -3829,6 +3817,7 @@
                                             Foreground="{TemplateBinding TextSecondary}"
                                             Glyph="&#xE9EE;" />
                                     </Grid>
+
                                     <Grid
                                         Height="58"
                                         Margin="4"
@@ -3854,6 +3843,7 @@
 
                                     <Grid Height="186" VerticalAlignment="Top">
                                         <Rectangle Fill="{TemplateBinding BannerBrush}" />
+
                                         <Rectangle
                                             Width="220"
                                             Margin="-30,0,0,0"
@@ -3865,6 +3855,7 @@
                                                 </LinearGradientBrush>
                                             </Rectangle.Fill>
                                         </Rectangle>
+
                                         <Rectangle>
                                             <Rectangle.Fill>
                                                 <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
@@ -3873,6 +3864,7 @@
                                                 </LinearGradientBrush>
                                             </Rectangle.Fill>
                                         </Rectangle>
+
                                         <Rectangle>
                                             <Rectangle.Fill>
                                                 <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
@@ -3899,6 +3891,7 @@
                                                 Height="60"
                                                 Margin="50,0,0,0"
                                                 Source="ms-appx:///Assets/Blocks/Grass_Block.png" />
+
                                             <Rectangle>
                                                 <Rectangle.Fill>
                                                     <LinearGradientBrush StartPoint="1,0" EndPoint="0,0">
@@ -3907,6 +3900,7 @@
                                                     </LinearGradientBrush>
                                                 </Rectangle.Fill>
                                             </Rectangle>
+
                                             <TextBlock
                                                 Margin="10,0,0,0"
                                                 VerticalAlignment="Center"
@@ -3914,6 +3908,7 @@
                                                 Style="{StaticResource Content}"
                                                 Text="Profile" />
                                         </Grid>
+
                                         <Grid
                                             Width="170"
                                             Background="#40ff0000"
@@ -3970,17 +3965,17 @@
                                             Grid.Column="4"
                                             Background="{TemplateBinding ControlPrimary}"
                                             CornerRadius="8" />
-
                                     </Grid>
-
                                 </Grid>
                             </Grid>
                         </ControlTemplate>
                     </Setter.Value>
                 </Setter>
             </Style>
+            <!--#endregion-->
 
 
+            <!--#region NoHeaderPivot-->
             <Style x:Key="NoHeaderPivotStyle" TargetType="Pivot">
                 <Setter Property="Margin" Value="0" />
                 <Setter Property="Padding" Value="0" />
@@ -4031,7 +4026,6 @@
                                         <Setter Property="FontSize" Value="{ThemeResource PivotTitleFontSize}" />
                                     </Style>
                                 </Grid.Resources>
-
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="Auto" />
                                     <RowDefinition Height="*" />
@@ -4055,6 +4049,7 @@
                                                     Glyph="&#xE0E3;"
                                                     MirroredWhenRightToLeft="True"
                                                     UseLayoutRounding="False" />
+
                                                 <VisualStateManager.VisualStateGroups>
                                                     <VisualStateGroup x:Name="CommonStates">
                                                         <VisualState x:Name="Normal" />
@@ -4101,6 +4096,7 @@
                                                     Glyph="&#xE0E2;"
                                                     MirroredWhenRightToLeft="True"
                                                     UseLayoutRounding="False" />
+
                                                 <VisualStateManager.VisualStateGroups>
                                                     <VisualStateGroup x:Name="CommonStates">
                                                         <VisualState x:Name="Normal" />
@@ -4293,8 +4289,122 @@
                     </Setter.Value>
                 </Setter>
             </Style>
+            <!--#endregion-->
+
+            <!--#endregion-->
 
 
+            <!--#region Templates-->
+
+            <!--#region SettingsExpander-->
+            <ControlTemplate x:Key="SettingsExpander">
+                <Expander
+                    MinHeight="70"
+                    Padding="48,24"
+                    HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
+                    HorizontalContentAlignment="Stretch"
+                    Content="{TemplateBinding Tag}"
+                    CornerRadius="8">
+                    <Expander.Header>
+                        <Grid Margin="-2,0,0,0">
+                            <FontIcon
+                                Margin="0,4,0,0"
+                                HorizontalAlignment="Left"
+                                FontFamily="Assets/FluentSystemIcons-Regular.ttf#FluentSystemIcons-Regular"
+                                FontSize="40"
+                                Foreground="{ThemeResource TextSecondary}"
+                                Glyph="{Binding Header, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource ArrayHelper}, ConverterParameter=0}" />
+
+                            <Grid Margin="53,0,0,3" VerticalAlignment="Center">
+                                <TextBlock Style="{StaticResource Content}" Text="{Binding Header, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource ArrayHelper}, ConverterParameter=1}" />
+                                <TextBlock
+                                    Margin="0,20,0,0"
+                                    Style="{StaticResource Subpoint}"
+                                    Text="{Binding Header, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource ArrayHelper}, ConverterParameter=2}"
+                                    TextTrimming="CharacterEllipsis" />
+                            </Grid>
+                        </Grid>
+                    </Expander.Header>
+                </Expander>
+            </ControlTemplate>
+            <!--#endregion-->
+
+            <!--#region CardExpander-->
+            <ControlTemplate x:Key="CardExpander">
+                <Expander
+                    MinHeight="60"
+                    Padding="48,24"
+                    HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
+                    HorizontalContentAlignment="Stretch"
+                    Content="{TemplateBinding Tag}"
+                    CornerRadius="8">
+                    <Expander.Header>
+                        <Grid VerticalAlignment="Center" CornerRadius="8">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="12" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+
+                            <TextBlock
+                                Margin="0,0,0,14"
+                                VerticalAlignment="Center"
+                                FontSize="15"
+                                Style="{StaticResource Subpoint}"
+                                Text="{Binding Header, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource ArrayHelper}, ConverterParameter=0}"
+                                TextTrimming="CharacterEllipsis" />
+                            <TextBlock
+                                Margin="0,12,0,0"
+                                VerticalAlignment="Center"
+                                Style="{StaticResource SubpointSecondary}"
+                                Text="{Binding Header, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource ArrayHelper}, ConverterParameter=1}"
+                                TextTrimming="CharacterEllipsis" />
+
+                            <ContentPresenter Grid.Column="2" HorizontalAlignment="Right" />
+                        </Grid>
+                    </Expander.Header>
+                </Expander>
+            </ControlTemplate>
+            <!--#endregion-->
+
+            <!--#region SettingsCard-->
+            <ControlTemplate x:Key="SettingsCard">
+                <Grid
+                    Padding="12,12,8,12"
+                    HorizontalAlignment="Stretch"
+                    VerticalAlignment="Center"
+                    Background="{ThemeResource ControlPrimary}"
+                    CornerRadius="8">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="12" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock
+                        Margin="0,0,0,14"
+                        VerticalAlignment="Center"
+                        FontSize="15"
+                        Style="{StaticResource Subpoint}"
+                        Text="{Binding Tag, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource ArrayHelper}, ConverterParameter=0}"
+                        TextTrimming="CharacterEllipsis" />
+                    <TextBlock
+                        Margin="0,18,0,0"
+                        VerticalAlignment="Center"
+                        Style="{StaticResource SubpointSecondary}"
+                        Text="{Binding Tag, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource ArrayHelper}, ConverterParameter=1}"
+                        TextTrimming="CharacterEllipsis" />
+
+                    <ContentPresenter
+                        Grid.Column="2"
+                        Margin="0,0,4,0"
+                        HorizontalAlignment="Right" />
+                </Grid>
+            </ControlTemplate>
+            <!--#endregion-->
+
+
+            <!--#region ColorPickerButton-->
             <ControlTemplate x:Key="ColorPickerButton" TargetType="ColorPicker">
                 <Grid>
                     <Grid.ColumnDefinitions>
@@ -4317,6 +4427,7 @@
                             Margin="0,2"
                             Background="{Binding Color, RelativeSource={RelativeSource TemplatedParent}, Mode=OneWay, Converter={StaticResource ColorBrushConverter}}"
                             CornerRadius="4,0,0,4" />
+
                         <SplitButton.Flyout>
                             <Flyout Placement="Left">
                                 <Viewbox Width="200" Height="232">
@@ -4333,6 +4444,9 @@
                     </SplitButton>
                 </Grid>
             </ControlTemplate>
+            <!--#endregion-->
+
+            <!--#endregion-->
 
         </ResourceDictionary>
     </Application.Resources>

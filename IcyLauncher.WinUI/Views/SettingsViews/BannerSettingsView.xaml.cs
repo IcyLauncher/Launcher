@@ -1,4 +1,5 @@
 ﻿using IcyLauncher.WinUI.ViewModels.SettingsViewModels;
+using Microsoft.UI.Xaml.Navigation;
 
 namespace IcyLauncher.WinUI.Views.SettingsViews;
 
@@ -8,4 +9,12 @@ public sealed partial class BannerSettingsView : Page
 
     public BannerSettingsView() =>
         InitializeComponent();
+
+
+    protected override void OnNavigatedTo(NavigationEventArgs e)
+    {
+        base.OnNavigatedTo(e);
+
+        viewModel.SetCorrectIndex();
+    }
 }

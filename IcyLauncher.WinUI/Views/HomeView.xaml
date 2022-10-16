@@ -102,7 +102,6 @@
             ItemsSource="{x:Bind viewModel.Profiles, Mode=OneWay}"
             SelectedItem="{x:Bind viewModel.SelectedProfile, Mode=TwoWay}" />
 
-
         <Grid Grid.Row="2" Margin="12">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition />

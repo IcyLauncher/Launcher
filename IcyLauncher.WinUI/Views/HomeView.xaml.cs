@@ -14,6 +14,7 @@ public sealed partial class HomeView : Page
     protected override async void OnNavigatedTo(NavigationEventArgs e)
     {
         base.OnNavigatedTo(e);
+
         viewModel.LoadBannerImage();
         await viewModel.AskForFeedback();
     }

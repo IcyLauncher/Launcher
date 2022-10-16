@@ -34,8 +34,7 @@ public partial class ColorSettingsViewModel : ObservableObject
 
 
     #region Navigation
-    [RelayCommand]
-    void SetNavigationIndex() =>
+    public void SetCorrectIndex() =>
         navigation.SetCurrentIndex(5);
     #endregion
 

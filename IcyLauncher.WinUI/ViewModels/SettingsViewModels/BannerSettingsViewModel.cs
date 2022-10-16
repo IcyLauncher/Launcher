@@ -74,10 +74,8 @@ public partial class BannerSettingsViewModel : ObservableObject
 
 
     #region Navigation
-    [RelayCommand]
-    void SetNavigationIndex() =>
+    public void SetCorrectIndex() =>
         navigation.SetCurrentIndex(5);
-
 
     [ObservableProperty]
     Visibility timeDependentVisibility = Visibility.Visible;

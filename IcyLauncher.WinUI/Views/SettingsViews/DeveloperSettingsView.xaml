@@ -29,6 +29,7 @@
                 <core:InvokeCommandAction Command="{x:Bind viewModel.RemoveTabViewItemCommand}" />
             </core:EventTriggerBehavior>
         </i:Interaction.Behaviors>
+
         <FlyoutBase.AttachedFlyout>
             <MenuFlyout Placement="Bottom">
                 <MenuFlyoutItem
