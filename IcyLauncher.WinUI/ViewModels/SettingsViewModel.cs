@@ -72,6 +72,16 @@ public partial class SettingsViewModel : ObservableObject
     #endregion
 
 
+    #region About
+    [RelayCommand]
+    async void ShowAboutPopupAsync()
+    {
+        Grid container = new();
+        await message.ShowAsync("About IcyLauncher", container);
+    }
+    #endregion
+
+
     #region Debug
     int presses = 0;
 
@@ -282,7 +292,7 @@ public partial class SettingsViewModel : ObservableObject
 
         if (loadConfig)
         {
-            if (!converter.TryToObject(out Configuration? configuration, await fileSystem.ReadAsTextAsync(file.Path).ConfigureAwait(false)))
+            if (!converter.TryToObject(out Configuration? configuration, await fileSystem.ReadAsTextAsync(file.Path)))
             {
                 await message.ShowAsync("Something went wrong :(", "It looks like this is not a valid configuration.\nPlease verify the file is a proper JSON and every property is being set.");
                 return;
@@ -293,7 +303,7 @@ public partial class SettingsViewModel : ObservableObject
         }
         else
         {
-            if (!converter.TryToObject(out Theme? configuration, await fileSystem.ReadAsTextAsync(file.Path).ConfigureAwait(false)))
+            if (!converter.TryToObject(out Theme? configuration, await fileSystem.ReadAsTextAsync(file.Path)))
             {
                 await message.ShowAsync("Something went wrong :(", "It looks like this is not a valid theme.\nPlease verify the file is a proper JSON and every property is being set.");
                 return;
