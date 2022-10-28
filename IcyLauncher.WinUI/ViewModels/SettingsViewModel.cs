@@ -15,6 +15,7 @@ public partial class SettingsViewModel : ObservableObject
     readonly WindowHandler windowHandler;
     readonly UIElementReciever uIElementReciever;
     readonly IConverter converter;
+    readonly FeedbackRequest feedbackRequest;
     readonly IFileSystem fileSystem;
     readonly INavigation navigation;
     readonly IMessage message;
@@ -30,6 +31,7 @@ public partial class SettingsViewModel : ObservableObject
         WindowHandler windowHandler,
         UIElementReciever uIElementReciever,
         IConverter converter,
+        FeedbackRequest feedbackRequest,
         IFileSystem fileSystem,
         Updater updater,
         INavigation navigation,
@@ -41,6 +43,7 @@ public partial class SettingsViewModel : ObservableObject
         this.windowHandler = windowHandler;
         this.uIElementReciever = uIElementReciever;
         this.converter = converter;
+        this.feedbackRequest = feedbackRequest;
         this.fileSystem = fileSystem;
         this.navigation = navigation;
         this.message = message;
@@ -74,10 +77,20 @@ public partial class SettingsViewModel : ObservableObject
 
     #region About
     [RelayCommand]
-    async void ShowAboutPopupAsync()
+    async Task ShowDialogAsync()
     {
-        Grid container = new();
-        await message.ShowAsync("About IcyLauncher", container);
+        ContentDialog dialog = UIElementProvider.AboutDialog(Updater.CurrentAppVersion, Updater.CurrentApiVersion, RequestFeedbackCommand);
+
+        await message.ShowAsync(dialog);
+    }
+
+    [RelayCommand]
+    async Task RequestFeedbackAsync()
+    {
+        Feedback result = await feedbackRequest.ShowAsync(true);
+
+        if (result.Result == FeedbackResult.Submit)
+            await feedbackRequest.SubmitAsync(result);
     }
     #endregion
 

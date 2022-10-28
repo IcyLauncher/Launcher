@@ -6,6 +6,8 @@ using Microsoft.UI.Xaml.Data;
 using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Media.Animation;
 using Microsoft.UI.Xaml.Shapes;
+using System.Windows.Input;
+using Windows.System;
 using Windows.UI;
 
 namespace IcyLauncher.Helpers;
@@ -190,23 +192,23 @@ public class UIElementProvider
 
 
     public static StackPanel FeedbackContainer(
-        out TextBlock title,
-        out TextBlock description,
         out RatingControl rating,
         out TextBox content)
     {
-        title = new()
+        TextBlock title = new()
         {
             Text = "Do you like IcyLauncher?❄️",
             FontSize = 22,
-            HorizontalAlignment = HorizontalAlignment.Center
+            HorizontalAlignment = HorizontalAlignment.Center,
+            Style = (Style)Application.Current.Resources["Title"]
         };
-        description = new()
+        TextBlock description = new()
         {
             Text = "Feedback helps us to make your IcyLauncher experience better.\nPlease tell us what you like and what we still can improve.",
             FontSize = 16,
             HorizontalAlignment = HorizontalAlignment.Center,
-            HorizontalTextAlignment = TextAlignment.Center
+            HorizontalTextAlignment = TextAlignment.Center,
+            Style = (Style)Application.Current.Resources["Content"]
         };
 
         RatingControl rating_ = new();
@@ -236,5 +238,166 @@ public class UIElementProvider
         container.Children.Add(new Viewbox() { Child = rating, Height = 50, Margin = new(0, 12, 0, 0) });
         container.Children.Add(content);
         return container;
+    }
+
+    public static ContentDialog AboutDialog(
+        Version launcherVersion,
+        Version apiVersion,
+        ICommand secondaryButtonCommand)
+    {
+        Viewbox icon = Icon(70, 70, new(), ((SolidColorBrush)Application.Current.Resources["AccentLight"]).Color, ((SolidColorBrush)Application.Current.Resources["AccentDark"]).Color);
+
+        TextBlock headerTitle = new()
+        {
+            Text = "IcyLauncher",
+            Style = (Style)Application.Current.Resources["Title"]
+        };
+        TextBlock headerContent = new()
+        {
+            Text = "A modern & feature rich MC:BE version switcher and launcher",
+            TextWrapping = TextWrapping.Wrap,
+            Style = (Style)Application.Current.Resources["Content"]
+        };
+        StackPanel headerTextContainer = new()
+        {
+            Margin = new(82, -4, 0, 0),
+            Spacing = -7
+        };
+        headerTextContainer.Children.Add(headerTitle);
+        headerTextContainer.Children.Add(headerContent);
+
+        Grid headerContainer = new();
+        headerContainer.Children.Add(icon);
+        headerContainer.Children.Add(headerTextContainer);
+
+
+        Rectangle divider1 = new()
+        {
+            Height = 1,
+            Margin = new(0, 7, 0, 0),
+            HorizontalAlignment = HorizontalAlignment.Stretch,
+            Fill = (SolidColorBrush)Application.Current.Resources["TextDisabled"]
+        };
+
+
+        TextBlock appInfo = new()
+        {
+            Text = "Product:\nLicensing:",
+            Style = (Style)Application.Current.Resources["SubpointSecondary"]
+        };
+        TextBlock appInfoAwn = new()
+        {
+            Text = $"Full (x{(Computer.Is64 ? "64" : "32")})\nIcySnex Copyright © 2022\nSome rights reserved",
+            Style = (Style)Application.Current.Resources["Subpoint"]
+        };
+
+        StackPanel appInfoContainer = new()
+        {
+            Orientation = Orientation.Horizontal,
+            Spacing = 4
+        };
+        appInfoContainer.Children.Add(appInfo);
+        appInfoContainer.Children.Add(appInfoAwn);
+
+        TextBlock appVersion = new()
+        {
+            Text = "Launcher Version:\nAPI Version:",
+            Style = (Style)Application.Current.Resources["SubpointSecondary"]
+        };
+        TextBlock appVersionAwn = new()
+        {
+            Text = $"{launcherVersion.TrimZeros()}\n{apiVersion.TrimZeros()}",
+            Style = (Style)Application.Current.Resources["Subpoint"]
+        };
+
+        StackPanel appVersionContainer = new()
+        {
+            HorizontalAlignment = HorizontalAlignment.Right,
+            Orientation = Orientation.Horizontal,
+            Spacing = 4
+        };
+        appVersionContainer.Children.Add(appVersion);
+        appVersionContainer.Children.Add(appVersionAwn);
+
+        Grid appContainer = new();
+        appContainer.Children.Add(appVersionContainer);
+        appContainer.Children.Add(appInfoContainer);
+
+
+        Rectangle divider2 = new()
+        {
+            Height = 1,
+            Margin = new(0, 7, 0, 0),
+            HorizontalAlignment = HorizontalAlignment.Stretch,
+            Fill = (SolidColorBrush)Application.Current.Resources["TextDisabled"]
+        };
+
+
+        TextBlock debugUI = new()
+        {
+            Text = "UI Layer:\nWinAppSDK:",
+            Style = (Style)Application.Current.Resources["SubpointSecondary"]
+        };
+        TextBlock debugUIAwn = new()
+        {
+            Text = $"WinUI {Computer.WinUIVersion.TrimZeros()}\n{Computer.WindowsAppSDKVersion.TrimZeros()}", /////////////////////////////
+            Style = (Style)Application.Current.Resources["Subpoint"]
+        };
+
+        StackPanel debugUIContainer = new()
+        {
+            Orientation = Orientation.Horizontal,
+            Spacing = 4
+        };
+        debugUIContainer.Children.Add(debugUI);
+        debugUIContainer.Children.Add(debugUIAwn);
+
+        TextBlock debugSystem = new()
+        {
+            Text = "OS Version:\nFramework:",
+            Style = (Style)Application.Current.Resources["SubpointSecondary"]
+        };
+        TextBlock debugSystemAwn = new()
+        {
+            Text = $"{Computer.OSVersion}\n.net {Computer.RuntimeVersion}",
+            Style = (Style)Application.Current.Resources["Subpoint"]
+        };
+
+        StackPanel debugSystemContainer = new()
+        {
+            HorizontalAlignment = HorizontalAlignment.Right,
+            Orientation = Orientation.Horizontal,
+            Spacing = 4
+        };
+        debugSystemContainer.Children.Add(debugSystem);
+        debugSystemContainer.Children.Add(debugSystemAwn);
+
+        Grid debugContainer = new();
+        debugContainer.Children.Add(debugUIContainer);
+        debugContainer.Children.Add(debugSystemContainer);
+
+
+        StackPanel container = new()
+        {
+            Spacing = 8
+        };
+        container.Children.Add(headerContainer);
+        container.Children.Add(divider1);
+        container.Children.Add(appContainer);
+        container.Children.Add(divider2);
+        container.Children.Add(debugContainer);
+
+        ContentDialog result = new()
+        {
+            Content = container,
+            CloseButtonText = "Close",
+            PrimaryButtonText = "License",
+            SecondaryButtonText = "Send Feedback",
+            SecondaryButtonCommand = secondaryButtonCommand,
+        };
+        result.PrimaryButtonClick += async (s, e) =>
+            await Launcher.LaunchUriAsync(new("https://raw.githubusercontent.com/IcyLauncher/Additional/main/LICENSE"));
+
+        return result;
     }
 }
