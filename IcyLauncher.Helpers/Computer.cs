@@ -1,5 +1,6 @@
 ﻿using Microsoft.Win32;
 using System.Management;
+using System.Reflection;
 
 namespace IcyLauncher.Helpers;
 
@@ -13,7 +14,13 @@ public class Computer
     public static string MinecraftDirectory { get; } = $"{AppDataDirectory}\\Packages\\Microsoft.MinecraftUWP_8wekyb3d8bbwe\\LocalState";
 
 
-    public static bool IsWindows11 { get; } = Environment.OSVersion.Version.Build >= 22000;
+    public static Version RuntimeVersion { get; } = Environment.Version;
+    public static Version WinUIVersion { get; } = Assembly.Load("Microsoft.WinUI").GetName().Version ?? new();
+    public static Version WindowsAppSDKVersion { get; } = Assembly.Load("Microsoft.WindowsAppRuntime.Bootstrap.Net").GetName().Version ?? new();
+    public static Version OSVersion { get; } = Environment.OSVersion.Version;
+
+    public static bool Is64 { get; } = Environment.Is64BitProcess;
+    public static bool IsWindows11 { get; } = OSVersion.Build >= 22000;
 
 
     public static string? CurrentCPU
