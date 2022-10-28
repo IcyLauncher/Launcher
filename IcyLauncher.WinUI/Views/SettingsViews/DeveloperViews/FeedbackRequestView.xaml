@@ -18,9 +18,22 @@
                 </StackPanel>
             </ContentControl>
 
-            <ContentControl Tag="ShowAsync()|[Returns: Feedback]  Requests a new user feedback popup" Template="{StaticResource SettingsCard}">
-                <Button Command="{x:Bind viewModel.ShowCommand}" Content="Test Method" />
-            </ContentControl>
+            <Expander
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Top"
+                Header="ShowAsync()|[Returns: Feedback]  Requests a new user feedback popup"
+                Template="{StaticResource CardExpander}">
+                <Expander.Tag>
+                    <ContentControl Tag="forceShow|[optional: false] [Type: bool]  Wether to force request even if AskForFeedback is set to NeverShowAgain" Template="{StaticResource SettingsCard}">
+                        <ToggleSwitch Name="ForceShow" />
+                    </ContentControl>
+                </Expander.Tag>
+
+                <Button
+                    Command="{x:Bind viewModel.ShowCommand}"
+                    CommandParameter="{x:Bind ForceShow.IsOn, Mode=OneWay}"
+                    Content="Test Method" />
+            </Expander>
 
             <Expander
                 HorizontalAlignment="Stretch"

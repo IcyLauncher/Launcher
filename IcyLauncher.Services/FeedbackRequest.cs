@@ -37,22 +37,19 @@ public class FeedbackRequest
     /// <summary>
     /// Requests a new user feedback popup
     /// </summary>
+    /// <param name="forceShow">Wether to force request even if AskForFeedback is set to NeverShowAgain</param>
     /// <returns>The feedback result with all infortmation</returns>
-    public async Task<Feedback> ShowAsync()
+    public async Task<Feedback> ShowAsync(bool forceShow = false)
     {
-        if (!configuration.Launcher.AskForFeedback)
+        if (!forceShow && !configuration.Launcher.AskForFeedback)
         {
             logger.Log($"Tried to show feedback request [NeverShowAgain]");
             return new() { Result = FeedbackResult.NeverShowAgain };
         }
 
         StackPanel feedback = UIElementProvider.FeedbackContainer(
-            out TextBlock title,
-            out TextBlock description,
             out RatingControl rating,
             out TextBox content);
-        title.Style = (Style)Application.Current.Resources["Title"];
-        description.Style = (Style)Application.Current.Resources["Content"];
 
         ContentDialog dialog = new()
         {

@@ -28,11 +28,11 @@ public partial class FeedbackRequestViewModel : ObservableObject
 
     #region ShowAsync
     [RelayCommand]
-    async Task ShowAsync()
+    async Task ShowAsync(bool forceShow)
     {
         try
         {
-            Feedback result = await feedbackRequest.ShowAsync();
+            Feedback result = await feedbackRequest.ShowAsync(forceShow);
             await message.ShowAsync("feedbackRequest.ShowAsync()", $"Method completed.\nResult: {result.Result}-{result.Stars}-{result.Content}-{result.Account}");
         }
         catch (Exception ex)
