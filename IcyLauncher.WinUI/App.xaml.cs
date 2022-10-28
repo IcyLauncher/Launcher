@@ -66,14 +66,7 @@ public partial class App : Application
                 services.AddTransient<DeveloperSettingsViewModel>();
 
                 // Window
-                services.AddSingleton<Window>(provider => new()
-                {
-                    Content = UIElementProvider.MainGrid(
-                        new GridLength[] { new(), new(1, GridUnitType.Star) },
-                        UIElementProvider.TitleBar(configuration.Apperance.Colors.Accent.Light, configuration.Apperance.Colors.Accent.Dark),
-                        UIElementProvider.NavigationView()),
-                    Title = "IcyLauncher"
-                });
+                services.AddSingleton(provider => UIElementProvider.MainWindow(configuration.Apperance.Colors.Accent.Light, configuration.Apperance.Colors.Accent.Dark));
             }).Build();
 
         Provider = host.Services;
