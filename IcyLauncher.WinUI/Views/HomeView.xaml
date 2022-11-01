@@ -42,12 +42,33 @@
                 Text="Home" />
 
             <Grid
+                Name="BannerProfileGrid"
                 Margin="32,0,0,20"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Center">
                 <Grid.TranslationTransition>
                     <Vector3Transition Duration="0:0:0.1" />
                 </Grid.TranslationTransition>
+                <Grid.Resources>
+                    <Storyboard x:Key="InBoard">
+                        <DoubleAnimation
+                            EnableDependentAnimation="True"
+                            Storyboard.TargetName="BannerProfileGrid"
+                            Storyboard.TargetProperty="Opacity"
+                            To="1"
+                            Duration="0:0:0.1" />
+                    </Storyboard>
+
+                    <Storyboard x:Key="OutBoard">
+                        <DoubleAnimation
+                            Completed="OnBannerProfileGridOutCompleted"
+                            EnableDependentAnimation="True"
+                            Storyboard.TargetName="BannerProfileGrid"
+                            Storyboard.TargetProperty="Opacity"
+                            To="0"
+                            Duration="0:0:0.1" />
+                    </Storyboard>
+                </Grid.Resources>
 
                 <TextBlock
                     FontSize="26"
@@ -57,7 +78,7 @@
                 <TextBlock
                     Margin="0,32,0,0"
                     Style="{StaticResource Content}"
-                    Text="{x:Bind viewModel.BannerProfileDetails, Mode=OneWay}" />
+                    Text="{x:Bind viewModel.SelectedProfile, Mode=OneWay, Converter={StaticResource ProfileDescriptionFormatter}, ConverterParameter='Select a profile to start playing!'}" />
 
                 <Button
                     Margin="0,65,0,0"
@@ -80,7 +101,7 @@
                     Margin="136,65,0,0"
                     Padding="0,0,0,-2"
                     Command="{x:Bind viewModel.LaunchCancelCommand}"
-                    FontFamily="Assets/FluentSystemIcons-Regular.ttf#FluentSystemIcons-Regular"
+                    FontFamily="{StaticResource FluentRegular}"
                     Opacity="{x:Bind viewModel.LaunchCommand.CanBeCanceled, Mode=OneWay, Converter={StaticResource BoolDoubleConverter}}"
                     Style="{StaticResource LaunchButton}"
                     Tag="&#xF367;"

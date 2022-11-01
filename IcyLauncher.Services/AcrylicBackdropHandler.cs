@@ -17,10 +17,10 @@ public class AcrylicBackdropHandler : IBackdropHandler
     /// </summary>
     public AcrylicBackdropHandler(
         ILogger<AcrylicBackdropHandler> logger,
-        Window shell)
+        CoreWindow shell)
     {
         this.logger = logger;
-        this.shell = (ICompositionSupportsSystemBackdrop)shell;
+        this.shell = (ICompositionSupportsSystemBackdrop)(Window)shell;
 
         controller.SetSystemBackdropConfiguration(new() { Theme = SystemBackdropTheme.Dark });
         controller.LuminosityOpacity = 0.8f;

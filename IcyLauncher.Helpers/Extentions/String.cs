@@ -1,4 +1,6 @@
-﻿using Microsoft.UI.Xaml.Controls;
+﻿using Microsoft.UI.Xaml;
+using Microsoft.UI.Xaml.Controls;
+using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Media.Imaging;
 using System.Text;
 
@@ -19,5 +21,9 @@ public static class StringExtentions
         Encoding.ASCII.GetBytes(input);
 
     public static FontIcon AsIcon(this string input) =>
-        new() { Glyph = input, FontFamily = new("Assets/FluentSystemIcons-Regular.ttf#FluentSystemIcons-Regular") };
+        new()
+        {
+            Glyph = input,
+            FontFamily = (FontFamily)Application.Current.Resources["FluentRegular"],
+        };
 }

@@ -1,6 +1,8 @@
 ﻿using IcyLauncher.WinUI.ViewModels.SettingsViewModels;
+using IcyLauncher.Xaml.UI;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
+using Microsoft.UI;
 using Serilog;
 
 namespace IcyLauncher.WinUI;
@@ -41,7 +43,6 @@ public partial class App : Application
                 // App/UI Handlers
                 services.AddScoped<AppStartupHandler>();
                 services.AddScoped<WindowHandler>();
-                services.AddScoped<UIElementReciever>();
                 services.AddScoped<MicaBackdropHandler>();
                 services.AddScoped<AcrylicBackdropHandler>();
                 services.AddScoped<VibrancyBackdropHandler>();
@@ -66,15 +67,26 @@ public partial class App : Application
                 services.AddTransient<DeveloperSettingsViewModel>();
 
                 // Window
-                services.AddSingleton(provider => UIElementProvider.MainWindow(configuration.Apperance.Colors.Accent.Light, configuration.Apperance.Colors.Accent.Dark));
+                services.AddSingleton(provider => new CoreWindow() { Title = "IcyLauncher" });
             }).Build();
 
         Provider = host.Services;
     }
 
-    protected override async void OnLaunched(LaunchActivatedEventArgs args)
+    protected override async void OnLaunched(
+        LaunchActivatedEventArgs _)
     {
         await host.StartAsync().ConfigureAwait(false);
+
+        Configuration configuration = Provider.GetRequiredService<IOptions<Configuration>>().Value;
+
+        if (Current.Resources["Colors"] is Theme resourceColors)
+        {
+            resourceColors.Accent = configuration.Apperance.Colors.Accent;
+            resourceColors.Background = configuration.Apperance.Colors.Background;
+            resourceColors.Text = configuration.Apperance.Colors.Text;
+            resourceColors.Control = configuration.Apperance.Colors.Control;
+        }
 
         Provider.GetRequiredService<AppStartupHandler>();
     }

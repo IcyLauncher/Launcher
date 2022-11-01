@@ -29,19 +29,11 @@
                 </Grid.ColumnDefinitions>
 
                 <Grid>
-                    <Viewbox
+                    <xmle:Icon
                         Width="59"
                         Height="59"
-                        HorizontalAlignment="Left">
-                        <Path Data="{x:Bind hlprs:UIElementProvider.IconPath}">
-                            <Path.Fill>
-                                <LinearGradientBrush StartPoint="0,0" EndPoint="0.625,1">
-                                    <GradientStop Offset="0.1" Color="{Binding Color, Source={ThemeResource AccentLight}}" />
-                                    <GradientStop Offset="1" Color="{Binding Color, Source={ThemeResource AccentDark}}" />
-                                </LinearGradientBrush>
-                            </Path.Fill>
-                        </Path>
-                    </Viewbox>
+                        DarkColor="{Binding Color, Source={ThemeResource AccentDark}}"
+                        LightColor="{Binding Color, Source={ThemeResource AccentLight}}" />
 
                     <Grid Margin="71,0,0,0" VerticalAlignment="Center">
                         <TextBlock
@@ -72,7 +64,7 @@
                         <FontIcon
                             Margin="0,0,0,-2"
                             HorizontalAlignment="Left"
-                            FontFamily="Assets/FluentSystemIcons-Regular.ttf#FluentSystemIcons-Regular"
+                            FontFamily="{StaticResource FluentRegular}"
                             FontSize="32"
                             Glyph="&#xE493;" />
 
@@ -103,7 +95,7 @@
                         <FontIcon
                             Margin="0,0,0,-2"
                             HorizontalAlignment="Left"
-                            FontFamily="Assets/FluentSystemIcons-Regular.ttf#FluentSystemIcons-Regular"
+                            FontFamily="{StaticResource FluentRegular}"
                             FontSize="32"
                             Glyph="&#xE371;" />
 

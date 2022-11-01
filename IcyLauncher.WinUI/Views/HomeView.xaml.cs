@@ -27,4 +27,9 @@ public sealed partial class HomeView : Page
         if (e.RemovedItems.Count != 0)
             ProfileTemplate.UpdateProperties((GridView)sender, e.RemovedItems[0], 0, new(-10, 0, 0), "outBoard");
     }
+
+    private void OnBannerProfileGridOutCompleted(object sender, object e)
+    {
+        viewModel.UpdateProfile();
+    }
 }

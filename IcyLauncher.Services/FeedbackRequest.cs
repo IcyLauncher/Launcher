@@ -1,5 +1,4 @@
-﻿using Microsoft.UI.Xaml.Controls;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 
 namespace IcyLauncher.Services;
 
@@ -39,7 +38,8 @@ public class FeedbackRequest
     /// </summary>
     /// <param name="forceShow">Wether to force request even if AskForFeedback is set to NeverShowAgain</param>
     /// <returns>The feedback result with all infortmation</returns>
-    public async Task<Feedback> ShowAsync(bool forceShow = false)
+    public async Task<Feedback> ShowAsync(
+        bool forceShow = false)
     {
         if (!forceShow && !configuration.Launcher.AskForFeedback)
         {
@@ -47,37 +47,21 @@ public class FeedbackRequest
             return new() { Result = FeedbackResult.NeverShowAgain };
         }
 
-        StackPanel feedback = UIElementProvider.FeedbackContainer(
-            out RatingControl rating,
-            out TextBox content);
+        FeedbackDialog dialog = new(forceShow);
+        await message.ShowAsync(dialog);
 
-        ContentDialog dialog = new()
+        Feedback result = new() { Result = dialog.Result };
+        switch (result.Result)
         {
-            Content = feedback,
-            CloseButtonText = "Cancel",
-            PrimaryButtonText = "Submit",
-            SecondaryButtonText = "Never show again :(",
-            IsPrimaryButtonEnabled = false
-        };
-        rating.ValueChanged += (s, e) => dialog.IsPrimaryButtonEnabled = rating.Value != -1;
-        ContentDialogResult request = await message.ShowAsync(dialog);
-
-        Feedback result = new();
-        result.Result = request switch
-        {
-            ContentDialogResult.Primary => FeedbackResult.Submit,
-            ContentDialogResult.Secondary => FeedbackResult.NeverShowAgain,
-            _ => FeedbackResult.Cancel
-        };
-        if (result.Result == FeedbackResult.Submit)
-        {
-            result.Stars = rating.Value;
-            result.Content = content.Text;
-            //result.Account = accountHandler.Current.Id;
+            case FeedbackResult.Submit:
+                result.Stars = dialog.Rating;
+                result.Content = dialog.FeedbackText;
+                //result.Account = accountHandler.Current.Id;
+                break;
+            case FeedbackResult.NeverShowAgain:
+                configuration.Launcher.AskForFeedback = false;
+                break;
         }
-
-        if (result.Result == FeedbackResult.NeverShowAgain)
-            configuration.Launcher.AskForFeedback = false;
 
         logger.Log($"Showed feedback request [{result.Result}]");
         return result;

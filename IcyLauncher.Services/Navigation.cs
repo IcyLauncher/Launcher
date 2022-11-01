@@ -10,7 +10,7 @@ public class Navigation : INavigation
 {
     #region Setup
     readonly ILogger logger;
-    readonly UIElementReciever uIElementReciever;
+    readonly CoreWindow shell;
 
     readonly List<NavigationViewItem> items;
     bool skipEvent = false;
@@ -20,22 +20,22 @@ public class Navigation : INavigation
     /// </summary>
     public Navigation(
         ILogger<Navigation> logger,
-        UIElementReciever uIElementReciever)
+        CoreWindow shell)
     {
         this.logger = logger;
-        this.uIElementReciever = uIElementReciever;
+        this.shell = shell;
 
-        items = uIElementReciever.NavigationView.MenuItems
-            .Concat(uIElementReciever.NavigationView.FooterMenuItems)
+        items = shell.NavigationView.MenuItems
+            .Concat(shell.NavigationView.FooterMenuItems)
             .Select(item => (NavigationViewItem)item)
             .ToList();
 
-        uIElementReciever.NavigationView.SelectionChanged += (s, e) =>
+        shell.NavigationView.SelectionChanged += (s, e) =>
         {
             if (!skipEvent && e.SelectedItemContainer is NavigationViewItem item)
                 SetCurrentPage($"Views.{item.Tag}View".AsType() ?? "Views.NoPageView".AsType());
         };
-        uIElementReciever.NavigationView.BackRequested += (s, e) => GoBack();
+        shell.NavigationView.BackRequested += (s, e) => GoBack();
 
         logger.Log("Registered navigation");
     }
@@ -48,7 +48,7 @@ public class Navigation : INavigation
     /// </summary>
     /// <returns>The current navigation view item</returns>
     public NavigationViewItem? GetCurrentNavigationViewItem() =>
-        uIElementReciever.NavigationView?.SelectedItem is NavigationViewItem current ? current : null;
+        shell.NavigationView?.SelectedItem is NavigationViewItem current ? current : null;
 
     /// <summary>
     /// Gets the LayoutRoot grid of the current navigation view item
@@ -93,7 +93,7 @@ public class Navigation : INavigation
     {
         try
         {
-            uIElementReciever.NavigationView.SelectedItem = item;
+            shell.NavigationView.SelectedItem = item;
 
             logger.Log("Set current navigation item");
             return true;
@@ -117,11 +117,11 @@ public class Navigation : INavigation
         {
             NavigationViewItem selectedItem = items.ElementAt(index);
 
-            if ((NavigationViewItem)uIElementReciever.NavigationView.SelectedItem == selectedItem)
+            if ((NavigationViewItem)shell.NavigationView.SelectedItem == selectedItem)
                 return false;
 
             skipEvent = true;
-            uIElementReciever.NavigationView.SelectedItem = selectedItem;
+            shell.NavigationView.SelectedItem = selectedItem;
             skipEvent = false;
 
             logger.Log("Set current navigation item without updating page");
@@ -146,16 +146,16 @@ public class Navigation : INavigation
     {
         try
         {
-            bool navigate = uIElementReciever.NavigationFrame.Navigate(type, parameter);
-            CanGoBackChanged(uIElementReciever.NavigationFrame.CanGoBack);
+            bool navigate = shell.ContentFrame.Navigate(type, parameter);
+            CanGoBackChanged(shell.ContentFrame.CanGoBack);
 
             logger.Log("Set current navigation page");
             return navigate;
         }
         catch (Exception ex)
         {
-            uIElementReciever.NavigationFrame.Navigate("Views.NoPageView".AsType(), ex);
-            CanGoBackChanged(uIElementReciever.NavigationFrame.CanGoBack);
+            shell.ContentFrame.Navigate("Views.NoPageView".AsType(), ex);
+            CanGoBackChanged(shell.ContentFrame.CanGoBack);
 
             logger.Log("Failed to set current navigation page", ex);
             return false;
@@ -201,14 +201,14 @@ public class Navigation : INavigation
     {
         try
         {
-            if (GetNavigationViewItem(uIElementReciever.NavigationFrame.BackStack.Last().SourcePageType.FullName, true) is NavigationViewItem item && (NavigationViewItem)uIElementReciever.NavigationView.SelectedItem != item)
+            if (GetNavigationViewItem(shell.ContentFrame.BackStack.Last().SourcePageType.FullName, true) is NavigationViewItem item && GetCurrentNavigationViewItem() != item)
                 SetCurrentNavigationViewItem(item);
-            else if (!SetCurrentPage(uIElementReciever.NavigationFrame.BackStack.Last().SourcePageType))
+            else if (!SetCurrentPage(shell.ContentFrame.BackStack.Last().SourcePageType))
                 return false;
 
-            uIElementReciever.NavigationFrame.BackStack.RemoveAt(uIElementReciever.NavigationFrame.BackStackDepth - 1);
-            uIElementReciever.NavigationFrame.BackStack.RemoveAt(uIElementReciever.NavigationFrame.BackStackDepth - 1);
-            CanGoBackChanged(uIElementReciever.NavigationFrame.CanGoBack);
+            shell.ContentFrame.BackStack.RemoveAt(shell.ContentFrame.BackStackDepth - 1);
+            shell.ContentFrame.BackStack.RemoveAt(shell.ContentFrame.BackStackDepth - 1);
+            CanGoBackChanged(shell.ContentFrame.CanGoBack);
 
             return true;
         }
@@ -224,29 +224,25 @@ public class Navigation : INavigation
     /// </summary>
     public void ClearBackStack()
     {
-        uIElementReciever.NavigationFrame.BackStack.Clear();
+        shell.ContentFrame.BackStack.Clear();
         CanGoBackChanged(false);
     }
 
     void CanGoBackChanged(
         bool canGoBack)
     {
-        if (canGoBack == (uIElementReciever.BackButton.Opacity != 0))
+        if (canGoBack == (shell.BackButton.Opacity != 0))
             return;
 
         if (canGoBack)
         {
-            uIElementReciever.BackButton.Opacity = 1;
-            Storyboard board = new();
-            board.Children.Add(UIElementProvider.Animate(uIElementReciever.BackButton, "Width", 0, 32, 200));
-            board.Begin();
+            shell.BackButton.Opacity = 1;
+            ((Storyboard)shell.BackButton.Resources["InBoard"]).Begin();
         }
         else
         {
-            uIElementReciever.BackButton.Opacity = 0;
-            Storyboard board = new();
-            board.Children.Add(UIElementProvider.Animate(uIElementReciever.BackButton, "Width", 32, 0, 200));
-            board.Begin();
+            shell.BackButton.Opacity = 0;
+            ((Storyboard)shell.BackButton.Resources["OutBoard"]).Begin();
         }
     }
     #endregion

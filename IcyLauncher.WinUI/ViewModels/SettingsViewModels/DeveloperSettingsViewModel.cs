@@ -1,4 +1,5 @@
 ﻿using IcyLauncher.WinUI.Views.SettingsViews.DeveloperViews;
+using IcyLauncher.Xaml.UI;
 using Microsoft.UI.Xaml.Controls.Primitives;
 using Microsoft.UI.Xaml.Media;
 using System.Collections.ObjectModel;
@@ -12,7 +13,6 @@ public partial class DeveloperSettingsViewModel : ObservableObject
     readonly ConfigurationManager configurationManager;
     readonly ThemeManager themeManager;
     readonly WindowHandler windowHandler;
-    readonly UIElementReciever uIElementReciever;
     readonly IBackdropHandler micaBackdropHandler;
     readonly IBackdropHandler acrylicBackdropHandler;
     readonly IBackdropHandler vibrancyBackdropHandler;
@@ -24,6 +24,7 @@ public partial class DeveloperSettingsViewModel : ObservableObject
     readonly Updater updater;
     readonly INavigation navigation;
     readonly IMessage message;
+    readonly CoreWindow shell;
 
     public readonly Configuration Configuration;
 
@@ -33,7 +34,6 @@ public partial class DeveloperSettingsViewModel : ObservableObject
         ConfigurationManager configurationManager,
         ThemeManager themeManager,
         WindowHandler windowHandler,
-        UIElementReciever uIElementReciever,
         MicaBackdropHandler micaBackdropHandler,
         AcrylicBackdropHandler acrylicBackdropHandler,
         VibrancyBackdropHandler vibrancyBackdropHandler,
@@ -44,13 +44,13 @@ public partial class DeveloperSettingsViewModel : ObservableObject
         IFileSystem fileSystem,
         Updater updater,
         INavigation navigation,
-        IMessage message)
+        IMessage message,
+        CoreWindow shell)
     {
         this.logger = logger;
         this.configurationManager = configurationManager;
         this.themeManager = themeManager;
         this.windowHandler = windowHandler;
-        this.uIElementReciever = uIElementReciever;
         this.micaBackdropHandler = micaBackdropHandler;
         this.acrylicBackdropHandler = acrylicBackdropHandler;
         this.vibrancyBackdropHandler = vibrancyBackdropHandler;
@@ -62,6 +62,7 @@ public partial class DeveloperSettingsViewModel : ObservableObject
         this.updater = updater;
         this.navigation = navigation;
         this.message = message;
+        this.shell = shell;
 
         Configuration = configuration.Value;
 
@@ -75,7 +76,7 @@ public partial class DeveloperSettingsViewModel : ObservableObject
             new TabViewItem()
             {
                 Header = "Home",
-                IconSource = new FontIconSource() { Glyph = "\uE70F", FontFamily = new("Assets/FluentSystemIcons-Regular.ttf#FluentSystemIcons-Regular") },
+                IconSource = new FontIconSource() { Glyph = "\uE70F", FontFamily = (FontFamily)Application.Current.Resources["FluentRegular"] },
                 IsClosable = false,
                 Content = new HomeView(new(Configuration, logger, message, ShowAddButtonFlyoutCommand))
             }
@@ -136,8 +137,7 @@ public partial class DeveloperSettingsViewModel : ObservableObject
             "ILogger<T>" => new() { Content = new ILoggerView(new(logger, themeManager, windowHandler, message)) },
             "ConfigurationManager" => new() { Content = new ConfigurationManagerView(new(configurationManager, converter, message)) },
             "ThemeManager" => new() { Content = new ThemeManagerView(new(themeManager, message)) },
-            "WindowHandler" => new() { Content = new WindowHandlerView(new(windowHandler, uIElementReciever, message)) },
-            "UIElementReciever" => new() { Content = new UIElementRecieverView(new(uIElementReciever)) },
+            "WindowHandler" => new() { Content = new WindowHandlerView(new(windowHandler, message, shell)) },
             "MicaBackdropHandler" => new() { Content = new MicaBackdropHandlerView(new(micaBackdropHandler, message)) },
             "AcrylicBackdropHandler" => new() { Content = new AcrylicBackdropHandlerView(new(acrylicBackdropHandler, message)) },
             "VibrancyBackdropHandler" => new() { Content = new VibrancyBackdropHandlerView(new(vibrancyBackdropHandler, message)) },

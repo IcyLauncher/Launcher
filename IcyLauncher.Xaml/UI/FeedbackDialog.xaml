@@ -1,0 +1,42 @@
+﻿<ContentDialog
+    x:Class="IcyLauncher.Xaml.UI.FeedbackDialog"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    CloseButtonText="Cancel"
+    IsPrimaryButtonEnabled="False"
+    PrimaryButtonText="Submit"
+    mc:Ignorable="d">
+
+    <StackPanel>
+        <TextBlock
+            HorizontalAlignment="Center"
+            FontSize="22"
+            Style="{StaticResource Title}"
+            Text="Do you like IcyLauncher?❄️" />
+        <TextBlock
+            HorizontalAlignment="Center"
+            FontSize="16"
+            HorizontalTextAlignment="Center"
+            Style="{StaticResource Content}"
+            Text="Feedback helps us to make your IcyLauncher experience better.&#x0a;Please tell us what you like and what we still can improve." />
+
+        <Viewbox Height="50" Margin="0,12,0,0">
+            <RatingControl Name="RatingControl" Value="{x:Bind Rating, Mode=TwoWay}" />
+        </Viewbox>
+        <TextBox
+            Name="FeedbackTextControl"
+            MaxWidth="400"
+            MaxHeight="200"
+            HorizontalAlignment="Center"
+            AcceptsReturn="True"
+            IsSpellCheckEnabled="True"
+            MaxLength="200"
+            PlaceholderText="Your feedback..."
+            ScrollViewer.VerticalScrollBarVisibility="Auto"
+            Text="{x:Bind FeedbackText, Mode=TwoWay}"
+            TextWrapping="Wrap"
+            Visibility="Collapsed" />
+    </StackPanel>
+</ContentDialog>

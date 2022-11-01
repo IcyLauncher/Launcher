@@ -2,8 +2,11 @@
 using Microsoft.UI.Composition;
 using Microsoft.UI.Xaml.Media.Animation;
 using Microsoft.UI.Xaml.Shapes;
+using Newtonsoft.Json.Linq;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Numerics;
+using System.Runtime.CompilerServices;
 using Windows.UI;
 
 namespace IcyLauncher.WinUI.ViewModels;
@@ -328,35 +331,31 @@ public partial class HomeViewModel : ObservableObject
         get => selectedProfile;
         set
         {
-            Storyboard outBoard = new();
-            outBoard.Children.Add(UIElementProvider.Animate(bannerProfileGrid, "Opacity", null, 0, 100));
-            outBoard.Completed += (s, e) =>
-            {
-                if (SetProperty(ref selectedProfile, value))
-                {
-                    BannerProfileDetails = value is null ? "Select a profile to start playing!" : $"Version {value.Version} | {value.Client}";
-                    LaunchCommand.NotifyCanExecuteChanged();
-                }
-
-                bannerProfileGrid.Translation = new Vector3(0, 0, 0);
-                bannerProfileInBoard.Begin();
-            };
+            newProfile = value;
             bannerProfileGrid.Translation = new Vector3(-10, 0, 0);
-            outBoard.Begin();
+            ((Storyboard)bannerProfileGrid.Resources["OutBoard"]).Begin();
         }
     }
 
-    [ObservableProperty]
-    string bannerProfileDetails = "Select a profile to start playing!";
+    Profile? newProfile;
+
+    public void UpdateProfile()
+    {
+        if (SetProperty(ref selectedProfile, newProfile, nameof(SelectedProfile)))
+        {
+            LaunchCommand.NotifyCanExecuteChanged();
+        }
+        bannerProfileGrid.Translation = new Vector3(0, 0, 0);
+        bannerProfileInBoard.Begin();
+    }
+
 
     void SetupProfile(
         Grid container)
     {
         bannerProfileGrid = container;
+        bannerProfileInBoard = (Storyboard)bannerProfileGrid.Resources["InBoard"];
 
-        bannerProfileInBoard = new();
-        bannerProfileInBoard.Children.Add(UIElementProvider.Animate(bannerProfileGrid, "Opacity", null, 1, 100));
-        
         SelectedProfile = Profiles.First();
     }
     #endregion

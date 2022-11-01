@@ -110,8 +110,8 @@
 		<None Remove="Assets\Blocks\Spawner.png" />
 		<None Remove="Assets\Blocks\Stone.png" />
 		<None Remove="Assets\Blocks\TNT.png" />
-		<None Remove="Assets\FluentSystemIcons-Filled.ttf" />
-		<None Remove="Assets\FluentSystemIcons-Regular.ttf" />
+		<None Remove="Assets\Fonts\FluentSystemIcons-Filled.ttf" />
+		<None Remove="Assets\Fonts\FluentSystemIcons-Regular.ttf" />
 		<None Remove="Assets\LICENSE" />
 		<None Remove="Assets\NoImage.png" />
 		<None Remove="Assets\Weather\0.png" />
@@ -153,7 +153,6 @@
 		<None Remove="Views\SettingsViews\DeveloperViews\INavigationView.xaml" />
 		<None Remove="Views\SettingsViews\DeveloperViews\MicaBackdropHandlerView.xaml" />
 		<None Remove="Views\SettingsViews\DeveloperViews\ThemeManagerView.xaml" />
-		<None Remove="Views\SettingsViews\DeveloperViews\UIElementRecieverView.xaml" />
 		<None Remove="Views\SettingsViews\DeveloperViews\UpdaterView.xaml" />
 		<None Remove="Views\SettingsViews\DeveloperViews\VibrancyBackdropHandlerView.xaml" />
 		<None Remove="Views\SettingsViews\DeveloperViews\WindowHandlerView.xaml" />
@@ -167,7 +166,7 @@
 		<PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="6.0.2" />
 		<PackageReference Include="Microsoft.Graphics.Win2D" Version="1.0.4" />
 		<PackageReference Include="Microsoft.WindowsAppSDK" Version="1.1.5" />
-		<PackageReference Include="Microsoft.Windows.SDK.BuildTools" Version="10.0.22621.1" />
+		<PackageReference Include="Microsoft.Windows.SDK.BuildTools" Version="10.0.22621.755" />
 		<PackageReference Include="Microsoft.Xaml.Behaviors.WinUI.Managed" Version="2.0.9" />
 		<PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
 		<PackageReference Include="Serilog" Version="2.12.0" />
@@ -405,11 +404,11 @@
 		<Content Update="Assets\Blocks\TNT.png">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</Content>
-		<Content Update="Assets\FluentSystemIcons-Filled.ttf">
-			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		<Content Update="Assets\Fonts\FluentSystemIcons-Filled.ttf">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</Content>
-		<Content Update="Assets\FluentSystemIcons-Regular.ttf">
-			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		<Content Update="Assets\Fonts\FluentSystemIcons-Regular.ttf">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</Content>
 		<Content Update="Assets\Icon.ico">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -534,10 +533,6 @@
 		  <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
 		  <SubType>Designer</SubType>
 		</Page>
-		<Page Update="Views\SettingsViews\DeveloperViews\UIElementRecieverView.xaml">
-		  <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
-		  <SubType>Designer</SubType>
-		</Page>
 		<Page Update="Views\SettingsViews\DeveloperViews\ThemeManagerView.xaml">
 		  <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
 		  <SubType>Designer</SubType>
@@ -602,9 +597,6 @@
 		<Content Update="Assets\Weather\50n.png">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</Content>
-		<Page Update="UIElements\ProfileDataTemplate.xaml">
-			<XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
-		</Page>
 		<Page Update="UI\BannerTimeDependentTemplate.xaml">
 			<XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
 			<SubType>Designer</SubType>

@@ -1,0 +1,80 @@
+﻿<ContentDialog
+    x:Class="IcyLauncher.Xaml.UI.AboutDialog"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:xmle="using:IcyLauncher.Xaml.Elements"
+    CloseButtonText="Close"
+    PrimaryButtonText="License"
+    SecondaryButtonText="Send Feedback"
+    mc:Ignorable="d">
+
+    <StackPanel Spacing="8">
+        <Grid>
+            <xmle:Icon
+                Width="70"
+                Height="70"
+                DarkColor="{Binding Color, Source={ThemeResource AccentDark}}"
+                LightColor="{Binding Color, Source={ThemeResource AccentLight}}" />
+
+            <StackPanel Margin="82,-4,0,0" Spacing="-7">
+                <TextBlock Style="{StaticResource Title}" Text="IcyLauncher" />
+                <TextBlock
+                    Style="{StaticResource Content}"
+                    Text="A modern &amp; feature rich MC:BE version switcher and launcher"
+                    TextWrapping="Wrap" />
+            </StackPanel>
+        </Grid>
+
+        <Rectangle Style="{StaticResource DividerHorizontal}" />
+
+        <Grid>
+            <StackPanel Orientation="Horizontal" Spacing="4">
+                <TextBlock Style="{StaticResource SubpointSecondary}" Text="Product:&#x0a;Licensing:" />
+                <TextBlock Style="{StaticResource Subpoint}">
+                    <Run Text="{x:Bind product}" />
+                    <LineBreak />
+                    <Run Text="{x:Bind licensing}" />
+                </TextBlock>
+            </StackPanel>
+
+            <StackPanel
+                HorizontalAlignment="Right"
+                Orientation="Horizontal"
+                Spacing="4">
+                <TextBlock Style="{StaticResource SubpointSecondary}" Text="Launcher Version:&#x0a;API Version:" />
+                <TextBlock Style="{StaticResource Subpoint}">
+                    <Run Text="{x:Bind launcherVersion}" />
+                    <LineBreak />
+                    <Run Text="{x:Bind aPIVersion}" />
+                </TextBlock>
+            </StackPanel>
+        </Grid>
+
+        <Rectangle Style="{StaticResource DividerHorizontal}" />
+
+        <Grid>
+            <StackPanel Orientation="Horizontal" Spacing="4">
+                <TextBlock Style="{StaticResource SubpointSecondary}" Text="UI Layer:&#x0a;WinAppSDK:" />
+                <TextBlock Style="{StaticResource Subpoint}">
+                    <Run Text="{x:Bind uILayer}" />
+                    <LineBreak />
+                    <Run Text="{x:Bind winAppSDK}" />
+                </TextBlock>
+            </StackPanel>
+
+            <StackPanel
+                HorizontalAlignment="Right"
+                Orientation="Horizontal"
+                Spacing="4">
+                <TextBlock Style="{StaticResource SubpointSecondary}" Text="OS:&#x0a;Framework:" />
+                <TextBlock Style="{StaticResource Subpoint}">
+                    <Run Text="{x:Bind os}" />
+                    <LineBreak />
+                    <Run Text="{x:Bind framework}" />
+                </TextBlock>
+            </StackPanel>
+        </Grid>
+    </StackPanel>
+</ContentDialog>

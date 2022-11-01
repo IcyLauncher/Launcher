@@ -12,13 +12,20 @@
 		<AssemblyVersion>0.0.0.1</AssemblyVersion>
 		<Version>0.0.0.1</Version>
 	</PropertyGroup>
-
 	<ItemGroup>
-		<PackageReference Include="Microsoft.WindowsAppSDK" Version="1.1.5" />
-		<PackageReference Include="Microsoft.Windows.SDK.BuildTools" Version="10.0.22621.1" />
+	  <None Remove="UI\AboutDialog.xaml" />
+	  <None Remove="UI\CoreWindow.xaml" />
+	  <None Remove="UI\FeedbackDialog.xaml" />
+	  <None Remove="UI\LoggerWindow.xaml" />
 	</ItemGroup>
 
 	<ItemGroup>
+		<PackageReference Include="Microsoft.WindowsAppSDK" Version="1.1.5" />
+		<PackageReference Include="Microsoft.Windows.SDK.BuildTools" Version="10.0.22621.755" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\IcyLauncher.Data\IcyLauncher.Data.csproj" />
 	  <ProjectReference Include="..\IcyLauncher.Helpers\IcyLauncher.Helpers.csproj" />
 	</ItemGroup>
 
@@ -30,5 +37,28 @@
 		<Using Include="Microsoft.UI.Xaml.Data" />
 		
 		<Using Include="IcyLauncher.Helpers.Extentions" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Page Update="UI\AboutDialog.xaml">
+	    <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+	    <SubType>Designer</SubType>
+	  </Page>
+	  <Page Update="UI\FeedbackDialog.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </Page>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Page Update="UI\LoggerWindow.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </Page>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Page Update="UI\CoreWindow.xaml">
+	    <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+	    <SubType>Designer</SubType>
+	  </Page>
 	</ItemGroup>
 </Project>

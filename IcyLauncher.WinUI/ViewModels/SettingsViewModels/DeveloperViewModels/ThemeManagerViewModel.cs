@@ -87,39 +87,6 @@ public partial class ThemeManagerViewModel : ObservableObject
     #endregion
 
 
-    #region SetResourceColors
-    [RelayCommand]
-    async Task SetResourceColorsAsync()
-    {
-        try
-        {
-            themeManager.SetResourceColors();
-            await message.ShowAsync("themeManager.SetResourceColors()", $"Method completed.");
-        }
-        catch (Exception ex)
-        {
-            await message.ShowAsync("themeManager.SetResourceColors()", $"Method completed.\nException{ex.Format()}");
-        }
-    }
-    #endregion
-
-    #region SetUnbindableBindings
-    [RelayCommand]
-    async Task SetUnbindableBindingsAsync()
-    {
-        try
-        {
-            themeManager.SetUnbindableBindings();
-            await message.ShowAsync("themeManager.SetUnbindableBindings()", $"Method completed.");
-        }
-        catch (Exception ex)
-        {
-            await message.ShowAsync("themeManager.SetUnbindableBindings()", $"Method completed.\nException{ex.Format()}");
-        }
-    }
-    #endregion
-
-
     #region GetRandomColor
     [ObservableProperty]
     byte transparency = 255;

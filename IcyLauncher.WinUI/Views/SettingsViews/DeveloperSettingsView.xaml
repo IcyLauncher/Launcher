@@ -64,12 +64,6 @@
                 <MenuFlyoutItem
                     Command="{x:Bind viewModel.AddTabViewItemCommand}"
                     CommandParameter="{Binding RelativeSource={RelativeSource Self}}"
-                    Icon="{x:Bind xtntns:StringExtentions.AsIcon('&#xEA3B;')}"
-                    Text="UIElementReciever"
-                    ToolTipService.ToolTip="Reciever and caster of all UIElements of the current main window" />
-                <MenuFlyoutItem
-                    Command="{x:Bind viewModel.AddTabViewItemCommand}"
-                    CommandParameter="{Binding RelativeSource={RelativeSource Self}}"
                     Icon="{x:Bind xtntns:StringExtentions.AsIcon('&#xF8F9;')}"
                     Text="MicaBackdropHandler"
                     ToolTipService.ToolTip="Handler to confgure a mica backdrop effect on the current main window (Win11+)" />

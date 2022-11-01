@@ -1,0 +1,111 @@
+﻿<Window
+    x:Class="IcyLauncher.Xaml.UI.CoreWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:nmtdvsls1="using:Microsoft.UI.Xaml.Controls.AnimatedVisuals"
+    xmlns:xmle="using:IcyLauncher.Xaml.Elements"
+    mc:Ignorable="d">
+
+    <Grid Name="MainGrid" x:FieldModifier="public">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="48" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <Grid
+            Name="TitleBarContainer"
+            x:FieldModifier="public"
+            Visibility="Collapsed">
+            <StackPanel Orientation="Horizontal" Spacing="10">
+                <Button
+                    Name="BackButton"
+                    Width="0"
+                    Height="32"
+                    Margin="4,4,0,4"
+                    Padding="0"
+                    x:FieldModifier="public"
+                    Background="Transparent"
+                    BorderBrush="Transparent"
+                    Opacity="0">
+                    <Button.OpacityTransition>
+                        <ScalarTransition />
+                    </Button.OpacityTransition>
+                    <Button.Resources>
+                        <Storyboard x:Key="InBoard">
+                            <DoubleAnimation
+                                EnableDependentAnimation="True"
+                                Storyboard.TargetName="BackButton"
+                                Storyboard.TargetProperty="Width"
+                                From="0"
+                                To="32"
+                                Duration="0:0:0.2" />
+                        </Storyboard>
+
+                        <Storyboard x:Key="OutBoard">
+                            <DoubleAnimation
+                                EnableDependentAnimation="True"
+                                Storyboard.TargetName="BackButton"
+                                Storyboard.TargetProperty="Width"
+                                From="32"
+                                To="0"
+                                Duration="0:0:0.2" />
+                        </Storyboard>
+                    </Button.Resources>
+
+                    <Viewbox Width="16" Height="16">
+                        <AnimatedIcon>
+                            <AnimatedIcon.Source>
+                                <nmtdvsls1:AnimatedBackVisualSource />
+                            </AnimatedIcon.Source>
+                            <AnimatedIcon.FallbackIconSource>
+                                <SymbolIconSource Symbol="Back" />
+                            </AnimatedIcon.FallbackIconSource>
+                        </AnimatedIcon>
+                    </Viewbox>
+                </Button>
+
+                <xmle:Icon
+                    Width="19"
+                    Height="19"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center"
+                    DarkColor="{Binding Color, Source={ThemeResource AccentDark}}"
+                    LightColor="{Binding Color, Source={ThemeResource AccentLight}}" />
+
+                <TextBlock
+                    VerticalAlignment="Center"
+                    FontSize="12"
+                    Foreground="{ThemeResource AccentPrimary}"
+                    Text="IcyLauncher" />
+            </StackPanel>
+
+            <Rectangle
+                Name="TitleBarDragArea"
+                Margin="39,0,0,0"
+                HorizontalAlignment="Stretch"
+                x:FieldModifier="public" />
+        </Grid>
+
+        <NavigationView
+            Name="NavigationView"
+            Grid.Row="1"
+            x:FieldModifier="public"
+            IsBackEnabled="{x:Bind ContentFrame.CanGoBack, Mode=OneWay}">
+            <NavigationView.MenuItems>
+                <NavigationViewItem Content="&#xE711;|&#xE71E;" Tag="Home" />
+                <NavigationViewItem Content="&#xE065;|&#xE065;" Tag="Profiles" />
+                <NavigationViewItem Content="&#xF593;|&#xF59D;" Tag="Cosmetics" />
+                <NavigationViewItem Content="&#xF135;|&#xF135;" Tag="Texturepacks" />
+                <!--<NavigationViewItem Tag="Servers" Content="&#xF451;|&#xF455;"/>-->
+            </NavigationView.MenuItems>
+            <NavigationView.FooterMenuItems>
+                <NavigationViewItem Content="&#xE9EE;|&#xE9F6;" Tag="Help" />
+                <NavigationViewItem Content="&#xEA95;|&#xEA9E;" Tag="Settings" />
+            </NavigationView.FooterMenuItems>
+
+            <Frame Name="ContentFrame" x:FieldModifier="public" />
+        </NavigationView>
+    </Grid>
+</Window>

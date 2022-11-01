@@ -1,5 +1,4 @@
-﻿using IcyLauncher.Xaml.Converters;
-using Microsoft.UI.Xaml.Data;
+﻿using IcyLauncher.Xaml.UI;
 
 namespace IcyLauncher.WinUI.ViewModels.SettingsViewModels.DeveloperViewModels;
 
@@ -70,9 +69,10 @@ public partial class ILoggerViewModel : ObservableObject
             return;
         }
 
-        Window loggerWindow = UIElementProvider.LoggerWindow(out TextBlock content);
+        LoggerWindow loggerWindow = new() { Title = "IcyLauncher - Logger" };
 
-        void handler(object? s, string e) => content.Text += e;
+        void handler(object? s, string e) =>
+            loggerWindow.ContentBlock.Text += e;
 
         App.Sink.OnNewLog += handler;
         loggerWindow.Closed += (s, e) =>
@@ -85,7 +85,7 @@ public partial class ILoggerViewModel : ObservableObject
         windowHandler.LoggerWindow = loggerWindow;
         loggerWindow.Activate();
 
-        logger.Log("Created new window and hooked all logger events");
+        logger.Log("Created new LoggerWindow and hooked handler");
     }
     #endregion
 }

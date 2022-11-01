@@ -1,7 +1,10 @@
-﻿using Microsoft.UI;
+﻿using IcyLauncher.Xaml.UI;
+using Microsoft.UI;
 using Microsoft.UI.Xaml.Media;
+using System.Xml.XPath;
 using Windows.Storage;
 using Windows.Storage.Pickers;
+using Windows.System;
 using Windows.UI;
 
 namespace IcyLauncher.WinUI.ViewModels;
@@ -13,12 +16,12 @@ public partial class SettingsViewModel : ObservableObject
     readonly ConfigurationManager configurationManager;
     readonly ThemeManager themeManager;
     readonly WindowHandler windowHandler;
-    readonly UIElementReciever uIElementReciever;
     readonly IConverter converter;
     readonly FeedbackRequest feedbackRequest;
     readonly IFileSystem fileSystem;
     readonly INavigation navigation;
     readonly IMessage message;
+    readonly CoreWindow shell;
 
     public readonly Configuration Configuration;
     public readonly Updater Updater;
@@ -29,24 +32,24 @@ public partial class SettingsViewModel : ObservableObject
         ConfigurationManager configurationManager,
         ThemeManager themeManager,
         WindowHandler windowHandler,
-        UIElementReciever uIElementReciever,
         IConverter converter,
         FeedbackRequest feedbackRequest,
         IFileSystem fileSystem,
         Updater updater,
         INavigation navigation,
-        IMessage message)
+        IMessage message,
+        CoreWindow shell)
     {
         this.logger = logger;
         this.configurationManager = configurationManager;
         this.themeManager = themeManager;
         this.windowHandler = windowHandler;
-        this.uIElementReciever = uIElementReciever;
         this.converter = converter;
         this.feedbackRequest = feedbackRequest;
         this.fileSystem = fileSystem;
         this.navigation = navigation;
         this.message = message;
+        this.shell = shell;
 
         Configuration = configuration.Value;
         Updater = updater;
@@ -79,18 +82,21 @@ public partial class SettingsViewModel : ObservableObject
     [RelayCommand]
     async Task ShowDialogAsync()
     {
-        ContentDialog dialog = UIElementProvider.AboutDialog(Updater.CurrentAppVersion, Updater.CurrentApiVersion, RequestFeedbackCommand);
+        AboutDialog dialog = new(Updater.CurrentAppVersion, Updater.CurrentApiVersion);
 
-        await message.ShowAsync(dialog);
-    }
+        ContentDialogResult result = await message.ShowAsync(dialog);
+        switch (result)
+        {
+            case ContentDialogResult.Primary:
+                await Launcher.LaunchUriAsync(new("https://raw.githubusercontent.com/IcyLauncher/Additional/main/LICENSE"));
+                break;
+            case ContentDialogResult.Secondary:
+                Feedback feedbackResult = await feedbackRequest.ShowAsync(true);
 
-    [RelayCommand]
-    async Task RequestFeedbackAsync()
-    {
-        Feedback result = await feedbackRequest.ShowAsync(true);
-
-        if (result.Result == FeedbackResult.Submit)
-            await feedbackRequest.SubmitAsync(result);
+                if (feedbackResult.Result == FeedbackResult.Submit)
+                    await feedbackRequest.SubmitAsync(feedbackResult);
+                break;
+        }
     }
     #endregion
 
@@ -126,7 +132,7 @@ public partial class SettingsViewModel : ObservableObject
         bool value)
     {
         if (value != windowHandler.HasCustomTitleBar)
-            windowHandler.SetTitleBar(value ? uIElementReciever.TitleBarDragArea : null, uIElementReciever.TitleBarContainer);
+            windowHandler.SetTitleBar(value ? shell.TitleBarDragArea : null, shell.TitleBarContainer);
 
         Configuration.Developer.UseCustomTitleBar = value;
 

@@ -1,7 +1,4 @@
-﻿using IcyLauncher.Xaml.Converters;
-using Microsoft.UI.Dispatching;
-using Microsoft.UI.Xaml.Controls;
-using Microsoft.UI.Xaml.Data;
+﻿using Microsoft.UI.Dispatching;
 using Newtonsoft.Json;
 using System.ComponentModel;
 using Windows.UI;
@@ -14,7 +11,6 @@ public class ThemeManager
     #region Setup
     readonly ILogger logger;
     readonly Configuration configuration;
-    readonly UIElementReciever uiElementReciever;
     readonly BackdropHandler backdropHandler;
     readonly IConverter converter;
     readonly INavigation navigation;
@@ -30,26 +26,21 @@ public class ThemeManager
     public ThemeManager(
         ILogger<ConfigurationManager> logger,
         IOptions<Configuration> configuration,
-        UIElementReciever uiElementReciever,
         BackdropHandler backdropHandler,
         IConverter converter,
         INavigation navigation)
     {
         this.logger = logger;
         this.configuration = configuration.Value;
-        this.uiElementReciever = uiElementReciever;
         this.backdropHandler = backdropHandler;
         this.converter = converter;
         this.navigation = navigation;
-
-        this.configuration.Apperance.Colors.Accent.PropertyChanged += AccentColorsValuesChanged;
-        this.configuration.Apperance.Colors.Control.PropertyChanged += ControlColorsValuesChanged;
 
         this.configuration.Apperance.PropertyChanged += ValuesChanged;
 
         SubscribeToUISettings(this.configuration.Apperance.UseSystemTheme || this.configuration.Apperance.UseSystemAccent);
 
-        logger.Log("Registered theme manager and hooked all ColorValueChanged events");
+        logger.Log("Registered theme manager and hooked handlers");
     }
     #endregion
 
@@ -266,82 +257,7 @@ public class ThemeManager
     #endregion
 
 
-    #region Set
-    /// <summary>
-    /// Sets resource colors from current theme
-    /// </summary>
-    public void SetResourceColors()
-    {
-        if (Application.Current.Resources["Colors"] is Theme resourceColors)
-        {
-            resourceColors.Accent = Colors.Accent;
-            resourceColors.Background = Colors.Background;
-            resourceColors.Text = Colors.Text;
-            resourceColors.Control = Colors.Control;
-        }
-
-        logger.Log($"Set resource colors from current theme");
-    }
-
-    /// <summary>
-    /// Binds non-bindable properties of UIElementReciever elements to their respected colors
-    /// </summary>
-    public void SetUnbindableBindings()
-    {
-        ColorBrushConverter converter = new();
-
-        uiElementReciever.BackButton.SetBinding(IconElement.ForegroundProperty, new Binding()
-        {
-            Source = configuration,
-            Converter = converter,
-            Path = new PropertyPath("Apperance.Colors.Text.Primary"),
-            Mode = BindingMode.OneWay
-        });
-
-        uiElementReciever.TitleBarTitle.SetBinding(TextBlock.ForegroundProperty, new Binding()
-        {
-            Source = configuration,
-            Converter = converter,
-            Path = new PropertyPath("Apperance.Colors.Accent.Primary"),
-            Mode = BindingMode.OneWay
-        });
-
-        logger.Log($"Binded unbindable bindings");
-    }
-    #endregion
-
-
     #region Handlers
-    void AccentColorsValuesChanged(object? _, PropertyChangedEventArgs e)
-    {
-        switch (e.PropertyName)
-        {
-            case "Light":
-                uiElementReciever.TitleBarIconGradientStops[0].Color = configuration.Apperance.Colors.Accent.Light;
-
-                logger.Log($"Updated TitleBarIconGradientStop [0]");
-                break;
-            case "Dark":
-                uiElementReciever.TitleBarIconGradientStops[1].Color = configuration.Apperance.Colors.Accent.Dark;
-
-                logger.Log($"Updated TitleBarIconGradientStop [1]");
-                break;
-        }
-    }
-
-    void ControlColorsValuesChanged(object? _, PropertyChangedEventArgs e)
-    {
-        switch (e.PropertyName)
-        {
-            case "Primary":
-                if (navigation.GetCurrentNavigationViewItemLayoutRoot() is Grid layoutRoot)
-                    layoutRoot.Background = configuration.Apperance.Colors.Control.Primary.AsSolid();
-
-                logger.Log($"Updated current NavigationLayoutRoot color");
-                break;
-        }
-    }
-
     void ValuesChanged(object? _, PropertyChangedEventArgs e)
     {
         switch (e.PropertyName)

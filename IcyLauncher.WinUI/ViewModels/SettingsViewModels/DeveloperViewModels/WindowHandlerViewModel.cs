@@ -1,4 +1,5 @@
-﻿using Windows.Graphics;
+﻿using IcyLauncher.Xaml.UI;
+using Windows.Graphics;
 
 namespace IcyLauncher.WinUI.ViewModels.SettingsViewModels.DeveloperViewModels;
 
@@ -6,17 +7,17 @@ public partial class WindowHandlerViewModel : ObservableObject
 {
     #region Setup
     readonly WindowHandler windowHandler;
-    readonly UIElementReciever uIElementReciever;
     readonly IMessage message;
+    readonly CoreWindow shell;
 
     public WindowHandlerViewModel(
         WindowHandler windowHandler,
-        UIElementReciever uIElementReciever,
-        IMessage message)
+        IMessage message,
+        CoreWindow shell)
     {
         this.windowHandler = windowHandler;
-        this.uIElementReciever = uIElementReciever;
         this.message = message;
+        this.shell = shell;
 
 
         UpdateHWnd();
@@ -216,7 +217,7 @@ public partial class WindowHandlerViewModel : ObservableObject
     {
         try
         {
-            bool result = windowHandler.SetTitleBar(TitleBarIsNull ? null : uIElementReciever.TitleBarDragArea, TitleBarContainerIsNull ? null : uIElementReciever.TitleBarContainer);
+            bool result = windowHandler.SetTitleBar(TitleBarIsNull ? null : shell.TitleBarDragArea, TitleBarContainerIsNull ? null : shell.TitleBarContainer);
             await message.ShowAsync("windowHandler.SetTitleBar()", $"Method completed.\nResult: {result}");
         }
         catch (Exception ex)

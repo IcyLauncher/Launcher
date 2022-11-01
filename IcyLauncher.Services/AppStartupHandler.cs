@@ -10,14 +10,12 @@ public class AppStartupHandler
         IOptions<Configuration> configuration,
         IOptions<SolidColorCollection> solidColors,
         ConfigurationManager configurationManagaer,
-        ThemeManager themeManager,
         WindowHandler windowHandler,
-        UIElementReciever uiElementReciever,
         BackdropHandler backdropHandler,
         IConverter converter,
         IFileSystem fileSystem,
         INavigation navigation,
-        Window shell)
+        CoreWindow shell)
     {
         AppDomain.CurrentDomain.FirstChanceException += (s, e) =>
         {
@@ -32,11 +30,8 @@ public class AppStartupHandler
         if (solidColors.Value.Container is null)
             solidColors.Value.Container = new(SolidColorCollection.Default);
 
-        themeManager.SetResourceColors();
-        themeManager.SetUnbindableBindings();
-
         if (configuration.Value.Developer.UseCustomTitleBar)
-            windowHandler.SetTitleBar(uiElementReciever.TitleBarDragArea, uiElementReciever.TitleBarContainer);
+            windowHandler.SetTitleBar(shell.TitleBarDragArea, shell.TitleBarContainer);
         windowHandler.SetIcon("Assets/Icon.ico");
         windowHandler.SetMinSize(750, 500);
         windowHandler.SetSize(1040, windowHandler.HasCustomTitleBar ? 556 : 538);
@@ -44,7 +39,7 @@ public class AppStartupHandler
 
         backdropHandler.SetBackdrop(configuration.Value.Apperance.Backdrop, true, configuration.Value.Apperance.IsDarkModeBackdropEnabled);
 
-        uiElementReciever.BackButton.Click += (s, e) =>
+        shell.BackButton.Click += (s, e) =>
             navigation.GoBack();
         navigation.Navigate("Home");
 

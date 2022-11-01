@@ -104,12 +104,8 @@
                         Margin="0,-3,10,0"
                         FontSize="12"
                         Style="{ThemeResource SubpointSecondary}"
-                        TextTrimming="CharacterEllipsis">
-                        <Run Text="Version" />
-                        <Run Text="{x:Bind Version}" />
-                        <Run Text=" | " />
-                        <Run Text="{x:Bind Client}" />
-                    </TextBlock>
+                        Text="{Binding Converter={StaticResource ProfileDescriptionFormatter}, ConverterParameter='N/A'}"
+                        TextTrimming="CharacterEllipsis" />
                 </Grid>
             </Grid>
         </Grid>

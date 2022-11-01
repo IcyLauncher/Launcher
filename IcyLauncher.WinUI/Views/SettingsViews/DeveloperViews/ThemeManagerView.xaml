@@ -123,14 +123,6 @@
                     <Button Command="{x:Bind viewModel.GetRandomColorCommand}" Content="Test Method" />
                 </StackPanel>
             </Expander>
-
-            <ContentControl Tag="SetResourceColors()|Sets resource colors from current theme" Template="{StaticResource SettingsCard}">
-                <Button Command="{x:Bind viewModel.SetResourceColorsCommand}" Content="Test Method" />
-            </ContentControl>
-
-            <ContentControl Tag="SetUnbindableBindings()|Binds non-bindable properties of UIElementReciever elements to their respected colors" Template="{StaticResource SettingsCard}">
-                <Button Command="{x:Bind viewModel.SetUnbindableBindingsCommand}" Content="Test Method" />
-            </ContentControl>
         </StackPanel>
     </ScrollViewer>
 </Page>

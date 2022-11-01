@@ -7,17 +7,17 @@ public class Message : IMessage
 {
     #region Setup
     readonly ILogger logger;
-    readonly UIElementReciever uIElementReciever;
+    readonly CoreWindow shell;
 
     /// <summary>
     /// Service to queue dialogs and notifications on the current main window
     /// </summary>
     public Message(
         ILogger<Message> logger,
-        UIElementReciever uIElementReciever)
+        CoreWindow shell)
     {
         this.logger = logger;
-        this.uIElementReciever = uIElementReciever;
+        this.shell = shell;
 
         logger.Log("Registered message");
     }
@@ -63,7 +63,7 @@ public class Message : IMessage
             activeDialog.Hide();
         }
 
-        dialog.XamlRoot = uIElementReciever.MainGrid.XamlRoot;
+        dialog.XamlRoot = shell.Content.XamlRoot;
         dialog.RequestedTheme = ElementTheme.Dark;
         activeDialog = dialog;
 

@@ -16,10 +16,10 @@ public class MicaBackdropHandler : IBackdropHandler
     /// </summary>
     public MicaBackdropHandler(
         ILogger<MicaBackdropHandler> logger,
-        Window shell)
+        CoreWindow shell)
     {
         this.logger = logger;
-        this.shell = (ICompositionSupportsSystemBackdrop)shell;
+        this.shell = (ICompositionSupportsSystemBackdrop)(Window)shell;
 
         IsDarkModeEnabled = true;
 

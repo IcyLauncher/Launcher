@@ -15,21 +15,18 @@ public class WindowHandler
     #region Setup
     readonly ILogger logger;
     readonly Configuration configuration;
-    readonly UIElementReciever uiElementReciever;
-    readonly Window shell;
+    readonly CoreWindow shell;
 
     /// <summary>
     /// Handler to configure the current main window
     /// </summary>
     public WindowHandler(
-        ILogger<Window> logger,
+        ILogger<WindowHandler> logger,
         IOptions<Configuration> configuration,
-        UIElementReciever uiElementReciever,
-        Window shell)
+        CoreWindow shell)
     {
         this.logger = logger;
         this.configuration = configuration.Value;
-        this.uiElementReciever = uiElementReciever;
         this.shell = shell;
 
         logger.Log("Registered window handler");
@@ -71,7 +68,7 @@ public class WindowHandler
     /// <summary>
     /// Active logger window (null if none is active)
     /// </summary>
-    public Window? LoggerWindow = null;
+    public LoggerWindow? LoggerWindow = null;
     #endregion
 
 
@@ -258,10 +255,10 @@ public class WindowHandler
             switch (backgroundColor)
             {
                 case "Transparent":
-                    uiElementReciever.MainGrid.Background = Colors.Transparent.AsSolid();
+                    shell.MainGrid.Background = Colors.Transparent.AsSolid();
                     break;
                 default:
-                    uiElementReciever.MainGrid.SetBinding(Panel.BackgroundProperty, new Binding()
+                    shell.MainGrid.SetBinding(Panel.BackgroundProperty, new Binding()
                     {
                         Source = configuration.Apperance.Colors,
                         Converter = new ColorBrushConverter(),
