@@ -5,7 +5,7 @@ using Serilog.Formatting.Display;
 using System.IO;
 
 namespace IcyLauncher.Helpers;
-    
+
 public class InMemorySink : ILogEventSink
 {
     readonly ITextFormatter textFormatter = new MessageTemplateTextFormatter("[{Timestamp:HH:mm:ss} {Level:u3}] {Message:lj}{NewLine}{Exception}");

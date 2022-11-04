@@ -2,11 +2,8 @@
 using Microsoft.UI.Composition;
 using Microsoft.UI.Xaml.Media.Animation;
 using Microsoft.UI.Xaml.Shapes;
-using Newtonsoft.Json.Linq;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
 using System.Numerics;
-using System.Runtime.CompilerServices;
 using Windows.UI;
 
 namespace IcyLauncher.WinUI.ViewModels;

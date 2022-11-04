@@ -204,7 +204,7 @@ public partial class BannerSettingsViewModel : ObservableObject
         {
             ImageSource = (item?.Image ?? "ms-appx:///Assets/Banners/NoBanner.png").AsImage(false),
             Stretch = Stretch.UniformToFill
-        }; 
+        };
 
         logger.Log($"Set home banner: TimeDependent [{SelectedTimeDependentPack}-{searchFor}]");
     }

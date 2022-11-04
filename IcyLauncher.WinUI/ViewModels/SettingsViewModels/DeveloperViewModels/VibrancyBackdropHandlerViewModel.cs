@@ -5,7 +5,7 @@ public partial class VibrancyBackdropHandlerViewModel : ObservableObject
     #region Setup
     readonly IBackdropHandler vibrancyBackdropHandler;
     readonly IMessage message;
-    
+
     public VibrancyBackdropHandlerViewModel(
         IBackdropHandler vibrancyBackdropHandler,
         IMessage message)

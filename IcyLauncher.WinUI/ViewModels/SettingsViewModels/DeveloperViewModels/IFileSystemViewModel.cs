@@ -88,8 +88,8 @@ public partial class IFileSystemViewModel : ObservableObject
     async Task CopyFileAAsync(
         CancellationToken cancellationToken)
     {
-            await fileSystem.CopyFileAsync(Path, Destination, Overwrite, cancellationToken);
-            await message.ShowAsync("fileSystem.CopyFileAsync()", "Method completed");
+        await fileSystem.CopyFileAsync(Path, Destination, Overwrite, cancellationToken);
+        await message.ShowAsync("fileSystem.CopyFileAsync()", "Method completed");
     }
     #endregion
 

@@ -2,19 +2,21 @@
 using IcyLauncher.Xaml.UI;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
-using Microsoft.UI;
 using Serilog;
 
 namespace IcyLauncher.WinUI;
 
 public partial class App : Application
 {
+    #region General
     readonly IHost host;
 
     public static IServiceProvider Provider { get; private set; } = default!;
     public static InMemorySink Sink { get; private set; } = new();
+    #endregion
 
 
+    #region Setup
     public App()
     {
         host = Host.CreateDefaultBuilder()
@@ -72,22 +74,24 @@ public partial class App : Application
 
         Provider = host.Services;
     }
+    #endregion
 
+    #region Startup
     protected override async void OnLaunched(
         LaunchActivatedEventArgs _)
     {
         await host.StartAsync().ConfigureAwait(false);
 
-        Configuration configuration = Provider.GetRequiredService<IOptions<Configuration>>().Value;
-
+        Theme currentTheme = Provider.GetRequiredService<IOptions<Configuration>>().Value.Apperance.Colors;
         if (Current.Resources["Colors"] is Theme resourceColors)
         {
-            resourceColors.Accent = configuration.Apperance.Colors.Accent;
-            resourceColors.Background = configuration.Apperance.Colors.Background;
-            resourceColors.Text = configuration.Apperance.Colors.Text;
-            resourceColors.Control = configuration.Apperance.Colors.Control;
+            resourceColors.Accent = currentTheme.Accent;
+            resourceColors.Background = currentTheme.Background;
+            resourceColors.Text = currentTheme.Text;
+            resourceColors.Control = currentTheme.Control;
         }
 
         Provider.GetRequiredService<AppStartupHandler>();
     }
+    #endregion
 }

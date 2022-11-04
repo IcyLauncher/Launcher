@@ -5,7 +5,7 @@ public partial class FeedbackRequestViewModel : ObservableObject
     #region Setup
     readonly FeedbackRequest feedbackRequest;
     readonly IMessage message;
-    
+
     public FeedbackRequestViewModel(
         FeedbackRequest feedbackRequest,
         IMessage message)

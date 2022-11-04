@@ -2,6 +2,9 @@
 
 public class HCont : ContentControl
 {
+    #region General
+
+    #region Title
     public static readonly DependencyProperty TitleProperty = DependencyProperty.Register(
         "Title", typeof(string), typeof(HCont), new("Card Title"));
 
@@ -10,8 +13,9 @@ public class HCont : ContentControl
         get => (string)GetValue(TitleProperty);
         set => SetValue(TitleProperty, value);
     }
+    #endregion
 
-
+    #region ContentHeight
     public static readonly DependencyProperty ContentHeightProperty = DependencyProperty.Register(
         "ContentHeight", typeof(double), typeof(HCont), new(double.NaN));
 
@@ -20,8 +24,9 @@ public class HCont : ContentControl
         get => (double)GetValue(ContentHeightProperty);
         set => SetValue(ContentHeightProperty, value);
     }
+    #endregion
 
-
+    #region ContentWidth
     public static readonly DependencyProperty ContentWidthProperty = DependencyProperty.Register(
         "ContentWidth", typeof(double), typeof(HCont), new(double.NaN));
 
@@ -30,8 +35,9 @@ public class HCont : ContentControl
         get => (double)GetValue(ContentWidthProperty);
         set => SetValue(ContentWidthProperty, value);
     }
+    #endregion
 
-
+    #region VerticalScrollBar
     public static readonly DependencyProperty VerticalScrollBarProperty = DependencyProperty.Register(
         "VerticalScrollBar", typeof(ScrollBarVisibility), typeof(HCont), new(ScrollBarVisibility.Disabled));
 
@@ -40,8 +46,9 @@ public class HCont : ContentControl
         get => (ScrollBarVisibility)GetValue(VerticalScrollBarProperty);
         set => SetValue(VerticalScrollBarProperty, value);
     }
+    #endregion
 
-
+    #region HorizontalScrollBar
     public static readonly DependencyProperty HorizontalScrollBarProperty = DependencyProperty.Register(
         "HorizontalScrollBar", typeof(ScrollBarVisibility), typeof(HCont), new(ScrollBarVisibility.Disabled));
 
@@ -50,8 +57,12 @@ public class HCont : ContentControl
         get => (ScrollBarVisibility)GetValue(HorizontalScrollBarProperty);
         set => SetValue(HorizontalScrollBarProperty, value);
     }
+    #endregion
+
+    #endregion
 
 
+    #region Startup
     protected override void OnApplyTemplate()
     {
         base.OnApplyTemplate();
@@ -62,4 +73,5 @@ public class HCont : ContentControl
         scrollContainer.ViewChanged += (s, e) =>
             header.Opacity = scrollContainer.VerticalOffset <= 5 ? 1 : 0;
     }
+    #endregion
 }

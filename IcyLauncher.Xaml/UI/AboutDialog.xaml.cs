@@ -4,6 +4,7 @@ namespace IcyLauncher.Xaml.UI;
 
 public sealed partial class AboutDialog : ContentDialog
 {
+    #region General
     readonly string launcherVersion;
     readonly string aPIVersion;
 
@@ -15,8 +16,10 @@ public sealed partial class AboutDialog : ContentDialog
 
     readonly string os = Computer.OSVersion.TrimZeros().ToString();
     readonly string framework = Computer.RuntimeVersion.TrimZeros().ToString();
+    #endregion
 
 
+    #region Startup
     public AboutDialog(
         Version launcherVersion,
         Version aPIVersion)
@@ -26,4 +29,5 @@ public sealed partial class AboutDialog : ContentDialog
         this.launcherVersion = launcherVersion.ToString();
         this.aPIVersion = aPIVersion.ToString();
     }
+    #endregion
 }

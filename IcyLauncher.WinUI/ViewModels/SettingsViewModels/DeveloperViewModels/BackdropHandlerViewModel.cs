@@ -72,13 +72,13 @@ public partial class BackdropHandlerViewModel : ObservableObject
     #region SetBackdrop
     [ObservableProperty]
     Backdrop backdrop;
-    
+
     [ObservableProperty]
     bool enable = true;
-    
+
     [ObservableProperty]
     bool useDarkMode = true;
-    
+
     [ObservableProperty]
     bool useDarkModeIsNull;
 

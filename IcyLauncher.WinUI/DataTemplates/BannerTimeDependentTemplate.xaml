@@ -3,6 +3,7 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mdls="using:IcyLauncher.Data.Models">
+
     <DataTemplate x:Key="BannerTimeDependentTemplate" x:DataType="mdls:BannerTimeDependentPack">
         <Grid Width="290" Height="106">
             <Grid
@@ -12,6 +13,7 @@
                 CornerRadius="4">
                 <Rectangle Loaded="OnImageLoaded" />
             </Grid>
+
             <TextBlock
                 Margin="8,80,0,0"
                 HorizontalAlignment="Left"

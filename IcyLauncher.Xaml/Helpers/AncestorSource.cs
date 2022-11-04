@@ -4,17 +4,25 @@ namespace IcyLauncher.Xaml.Helpers;
 
 public class AncestorSource
 {
+    #region General
     public static readonly DependencyProperty AncestorTypeProperty = DependencyProperty.RegisterAttached(
-            "AncestorType", typeof(Type), typeof(AncestorSource), new(default(Type), OnAncestorTypeChanged));
+        "AncestorType", typeof(Type), typeof(AncestorSource), new(default(Type), OnAncestorTypeChanged));
+    #endregion
 
 
-    public static void SetAncestorType(FrameworkElement element, Type value) =>
+    #region Actions
+    public static void SetAncestorType(
+        FrameworkElement element,
+        Type value) =>
         element.SetValue(AncestorTypeProperty, value);
 
-    public static Type GetAncestorType(FrameworkElement element) =>
+    public static Type GetAncestorType(
+        FrameworkElement element) =>
         (Type)element.GetValue(AncestorTypeProperty);
 
-    static void SetDataContext(FrameworkElement target)
+
+    static void SetDataContext(
+        FrameworkElement target)
     {
         Type ancestorType = GetAncestorType(target);
 
@@ -23,26 +31,9 @@ public class AncestorSource
     }
 
 
-    static void OnAncestorTypeChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
-    {
-        FrameworkElement target = (FrameworkElement)d;
-
-        if (target.IsLoaded)
-            SetDataContext(target);
-        else
-            target.Loaded += OnTargetLoaded;
-    }
-
-    static void OnTargetLoaded(object sender, RoutedEventArgs e)
-    {
-        FrameworkElement target = (FrameworkElement)sender;
-        SetDataContext(target);
-
-        target.Loaded -= OnTargetLoaded;
-    }
-
-
-    static object? FindParent(DependencyObject dependencyObject, Type ancestorType)
+    static object? FindParent(
+        DependencyObject dependencyObject,
+        Type ancestorType)
     {
         DependencyObject parent = VisualTreeHelper.GetParent(dependencyObject);
 
@@ -51,4 +42,26 @@ public class AncestorSource
 
         return FindParent(parent, ancestorType);
     }
+    #endregion
+
+
+    #region Handlers
+    static void OnAncestorTypeChanged(DependencyObject sender, DependencyPropertyChangedEventArgs _)
+    {
+        FrameworkElement target = (FrameworkElement)sender;
+
+        if (target.IsLoaded)
+            SetDataContext(target);
+        else
+            target.Loaded += OnTargetLoaded;
+    }
+
+    static void OnTargetLoaded(object sender, RoutedEventArgs _)
+    {
+        FrameworkElement target = (FrameworkElement)sender;
+        SetDataContext(target);
+
+        target.Loaded -= OnTargetLoaded;
+    }
+    #endregion
 }

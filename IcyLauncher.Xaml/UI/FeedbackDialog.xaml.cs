@@ -4,6 +4,9 @@ namespace IcyLauncher.Xaml.UI;
 
 public sealed partial class FeedbackDialog : ContentDialog
 {
+    #region General
+
+    #region Rating
     public static readonly DependencyProperty RatingProperty = DependencyProperty.Register(
         "Rating", typeof(int), typeof(FeedbackDialog), new(-1));
 
@@ -12,7 +15,9 @@ public sealed partial class FeedbackDialog : ContentDialog
         get => (int)GetValue(RatingProperty);
         set => SetValue(RatingProperty, value);
     }
+    #endregion
 
+    #region FeedbackText
     public static readonly DependencyProperty FeedbackTextProperty = DependencyProperty.Register(
         "FeedbackText", typeof(string), typeof(FeedbackDialog), new(string.Empty));
 
@@ -21,10 +26,16 @@ public sealed partial class FeedbackDialog : ContentDialog
         get => (string)GetValue(FeedbackTextProperty);
         set => SetValue(FeedbackTextProperty, value);
     }
+    #endregion
 
+    #region Result
     public FeedbackResult Result { get; private set; }
+    #endregion
+
+    #endregion
 
 
+    #region Startup
     public FeedbackDialog(
         bool forceShow = false)
     {
@@ -52,4 +63,5 @@ public sealed partial class FeedbackDialog : ContentDialog
             IsPrimaryButtonEnabled = RatingControl.Value != -1;
         };
     }
+    #endregion
 }

@@ -74,5 +74,5 @@ public partial class IMessageViewModel : ObservableObject
             await message.ShowAsync("message.Show()", $"Method completed.\nException{ex.Format()}");
         }
     }
-#endregion
+    #endregion
 }

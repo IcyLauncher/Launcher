@@ -23,69 +23,25 @@ public class Computer
     public static bool IsWindows11 { get; } = OSVersion.Build >= 22000;
 
 
-    public static string? CurrentCPU
+    public static string? GetCPU() => 
+        Registry.GetValue(@"HKEY_LOCAL_MACHINE\HARDWARE\DESCRIPTION\SYSTEM\CentralProcessor\0", "ProcessorNameString", null) is string name ? 
+        name.ToString().Replace("Processor", "").Replace("Six-Core", "") :
+        null;
+
+    public static string? GetGPU()
     {
-        get
-        {
-            try
-            {
-                return Registry.GetValue(@"HKEY_LOCAL_MACHINE\HARDWARE\DESCRIPTION\SYSTEM\CentralProcessor\0", "ProcessorNameString", null) is string name
-                    ? name.ToString().Replace("Processor", "").Replace("Six-Core", "") :
-                    null;
-            }
-            catch
-            {
-                return null;
-            }
-        }
+        foreach (ManagementBaseObject i in new ManagementObjectSearcher(new SelectQuery("Win32_VideoController")).Get())
+            return i["Caption"].ToString();
+        return null;
     }
 
-    public static string? CurrentGPU
+    public static string? GetRam()
     {
-        get
-        {
-            try
-            {
-                foreach (ManagementBaseObject i in new ManagementObjectSearcher(new SelectQuery("Win32_VideoController")).Get())
-                    return i["Caption"].ToString();
-                return null;
-            }
-            catch
-            {
-                return null;
-            }
-        }
+        foreach (ManagementBaseObject i in new ManagementObjectSearcher(new ObjectQuery("SELECT * FROM Win32_OperatingSystem")).Get())
+            return Math.Round(Convert.ToDouble(i["TotalVisibleMemorySize"]) / 1048576, 2) is double size ? $"{size} GB" : null;
+        return null;
     }
 
-    public static double? CurrentRAM
-    {
-        get
-        {
-            try
-            {
-                foreach (ManagementBaseObject i in new ManagementObjectSearcher(new ObjectQuery("SELECT * FROM Win32_OperatingSystem")).Get())
-                    return Math.Round(Convert.ToDouble(i["TotalVisibleMemorySize"]) / 1048576, 2);
-                return null;
-            }
-            catch
-            {
-                return null;
-            }
-        }
-    }
-
-    public static string? CurrentOS
-    {
-        get
-        {
-            try
-            {
-                return $"{Win32.BrandingFormatString("%WINDOWS_LONG%")} {Registry.GetValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion", "DisplayVersion", null)}";
-            }
-            catch
-            {
-                return null;
-            }
-        }
-    }
+    public static string? GetOS() =>
+        $"{Win32.BrandingFormatString("%WINDOWS_LONG%")} {Registry.GetValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion", "DisplayVersion", null)}";
 }

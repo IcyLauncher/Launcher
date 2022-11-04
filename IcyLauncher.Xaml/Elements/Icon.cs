@@ -5,6 +5,9 @@ namespace IcyLauncher.Xaml.Elements;
 
 public class Icon : ContentControl
 {
+    #region General
+
+    #region LightColor
     public static readonly DependencyProperty LightColorProperty = DependencyProperty.Register(
         "LightColor", typeof(Color), typeof(Icon), new(Colors.White));
 
@@ -13,7 +16,9 @@ public class Icon : ContentControl
         get => (Color)GetValue(LightColorProperty);
         set => SetValue(LightColorProperty, value);
     }
+    #endregion
 
+    #region DarkColor
     public static readonly DependencyProperty DarkColorProperty = DependencyProperty.Register(
         "DarkColor", typeof(Color), typeof(Icon), new(Colors.Black));
 
@@ -22,10 +27,7 @@ public class Icon : ContentControl
         get => (Color)GetValue(DarkColorProperty);
         set => SetValue(DarkColorProperty, value);
     }
+    #endregion
 
-
-    protected override void OnApplyTemplate()
-    {
-        base.OnApplyTemplate();
-    }
+    #endregion
 }

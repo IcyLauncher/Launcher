@@ -1,7 +1,6 @@
 ﻿using IcyLauncher.Xaml.UI;
 using Microsoft.UI;
 using Microsoft.UI.Xaml.Media;
-using System.Xml.XPath;
 using Windows.Storage;
 using Windows.Storage.Pickers;
 using Windows.System;

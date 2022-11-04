@@ -5,7 +5,7 @@ public partial class INavigationViewModel : ObservableObject
     #region Setup
     readonly INavigation navigation;
     readonly IMessage message;
-    
+
     public INavigationViewModel(
         INavigation navigation,
         IMessage message)

@@ -11,6 +11,7 @@ public sealed partial class HomeView : Page
         InitializeComponent();
 
 
+    #region Handlers
     protected override async void OnNavigatedTo(NavigationEventArgs e)
     {
         base.OnNavigatedTo(e);
@@ -32,4 +33,5 @@ public sealed partial class HomeView : Page
     {
         viewModel.UpdateProfile();
     }
+    #endregion
 }
